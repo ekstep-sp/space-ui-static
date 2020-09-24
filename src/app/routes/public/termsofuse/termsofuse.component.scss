@@ -10,8 +10,7 @@ line-height: 1.7;
 #cimage {
   background-size: cover;
   background-position: center;
- width: 684px;
-    height: 346px;
+ width: 100%;
     margin-left: -2.5rem;
     @include breakpoint-xs {
       width: 18rem !important;
