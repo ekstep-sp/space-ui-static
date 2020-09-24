@@ -25,6 +25,18 @@ body {
   font-family: $font-family-montserrat;
 }
 
+.custom-padding .mat-dialog-container {
+          padding: 0;
+          box-shadow: none !important;
+          background-color: transparent !important;
+          .custom-close {
+            float: right;
+            margin-right: 20px;
+            margin-top: 20px;
+            font-size: 40px;
+          }
+}
+
 header {
   font-family: $font-family-campaign !important;
 }

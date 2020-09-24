@@ -90,10 +90,33 @@ height: 65px;
   flex-wrap: wrap;
   justify-content: center;
   margin-bottom: 20px;
+  max-width: 80%;
+  margin: auto;
+}
+
+@media only screen and (max-width: 680px) {
+  .partnerBody {
+    width: 88%;
+    padding-left: 2.4rem;
+  }
+  .partnerContainer {
+    margin: auto;
+    padding-bottom: 10px;
+  }
+  .no-padding {
+    padding: 0;
+  }
+  .imageRow {
+    display: flex !important;
+    padding-top: 0;
+  }
+  #collaborator h1{
+    padding-left: 2.4rem;
+}
 }
 @media only screen and (min-width: 453px) and (max-width: 680px) {
   .imageRow {
-    display: inline !important;
+    display: flex !important;
   }
   .box {
     width: 35% !important;
@@ -102,25 +125,23 @@ height: 65px;
   }
 }
 @media only screen and (min-width: 312px) and (max-width: 453px) {
-  .imageRow {
-    display: inline !important;
-  }
   .box {
     margin: .5rem !important;
-    padding-top: 2rem !important;
     width: 13rem !important;
   }
 }
 .box {
-    padding: 1em 1em 1rem 1rem;
+  display: flex;
+    align-items: center;
     margin-top: 2.5rem;
     border: 2px solid #925EB0;
     box-sizing: border-box;
     border-radius: 20px;
-    height: 180px;
-    margin: .5rem;
-    padding-top: 2.5rem;
-    width: 180px;
+    height: 200px;
+    margin: 0.5rem;
+    width: 200px;
+    padding: 5px;
+    justify-content: center;
 }
 a {
   background-color: transparent;
@@ -130,9 +151,7 @@ a {
 }
 img {
   // width: 9rem;
-    width: 9.2rem;
-    padding-top: -0.2rem;
-    height: 6rem;
+    width: 100%;
 }
 .exception-style {
     //  margin-top: -2rem;
@@ -373,9 +392,13 @@ carousel {
 
 #container {
     width: 67%;
-    margin: 5em auto;
+    height: 25rem;
+    // margin: 5em auto;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 5rem;
     padding: 0;
-    border: 2px red solid;
+    // border: 2px red solid;
     .ng2-carouselamos-container{
         width: 70%;
         margin: auto;

@@ -2,6 +2,22 @@
 @import 'ws-common';
 // @import 'ws-includes';
 /* about page design start */
+::ng-deep{
+  .custom-padding .mat-dialog-container {
+    padding: 0;
+    box-shadow: none;
+    background-color: none;
+  }
+}
+
+.img-container {
+  max-width: 650px;
+  width: 100%;
+  margin:auto;
+  img {
+    width: 100%;
+  }
+}
 .img {
   background-image: url(/assets/instances/space/banners/about.png);
   background-size: cover;
@@ -108,6 +124,7 @@ font-weight: 460;
 font-size: 48px;
 line-height: 55px;
 color: #925EB0;
+margin-bottom: 0;
 width:240px;
 height: 65px;
   @include breakpoint-xs {
@@ -123,14 +140,13 @@ height: 65px;
 }
 .flex {
   justify-content: flex-start;
+  margin-top: 55px;
 }
 .col-1 {
   flex: 1;
-  max-width: 39rem;
 }
 .col-2 {
-  flex: auto;
-  margin-top: 10.5rem !important;
+  flex: 1;
 }
 .icon {
   background-image: url(/assets/instances/space/common/Vector@2x.png);
@@ -146,7 +162,6 @@ height: 65px;
 opacity: 0.2;
 }
 .text-wrap {
- width: 32rem;
 font-weight: normal;
 font-size: 16px;
 line-height: 24px;
@@ -160,6 +175,31 @@ word-break: break-word;
   }
   @include breakpoint-m {
     width: 28rem !important;
+  }
+}
+
+@media only screen and (max-width: 680px) {
+  .flex {
+    flex-direction: column-reverse;
+  }
+  .col-1 {
+    section {
+      padding-top: 0;
+    }
+  }
+}
+
+@media only screen and (max-width: 680px) {
+  .header.heading-style {
+    padding-left: 2.4rem;
+  }
+  .col-2 {
+    .pr-4 {
+      padding: 0 1.1rem;
+    }
+  }
+  .less-padding {
+    padding-left: 2.4rem !important;
   }
 }
    @media only screen and (max-width: 320px) {

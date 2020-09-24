@@ -3,6 +3,7 @@
   <!-- <div class="group2"></div> -->
   <!-- <div class="pt-12 pl-16 pb-48"> -->
   <div class="pt-12 pl-16">
+    <!-- <div class="pt-12 pl-16 pb-48 no-padding"> -->
     <p class="container partnerBody text-style">
       Organisations that are contributing assets for public use.
     </p>
@@ -31,6 +32,17 @@
             </div> -->
     <!-- </ws-utils-horizontal-scroller> -->
     <!-- <div class="box">
+    <div class="partnerContainer">
+      <div class="partnerContainerBody">
+        <div class="row imageRow pt-32">
+          <div class="box" *ngFor="let src of partner.src;let i = index">
+            <a href="{{partner.url[i]}}" target="_blank" *ngIf="i !== 3 && i !== 5"><img class="p-0" [src]="src" /></a>
+            <a href="{{partner.url[i]}}" target="_blank" *ngIf="i === 3 "><img class="p-0"
+                [src]="src" /></a>
+            <a href="{{partner.url[i]}}" target="_blank" *ngIf="i === 5"><img class="p-0 net-style"
+                [src]="src" /></a>
+          </div>
+          <div class="box">
             <a href="https://www.echoindia.in/" target="_blank"><img
                 src="assets/instances/space/app-collaborators-logos/ECHO.png" /></a>
           </div>
