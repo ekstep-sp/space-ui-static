@@ -1,22 +1,36 @@
 <div id="collaborator" #collaborator>
   <h1 class="header heading-style pt-24 pl-16" name="collaborator">Collaborators</h1>
   <!-- <div class="group2"></div> -->
-  <div class="pt-12 pl-16 pb-48">
+  <!-- <div class="pt-12 pl-16 pb-48"> -->
+  <div class="pt-12 pl-16">
     <p class="container partnerBody text-style">
       Organisations that are contributing assets for public use.
     </p>
     <!-- <div class="ellipse2"></div> -->
-    <div class="container container-fluid partnerContainer">
-      <div class="partnerContainerBody">
-        <div class="row imageRow pt-32">
-          <div class="box" *ngFor="let src of partner.src;let i = index">
-            <a href="{{partner.url[i]}}" target="_blank" *ngIf="i !== 3 && i !== 5"><img class="p-0" [src]="src" /></a>
-            <a href="{{partner.url[i]}}" target="_blank" *ngIf="i === 3 "><img class="p-0 exception-style"
-                [src]="src" /></a>
-            <a href="{{partner.url[i]}}" target="_blank" *ngIf="i === 5"><img class="p-0 mt-5 net-style"
-                [src]="src" /></a>
-          </div>
-          <!-- <div class="box">
+    <!-- <section class="horizontal-scroll-container h-full">
+      <button aria-label="Previous" i18n-aria-label name="content-backward-button" mat-mini-fab color="primary">
+        <mat-icon>navigate_before</mat-icon>
+      </button> -->
+    <!-- <ws-utils-horizontal-scroller> -->
+    <!-- <div id="container">
+      <div ng2-carouselamos class="slides-wrapper" [width]="850" [$prev]="prev" [$next]="next">
+      </div>
+      <div class="container container-fluid partnerContainer">
+        <div class="partnerContainerBody">
+          <div class="row imageRow pt-32">
+
+            <div class="slide-items">
+              <div class="box" *ngFor="let src of partner.src;let i = index">
+                <a href="{{partner.url[i]}}" target="_blank" *ngIf="i !== 3 && i !== 5"><img class="p-0"
+                    [src]="src" /></a>
+                <a href="{{partner.url[i]}}" target="_blank" *ngIf="i === 3 "><img class="p-0 exception-style"
+                    [src]="src" /></a>
+                <a href="{{partner.url[i]}}" target="_blank" *ngIf="i === 5"><img class="p-0 mt-5 net-style"
+                    [src]="src" /></a>
+              </div>
+            </div> -->
+    <!-- </ws-utils-horizontal-scroller> -->
+    <!-- <div class="box">
             <a href="https://www.echoindia.in/" target="_blank"><img
                 src="assets/instances/space/app-collaborators-logos/ECHO.png" /></a>
           </div>
@@ -32,12 +46,18 @@
             <a href="https://shikshalokam.org/" target="_blank"><img
                 src="assets/instances/space/app-collaborators-logos/ShikshaLokam.png" /></a>
           </div> -->
+    <!-- </div>
         </div>
+
       </div>
-      <!---->
-    </div>
+    </div> -->
+    <!-- <button aria-label="Next" i18n-aria-label name="content-forward-button">
+        <mat-icon>navigate_next</mat-icon>
+      </button>
+    </section> -->
   </div>
 </div>
+
 <!-- <div class="container">
   <div class="imgsize">
     <div class="container">
@@ -82,3 +102,34 @@
     </div>
   </div>
 </div> -->
+
+<div id="container">
+  <div ng2-carouselamos class="slides-wrapper" [items]="images" [width]="850" [$prev]="prev" [$next]="next"
+    [$item]="item">
+  </div>
+
+
+  <ng-template #prev>
+    <!-- <img src="assets/images/prev.png" id="left" /> -->
+    <!-- <button (click)="prevbtn()">
+
+    </button> -->
+    <button class="btn" type="button" mdbBtn color="primary" mdbWavesEffect (click)="prevbtn()">
+      <mat-icon>navigate_before</mat-icon>
+    </button>
+
+  </ng-template>
+  <ng-template #next>
+
+    <button class="btn" type="button" mdbBtn color="primary" mdbWavesEffect (click)="nextbtn()">
+      <mat-icon>navigate_next</mat-icon>
+    </button>
+
+  </ng-template>
+  <ng-template #item let-item let-i="index">
+
+    <div class="slide-items">
+      <img src="{{ item.name }}">
+    </div>
+  </ng-template>
+</div>

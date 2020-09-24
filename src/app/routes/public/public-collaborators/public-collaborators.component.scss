@@ -237,3 +237,164 @@ img {
 //   text-decoration: none;
 //   -webkit-transition: 0.2s ease-in;
 // }
+// @media screen and (min-width: 1240px) and (max-width:1330px) {
+//   .imageRow {
+// justify-content: flex-start !important;
+//   }
+// }
+
+// @media screen and (min-width: 1005px) and (max-width:1300px) {
+//   .imageRow {
+// justify-content: flex-start !important;
+
+//   }
+// }
+
+
+
+
+$spaceFromEnd: -$size-m;
+
+.horizontal-scroll-container {
+  position: relative;
+  width: 100%;
+  min-height: 100px;
+}
+
+%btn {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 999;
+}
+
+
+
+.prevBtn {
+  @extend %btn;
+  left: $spaceFromEnd;
+}
+
+.prevBtnHover {
+  @extend %btn;
+opacity: 0;
+  transition: opacity 800ms;
+}
+
+.prevBtnHover:hover {
+  opacity: 1.0;
+}
+
+.nextBtn {
+  @extend %btn;
+  right: $spaceFromEnd;
+
+}
+
+.nextBtnHover {
+  @extend %btn;
+opacity: 0;
+  transition: opacity 800ms;
+}
+
+.nextBtnHover:hover {
+  opacity: 1.0;
+}
+
+.nextLoading {
+  @extend %btn;
+  padding: 0;
+  right: $spaceFromEnd;
+}
+
+// Changing scrollbar
+.horizontal-scroll-content {
+  overflow-x: auto;
+  /* white-space: nowrap; */
+  -webkit-overflow-scrolling: touch;
+  height: 100%;
+  flex-wrap: nowrap;
+  display: flex;
+  align-items: stretch;
+  -ms-overflow-style: none;
+
+  &::-webkit-scrollbar {
+    $scroll-size: 0px;
+    width: $scroll-size;
+    height: $scroll-size;
+  }
+}
+
+
+// .carousel {
+//   height: 160px;
+// }
+
+// /* cell inherit height from carousel */
+// .carousel-cell {
+//   height: 100%;
+// }
+
+carousel {
+  height: 100%;
+    min-height: 100px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+@mixin bp-small {
+  @media (min-width: 600px) {
+    @content;
+  }
+}
+
+// Medium devices (large tablets)
+@mixin bp-medium {
+  @media (min-width: 1023px) {
+    @content;
+  }
+}
+
+// Large devices (desktops < 1080p)
+@mixin bp-large {
+  @media (min-width: 1439px) {
+    @content;
+  }
+}
+
+// Extra Large devices (desktops >= 1080p)
+@mixin bp-xlarge {
+  @media (min-width: 1919px) {
+    @content;
+  }
+}
+
+
+#container {
+    width: 67%;
+    margin: 5em auto;
+    padding: 0;
+    border: 2px red solid;
+    .ng2-carouselamos-container{
+        width: 70%;
+        margin: auto;
+        border: 2px green solid;
+    }
+    .slide-items{
+        margin-right: 10px;
+        img{
+            width: 199px;
+            border: 2px blue solid;
+             border-radius: 20px;
+             height: 180px;
+
+        }
+    }
+}
+
+.btn{
+  border-radius: 50%;
+  margin-right: 35px;
+    margin-left: 25px;
+}
