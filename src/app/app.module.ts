@@ -73,6 +73,7 @@ import { ContentpolicyandcommunicationComponent } from './routes/public/contentp
 // import { environment } from '../environments/environment'
 import { AboutCollaboratorComponent } from './component/about-collaborator/about-collaborator.component'
 import { TourVideoComponent } from './routes/public/tour-video/tour-video.component'
+import { VideoRendererComponent } from './routes/public/video-renderer/video-renderer.component'
 
 @Injectable()
 export class HammerConfig extends GestureConfig {
@@ -117,6 +118,7 @@ const getBaseHref = (platformLocation: PlatformLocation): string => {
     ContentpolicyandcommunicationComponent,
     AboutCollaboratorComponent,
     TourVideoComponent,
+    VideoRendererComponent,
 
   ],
   imports: [

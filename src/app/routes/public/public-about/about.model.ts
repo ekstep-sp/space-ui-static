@@ -55,4 +55,7 @@ export interface IAboutObject {
   section5: ISection5
   features?: IFeatures
   innerHtmlWithTitle?: ISection5
+  introVideo: {
+    en: string
+  }
 }

@@ -2,6 +2,14 @@
 @import 'ws-common';
 // @import 'ws-includes';
 /* about page design start */
+::ng-deep{
+  .custom-padding .mat-dialog-container {
+    padding: 0;
+    box-shadow: none;
+    background-color: none;
+  }
+}
+
 .img-container {
   max-width: 650px;
   width: 100%;
@@ -170,7 +178,7 @@ word-break: break-word;
   }
 }
 
-@media only screen and (max-width: 480px) {
+@media only screen and (max-width: 680px) {
   .flex {
     flex-direction: column-reverse;
   }

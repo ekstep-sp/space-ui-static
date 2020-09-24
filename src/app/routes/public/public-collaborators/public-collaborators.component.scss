@@ -116,7 +116,7 @@ height: 65px;
 }
 @media only screen and (min-width: 453px) and (max-width: 680px) {
   .imageRow {
-    display: inline !important;
+    display: flex !important;
   }
   .box {
     width: 35% !important;
