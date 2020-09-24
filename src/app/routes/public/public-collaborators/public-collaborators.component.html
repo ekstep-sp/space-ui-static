@@ -1,19 +1,19 @@
 <div id="collaborator" #collaborator>
   <h1 class="header heading-style pt-24 pl-16" name="collaborator">Collaborators</h1>
   <!-- <div class="group2"></div> -->
-  <div class="pt-12 pl-16 pb-48">
+  <div class="pt-12 pl-16 pb-48 no-padding">
     <p class="container partnerBody text-style">
       Organisations that are contributing assets for public use.
     </p>
     <!-- <div class="ellipse2"></div> -->
-    <div class="container container-fluid partnerContainer">
+    <div class="partnerContainer">
       <div class="partnerContainerBody">
         <div class="row imageRow pt-32">
           <div class="box" *ngFor="let src of partner.src;let i = index">
             <a href="{{partner.url[i]}}" target="_blank" *ngIf="i !== 3 && i !== 5"><img class="p-0" [src]="src" /></a>
-            <a href="{{partner.url[i]}}" target="_blank" *ngIf="i === 3 "><img class="p-0 exception-style"
+            <a href="{{partner.url[i]}}" target="_blank" *ngIf="i === 3 "><img class="p-0"
                 [src]="src" /></a>
-            <a href="{{partner.url[i]}}" target="_blank" *ngIf="i === 5"><img class="p-0 mt-5 net-style"
+            <a href="{{partner.url[i]}}" target="_blank" *ngIf="i === 5"><img class="p-0 net-style"
                 [src]="src" /></a>
           </div>
           <!-- <div class="box">
