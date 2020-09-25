@@ -2,7 +2,7 @@
   <h1 class="header heading-style pt-24 pl-16" name="collaborator">Collaborators</h1>
   <!-- <div class="group2"></div> -->
   <!-- <div class="pt-12 pl-16 pb-48"> -->
-  <div class="pt-12 pl-16">
+  <div class="org-text-padding pl-16">
     <!-- <div class="pt-12 pl-16 pb-48 no-padding"> -->
     <p class="container partnerBody text-style">
       Organisations that are contributing assets for public use.
@@ -115,23 +115,22 @@
   </div>
 </div> -->
 
-<div id="container">
+<!-- <div id="container">
   <div ng2-carouselamos class="slides-wrapper" [items]="images" [width]="850" [$prev]="prev" [$next]="next"
     [$item]="item">
-  </div>
+  </div> -->
 
 
-  <ng-template #prev>
-    <!-- <img src="assets/images/prev.png" id="left" /> -->
-    <!-- <button (click)="prevbtn()">
+<!-- <ng-template #prev>
 
-    </button> -->
+
+    </button>
     <button class="btn" type="button" mdbBtn color="primary" mdbWavesEffect (click)="prevbtn()">
       <mat-icon>navigate_before</mat-icon>
     </button>
 
-  </ng-template>
-  <ng-template #next>
+  </ng-template> -->
+<!-- <ng-template #next>
 
     <button class="btn" type="button" mdbBtn color="primary" mdbWavesEffect (click)="nextbtn()">
       <mat-icon>navigate_next</mat-icon>
@@ -144,4 +143,41 @@
       <img src="{{ item.name }}">
     </div>
   </ng-template>
+</div> -->
+
+
+
+<div class="parent-scroller-container">
+  <div class="scroller-container">
+    <ws-utils-horizontal-scroller *ngIf=" partner.src?.length" [loadStatus]="'done'">
+      <div class="card-container" *ngFor="let src of partner.src;let i = index">
+        <a href="{{partner.url[i]}}" target="_blank">
+          <img src="{{ src }}">
+        </a>
+
+      </div>
+    </ws-utils-horizontal-scroller>
+  </div>
 </div>
+
+
+
+<!-- <ws-utils-horizontal-scroller *ngIf="widgetData?.cardMenu?.length" [loadStatus]="'done'">
+  <div (click)="changeWidget(card)" class="card-container" *ngFor="let card of widgetData.cardMenu">
+    <mat-icon *ngIf="card?.cardData?.currentlyPlaying" color="warn" class="icon-position">fiber_manual_record
+    </mat-icon>
+    <img class="object-cover" [src]="card?.cardData?.thumbnail" alt="thumbnail" />
+    <div class="description p-3 flex flex-col flex-wrap">
+      <div class="truncate text-base pb-1 max-w-full">{{ card?.cardData?.title }}</div>
+      <div class="truncate leading-loose text-lg max-w-full">
+        {{ card?.cardData?.description }}
+      </div>
+    </div>
+  </div>
+</ws-utils-horizontal-scroller> -->
+
+<!-- <div class="card-holder dimensionBadge">
+  <ng-container *ngFor="let badge of badgesWon">
+    <ws-app-badges-card [badge]="badge"></ws-app-badges-card>
+  </ng-container>
+</div> -->

@@ -421,3 +421,45 @@ carousel {
   margin-right: 35px;
     margin-left: 25px;
 }
+
+.card-container {
+  height: 200px;
+    /* margin-right: 16px; */
+    min-width: 200px;
+     width: 200px;
+    min-height: 200px;
+    display: flex;
+    /* flex-direction: column; */
+    justify-content: center;
+    cursor: pointer;
+    border: 2px blue solid;
+    /* position: relative; */
+    border: 2px solid #925eb0;
+    box-sizing: border-box;
+    border-radius: 20px;
+    margin: 20px;
+    align-items: center;
+    padding: 0.4rem;
+
+
+
+
+}
+.scroller-container{
+  width: 85%;
+  padding: 128px 0 205px 0;
+}
+
+.parent-scroller-container{
+  display: flex;
+  justify-content: center;
+}
+.container-item{
+  height: 100%;
+    align-items: center;
+    display: flex;
+}
+
+.org-text-padding{
+  padding-top: 39px;
+}
