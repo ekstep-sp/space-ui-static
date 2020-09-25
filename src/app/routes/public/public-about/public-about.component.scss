@@ -185,11 +185,14 @@ word-break: break-word;
   .col-1 {
     section {
       padding-top: 0;
+      .text-wrap {
+        text-align: justify !important;
+        width: 85% !important;
+        padding-left: 0 !important;
+        margin: auto;
+      }
     }
   }
-}
-
-@media only screen and (max-width: 680px) {
   .header.heading-style {
     padding-left: 2.4rem;
   }
