@@ -40,14 +40,7 @@ export class PublicCollaboratorsComponent implements OnInit {
     })
   }
 
-  prevbtn() {
-    this.carousel.previousSlide()
-  }
 
-  nextbtn() {
-    this.carousel.nextSlide()
-
-  }
 
 
 
