@@ -94,10 +94,14 @@ height: 65px;
 //   margin: auto;
 // }
 
+.partnerBody {
+  padding-left: 2.0rem;
+}
+
 @media only screen and (max-width: 680px) {
   .partnerBody {
     width: 88%;
-    padding-left: 2.4rem;
+    padding-left: 0;
   }
   .partnerContainer {
     margin: auto;
@@ -183,30 +187,11 @@ img {
 }
 
 @media only screen and (max-width: 599px){
-  .partnerBody{
-     padding-left: 15.5%;
-  }
-}
-
-@media only screen and (max-width: 599px){
   .org-text-padding{
      padding-top: 1px !important;
   }
 }
 
 .padding-para{
-  padding-left: 96px;
-}
-
-@media only screen and (max-width: 599px){
-  .padding-para{
-  padding-left: 0px !important;
-}
-}
-
-@media only screen and (min-width: 280px) and (max-width: 310px){
-  .partnerBody{
-     padding-left: 20.5% !important;
-     width: auto !important;
-  }
+  padding-left: 2.4rem;
 }
