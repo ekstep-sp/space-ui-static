@@ -96,6 +96,13 @@ p {
   line-height: 1.7em;
   // color: #865ba0;
 }
+
+.break-text {
+  @include breakpoint-m {
+    display: none;
+}
+  
+}
 @media (max-width: 971px) and (min-width: 768px) {
   .text {
     display: none !important;
@@ -229,6 +236,10 @@ background: url(/assets/instances/space/banners/Ellipse.png) no-repeat;
 top: unset !important;
 left: unset !important;
   }
+  @include breakpoint-m {
+    top: -2.1rem;
+    left: 210px;
+      }
  }
  .group-image1 {
     background:url('/assets/instances/space/banners/Group.png') no-repeat;
@@ -299,6 +310,9 @@ left: unset !important;
  .signin-style {
    justify-content: center !important;
  }
+ .breakText {
+  display: none !important;
+}
 }
 .homepage__banner-content {
     line-height: 1.875em;
@@ -390,6 +404,7 @@ height: 230px;
 }
  @include breakpoint-m {
      padding-left: 4rem !important;
+     margin-top: unset !important;
 }
 }
 @media screen and (min-width: 1880px) and (max-width:1950px) {
@@ -467,7 +482,7 @@ top: 750px !important;
 }
 @media screen and (min-width: 1005px) and (max-width:1300px) {
   .head-text {
-left: 37px !important;
+left: 0 !important;
   }
 }
 @media screen and (min-width: 1240px) and (max-width:1330px) {

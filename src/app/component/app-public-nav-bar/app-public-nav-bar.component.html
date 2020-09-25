@@ -1,4 +1,4 @@
-<mat-toolbar *ngIf="showPublicNavbar" [color]="navBar?.color" [ngStyle]="navBar?.styles" id="publicWhiteNavBar">
+<mat-toolbar *ngIf="showPublicNavbar" [color]="navBar?.color" class="justify-content-evenly" [ngStyle]="navBar?.styles" id="publicWhiteNavBar">
   <div class="logosize">
     <a name="application-logo" [disableRipple]="true" class="padding-remove-small campaign logo" mat-flat-button
       routerLink="" i18n-matTooltip matTooltip="Home">
@@ -36,7 +36,7 @@
       <span i18n class="small-font-size btn-size text-white">Sign In</span>
     </button>
   </div>
-  <button class="hidden-gt-xs menu" mat-icon-button [matMenuTriggerFor]="pdfMenu">
+  <button class="hidden-gt-xs menu small-margin" mat-icon-button [matMenuTriggerFor]="pdfMenu">
     <mat-icon class="icon">more_vert</mat-icon>
   </button>
   <!-- <button *ngIf="!isClientLogin" name="login_for_infoscions" color="primary" mat-raised-button i18n="login: employee"
