@@ -68,7 +68,7 @@
 img {
     /* position: absolute; */
     // width: 50% !important;
-    height: 43rem;
+    // height: 43rem;
     /* left: 682px; */
     /* top: 235px; */
     float: right;
@@ -95,6 +95,13 @@ p {
   /* margin: 0 0 1.53em; */
   line-height: 1.7em;
   // color: #865ba0;
+}
+
+.break-text {
+  @include breakpoint-m {
+    display: none;
+}
+  
 }
 @media (max-width: 971px) and (min-width: 768px) {
   .text {
@@ -229,6 +236,10 @@ background: url(/assets/instances/space/banners/Ellipse.png) no-repeat;
 top: unset !important;
 left: unset !important;
   }
+  @include breakpoint-m {
+    top: -2.1rem;
+    left: 210px;
+      }
  }
  .group-image1 {
     background:url('/assets/instances/space/banners/Group.png') no-repeat;
@@ -299,6 +310,9 @@ left: unset !important;
  .signin-style {
    justify-content: center !important;
  }
+ .breakText {
+  display: none !important;
+}
 }
 .homepage__banner-content {
     line-height: 1.875em;
@@ -351,12 +365,13 @@ left: unset !important;
 }
 .head-text {
   z-index: 1;
+  left:37px !important;
 }
 .image-text {
    overflow: hidden !important;
    left: calc((45% - 0.5px + 1px) * 1) !important;
     width: calc((57% - 0.5px) * 1 + 0px) !important;
-    padding-top: calc((50% - 0.5px) * 1 + 0px) !important;
+   padding-top: calc((56% - 0.5px) * 1 + 0px) !important;
  }
 @media screen and (min-width: 1024px) and (max-width: 1027px) {
 .homepage__banner-content {
@@ -365,6 +380,7 @@ left: unset !important;
     line-height: 2.05882em;
 }
 }
+
 @media screen and (min-width: 312px) and (max-width:768px) {
 .homepage__banner-content {
     width: 60.31746%;
@@ -380,21 +396,135 @@ height: 230px;
 }
 .container-1 {
   margin-top: -12rem;
-  @include breakpoint-gt-m {
-  padding-left: 5rem !important;
+  @include breakpoint-lt-l {
+  padding-left: 50px !important;
   }
    @include breakpoint-xl {
      padding-left: 2rem !important;
 }
  @include breakpoint-m {
      padding-left: 4rem !important;
+     margin-top: unset !important;
+}
+}
+@media screen and (min-width: 1880px) and (max-width:1950px) {
+.head-text {
+    left: -86px !important;
+}
+.group-image {
+    left: 236px !important;
+    position: absolute;
+    background-size: 8rem !important;
+    top: -1.9rem !important;
+}
+.group {
+    position: relative !important;
+    top: unset !important;
+}
+.image-text {
+    left: calc((52% - 0.5px + 1px) * 1) !important;
+}
+.group-image1 {
+top: 800px !important;
+}
+.group-image2 {
+top: 800px !important;
+}
+}
+@media screen and (min-width: 2800px) and (max-width:2890px) {
+.group-image {
+    left: 550px !important;
+    background-size: 10rem !important;
+    top: 4.1rem !important;
+}
+.group-image1 {
+    top: 56rem !important;
+}
+.group-image2 {
+    left: 35rem !important;
+    top: 56rem !important;
+}
+.head-text {
+    left: -239px !important;
+}
+.homepage__banner-title {
+ width: auto !important;
+}
+.h1-head-style {
+    font-size: 63px !important;
+}
+}
+@media screen and (min-width: 2100px) and (max-width:2160px) {
+  .head-text {
+    left: -150px !important;
+}
+}
+@media screen and (min-width: 1750px) and (max-width:1800px) {
+.head-text {
+    left: -54px !important;
+}
+.group-image1 {
+top: 700px !important;
+}
+.group-image2 {
+top: 750px !important;
+}
+.group-image {
+    left: 340px !important;
+    background-size: 8rem !important;
+    top: 1.1rem !important;
+}
+}
+@media screen and (min-width: 1530px) and (max-width:1600px) {
+.head-text {
+    left: 0px !important;
 }
 }
 @media screen and (min-width: 1005px) and (max-width:1300px) {
+  .head-text {
+left: 0 !important;
+  }
+}
+@media screen and (min-width: 1240px) and (max-width:1330px) {
+  .head-text {
+left: 63px !important;
+  }
+  .group-image {
+    left: 235px !important;
+    top: -0.9rem !important;
+}
+}
+@media screen and (min-width: 1005px) and (max-width:1300px) {
+
+.head-text {
+  left:65px !important;
+}
+}
+@media screen and (min-width: 1100px) and (max-width:1150px) {
+  .head-text {
+    left: 0 !important;
+  }
+  .group-image {
+    left: 192px !important;
+    top: -1.2rem !important;
+}
+.h1-head-style {
+    font-size: 35px !important;
+}
+.sub-heading {
+    font-size: 23px !important;
+}
+.container-1 {
+    margin-top: unset !important;
+}
+.text-wrap {
+    font-size: 14px !important;
+}
 .img-res {
-  height: 13rem !important;
+  height: 17rem !important;
 }
 }
+
 // .slide-details {
 //   padding: 0;
 //   color: #333;

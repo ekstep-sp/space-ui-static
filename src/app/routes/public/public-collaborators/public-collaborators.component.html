@@ -1,84 +1,38 @@
 <div id="collaborator" #collaborator>
   <h1 class="header heading-style pt-24 pl-16" name="collaborator">Collaborators</h1>
   <!-- <div class="group2"></div> -->
-  <div class="pt-12 pl-16 pb-48">
+  <!-- <div class="pt-12 pl-16 pb-48"> -->
+  <div class="org-text-padding padding-para">
+    <!-- <div class="pt-12 pl-16 pb-48 no-padding"> -->
     <p class="container partnerBody text-style">
       Organisations that are contributing assets for public use.
     </p>
     <!-- <div class="ellipse2"></div> -->
-    <div class="container container-fluid partnerContainer">
-      <div class="partnerContainerBody">
-        <div class="row imageRow pt-32">
-          <div class="box" *ngFor="let src of partner.src;let i = index">
-            <a href="{{partner.url[i]}}" target="_blank" *ngIf="i !== 3 && i !== 5"><img class="p-0" [src]="src" /></a>
-            <a href="{{partner.url[i]}}" target="_blank" *ngIf="i === 3 "><img class="p-0 exception-style"
-                [src]="src" /></a>
-            <a href="{{partner.url[i]}}" target="_blank" *ngIf="i === 5"><img class="p-0 mt-5 net-style"
-                [src]="src" /></a>
-          </div>
-          <!-- <div class="box">
-            <a href="https://www.echoindia.in/" target="_blank"><img
-                src="assets/instances/space/app-collaborators-logos/ECHO.png" /></a>
-          </div>
-          <div class="box">
-            <a href=" https://www.egovernments.org/" target="_blank"><img class="p-0"
-                src="assets/instances/space/app-collaborators-logos/Egov.png" /></a>
-          </div>
-          <div class="box exception-style">
-            <a href="https://ekstep.in/" target="_blank"><img class="p-0"
-                src="assets/instances/space/app-collaborators-logos/EkStep.png" /></a>
-          </div>
-          <div class="box">
-            <a href="https://shikshalokam.org/" target="_blank"><img
-                src="assets/instances/space/app-collaborators-logos/ShikshaLokam.png" /></a>
-          </div> -->
-        </div>
+    <!-- <section class="horizontal-scroll-container h-full">
+      <button aria-label="Previous" i18n-aria-label name="content-backward-button" mat-mini-fab color="primary">
+        <mat-icon>navigate_before</mat-icon>
+      </button> -->
+    <!-- <ws-utils-horizontal-scroller> -->
+    <!-- <div id="container">
+      <div ng2-carouselamos class="slides-wrapper" [width]="850" [$prev]="prev" [$next]="next">
       </div>
-      <!---->
-    </div>
+</div> -->
+    <!-- <button aria-label="Next" i18n-aria-label name="content-forward-button">
+        <mat-icon>navigate_next</mat-icon>
+      </button>
+    </section> -->
   </div>
 </div>
-<!-- <div class="container">
-  <div class="imgsize">
-    <div class="container">
-      <div class="row mb-4">
-        <div class="col-md-12"></div>
+
+<div class="parent-scroller-container">
+  <div class="scroller-container">
+    <ws-utils-horizontal-scroller *ngIf=" partner.src?.length" [loadStatus]="'done'">
+      <div class="card-container" *ngFor="let src of partner.src;let i = index">
+        <a href="{{partner.url[i]}}" target="_blank">
+          <img src="{{ src }}">
+        </a>
+
       </div>
-    </div>
+    </ws-utils-horizontal-scroller>
   </div>
-  <p class="container pt-10 partnerBody">
-    Organizations and institutions who are practitioners of Societal Platform approach and
-    contributing assets for public use.
-  </p>
-  <div class="container container-fluid partnerContainer">
-    <div class="partnerContainerBody">
-      <div class="row imageRow">
-        <div class="box">
-          <a href="https://www.aastar.org/" target="_blank"
-            ><img class="p-0" src="assets/instances/space/app-collaborators-logos/aastar.png"
-          /></a>
-        </div>
-        <div class="box">
-          <a href="https://www.echoindia.in/" target="_blank"
-            ><img src="assets/instances/space/app-collaborators-logos/ECHO.png"
-          /></a>
-        </div>
-        <div class="box">
-          <a href=" https://www.egovernments.org/" target="_blank"
-            ><img class="p-0" src="assets/instances/space/app-collaborators-logos/Egov.png"
-          /></a>
-        </div>
-        <div class="box">
-          <a href="https://ekstep.in/" target="_blank"
-            ><img class="p-0" src="assets/instances/space/app-collaborators-logos/EkStep.png"
-          /></a>
-        </div>
-        <div class="box">
-          <a href="https://shikshalokam.org/" target="_blank"
-            ><img src="assets/instances/space/app-collaborators-logos/ShikshaLokam.png"
-          /></a>
-        </div>
-      </div>
-    </div>
-  </div>
-</div> -->
+</div>

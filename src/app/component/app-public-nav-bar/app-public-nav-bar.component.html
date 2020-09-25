@@ -1,25 +1,26 @@
-<mat-toolbar *ngIf="showPublicNavbar" [color]="navBar?.color" [ngStyle]="navBar?.styles" id="publicWhiteNavBar">
+<mat-toolbar *ngIf="showPublicNavbar" [color]="navBar?.color" class="justify-content-evenly" [ngStyle]="navBar?.styles" id="publicWhiteNavBar">
   <div class="logosize">
-    <a name="application-logo" [disableRipple]="true" class="padding-remove-small campaign logo" mat-flat-button routerLink="" i18n-matTooltip
-      matTooltip="Home">
+    <a name="application-logo" [disableRipple]="true" class="padding-remove-small campaign logo" mat-flat-button
+      routerLink="" i18n-matTooltip matTooltip="Home">
       <img [src]="appIcon" i18n-alt alt="Application Logo" class="app-logo" />
       <!-- <span class="title-app mx-2" *ngIf="appName">| {{appName}}</span> -->
     </a>
   </div>
   <div class="hidden-xs">
     <nav mat-tab-nav-bar class="toc-links">
-    <a name="about_btn" [disableRipple]="true" mat-tab-link class="padding-remove-small campaign about_btn header-btn-style" mat-flat-button
-      [routerLink]="'/public/about'" routerLinkActive="ws-mat-primary-text link-active">
-      <span i18n class="small-font-size">About Us</span>
-    </a>
-    <a class="collaborator_btn padding-remove-small campaign header-btn-style" [disableRipple]="true" mat-tab-link mat-flat-button
-      [routerLink]="'/public/collaborators'" routerLinkActive="ws-mat-primary-text link-active">
-      <span i18n class="small-font-size" >Collaborators</span>
-    </a>
-    <!-- <a name="help_btn" class="padding-remove-small" mat-button routerLink="/public/contact">
+      <a name="about_btn" [disableRipple]="true" mat-tab-link
+        class="padding-remove-small campaign about_btn header-btn-style" mat-flat-button [routerLink]="'/public/about'"
+        routerLinkActive="ws-mat-primary-text link-active">
+        <span i18n class="small-font-size">About Us</span>
+      </a>
+      <a class="collaborator_btn padding-remove-small campaign header-btn-style" [disableRipple]="true" mat-tab-link
+        mat-flat-button [routerLink]="'/public/collaborators'" routerLinkActive="ws-mat-primary-text link-active">
+        <span i18n class="small-font-size">Collaborators</span>
+      </a>
+      <!-- <a name="help_btn" class="padding-remove-small" mat-button routerLink="/public/contact">
     <span class="pr-4 small-font-size" i18n>Help & Contact</span>
   </a> -->
-    <!-- todo for Wingspan change column -->
+      <!-- todo for Wingspan change column -->
     </nav>
   </div>
   <div class="flex justify-center flex-col login-btn ml-auto hidden-xs">
@@ -35,7 +36,7 @@
       <span i18n class="small-font-size btn-size text-white">Sign In</span>
     </button>
   </div>
-  <button class="hidden-gt-xs menu" mat-icon-button [matMenuTriggerFor]="pdfMenu">
+  <button class="hidden-gt-xs menu small-margin" mat-icon-button [matMenuTriggerFor]="pdfMenu">
     <mat-icon class="icon">more_vert</mat-icon>
   </button>
   <!-- <button *ngIf="!isClientLogin" name="login_for_infoscions" color="primary" mat-raised-button i18n="login: employee"

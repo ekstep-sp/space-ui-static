@@ -8,6 +8,10 @@ import { ActivatedRoute } from '@angular/router'
 import { IAboutObject } from './about.model'
 import { IWidgetsPlayerMediaData } from '../../../../../library/ws-widget/collection/src/public-api'
 import { NsWidgetResolver } from '../../../../../library/ws-widget/resolver/src/public-api'
+import { Overlay, OverlayConfig } from '@angular/cdk/overlay'
+import { ComponentPortal } from '@angular/cdk/portal'
+import { VideoRendererComponent } from '../video-renderer/video-renderer.component'
+import { MatDialog } from '@angular/material'
 
 @Component({
   selector: 'ws-public-about',
@@ -52,11 +56,14 @@ export class PublicAboutComponent implements OnInit, OnDestroy {
     private domSanitizer: DomSanitizer,
     private configSvc: ConfigurationsService,
     private activateRoute: ActivatedRoute,
+    private readonly overlay: Overlay,
+    private readonly dialog: MatDialog,
   ) { }
 
   ngOnInit() {
     this.subscriptionAbout = this.activateRoute.data.subscribe(data => {
       this.aboutPage = data.pageData.data
+
       if (this.aboutPage && this.aboutPage.banner && this.aboutPage.banner.videoLink) {
         this.videoLink = this.domSanitizer.bypassSecurityTrustResourceUrl(
           this.aboutPage.banner.videoLink,
@@ -79,5 +86,27 @@ export class PublicAboutComponent implements OnInit, OnDestroy {
     if (this.subscriptionAbout) {
       this.subscriptionAbout.unsubscribe()
     }
+  }
+
+  playTourVideo() {
+    const config = new OverlayConfig({
+      hasBackdrop: true,
+      backdropClass: 'cdk-overlay-transparent-backdrop',
+      positionStrategy: this.overlay.position().global().centerHorizontally(),
+      height: '100%',
+      width: '100%',
+    })
+    const overlayRef = this.overlay.create(config)
+    const tourVideoPortal = new ComponentPortal(VideoRendererComponent)
+    overlayRef.attach(tourVideoPortal)
+  }
+
+  openVideoDialog() {
+    this.dialog.open(VideoRendererComponent, {
+      width: '95%',
+      height: '95%',
+      data: this.aboutPage ? this.aboutPage.introVideo.en : null,
+      panelClass: 'custom-padding',
+    })
   }
 }

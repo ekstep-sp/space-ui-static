@@ -1,28 +1,21 @@
 <div id="about" #about>
+  <div class="aboutUs-container">
+    <h1 class="header heading-style pt-12 pl-16" name="about">About Us</h1>
+  </div>
   <div class="flex">
     <div class="col-1">
-      <h1 class="header heading-style pt-12 pl-16" name="about">About Us</h1>
-      <section *ngIf="!aboutPage?.detailaboutenable" style="width: 0rem" class="text-section">
-        <div class="pt-12 pl-16 text-wrap text-style" *ngFor="let content of aboutPage.section5.paragraph">
+      <section *ngIf="!aboutPage?.detailaboutenable" class="text-section">
+        <div class="pt-12 pl-16 text-wrap text-style less-padding" *ngFor="let content of aboutPage.section5.paragraph">
           <p [innerHTML]="content.value | pipeSafeSanitizer: 'html'"></p>
         </div>
       </section>
     </div>
     <div class="col-2">
       <div class="pr-4">
-      <a href="/public/tour-video" target="_blank">
-        <!-- <div class="icon pt-56"></div>
-        <div class="abt-video"> -->
-        <!-- <div class="allignment"> -->
-        <div class="img">
-          </div>
-        <!-- <div class="image">
-            <img class="imagesize" src="/assets/instances/space/common/Vector@3.png">
-          </div>
-        </div> -->
-        <!-- </div> -->
-      </a>
-      <!-- <div class="ellipse"></div>
+        <div class="img-container pt-5" (click)="openVideoDialog()">
+          <img src="/assets/instances/space/banners/about.png">
+        </div>
+        <!-- <div class="ellipse"></div>
       <div class="group"></div> -->
       </div>
     </div>
