@@ -177,4 +177,35 @@ img {
 
 .org-text-padding{
   padding-top: 39px;
+  // @include breakpoint-lt-s{
+  //   padding-top: 0;
+  // }
 }
+
+@media only screen and (max-width: 599px){
+  .partnerBody{
+     padding-left: 15.5%;
+  }
+}
+
+@media only screen and (max-width: 599px){
+  .org-text-padding{
+     padding-top: 1px !important;
+  }
+}
+
+.padding-para{
+  padding-left: 96px;
+}
+
+@media only screen and (max-width: 599px){
+  .padding-para{
+  padding-left: 0px !important;
+}
+}
+
+// @media only screen and (min-width: 544px) and (max-width: 548px){
+//   .partnerBody{
+//      padding-left: 10.5% !important;
+//   }
+// }
