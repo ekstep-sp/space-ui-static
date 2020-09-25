@@ -1,7 +1,7 @@
-import { Directive } from '@angular/core';
+import { Directive } from '@angular/core'
 
 @Directive({
-  selector: '[wsCarouselItemElement]'
+  selector: '[wsCarouselItemElement]',
 })
 export class CarouselItemElementDirective {
 

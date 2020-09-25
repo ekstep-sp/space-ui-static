@@ -1,25 +1,25 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { async, ComponentFixture, TestBed } from '@angular/core/testing'
 
-import { VideoRendererComponent } from './video-renderer.component';
+import { VideoRendererComponent } from './video-renderer.component'
 
 describe('VideoRendererComponent', () => {
-  let component: VideoRendererComponent;
-  let fixture: ComponentFixture<VideoRendererComponent>;
+  let component: VideoRendererComponent
+  let fixture: ComponentFixture<VideoRendererComponent>
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ VideoRendererComponent ]
+      declarations: [VideoRendererComponent],
     })
-    .compileComponents();
-  }));
+    .compileComponents()
+  }))
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(VideoRendererComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
-  });
+    fixture = TestBed.createComponent(VideoRendererComponent)
+    component = fixture.componentInstance
+    fixture.detectChanges()
+  })
 
   it('should create', () => {
-    expect(component).toBeTruthy();
-  });
-});
+    expect(component).toBeTruthy()
+  })
+})

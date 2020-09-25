@@ -4,7 +4,7 @@ import { MAT_DIALOG_DATA } from '@angular/material'
 @Component({
   selector: 'ws-video-renderer',
   templateUrl: './video-renderer.component.html',
-  styleUrls: ['./video-renderer.component.scss']
+  styleUrls: ['./video-renderer.component.scss'],
 })
 export class VideoRendererComponent implements OnInit {
   url: any
