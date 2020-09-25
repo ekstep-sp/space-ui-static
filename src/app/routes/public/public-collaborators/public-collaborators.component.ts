@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core'
+import { Component, OnInit, ViewChild } from '@angular/core'
 import { DomSanitizer, SafeUrl } from '@angular/platform-browser'
 import { ConfigurationsService } from '../../../../../library/ws-widget/utils/src/public-api'
 import { ActivatedRoute } from '@angular/router'
@@ -9,6 +9,9 @@ import { ActivatedRoute } from '@angular/router'
   styleUrls: ['./public-collaborators.component.scss'],
 })
 export class PublicCollaboratorsComponent implements OnInit {
+  @ViewChild('carousel', { static: false }) carousel: any
+  images: Array<any> = []
+
 
   collaboratorBanner: SafeUrl | null = null
   partner = {
@@ -26,6 +29,9 @@ export class PublicCollaboratorsComponent implements OnInit {
         instanceConfig.banners.collaboratorBanner,
       )
     }
+
+
+
   }
   ngOnInit() {
     this.router.data.subscribe(data => {
@@ -33,5 +39,9 @@ export class PublicCollaboratorsComponent implements OnInit {
       this.partner.url = data.pageData.data.partner.url
     })
   }
+
+
+
+
 
 }
