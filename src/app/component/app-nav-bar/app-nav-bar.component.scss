@@ -10,15 +10,23 @@
   flex-direction: row;
   cursor: pointer;
 }
-
+.custom-padding {
+  padding-right: 34px !important;
+}
 .tourGuideBtn:hover {
   background: rgba(0, 0, 0, 0.04);
 }
-
+.custom-style {
+    padding-left: 20px;
+    // padding-right: 18px;
+}
 .tourGuideBtn mat-icon {
   width: 28%;
 }
-
+.icon-style {
+  padding-left:20px;
+  padding-right: 17px;
+}
 .logo-dim {
   min-width: 70px;
 }
