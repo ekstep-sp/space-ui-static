@@ -157,6 +157,7 @@ margin-top: -4rem !important;
 .header {
   font-size: 33px;
 }
+
 }
 
 
@@ -208,4 +209,11 @@ margin-top: -4rem !important;
 }
 .allign-p:not(:root:root){
      margin-left: -22px !important
+}
+
+
+@media screen and (min-width:1022px) and (max-width: 1026px) {
+  .img-container{
+    width: 600px !important;
+  }
 }
