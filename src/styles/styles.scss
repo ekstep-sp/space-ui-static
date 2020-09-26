@@ -40,7 +40,7 @@ a {
   font-family: $font-family-montserrat !important;
 }
 mat-toolbar span {
-  font-family: $font-family-campaign !important;
+  font-family: $font-family-montserrat !important;
 }
 p {
   font-family: $font-family-montserrat !important;
@@ -64,7 +64,9 @@ mat-toolbar span {
   color: black !important;
 }
 .mat-toolbar-style span {
-  color: black;
+ color: #696466;
+    font-size: 15px;
+    line-height: 17px;
 }
 
 [color|='primary'] {

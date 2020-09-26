@@ -1,0 +1,117 @@
+<ng-container style="margin-top: -1.2rem;">
+  <ng-container *ngIf="featuredWidget.show === true && featuredWidget.expand === true">
+    <mat-accordion>
+      <mat-expansion-panel (click)="$event.stopPropagation()">
+        <mat-expansion-panel-header>
+          <mat-panel-title>
+
+            <ng-container *ngIf="featuredWidget.name !== 'Admin'" [ngTemplateOutlet]="icon" [ngTemplateOutletContext]="{
+                    iconType: featuredWidget.iconType,
+                    icon: featuredWidget.icon,
+                    scale: 1.7,
+                    color: featuredWidget.color
+                  }">
+            </ng-container>
+            <span *ngIf="featuredWidget.name !== 'Admin'" class="ml-4 text-center" style="color: #696466;">
+              {{featuredWidget.name}} </span>
+            <ng-container *ngIf="featuredWidget.name === 'Admin'">
+              <img class="" src="/assets/instances/space/admin_panal_icon/admin_panel_settings.svg">
+              <span class="ml-4 text-center admin-panel" style="color: #696466;"> {{featuredWidget.name}} </span>
+            </ng-container>
+          </mat-panel-title>
+        </mat-expansion-panel-header>
+        <ng-container *ngFor="let group of featuredWidget.featureWidgets">
+          <ng-container *ngIf="group.widgetData.actionBtn.show">
+            <ng-container [ngSwitch]="group.widgetData.config.type">
+              <ng-container *ngSwitchCase="displayType.featureItem">
+                <ng-container [ngTemplateOutlet]="featureItem" [ngTemplateOutletContext]="group.widgetData">
+                </ng-container>
+              </ng-container>
+            </ng-container>
+          </ng-container>
+        </ng-container>
+      </mat-expansion-panel>
+    </mat-accordion>
+  </ng-container>
+  <ng-container *ngIf="featuredWidget.name !== 'Admin'  && featuredWidget.expand === false">
+    <a class="text-center block a-tag" (click)="navigate(featuredWidget.url,$event)" mat-button [disableRipple]="true">
+      <span class="flex-design">
+        <ng-container [ngTemplateOutlet]="icon" [ngTemplateOutletContext]="{
+                        iconType: featuredWidget.iconType,
+                        icon: featuredWidget.icon,
+                        scale: 1.7,
+                        widget: featuredWidget.name,
+                        color: featuredWidget.color
+                      }"></ng-container>
+        <span class="ml-4 text-center text" style="color: #696466;"> {{featuredWidget.name}} </span>
+      </span>
+    </a>
+  </ng-container>
+</ng-container>
+<ng-template #featureItem let-actionBtn="actionBtn" let-config="config">
+  <div class="relative py-2" id="{{actionBtn?.id}}" [ngClass]="{
+      'rounded h-full box-sizing-box': config?.treatAsCard,
+      greyOut: actionBtn.greyOut
+    }">
+    <a class="text-center block" (click)="navigate(actionBtn.url,$event)" mat-flat-button [disableRipple]="true">
+      <ng-container [ngTemplateOutlet]="icon" [ngTemplateOutletContext]="{
+          iconType: actionBtn.iconType,
+          icon: actionBtn.icon,
+          scale: 1.7,
+          color: actionBtn.color
+        }"></ng-container>
+      <span class="ml-4 text-center" style="color: #696466;" *ngIf="!config.useShortName">{{ actionBtn.name }}</span>
+      <span class="ml-4 text-center" style="color: #696466;" *ngIf="config.useShortName">
+        {{ actionBtn.shortName }}
+      </span>
+    </a>
+  </div>
+</ng-template>
+<ng-template #icon let-iconType="iconType" let-widget="widget" let-icon="icon" let-scale="scale" let-color="color">
+  <ng-container>
+    <mat-icon *ngIf="iconType === 'mat-icon' && widget !== 'Profile' && widget !== 'Settings'" style="color: #696466;"
+      aria-hidden="false" [color]="color" [ngStyle]="
+        scale
+          ? {
+              'font-size': scale * defaultIconSize + 'px',
+              height: scale * defaultIconSize + 'px',
+              width: scale * defaultIconSize + 'px'
+            }
+          : {}
+      ">
+      {{ icon }}
+    </mat-icon>
+    <mat-icon class="line ml-2" *ngIf="iconType === 'mat-icon' && widget === 'Profile'" style="color: #696466;"
+      aria-hidden="false" [color]="color" [ngStyle]="
+              scale
+                ? {
+                    'font-size': scale * defaultIconSize + 'px',
+                    height: scale * defaultIconSize + 'px',
+                    width: scale * defaultIconSize + 'px'
+                  }
+                : {}
+            ">
+      {{ icon }}
+    </mat-icon>
+    <mat-icon class="line ml-2" *ngIf="iconType === 'mat-icon'  && widget === 'Settings'" style="color: #696466;"
+      aria-hidden="false" [color]="color" [ngStyle]="
+                  scale
+                    ? {
+                        'font-size': scale * defaultIconSize + 'px',
+                        height: scale * defaultIconSize + 'px',
+                        width: scale * defaultIconSize + 'px'
+                      }
+                    : {}
+                ">
+      {{ icon }}
+    </mat-icon>
+  </ng-container>
+  <img class="feature-icon-img" [ngStyle]="
+      scale
+        ? {
+            height: scale * defaultIconSize + 'px',
+            width: scale * defaultIconSize + 'px'
+          }
+        : {}
+    " *ngIf="iconType === 'url'" [src]="icon" i18n-alt alt="icon" />
+</ng-template>

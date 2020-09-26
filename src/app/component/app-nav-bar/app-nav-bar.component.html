@@ -1,5 +1,6 @@
 <mat-toolbar [hidden]="!showAppNavBar" [color]="primaryNavbarBackground?.color"
-  [ngStyle]="primaryNavbarBackground?.styles" id="appWhiteNavbar" class="mat-elevation-z3 mat-toolbar-style">
+  [ngStyle]="primaryNavbarBackground?.styles" id="appWhiteNavbar"
+  class="mat-elevation-z3 mat-toolbar-style custom-padding">
   <ng-container *ngIf="mode === 'top'">
     <div class="logosize">
       <a routerLink="/page/home" i18n-matTooltip matTooltip="Home" name="applicationLogo" class="logo-dim">
@@ -21,17 +22,19 @@
         *ngFor="let item of primaryNavbarConfig?.mediumScreen?.left">
       </ng-container>
       <span class="spacer"></span>
-      <button i18n-aria-label aria-label="Help" class="home-help" name="helpIconHomePage" mat-icon-button id="helper"
+      <!-- <button i18n-aria-label aria-label="Help" class="home-help" name="helpIconHomePage" mat-icon-button id="helper"
         [matMenuTriggerFor]="helpMenu" *ngIf="!isHelpMenuRestricted">
         <mat-icon>help_outline</mat-icon>
-      </button>
+      </button> -->
       <ng-container [ngTemplateOutlet]="navbarSide" [ngTemplateOutletContext]="{ item: item }"
         *ngFor="let item of primaryNavbarConfig?.mediumScreen?.right">
       </ng-container>
-      <div class="mat-icon-button pipe-icon">
+      <!-- <div class="mat-icon-button pipe-icon">
         |
+      </div> -->
+      <div class="custom-style">
+        <ng-container [wsResolverWidget]="btnAppsConfig"></ng-container>
       </div>
-      <ng-container [wsResolverWidget]="btnAppsConfig"></ng-container>
     </ng-container>
   </ng-container>
   <div class="flex justify-between items-center w-full" *ngIf="mode === 'bottom'">
@@ -62,8 +65,10 @@
 
 <ng-template #navbarSide let-item="item">
   <ng-container *ngIf="item.type === 'widgetButton'" [wsResolverWidget]="item.config"></ng-container>
-  <ws-widget-btn-feature *ngIf="item.type === 'featureButton'" [id]="item.config.actionBtnId" [widgetData]="item.config"
-    [showFixedLength]="true">dfnj</ws-widget-btn-feature>
+  <ws-widget-btn-feature class="item.widgetHostClass" style="padding-left:20px;padding-right: 17px;"
+    *ngIf="item.type === 'featureButton'" [id]="item.config.actionBtnId" [widgetData]="item.config"
+    [showFixedLength]="true">dfnj
+  </ws-widget-btn-feature>
 </ng-template>
 
 <mat-menu aria-label="helpMenu" #helpMenu="matMenu" name="helpOptionsListContainerHomePage">

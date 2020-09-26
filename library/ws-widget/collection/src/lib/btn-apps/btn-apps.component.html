@@ -1,39 +1,26 @@
-<button
-  i18n-aria-label
-  aria-label="Apps"
-  style="color: black;"
-  *ngIf="!widgetData?.showTitle"
-  mat-icon-button
-  [matMenuTriggerFor]="appsMenu"
-  [ngClass]="{ 'ws-mat-accent-text': isUrlOpened }"
-  i18n-matTooltip
-  matTooltip="Apps"
-  name="appsIconHomePage"
->
-  <mat-icon>apps</mat-icon>
+<button i18n-aria-label aria-label="Apps" style="color: black;" *ngIf="!widgetData?.showTitle" mat-icon-button
+  [matMenuTriggerFor]="appsMenu" [ngClass]="{ 'ws-mat-accent-text': isUrlOpened }" i18n-matTooltip matTooltip="Apps"
+  name="appsIconHomePage">
+  <mat-icon>dehaze
+  </mat-icon>
 </button>
-<a
-  role="button"
-  style="color: black;"
-  matRipple
-  *ngIf="widgetData?.showTitle"
+<a role="button" style="color: black;" matRipple *ngIf="widgetData?.showTitle"
   [ngClass]="{ 'ws-mat-accent-text': isUrlOpened }"
-  class="flex items-center flex-col cursor-pointer px-2 box-sizing-box"
-  [matMenuTriggerFor]="appsMenu"
->
-  <mat-icon>apps</mat-icon>
+  class="flex items-center flex-col cursor-pointer px-2 box-sizing-box pb-3" [matMenuTriggerFor]="appsMenu">
+  <mat-icon>dehaze
+  </mat-icon>
   <span [ngClass]="instanceVal === 'RootOrg' ? 'title font-sans' : 'mat-caption'" i18n>Apps</span>
 </a>
-<mat-menu #appsMenu="matMenu" xPosition="before" yPosition="above">
-  <section *ngIf="pinnedApps?.length && isPinFeatureAvailable" class="p-4 md:p-4 sm:p-2">
+<mat-menu backdropClass="custom_menu" #appsMenu="matMenu" xPosition="before" yPosition="below">
+  <!-- <section *ngIf="pinnedApps?.length && isPinFeatureAvailable" class="p-4 md:p-4 sm:p-2">
     <div class="flex justify-between">
       <h2 class="mat-title margin-bottom-xs" i18n>Pinned</h2>
-      <!-- <a mat-button [routerLink]="widgetData?.allListingUrl" *ngIf="widgetData?.allListingUrl">
+      <a mat-button [routerLink]="widgetData?.allListingUrl" *ngIf="widgetData?.allListingUrl">
         <span class="flex items-center">
           <span i18n>All</span>&nbsp;
           <mat-icon>chevron_right</mat-icon>
-        </span>
-      </a> -->
+        </span>S
+      </a>
     </div>
     <div class="flex flex-wrap -mx-2 -mt-1">
       <ng-container
@@ -41,37 +28,67 @@
         [wsResolverWidget]="pinnedWidget"
       ></ng-container>
     </div>
-  </section>
-  <section *ngIf="featuredApps" class="p-4 md:p-4 sm:p-2">
-    <div class="flex justify-between">
-      <h2 class="mat-title margin-bottom-xs" i18n>Featured</h2>
-      <!-- <a mat-button [routerLink]="widgetData?.allListingUrl" *ngIf="widgetData?.allListingUrl">
+  </section> -->
+  <section *ngIf="featuredApps" class="sm:p-2 alignment">
+    <!-- <div class="flex justify-between">
+      <h2 class="mat-title margin-bottom-xs" i18n>Featured</h2> -->
+    <!-- <a mat-button [routerLink]="widgetData?.allListingUrl" *ngIf="widgetData?.allListingUrl">
         <span class="flex items-center">
           <span i18n>All</span>&nbsp;
           <mat-icon>chevron_right</mat-icon>
         </span>
       </a> -->
-    </div>
-    <div class="flex flex-wrap -mx-2 -mt-1">
-      <ng-container
-        *ngFor="let featuredWidget of featuredApps"
-        [wsResolverWidget]="featuredWidget"
-      ></ng-container>
+    <!-- </div> -->
+    <div class="flex flex-wrap -mx-2">
+      <ng-container *ngFor="let featuredWidget of featureGroups">
+        <!-- <mat-accordion>
+          <mat-expansion-panel> -->
+        <ws-widget-app-btn-feature class="box-style" style="width: 100%" [featuredWidget]="featuredWidget">
+        </ws-widget-app-btn-feature>
+        <!-- </mat-expansion-panel>
+        </mat-accordion> -->
+      </ng-container>
+      <ng-container>
+        <div class="relative width-style box-style">
+          <!-- <mat-icon class="feature-status-icon" *ngIf="featureStatusColor" [color]="featureStatusColor">
+              brightness_1
+            </mat-icon> -->
+          <a class="text-center block a-tag" routerLink="/page/tour" mat-button [disableRipple]="true">
+            <span class="flex-design">
+              <mat-icon class="ml-2">help_outline</mat-icon>
+              <span class="ml-2 text-center text admin-panel">
+                Help
+              </span>
+            </span>
+          </a>
+        </div>
+      </ng-container>
+      <ng-container>
+        <div class="relative width-style box-style">
+          <a class="text-center block a-tag" (click)="logout()" mat-button [disableRipple]="true">
+            <span class="flex-design">
+              <mat-icon class="ml-2">power_settings_new</mat-icon>
+              <span class="ml-2 text-center text admin-panel">
+                Logout
+              </span>
+            </span>
+          </a>
+        </div>
+      </ng-container>
     </div>
   </section>
-  <a
-    mat-menu-item
-    [routerLink]="widgetData?.allListingUrl"
-    class="all-features"
-    *ngIf="widgetData?.allListingUrl"
-  >
-    <!-- <mat-icon>expand_more</mat-icon> -->
-    <span i18n>Explore all features</span>
-  </a>
-  <div class="flex flex-row-reverse">
+  <!-- <div mat-menu-item class="padding-remove" *ngIf="featuredApps.indexOf('feature_aboutUs') > -1">
+    <ws-widget-btn-feature [widgetData]="{
+          actionBtnId: 'feature_aboutUs',
+          config: {
+            type: 'mat-menu-item'
+          }
+        }"></ws-widget-btn-feature>
+  </div> -->
+  <!-- <div class="flex flex-row-reverse">
     <button (click)="logout()" color="warn" mat-button>
       <mat-icon>power_settings_new</mat-icon>&nbsp;
       <span i18n>Logout</span>
     </button>
-  </div>
+  </div> -->
 </mat-menu>

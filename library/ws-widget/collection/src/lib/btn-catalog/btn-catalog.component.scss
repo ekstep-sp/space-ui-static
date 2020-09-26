@@ -1,0 +1,11 @@
+@import 'ws-mixins';
+
+.display {
+  display: none;
+  @include breakpoint-s {
+    display: block !important;
+  }
+  @include breakpoint-xs {
+    display: block !important;
+  }
+}
