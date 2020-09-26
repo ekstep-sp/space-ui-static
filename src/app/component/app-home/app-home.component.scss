@@ -365,7 +365,7 @@ left: unset !important;
 }
 .head-text {
   z-index: 1;
-  left:37px !important;
+  left:65px !important;
 }
 .image-text {
    overflow: hidden !important;
@@ -408,9 +408,7 @@ height: 230px;
 }
 }
 @media screen and (min-width: 1880px) and (max-width:1950px) {
-.head-text {
-    left: -86px !important;
-}
+
 .group-image {
     left: 236px !important;
     position: absolute;
@@ -444,9 +442,6 @@ top: 800px !important;
     left: 35rem !important;
     top: 56rem !important;
 }
-.head-text {
-    left: -239px !important;
-}
 .homepage__banner-title {
  width: auto !important;
 }
@@ -455,14 +450,9 @@ top: 800px !important;
 }
 }
 @media screen and (min-width: 2100px) and (max-width:2160px) {
-  .head-text {
-    left: -150px !important;
-}
+  
 }
 @media screen and (min-width: 1750px) and (max-width:1800px) {
-.head-text {
-    left: -54px !important;
-}
 .group-image1 {
 top: 700px !important;
 }
@@ -475,30 +465,43 @@ top: 750px !important;
     top: 1.1rem !important;
 }
 }
+@media screen and (min-width: 1801px) and (max-width:1880px) {
+  .head-text {
+    left: 4.4rem !important;
+    ::ng-deep {
+      figure {
+        justify-content: flex-start;
+      }
+    }
+}  
+}
+@media screen and (min-width: 1601px) and (max-width: 1749px) {
+  .head-text {
+    ::ng-deep {
+      figure {
+        justify-content: flex-start;
+      }
+    }
+}
+}
 @media screen and (min-width: 1530px) and (max-width:1600px) {
 .head-text {
-    left: 0px !important;
+    left: 70px !important;
 }
 }
-@media screen and (min-width: 1005px) and (max-width:1300px) {
+@media screen and (min-width: 1020px) and (max-width:1279px) {
   .head-text {
-left: 0 !important;
+  left: 0 !important;
+  padding-left: 0 !important
+  
   }
 }
-@media screen and (min-width: 1240px) and (max-width:1330px) {
-  .head-text {
-left: 63px !important;
-  }
-  .group-image {
-    left: 235px !important;
-    top: -0.9rem !important;
-}
-}
-@media screen and (min-width: 1005px) and (max-width:1300px) {
 
-.head-text {
-  left:65px !important;
-}
+@media screen and (min-width: 1005px) and (max-width:1300px) {
+    .group-image {
+      left: 235px !important;
+      top: -0.9rem !important;
+  }
 }
 @media screen and (min-width: 1100px) and (max-width:1150px) {
   .head-text {
@@ -525,59 +528,12 @@ left: 63px !important;
 }
 }
 
-// .slide-details {
-//   padding: 0;
-//   color: #333;
-//   position: absolute;
-//   top: 50%;
-//   left: 50%;
-//   transform: translate(-50%, -50%);
-//   font-weight: 500;
-//   font-size: 15px;
-//   /* text-shadow: 1px 1px 1px #000; */
-//   width: 100%;
-// }
-// @media (max-width: 767.98px) {
-//   .slide-details {
-//     font-size: 12px !important;
-//     transform: translate(-50%, 32%) !important;
-//   }
-// }
-// @media only screen and (min-width: 768px) {
-//   .slide-details {
-//     transform: translate(10%, -35%);
-//   }
-// }
-// @media only screen and (min-width: 1023px) and (max-width: 1024px){
-// .slide-details {
-//     transform: translate(8%, 30%);
-// }
-// }
-// @media only screen and (min-width: 768px) {
-//   .slide-details {
-//     font-size: 22px;
-//     position: initial;
-//     left: 0;
-//     bottom: 0;
-//     // width: auto;
-//     padding: 20px 0px;
-//   }
-// }
-// @media (max-width: 971px) and (min-width: 768px) {
-//   .slide-details {
-//     position: absolute;
-//     left: 40%;
-//   }
-// }
-// @media screen and (max-width: 600px) {
-//   .slide-details {
-//     font-size: 12px !important;
-//     transform: translate(-50%, 32%) !important;
-//   }
-// }
-// @media screen and (max-width: 480px) {
-//   .slide-details {
-//     font-size: 12px !important;
-//     transform: translate(-50%, 32%) !important;
-//   }
-// }
+@media screen and (min-width: 1280px) {
+  .head-text {
+    ::ng-deep {
+      figure {
+        justify-content: flex-start;
+      }
+    }
+  }
+}
