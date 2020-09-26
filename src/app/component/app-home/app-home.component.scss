@@ -328,6 +328,17 @@ left: unset !important;
     font-size: 6.47vw;
 }
 }
+@media screen and (min-width: 1028px) and (max-width: 1075px) {
+  .h1-head-style {
+    font-size: 33px !important;
+  }
+}
+
+@media screen and (min-width: 1076px) and (max-width: 1280px) {
+  .h1-head-style {
+    font-size: 35px !important;
+  }
+}
 @media screen and (min-width: 312px) and (max-width:768px) {
 .homepage__banner-title {
     font-size: 8.1vw;
