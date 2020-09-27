@@ -23,6 +23,12 @@
   margin-left: 0px !important;
 }
  }
+ 
+.link-active {
+  font-weight: bold;
+  border-bottom: 3px solid;
+  border-radius: 0px;
+}
 .feature-status-icon {
   position: absolute;
   top: 4px;
@@ -117,3 +123,13 @@
 .external-link-button {
   color: inherit !important;
 }
+.header-display-none{
+  display:none;
+}
+[actionHide = feature_collaborators ]{
+  display:none;
+}
+[actionHide = feature_aboutUs ]{
+  display:none;
+}
+
