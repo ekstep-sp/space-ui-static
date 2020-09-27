@@ -160,3 +160,9 @@ margin-top: -7rem;
 .spaceallign:not(:root:root){
      padding-left: 20px !important;
 }
+
+@media screen and (min-width:1363px) and (max-width: 1368px) {
+  .img-container{
+    width: 640px !important;
+  }
+}
