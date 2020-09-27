@@ -7,7 +7,7 @@
 <a role="button" style="color: black;" matRipple *ngIf="widgetData?.showTitle"
   [ngClass]="{ 'ws-mat-accent-text': isUrlOpened }"
   class="flex items-center flex-col cursor-pointer px-2 box-sizing-box pb-3" [matMenuTriggerFor]="appsMenu">
-  <mat-icon>dehaze
+  <mat-icon class="custom-margin-icon">dehaze
   </mat-icon>
   <span [ngClass]="instanceVal === 'RootOrg' ? 'title font-sans' : 'mat-caption'" i18n>Apps</span>
 </a>

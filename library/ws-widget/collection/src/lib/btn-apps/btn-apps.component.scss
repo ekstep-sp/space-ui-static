@@ -46,9 +46,15 @@ mat-icon {
       color: #696466;
     /* display: flex; */
     /* justify-content: space-evenly; */
-    flex-basis: 32px;
+    // flex-basis: 32px;
     line-height: 2;
 }
+
+.custom-margin-icon{
+  margin-bottom:10px;
+}
+
+
 .text {
     display: flex;
     justify-content: space-evenly;
