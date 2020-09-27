@@ -548,3 +548,16 @@ top: 750px !important;
     }
   }
 }
+
+@media screen and (max-width: 300px) {
+  .signin-style {
+    display: block !important;
+}
+.signin, .signup {
+  width: 100%;
+  margin: 0 !important;
+}
+.signin {
+  margin-bottom: 15px !important;
+}
+}
