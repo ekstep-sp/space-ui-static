@@ -140,6 +140,12 @@ mat-toolbar span {
   background-color: rgba(0, 0, 0, 0.12) !important;
   color: rgba(0, 0, 0, 0.26) !important;
 }
+.theme-muave.night-mode .mat-flat-button
+{
+  background: transparent !important;
+  color: #696466 !important;
+  // color: rgba(0, 0, 0, 0.26) !important;
+}
 .header-btn-style {
 font-family: Montserrat !important;
 font-style: normal !important;

@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core'
+import { Component, OnInit, Input, ChangeDetectorRef } from '@angular/core'
 import { NsAppsConfig, NsPage, ConfigurationsService, AuthKeycloakService } from '../../../../utils/src/public-api'
 import { NsWidgetResolver } from '../../../../resolver/src/public-api'
 import { AppBtnFeatureService } from './service/app-btn-feature.service'
@@ -30,37 +30,40 @@ export const typeMap = {
 })
 export class AppBtnFeatureComponent implements OnInit {
 
-  @Input() featuredWidget: IGroupWithFeatureWidgets[] | any = []
+  @Input() widget: IGroupWithFeatureWidgets[] | any = []
   rolesBasedFeatureGroups: IGroupWithFeatureWidgets[] = []
   readonly displayType = typeMap
   allowedToFeedback = true
   allowedToAuthor = true
+  featuredWidget: IGroupWithFeatureWidgets[] | any = []
 
   constructor(
     public configSvc: ConfigurationsService,
     private authSvc: AuthKeycloakService,
     public featureService: AppBtnFeatureService,
     public router: Router,
+    private cd: ChangeDetectorRef,
   ) { }
 
   ngOnInit() {
     this.setUpPermission()
-    this.isAllowedForDisplay(this.featuredWidget)
+    this.isAllowedForDisplay(this.widget)
+    this.featuredWidget = this.widget
   }
   setUpPermission() {
-    if (this.featuredWidget) {
-      const allowed = this.featuredWidget.rolesAllowed || []
-      const notAllowed = this.featuredWidget.rolesNotAllowed || []
+    if (this.widget) {
+      const allowed = this.widget.rolesAllowed || []
+      const notAllowed = this.widget.rolesNotAllowed || []
       if (this.featureService.isVisibileAccToRoles(allowed, notAllowed)) {
-        this.featuredWidget.show = true
+        this.widget.show = true
       } else {
-        this.featuredWidget.show = false
+        this.widget.show = false
       }
     }
-    if (this.featuredWidget.show && this.featuredWidget.expand && this.featuredWidget.featureWidgets.length) {
-      this.featuredWidget.featureWidgets.forEach((widget: any) => {
+    if (this.widget.show && this.widget.expand && this.widget.featureWidgets.length) {
+      this.widget.featureWidgets.forEach((widget: any) => {
         const allowed = widget.widgetData.actionBtn.allowedRoles || []
-        const notAllowed = this.featuredWidget.rolesNotAllowed || []
+        const notAllowed = this.widget.rolesNotAllowed || []
         widget.widgetData.actionBtn.show = this.featureService.isVisibileAccToRoles(allowed, notAllowed)
       })
     }
@@ -69,6 +72,10 @@ export class AppBtnFeatureComponent implements OnInit {
     e.preventDefault()
     e.stopPropagation()
     this.router.navigateByUrl(key)
+  }
+  maintainPropagation(event: any) {
+    event.stopPropagation()
+    this.cd.detectChanges()
   }
   // get desktopVisible() {
   //   if (this.widgetData.actionBtn && this.widgetData.actionBtn.mobileAppFunction) {
