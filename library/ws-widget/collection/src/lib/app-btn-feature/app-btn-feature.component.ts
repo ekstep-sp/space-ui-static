@@ -69,12 +69,13 @@ export class AppBtnFeatureComponent implements OnInit {
     }
   }
   navigate(key: any, e: any) {
-    e.preventDefault()
-    e.stopPropagation()
     this.router.navigateByUrl(key)
   }
   maintainPropagation(event: any) {
-    event.stopPropagation()
+    if (!event.target.className.split(' ').includes('innerSpan')) {
+      event.preventDefault()
+      event.stopPropagation()
+    }
     this.cd.detectChanges()
   }
   // get desktopVisible() {
