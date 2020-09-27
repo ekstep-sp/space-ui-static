@@ -1,7 +1,7 @@
 <ng-container style="margin-top: -1.2rem;">
   <ng-container *ngIf="featuredWidget.show === true && featuredWidget.expand === true">
     <mat-accordion>
-      <mat-expansion-panel (click)="$event.stopPropagation()">
+      <mat-expansion-panel (click)="maintainPropagation($event)">
         <mat-expansion-panel-header>
           <mat-panel-title>
 

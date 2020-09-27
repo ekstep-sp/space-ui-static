@@ -7,7 +7,10 @@
 }
 ::ng-deep {
 .mat-menu-content {
-  padding-bottom: 0 !important;
+padding-bottom: 0 !important;
+  @include breakpoint-s {
+    padding-top: 0 !important;
+  }
 }
 }
 .alignment {
@@ -46,9 +49,15 @@ mat-icon {
       color: #696466;
     /* display: flex; */
     /* justify-content: space-evenly; */
-    flex-basis: 32px;
+    // flex-basis: 32px;
     line-height: 2;
 }
+
+.custom-margin-icon{
+  margin-bottom:10px;
+}
+
+
 .text {
     display: flex;
     justify-content: space-evenly;

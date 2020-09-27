@@ -18,6 +18,11 @@
 .custom-padding {
   margin-left: 20px;
 }
+ @media screen and (max-width:600px){
+.custom-padding {
+  margin-left: 0px !important;
+}
+ }
 .feature-status-icon {
   position: absolute;
   top: 4px;
@@ -30,6 +35,13 @@
 .btnDisabled{
   pointer-events: none;
   color: #e1e1e1;
+}
+::ng-deep {
+.theme-muave.night-mode .custom-nightmode {
+    color: white;
+    /* background-color: #424242; */
+    background: transparent;
+}
 }
 .feature-icon {
   width: 36px;

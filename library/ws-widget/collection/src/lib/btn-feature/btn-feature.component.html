@@ -21,7 +21,7 @@
     <a *ngSwitchCase="displayType.matFabButton" mat-fab>
       <ng-container [ngTemplateOutlet]="icon" [ngTemplateOutletContext]="widgetData.actionBtn"></ng-container>
     </a>
-    <a *ngSwitchCase="displayType.matFlatButton" [routerLink]="widgetData.actionBtn?.url" [disableRipple]="true" mat-flat-button>
+    <a *ngSwitchCase="displayType.matFlatButton" class="custom-nightmode" [routerLink]="widgetData.actionBtn?.url" [disableRipple]="true" mat-flat-button>
       <ng-container [ngTemplateOutlet]="buttonContent" [ngTemplateOutletContext]="widgetData"></ng-container>
     </a>
     <a *ngSwitchCase="displayType.matIconButton" [disableRipple]="true" [name]="widgetData.actionBtn?.name" class="custom-padding"
