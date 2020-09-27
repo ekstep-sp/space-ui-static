@@ -1,7 +1,7 @@
 <ng-container style="margin-top: -1.2rem;">
   <ng-container *ngIf="featuredWidget.show === true && featuredWidget.expand === true">
-    <mat-accordion>
-      <mat-expansion-panel (click)="maintainPropagation($event)">
+    <mat-accordion (click)="maintainPropagation($event)">
+      <mat-expansion-panel>
         <mat-expansion-panel-header>
           <mat-panel-title>
 
@@ -13,10 +13,10 @@
                   }">
             </ng-container>
             <span *ngIf="featuredWidget.name !== 'Admin'" class="ml-4 text-center" style="color: #696466;">
-              {{featuredWidget.name}} </span>
+              {{featuredWidget.name}}</span>
             <ng-container *ngIf="featuredWidget.name === 'Admin'">
               <img class="" src="/assets/instances/space/admin_panal_icon/admin_panel_settings.svg">
-              <span class="ml-4 text-center admin-panel" style="color: #696466;"> {{featuredWidget.name}} </span>
+              <span class="ml-4 text-center admin-panel" style="color: #696466;"> {{featuredWidget.name}}</span>
             </ng-container>
           </mat-panel-title>
         </mat-expansion-panel-header>
@@ -43,7 +43,7 @@
                         widget: featuredWidget.name,
                         color: featuredWidget.color
                       }"></ng-container>
-        <span class="ml-4 text-center text" style="color: #696466;"> {{featuredWidget.name}} </span>
+        <span class="ml-4 text-center text" style="color: #696466;"> {{featuredWidget.name}}</span>
       </span>
     </a>
   </ng-container>
@@ -60,7 +60,7 @@
           scale: 1.7,
           color: actionBtn.color
         }"></ng-container>
-      <span class="ml-4 text-center" style="color: #696466;" *ngIf="!config.useShortName">{{ actionBtn.name }}</span>
+      <span class="ml-4 text-center innerSpan" style="color: #696466;" *ngIf="!config.useShortName">{{ actionBtn.name }}</span>
       <span class="ml-4 text-center" style="color: #696466;" *ngIf="config.useShortName">
         {{ actionBtn.shortName }}
       </span>
