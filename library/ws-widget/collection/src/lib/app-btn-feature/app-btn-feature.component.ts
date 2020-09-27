@@ -68,7 +68,7 @@ export class AppBtnFeatureComponent implements OnInit {
       })
     }
   }
-  navigate(key: any, e: any) {
+  navigate(key: any, _e: any) {
     this.router.navigateByUrl(key)
   }
   maintainPropagation(event: any) {
