@@ -7,7 +7,10 @@
 }
 ::ng-deep {
 .mat-menu-content {
-  padding-bottom: 0 !important;
+padding-bottom: 0 !important;
+  @include breakpoint-s {
+    padding-top: 0 !important;
+  }
 }
 }
 .alignment {

@@ -42,6 +42,13 @@
   pointer-events: none;
   color: #e1e1e1;
 }
+::ng-deep {
+.theme-muave.night-mode .custom-nightmode {
+    color: white;
+    /* background-color: #424242; */
+    background: transparent;
+}
+}
 .feature-icon {
   width: 36px;
   height: 36px;
