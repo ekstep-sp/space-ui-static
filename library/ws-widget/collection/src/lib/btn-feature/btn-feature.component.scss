@@ -18,6 +18,11 @@
 .custom-padding {
   margin-left: 20px;
 }
+ @media screen and (max-width:600px){
+.custom-padding {
+  margin-left: 0px !important;
+}
+ }
 .feature-status-icon {
   position: absolute;
   top: 4px;

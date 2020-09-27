@@ -103,7 +103,7 @@ export class EditorQuillComponent implements OnInit, OnDestroy {
   onContentChanged(editorEvent: any) {
     const newList = this.emitMentionsEvent(editorEvent.content.ops)
     this.textData.emit({
-      isValid: editorEvent.text.length > this.minLength,
+      isValid: editorEvent.text.trim().length > this.minLength,
       htmlText: editorEvent.html,
       text: editorEvent.text,
       mentions: newList,
