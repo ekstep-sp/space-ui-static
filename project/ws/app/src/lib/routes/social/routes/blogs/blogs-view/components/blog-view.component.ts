@@ -68,7 +68,7 @@ export class BlogViewComponent implements OnInit {
     combineLatest(this.route.data, this.route.paramMap).subscribe(_combinedResult => {
       if (_combinedResult[0].socialData.data.allowMentionUsers) {
         this.allowMention = _combinedResult[0].socialData.data.allowMentionUsers
-        }
+      }
       // tslint:disable-next-line: max-line-length
       if (this.forumSrvc.isVisibileAccToRoles(_combinedResult[0].socialData.data.rolesAllowed.blogs, _combinedResult[0].socialData.data.rolesNotAllowed.blogs)) {
         this.allowedToEditBlog = true
@@ -262,14 +262,14 @@ export class BlogViewComponent implements OnInit {
   }
 
   get blogTitle() {
-      try {
-        if (this.conversation && this.conversation.mainPost.postContent.title) {
-          const domEl = new DOMParser().parseFromString(this.conversation.mainPost.postContent.title, 'text/html')
-          return (domEl.children[0] as any).innerText
-        }
-        return ''
-      } catch (e) {
-        return ''
+    try {
+      if (this.conversation && this.conversation.mainPost.postContent.title) {
+        const domEl = new DOMParser().parseFromString(this.conversation.mainPost.postContent.title, 'text/html')
+        return (domEl.children[0] as any).innerText
       }
+      return ''
+    } catch (e) {
+      return ''
+    }
   }
 }
