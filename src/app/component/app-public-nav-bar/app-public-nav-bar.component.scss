@@ -189,6 +189,11 @@ color: #696466;
     line-height: 17px !important;
   }
 }
+
+.header-fixed{
+  position: fixed;
+  z-index:10;
+}
 // @media only screen and (min-width: 360px) and (max-width: 599px) {
 //   .app-logo {
 //     // width: 6rem !important;
