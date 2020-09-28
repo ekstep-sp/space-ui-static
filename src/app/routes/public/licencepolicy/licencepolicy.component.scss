@@ -8,7 +8,7 @@ line-height: 1.7;
    padding: 0 !important;
 }
 }
-#cimage {
+.cimage {
   background-size: cover;
   background-position: center;
   width: 100%;
@@ -111,7 +111,7 @@ height: auto !important;
   // height: 17rem;
 }
 @media screen and (min-width:280px) and (max-width: 320px) {
-    #cimage {
+    .cimage {
     width: 15rem !important;
   }
   .img-container {
@@ -129,6 +129,17 @@ margin-left: 1rem !important;
    }
    .font-style {
     width: 14rem !important;
+}
+.section-margin {
+  margin-right: 0 !important;
+}
+.mat-drawer-container {
+    position: relative;
+    z-index: 1;
+    box-sizing: border-box;
+    -webkit-overflow-scrolling: touch;
+    // display: block;
+     overflow: hidden !important;
 }
 }
 @media screen and (min-width:539px) and (max-width: 542px) {
@@ -165,9 +176,44 @@ margin-left: 1rem !important;
 .allign-p:not(:root:root){
      margin-left: -5px !important
 }
+.text-container{
+  padding: 2.5rem;
+}
 
+.section-margin {
+  margin-right: 2.5rem;
+}
 ::ng-deep{
 .theme-muave.night-mode .font-style{
   color: white !important;
+}
+
+.theme-muave.night-mode .img-container{
+max-width: 600px !important;
+    padding: 10px !important;
+    margin-top: 40px !important;
+}
+
+ .theme-muave.night-mode .cimage {
+
+     margin-left: 0 !important;
+}
+.theme-muave.night-mode .section-margin{
+  margin-right: 0 !important;
+}
+ .mat-drawer-container {
+    position: relative;
+    z-index: 1;
+    box-sizing: border-box;
+    -webkit-overflow-scrolling: touch;
+    // display: block;
+     overflow: inherit;
+}
+@media only screen and (max-width: 959px) and (min-width: 600px){
+ .theme-muave.night-mode .cimage {
+    width: 18rem !important;
+    height: auto !important;
+    margin-left: 0rem !important;
+}
 }
 }
