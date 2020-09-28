@@ -23,10 +23,6 @@ export namespace NsEditProfile {
   }
 }
 
-const endpoint = {
-  profilePid: '/apis/protected/v8/user/details/wtoken',
-}
-
 @Component({
   selector: 'ws-app-edit-profile',
   templateUrl: './edit-profile.component.html',
