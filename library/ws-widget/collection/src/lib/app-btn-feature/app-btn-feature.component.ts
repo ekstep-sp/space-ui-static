@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, ChangeDetectorRef } from '@angular/core'
+import { Component, OnInit, Input, ChangeDetectorRef, AfterViewInit } from '@angular/core'
 import { NsAppsConfig, NsPage, ConfigurationsService, AuthKeycloakService } from '../../../../utils/src/public-api'
 import { NsWidgetResolver } from '../../../../resolver/src/public-api'
 import { AppBtnFeatureService } from './service/app-btn-feature.service'
@@ -28,7 +28,7 @@ export const typeMap = {
   templateUrl: './app-btn-feature.component.html',
   styleUrls: ['./app-btn-feature.component.scss'],
 })
-export class AppBtnFeatureComponent implements OnInit {
+export class AppBtnFeatureComponent implements OnInit, AfterViewInit {
 
   @Input() widget: IGroupWithFeatureWidgets[] | any = []
   rolesBasedFeatureGroups: IGroupWithFeatureWidgets[] = []
@@ -36,6 +36,7 @@ export class AppBtnFeatureComponent implements OnInit {
   allowedToFeedback = true
   allowedToAuthor = true
   featuredWidget: IGroupWithFeatureWidgets[] | any = []
+  expand = false
 
   constructor(
     public configSvc: ConfigurationsService,
@@ -43,7 +44,12 @@ export class AppBtnFeatureComponent implements OnInit {
     public featureService: AppBtnFeatureService,
     public router: Router,
     private cd: ChangeDetectorRef,
-  ) { }
+  ) { 
+    this.featureService.triggerExpansion.subscribe((newExpansion: boolean) => {
+      this.expand = newExpansion
+      console.log('recieved value ', this.expand)
+    })
+  }
 
   ngOnInit() {
     this.setUpPermission()
@@ -122,5 +128,13 @@ export class AppBtnFeatureComponent implements OnInit {
         }
       })
     }
+  }
+
+  setExpansion(currentExpansion: boolean) {
+    this.expand = currentExpansion
+  }
+
+  ngAfterViewInit() {
+    console.log('hello')
   }
 }
