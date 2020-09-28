@@ -1,8 +1,10 @@
-import { Component, OnInit, Input, ChangeDetectorRef } from '@angular/core'
+import { Component, OnInit, Input, OnDestroy, ViewChild } from '@angular/core'
 import { NsAppsConfig, NsPage, ConfigurationsService, AuthKeycloakService } from '../../../../utils/src/public-api'
 import { NsWidgetResolver } from '../../../../resolver/src/public-api'
 import { AppBtnFeatureService } from './service/app-btn-feature.service'
 import { Router } from '@angular/router'
+import { Subscription } from 'rxjs'
+import { MatAccordion } from '@angular/material'
 
 interface IGroupWithFeatureWidgets extends NsAppsConfig.IGroup {
   featureWidgets: NsWidgetResolver.IRenderConfigWithTypedData<NsPage.INavLink>[],
@@ -28,30 +30,32 @@ export const typeMap = {
   templateUrl: './app-btn-feature.component.html',
   styleUrls: ['./app-btn-feature.component.scss'],
 })
-export class AppBtnFeatureComponent implements OnInit {
+export class AppBtnFeatureComponent implements OnInit, OnDestroy {
 
   @Input() widget: IGroupWithFeatureWidgets[] | any = []
+  @ViewChild('accordion', { static: true }) maccordion: MatAccordion | undefined
   rolesBasedFeatureGroups: IGroupWithFeatureWidgets[] = []
   readonly displayType = typeMap
   allowedToFeedback = true
   allowedToAuthor = true
   featuredWidget: IGroupWithFeatureWidgets[] | any = []
   expand = false
+  expansion$: Subscription | null = null
 
   constructor(
     public configSvc: ConfigurationsService,
     private authSvc: AuthKeycloakService,
     public featureService: AppBtnFeatureService,
     public router: Router,
-    private cd: ChangeDetectorRef,
-  ) {
-    this.featureService.triggerExpansion.subscribe((newExpansion: boolean) => {
-      this.expand = newExpansion
-      // console.log('recieved value ', this.expand)
-    })
-  }
+  ) {}
 
   ngOnInit() {
+    this.expansion$ = this.featureService.triggerExpansion.subscribe((newExpansion: boolean) => {
+      this.expand = newExpansion
+      if (this.maccordion) {
+        this.maccordion.closeAll()
+      }
+    })
     this.setUpPermission()
     this.isAllowedForDisplay(this.widget)
     this.featuredWidget = this.widget
@@ -82,7 +86,6 @@ export class AppBtnFeatureComponent implements OnInit {
       event.preventDefault()
       event.stopPropagation()
     }
-    this.cd.detectChanges()
   }
   // get desktopVisible() {
   //   if (this.widgetData.actionBtn && this.widgetData.actionBtn.mobileAppFunction) {
@@ -132,5 +135,11 @@ export class AppBtnFeatureComponent implements OnInit {
 
   setExpansion(currentExpansion: boolean) {
     this.expand = currentExpansion
+  }
+
+  ngOnDestroy() {
+    if (this.expansion$) {
+      this.expansion$.unsubscribe()
+    }
   }
 }

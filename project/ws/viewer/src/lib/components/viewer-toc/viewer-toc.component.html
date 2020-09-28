@@ -217,7 +217,7 @@
           </div>
         </div>
         <span class="mat-body-1">
-          <span>{{ content.type | pipeLimitTo: 300 }}</span> </span
+          <span>{{ (content.assetType === 'Connection' ? 'Connection' : content.type) | pipeLimitTo: 300 }}</span> </span
         ><span class="mat-body-1 margin-left-xxs" *ngIf="content?.complexity"
           ><span>| {{ content?.complexity | pipeLimitTo: 300 }}</span>
         </span>

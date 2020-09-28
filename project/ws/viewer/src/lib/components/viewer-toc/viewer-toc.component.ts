@@ -20,6 +20,7 @@ import { delay } from 'rxjs/operators'
 import { ViewerDataService } from '../../viewer-data.service'
 import { ViewerUtilService } from '../../viewer-util.service'
 interface IViewerTocCard {
+  assetType: string | null
   identifier: string
   viewerUrl: string
   thumbnailUrl: string
@@ -265,6 +266,7 @@ export class ViewerTocComponent implements OnInit, OnDestroy {
     //     content.children.map(child => this.convertContentToIViewerTocCard(child)) : null,
     // }
     return {
+      assetType: content.assetType || null ,
       identifier: content.identifier,
       viewerUrl: `${this.forPreview ? '/author' : ''}/viewer/${VIEWER_ROUTE_FROM_MIME(
         content.mimeType,

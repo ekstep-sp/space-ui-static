@@ -1,10 +1,9 @@
 <ng-container style="margin-top: -1.2rem;">
   <ng-container *ngIf="featuredWidget.show === true && featuredWidget.expand === true">
-    <mat-accordion (click)="maintainPropagation($event)">
-      <mat-expansion-panel [expanded]="expand" (opened)="setExpansion(true)" (close)="setExpansion(false)">
+    <mat-accordion #accordion='matAccordion' (click)="maintainPropagation($event)">
+      <mat-expansion-panel>
         <mat-expansion-panel-header>
           <mat-panel-title>
-
             <ng-container *ngIf="featuredWidget.name !== 'Admin'" [ngTemplateOutlet]="icon" [ngTemplateOutletContext]="{
                     iconType: featuredWidget.iconType,
                     icon: featuredWidget.icon,
