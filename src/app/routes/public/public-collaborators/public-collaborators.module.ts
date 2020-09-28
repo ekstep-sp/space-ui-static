@@ -5,14 +5,13 @@ import { MatIconModule } from '@angular/material/icon'
 import { HorizontalScrollerModule } from '../../../../../library/ws-widget/utils/src/public-api'
 import { Ng2CarouselamosModule } from 'ng2-carouselamos'
 
-
 @NgModule({
   declarations: [PublicCollaboratorsComponent],
   imports: [
     CommonModule,
     MatIconModule,
     HorizontalScrollerModule,
-    Ng2CarouselamosModule
+    Ng2CarouselamosModule,
   ],
   exports: [PublicCollaboratorsComponent],
 })

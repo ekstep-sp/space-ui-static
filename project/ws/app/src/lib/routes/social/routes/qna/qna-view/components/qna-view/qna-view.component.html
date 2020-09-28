@@ -101,14 +101,11 @@
           </div>
           <form class="comment-form" *ngIf="allowedToComment">
             <mat-form-field class="width-1-1">
-              <!-- <input matInput i18n-placeholder placeholder="Add a comment" [mentionConfig]="mentionConfig"
-                value="commentAddRequest.postContent.body" type="text" name="comment"
-                [(ngModel)]="commentAddRequest.postContent.body" /> -->
               <input matInput i18n-placeholder placeholder="Add a comment" value="commentAddRequest.postContent.body"
                 type="text" name="comment" [(ngModel)]="commentAddRequest.postContent.body" />
             </mat-form-field>
             <button mat-stroked-button color="primary" class="margin-left-s"
-              [disabled]="!commentAddRequest.postContent.body.length || isPostingComment"
+              [disabled]="!commentAddRequest.postContent.body.trim().length || isPostingComment"
               i18n="Post comment of question" (click)="postComment()">
               Post
             </button>

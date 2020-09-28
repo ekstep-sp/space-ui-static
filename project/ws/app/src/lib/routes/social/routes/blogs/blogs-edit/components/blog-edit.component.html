@@ -107,24 +107,24 @@
   <div class="flex flex-middle flex-center margin-top-m">
     <button *ngIf="editMode === 'create'" class="margin-right-s text-white"
       (click)="saveDraft(savedDraft.value, error.value)"
-      [disabled]="isCreatingPost || !actionBtnsEnabled || blogTitle.invalid || blogAbstract.invalid" mat-raised-button
-      color="primary" i18n>
+      [disabled]="isCreatingPost || !actionBtnsEnabled || blogTitle.invalid || blogAbstract.invalid || !blogTitle.value.trim().length || !blogAbstract.value.trim().length"
+      mat-raised-button color="primary" i18n>
       Save as Draft
     </button>
     <button *ngIf="editMode === 'update'" class="margin-right-s" (click)="update(saved.value, error.value)"
-      [disabled]="isCreatingPost || !actionBtnsEnabled || blogTitle.invalid || blogAbstract.invalid" mat-raised-button
-      color="primary" i18n>
+      [disabled]="isCreatingPost || !actionBtnsEnabled || blogTitle.invalid || blogAbstract.invalid || !blogTitle.value.trim().length || !blogAbstract.value.trim().length"
+      mat-raised-button color="primary" i18n>
       Save
     </button>
     <button *ngIf="editMode === 'draft'" class="margin-right-s" (click)="saveDraft(saved.value, error.value)"
-      [disabled]="isCreatingPost || !actionBtnsEnabled || blogTitle.invalid || blogAbstract.invalid" mat-raised-button
-      color="primary" i18n>
+      [disabled]="isCreatingPost || !actionBtnsEnabled || blogTitle.invalid || blogAbstract.invalid ||  !blogTitle.value.trim().length || !blogAbstract.value.trim().length"
+      mat-raised-button color="primary" i18n>
       Save
     </button>
     <button *ngIf="editMode === 'create' || editMode === 'draft'" class="margin-right-s"
       (click)="publishBlog(publish.value, error.value)"
-      [disabled]="isCreatingPost || !actionBtnsEnabled || blogTitle.invalid || blogAbstract.invalid" mat-raised-button
-      color="primary" i18n="Post of Ask a Question">
+      [disabled]="isCreatingPost || !actionBtnsEnabled || blogTitle.invalid || blogAbstract.invalid  || !blogTitle.value.trim().length || !blogAbstract.value.trim().length"
+      mat-raised-button color="primary" i18n="Post of Ask a Question">
       Publish
     </button>
     <div *ngIf="isCreatingPost">

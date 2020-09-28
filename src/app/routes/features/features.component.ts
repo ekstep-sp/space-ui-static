@@ -80,7 +80,7 @@ export class FeaturesComponent implements OnInit, OnDestroy {
       } else {
         this.allowedToFeedback = false
       }
-       // tslint:disable-next-line: max-line-length
+      // tslint:disable-next-line: max-line-length
       if (this.featureService.isVisibileAccToRoles(_data.pageData.data.author.rolesAllowed.author, _data.pageData.data.author.rolesNotAllowed.author)) {
         this.allowedToAuthor = true
       } else {
@@ -164,13 +164,13 @@ export class FeaturesComponent implements OnInit, OnDestroy {
         if (data.allowedRoles) {
           const requiredRolePreset = data.allowedRoles.some(item =>
             (this.configurationSvc.userRoles || new Set()).has(item),
-        )
-        if (requiredRolePreset) {
+          )
+          if (requiredRolePreset) {
+            this.rolesBasedFeatureGroups.push(data)
+          }
+        } else {
           this.rolesBasedFeatureGroups.push(data)
         }
-      } else {
-        this.rolesBasedFeatureGroups.push(data)
-      }
       })
     }
   }

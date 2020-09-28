@@ -79,3 +79,10 @@ line-height: 20px;
 // .mat-body p, .mat-body-1 p, .mat-typography p{
 //     margin: 0 0 6px;
 // }
+
+@media screen and (min-width:270px) and (max-width: 290px){
+  a{
+    font-size: 11px !important;
+  }
+
+}

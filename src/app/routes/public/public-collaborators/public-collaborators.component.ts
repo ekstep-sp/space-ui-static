@@ -10,8 +10,7 @@ import { ActivatedRoute } from '@angular/router'
 })
 export class PublicCollaboratorsComponent implements OnInit {
   @ViewChild('carousel', { static: false }) carousel: any
-  images: Array<any> = []
-
+  images: any[] = []
 
   collaboratorBanner: SafeUrl | null = null
   partner = {
@@ -30,8 +29,6 @@ export class PublicCollaboratorsComponent implements OnInit {
       )
     }
 
-
-
   }
   ngOnInit() {
     this.router.data.subscribe(data => {
@@ -39,9 +36,5 @@ export class PublicCollaboratorsComponent implements OnInit {
       this.partner.url = data.pageData.data.partner.url
     })
   }
-
-
-
-
 
 }

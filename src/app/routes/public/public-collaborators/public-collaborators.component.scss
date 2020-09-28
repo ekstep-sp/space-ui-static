@@ -96,6 +96,7 @@ height: 65px;
 
 .partnerBody {
   padding-left: 2.0rem;
+  width: auto;
 }
 
 @media only screen and (max-width: 680px) {
@@ -178,10 +179,6 @@ img {
 //   text-decoration: none;
 //   -webkit-transition: 0.2s ease-in;
 // }
-
-.padding-para:not(:root:root){
-  padding-left: 4.4rem !important;
-}
 .card-container {
   height: 200px;
     /* margin-right: 16px; */

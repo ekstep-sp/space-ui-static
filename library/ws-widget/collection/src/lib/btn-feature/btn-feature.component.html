@@ -21,11 +21,12 @@
     <a *ngSwitchCase="displayType.matFabButton" mat-fab>
       <ng-container [ngTemplateOutlet]="icon" [ngTemplateOutletContext]="widgetData.actionBtn"></ng-container>
     </a>
-    <a *ngSwitchCase="displayType.matFlatButton" [routerLink]="widgetData.actionBtn?.url" mat-flat-button>
+    <a *ngSwitchCase="displayType.matFlatButton"  class="btn-margin" [routerLink]="widgetData.actionBtn?.url" [disableRipple]="true"
+      mat-flat-button routerLinkActive="ws-mat-primary-text link-active">
       <ng-container [ngTemplateOutlet]="buttonContent" [ngTemplateOutletContext]="widgetData"></ng-container>
     </a>
-    <a *ngSwitchCase="displayType.matIconButton" [name]="widgetData.actionBtnName"
-      [routerLink]="widgetData.actionBtn?.url" mat-icon-button>
+    <a *ngSwitchCase="displayType.matIconButton" [disableRipple]="true" [name]="widgetData.actionBtn?.name"
+      class="custom-padding" [routerLink]="widgetData.actionBtn?.url" mat-icon-button>
       <ng-container [ngTemplateOutlet]="icon" [ngTemplateOutletContext]="{
           iconType: widgetData.actionBtn.iconType,
           icon: widgetData.actionBtn.icon
@@ -118,9 +119,8 @@
       brightness_1
     </mat-icon> -->
 
-    <a *ngIf="!isMobile(actionBtn.name);" class="text-center block" [href]="actionBtn.url"
-      [url]="actionBtn.url" [wsWidgetUrlResolver]="actionBtn.isExternal"
-      [mobileAppFunction]="actionBtn.mobileAppFunction">
+    <a *ngIf="!isMobile(actionBtn.name);" class="text-center block" [href]="actionBtn.url" [url]="actionBtn.url"
+      [wsWidgetUrlResolver]="actionBtn.isExternal" [mobileAppFunction]="actionBtn.mobileAppFunction">
       <ng-container [ngTemplateOutlet]="icon" [ngTemplateOutletContext]="{
           iconType: actionBtn.iconType,
           icon: actionBtn.icon,
@@ -132,19 +132,20 @@
         {{ actionBtn.shortName }}
       </div>
     </a>
-      <a *ngIf="isMobile(actionBtn.name)" class="text-center block btnDisabled" [href]="actionBtn.url" [url]="actionBtn.url"
-        [wsWidgetUrlResolver]="actionBtn.isExternal" [mobileAppFunction]="actionBtn.mobileAppFunction">
-        <ng-container [ngTemplateOutlet]="icon" [ngTemplateOutletContext]="{
+    <a *ngIf="isMobile(actionBtn.name)" class="text-center block btnDisabled" [href]="actionBtn.url"
+      [url]="actionBtn.url" [wsWidgetUrlResolver]="actionBtn.isExternal"
+      [mobileAppFunction]="actionBtn.mobileAppFunction">
+      <ng-container [ngTemplateOutlet]="icon" [ngTemplateOutletContext]="{
               iconType: actionBtn.iconType,
               icon: actionBtn.icon,
               scale: 1.7,
               color: actionBtn.color
             }"></ng-container>
-        <div class="mt-2 text-center" *ngIf="!config.useShortName">{{ actionBtn.name }}</div>
-        <div class="mt-2 text-center" *ngIf="config.useShortName">
-          {{ actionBtn.shortName }}
-        </div>
-      </a>
+      <div class="mt-2 text-center" *ngIf="!config.useShortName">{{ actionBtn.name }}</div>
+      <div class="mt-2 text-center" *ngIf="config.useShortName">
+        {{ actionBtn.shortName }}
+      </div>
+    </a>
     <mat-icon role="button" class="feature-pin" color="accent" *ngIf="!config?.hidePin && isPinFeatureAvailable"
       (click)="togglePin(actionBtn?.id, $event)">{{ isPinned ? 'bookmark' : 'bookmark_border' }}</mat-icon>
   </div>
@@ -152,7 +153,7 @@
 <ng-template #icon let-iconType="iconType" let-icon="icon" let-scale="scale" let-color="color">
   <ng-container *ngIf="!badgeCount.length">
     <mat-icon *ngIf="iconType === 'mat-icon'" aria-hidden="false" [attr.aria-label]="widgetData.actionBtnName"
-      [color]="color" [ngStyle]="
+      [attr.actionHide]="widgetData.actionBtnId" [color]="color" [ngStyle]="
         scale
           ? {
               'font-size': scale * defaultIconSize + 'px',

@@ -36,5 +36,6 @@ import { LogoutModule } from '@ws-widget/utils'
     MatCardModule,
   ],
   exports: [FeaturesComponent],
+  entryComponents: [FeaturesComponent],
 })
 export class FeaturesModule { }

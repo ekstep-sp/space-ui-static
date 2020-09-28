@@ -15,7 +15,20 @@
   line-height: 26px !important;
   font-weight: 300 !important;
 }
+.custom-padding {
+  margin-left: 20px;
+}
+ @media screen and (max-width:600px){
+.custom-padding {
+  margin-left: 0px !important;
+}
+ }
 
+.link-active {
+  font-weight: bold;
+  border-bottom: 3px solid;
+  border-radius: 0px;
+}
 .feature-status-icon {
   position: absolute;
   top: 4px;
@@ -28,6 +41,13 @@
 .btnDisabled{
   pointer-events: none;
   color: #e1e1e1;
+}
+::ng-deep {
+.theme-muave.night-mode .custom-nightmode {
+    color: white;
+    /* background-color: #424242; */
+    background: transparent;
+}
 }
 .feature-icon {
   width: 36px;
@@ -109,4 +129,19 @@
 
 .external-link-button {
   color: inherit !important;
+}
+.header-display-none{
+  display:none;
+}
+[actionHide = feature_collaborators ]{
+  display:none;
+}
+[actionHide = feature_aboutUs ]{
+  display:none;
+}
+
+
+.btn-margin{
+  padding:0;
+  margin:0 16px;
 }

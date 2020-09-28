@@ -10,12 +10,17 @@
   }
 }
 
+.name {
+  width: auto !important;
+}
+
 .img-container {
   max-width: 650px;
   width: 100%;
   margin:auto;
   img {
     width: 100%;
+    cursor: pointer;
   }
 }
 .img {

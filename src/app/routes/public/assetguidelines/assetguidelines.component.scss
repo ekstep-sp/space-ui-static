@@ -56,7 +56,7 @@ color: #925EB0 !important;;
 
 }
 .spaceallign {
-  padding-left: 1rem !important;
+  padding-left: 13px !important;
 }
 .spaceallignment{
   padding-left: 0rem !important;
@@ -156,4 +156,13 @@ margin-top: -7rem;
 }
 .allignpara{
   margin-left: -15px;
+}
+.spaceallign:not(:root:root){
+     padding-left: 20px !important;
+}
+
+@media screen and (min-width:1363px) and (max-width: 1368px) {
+  .img-container{
+    width: 640px !important;
+  }
 }

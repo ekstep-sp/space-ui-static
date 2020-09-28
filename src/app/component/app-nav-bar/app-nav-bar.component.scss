@@ -14,11 +14,17 @@
 .tourGuideBtn:hover {
   background: rgba(0, 0, 0, 0.04);
 }
-
+.custom-style {
+    padding-left: 20px;
+    // padding-right: 18px;
+}
 .tourGuideBtn mat-icon {
   width: 28%;
 }
-
+.icon-style {
+  padding-left:20px;
+  padding-right: 17px;
+}
 .logo-dim {
   min-width: 70px;
 }
@@ -107,7 +113,6 @@
 }
 @media only screen and (min-width: 599px) and (max-width: 692px) {
   .app-logo {
-    width: 7rem !important;
     margin-top: -0.4rem !important;
     min-width: auto !important;
   }
@@ -117,7 +122,7 @@
 }
 @media only screen and (min-width: 693px) and (max-width: 795px) {
   .app-logo {
-    width: 6rem !important;
+    width: 10rem !important;
     margin-top: 4.5px !important;
     min-width: auto !important;
   }
@@ -138,6 +143,10 @@
     // width: 9rem !important;
     // margin-top: -0.5rem !important;
   }
+  .custom-padding {
+  padding-right: 34px !important;
+}
+
 }
 .logosize {
   overflow-y: hidden;

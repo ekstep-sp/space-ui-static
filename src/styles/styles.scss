@@ -1,16 +1,16 @@
 @import 'ws-vars';
 @import 'ws-mixins';
 @import './utility.scss';
-@import url(//db.onlinewebfonts.com/c/8d7db40f4a18fe878fd4e0577ddbb03b?family=Campaign+Grotesk);
+@import url(https://db.onlinewebfonts.com/c/8d7db40f4a18fe878fd4e0577ddbb03b?family=Campaign+Grotesk);
 
 @font-face {
   font-family: CampaignW00-Medium;
-  src: url("//db.onlinewebfonts.com/t/8d7db40f4a18fe878fd4e0577ddbb03b.eot");
-  src: url("//db.onlinewebfonts.com/t/8d7db40f4a18fe878fd4e0577ddbb03b.eot?#iefix") format("embedded-opentype"),
-  url("//db.onlinewebfonts.com/t/8d7db40f4a18fe878fd4e0577ddbb03b.woff2") format("woff2"),
-  url("//db.onlinewebfonts.com/t/8d7db40f4a18fe878fd4e0577ddbb03b.woff") format("woff"),
-  url("//db.onlinewebfonts.com/t/8d7db40f4a18fe878fd4e0577ddbb03b.ttf") format("truetype"),
-  url("//db.onlinewebfonts.com/t/8d7db40f4a18fe878fd4e0577ddbb03b.svg#Campaign Grotesk") format("svg"); }
+  src: url("https://db.onlinewebfonts.com/t/8d7db40f4a18fe878fd4e0577ddbb03b.eot");
+  src: url("https://db.onlinewebfonts.com/t/8d7db40f4a18fe878fd4e0577ddbb03b.eot?#iefix") format("embedded-opentype"),
+  url("https://db.onlinewebfonts.com/t/8d7db40f4a18fe878fd4e0577ddbb03b.woff2") format("woff2"),
+  url("https://db.onlinewebfonts.com/t/8d7db40f4a18fe878fd4e0577ddbb03b.woff") format("woff"),
+  url("https://db.onlinewebfonts.com/t/8d7db40f4a18fe878fd4e0577ddbb03b.ttf") format("truetype"),
+  url("https://db.onlinewebfonts.com/t/8d7db40f4a18fe878fd4e0577ddbb03b.svg#Campaign Grotesk") format("svg"); }
 @include print {
   * {
     display: none !important;
@@ -62,7 +62,7 @@ a {
   font-family: $font-family-montserrat !important;
 }
 mat-toolbar span {
-  font-family: $font-family-campaign !important;
+  font-family: $font-family-montserrat !important;
 }
 p {
   font-family: $font-family-montserrat !important;
@@ -87,7 +87,9 @@ mat-toolbar span {
   color: black !important;
 }
 .mat-toolbar-style span {
-  color: black;
+ color: #696466;
+    font-size: 15px;
+    line-height: 17px;
 }
 
 [color|='primary'] {
@@ -137,6 +139,12 @@ mat-toolbar span {
 .theme-muave.day-mode .mat-flat-button[disabled][disabled] {
   background-color: rgba(0, 0, 0, 0.12) !important;
   color: rgba(0, 0, 0, 0.26) !important;
+}
+.theme-muave.night-mode .mat-flat-button
+{
+  background: transparent !important;
+  color: #696466 !important;
+  // color: rgba(0, 0, 0, 0.26) !important;
 }
 .header-btn-style {
 font-family: Montserrat !important;

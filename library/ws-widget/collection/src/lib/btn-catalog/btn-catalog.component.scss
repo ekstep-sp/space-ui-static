@@ -1,0 +1,23 @@
+@import 'ws-mixins';
+@import 'src/themes/theme-muave.scss';
+
+ $primary: $theme-primary;
+
+.display {
+  display: none;
+  // @include breakpoint-s {
+  //   display: block !important;
+  // }
+  // @include breakpoint-xs {
+  //   display: block !important;
+  // }
+}
+
+.btn-margin{
+  padding:0;
+  margin:0 16px;
+     font-weight: bold;
+      border-bottom: 3px solid;
+      border-radius: 0px;
+      color: mat-color($primary) !important;
+}
