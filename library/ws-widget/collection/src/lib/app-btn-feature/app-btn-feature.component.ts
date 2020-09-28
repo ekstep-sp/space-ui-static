@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, ChangeDetectorRef, OnDestroy } from '@angular/core'
+import { Component, OnInit, Input, OnDestroy } from '@angular/core'
 import { NsAppsConfig, NsPage, ConfigurationsService, AuthKeycloakService } from '../../../../utils/src/public-api'
 import { NsWidgetResolver } from '../../../../resolver/src/public-api'
 import { AppBtnFeatureService } from './service/app-btn-feature.service'
@@ -45,13 +45,11 @@ export class AppBtnFeatureComponent implements OnInit, OnDestroy {
     private authSvc: AuthKeycloakService,
     public featureService: AppBtnFeatureService,
     public router: Router,
-    private cd: ChangeDetectorRef,
   ) {}
 
   ngOnInit() {
     this.expansion$ = this.featureService.triggerExpansion.subscribe((newExpansion: boolean) => {
       this.expand = newExpansion
-      console.log(`expand for ${this.widget.name} set now ${this.expand}`)
     })
     this.setUpPermission()
     this.isAllowedForDisplay(this.widget)
@@ -83,7 +81,6 @@ export class AppBtnFeatureComponent implements OnInit, OnDestroy {
       event.preventDefault()
       event.stopPropagation()
     }
-    this.cd.detectChanges()
   }
   // get desktopVisible() {
   //   if (this.widgetData.actionBtn && this.widgetData.actionBtn.mobileAppFunction) {
@@ -132,16 +129,12 @@ export class AppBtnFeatureComponent implements OnInit, OnDestroy {
   }
 
   setExpansion(currentExpansion: boolean) {
-    console.log(`initial expand value of ${this.featuredWidget.name} was ${this.expand}`)
     this.expand = currentExpansion
-    console.log(`now expansion for ${this.featuredWidget.name} is ${this.expand}`)
-    this.cd.detectChanges()
   }
 
   ngOnDestroy() {
     if (this.expansion$) {
       this.expansion$.unsubscribe()
-      console.log('unsubscribed expansion criteria')
     }
   }
 }
