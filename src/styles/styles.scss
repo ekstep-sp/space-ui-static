@@ -1,16 +1,16 @@
 @import 'ws-vars';
 @import 'ws-mixins';
 @import './utility.scss';
-@import url(//db.onlinewebfonts.com/c/8d7db40f4a18fe878fd4e0577ddbb03b?family=Campaign+Grotesk);
+@import url(https://db.onlinewebfonts.com/c/8d7db40f4a18fe878fd4e0577ddbb03b?family=Campaign+Grotesk);
 
 @font-face {
   font-family: CampaignW00-Medium;
-  src: url("//db.onlinewebfonts.com/t/8d7db40f4a18fe878fd4e0577ddbb03b.eot");
-  src: url("//db.onlinewebfonts.com/t/8d7db40f4a18fe878fd4e0577ddbb03b.eot?#iefix") format("embedded-opentype"),
-  url("//db.onlinewebfonts.com/t/8d7db40f4a18fe878fd4e0577ddbb03b.woff2") format("woff2"),
-  url("//db.onlinewebfonts.com/t/8d7db40f4a18fe878fd4e0577ddbb03b.woff") format("woff"),
-  url("//db.onlinewebfonts.com/t/8d7db40f4a18fe878fd4e0577ddbb03b.ttf") format("truetype"),
-  url("//db.onlinewebfonts.com/t/8d7db40f4a18fe878fd4e0577ddbb03b.svg#Campaign Grotesk") format("svg"); }
+  src: url("https://db.onlinewebfonts.com/t/8d7db40f4a18fe878fd4e0577ddbb03b.eot");
+  src: url("https://db.onlinewebfonts.com/t/8d7db40f4a18fe878fd4e0577ddbb03b.eot?#iefix") format("embedded-opentype"),
+  url("https://db.onlinewebfonts.com/t/8d7db40f4a18fe878fd4e0577ddbb03b.woff2") format("woff2"),
+  url("https://db.onlinewebfonts.com/t/8d7db40f4a18fe878fd4e0577ddbb03b.woff") format("woff"),
+  url("https://db.onlinewebfonts.com/t/8d7db40f4a18fe878fd4e0577ddbb03b.ttf") format("truetype"),
+  url("https://db.onlinewebfonts.com/t/8d7db40f4a18fe878fd4e0577ddbb03b.svg#Campaign Grotesk") format("svg"); }
 @include print {
   * {
     display: none !important;
