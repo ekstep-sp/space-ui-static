@@ -1,4 +1,7 @@
 @import 'ws-mixins';
+@import 'src/themes/theme-muave.scss';
+
+ $primary: $theme-primary;
 
 .display {
   display: none;
@@ -8,4 +11,10 @@
   // @include breakpoint-xs {
   //   display: block !important;
   // }
+}
+button:focus{
+      font-weight: bold;
+      border-bottom: 3px solid;
+      border-radius: 0px;
+      color: mat-color($primary) !important;
 }

@@ -21,11 +21,12 @@
     <a *ngSwitchCase="displayType.matFabButton" mat-fab>
       <ng-container [ngTemplateOutlet]="icon" [ngTemplateOutletContext]="widgetData.actionBtn"></ng-container>
     </a>
-    <a *ngSwitchCase="displayType.matFlatButton" class="custom-nightmode" [routerLink]="widgetData.actionBtn?.url" [disableRipple]="true" mat-flat-button>
+    <a *ngSwitchCase="displayType.matFlatButton" [routerLink]="widgetData.actionBtn?.url" [disableRipple]="true"
+      mat-flat-button routerLinkActive="ws-mat-primary-text link-active">
       <ng-container [ngTemplateOutlet]="buttonContent" [ngTemplateOutletContext]="widgetData"></ng-container>
     </a>
-    <a *ngSwitchCase="displayType.matIconButton" [disableRipple]="true" [name]="widgetData.actionBtn?.name" class="custom-padding"
-      [routerLink]="widgetData.actionBtn?.url" mat-icon-button>
+    <a *ngSwitchCase="displayType.matIconButton" [disableRipple]="true" [name]="widgetData.actionBtn?.name"
+      class="custom-padding" [routerLink]="widgetData.actionBtn?.url" mat-icon-button>
       <ng-container [ngTemplateOutlet]="icon" [ngTemplateOutletContext]="{
           iconType: widgetData.actionBtn.iconType,
           icon: widgetData.actionBtn.icon
@@ -152,7 +153,7 @@
 <ng-template #icon let-iconType="iconType" let-icon="icon" let-scale="scale" let-color="color">
   <ng-container *ngIf="!badgeCount.length">
     <mat-icon *ngIf="iconType === 'mat-icon'" aria-hidden="false" [attr.aria-label]="widgetData.actionBtnName"
-      [color]="color" [ngStyle]="
+      [attr.actionHide]="widgetData.actionBtnId" [color]="color" [ngStyle]="
         scale
           ? {
               'font-size': scale * defaultIconSize + 'px',
