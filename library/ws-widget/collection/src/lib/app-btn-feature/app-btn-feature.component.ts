@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, ChangeDetectorRef, AfterViewInit } from '@angular/core'
+import { Component, OnInit, Input, ChangeDetectorRef } from '@angular/core'
 import { NsAppsConfig, NsPage, ConfigurationsService, AuthKeycloakService } from '../../../../utils/src/public-api'
 import { NsWidgetResolver } from '../../../../resolver/src/public-api'
 import { AppBtnFeatureService } from './service/app-btn-feature.service'
@@ -28,7 +28,7 @@ export const typeMap = {
   templateUrl: './app-btn-feature.component.html',
   styleUrls: ['./app-btn-feature.component.scss'],
 })
-export class AppBtnFeatureComponent implements OnInit, AfterViewInit {
+export class AppBtnFeatureComponent implements OnInit {
 
   @Input() widget: IGroupWithFeatureWidgets[] | any = []
   rolesBasedFeatureGroups: IGroupWithFeatureWidgets[] = []
@@ -44,10 +44,10 @@ export class AppBtnFeatureComponent implements OnInit, AfterViewInit {
     public featureService: AppBtnFeatureService,
     public router: Router,
     private cd: ChangeDetectorRef,
-  ) { 
+  ) {
     this.featureService.triggerExpansion.subscribe((newExpansion: boolean) => {
       this.expand = newExpansion
-      console.log('recieved value ', this.expand)
+      // console.log('recieved value ', this.expand)
     })
   }
 
@@ -132,9 +132,5 @@ export class AppBtnFeatureComponent implements OnInit, AfterViewInit {
 
   setExpansion(currentExpansion: boolean) {
     this.expand = currentExpansion
-  }
-
-  ngAfterViewInit() {
-    console.log('hello')
   }
 }
