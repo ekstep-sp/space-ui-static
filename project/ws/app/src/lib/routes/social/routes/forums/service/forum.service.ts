@@ -122,16 +122,12 @@ export class ForumService {
               '#blogTitle': _tag.blogTitle,
               '#postUrl': `${document.baseURI}app/social/blogs/${_tag.blogId}`,
               '#taggedBy': _tag.tagCreatorName,
-              '#taggedUserName': _tag.taggedUserName,
+              '#taggedUser': _tag.taggedUserName,
             },
-            /* data: {
-              identifier: _tag.blogId,
-              blogCreatorID: _tag.blogCreatorID,
-              taggedUserEmail: _tag.taggedUserEmail,
-            }, */
             recipients: {
               actor: [_tag.tagCreatorID],
               taggedUser: [_tag.taggedUserID],
+              author: [_tag.blogCreatorID],
             },
           }
         }
@@ -143,20 +139,15 @@ export class ForumService {
               '#type': 'qna',
               '#postUrl': `${document.baseURI}app/social/qna/${_tag.QnaId}`,
               '#taggedBy': _tag.tagCreatorName,
-              '#taggedUserName': _tag.taggedUserName,
+              '#taggedUser': _tag.taggedUserName,
             },
-            /* data: {
-              identifier: _tag.QnaId,
-              qnaCreatorID: _tag.QnaCreatorID,
-              taggedUserEmail: _tag.taggedUserEmail,
-            }, */
             recipients: {
               actor: [_tag.tagCreatorID],
               taggedUser: [_tag.taggedUserID],
+              author: [_tag.QnaCreatorID],
             },
           }
         }
-        // console.log('request looks like', request)
         return this.http.post(NOTIFICATION, request).toPromise()
       })
       return Promise.all(notificationPromises)
