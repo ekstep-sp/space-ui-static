@@ -8,6 +8,7 @@ import { Router, NavigationStart, NavigationEnd, ActivatedRoute } from '@angular
 import { MatDialog } from '@angular/material'
 import { FormControl } from '@angular/forms'
 import { distinctUntilChanged, startWith, debounceTime } from 'rxjs/operators'
+import { AppBtnFeatureService } from '../app-btn-feature/service/app-btn-feature.service'
 
 interface IGroupWithFeatureWidgets extends NsAppsConfig.IGroup {
   featureWidgets: NsWidgetResolver.IRenderConfigWithTypedData<NsPage.INavLink>[]
@@ -37,6 +38,7 @@ export class BtnAppsComponent extends WidgetBaseComponent
     private configSvc: ConfigurationsService,
     private router: Router,
     private activateRoute: ActivatedRoute,
+    private readonly featureSrvc: AppBtnFeatureService
   ) {
     super()
     if (this.configSvc.appsConfig) {
@@ -201,5 +203,9 @@ export class BtnAppsComponent extends WidgetBaseComponent
         }
       })
     }
+  }
+
+  triggerExpansion() {
+    this.featureSrvc.triggerAppsExpansion(false)
   }
 }

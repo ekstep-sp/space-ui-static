@@ -1,10 +1,13 @@
 import { Injectable } from '@angular/core'
+import { BehaviorSubject } from 'rxjs'
 import { ConfigurationsService } from '../../../../../utils/src/public-api'
 
 @Injectable({
   providedIn: 'root',
 })
 export class AppBtnFeatureService {
+
+  triggerExpansion = new BehaviorSubject<boolean>(false)
 
   constructor(public configSvc: ConfigurationsService) { }
   isVisibileAccToRoles(allowedRoles: [string], notAllowedRoles: [string]) {
@@ -32,5 +35,9 @@ export class AppBtnFeatureService {
     }
     // console.log(finalAcceptance)
     return finalAcceptance
+  }
+
+  triggerAppsExpansion(expand: boolean) {
+    this.triggerExpansion.next(expand)
   }
 }
