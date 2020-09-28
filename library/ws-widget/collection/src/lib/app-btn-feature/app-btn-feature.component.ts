@@ -1,8 +1,9 @@
-import { Component, OnInit, Input, ChangeDetectorRef } from '@angular/core'
+import { Component, OnInit, Input, ChangeDetectorRef, OnDestroy } from '@angular/core'
 import { NsAppsConfig, NsPage, ConfigurationsService, AuthKeycloakService } from '../../../../utils/src/public-api'
 import { NsWidgetResolver } from '../../../../resolver/src/public-api'
 import { AppBtnFeatureService } from './service/app-btn-feature.service'
 import { Router } from '@angular/router'
+import { Subscription } from 'rxjs'
 
 interface IGroupWithFeatureWidgets extends NsAppsConfig.IGroup {
   featureWidgets: NsWidgetResolver.IRenderConfigWithTypedData<NsPage.INavLink>[],
@@ -28,7 +29,7 @@ export const typeMap = {
   templateUrl: './app-btn-feature.component.html',
   styleUrls: ['./app-btn-feature.component.scss'],
 })
-export class AppBtnFeatureComponent implements OnInit {
+export class AppBtnFeatureComponent implements OnInit, OnDestroy {
 
   @Input() widget: IGroupWithFeatureWidgets[] | any = []
   rolesBasedFeatureGroups: IGroupWithFeatureWidgets[] = []
@@ -37,6 +38,7 @@ export class AppBtnFeatureComponent implements OnInit {
   allowedToAuthor = true
   featuredWidget: IGroupWithFeatureWidgets[] | any = []
   expand = false
+  expansion$: Subscription | null = null
 
   constructor(
     public configSvc: ConfigurationsService,
@@ -44,14 +46,13 @@ export class AppBtnFeatureComponent implements OnInit {
     public featureService: AppBtnFeatureService,
     public router: Router,
     private cd: ChangeDetectorRef,
-  ) {
-    this.featureService.triggerExpansion.subscribe((newExpansion: boolean) => {
-      this.expand = newExpansion
-      // console.log('recieved value ', this.expand)
-    })
-  }
+  ) {}
 
   ngOnInit() {
+    this.expansion$ = this.featureService.triggerExpansion.subscribe((newExpansion: boolean) => {
+      this.expand = newExpansion
+      console.log(`expand for ${this.widget.name} set now ${this.expand}`)
+    })
     this.setUpPermission()
     this.isAllowedForDisplay(this.widget)
     this.featuredWidget = this.widget
@@ -131,6 +132,16 @@ export class AppBtnFeatureComponent implements OnInit {
   }
 
   setExpansion(currentExpansion: boolean) {
+    console.log(`initial expand value of ${this.featuredWidget.name} was ${this.expand}`)
     this.expand = currentExpansion
+    console.log(`now expansion for ${this.featuredWidget.name} is ${this.expand}`)
+    this.cd.detectChanges()
+  }
+
+  ngOnDestroy() {
+    if (this.expansion$) {
+      this.expansion$.unsubscribe()
+      console.log('unsubscribed expansion criteria')
+    }
   }
 }
