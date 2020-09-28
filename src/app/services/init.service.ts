@@ -239,6 +239,9 @@ export class InitService {
     return appsConfig
   }
 
+  updatePidDetails() {
+     return this.fetchStartUpDetails()
+   }
   private async fetchStartUpDetails(): Promise<IDetailsResponse> {
     if (this.configSvc.instanceConfig && !Boolean(this.configSvc.instanceConfig.disablePidCheck)) {
       let userPidProfile: NsUser.IUserPidProfile | null = null

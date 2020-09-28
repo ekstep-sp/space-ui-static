@@ -22,6 +22,11 @@ export namespace NsEditProfile {
     profileLink: string
   }
 }
+
+const endpoint = {
+  profilePid: '/apis/protected/v8/user/details/wtoken',
+}
+
 @Component({
   selector: 'ws-app-edit-profile',
   templateUrl: './edit-profile.component.html',
@@ -47,6 +52,7 @@ export class EditProfileComponent implements OnInit {
     userLastName: new FormControl(''),
     sourceProfilePicture: new FormControl(''),
   })
+
   userProfile: any
   // userPropertiesData: NsEditProfile.IUserProperties = {} as NsEditProfile.IUserProperties
   isLoad = false
@@ -131,6 +137,7 @@ export class EditProfileComponent implements OnInit {
       this.isLoad = false
       if (editresponse.ok) {
         if (editresponse.DATA != null) {
+          this.fetchInitialUserData()
           this.snackBar.open(editresponse.MESSAGE, '', {
             duration: 1000,
           })
@@ -140,6 +147,15 @@ export class EditProfileComponent implements OnInit {
           duration: 1000,
         })
       }
+    }
+  }
+   fetchInitialUserData() {
+    try {
+      this.initService.updatePidDetails()
+    } catch (e) {
+      this.snackBar.open('Reload to view latest changes', '', {
+        duration: 1000,
+      })
     }
   }
 }
