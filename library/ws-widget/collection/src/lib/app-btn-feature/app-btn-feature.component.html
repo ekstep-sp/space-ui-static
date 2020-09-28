@@ -1,7 +1,8 @@
 <ng-container style="margin-top: -1.2rem;">
   <ng-container *ngIf="featuredWidget.show === true && featuredWidget.expand === true">
     <mat-accordion (click)="maintainPropagation($event)">
-      <mat-expansion-panel [expanded]="expand" (opened)="setExpansion(true)" (close)="setExpansion(false)">
+      <mat-expansion-panel class="expansion-panel-color" [expanded]="expand" (opened)="setExpansion(true)"
+        (close)="setExpansion(false)">
         <mat-expansion-panel-header>
           <mat-panel-title>
 
@@ -12,11 +13,11 @@
                     color: featuredWidget.color
                   }">
             </ng-container>
-            <span *ngIf="featuredWidget.name !== 'Admin'" class="ml-4 text-center" style="color: #696466;">
+            <span *ngIf="featuredWidget.name !== 'Admin'" class="ml-4 text-center">
               {{featuredWidget.name}}</span>
             <ng-container *ngIf="featuredWidget.name === 'Admin'">
-              <img class="" src="/assets/instances/space/admin_panal_icon/admin_panel_settings.svg">
-              <span class="ml-4 text-center admin-panel" style="color: #696466;"> {{featuredWidget.name}}</span>
+              <img class="matdark" src="/assets/instances/space/admin_panal_icon/admin_panel_settings.svg">
+              <span class="ml-4 text-center admin-panel"> {{featuredWidget.name}}</span>
             </ng-container>
           </mat-panel-title>
         </mat-expansion-panel-header>
@@ -43,7 +44,7 @@
                         widget: featuredWidget.name,
                         color: featuredWidget.color
                       }"></ng-container>
-        <span class="ml-4 text-center text" style="color: #696466;"> {{featuredWidget.name}}</span>
+        <span class="ml-4 text-center text"> {{featuredWidget.name}}</span>
       </span>
     </a>
   </ng-container>
@@ -60,8 +61,8 @@
           scale: 1.7,
           color: actionBtn.color
         }"></ng-container>
-      <span class="ml-4 text-center innerSpan" style="color: #696466;" *ngIf="!config.useShortName">{{ actionBtn.name }}</span>
-      <span class="ml-4 text-center" style="color: #696466;" *ngIf="config.useShortName">
+      <span class="ml-4 text-center innerSpan" *ngIf="!config.useShortName">{{ actionBtn.name }}</span>
+      <span class="ml-4 text-center" *ngIf="config.useShortName">
         {{ actionBtn.shortName }}
       </span>
     </a>
@@ -69,7 +70,7 @@
 </ng-template>
 <ng-template #icon let-iconType="iconType" let-widget="widget" let-icon="icon" let-scale="scale" let-color="color">
   <ng-container>
-    <mat-icon *ngIf="iconType === 'mat-icon' && widget !== 'Profile' && widget !== 'Settings'" style="color: #696466;"
+    <mat-icon class="matdark" *ngIf="iconType === 'mat-icon' && widget !== 'Profile' && widget !== 'Settings'"
       aria-hidden="false" [color]="color" [ngStyle]="
         scale
           ? {
@@ -81,8 +82,8 @@
       ">
       {{ icon }}
     </mat-icon>
-    <mat-icon class="line ml-2" *ngIf="iconType === 'mat-icon' && widget === 'Profile'" style="color: #696466;"
-      aria-hidden="false" [color]="color" [ngStyle]="
+    <mat-icon class="line ml-2 matdark" *ngIf="iconType === 'mat-icon' && widget === 'Profile'" aria-hidden="false"
+      [color]="color" [ngStyle]="
               scale
                 ? {
                     'font-size': scale * defaultIconSize + 'px',
@@ -93,8 +94,8 @@
             ">
       {{ icon }}
     </mat-icon>
-    <mat-icon class="line ml-2" *ngIf="iconType === 'mat-icon'  && widget === 'Settings'" style="color: #696466;"
-      aria-hidden="false" [color]="color" [ngStyle]="
+    <mat-icon class="line ml-2 matdark" *ngIf="iconType === 'mat-icon'  && widget === 'Settings'" aria-hidden="false"
+      [color]="color" [ngStyle]="
                   scale
                     ? {
                         'font-size': scale * defaultIconSize + 'px',

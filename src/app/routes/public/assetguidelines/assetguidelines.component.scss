@@ -166,3 +166,16 @@ margin-top: -7rem;
     width: 640px !important;
   }
 }
+.text-container{
+  padding: 2.5em;
+}
+::ng-deep{
+.theme-muave.night-mode .font-style{
+  color: white !important;
+}
+.theme-muave.night-mode .img-container{
+max-width: 600px !important;
+    padding: 10px !important;
+    margin-top: 0 !important;
+}
+}

@@ -161,3 +161,25 @@ padding-left: 8px;
 .external-link-button {
   color: inherit !important;
 }
+
+::ng-deep{
+.theme-muave.night-mode .matdark{
+  color: white !important;
+}
+// #cdk-accordion-child-1{
+//   background: inherit !important;
+//   color: inherit !important;
+// }
+
+
+.theme-muave.night-mode .mat-expansion-panel-body{
+background: #303030;
+
+}
+.theme-muave.night-mode .text-center{
+color: white;
+}
+}
+
+
+
