@@ -75,3 +75,9 @@ line-height: 20px;
 .col-2 {
   flex: 2;
 }
+@media screen and (max-width:600px) {
+#display-responsive{
+margin-bottom:56px;
+
+}
+}
