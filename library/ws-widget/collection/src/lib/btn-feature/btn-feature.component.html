@@ -21,7 +21,7 @@
     <a *ngSwitchCase="displayType.matFabButton" mat-fab>
       <ng-container [ngTemplateOutlet]="icon" [ngTemplateOutletContext]="widgetData.actionBtn"></ng-container>
     </a>
-    <a *ngSwitchCase="displayType.matFlatButton" [routerLink]="widgetData.actionBtn?.url" [disableRipple]="true"
+    <a *ngSwitchCase="displayType.matFlatButton"  class="btn-margin" [routerLink]="widgetData.actionBtn?.url" [disableRipple]="true"
       mat-flat-button routerLinkActive="ws-mat-primary-text link-active">
       <ng-container [ngTemplateOutlet]="buttonContent" [ngTemplateOutletContext]="widgetData"></ng-container>
     </a>

@@ -29,7 +29,7 @@
         </ng-container>
         <!-- Handle leaf node menu items -->
         <ng-container *ngIf="!child.children || !child.children.length">
-          <a [routerLink]="child.type | treeCatalogRoute" mat-menu-item>
+          <a [routerLink]="child.type | treeCatalogRoute"  mat-menu-item>
             {{ child?.displayName }}
           </a>
         </ng-container>

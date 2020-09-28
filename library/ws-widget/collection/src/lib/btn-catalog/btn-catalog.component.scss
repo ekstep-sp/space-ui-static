@@ -12,8 +12,11 @@
   //   display: block !important;
   // }
 }
-button:focus{
-      font-weight: bold;
+
+.btn-margin{
+  padding:0;
+  margin:0 16px;
+     font-weight: bold;
       border-bottom: 3px solid;
       border-radius: 0px;
       color: mat-color($primary) !important;

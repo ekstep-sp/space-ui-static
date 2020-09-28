@@ -1,9 +1,9 @@
-<button mat-flat-button i18n-matTooltip matTooltip="Explore" (click)="getCatalog()" #rootTrigger="matMenuTrigger"
+<button mat-flat-button i18n-matTooltip matTooltip="Explore"  [ngClass]= "{'btn-margin':showBottomBorder}" (click)="getCatalog()" #rootTrigger="matMenuTrigger"
   name="exploreButtonHomePag" [disableRipple]="true" [matMenuTriggerFor]="rootMenu.childMenu" class="pr-4 pl-3">
   <mat-icon class="display">explore</mat-icon>
   <span class="padding-left-xs" i18n>Explore</span>
 </button>
 
-<ws-widget-tree-catalog-menu #rootMenu [rootTrigger]="rootTrigger" [catalogItems]="catalogItems | slice: 0:10"
+<ws-widget-tree-catalog-menu #rootMenu [rootTrigger]="rootTrigger"  [catalogItems]="catalogItems | slice: 0:10"
   [fetchStatus]="catalogFetchStatus" isRoot="true">
 </ws-widget-tree-catalog-menu>
