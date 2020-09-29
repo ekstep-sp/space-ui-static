@@ -98,7 +98,7 @@ color: #696466;
 /* sign in button responsive */
 @media only screen and (min-width: 1020px) {
   .login-btn {
-    padding: 0 30px !important;
+    padding: 0 50px 0 0 !important;
   }
   .mat-button {
  padding: 0 42.34px !important;
@@ -164,12 +164,7 @@ color: #696466;
   color: black;
    line-height: 12px !important;
 }
-@media screen and (min-width:635px) and (max-width: 670px) {
-.app-logo {
-  width: 13rem !important;
-  height: 28px !important;
-}
-}
+
 @media screen and (min-width:539px) and (max-width: 542px) {
   .logosize {
     width: auto !important;
@@ -194,6 +189,35 @@ color: #696466;
   position: fixed;
   z-index:10;
 }
+
+@media screen and (max-width: 1019px) and (min-width: 700px) {
+  .signIn {
+      margin-right: 40px;
+  }
+  .logo {
+    padding-left: 25px !important;
+  }
+  .logosize{
+    width: 285px;
+  }
+  }
+
+  @media screen and (max-width: 700px) and (min-width: 601px)  {
+    .logo {
+      padding-left: 0 !important;
+    }
+
+    .signIn {
+      margin-right: 15px;
+  }
+  .app-logo {
+    width: 12rem;
+  }
+
+  .logosize{
+    width: 245px;
+  }
+  }
 // @media only screen and (min-width: 360px) and (max-width: 599px) {
 //   .app-logo {
 //     // width: 6rem !important;

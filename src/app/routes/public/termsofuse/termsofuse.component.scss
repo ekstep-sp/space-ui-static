@@ -1,23 +1,25 @@
 @import 'ws-vars';
 @import 'ws-mixins';
 .allignment{
-padding: 8px 24px;
+padding: 8px 0px;
 line-height: 1.7;
 @include breakpoint-xs {
    padding: 0 !important;
 }
 }
-#cimage {
+.cimage {
   background-size: cover;
   background-position: center;
- width: 100%;
-    margin-left: -2.5rem;
+   width: 100%;
+    height: auto;
+    max-width: 750px;
+    max-height: 350px;
     @include breakpoint-xs {
-      width: 18rem !important;
+      width: 100% !important;
       height: auto !important;
     }
       @include breakpoint-s {
-width: 15rem !important;
+width: 100% !important;
 height: auto !important;
   }
 }
@@ -86,70 +88,73 @@ color: #925EB0 !important;;
   flex: 1;
 }
 .header {
+  margin-top: 40px;
 font-weight: 460;
+width: 50%;
+display: inline-block;
 font-size: 48px;
 line-height: 55px;
 color: #925EB0;
-padding-left: 2.5rem !important;
+// padding-left: 2.5rem !important;
 @include breakpoint-xs {
-  width: 19rem !important;
-  font-size: 22px !important;
+  width: 100% !important;
+  font-size: 30px !important;
 }
   @include breakpoint-s {
-font-size: 19px !important;
-  }
+    font-size: 32px !important;
+    width: 50%;  }
 }
 .img-container {
   float: right;
-    margin-top: -7rem !important;
-    width: 664px;
-    height: 346px;
+  width: 50%;
+    height: auto;
+    max-height: 346px;
   @include breakpoint-xs {
     width: auto !important;
     margin-top: auto !important;
     float: unset !important;
-    margin-left: 4rem !important;
+    // margin-left: 4rem !important;
      height: auto !important;
   }
-  @include breakpoint-s {
-width: 17rem !important;
-margin-top: -4rem !important;
-  }
+//   @include breakpoint-s {
+// width: 17rem !important;
+// margin-top: -4rem !important;
+//   }
   // height: 17rem;
 }
 @media screen and (min-width:280px) and (max-width: 320px) {
-  #cimage {
-    width: 16rem !important;
-  }
+  // #cimage {
+  //   width: 16rem !important;
+  // }
    .img-container {
   width: auto !important;
   float: none !important;
   margin-top: auto !important;
-  margin-left: 4rem !important;
+  // margin-left: 4rem !important;
    height: auto !important;
 }
   .header{
-    width: 17rem !important;
+    width: 100% !important;
     font-size: 19px !important;
     padding-left: 0 !important;
     text-align: center !important;
    }
-   .font-style {
-    width: 14rem !important;
+//    .font-style {
+//     width: 14rem !important;
+// }
 }
-}
-@media screen and (min-width:542px) and (max-width: 569px) {
-  .font-style {
-    width: 29rem !important;
-  }
-}
+// @media screen and (min-width:542px) and (max-width: 569px) {
+//   .font-style {
+//     width: 29rem !important;
+//   }
+// }
 @media screen and (min-width:539px) and (max-width: 542px) {
 .font-style {
-    width: 25rem !important;
+    // width: 25rem !important;
     font-size: 16px !important;
 }
 .header {
-    width: 31rem !important;
+    // width: 31rem !important;
     font-size: 16px !important;
 }
 }
@@ -157,7 +162,11 @@ margin-top: -4rem !important;
 .header {
   font-size: 33px;
 }
-
+.cimage {
+  width: 100% !important;
+     height: auto !important;
+     // margin-left: 4.5rem !important;
+ }
 }
 
 
@@ -283,3 +292,34 @@ margin-top: -4rem !important;
 //     margin-top: 0 !important;
 // }
 }
+
+.section-container {
+  padding: 4rem 66px; 
+ }
+ 
+ @media screen and (max-width: 1019px) and (min-width: 700px) {
+   .section-container {
+     padding: 4rem 56px;
+   }
+   .img-container {
+     height: 320px;
+   }
+ }
+ 
+ @media screen and (max-width: 700px) and (min-width: 500px) {
+   .section-container {
+     padding: 4rem 31px;
+   }
+ }
+ 
+ @media screen and (max-width: 600px) and (min-width: 350px) {
+   .img-container {
+     padding: 1rem;
+   }
+ }
+ 
+ @media screen and (max-width: 500px) {
+   .section-container {
+     padding: 4rem 16px;
+   }
+ }

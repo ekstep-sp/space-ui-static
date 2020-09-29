@@ -1,27 +1,27 @@
 @import 'ws-vars';
 @import 'ws-mixins';
 .allignment{
-padding: 8px 20px;
+padding: 8px 0;
 line-height: 1.7;
 @include breakpoint-xs {
    padding: 0 !important;
+   width: 100%;
 }
 }
 .cimage {
   background-size: cover;
   background-position: center;
-   width: 700px;
-    height: 356px;
-    margin-left: -3.5rem;
+   width: 100%;
+    height: auto;
+    max-width: 750px;
+    max-height: 350px;
     @include breakpoint-xs {
-      width: 18rem !important;
+      width: 100% !important;
       height: auto !important;
-      margin-left: -0.5rem !important;
     }
       @include breakpoint-s {
-width: 20rem !important;
+width: 100% !important;
 height: auto !important;
-margin-left: -0.5rem !important;
   }
 }
 .imgsize {
@@ -39,9 +39,9 @@ font-weight: normal;
 font-size: 16px;
 line-height: 24px;
 color: #696466;
-@include breakpoint-xs {
-  width: 17rem;
-}
+// @include breakpoint-xs {
+//   width: 17rem;
+// }
 }
 .text-style{
 font-weight: 600;
@@ -92,70 +92,75 @@ color: #925EB0 !important;;
   padding-left: 1rem;
 }
 .header {
+  margin-top: 40px;
 font-weight: 460;
+width: 50%;
 font-size: 48px;
 line-height: 55px;
+display: inline-block;
 color: #925EB0;
-padding-left: 2.5rem !important;
+// padding-left: 2.5rem !important;
 @include breakpoint-xs {
-  width: 19rem !important;
-  font-size: 22px !important;
+  width: 100% !important;
+  font-size: 30px !important;
 }
   @include breakpoint-s {
-font-size: 19px !important;
+font-size: 32px !important;
+width: 50%;
   }
 }
 .img-container {
   float: right;
-  width: 627px;
-    height: 346px;
-    margin-top: -6rem !important;
-  @include breakpoint-xs {
+  width: 50%;
+    height: auto;
+    max-height: 346px;
+
+      @include breakpoint-xs {
     width: auto !important;
     margin-top: auto !important;
     float: unset !important;
-    margin-left: 2rem !important;
+    // margin-left: 2rem !important;
      height: auto !important;
   }
-  @include breakpoint-s {
-width: 17rem !important;
-margin-top: -7rem;
-  }
+//   @include breakpoint-s {
+// width: 17rem !important;
+// margin-top: -7rem;
+//   }
   // height: 17rem;
 }
 @media screen and (min-width:280px) and (max-width: 320px) {
-  .cimage {
-    width: 16rem !important;
-  }
+  // .cimage {
+  //   width: 16rem !important;
+  // }
    .img-container {
   width: auto !important;
   float: none !important;
   margin-top: auto !important;
-  margin-left: 1rem !important;
+  // margin-left: 1rem !important;
    height: auto !important;
 }
   .header{
-    width: 17rem !important;
+    width: 100% !important;
     font-size: 19px !important;
     padding-left: 0 !important;
     text-align: center !important;
    }
-   .font-style {
-    width: 14rem !important;
-}
+//    .font-style {
+//     width: 14rem !important;
+// }
 }
 @media screen and (min-width:542px) and (max-width: 569px) {
-  .font-style {
-    width: 29rem !important;
-  }
+  // .font-style {
+  //   width: 29rem !important;
+  // }
 }
 @media screen and (min-width:539px) and (max-width: 542px) {
 .font-style {
-    width: 25rem !important;
+    // width: 25rem !important;
     font-size: 16px !important;
 }
 .header {
-    width: 31rem !important;
+    // width: 31rem !important;
     font-size: 16px !important;
 }
 }
@@ -164,9 +169,9 @@ margin-top: -7rem;
   font-size: 33px;
 }
 .cimage {
- width: 574px !important;
-    height: 319px !important;
-    margin-left: 4.5rem !important;
+ width: 100% !important;
+    height: auto !important;
+    // margin-left: 4.5rem !important;
 }
 }
 .allignparagraph{
@@ -262,13 +267,7 @@ margin-top: -7rem;
 //   height: 100% !important;
 //   margin-left: 0 !important;
 // }
-// @media only screen and (max-width: 959px) and (min-width: 600px){
-// .theme-muave.night-mode .cimage {
-//     width: 20rem !important;
-//     height: auto !important;
-//     margin-left: -0.5rem !important;
-// }
-// }
+
 // @media screen and (max-width: 1020px) and (min-width: 960px){
 
 // .theme-muave.night-mode .image-allign{
@@ -287,13 +286,13 @@ margin-top: -7rem;
 
 .theme-muave.night-mode .img-container{
 max-width: 600px !important;
-    padding: 10px !important;
+    // padding: 10px !important;
     margin-top: 0 !important;
 }
 .theme-muave.night-mode .cimage{
 
     width: 100% important;
-    height: 356px !important;
+    height: auto !important;
    margin-left: 0 !important;
 }
 
@@ -303,3 +302,36 @@ max-width: 600px !important;
 
 
 
+
+
+
+.section-container {
+ padding: 4rem 66px; 
+}
+
+@media screen and (max-width: 1019px) and (min-width: 700px) {
+  .section-container {
+    padding: 4rem 56px;
+  }
+  .img-container {
+    height: 320px;
+  }
+}
+
+@media screen and (max-width: 700px) and (min-width: 500px) {
+  .section-container {
+    padding: 4rem 31px;
+  }
+}
+
+@media screen and (max-width: 600px) and (min-width: 350px) {
+  .img-container {
+    padding: 1rem;
+  }
+}
+
+@media screen and (max-width: 500px) {
+  .section-container {
+    padding: 4rem 16px;
+  }
+}
