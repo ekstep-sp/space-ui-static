@@ -38,9 +38,9 @@ font-weight: normal;
 font-size: 16px;
 line-height: 24px;
 color: #696466;
-@include breakpoint-xs {
-  width: 17rem;
-}
+// @include breakpoint-xs {
+//   width: 17rem;
+// }
 }
 .text-style{
 font-weight: 600;
@@ -99,10 +99,13 @@ color: #925EB0;
 @include breakpoint-xs {
   width: 100% !important;
   font-size: 30px !important;
+  line-height: 33px !important;
 }
   @include breakpoint-s {
     font-size: 32px !important;
-    width: 50%;  }
+    width: 50%;
+    line-height: 33px !important;
+  }
 }
 .img-container {
   float: right;
@@ -222,9 +225,9 @@ color: #925EB0;
 
 
 @media screen and (min-width:1022px) and (max-width: 1026px) {
-  .img-container{
-    width: 600px !important;
-  }
+  // .img-container{
+  //   width: 600px !important;
+  // }
 }
 
 ::ng-deep{
@@ -323,3 +326,18 @@ color: #925EB0;
      padding: 4rem 16px;
    }
  }
+
+ @media screen and (max-width: 330px) {
+  .section-container {
+    word-break: break-word;
+  }
+}
+
+ .mat-drawer-container {
+    position: relative;
+    z-index: 1;
+    box-sizing: border-box;
+    -webkit-overflow-scrolling: touch;
+    // display: block;
+     overflow: hidden !important;
+}

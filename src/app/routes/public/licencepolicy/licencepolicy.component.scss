@@ -92,10 +92,12 @@ color: #925EB0;
   width: 100% !important;
   font-size: 30px !important;
   padding-bottom: 1rem;
+  line-height: 33px !important;
 }
   @include breakpoint-s {
 font-size: 32px !important;
 width: 50%;
+line-height: 33px !important;
   }
 }
 .img-container {
@@ -262,3 +264,9 @@ max-width: 600px !important;
      padding: 4rem 16px;
    }
  }
+
+ @media screen and (max-width: 330px) {
+  .section-container {
+    word-break: break-word;
+  }
+}
