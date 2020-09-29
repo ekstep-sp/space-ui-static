@@ -7,7 +7,6 @@ import { NsGoal } from '../btn-goals/btn-goals.model'
 import { NsPlaylist } from '../btn-playlist/btn-playlist.model'
 import { NsContent } from '../_services/widget-content.model'
 import { NsCardContent } from './card-content.model'
-import { WidgetContentService } from '../_services/widget-content.service'
 import { ActivatedRoute } from '@angular/router'
 import { ContentStripMultipleService } from '../content-strip-multiple/content-strip-multiple.service'
 
@@ -35,7 +34,6 @@ export class CardContentComponent extends WidgetBaseComponent
     private configSvc: ConfigurationsService,
     private utilitySvc: UtilityService,
     private snackBar: MatSnackBar,
-    private contentService: WidgetContentService,
     private route: ActivatedRoute,
     private contentStripSvc: ContentStripMultipleService
   ) {
@@ -214,45 +212,7 @@ export class CardContentComponent extends WidgetBaseComponent
       ]
     }
     this.widgetData.content.averageRating = this.widgetData.content.averageRating || 0
-    // this.contentService.fetchContentRating(this.widgetData.content.identifier).subscribe(data => {
-    //   if (
-    //     this.widgetData.content &&
-    //     this.widgetData.content.averageRating &&
-    //     typeof this.widgetData.content.averageRating !== 'number'
-    //   ) {
-    //     // tslint:disable-next-line: ter-computed-property-spacing
-    //     this.widgetData.content.averageRating = (data.rating as any)[
-    //       this.configSvc.rootOrg || ''
-    //       // tslint:disable-next-line: ter-computed-property-spacing
-    //     ]
-    //   }
-    //   this.widgetData.content.averageRating = data.rating || 0
-    //   // console.log('rating : ', data, data.rating)
-    // })
-
   }
-
-  // private assignThumbnail() {
-  //   const thumbnailElement = document.getElementById(`card_${this.widgetData.content.identifier}`) as HTMLImageElement
-  //   if (thumbnailElement) {
-  //     try {
-  //       const observer = new IntersectionObserver(
-  //         entries => {
-  //           entries.forEach(entry => {
-  //             const { isIntersecting } = entry
-  //             if (isIntersecting) {
-  //               thumbnailElement.src = this.widgetData.content.appIcon
-  //               observer.disconnect()
-  //             }
-  //           })
-  //         },
-  //       )
-  //       observer.observe(thumbnailElement)
-  //     } catch (e) {
-  //       thumbnailElement.src = this.widgetData.content.appIcon
-  //     }
-  //   }
-  // }
 
   get isKnowledgeBoard() {
     return (
