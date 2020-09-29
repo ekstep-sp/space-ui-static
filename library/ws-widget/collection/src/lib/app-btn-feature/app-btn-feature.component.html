@@ -8,7 +8,8 @@
                     iconType: featuredWidget.iconType,
                     icon: featuredWidget.icon,
                     scale: 1.7,
-                    color: featuredWidget.color
+                    color: featuredWidget.color,
+                    innerSpan: false
                   }">
             </ng-container>
             <span *ngIf="featuredWidget.name !== 'Admin'" class="ml-4 text-center">
@@ -40,7 +41,8 @@
                         icon: featuredWidget.icon,
                         scale: 1.7,
                         widget: featuredWidget.name,
-                        color: featuredWidget.color
+                        color: featuredWidget.color,
+                        innerSpan: false
                       }"></ng-container>
         <span class="ml-4 text-center text"> {{featuredWidget.name}}</span>
       </span>
@@ -48,16 +50,17 @@
   </ng-container>
 </ng-container>
 <ng-template #featureItem let-actionBtn="actionBtn" let-config="config">
-  <div class="relative py-2" id="{{actionBtn?.id}}" [ngClass]="{
+  <div class="relative py-2 innerSpan" id="{{actionBtn?.id}}" [ngClass]="{
       'rounded h-full box-sizing-box': config?.treatAsCard,
       greyOut: actionBtn.greyOut
-    }">
-    <a class="text-center block" (click)="navigate(actionBtn.url,$event)" mat-flat-button [disableRipple]="true">
+    }" (click)="navigate(actionBtn.url,$event)">
+    <a class="text-center block" (click)="navigate(actionBtn.url,$event)" mat-flat-button [disableRipple]="true" class="innerSpan">
       <ng-container [ngTemplateOutlet]="icon" [ngTemplateOutletContext]="{
           iconType: actionBtn.iconType,
           icon: actionBtn.icon,
           scale: 1.7,
-          color: actionBtn.color
+          color: actionBtn.color,
+          innerSpan: true
         }"></ng-container>
       <span class="ml-4 text-center innerSpan" *ngIf="!config.useShortName">{{ actionBtn.name }}</span>
       <span class="ml-4 text-center" *ngIf="config.useShortName">
@@ -66,9 +69,10 @@
     </a>
   </div>
 </ng-template>
-<ng-template #icon let-iconType="iconType" let-widget="widget" let-icon="icon" let-scale="scale" let-color="color">
+<ng-template #icon let-iconType="iconType" let-innerSpan="innerSpan" let-widget="widget" let-icon="icon" let-scale="scale" let-color="color">
   <ng-container>
     <mat-icon class="matdark" *ngIf="iconType === 'mat-icon' && widget !== 'Profile' && widget !== 'Settings'"
+    [ngClass]="{'innerSpan' : !!innerSpan}"
       aria-hidden="false" [color]="color" [ngStyle]="
         scale
           ? {
