@@ -258,3 +258,8 @@ word-break: break-word;
     width: 87% !important;
   }
 }
+::ng-deep{
+.theme-muave.night-mode .text-style{
+  color: white !important;
+}
+}

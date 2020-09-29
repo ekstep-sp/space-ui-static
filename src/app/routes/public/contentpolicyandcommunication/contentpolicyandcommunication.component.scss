@@ -8,7 +8,7 @@ line-height: 1.7;
    padding: 0 !important;
 }
 }
-#cimage {
+.cimage {
   background-size: cover;
   background-position: center;
   width: 100%;
@@ -112,8 +112,8 @@ margin-top: -7rem;
   // height: 17rem;
 }
 @media screen and (min-width:280px) and (max-width: 320px) {
-  #cimage {
-    width: 16rem !important;
+  .cimage {
+    width: 14rem !important;
     margin-left: 0rem !important;
   }
   .header{
@@ -126,6 +126,17 @@ margin-top: -7rem;
 }
 .img-container {
 margin-left: 1rem !important;
+}
+.section-margin {
+  margin-right: 0 !important;
+}
+.mat-drawer-container {
+    position: relative;
+    z-index: 1;
+    box-sizing: border-box;
+    -webkit-overflow-scrolling: touch;
+    // display: block;
+     overflow: hidden !important;
 }
 }
 @media screen and (min-width:539px) and (max-width: 542px) {
@@ -151,7 +162,7 @@ margin-left: 1rem !important;
   .img-container{
   width: 30.5rem !important;
 }
-#cimage {
+.cimage {
   width: 525px !important;
   height: 320px !important;
 }
@@ -167,4 +178,64 @@ margin-left: 1rem !important;
 }
 .allignpara:not(:root:root){
      margin-left: -20px !important
+}
+
+.text-container{
+  padding: 2.5rem;
+}
+
+.section-margin {
+  margin-right: 2.5rem;
+}
+
+::ng-deep{
+.theme-muave.night-mode .font-style{
+  color: white !important;
+}
+
+.theme-muave.night-mode .img-container{
+max-width: 600px !important;
+    padding: 10px !important;
+    margin-top: 40px !important;
+}
+
+ .theme-muave.night-mode .cimage {
+
+     margin-left: 0 !important;
+}
+@media only screen and (max-width: 599px){
+.theme-muave.night-mode .cimage {
+    width: 17rem !important;
+    height: auto !important;
+    margin-left: 0rem !important;
+}
+}
+// .theme-muave.night-mode .section-margin{
+//   margin-right: 0 !important;
+// }
+// .theme-muave.night-mode .cimage{
+// width: 100% !important;
+//   height: 100% !important;
+//   margin-left: 0 !important;
+// }
+// .theme-muave.night-mode .img-container {
+//   margin-top: 0 !important;
+// }
+// @media only screen and (max-width: 959px) and (min-width: 600px){
+// .theme-muave.night-mode .cimage {
+//     width: 20rem !important;
+//     height: auto !important;
+//     margin-left: -0.5rem !important;
+// }
+// }
+// @media screen and (max-width: 1020px) and (min-width: 960px){
+
+// .theme-muave.night-mode .image-allign{
+//     width: 574px !important;
+//     height: 319px !important;
+//     margin-left: 4.5rem !important;
+
+// }
+// }
+
 }

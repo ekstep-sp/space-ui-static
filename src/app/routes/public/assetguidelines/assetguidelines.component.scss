@@ -109,10 +109,24 @@ margin-top: -7rem;
   }
   // height: 17rem;
 }
+.section-margin {
+  margin-right: 2.5rem;
+}
 @media screen and (min-width:280px) and (max-width: 320px) {
   #cimage {
-    width: 15rem !important;
+    width: 14rem !important;
   }
+  .section-margin {
+  margin-right: 0 !important;
+}
+.mat-drawer-container {
+    position: relative;
+    z-index: 1;
+    box-sizing: border-box;
+    -webkit-overflow-scrolling: touch;
+    // display: block;
+     overflow: hidden !important;
+}
    .img-container {
   width: auto !important;
   float: none !important;
@@ -165,4 +179,17 @@ margin-top: -7rem;
   .img-container{
     width: 640px !important;
   }
+}
+.text-container{
+  padding: 2.5em;
+}
+::ng-deep{
+.theme-muave.night-mode .font-style{
+  color: white !important;
+}
+.theme-muave.night-mode .img-container{
+max-width: 600px !important;
+    padding: 10px !important;
+    margin-top: 0 !important;
+}
 }

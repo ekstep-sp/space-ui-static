@@ -7,7 +7,7 @@ line-height: 1.7;
    padding: 0 !important;
 }
 }
-#cimage {
+.cimage {
   background-size: cover;
   background-position: center;
    width: 700px;
@@ -50,9 +50,9 @@ line-height: 24px;
 color: #925EB0 !important;;
 }
 .font-text{
-    font-size: 18px;
+    font-size: 17px;
     line-height: 24px;
-    font-family: Montserrat;
+    font-family:campaign, sans-serif !important;
     font-style: normal;
 }
 .spaceallignment{
@@ -124,7 +124,7 @@ margin-top: -7rem;
   // height: 17rem;
 }
 @media screen and (min-width:280px) and (max-width: 320px) {
-  #cimage {
+  .cimage {
     width: 16rem !important;
   }
    .img-container {
@@ -163,7 +163,7 @@ margin-top: -7rem;
 .header {
   font-size: 33px;
 }
-#cimage {
+.cimage {
  width: 574px !important;
     height: 319px !important;
     margin-left: 4.5rem !important;
@@ -252,5 +252,54 @@ margin-top: -7rem;
 
 //     }
 // }
+
+::ng-deep{
+.theme-muave.night-mode .font-style{
+  color: white !important;
+}
+// .theme-muave.night-mode .cimage{
+// width: 100% !important;
+//   height: 100% !important;
+//   margin-left: 0 !important;
+// }
+// @media only screen and (max-width: 959px) and (min-width: 600px){
+// .theme-muave.night-mode .cimage {
+//     width: 20rem !important;
+//     height: auto !important;
+//     margin-left: -0.5rem !important;
+// }
+// }
+// @media screen and (max-width: 1020px) and (min-width: 960px){
+
+// .theme-muave.night-mode .image-allign{
+//     width: 574px !important;
+//     height: 319px !important;
+//     margin-left: 4.5rem !important;
+
+// }
+// }
+// @media screen and (max-width: 320px) and (min-width: 280px){
+// .theme-muave.night-mode .cimage {
+//     width: 16rem !important;
+// }
+// }
+
+
+.theme-muave.night-mode .img-container{
+max-width: 600px !important;
+    padding: 10px !important;
+    margin-top: 0 !important;
+}
+.theme-muave.night-mode .cimage{
+
+    width: 100% important;
+    height: 356px !important;
+   margin-left: 0 !important;
+}
+
+}
+
+
+
 
 
