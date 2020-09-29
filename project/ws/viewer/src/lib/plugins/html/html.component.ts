@@ -108,8 +108,9 @@ export class HtmlComponent implements OnInit, OnChanges {
           3000,
         )
       }
-      this.iframeUrl = this.domSanitizer.bypassSecurityTrustResourceUrl(
-        this.htmlContent.artifactUrl,
+        const maybeYTUrl = this.parseForYoutube(this.htmlContent.artifactUrl) // it will convert a faulty youtube url into an embeddable url
+       this.iframeUrl = this.domSanitizer.bypassSecurityTrustResourceUrl(
+        maybeYTUrl,
       )
     } else if (this.htmlContent && this.htmlContent.artifactUrl === '') {
       this.iframeUrl = null
@@ -118,6 +119,10 @@ export class HtmlComponent implements OnInit, OnChanges {
       this.iframeUrl = null
       this.pageFetchStatus = 'error'
     }
+  }
+
+  parseForYoutube(url: string) {
+    return url.replace('watch?v=', 'embed/')
   }
 
   backToDetailsPage() {
