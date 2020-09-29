@@ -31,10 +31,10 @@ export namespace NsEditProfile {
 export class EditProfileComponent implements OnInit {
   paramsForEditProfile: NsEditProfile.IResponseBody = {} as NsEditProfile.IResponseBody
   constructor(private initService: InitService,
-              private profileSvc: ProfileService,
-              private uploadService: UploadService,
-              private snackBar: MatSnackBar,
-              private activateRoute: ActivatedRoute) { }
+    private profileSvc: ProfileService,
+    private uploadService: UploadService,
+    private snackBar: MatSnackBar,
+    private activateRoute: ActivatedRoute) { }
   url = ''
   profileUrlParams = ''
   relativeUrl = ''
@@ -72,7 +72,7 @@ export class EditProfileComponent implements OnInit {
         this.profileForm.controls.bio.setValue(this.userProfile.userProperties.bio &&
           this.userProfile.userProperties.bio !== 'null' ? this.userProfile.userProperties.bio : '')
         this.profileForm.controls.profileLink.setValue(this.userProfile.userProperties.profileLink
-          && this.userProfile.userProperties.profileLink !== 'null' ? this.userProfile.profileLink : '')
+          && this.userProfile.userProperties.profileLink !== 'null' ? this.userProfile.userProperties.profileLink : '')
       }
       // tslint:disable-next-line: max-line-length
       if (this.userProfile.source_profile_picture && this.userProfile.source_profile_picture !== null && this.userProfile.source_profile_picture !== 'null' && this.userProfile.source_profile_picture !== '') {
