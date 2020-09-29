@@ -61,13 +61,18 @@ export class EditProfileComponent implements OnInit {
     })
     this.userProfile = this.initService.getUserProfile()
     if (this.userProfile) {
-      this.profileForm.controls.userFirstName.setValue(this.userProfile.givenName)
-      this.profileForm.controls.userOrganisation.setValue(this.userProfile.departmentName)
-      this.profileForm.controls.userLastName.setValue(this.userProfile.lastName)
-      this.profileForm.controls.email.setValue(this.userProfile.email)
+      this.profileForm.controls.userFirstName.setValue(this.userProfile.givenName
+        && this.userProfile.givenName !== 'null' ? this.userProfile.givenName : '')
+      this.profileForm.controls.userOrganisation.setValue(this.userProfile.departmentName &&
+        this.userProfile.departmentName !== 'null' ? this.userProfile.departmentName : '')
+      this.profileForm.controls.userLastName.setValue(this.userProfile.lastName
+        && this.userProfile.lastName !== 'null' ? this.userProfile.lastName : '')
+      this.profileForm.controls.email.setValue(this.userProfile.email && this.userProfile.email !== 'null' ? this.userProfile.email : '')
       if (this.userProfile.userProperties) {
-        this.profileForm.controls.bio.setValue(this.userProfile.userProperties.bio)
-        this.profileForm.controls.profileLink.setValue(this.userProfile.userProperties.profileLink)
+        this.profileForm.controls.bio.setValue(this.userProfile.userProperties.bio &&
+          this.userProfile.userProperties.bio !== 'null' ? this.userProfile.userProperties.bio : '')
+        this.profileForm.controls.profileLink.setValue(this.userProfile.userProperties.profileLink
+          && this.userProfile.userProperties.profileLink !== 'null' ? this.userProfile.profileLink : '')
       }
       // tslint:disable-next-line: max-line-length
       if (this.userProfile.source_profile_picture && this.userProfile.source_profile_picture !== null && this.userProfile.source_profile_picture !== 'null' && this.userProfile.source_profile_picture !== '') {
@@ -75,7 +80,6 @@ export class EditProfileComponent implements OnInit {
         this.url = this.getAuthoringUrl(this.userProfile.source_profile_picture)
       }
     }
-
   }
   onSelectFile(file: File) {
     this.isEnable = true
@@ -145,7 +149,7 @@ export class EditProfileComponent implements OnInit {
       }
     }
   }
-   fetchInitialUserData() {
+  fetchInitialUserData() {
     try {
       this.initService.updatePidDetails()
     } catch (e) {
