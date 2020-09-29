@@ -31,10 +31,10 @@ export namespace NsEditProfile {
 export class EditProfileComponent implements OnInit {
   paramsForEditProfile: NsEditProfile.IResponseBody = {} as NsEditProfile.IResponseBody
   constructor(private initService: InitService,
-    private profileSvc: ProfileService,
-    private uploadService: UploadService,
-    private snackBar: MatSnackBar,
-    private activateRoute: ActivatedRoute) { }
+              private profileSvc: ProfileService,
+              private uploadService: UploadService,
+              private snackBar: MatSnackBar,
+              private activateRoute: ActivatedRoute) { }
   url = ''
   profileUrlParams = ''
   relativeUrl = ''
