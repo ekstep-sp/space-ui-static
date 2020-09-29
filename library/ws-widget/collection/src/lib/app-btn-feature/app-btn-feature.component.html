@@ -1,5 +1,5 @@
 <ng-container style="margin-top: -1.2rem;">
-  <ng-container *ngIf="featuredWidget.show === true && featuredWidget.expand === true">
+  <ng-container *ngIf="featuredWidget.name !== 'Contribute' && featuredWidget.show === true && featuredWidget.expand === true">
     <mat-accordion #accordion='matAccordion' class="expansion-panel-color" (click)="maintainPropagation($event)">
       <mat-expansion-panel>
         <mat-expansion-panel-header>
@@ -8,8 +8,42 @@
                     iconType: featuredWidget.iconType,
                     icon: featuredWidget.icon,
                     scale: 1.7,
-                    color: featuredWidget.color
+                    color: featuredWidget.color,
+                    innerSpan: false
                   }">
+            </ng-container>
+            <span *ngIf="featuredWidget.name !== 'Admin'" class="ml-4 text-center">
+              {{featuredWidget.name}}</span>
+            <ng-container *ngIf="featuredWidget.name === 'Admin'">
+              <img class="matdark" src="/assets/instances/space/admin_panal_icon/admin_panel_settings.svg">
+              <span class="ml-4 text-center admin-panel"> {{featuredWidget.name}}</span>
+            </ng-container>
+          </mat-panel-title>
+        </mat-expansion-panel-header>
+        <ng-container *ngFor="let group of featuredWidget.featureWidgets">
+          <ng-container *ngIf="group.widgetData.actionBtn.show">
+            <ng-container [ngSwitch]="group.widgetData.config.type">
+              <ng-container *ngSwitchCase="displayType.featureItem">
+                <ng-container [ngTemplateOutlet]="featureItem" [ngTemplateOutletContext]="group.widgetData">
+                </ng-container>
+              </ng-container>
+            </ng-container>
+          </ng-container>
+        </ng-container>
+      </mat-expansion-panel>
+    </mat-accordion>
+  </ng-container>
+  <ng-container *ngIf="featuredWidget.name === 'Contribute' && featuredWidget.show === true && featuredWidget.expand === true">
+    <mat-accordion #accordion='matAccordion' class="expansion-panel-color isVisible" (click)="maintainPropagation($event)">
+      <mat-expansion-panel>
+        <mat-expansion-panel-header>
+          <mat-panel-title>
+            <ng-container *ngIf="featuredWidget.name !== 'Admin'" [ngTemplateOutlet]="icon" [ngTemplateOutletContext]="{
+                      iconType: featuredWidget.iconType,
+                      icon: featuredWidget.icon,
+                      scale: 1.7,
+                      color: featuredWidget.color
+                    }">
             </ng-container>
             <span *ngIf="featuredWidget.name !== 'Admin'" class="ml-4 text-center">
               {{featuredWidget.name}}</span>
@@ -40,7 +74,8 @@
                         icon: featuredWidget.icon,
                         scale: 1.7,
                         widget: featuredWidget.name,
-                        color: featuredWidget.color
+                        color: featuredWidget.color,
+                        innerSpan: false
                       }"></ng-container>
         <span class="ml-4 text-center text"> {{featuredWidget.name}}</span>
       </span>
@@ -48,16 +83,17 @@
   </ng-container>
 </ng-container>
 <ng-template #featureItem let-actionBtn="actionBtn" let-config="config">
-  <div class="relative py-2" id="{{actionBtn?.id}}" [ngClass]="{
+  <div class="relative py-2 innerSpan" id="{{actionBtn?.id}}" [ngClass]="{
       'rounded h-full box-sizing-box': config?.treatAsCard,
       greyOut: actionBtn.greyOut
-    }">
-    <a class="text-center block" (click)="navigate(actionBtn.url,$event)" mat-flat-button [disableRipple]="true">
+    }" (click)="navigate(actionBtn.url,$event)">
+    <a class="text-center block" (click)="navigate(actionBtn.url,$event)" mat-flat-button [disableRipple]="true" class="innerSpan">
       <ng-container [ngTemplateOutlet]="icon" [ngTemplateOutletContext]="{
           iconType: actionBtn.iconType,
           icon: actionBtn.icon,
           scale: 1.7,
-          color: actionBtn.color
+          color: actionBtn.color,
+          innerSpan: true
         }"></ng-container>
       <span class="ml-4 text-center innerSpan" *ngIf="!config.useShortName">{{ actionBtn.name }}</span>
       <span class="ml-4 text-center" *ngIf="config.useShortName">
@@ -66,9 +102,10 @@
     </a>
   </div>
 </ng-template>
-<ng-template #icon let-iconType="iconType" let-widget="widget" let-icon="icon" let-scale="scale" let-color="color">
+<ng-template #icon let-iconType="iconType" let-innerSpan="innerSpan" let-widget="widget" let-icon="icon" let-scale="scale" let-color="color">
   <ng-container>
     <mat-icon class="matdark" *ngIf="iconType === 'mat-icon' && widget !== 'Profile' && widget !== 'Settings'"
+    [ngClass]="{'innerSpan' : !!innerSpan}"
       aria-hidden="false" [color]="color" [ngStyle]="
         scale
           ? {

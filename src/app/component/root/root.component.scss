@@ -4,6 +4,10 @@
 ws-app-nav-bar {
   z-index: 1000;
 }
+
+ws-app-public-nav-bar{
+  z-index:1000
+}
 .route-change {
   position: fixed;
   top: 0;
@@ -18,6 +22,9 @@ ws-app-nav-bar {
 }
 .height-on-top {
   padding-top: 56px;
+}
+.height-on-top-login{
+  padding-top: 100px;
 }
 .top-nav-bar {
   position: fixed;

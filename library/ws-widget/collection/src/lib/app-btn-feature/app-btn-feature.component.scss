@@ -37,9 +37,24 @@ mat-icon {
     align-items: center;
     font-size: 16px;
     font-weight: 200;
+    color: #696466;
+}
+.text-center {
+  color: #696466;
+}
+.isVisible {
+  display: flex !important;
+  @include breakpoint-s {
+    display: none !important;
+  }
+  @include breakpoint-xs {
+    display: none !important;
+  }
 }
 .mat-expansion-panel-header {
-  width: 232px !important;
+    width: 232px !important;
+    font-family: 'montserrat','sans-serif' !important;
+    font-size: 15px !important;
 }
 mat-expansion-panel {
     background-color: rgba(198, 188, 184, 0.42) !important;
@@ -161,25 +176,3 @@ padding-left: 8px;
 .external-link-button {
   color: inherit !important;
 }
-
-::ng-deep{
-.theme-muave.night-mode .matdark{
-  color: white !important;
-}
-// #cdk-accordion-child-1{
-//   background: inherit !important;
-//   color: inherit !important;
-// }
-
-
-.theme-muave.night-mode .mat-expansion-panel-body{
-background: #303030;
-
-}
-.theme-muave.night-mode .text-center{
-color: white;
-}
-}
-
-
-
