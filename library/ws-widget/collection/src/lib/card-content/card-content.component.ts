@@ -202,21 +202,34 @@ export class CardContentComponent extends WidgetBaseComponent
   }
 
   private modifySensibleContentRating() {
-    this.contentService.fetchContentRating(this.widgetData.content.identifier).subscribe(data => {
-      if (
-        this.widgetData.content &&
-        this.widgetData.content.averageRating &&
-        typeof this.widgetData.content.averageRating !== 'number'
-      ) {
+    if (
+      this.widgetData.content &&
+      this.widgetData.content.averageRating &&
+      typeof this.widgetData.content.averageRating !== 'number'
+    ) {
+      // tslint:disable-next-line: ter-computed-property-spacing
+      this.widgetData.content.averageRating = (this.widgetData.content.averageRating as any)[
+        this.configSvc.rootOrg || ''
         // tslint:disable-next-line: ter-computed-property-spacing
-        this.widgetData.content.averageRating = (data.rating as any)[
-          this.configSvc.rootOrg || ''
-          // tslint:disable-next-line: ter-computed-property-spacing
-        ]
-      }
-      this.widgetData.content.averageRating = data.rating || 0
-      // console.log('rating : ', data, data.rating)
-    })
+      ]
+    }
+    this.widgetData.content.averageRating = this.widgetData.content.averageRating || 0
+    // this.contentService.fetchContentRating(this.widgetData.content.identifier).subscribe(data => {
+    //   if (
+    //     this.widgetData.content &&
+    //     this.widgetData.content.averageRating &&
+    //     typeof this.widgetData.content.averageRating !== 'number'
+    //   ) {
+    //     // tslint:disable-next-line: ter-computed-property-spacing
+    //     this.widgetData.content.averageRating = (data.rating as any)[
+    //       this.configSvc.rootOrg || ''
+    //       // tslint:disable-next-line: ter-computed-property-spacing
+    //     ]
+    //   }
+    //   this.widgetData.content.averageRating = data.rating || 0
+    //   // console.log('rating : ', data, data.rating)
+    // })
+
   }
 
   // private assignThumbnail() {
