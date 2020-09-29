@@ -4,7 +4,7 @@ import { ConfigurationsService, NsPage, LogoutComponent, NsAppsConfig } from '@w
 import { Subscription } from 'rxjs'
 import { ROOT_WIDGET_CONFIG } from '../collection.config'
 import { IBtnAppsConfig } from './btn-apps.model'
-import { Router, NavigationStart, NavigationEnd, ActivatedRoute } from '@angular/router'
+import { Router, ActivatedRoute } from '@angular/router'
 import { MatDialog } from '@angular/material'
 import { FormControl } from '@angular/forms'
 import { distinctUntilChanged, startWith, debounceTime } from 'rxjs/operators'
@@ -65,7 +65,8 @@ export class BtnAppsComponent extends WidgetBaseComponent
         }),
       )
     }
-    this.router.events.subscribe(event => {
+    // existing code, removed because app/features is no longer available
+    /* this.router.events.subscribe(event => {
       if (event instanceof NavigationStart) {
         if (this.router.url === '/app/features') {
           this.isUrlOpened = true
@@ -79,7 +80,7 @@ export class BtnAppsComponent extends WidgetBaseComponent
           this.isUrlOpened = false
         }
       }
-    })
+    }) */
   }
 
   ngOnInit() {
