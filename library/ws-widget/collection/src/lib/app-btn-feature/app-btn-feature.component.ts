@@ -1,5 +1,5 @@
 import { Component, OnInit, Input, OnDestroy, ViewChild } from '@angular/core'
-import { NsAppsConfig, NsPage, ConfigurationsService, AuthKeycloakService } from '../../../../utils/src/public-api'
+import { NsAppsConfig, NsPage, ConfigurationsService, AuthKeycloakService, UtilityService } from '../../../../utils/src/public-api'
 import { NsWidgetResolver } from '../../../../resolver/src/public-api'
 import { AppBtnFeatureService } from './service/app-btn-feature.service'
 import { Router } from '@angular/router'
@@ -47,6 +47,7 @@ export class AppBtnFeatureComponent implements OnInit, OnDestroy {
     private authSvc: AuthKeycloakService,
     public featureService: AppBtnFeatureService,
     public router: Router,
+    public utilitySvc: UtilityService,
   ) {}
 
   ngOnInit() {
@@ -87,31 +88,12 @@ export class AppBtnFeatureComponent implements OnInit, OnDestroy {
       event.stopPropagation()
     }
   }
-  // get desktopVisible() {
-  //   if (this.widgetData.actionBtn && this.widgetData.actionBtn.mobileAppFunction) {
-  //     if (!this.mobileSvc.isMobile) {
-  //       return false
-  //     }
-  //     return true
-  //   }
-  //   return true
-  // }
-  // updateBadge() {
-  //   if (this.widgetData.actionBtn && this.widgetData.actionBtn.badgeEndpoint) {
-  //     this.btnFeatureSvc
-  //       .getBadgeCount(this.widgetData.actionBtn.badgeEndpoint)
-  //       .then(count => {
-  //         if (count > 99) {
-  //           this.badgeCount = '99+'
-  //         } else if (count > 0) {
-  //           this.badgeCount = count.toString()
-  //         } else {
-  //           this.badgeCount = ''
-  //         }
-  //       })
-  //       .catch(_err => { })
-  //   }
-  // }
+  isMobile(name: string): boolean {
+    if (this.utilitySvc.isMobile && name === 'Contribute') {
+      return true
+    }
+    return false
+  }
   logout() {
     this.authSvc.logout()
   }

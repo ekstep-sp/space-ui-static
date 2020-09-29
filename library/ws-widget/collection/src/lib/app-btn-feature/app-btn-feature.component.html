@@ -1,5 +1,5 @@
 <ng-container style="margin-top: -1.2rem;">
-  <ng-container *ngIf="featuredWidget.show === true && featuredWidget.expand === true">
+  <ng-container *ngIf="featuredWidget.name !== 'Contribute' && featuredWidget.show === true && featuredWidget.expand === true">
     <mat-accordion #accordion='matAccordion' class="expansion-panel-color" (click)="maintainPropagation($event)">
       <mat-expansion-panel>
         <mat-expansion-panel-header>
@@ -11,6 +11,39 @@
                     color: featuredWidget.color,
                     innerSpan: false
                   }">
+            </ng-container>
+            <span *ngIf="featuredWidget.name !== 'Admin'" class="ml-4 text-center">
+              {{featuredWidget.name}}</span>
+            <ng-container *ngIf="featuredWidget.name === 'Admin'">
+              <img class="matdark" src="/assets/instances/space/admin_panal_icon/admin_panel_settings.svg">
+              <span class="ml-4 text-center admin-panel"> {{featuredWidget.name}}</span>
+            </ng-container>
+          </mat-panel-title>
+        </mat-expansion-panel-header>
+        <ng-container *ngFor="let group of featuredWidget.featureWidgets">
+          <ng-container *ngIf="group.widgetData.actionBtn.show">
+            <ng-container [ngSwitch]="group.widgetData.config.type">
+              <ng-container *ngSwitchCase="displayType.featureItem">
+                <ng-container [ngTemplateOutlet]="featureItem" [ngTemplateOutletContext]="group.widgetData">
+                </ng-container>
+              </ng-container>
+            </ng-container>
+          </ng-container>
+        </ng-container>
+      </mat-expansion-panel>
+    </mat-accordion>
+  </ng-container>
+  <ng-container *ngIf="featuredWidget.name === 'Contribute' && featuredWidget.show === true && featuredWidget.expand === true">
+    <mat-accordion #accordion='matAccordion' class="expansion-panel-color isVisible" (click)="maintainPropagation($event)">
+      <mat-expansion-panel>
+        <mat-expansion-panel-header>
+          <mat-panel-title>
+            <ng-container *ngIf="featuredWidget.name !== 'Admin'" [ngTemplateOutlet]="icon" [ngTemplateOutletContext]="{
+                      iconType: featuredWidget.iconType,
+                      icon: featuredWidget.icon,
+                      scale: 1.7,
+                      color: featuredWidget.color
+                    }">
             </ng-container>
             <span *ngIf="featuredWidget.name !== 'Admin'" class="ml-4 text-center">
               {{featuredWidget.name}}</span>
