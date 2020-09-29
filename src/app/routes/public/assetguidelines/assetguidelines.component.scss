@@ -82,6 +82,8 @@ font-size: 48px;
 line-height: 55px;
 color: #925EB0;
 margin-left: 2.5rem !important;
+display: inline-block;
+padding-bottom: 6rem;
 @include breakpoint-xs {
   width: 19rem !important;
   font-size: 21px !important;
