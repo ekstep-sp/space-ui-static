@@ -16,7 +16,8 @@
       (isXSmall$ | async) === false &&
       (authSvc.isLoggedIn$ | async) === true &&
       showNavbar &&
-      isNavBarRequired || (authSvc.isLoggedIn$ | async) === false
+      isNavBarRequired,
+      'height-on-top-login': (authSvc.isLoggedIn$ | async) === false
   }">
   <router-outlet></router-outlet>
 </div>
