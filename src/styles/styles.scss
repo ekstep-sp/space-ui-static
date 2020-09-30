@@ -146,6 +146,19 @@ mat-toolbar span {
   color: #696466 !important;
   // color: rgba(0, 0, 0, 0.26) !important;
 }
+.theme-muave.night-mode a.primaryclr {
+  color: white !important;
+  background: #865ba0 !important;
+}
+
+.theme-muave.night-mode button.primaryclr {
+  color: white !important;
+  background: #865ba0 !important;
+}
+.theme-muave.night-mode button.primaryclr:disabled,button.primaryclr[disabled] {
+  color: white !important;
+  background: #918b96 !important;
+}
 .header-btn-style {
 font-family: Montserrat !important;
 font-style: normal !important;
