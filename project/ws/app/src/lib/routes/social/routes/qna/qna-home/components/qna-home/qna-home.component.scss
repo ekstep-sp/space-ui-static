@@ -36,3 +36,10 @@
   font-size: 0.6rem;
 }
 }
+
+::ng-deep{
+  .theme-muave.night-mode .mat-flat-button.qa-btn{
+    background: #865BA0 !important;
+    color: white !important;
+  }
+}
