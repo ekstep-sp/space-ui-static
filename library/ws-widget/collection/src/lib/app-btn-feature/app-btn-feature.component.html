@@ -12,11 +12,12 @@
                     innerSpan: false
                   }">
             </ng-container>
-            <span *ngIf="featuredWidget.name !== 'Admin'" class="ml-4 text-center">
+            <span *ngIf="featuredWidget.name !== 'Admin'" class="ml-5 text-center">
               {{featuredWidget.name}}</span>
             <ng-container *ngIf="featuredWidget.name === 'Admin'">
-              <img class="matdark" src="/assets/instances/space/admin_panal_icon/admin_panel_settings.svg">
-              <span class="ml-4 text-center admin-panel"> {{featuredWidget.name}}</span>
+              <img class="matdark mat-icon admin-image-black" src="/assets/instances/space/admin_panal_icon/admin_panel_settings-black.svg">
+              <img class="matdark mat-icon admin-image-white" src="/assets/instances/space/admin_panal_icon/admin_panel_settings-white.svg">
+              <span class="ml-5 text-center admin-panel"> {{featuredWidget.name}}</span>
             </ng-container>
           </mat-panel-title>
         </mat-expansion-panel-header>
@@ -45,11 +46,11 @@
                       color: featuredWidget.color
                     }">
             </ng-container>
-            <span *ngIf="featuredWidget.name !== 'Admin'" class="ml-4 text-center">
+            <span *ngIf="featuredWidget.name !== 'Admin'" class="ml-5 text-center">
               {{featuredWidget.name}}</span>
             <ng-container *ngIf="featuredWidget.name === 'Admin'">
               <img class="matdark" src="/assets/instances/space/admin_panal_icon/admin_panel_settings.svg">
-              <span class="ml-4 text-center admin-panel"> {{featuredWidget.name}}</span>
+              <span class="ml-5 text-center admin-panel"> {{featuredWidget.name}}</span>
             </ng-container>
           </mat-panel-title>
         </mat-expansion-panel-header>
@@ -77,7 +78,7 @@
                         color: featuredWidget.color,
                         innerSpan: false
                       }"></ng-container>
-        <span class="ml-4 text-center text"> {{featuredWidget.name}}</span>
+        <span class="ml-5 text-center text"> {{featuredWidget.name}}</span>
       </span>
     </a>
   </ng-container>
@@ -95,8 +96,8 @@
           color: actionBtn.color,
           innerSpan: true
         }"></ng-container>
-      <span class="ml-4 text-center innerSpan" *ngIf="!config.useShortName">{{ actionBtn.name }}</span>
-      <span class="ml-4 text-center" *ngIf="config.useShortName">
+      <span class="ml-5 text-center innerSpan" *ngIf="!config.useShortName">{{ actionBtn.name }}</span>
+      <span class="ml-5 text-center" *ngIf="config.useShortName">
         {{ actionBtn.shortName }}
       </span>
     </a>
@@ -117,7 +118,7 @@
       ">
       {{ icon }}
     </mat-icon>
-    <mat-icon class="line ml-2 matdark" *ngIf="iconType === 'mat-icon' && widget === 'Profile'" aria-hidden="false"
+    <mat-icon class="line matdark" *ngIf="iconType === 'mat-icon' && widget === 'Profile'" aria-hidden="false"
       [color]="color" [ngStyle]="
               scale
                 ? {
@@ -129,7 +130,7 @@
             ">
       {{ icon }}
     </mat-icon>
-    <mat-icon class="line ml-2 matdark" *ngIf="iconType === 'mat-icon'  && widget === 'Settings'" aria-hidden="false"
+    <mat-icon class="line matdark" *ngIf="iconType === 'mat-icon'  && widget === 'Settings'" aria-hidden="false"
       [color]="color" [ngStyle]="
                   scale
                     ? {
