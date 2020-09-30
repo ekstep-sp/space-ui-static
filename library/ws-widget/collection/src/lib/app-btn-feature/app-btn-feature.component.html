@@ -49,7 +49,8 @@
             <span *ngIf="featuredWidget.name !== 'Admin'" class="ml-5 text-center">
               {{featuredWidget.name}}</span>
             <ng-container *ngIf="featuredWidget.name === 'Admin'">
-              <img class="matdark" src="/assets/instances/space/admin_panal_icon/admin_panel_settings.svg">
+              <img class="matdark mat-icon admin-image-black" src="/assets/instances/space/admin_panal_icon/admin_panel_settings-black.svg">
+              <img class="matdark mat-icon admin-image-white" src="/assets/instances/space/admin_panal_icon/admin_panel_settings-white.svg">
               <span class="ml-5 text-center admin-panel"> {{featuredWidget.name}}</span>
             </ng-container>
           </mat-panel-title>
@@ -105,7 +106,7 @@
 </ng-template>
 <ng-template #icon let-iconType="iconType" let-innerSpan="innerSpan" let-widget="widget" let-icon="icon" let-scale="scale" let-color="color">
   <ng-container>
-    <mat-icon class="matdark" *ngIf="iconType === 'mat-icon' && widget !== 'Profile' && widget !== 'Settings'"
+    <mat-icon class="matdark material-icons-outlined" *ngIf="iconType === 'mat-icon' && widget !== 'Profile' && widget !== 'Settings'"
     [ngClass]="{'innerSpan' : !!innerSpan}"
       aria-hidden="false" [color]="color" [ngStyle]="
         scale
