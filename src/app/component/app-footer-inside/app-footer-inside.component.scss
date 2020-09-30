@@ -66,15 +66,15 @@ p {
 }
 .mat-body {
   display: flex;
-  justify-content: space-around;
+  justify-content: flex-start;
 }
 /* footer content style */
-.col-1 {
-  flex: 1;
-}
+// .col-1 {
+//   flex: 1;
+// }
 .col-2 {
-  flex: 2;
-  margin-left: 2rem;
+  // flex: 2;
+  margin-left: 4rem;
 }
 @media screen and (max-width: 600px) {
   #display-responsive {
