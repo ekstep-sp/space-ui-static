@@ -4,7 +4,7 @@ import { ConfigurationsService, NsPage, LogoutComponent, NsAppsConfig } from '@w
 import { Subscription } from 'rxjs'
 import { ROOT_WIDGET_CONFIG } from '../collection.config'
 import { IBtnAppsConfig } from './btn-apps.model'
-import { Router, ActivatedRoute } from '@angular/router'
+import { ActivatedRoute } from '@angular/router'
 import { MatDialog } from '@angular/material'
 import { FormControl } from '@angular/forms'
 import { distinctUntilChanged, startWith, debounceTime } from 'rxjs/operators'
@@ -36,7 +36,6 @@ export class BtnAppsComponent extends WidgetBaseComponent
   constructor(
     private dialog: MatDialog,
     private configSvc: ConfigurationsService,
-    private router: Router,
     private activateRoute: ActivatedRoute,
     private readonly featureSrvc: AppBtnFeatureService
   ) {
@@ -95,7 +94,7 @@ export class BtnAppsComponent extends WidgetBaseComponent
         distinctUntilChanged(),
       )
       .subscribe((query: string) => {
-        this.router.navigate([], { queryParams: { q: query || null } })
+        // this.router.navigate([], { queryParams: { q: query || null } })
         this.featureGroups = this.filteredFeatures(query)
         this.rolesBasedFeatureGroups = this.featureGroups
         this.isAllowedForDisplay()
