@@ -48,7 +48,7 @@
             positiveFeedbackSendStatus === 'sending' || negativeFeedbackSendStatus === 'sending'
           "></mat-progress-spinner>
       </div>
-      <button mat-flat-button color="primary" type="submit" [disabled]="
+      <button class="primaryclr" mat-flat-button color="primary" type="submit" [disabled]="
           feedbackForm.pristine ||
           feedbackForm.invalid ||
           positiveFeedbackSendStatus === 'sending' ||

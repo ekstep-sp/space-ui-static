@@ -1,3 +1,10 @@
 .hide-overflow{
   overflow: hidden;
 }
+
+::ng-deep{
+  .theme-muave.night-mode .mat-flat-button.logout-btn{
+    background: #F44336 !important;
+    color: white !important;
+  }
+}

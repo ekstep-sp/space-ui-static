@@ -7,3 +7,10 @@
   color: white !important;
   background: #865ba0 !important;
 }
+
+::ng-deep{
+  .theme-muave.night-mode .mat-flat-button.feedback-btn{
+    background: #865BA0 !important;
+    color: white !important;
+  }
+}

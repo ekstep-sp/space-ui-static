@@ -186,3 +186,10 @@ span{
   max-height: 130px;
   border-radius: unset !important;
 }
+
+::ng-deep{
+  .theme-muave.night-mode .department{
+   
+    color: white !important;
+  }
+}
