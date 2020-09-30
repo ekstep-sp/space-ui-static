@@ -56,3 +56,8 @@ mat-panel-title {
   padding-right: 2rem;
   color: #865ba0;
 }
+::ng-deep{
+.theme-muave.night-mode .mat-expansion-panel-content {
+background: #424242 !important;
+}
+}
