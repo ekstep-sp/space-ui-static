@@ -13,7 +13,7 @@
     background-color: rgba(198, 188, 184, 0.42);
     text-align: left !important;
     flex-basis: 100%;
-    padding-left: 1rem;
+    padding: 0 24px;
     display: flex;
     height: 100%;
 }
@@ -21,7 +21,7 @@ mat-icon {
       color: #696466;
     /* display: flex; */
     /* justify-content: space-evenly; */
-    flex-basis: 32px;
+    // flex-basis: 32px;
 }
 .line {
   line-height: 2 !important;
@@ -51,8 +51,14 @@ mat-icon {
     display: none !important;
   }
 }
+
+.mat-expansion-panel {
+  width: 100%;
+}
+
 .mat-expansion-panel-header {
-    width: 232px !important;
+    // width: 232px !important;
+    width: calc(100% - 48px) !important;
     font-family: 'montserrat','sans-serif' !important;
     font-size: 15px !important;
 }
@@ -79,9 +85,9 @@ mat-expansion-panel {
   line-height: 26px !important;
   font-weight: 300 !important;
 }
-.admin-panel {
-padding-left: 8px;
-}
+// .admin-panel {
+// padding-left: 8px;
+// }
 .feature-status-icon {
   position: absolute;
   top: 4px;
@@ -176,3 +182,62 @@ padding-left: 8px;
 .external-link-button {
   color: inherit !important;
 }
+
+::ng-deep{
+  .theme-muave.night-mode .matdark{
+    color: white !important;
+  }
+  // #cdk-accordion-child-1{
+  //   background: inherit !important;
+  //   color: inherit !important;
+  // }
+  
+  
+  .theme-muave.night-mode .mat-expansion-panel-body{
+  background: #303030;
+  
+  }
+  .theme-muave.night-mode .text-center{
+  color: white;
+  }
+  
+  .theme-muave.day-mode .admin-image-black {
+    visibility: visible;
+  }
+
+  .theme-muave.night-mode .admin-image-black {
+    visibility: hidden;
+    height: 0;
+    width: 0;
+  }
+
+  .theme-muave.day-mode .admin-image-white {
+    visibility: hidden;
+    height: 0;
+    width: 0;
+  }
+
+  .theme-muave.night-mode .admin-image-white {
+    visibility: visible;
+  }
+
+  .theme-muave.day-mode .mat-expansion-panel:not(.mat-expanded):not([aria-disabled=true]) .mat-expansion-panel-header:hover {
+    background: rgba(0, 0, 0, 0.04);
+    // background-color: rgba(198, 188, 184, 0.42);
+  }
+
+  .theme-muave.night-mode .mat-expansion-panel:not(.mat-expanded):not([aria-disabled=true]) .mat-expansion-panel-header:hover {
+    background: rgba(255, 255, 255, 0.04);
+  }
+
+  .mat-expansion-panel-header-title {
+    align-items: center;
+  }
+  
+  @media only screen and (max-width: 700px) {
+    .mat-content {
+      flex: 0.9 !important;
+    }
+  }
+
+  }

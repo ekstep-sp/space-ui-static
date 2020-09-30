@@ -2,6 +2,7 @@
 @import 'ws-mixins';
 @import './utility.scss';
 @import url(https://db.onlinewebfonts.com/c/8d7db40f4a18fe878fd4e0577ddbb03b?family=Campaign+Grotesk);
+@import url("https://fonts.googleapis.com/icon?family=Material+Icons|Material+Icons+Outlined");
 
 @font-face {
   font-family: CampaignW00-Medium;
@@ -146,6 +147,19 @@ mat-toolbar span {
   color: #696466 !important;
   // color: rgba(0, 0, 0, 0.26) !important;
 }
+.theme-muave.night-mode a.primaryclr {
+  color: white !important;
+  background: #865ba0 !important;
+}
+
+.theme-muave.night-mode button.primaryclr {
+  color: white !important;
+  background: #865ba0 !important;
+}
+.theme-muave.night-mode button.primaryclr:disabled,button.primaryclr[disabled] {
+  color: white !important;
+  background: #918b96 !important;
+}
 .header-btn-style {
 font-family: Montserrat !important;
 font-style: normal !important;
@@ -165,7 +179,7 @@ color: #696466 !important;
   font-size: 16px;
   font-weight: bolder;
   @include breakpoint-xs {
-    font-size: 9px;
+    font-size: 15px;
   }
 }
 ::-moz-selection {

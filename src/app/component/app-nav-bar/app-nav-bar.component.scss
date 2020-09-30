@@ -111,7 +111,7 @@
    padding: 4px 0px 0px 0px;
   }
 }
-@media only screen and (min-width: 599px) and (max-width: 692px) {
+@media only screen and (min-width: 599px) and (max-width: 725px) {
   .app-logo {
     margin-top: -0.4rem !important;
     min-width: auto !important;
@@ -120,7 +120,7 @@
     overflow-y: visible !important;
   }
 }
-@media only screen and (min-width: 693px) and (max-width: 795px) {
+@media only screen and (min-width: 726px) and (max-width: 795px) {
   .app-logo {
     width: 10rem !important;
     margin-top: 4.5px !important;
@@ -151,7 +151,7 @@
 .logosize {
   overflow-y: hidden;
   // height: 3rem;
-  padding: 8px 0 0 0;
+  padding: 8px 0 0 25px;
   max-width: 295px;
   max-height: 35px;
 }
