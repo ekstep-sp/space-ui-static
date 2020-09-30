@@ -45,6 +45,9 @@
   }
 
   @if $is-dark {
+    .mat-expansion-panel-body {
+      background: #424242 !important;
+      }
     mat-toolbar {
       button[disabled] {
         color: black !important;
