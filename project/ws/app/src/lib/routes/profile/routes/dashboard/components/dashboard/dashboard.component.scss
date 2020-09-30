@@ -251,3 +251,15 @@ height:auto;
   padding-left:10px;
   cursor:pointer;
 }
+
+@media screen and (max-width:600px){
+  .px-2{
+   padding:0;
+  font-size:14px;
+ }
+ .interest-edit{
+   margin-left:14px;
+   padding-left:4px;
+   padding-right:4px;
+ }
+}
