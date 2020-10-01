@@ -1,7 +1,7 @@
-<ng-container style="margin-top: -1.2rem;">
+<ng-container style="margin-top: -1.2rem;" (click)="$event.stopPropagation()">
   <ng-container *ngIf="featuredWidget.name !== 'Contribute' && featuredWidget.show === true && featuredWidget.expand === true">
-    <mat-accordion #accordion='matAccordion' class="expansion-panel-color" (click)="maintainPropagation($event); $event.stopPropagation()">
-      <mat-expansion-panel>
+    <mat-accordion #accordion='matAccordion' class="expansion-panel-color" (click)="maintainPropagation($event)" multi="false">
+      <mat-expansion-panel [expanded]="!!expand">
         <mat-expansion-panel-header>
           <mat-panel-title>
             <ng-container *ngIf="featuredWidget.name !== 'Admin'" [ngTemplateOutlet]="icon" [ngTemplateOutletContext]="{
@@ -36,7 +36,7 @@
   </ng-container>
   <ng-container *ngIf="featuredWidget.name === 'Contribute' && featuredWidget.show === true && featuredWidget.expand === true">
     <mat-accordion #accordion='matAccordion' class="expansion-panel-color isVisible" (click)="maintainPropagation($event)">
-      <mat-expansion-panel>
+      <mat-expansion-panel [expanded]="!!expand">
         <mat-expansion-panel-header>
           <mat-panel-title>
             <ng-container *ngIf="featuredWidget.name !== 'Admin'" [ngTemplateOutlet]="icon" [ngTemplateOutletContext]="{
