@@ -1,7 +1,7 @@
 import { AfterViewInit, Component, ElementRef, Input, OnDestroy, OnInit, ViewChild } from '@angular/core'
 import { ActivatedRoute } from '@angular/router'
 import { NsWidgetResolver, WidgetBaseComponent } from '@ws-widget/resolver'
-import { EventService } from '@ws-widget/utils'
+import { EventService, ValueService } from '@ws-widget/utils'
 import videoJs from 'video.js'
 import { ViewerUtilService } from '../../../../../../project/ws/viewer/src/lib/viewer-util.service'
 import { ROOT_WIDGET_CONFIG } from '../collection.config'
@@ -14,6 +14,7 @@ import {
   videoJsInitializer,
 } from '../_services/videojs-util'
 import { WidgetContentService } from '../_services/widget-content.service'
+import { Subscription } from 'rxjs'
 
 const videoJsOptions: videoJs.PlayerOptions = {
   controls: true,
@@ -50,16 +51,24 @@ export class PlayerVideoComponent extends WidgetBaseComponent
   @ViewChild('realvideoTag', { static: false }) realvideoTag!: ElementRef<HTMLVideoElement>
   private player: videoJs.Player | null = null
   private dispose: (() => void) | null = null
+  private defaultSideNavBarOpenedSubscription: Subscription | null = null
+  isLtMedium$ = this.valueSvc.isLtMedium$
+  screenSizeIsLtMedium = false
   constructor(
     private eventSvc: EventService,
     private contentSvc: WidgetContentService,
     private viewerSvc: ViewerUtilService,
     private activatedRoute: ActivatedRoute,
+    private valueSvc: ValueService,
   ) {
     super()
   }
 
-  ngOnInit() { }
+  ngOnInit() {
+    this.defaultSideNavBarOpenedSubscription = this.isLtMedium$.subscribe((isLtMedium: boolean) => {
+      this.screenSizeIsLtMedium = isLtMedium
+    })
+  }
 
   async ngAfterViewInit() {
     this.widgetData = {
@@ -83,7 +92,11 @@ export class PlayerVideoComponent extends WidgetBaseComponent
     if (this.dispose) {
       this.dispose()
     }
+    if (this.defaultSideNavBarOpenedSubscription) {
+      this.defaultSideNavBarOpenedSubscription.unsubscribe()
+    }
   }
+
   private initializeVPlayer() {
     const dispatcher: telemetryEventDispatcherFunction = event => {
       if (this.widgetData.identifier) {
