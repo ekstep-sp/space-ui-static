@@ -1,9 +1,10 @@
-import { Component, OnInit, Input, OnDestroy } from '@angular/core'
+import { Component, OnInit, Input, OnDestroy, ViewChild, Output } from '@angular/core'
 import { NsAppsConfig, NsPage, ConfigurationsService, AuthKeycloakService, UtilityService } from '../../../../utils/src/public-api'
 import { NsWidgetResolver } from '../../../../resolver/src/public-api'
 import { AppBtnFeatureService } from './service/app-btn-feature.service'
 import { Router } from '@angular/router'
-import { Subscription } from 'rxjs'
+import { Subscription, BehaviorSubject } from 'rxjs'
+import { MatExpansionModule, MatExpansionPanel, MatAccordion } from '@angular/material';
 
 interface IGroupWithFeatureWidgets extends NsAppsConfig.IGroup {
   featureWidgets: NsWidgetResolver.IRenderConfigWithTypedData<NsPage.INavLink>[],
@@ -30,7 +31,10 @@ export const typeMap = {
   styleUrls: ['./app-btn-feature.component.scss'],
 })
 export class AppBtnFeatureComponent implements OnInit, OnDestroy {
-
+  
+  @ViewChild('panel',{static: true}) expansionPanel!: MatExpansionPanel
+  @ViewChild('accordion',{static: true}) mAccordion!: MatAccordion
+  @Output() mataccordion!: BehaviorSubject<MatAccordion>
   @Input() widget: IGroupWithFeatureWidgets[] | any = []
   rolesBasedFeatureGroups: IGroupWithFeatureWidgets[] = []
   readonly displayType = typeMap
@@ -38,6 +42,7 @@ export class AppBtnFeatureComponent implements OnInit, OnDestroy {
   allowedToAuthor = true
   featuredWidget: IGroupWithFeatureWidgets[] | any = []
   expand = false
+  openedPanels: any = []
   expansion$: Subscription | null = null
 
   constructor(
@@ -49,14 +54,12 @@ export class AppBtnFeatureComponent implements OnInit, OnDestroy {
   ) {}
 
   ngOnInit() {
-    this.expansion$ = this.featureService.triggerExpansion.subscribe((newExpansion: boolean) => {
-      this.expand = newExpansion
-      console.log('expanded now is ', this.expand)
-    })
+
     this.setUpPermission()
     this.isAllowedForDisplay(this.widget)
     this.featuredWidget = this.widget
   }
+  
   setUpPermission() {
     if (this.widget) {
       const allowed = this.widget.rolesAllowed || []
@@ -75,7 +78,16 @@ export class AppBtnFeatureComponent implements OnInit, OnDestroy {
       })
     }
   }
-  navigate(key: any, _e: any) {
+  maintainState(panel: MatExpansionPanel, accordion: MatAccordion) {
+    // console.log(panel, accordion)
+    this.expansionPanel = panel
+    this.mAccordion = accordion
+      this.featureService.triggerAppsExpansionClose(this.expansionPanel)
+  }
+  navigate(key: any, _e: any, actionBtn: any) {
+    if (actionBtn !== 'Profile' && actionBtn !== 'Settings') {
+    this.expansionPanel.expanded = false
+    }
     this.router.navigateByUrl(key)
   }
   maintainPropagation(event: any) {
