@@ -1,4 +1,7 @@
 @import 'ws-mixins';
+@import 'src/themes/theme-muave.scss';
+
+ $primary: $theme-primary;
 
 .feature {
   position: relative;
@@ -26,7 +29,7 @@
 
 .link-active {
   font-weight: bold;
-  border-bottom: 3px solid;
+  border-bottom: 3px solid mat-color($primary) !important ;
   border-radius: 0px;
 }
 .feature-status-icon {

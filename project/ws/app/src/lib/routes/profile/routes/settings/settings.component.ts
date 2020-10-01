@@ -66,9 +66,10 @@ export class SettingsComponent implements OnInit, OnDestroy {
     private snackBar: MatSnackBar,
     private route: ActivatedRoute,
     private utilitySvc: UtilityService,
-  ) {}
+  ) { }
 
   ngOnInit() {
+    this.dispatchEvent()
     const tab = this.route.snapshot.queryParamMap.get('tab')
     if (this.configSvc.restrictedFeatures) {
       this.showIntranetSettings =
@@ -256,5 +257,10 @@ export class SettingsComponent implements OnInit, OnDestroy {
          break */
     }
     this.router.navigate([], { queryParams: { tab } })
+  }
+  dispatchEvent() {
+    setTimeout(() => {
+      window.dispatchEvent(new Event('resize'))
+    },         150)
   }
 }
