@@ -11,27 +11,16 @@
   </ng-container>
 
   <ng-container *ngIf="(isXSmall$ | async) === true">
-    <a
-      [routerLink]="'/app/profile/settings'"
-      [queryParams]="{ tab: 'notifications' }"
-      mat-icon-button
-      style="color: white; padding-right: 5rem;"
-    >
+    <a [routerLink]="'/app/profile/settings'" [queryParams]="{ tab: 'notifications' }" mat-icon-button
+      style="color: white; padding-right: 5rem;">
       <mat-icon>settings</mat-icon>
     </a>
   </ng-container>
 </mat-toolbar>
 
 <section class="my-4 pt-4 pb-8 pl-4 pr-4 container-balanced">
-  <button
-    [disabled]="!showMarkAsRead"
-    mat-raised-button
-    class="text-right"
-    color="primary"
-    *ngIf="actionNotifications.length || infoNotifications.length"
-    (click)="readAllNotifications()"
-    i18n
-  >
+  <button [disabled]="!showMarkAsRead" mat-raised-button class="text-right" color="primary"
+    *ngIf="actionNotifications.length || infoNotifications.length" (click)="readAllNotifications()" i18n>
     Mark all as read
   </button>
 
@@ -43,9 +32,7 @@
         <li matRipple class="p-4 cursor-pointer" (click)="onClickNotification(notification)">
           <div class="flex flex-between">
             <div class="flex flex-col flex-center w-1/10">
-              <ws-app-notification-event
-                [notificationEvent]="notification.eventId"
-              ></ws-app-notification-event>
+              <ws-app-notification-event [notificationEvent]="notification.eventId"></ws-app-notification-event>
             </div>
 
             <div class="mat-body flex-grow flex flex-col flex-center px-2">
@@ -66,14 +53,9 @@
     </ul>
 
     <div class="mt-4">
-      <button
-        class="color"
-        mat-flat-button
+      <button class="color view-more-btn" mat-flat-button
         *ngIf="actionNotificationsNextPage && actionNotificationsNextPage !== '-1'"
-        [disabled]="actionNotificationsFetchStatus === 'fetching'"
-        (click)="fetchActionNotifications()"
-        i18n
-      >
+        [disabled]="actionNotificationsFetchStatus === 'fetching'" (click)="fetchActionNotifications()" i18n>
         View More
       </button>
     </div>
@@ -87,9 +69,7 @@
         <li matRipple class="p-4 cursor-pointer" (click)="onClickNotification(notification)">
           <div class="flex flex-between">
             <div class="flex flex-col flex-center">
-              <ws-app-notification-event
-                [notificationEvent]="notification.eventId"
-              ></ws-app-notification-event>
+              <ws-app-notification-event [notificationEvent]="notification.eventId"></ws-app-notification-event>
             </div>
 
             <div class="mat-body flex-grow flex flex-col flex-center px-2">
@@ -110,29 +90,20 @@
     </ul>
 
     <div class="mt-4">
-      <button
-        class="color"
-        mat-flat-button
+      <button class="color view-more-btn" mat-flat-button
         *ngIf="infoNotificationsNextPage && infoNotificationsNextPage !== '-1'"
-        [disabled]="infoNotificationsFetchStatus === 'fetching'"
-        (click)="fetchInfoNotifications()"
-        i18n
-      >
+        [disabled]="infoNotificationsFetchStatus === 'fetching'" (click)="fetchInfoNotifications()" i18n>
         View More
       </button>
     </div>
   </div>
 
-  <h4
-    class="text-center mat-h4 mt-16"
-    *ngIf="
+  <h4 class="text-center mat-h4 mt-16" *ngIf="
       actionNotificationsFetchStatus !== 'fetching' &&
       infoNotificationsFetchStatus !== 'fetching' &&
       !actionNotifications.length &&
       !infoNotifications.length
-    "
-    i18n
-  >
+    " i18n>
     You do not have any notifications yet.
   </h4>
 </section>
