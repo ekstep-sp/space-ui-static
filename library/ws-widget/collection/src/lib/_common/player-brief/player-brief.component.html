@@ -238,10 +238,10 @@
 <div class="md:px-2">
   <!-- <ws-widget-mark-as-complete [content]="content"></ws-widget-mark-as-complete> -->
   <ng-container *ngIf="content && isDownloadable">
-    <mat-card class="mb-4">
+    <mat-card class="mb-4 hidedownload">
       <button mat-button color="primary" (click)="download()">
         <mat-icon>cloud_download</mat-icon>
-        <span i18n class="px-2">Download</span>
+        <span i18n class="px-2">Downloads</span>
       </button>
     </mat-card>
   </ng-container>
@@ -551,8 +551,8 @@
       </button>
     </div>
   </mat-card>
-  <ws-widget-user-content-rating class="mb-4 block" *ngIf="content?.identifier && content?.assetType !== 'Connection'" [contentId]="content?.identifier"
-    [isDisabled]="isPreviewMode || !enableRatings">
+  <ws-widget-user-content-rating class="mb-4 block" *ngIf="content?.identifier && content?.assetType !== 'Connection'"
+    [contentId]="content?.identifier" [isDisabled]="isPreviewMode || !enableRatings">
   </ws-widget-user-content-rating>
   <!-- <div class="hidden sm:block margin-bottom-m" *ngIf="content?.creatorDetails?.length">
     <ng-container [ngTemplateOutlet]="creators" [ngTemplateOutletContext]="{
@@ -582,8 +582,9 @@
       <div class="width-expand flex flex-middle flex-between">
         <h3 class="margin-remove">{{ author.name }}</h3>
         <ng-container *ngIf="mailIcon">
-         <ws-widget-btn-mail-user *ngIf="askAuthorEnabled" [widgetData]="{ content: content, emails: [{email: author.email, name: author.name}] }">
-        </ws-widget-btn-mail-user>
+          <ws-widget-btn-mail-user *ngIf="askAuthorEnabled"
+            [widgetData]="{ content: content, emails: [{email: author.email, name: author.name}] }">
+          </ws-widget-btn-mail-user>
         </ng-container>
       </div>
     </div>

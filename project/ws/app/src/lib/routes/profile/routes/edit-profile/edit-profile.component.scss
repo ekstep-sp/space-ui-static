@@ -109,6 +109,7 @@ form
 {
 width: 100%;
 }
+
 }
 .delete-photo{
 position: absolute;
@@ -128,6 +129,12 @@ cursor: pointer;
 textarea.mat-input-element {
 padding: 2px 0;
 margin: -10px 0;
+}
+
+@media only screen and (max-width: 823px){
+    .photo-icon {
+      display:none
+    }
 }
 // ::ng-deep{
 // .theme-muave.night-mode .ws-mat-primary-text{

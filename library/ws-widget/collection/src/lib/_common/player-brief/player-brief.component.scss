@@ -42,3 +42,25 @@
     width: $size;
   }
 }
+
+
+
+::ng-deep{
+  @media only screen and (max-width: 1366px){
+    .hidedownload{
+      display: none !important;
+    }
+
+   .mat-ink-bar {
+      // background-color: var(--primary-color,$orange) !important;
+      display: none !important;
+      visibility: hidden !important;
+      transition: none !important;
+      height: 0px !important;
+      width: 0px !important;
+    }
+   
+  }
+
+
+}
