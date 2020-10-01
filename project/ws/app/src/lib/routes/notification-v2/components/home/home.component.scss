@@ -25,3 +25,10 @@ button[disabled] {
 .min-w-120 {
   min-width: 120px;
 }
+
+::ng-deep{
+  .theme-muave.night-mode .mat-flat-button.view-more-btn{
+    background: #865BA0 !important;
+    color: white !important;
+  }
+}
