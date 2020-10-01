@@ -64,10 +64,9 @@ export class PlayerVideoComponent extends WidgetBaseComponent
     super()
   }
 
-  ngOnInit() { 
+  ngOnInit() {
     this.defaultSideNavBarOpenedSubscription = this.isLtMedium$.subscribe((isLtMedium: boolean) => {
       this.screenSizeIsLtMedium = isLtMedium
-      console.log("screenSizeIsLtMedium",this.screenSizeIsLtMedium)
     })
   }
 
