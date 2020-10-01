@@ -1,10 +1,9 @@
-import { Component, OnInit, Input, OnDestroy, ViewChild } from '@angular/core'
+import { Component, OnInit, Input, OnDestroy } from '@angular/core'
 import { NsAppsConfig, NsPage, ConfigurationsService, AuthKeycloakService, UtilityService } from '../../../../utils/src/public-api'
 import { NsWidgetResolver } from '../../../../resolver/src/public-api'
 import { AppBtnFeatureService } from './service/app-btn-feature.service'
 import { Router } from '@angular/router'
 import { Subscription } from 'rxjs'
-import { MatAccordion } from '@angular/material'
 
 interface IGroupWithFeatureWidgets extends NsAppsConfig.IGroup {
   featureWidgets: NsWidgetResolver.IRenderConfigWithTypedData<NsPage.INavLink>[],
@@ -33,7 +32,6 @@ export const typeMap = {
 export class AppBtnFeatureComponent implements OnInit, OnDestroy {
 
   @Input() widget: IGroupWithFeatureWidgets[] | any = []
-  @ViewChild('accordion', { static: true }) maccordion: MatAccordion | undefined
   rolesBasedFeatureGroups: IGroupWithFeatureWidgets[] = []
   readonly displayType = typeMap
   allowedToFeedback = true
@@ -53,9 +51,7 @@ export class AppBtnFeatureComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.expansion$ = this.featureService.triggerExpansion.subscribe((newExpansion: boolean) => {
       this.expand = newExpansion
-      if (this.maccordion) {
-        this.maccordion.closeAll()
-      }
+      console.log('expanded now is ', this.expand)
     })
     this.setUpPermission()
     this.isAllowedForDisplay(this.widget)
