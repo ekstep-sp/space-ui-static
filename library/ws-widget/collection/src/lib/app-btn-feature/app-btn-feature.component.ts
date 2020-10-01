@@ -51,7 +51,7 @@ export class AppBtnFeatureComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.expansion$ = this.featureService.triggerExpansion.subscribe((newExpansion: boolean) => {
       this.expand = newExpansion
-      console.log('expanded now is ', this.expand)
+      // console.log('expanded now is ', this.expand)
     })
     this.setUpPermission()
     this.isAllowedForDisplay(this.widget)
