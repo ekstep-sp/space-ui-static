@@ -4,7 +4,7 @@ import { NsWidgetResolver } from '../../../../resolver/src/public-api'
 import { AppBtnFeatureService } from './service/app-btn-feature.service'
 import { Router } from '@angular/router'
 import { Subscription, BehaviorSubject } from 'rxjs'
-import { MatExpansionModule, MatExpansionPanel, MatAccordion } from '@angular/material';
+import { MatExpansionPanel, MatAccordion } from '@angular/material';
 
 interface IGroupWithFeatureWidgets extends NsAppsConfig.IGroup {
   featureWidgets: NsWidgetResolver.IRenderConfigWithTypedData<NsPage.INavLink>[],
@@ -85,6 +85,7 @@ export class AppBtnFeatureComponent implements OnInit, OnDestroy {
       this.featureService.triggerAppsExpansionClose(this.expansionPanel)
   }
   navigate(key: any, _e: any, actionBtn: any) {
+    console.log(actionBtn)
     if (actionBtn !== 'Profile' && actionBtn !== 'Settings') {
     this.expansionPanel.expanded = false
     }

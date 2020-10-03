@@ -86,7 +86,7 @@ export class BtnAppsComponent extends WidgetBaseComponent
   }
 
   ngOnInit() {
-    this.expansion$ = this.featureSrvc.triggerExpansionPanel.subscribe((newExpansion: MatExpansionPanel | null) => {
+    this.expansion$ = this.featureSrvc.triggerExpansionPanel.subscribe((newExpansion: MatExpansionPanel[] | null) => {
      this.allOpenedPanel = newExpansion
     })
     this.instanceVal = this.configSvc.rootOrg || ''
