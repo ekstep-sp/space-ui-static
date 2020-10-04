@@ -29,6 +29,7 @@ export class ProfileComponent implements OnInit, OnDestroy {
   ) {}
 
   ngOnInit() {
+    this.showText = !this.showText
     const tab = this.router.url.split('/')[3]
     if (tab === 'dashboard') {
       this.tabName = this.enabledTabs.dashboard.displayName
@@ -53,9 +54,9 @@ export class ProfileComponent implements OnInit, OnDestroy {
   }
   tabUpdate(tab: string) {
     this.tabName = tab
-    if (!this.screenSizeIsLtMedium) {
-      this.showText = !this.showText
-    }
+    // if (!this.screenSizeIsLtMedium) {
+    //   this.showText = !this.showText
+    //  }
   }
   ngOnDestroy() {
     if (this.defaultSideNavBarOpenedSubscription) {
