@@ -1,7 +1,7 @@
 import { UploadComponent } from './components/upload/upload.component'
 import { NgModule } from '@angular/core'
 import { Routes, RouterModule } from '@angular/router'
-import { PageResolve } from '@ws-widget/utils/src/public-api';
+import { PageResolve } from '@ws-widget/utils/src/public-api'
 
 const routes: Routes = [
   {

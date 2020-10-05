@@ -690,11 +690,11 @@ export class EditMetaComponent implements OnInit, OnDestroy, AfterViewInit {
 
   storeData() {
     try {
+      const meta = <any>{}
+      const currentMeta: NSContent.IContentMeta = JSON.parse(JSON.stringify(this.contentForm.value))
       const originalMeta = this.contentService.getOriginalMeta(this.contentMeta.identifier)
       if (originalMeta && this.isEditEnabled) {
         const expiryDate = this.contentForm.value.expiryDate
-        const currentMeta: NSContent.IContentMeta = JSON.parse(JSON.stringify(this.contentForm.value))
-        const meta = <any>{}
         if (this.canExpiry) {
           currentMeta.expiryDate = `${
             expiryDate.toISOString().replace(/-/g, '').replace(/:/g, '').split('.')[0]
@@ -733,6 +733,10 @@ export class EditMetaComponent implements OnInit, OnDestroy, AfterViewInit {
         const newMeta = this.handleMimeTypeBeforeStore(meta) as NSContent.IContentMeta
         this.contentService.setUpdatedMeta(newMeta, this.contentMeta.identifier)
         // cons?ole.log(newMeta)
+      } else if (this.showAccToRoles('catalogPath')) {
+        meta.catalogPaths = []
+        meta.catalogPaths = [...currentMeta.catalogPaths]
+        this.contentService.setUpdatedMeta(meta, this.contentMeta.identifier)
       }
     } catch (e) {
       throw new Error(e)
@@ -1676,7 +1680,7 @@ export class EditMetaComponent implements OnInit, OnDestroy, AfterViewInit {
     this.contentService.setUpdatedMeta(updatedMeta, this.contentService.currentContent)
     console.log('after update data looks like ', this.contentService.getUpdatedMeta(this.contentService.currentContent))
     console.log(`data for profile is ${eventData} ${eventType}`) */
-    const updatedMeta = { } as NSContent.IContentMeta
+    const updatedMeta = {} as NSContent.IContentMeta
     if (!this.contentForm.controls.profile_link.pristine) {
       if (_eventType === 'link') {
         updatedMeta.artifactUploadUrl = ''
@@ -1688,9 +1692,9 @@ export class EditMetaComponent implements OnInit, OnDestroy, AfterViewInit {
     }
   }
   showAccToRoles(roleKey: any) {
-     // tslint:disable-next-line: max-line-length
-     if (this.uploadService.isVisibileAccToRoles(this.allowedRoles[roleKey], this.notAllowedRoles[roleKey])) {
-     return true
+    // tslint:disable-next-line: max-line-length
+    if (this.uploadService.isVisibileAccToRoles(this.allowedRoles[roleKey], this.notAllowedRoles[roleKey])) {
+      return true
     }
     if (!this.uploadService.isVisibileAccToRoles(this.allowedRoles[roleKey], this.notAllowedRoles[roleKey])) {
       return false
