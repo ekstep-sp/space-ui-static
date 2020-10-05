@@ -5,7 +5,7 @@ import { Subscription } from 'rxjs'
 import { ROOT_WIDGET_CONFIG } from '../collection.config'
 import { IBtnAppsConfig } from './btn-apps.model'
 import { ActivatedRoute } from '@angular/router'
-import { MatDialog } from '@angular/material'
+import { MatDialog, MatExpansionPanel } from '@angular/material'
 import { FormControl } from '@angular/forms'
 import { distinctUntilChanged, startWith, debounceTime } from 'rxjs/operators'
 import { AppBtnFeatureService } from '../app-btn-feature/service/app-btn-feature.service'
@@ -29,6 +29,9 @@ export class BtnAppsComponent extends WidgetBaseComponent
   isPinFeatureAvailable = true
   instanceVal = ''
   isUrlOpened = false
+  expansion$: Subscription | null = null
+  allOpenedPanel: [] | any
+  object !: MatExpansionPanel
   pinnedApps: NsWidgetResolver.IRenderConfigWithTypedData<NsPage.INavLink>[] = []
   featuredApps: NsWidgetResolver.IRenderConfigWithTypedData<NsPage.INavLink>[] = []
 
@@ -83,6 +86,9 @@ export class BtnAppsComponent extends WidgetBaseComponent
   }
 
   ngOnInit() {
+    this.expansion$ = this.featureSrvc.triggerExpansionPanel.subscribe((newExpansion: MatExpansionPanel[] | null) => {
+     this.allOpenedPanel = newExpansion
+    })
     this.instanceVal = this.configSvc.rootOrg || ''
     if (this.configSvc.restrictedFeatures) {
       this.isPinFeatureAvailable = !this.configSvc.restrictedFeatures.has('pinFeatures')
@@ -204,8 +210,7 @@ export class BtnAppsComponent extends WidgetBaseComponent
       })
     }
   }
-
   triggerExpansion() {
-    this.featureSrvc.triggerAppsExpansion(false)
-  }
+      this.featureSrvc.triggerAppsExpansionStatus(true)
+    }
 }

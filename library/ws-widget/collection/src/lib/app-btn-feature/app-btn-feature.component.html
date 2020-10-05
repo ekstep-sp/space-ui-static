@@ -1,8 +1,8 @@
 <ng-container style="margin-top: -1.2rem;" (click)="$event.stopPropagation()">
   <ng-container *ngIf="featuredWidget.name !== 'Contribute' && featuredWidget.show === true && featuredWidget.expand === true">
     <mat-accordion #accordion='matAccordion' class="expansion-panel-color" (click)="maintainPropagation($event)" multi="false">
-      <mat-expansion-panel [expanded]="!!expand">
-        <mat-expansion-panel-header>
+      <mat-expansion-panel #panel>
+        <mat-expansion-panel-header (click)="maintainState(panel,accordion)">
           <mat-panel-title>
             <ng-container *ngIf="featuredWidget.name !== 'Admin'" [ngTemplateOutlet]="icon" [ngTemplateOutletContext]="{
                     iconType: featuredWidget.iconType,
@@ -36,8 +36,8 @@
   </ng-container>
   <ng-container *ngIf="featuredWidget.name === 'Contribute' && featuredWidget.show === true && featuredWidget.expand === true">
     <mat-accordion #accordion='matAccordion' class="expansion-panel-color isVisible" (click)="maintainPropagation($event)">
-      <mat-expansion-panel [expanded]="!!expand">
-        <mat-expansion-panel-header>
+      <mat-expansion-panel #panel>
+        <mat-expansion-panel-header (click)="maintainState(panel,accordion)">
           <mat-panel-title>
             <ng-container *ngIf="featuredWidget.name !== 'Admin'" [ngTemplateOutlet]="icon" [ngTemplateOutletContext]="{
                       iconType: featuredWidget.iconType,
@@ -69,7 +69,7 @@
     </mat-accordion>
   </ng-container>
   <ng-container *ngIf="featuredWidget.name !== 'Admin'  && featuredWidget.expand === false">
-    <a class="text-center block a-tag" (click)="navigate(featuredWidget.url,$event)" mat-button [disableRipple]="true">
+    <a class="text-center block a-tag" (click)="navigate(featuredWidget.url,$event,featuredWidget.name)" mat-button [disableRipple]="true">
       <span class="flex-design">
         <ng-container [ngTemplateOutlet]="icon" [ngTemplateOutletContext]="{
                         iconType: featuredWidget.iconType,
@@ -88,8 +88,8 @@
   <div class="relative py-2 innerSpan" id="{{actionBtn?.id}}" [ngClass]="{
       'rounded h-full box-sizing-box': config?.treatAsCard,
       greyOut: actionBtn.greyOut
-    }" (click)="navigate(actionBtn.url,$event)">
-    <a class="text-center block" (click)="navigate(actionBtn.url,$event)" mat-flat-button [disableRipple]="true" class="innerSpan">
+    }" (click)="navigate(actionBtn.url,$event,actionBtn.name)">
+    <a class="text-center block" (click)="navigate(actionBtn.url,$event,actionBtn.name)" mat-flat-button [disableRipple]="true" class="innerSpan">
       <ng-container [ngTemplateOutlet]="icon" [ngTemplateOutletContext]="{
           iconType: actionBtn.iconType,
           icon: actionBtn.icon,
