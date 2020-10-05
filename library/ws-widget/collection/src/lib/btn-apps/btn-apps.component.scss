@@ -44,6 +44,12 @@ color: #696466;
     padding-top: 8px !important;
     padding-right: 9px !important;
   }
+  @media screen and (min-width:270px) and (max-width:280px) {
+    .cdk-overlay-connected-position-bounding-box {
+      padding-top: 3px !important;
+      padding-right: unset !important;
+  }
+  }
 }
 mat-icon {
       color: #696466;
