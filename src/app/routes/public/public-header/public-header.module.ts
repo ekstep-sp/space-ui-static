@@ -4,6 +4,7 @@ import { PublicHeaderComponent } from './public-header.component'
 import { BtnPageBackMobileModule } from '@ws-widget/collection/src/lib/btn-page-back-mobile/btn-page-back-mobile.module'
 import { MatIconModule, MatToolbarModule, MatMenuModule, MatButtonModule, MatTooltipModule } from '@angular/material'
 import { BtnFeatureModule } from '@ws-widget/collection/src/public-api'
+import { RouterModule } from '@angular/router';
 
 @NgModule({
   declarations: [PublicHeaderComponent],
@@ -16,6 +17,7 @@ import { BtnFeatureModule } from '@ws-widget/collection/src/public-api'
     MatMenuModule,
     MatButtonModule,
     MatTooltipModule,
+    RouterModule,
   ],
   exports: [
     PublicHeaderComponent,
