@@ -11,8 +11,7 @@
   </ng-container>
 
   <ng-container *ngIf="(isXSmall$ | async) === true">
-    <a [routerLink]="'/app/profile/settings'" [queryParams]="{ tab: 'notifications' }" mat-icon-button
-      style="color: white; padding-right: 5rem;">
+    <a [routerLink]="'/app/profile/settings'" [queryParams]="{ tab: 'notifications' }" mat-icon-button>
       <mat-icon>settings</mat-icon>
     </a>
   </ng-container>
