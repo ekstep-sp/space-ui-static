@@ -13,8 +13,8 @@ export class PublicContactComponent implements OnInit, OnDestroy {
   contactPage: any
   platform = 'Wingspan'
   panelOpenState = false
-  isXSmall$ = this.valueSvc.isXSmall$
-  isXSmall = false
+  isLtMedium$ = this.valueSvc.isLtMedium$
+  isLtMedium = false
   pageNavbar: Partial<NsPage.INavBackground> = this.configSvc.pageNavBar
   private subscriptionContact: Subscription | null = null
 
@@ -28,8 +28,8 @@ export class PublicContactComponent implements OnInit, OnDestroy {
     if (this.configSvc.instanceConfig) {
       this.contactUsMail = this.configSvc.instanceConfig.mailIds.contactUs
     }
-    this.valueSvc.isXSmall$.subscribe(isXSmall => {
-      this.isXSmall = isXSmall
+    this.valueSvc.isLtMedium$.subscribe(isLtMedium => {
+      this.isLtMedium = isLtMedium
     })
   }
 
