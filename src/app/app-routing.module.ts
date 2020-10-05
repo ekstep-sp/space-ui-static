@@ -22,7 +22,6 @@ import { TncPublicResolverService } from './services/tnc-public-resolver.service
 import { AppTocResolverService } from '@ws/app/src/lib/routes/app-toc/resolvers/app-toc-resolver.service'
 import { AssetguidelinesComponent } from './routes/public/assetguidelines/assetguidelines.component'
 import { GrievanceredressalComponent } from './routes/public/grievanceredressal/grievanceredressal.component'
-import { LicencepolicyComponent } from './routes/public/licencepolicy/licencepolicy.component'
 import { AppHomeComponent } from './component/app-home/app-home.component'
 // import { PublicCollaboratorsComponent } from './routes/public/public-collaborators/public-collaborators.component'
 // import { AppCollaboratorsComponent } from './component/app-collaborators/app-collaborators.component'
@@ -31,6 +30,7 @@ import { TermsofuseComponent } from './routes/public/termsofuse/termsofuse.compo
 import { ContentpolicyandcommunicationComponent } from './routes/public/contentpolicyandcommunication/contentpolicyandcommunication.component'
 import { AboutCollaboratorComponent } from './component/about-collaborator/about-collaborator.component'
 import { TourVideoComponent } from './routes/public/tour-video/tour-video.component'
+import { LicencepolicyComponent } from './routes/public/licencepolicy/licencepolicy.component'
 
 // 💥💥💥💥💥💥💥💥💥💥💥💥💥💥💥💥💥💥💥💥💥💥💥💥💥💥💥💥💥💥💥💥💥💥💥💥💥💥💥
 // Please declare routes in alphabetical order
@@ -489,6 +489,13 @@ const routes: Routes = [
   {
     path: 'public/assetguidelines',
     component: AssetguidelinesComponent,
+    data: {
+      pageType: 'feature',
+      pageKey: 'asset-guidelines',
+    },
+    resolve: {
+      pageData: PageResolve,
+    },
   },
   {
     path: 'public/grievanceredressal',
@@ -498,14 +505,35 @@ const routes: Routes = [
   {
     path: 'public/licencepolicy',
     component: LicencepolicyComponent,
+    data: {
+      pageType: 'feature',
+      pageKey: 'licence-policy',
+    },
+    resolve: {
+      pageData: PageResolve,
+    },
   },
   {
     path: 'public/dataprivacy',
     component: DataprivacyComponent,
+    data: {
+      pageType: 'feature',
+      pageKey: 'dataprivacy',
+    },
+    resolve: {
+      pageData: PageResolve,
+    },
   },
   {
     path: 'public/termsofuse',
     component: TermsofuseComponent,
+    data: {
+      pageType: 'feature',
+      pageKey: 'toc',
+    },
+    resolve: {
+      pageData: PageResolve,
+    },
   },
   {
     path: 'public/tour-video',
@@ -522,6 +550,13 @@ const routes: Routes = [
   {
     path: 'public/content-policy-and-community-guidelines',
     component: ContentpolicyandcommunicationComponent,
+    data: {
+      pageType: 'feature',
+      pageKey: 'content-policy',
+    },
+    resolve: {
+      pageData: PageResolve,
+    },
   },
 
   {
