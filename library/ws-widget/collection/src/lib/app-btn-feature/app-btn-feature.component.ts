@@ -4,7 +4,7 @@ import { NsWidgetResolver } from '../../../../resolver/src/public-api'
 import { AppBtnFeatureService } from './service/app-btn-feature.service'
 import { Router } from '@angular/router'
 import { Subscription, BehaviorSubject } from 'rxjs'
-import { MatExpansionPanel, MatAccordion } from '@angular/material';
+import { MatExpansionPanel, MatAccordion } from '@angular/material'
 
 interface IGroupWithFeatureWidgets extends NsAppsConfig.IGroup {
   featureWidgets: NsWidgetResolver.IRenderConfigWithTypedData<NsPage.INavLink>[],
@@ -31,9 +31,8 @@ export const typeMap = {
   styleUrls: ['./app-btn-feature.component.scss'],
 })
 export class AppBtnFeatureComponent implements OnInit, OnDestroy {
-  
-  @ViewChild('panel',{static: true}) expansionPanel!: MatExpansionPanel
-  @ViewChild('accordion',{static: true}) mAccordion!: MatAccordion
+  @ViewChild('panel', { static: true }) expansionPanel!: MatExpansionPanel
+  @ViewChild('accordion', { static: true }) mAccordion!: MatAccordion
   @Output() mataccordion!: BehaviorSubject<MatAccordion>
   @Input() widget: IGroupWithFeatureWidgets[] | any = []
   rolesBasedFeatureGroups: IGroupWithFeatureWidgets[] = []
@@ -59,7 +58,7 @@ export class AppBtnFeatureComponent implements OnInit, OnDestroy {
     this.isAllowedForDisplay(this.widget)
     this.featuredWidget = this.widget
   }
-  
+
   setUpPermission() {
     if (this.widget) {
       const allowed = this.widget.rolesAllowed || []
@@ -79,13 +78,11 @@ export class AppBtnFeatureComponent implements OnInit, OnDestroy {
     }
   }
   maintainState(panel: MatExpansionPanel, accordion: MatAccordion) {
-    // console.log(panel, accordion)
     this.expansionPanel = panel
     this.mAccordion = accordion
       this.featureService.triggerAppsExpansionClose(this.expansionPanel)
   }
   navigate(key: any, _e: any, actionBtn: any) {
-    console.log(actionBtn)
     if (actionBtn !== 'Profile' && actionBtn !== 'Settings') {
     this.expansionPanel.expanded = false
     }

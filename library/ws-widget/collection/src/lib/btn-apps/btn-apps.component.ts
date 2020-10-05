@@ -31,7 +31,7 @@ export class BtnAppsComponent extends WidgetBaseComponent
   isUrlOpened = false
   expansion$: Subscription | null = null
   allOpenedPanel: [] | any
-  object !: MatExpansionPanel 
+  object !: MatExpansionPanel
   pinnedApps: NsWidgetResolver.IRenderConfigWithTypedData<NsPage.INavLink>[] = []
   featuredApps: NsWidgetResolver.IRenderConfigWithTypedData<NsPage.INavLink>[] = []
 
@@ -214,14 +214,3 @@ export class BtnAppsComponent extends WidgetBaseComponent
       this.featureSrvc.triggerAppsExpansionStatus(true)
     }
 }
-  // triggerClosePanel() {
-  //   this.allOpenedPanel.forEach((element: any, index: any) => {
-  //     if(element.expanded === true) {
-  //       element.expanded = false
-  //       this.featureSrvc.triggerAppsExpansionStatus(true)
-  //     }
-  //   })
-  //   console.log('expanded now is ', this.allOpenedPanel,this.object)
-  //   // this.featureSrvc.triggerAppsExpansionClose(this.object)
-  // }
-  

@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core'
 import { BehaviorSubject } from 'rxjs'
 import { ConfigurationsService } from '../../../../../utils/src/public-api'
-import { MatExpansionPanel } from '@angular/material';
+import { MatExpansionPanel } from '@angular/material'
 
 @Injectable({
   providedIn: 'root',
@@ -45,10 +45,10 @@ export class AppBtnFeatureService {
     this.triggerExpansion.next(expand)
   }
   triggerAppsExpansionStatus(expand: boolean) {
-    if(expand) {
-        if(this.openedPanels.length) {
+    if (expand) {
+        if (this.openedPanels.length) {
           this.openedPanels = this.openedPanels.filter((element: any) => {
-        if(element.expanded) {
+        if (element.expanded) {
           element.expanded = false
           return element.expanded
         }
@@ -64,9 +64,9 @@ export class AppBtnFeatureService {
       if (expansionPanel.expanded === false) {
        const foundPanel = this.openedPanels.findIndex(panel => {
           return panel._headerId === expansionPanel._headerId
-        }) 
-       if(foundPanel > -1) {
-        this.openedPanels =  this.openedPanels.slice(0,foundPanel)
+        })
+       if (foundPanel > -1) {
+        this.openedPanels =  this.openedPanels.slice(0, foundPanel)
        }
         }
     this.triggerExpansionPanel.next(this.openedPanels)
