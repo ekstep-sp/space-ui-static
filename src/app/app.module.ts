@@ -74,6 +74,8 @@ import { ContentpolicyandcommunicationComponent } from './routes/public/contentp
 import { AboutCollaboratorComponent } from './component/about-collaborator/about-collaborator.component'
 import { TourVideoComponent } from './routes/public/tour-video/tour-video.component'
 import { VideoRendererComponent } from './routes/public/video-renderer/video-renderer.component'
+import { BtnPageBackMobileModule } from '@ws-widget/collection/src/lib/btn-page-back-mobile/btn-page-back-mobile.module'
+import { PublicHeaderModule } from './routes/public/public-header/public-header.module'
 
 @Injectable()
 export class HammerConfig extends GestureConfig {
@@ -159,6 +161,8 @@ const getBaseHref = (platformLocation: PlatformLocation): string => {
     PipeSafeSanitizerModule,
     TourModule,
     MatGridListModule,
+    BtnPageBackMobileModule,
+    PublicHeaderModule,
     // ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production }),
   ],
   exports: [

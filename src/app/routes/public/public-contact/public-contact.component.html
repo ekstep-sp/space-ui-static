@@ -1,4 +1,5 @@
-<mat-toolbar [color]="pageNavbar.color" [ngStyle]="pageNavbar?.styles">
+<ws-public-header [publicNavBarDetails]= "contactPage"></ws-public-header>
+<mat-toolbar  *ngIf= "!isXSmall" [color]="pageNavbar.color" [ngStyle]="pageNavbar?.styles">
   <ws-widget-btn-page-back [widgetData]="{ url: 'back' }"></ws-widget-btn-page-back>
   <span class="margin-left-xs text-truncate">
     <span i18n="page title: contact" class="margin-left-xs text-white">Support</span>
