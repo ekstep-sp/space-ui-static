@@ -2,7 +2,6 @@
 @import 'ws-mixins';
 @import './utility.scss';
 @import url(https://db.onlinewebfonts.com/c/8d7db40f4a18fe878fd4e0577ddbb03b?family=Campaign+Grotesk);
-@import url("https://fonts.googleapis.com/icon?family=Material+Icons|Material+Icons+Outlined");
 
 @font-face {
   font-family: CampaignW00-Medium;
@@ -11,7 +10,25 @@
   url("https://db.onlinewebfonts.com/t/8d7db40f4a18fe878fd4e0577ddbb03b.woff2") format("woff2"),
   url("https://db.onlinewebfonts.com/t/8d7db40f4a18fe878fd4e0577ddbb03b.woff") format("woff"),
   url("https://db.onlinewebfonts.com/t/8d7db40f4a18fe878fd4e0577ddbb03b.ttf") format("truetype"),
-  url("https://db.onlinewebfonts.com/t/8d7db40f4a18fe878fd4e0577ddbb03b.svg#Campaign Grotesk") format("svg"); }
+  url("https://db.onlinewebfonts.com/t/8d7db40f4a18fe878fd4e0577ddbb03b.svg#Campaign Grotesk") format("svg");
+}
+
+/* fallback */
+@font-face {
+  font-family: 'Material Icons';
+  font-style: normal;
+  font-weight: 400;
+  src: url("src/styles/material-styles/flUhRq6tzZclQEJ-Vdg-IuiaDsNc.woff2") format('woff2');
+}
+/* fallback */
+@font-face {
+  font-family: 'Material Icons Outlined';
+  font-style: normal;
+  font-weight: 400;
+  src: url("src/styles/material-styles/gok-H7zzDkdnRel8-DQ6KAXJ69wP1tGnf4ZGhUce.woff2") format('woff2');
+}
+
+
 @include print {
   * {
     display: none !important;
@@ -656,4 +673,35 @@ h3.shepherd-title {
   @include breakpoint-xs {
     width: 100% !important;
   }
+}
+.material-icons {
+  font-family: 'Material Icons';
+  font-weight: normal;
+  font-style: normal;
+  font-size: 24px;
+  line-height: 1;
+  letter-spacing: normal;
+  text-transform: none;
+  display: inline-block;
+  white-space: nowrap;
+  word-wrap: normal;
+  direction: ltr;
+  -webkit-font-feature-settings: 'liga';
+  -webkit-font-smoothing: antialiased;
+}
+
+.material-icons-outlined {
+  font-family: 'Material Icons Outlined';
+  font-weight: normal;
+  font-style: normal;
+  font-size: 24px;
+  line-height: 1;
+  letter-spacing: normal;
+  text-transform: none;
+  display: inline-block;
+  white-space: nowrap;
+  word-wrap: normal;
+  direction: ltr;
+  -webkit-font-feature-settings: 'liga';
+  -webkit-font-smoothing: antialiased;
 }

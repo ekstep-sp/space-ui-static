@@ -95,7 +95,8 @@
           icon: actionBtn.icon,
           scale: 1.7,
           color: actionBtn.color,
-          innerSpan: true
+          innerSpan: true,
+          buttonName: actionBtn.name
         }"></ng-container>
       <span class="ml-5 text-center innerSpan" *ngIf="!config.useShortName">{{ actionBtn.name }}</span>
       <span class="ml-5 text-center" *ngIf="config.useShortName">
@@ -104,8 +105,8 @@
     </a>
   </div>
 </ng-template>
-<ng-template #icon let-iconType="iconType" let-innerSpan="innerSpan" let-widget="widget" let-icon="icon" let-scale="scale" let-color="color">
-  <ng-container>
+<ng-template #icon let-buttonName="buttonName" let-iconType="iconType" let-innerSpan="innerSpan" let-widget="widget" let-icon="icon" let-scale="scale" let-color="color">
+  <ng-container *ngIf="buttonName !== 'Users'">
     <mat-icon class="matdark material-icons-outlined" *ngIf="iconType === 'mat-icon' && widget !== 'Profile' && widget !== 'Settings'"
     [ngClass]="{'innerSpan' : !!innerSpan}"
       aria-hidden="false" [color]="color" [ngStyle]="
@@ -144,6 +145,21 @@
       {{ icon }}
     </mat-icon>
   </ng-container>
+  <ng-container *ngIf="buttonName === 'Users'">
+    <mat-icon class="matdark" *ngIf="iconType === 'mat-icon'"
+    [ngClass]="{'innerSpan' : !!innerSpan}"
+      aria-hidden="false" [color]="color" [ngStyle]="
+        scale
+          ? {
+              'font-size': scale * defaultIconSize + 'px',
+              height: scale * defaultIconSize + 'px',
+              width: scale * defaultIconSize + 'px'
+            }
+          : {}
+      ">
+      {{ icon }}
+    </mat-icon>
+    </ng-container>
   <img class="feature-icon-img" [ngStyle]="
       scale
         ? {
