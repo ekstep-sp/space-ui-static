@@ -47,6 +47,7 @@ import {
 import { FeedbackFormComponent } from '@ws/author/src/lib/modules/shared/components/feedback-form/feedback-form.component'
 import { LicenseInfoDisplayDialogComponent } from '../license-info-display-dialog/license-info-display-dialog.component'
 import { AssetTypeInfoDisplayDialogComponent } from '../asset-type-info-display-dialog/asset-type-info-display-dialog.component'
+import { ActivatedRoute } from '@angular/router';
 
 interface ILicenseMetaInfo {
   parent: string[],
@@ -143,6 +144,7 @@ export class EditMetaComponent implements OnInit, OnDestroy, AfterViewInit {
   currentAssestTypeData: IAssetTypeMetaInfo[] | undefined = undefined
   showOther = false
   staticValidation$: any
+  allowedToCatalog = true
 
   @ViewChild('creatorContactsView', { static: false }) creatorContactsView!: ElementRef
   @ViewChild('trackContactsView', { static: false }) trackContactsView!: ElementRef
@@ -158,6 +160,8 @@ export class EditMetaComponent implements OnInit, OnDestroy, AfterViewInit {
 
   timer: any
   showRoleRequest = false
+  allowedRoles: any
+  notAllowedRoles: any
   filteredOptions$: Observable<string[]> = of([])
 
   constructor(
@@ -174,6 +178,7 @@ export class EditMetaComponent implements OnInit, OnDestroy, AfterViewInit {
     private authInitService: AuthInitService,
     private accessService: AccessControlService,
     private valueSvc: ValueService,
+    private route: ActivatedRoute,
   ) {
     this.contentTracker.previousContent = this.contentService.currentContent
   }
@@ -187,6 +192,10 @@ export class EditMetaComponent implements OnInit, OnDestroy, AfterViewInit {
   }
 
   ngOnInit() {
+    this.route.data.subscribe(data => {
+      this.allowedRoles = data.pageData.data.allowedRoles
+      this.notAllowedRoles = data.pageData.data.notAllowedRoles
+    })
     this.staticValidation$ = this.contentService.staticValidationEvent.pipe(filter(v => v))
     this.staticValidation$.subscribe((_: any) => {
       this.emitPushEvent()
@@ -1677,5 +1686,15 @@ export class EditMetaComponent implements OnInit, OnDestroy, AfterViewInit {
       this.contentService.setUpdatedMeta(updatedMeta, this.contentService.currentContent)
       this.storeData()
     }
+  }
+  showAccToRoles(roleKey: any) {
+     // tslint:disable-next-line: max-line-length
+     if (this.uploadService.isVisibileAccToRoles(this.allowedRoles[roleKey], this.notAllowedRoles[roleKey])) {
+     return true
+    }
+    if (!this.uploadService.isVisibileAccToRoles(this.allowedRoles[roleKey], this.notAllowedRoles[roleKey])) {
+      return false
+    }
+    return true
   }
 }
