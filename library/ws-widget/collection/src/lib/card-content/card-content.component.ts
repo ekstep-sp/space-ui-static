@@ -44,7 +44,11 @@ export class CardContentComponent extends WidgetBaseComponent
     this.route.data.subscribe(_data => {
       // console.log(_data)
       // tslint:disable-next-line: max-line-length
-      if (this.contentStripSvc.isVisibileAccToRoles(_data.pageData.data.authorRestrictions.rolesAllowed.share, _data.pageData.data.authorRestrictions.rolesNotAllowed.share)) {
+      const rolesAllowed = _data.pageData.data.authorRestrictions.rolesAllowed ? _data.pageData.data.authorRestrictions.rolesAllowed.share : []
+      // tslint:disable-next-line: max-line-length
+      const rolesNotAllowed =  _data.pageData.data.authorRestrictions.rolesNotAllowed ? _data.pageData.data.authorRestrictions.rolesNotAllowed.share : []
+
+      if (this.contentStripSvc.isVisibileAccToRoles(rolesAllowed, rolesNotAllowed)) {
         this.allowedToSharePlaylist = true
       } else {
         this.allowedToSharePlaylist = false
