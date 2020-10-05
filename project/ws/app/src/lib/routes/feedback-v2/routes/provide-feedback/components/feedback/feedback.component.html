@@ -51,11 +51,14 @@
       <button class="primaryclr" mat-flat-button color="primary" type="submit" [disabled]="
           feedbackForm.pristine ||
           feedbackForm.invalid ||
+         
           positiveFeedbackSendStatus === 'sending' ||
           negativeFeedbackSendStatus === 'sending'
         ">
+
         <ng-container i18n>Submit</ng-container>
       </button>
+
     </div>
   </form>
 </ng-template>
@@ -84,6 +87,7 @@
       <button mat-flat-button color="primary" type="submit" [disabled]="
           singleFeedbackForm.pristine ||
           singleFeedbackForm.invalid ||
+          
           singleFeedbackSendStatus === 'sending'
         ">
         <ng-container i18n>Submit</ng-container>
