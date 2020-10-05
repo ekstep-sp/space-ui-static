@@ -10,7 +10,7 @@ import { ActivatedRoute } from '@angular/router'
 })
 export class LicencepolicyComponent implements OnInit {
   licensePolicy: SafeUrl | null = null
-  licencePolicyDetails: any | null= null
+  licencePolicyDetails: any | null = null
   pageNavbar: Partial<NsPage.INavBackground> = this.configSvc.pageNavBar
 
   constructor(private configSvc: ConfigurationsService, private domSanitizer: DomSanitizer,
