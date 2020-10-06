@@ -2,7 +2,7 @@
 @import 'ws-common';
 
 .collaborator-wrapper {
-  padding-left: 4rem;
+  padding-left: 2rem;
 }
 
 /* collaborator page design start */
@@ -68,13 +68,14 @@ img {
     padding: 0.4rem;
 }
 .scroller-container{
-  width: 85%;
+  width: 95%;
   padding: 128px 0 205px 0;
 }
 
 .parent-scroller-container{
   display: flex;
-  justify-content: center;
+  // justify-content: center;
+  justify-content: start;
 }
 .container-item{
   height: 100%;
