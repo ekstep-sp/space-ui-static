@@ -54,7 +54,12 @@ body {
             font-size: 40px;
           }
 }
-
+.mat-menu-item {
+  font-family: montserrat, sans-serif !important;
+  font-style: normal !important;
+  font-weight: 500 !important;
+  font-size: 14px !important;
+}
 header {
   font-family: $font-family-campaign !important;
 }

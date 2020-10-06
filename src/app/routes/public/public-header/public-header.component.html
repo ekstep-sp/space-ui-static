@@ -22,24 +22,24 @@
       <mat-icon>contact_support</mat-icon>
     </button> -->
     <button class="home-help" mat-icon-button id="helper" [matMenuTriggerFor]="helpMenu" *ngIf="!isHlpMenuXs">
-      <mat-icon>more_vertical</mat-icon>
+      <mat-icon class="icon-style">dehaze</mat-icon>
     </button>
   </ng-container>
   </mat-toolbar>
   <mat-menu #helpMenu="matMenu">
     <ws-widget-btn-feature [widgetData]="{
-              actionBtnId: 'feature_feedback',
+              actionBtnId: 'feature_aboutUs',
               config: {
                 type: 'mat-menu-item'
               }
             }"></ws-widget-btn-feature>
     <ws-widget-btn-feature [widgetData]="{
-                actionBtnId: 'feature_contact',
+                actionBtnId: 'feature_collaborators',
                 config: {
                   type: 'mat-menu-item'
                 }
               }"></ws-widget-btn-feature>
-    <ws-widget-btn-feature [widgetData]="{
+    <!-- <ws-widget-btn-feature [widgetData]="{
         actionBtnId: 'feature_FAQs',
         config: {
           type: 'mat-menu-item'
@@ -50,7 +50,7 @@
         config: {
           type: 'mat-menu-item'
         }
-      }"></ws-widget-btn-feature>
+      }"></ws-widget-btn-feature> -->
   </mat-menu>
 
 
