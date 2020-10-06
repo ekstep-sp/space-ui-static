@@ -24,6 +24,11 @@ width: 100% !important;
 height: auto !important;
   }
 }
+.padding-style {
+  @include breakpoint-xs {
+    padding-bottom: 60px !important;
+  }
+}
 .imgsize {
   height: 18rem;
   @include breakpoint-xs {
@@ -89,6 +94,10 @@ color: #925EB0;
   width: 100% !important;
   font-size: 30px !important;
   line-height: 33px !important;
+  text-align: center !important;
+  margin-top: unset !important;
+  margin-bottom: 0;
+  padding-bottom: 45px;
 }
   @include breakpoint-s {
 font-size: 32px !important;
@@ -285,7 +294,7 @@ max-width: 600px !important;
  
  @media screen and (max-width: 500px) {
    .section-container {
-     padding: 4rem 16px;
+    padding: 45px 20px;
    }
  }
 
