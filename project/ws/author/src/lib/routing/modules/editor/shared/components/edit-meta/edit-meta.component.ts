@@ -47,7 +47,7 @@ import {
 import { FeedbackFormComponent } from '@ws/author/src/lib/modules/shared/components/feedback-form/feedback-form.component'
 import { LicenseInfoDisplayDialogComponent } from '../license-info-display-dialog/license-info-display-dialog.component'
 import { AssetTypeInfoDisplayDialogComponent } from '../asset-type-info-display-dialog/asset-type-info-display-dialog.component'
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute } from '@angular/router'
 
 interface ILicenseMetaInfo {
   parent: string[],
