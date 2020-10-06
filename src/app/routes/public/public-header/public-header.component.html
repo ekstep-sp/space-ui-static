@@ -1,4 +1,4 @@
-<mat-toolbar role="navigation" *ngIf="publicNavBarDetails?.navigationBar && !error && (isXSmall$ | async) === true && (authSvc.isLoggedIn$ | async) === true" [ngClass]="{
+<mat-toolbar role="navigation" *ngIf="publicNavBarDetails?.navigationBar && (isXSmall$ | async) === true && (authSvc.isLoggedIn$ | async) === true" [ngClass]="{
     navbar: !isXSmall && !publicNavBarDetails.navigationBar.pageBackLink && !publicNavBarDetails.navigationBar.pageTitle
   }" id="page-toolbar" [ngStyle]="navBackground?.styles">
   <ws-widget-btn-page-back-mobile [widgetData]="{ url: publicNavBarDetails?.navigationBar?.pageBackLink }">
