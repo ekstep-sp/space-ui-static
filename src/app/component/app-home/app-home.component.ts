@@ -10,6 +10,7 @@ import { ActivatedRoute } from '@angular/router'
 })
 export class AppHomeComponent implements OnInit {
   appBanner: SafeUrl | null = null
+  appMobileBanner: SafeUrl | null = null
   loadText = false
   private redirectUrl = ''
   constructor(
@@ -22,6 +23,9 @@ export class AppHomeComponent implements OnInit {
     if (instanceConfig) {
       this.appBanner = this.domSanitizer.bypassSecurityTrustResourceUrl(
         instanceConfig.banners.mainBanner,
+      )
+      this.appMobileBanner = this.domSanitizer.bypassSecurityTrustResourceUrl(
+        instanceConfig.banners.mobileBanner,
       )
       this.loadText = true
     }
