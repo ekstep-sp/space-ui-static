@@ -35,6 +35,7 @@ export namespace NsInstanceConfig {
     themes: ITheme[]
     logos: ILogos
     banners: IBanners
+    mobileBanner: IBanners
     mailIds: IMailIds
     details: IDetails
     validMailIdExtensionsForMailMe: string[]
@@ -138,6 +139,7 @@ export namespace NsInstanceConfig {
     thumpsUp?: string
   }
   export interface IBanners {
+    mobileBanner: string
     mainBanner: string
     collaboratorBanner: string
     licensePolicy: string

@@ -126,8 +126,21 @@ p {
     padding-top: 6rem;
   }
   .h1-style {
-    font-weight: 600;
+    font-family: CampaignW00-Medium !important;
+    font-style: normal;
+    font-weight: 460;
+    font-size: 24px;
+    line-height: 28px;
     color: #925EB0;
+  }
+  .sub-heading-style {
+    font-family: CampaignW00-Medium !important;
+    font-style: normal;
+    font-weight: 460;
+    font-size: 14px;
+    line-height: 16px;
+    /* color: #925be0; */
+    color: #696466;
   }
   .flex {
       justify-content: center !important;
@@ -162,6 +175,15 @@ p {
   .p-style {
     font-size: 24px;
   }
+}
+.p-style {
+text-align: left !important;
+margin: 2rem 1rem 3rem 1rem;
+font-style: normal !important;
+font-weight: normal !important;
+font-size: 12px !important;
+line-height: 30px !important;
+color: #696466;
 }
 /* text style  start*/
 .h1-head-style {
@@ -549,7 +571,7 @@ top: 750px !important;
   }
 }
 
-@media screen and (max-width: 300px) {
+@media screen and (max-width: 480px) {
   .signin-style {
     display: block !important;
 }
