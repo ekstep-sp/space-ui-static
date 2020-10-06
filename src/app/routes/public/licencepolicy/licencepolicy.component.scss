@@ -1,7 +1,7 @@
 @import 'ws-vars';
 @import 'ws-mixins';
 
-.allignment{
+.alignment{
 padding: 8px 0;
 line-height: 1.7;
 @include breakpoint-xs {
@@ -158,7 +158,7 @@ line-height: 33px !important;
 }
 .header {
     // width: 31rem !important;
-    font-size: 16px !important;
+    font-size: 24px !important;
 }
 }
 @media screen and (min-width:542px) and (max-width: 569px) {
@@ -258,15 +258,27 @@ max-width: 600px !important;
      padding: 1rem;
    }
  }
- 
- @media screen and (max-width: 500px) {
-   .section-container {
-     padding: 4rem 16px;
-   }
- }
 
  @media screen and (max-width: 330px) {
   .section-container {
     word-break: break-word;
+  }
+}
+
+@media screen and (max-width: 680px) {
+  .custom-padding {
+    padding-bottom: 0;
+    margin-bottom: 0;
+  } 
+  .section-container {
+    padding: 45px 20px 60px 20px;
+  }
+  .header.heading-style {
+    margin: 0;
+    padding-bottom: 45px;
+    text-align: center;
+  }
+  .img-container {
+    padding-top: 0;
   }
 }
