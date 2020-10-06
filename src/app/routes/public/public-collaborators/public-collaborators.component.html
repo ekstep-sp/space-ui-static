@@ -1,29 +1,13 @@
-<div id="collaborator" #collaborator>
-  <h1 class="header heading-style pt-24 pl-16" name="collaborator">Collaborators</h1>
-  <!-- <div class="group2"></div> -->
-  <!-- <div class="pt-12 pl-16 pb-48"> -->
-  <div class="org-text-padding padding-para">
-    <!-- <div class="pt-12 pl-16 pb-48 no-padding"> -->
-    <p class="container partnerBody text-style">
-      Organisations that are contributing assets as public goods.
-    </p>
-    <!-- <div class="ellipse2"></div> -->
-    <!-- <section class="horizontal-scroll-container h-full">
-      <button aria-label="Previous" i18n-aria-label name="content-backward-button" mat-mini-fab color="primary">
-        <mat-icon>navigate_before</mat-icon>
-      </button> -->
-    <!-- <ws-utils-horizontal-scroller> -->
-    <!-- <div id="container">
-      <div ng2-carouselamos class="slides-wrapper" [width]="850" [$prev]="prev" [$next]="next">
-      </div>
-</div> -->
-    <!-- <button aria-label="Next" i18n-aria-label name="content-forward-button">
-        <mat-icon>navigate_next</mat-icon>
-      </button>
-    </section> -->
+<div class="collaborator-wrapper">
+  <div id="collaborator" #collaborator>
+    <h1 class="header heading-style" name="collaborator">Collaborators</h1>
+    <div class="org-text-padding padding-para">
+      <p class="container partnerBody text-style">
+        Organisations that are contributing assets as public goods.
+      </p>
+    </div>
   </div>
 </div>
-
 <div class="parent-scroller-container">
   <div class="scroller-container">
     <ws-utils-horizontal-scroller *ngIf=" partner.src?.length" [loadStatus]="'done'">
@@ -31,7 +15,6 @@
         <a href="{{partner.url[i]}}" target="_blank">
           <img src="{{ src }}">
         </a>
-
       </div>
     </ws-utils-horizontal-scroller>
   </div>

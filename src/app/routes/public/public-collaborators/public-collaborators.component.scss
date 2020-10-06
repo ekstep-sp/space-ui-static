@@ -1,22 +1,26 @@
 @import 'ws-vars';
 @import 'ws-common';
 
+.collaborator-wrapper {
+  padding-left: 4rem;
+}
+
 /* collaborator page design start */
 .header {
 font-weight: 460;
 font-size: 48px;
 line-height: 55px;
 color: #925EB0;
-width:240px;
 height: 65px;
+padding: 55px 0 55px 0;
   @include breakpoint-xs {
     font-size: 38px !important;
+    text-align: center;
   }
 }
   @media only screen and (max-width: 321px) {
     .header {
     font-size: 27px !important;
-    width: 217px !important;
   }
 }
 .partnerContainerBody {
@@ -24,102 +28,14 @@ height: 65px;
     padding-top: 2.5rem !important;
   }
 }
-// .ellipse2 {
-//     background: no-repeat;
-//     background-image: url(/assets/instances/space/banners/Ellipse16.png);
-//     background-size: 5rem;
-//     background-position: center;
-//     width: 19%;
-//     height: 5rem;
-//     float: right;
-//     margin-top: -7rem;
-//     @include breakpoint-xs {
-//        display: none;
-//      }
-//     @include breakpoint-s {
-//        margin-top: -9rem;
-//     }
-//     @include breakpoint-m {
-//       margin-top: -9rem !important;
-//     }
-// }
-// .group {
-//     background: no-repeat;
-//     background-image: url(/assets/instances/space/banners/Group19.png);
-//     background-size: 3rem;
-//     background-position: center;
-//     width: 10%;
-//     height: 5rem;
-//     float: right;
-//     margin-top: 1rem;
-//     margin-right: -3.5rem;
-//      @include breakpoint-xs {
-//        display: none;
-//      }
-//      @include breakpoint-s {
-//        margin-right: -2.5rem !important;
-//        width: 13% !important;
-//      }
-// }
-// .group2 {
-//     background: no-repeat;
-//     background-image: url(/assets/instances/space/banners/Group17.png);
-//     background-size: 4rem;
-//     background-position: center;
-//     width: 10%;
-//     height: 5rem;
-//     margin-top: -7rem;
-//     margin-left: 51rem;
-//     @include breakpoint-xs {
-//        display: none;
-//      }
-//     @include breakpoint-s {
-//       margin-left: 30rem !important;
-//     }
-//     @include breakpoint-m {
-//       margin-left: 40rem !important;
-//     }
-// }
 .container {
-  // max-width: 100%;
   justify-content: center;
   margin: 0;
 }
-// .imageRow {
-//   display: flex;
-//   flex-wrap: wrap;
-//   justify-content: center;
-//   margin-bottom: 20px;
-//   max-width: 80%;
-//   margin: auto;
-// }
 
 .partnerBody {
-  padding-left: 2.0rem;
   width: auto;
 }
-
-@media only screen and (max-width: 680px) {
-  .partnerBody {
-    width: 88%;
-    padding-left: 0;
-  }
-  .partnerContainer {
-    margin: auto;
-    padding-bottom: 10px;
-  }
-  .no-padding {
-    padding: 0;
-  }
-  .imageRow {
-    display: flex !important;
-    padding-top: 0;
-  }
-  #collaborator h1{
-    padding-left: 2.4rem;
-}
-}
-
 
 a {
   background-color: transparent;
@@ -131,54 +47,7 @@ img {
   // width: 9rem;
     width: 100%;
 }
-// .exception-style {
-//     //  margin-top: -2rem;
-//     margin-top: -0.9rem;
-//     width: 9rem;
-//     height: 8rem;
-// }
-// .net-style {
-//     width: 9rem !important;
-//     height: 3rem !important;
-// }
 
-// .imageRow {
-//   display: flex;
-//   flex-wrap: wrap;
-//   align-items: center;
-//   justify-content: center;
-//   margin-bottom: 20px;
-// }
-// @media only screen and (min-width: 453px) and (max-width: 680px) {
-//   .imageRow {
-//     display: inline !important;
-//   }
-//   .box {
-//     width: 35% !important;
-//     margin-right: 10px !important;
-//   }
-// }
-// @media only screen and (min-width: 312px) and (max-width: 453px) {
-//   .imageRow {
-//     display: inline !important;
-//   }
-//   .box {
-//     width: 35% !important;
-//     padding: 5.5em 0em 0 -0rem !important;
-//     margin-right: 10px !important;
-//   }
-// }
-// .box {
-//   width: 34%;
-//   padding: 5.5em 0em 0 8rem;
-//   margin-right: 10px;
-// }
-// a {
-//   background-color: transparent;
-//   color: #1cadce;
-//   text-decoration: none;
-//   -webkit-transition: 0.2s ease-in;
-// }
 .card-container {
   height: 200px;
     /* margin-right: 16px; */
@@ -226,7 +95,38 @@ img {
   }
 }
 
-.padding-para{
-  padding-left: 2.4rem;
+@media only screen and (max-width: 680px) {
+  .partnerBody {
+    width: 100%;
+    padding: 0;
+    text-align: center;
+    margin: 0;
+  }
+  .partnerContainer {
+    margin: auto;
+    padding-bottom: 10px;
+  }
+  .no-padding {
+    padding: 0;
+  }
+  .imageRow {
+    display: flex !important;
+    padding-top: 0;
+  }
+  .header {
+    margin: 0;
+    padding-left: 0;
+    text-align: center;
+    padding: 45px 0;
+  }
+  .padding-para{
+    padding-left: 0 !important;
+  }
+  .collaborator-wrapper {
+    padding: 1.2rem;
+  }
+  .scroller-container {
+    padding: 45px 0 60px 0;
+  }
 }
 
