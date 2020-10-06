@@ -95,6 +95,7 @@ color: #925EB0 !important;;
 .exception-style {
   @include breakpoint-xs {
     text-align: center;
+    margin-bottom: 30px;
   }
 }
 .header {
@@ -132,6 +133,7 @@ color: #925EB0;
     float: unset !important;
     // margin-left: 4rem !important;
      height: auto !important;
+     margin-bottom: 30px !important;
   }
 //   @include breakpoint-s {
 // width: 17rem !important;
@@ -337,7 +339,7 @@ color: #925EB0;
  
  @media screen and (max-width: 500px) {
    .section-container {
-    padding: 45px 20px;
+    padding: 60px 20px;
    }
  }
 
