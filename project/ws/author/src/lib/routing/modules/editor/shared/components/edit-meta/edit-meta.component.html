@@ -638,7 +638,7 @@
           </div>
           <div class="grid">
             <div class="margin-top-m margin-left-xl" *ngIf="checkCondition('catalogPaths', 'show')"
-              [ngClass]="{ disable: checkCondition('catalogPaths', 'disabled') }">
+              [ngClass]="{ disable: !showAccToRoles('catalogPath') }">
               <label>
                 <div class="margin-top-s flex flex-middle">
                   <b [ngClass]="{ required: checkCondition('catalogPaths', 'required') }" i18n>Catalog</b>

@@ -47,6 +47,7 @@ import {
 import { FeedbackFormComponent } from '@ws/author/src/lib/modules/shared/components/feedback-form/feedback-form.component'
 import { LicenseInfoDisplayDialogComponent } from '../license-info-display-dialog/license-info-display-dialog.component'
 import { AssetTypeInfoDisplayDialogComponent } from '../asset-type-info-display-dialog/asset-type-info-display-dialog.component'
+import { ActivatedRoute } from '@angular/router'
 
 interface ILicenseMetaInfo {
   parent: string[],
@@ -143,6 +144,7 @@ export class EditMetaComponent implements OnInit, OnDestroy, AfterViewInit {
   currentAssestTypeData: IAssetTypeMetaInfo[] | undefined = undefined
   showOther = false
   staticValidation$: any
+  allowedToCatalog = true
 
   @ViewChild('creatorContactsView', { static: false }) creatorContactsView!: ElementRef
   @ViewChild('trackContactsView', { static: false }) trackContactsView!: ElementRef
@@ -158,6 +160,8 @@ export class EditMetaComponent implements OnInit, OnDestroy, AfterViewInit {
 
   timer: any
   showRoleRequest = false
+  allowedRoles: any
+  notAllowedRoles: any
   filteredOptions$: Observable<string[]> = of([])
 
   constructor(
@@ -174,6 +178,7 @@ export class EditMetaComponent implements OnInit, OnDestroy, AfterViewInit {
     private authInitService: AuthInitService,
     private accessService: AccessControlService,
     private valueSvc: ValueService,
+    private route: ActivatedRoute,
   ) {
     this.contentTracker.previousContent = this.contentService.currentContent
   }
@@ -187,6 +192,10 @@ export class EditMetaComponent implements OnInit, OnDestroy, AfterViewInit {
   }
 
   ngOnInit() {
+    this.route.data.subscribe(data => {
+      this.allowedRoles = data.pageData.data.allowedRoles
+      this.notAllowedRoles = data.pageData.data.notAllowedRoles
+    })
     this.staticValidation$ = this.contentService.staticValidationEvent.pipe(filter(v => v))
     this.staticValidation$.subscribe((_: any) => {
       this.emitPushEvent()
@@ -681,11 +690,11 @@ export class EditMetaComponent implements OnInit, OnDestroy, AfterViewInit {
 
   storeData() {
     try {
+      const meta = <any>{}
+      const currentMeta: NSContent.IContentMeta = JSON.parse(JSON.stringify(this.contentForm.value))
       const originalMeta = this.contentService.getOriginalMeta(this.contentMeta.identifier)
       if (originalMeta && this.isEditEnabled) {
         const expiryDate = this.contentForm.value.expiryDate
-        const currentMeta: NSContent.IContentMeta = JSON.parse(JSON.stringify(this.contentForm.value))
-        const meta = <any>{}
         if (this.canExpiry) {
           currentMeta.expiryDate = `${
             expiryDate.toISOString().replace(/-/g, '').replace(/:/g, '').split('.')[0]
@@ -724,6 +733,10 @@ export class EditMetaComponent implements OnInit, OnDestroy, AfterViewInit {
         const newMeta = this.handleMimeTypeBeforeStore(meta) as NSContent.IContentMeta
         this.contentService.setUpdatedMeta(newMeta, this.contentMeta.identifier)
         // cons?ole.log(newMeta)
+      } else if (this.showAccToRoles('catalogPath')) {
+        meta.catalogPaths = []
+        meta.catalogPaths = [...currentMeta.catalogPaths]
+        this.contentService.setUpdatedMeta(meta, this.contentMeta.identifier)
       }
     } catch (e) {
       throw new Error(e)
@@ -1667,7 +1680,7 @@ export class EditMetaComponent implements OnInit, OnDestroy, AfterViewInit {
     this.contentService.setUpdatedMeta(updatedMeta, this.contentService.currentContent)
     console.log('after update data looks like ', this.contentService.getUpdatedMeta(this.contentService.currentContent))
     console.log(`data for profile is ${eventData} ${eventType}`) */
-    const updatedMeta = { } as NSContent.IContentMeta
+    const updatedMeta = {} as NSContent.IContentMeta
     if (!this.contentForm.controls.profile_link.pristine) {
       if (_eventType === 'link') {
         updatedMeta.artifactUploadUrl = ''
@@ -1677,5 +1690,15 @@ export class EditMetaComponent implements OnInit, OnDestroy, AfterViewInit {
       this.contentService.setUpdatedMeta(updatedMeta, this.contentService.currentContent)
       this.storeData()
     }
+  }
+  showAccToRoles(roleKey: any) {
+    // tslint:disable-next-line: max-line-length
+    if (this.uploadService.isVisibileAccToRoles(this.allowedRoles[roleKey], this.notAllowedRoles[roleKey])) {
+      return true
+    }
+    if (!this.uploadService.isVisibileAccToRoles(this.allowedRoles[roleKey], this.notAllowedRoles[roleKey])) {
+      return false
+    }
+    return true
   }
 }
