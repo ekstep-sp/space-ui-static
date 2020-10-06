@@ -76,6 +76,16 @@ img {
   vertical-align: middle;
   border: 0;
 }
+@media screen and (min-width:768px) and (max-width:1024px) {
+img {
+    width: 100%;
+}
+.p-style {
+  text-align: center !important;
+  font-size: 18px !important;
+  font-weight: normal !important;
+}
+}
 .text-white {
   color: #fff !important;
 }
@@ -123,7 +133,7 @@ p {
   .display-text {
     text-align: center;
     padding-bottom: 3rem !important;
-    padding-top: 6rem;
+    padding-top: 4rem;
   }
   .h1-style {
     font-family: CampaignW00-Medium !important;
@@ -177,11 +187,11 @@ p {
   }
 }
 .p-style {
-text-align: left !important;
+text-align: left ;
 margin: 2rem 1rem 3rem 1rem;
 font-style: normal !important;
-font-weight: normal !important;
-font-size: 12px !important;
+font-weight: normal t;
+font-size: 12px;
 line-height: 30px !important;
 color: #696466;
 }
@@ -209,7 +219,7 @@ color: #696466;
 .signin {
     position: relative;
     width: 38.59%;
-    height: 49px;
+    height: 50px;
     border-radius: 0px !important;
     background: #925EB0 !important;
     //  @include breakpoint-gt-xs {
@@ -218,12 +228,12 @@ color: #696466;
        @include breakpoint-xs {
       //  width: 45% !important;
        margin-left: 1rem !important;
-     }
+      }
 }
 .signup {
 position: relative;
 width: 38.59%;
-height: 49px;
+height: 50px;
 border-radius: 0px !important;
 border: 2px solid #925EB0 !important;
 box-sizing: border-box;

@@ -92,11 +92,20 @@ color: #925EB0;
   width: 100% !important;
   font-size: 30px !important;
   padding-bottom: 1rem;
+  text-align: center !important;
+  margin-top: unset !important;
+  margin-bottom: 0;
+  padding-bottom: 45px;
 }
   @include breakpoint-s {
 font-size: 32px !important;
 width: 50%;
 line-height: 33px !important;
+  }
+}
+.padding-style {
+  @include breakpoint-xs {
+    padding-bottom: 60px !important;
   }
 }
 .img-container {
@@ -110,6 +119,7 @@ line-height: 33px !important;
     float: unset !important;
     // margin-left: 2rem !important;
     height: auto !important;
+    margin-bottom: 30px;
   }
 //   @include breakpoint-s {
 // width: 17rem !important;
@@ -220,6 +230,6 @@ max-width: 600px !important;
  
  @media screen and (max-width: 500px) {
    .section-container {
-     padding: 4rem 16px;
+    padding: 45px 20px;
    }
  }

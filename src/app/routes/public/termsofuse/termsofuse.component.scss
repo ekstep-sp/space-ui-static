@@ -7,6 +7,11 @@ line-height: 1.7;
    padding: 0 !important;
 }
 }
+.padding-style {
+  @include breakpoint-xs {
+    padding-bottom: 60px !important;
+  }
+}
 .cimage {
   background-size: cover;
   background-position: center;
@@ -87,6 +92,12 @@ color: #925EB0 !important;;
 .col-2 {
   flex: 1;
 }
+.exception-style {
+  @include breakpoint-xs {
+    text-align: center;
+    margin-bottom: 30px;
+  }
+}
 .header {
   margin-top: 40px;
 font-weight: 460;
@@ -100,6 +111,10 @@ color: #925EB0;
   width: 100% !important;
   font-size: 30px !important;
   line-height: 33px !important;
+  text-align: center !important;
+  margin-top: unset !important;
+  margin-bottom: 0;
+  padding-bottom: 45px;
 }
   @include breakpoint-s {
     font-size: 32px !important;
@@ -118,6 +133,7 @@ color: #925EB0;
     float: unset !important;
     // margin-left: 4rem !important;
      height: auto !important;
+     margin-bottom: 30px !important;
   }
 //   @include breakpoint-s {
 // width: 17rem !important;
@@ -323,7 +339,7 @@ color: #925EB0;
  
  @media screen and (max-width: 500px) {
    .section-container {
-     padding: 4rem 16px;
+    padding: 45px 20px;
    }
  }
 
