@@ -85,7 +85,7 @@ export class AppBtnFeatureComponent implements OnInit, OnDestroy {
     this.mAccordion = accordion
       // this.featureService.triggerAppsExpansionClose(this.expansionPanel)
   }
-  navigate(key: any, _e: any, actionBtn: any) {
+  navigate(key: any, _e: any, _actionBtn: any) {
     // if (actionBtn !== 'Profile' && actionBtn !== 'Settings') {
     // this.expansionPanel.expanded = false
     // }
