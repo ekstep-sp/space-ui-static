@@ -119,26 +119,14 @@ line-height: 33px !important;
      height: auto !important;
      margin-bottom: 30px;
   }
-//   @include breakpoint-s {
-// width: 17rem !important;
-// margin-top: -7rem;
-//   }
-  // height: 17rem;
 }
 @media screen and (min-width:280px) and (max-width: 320px) {
-  // .cimage {
-  //   width: 14rem !important;
-  //   margin-left: 0rem !important;
-  // }
   .header{
     width: 100% !important;
     font-size: 23px !important;
     padding-left: 0 !important;
     text-align: center !important;
    }
-//    .font-style {
-//     width: 14rem !important;
-// }
 .img-container {
   width: auto !important;
   float: none !important;
@@ -149,69 +137,7 @@ line-height: 33px !important;
 .section-margin {
   margin-right: 0 !important;
 }
-// .mat-drawer-container {
-//     position: relative;
-//     z-index: 1;
-//     box-sizing: border-box;
-//     -webkit-overflow-scrolling: touch;
-//     // display: block;
-//      overflow: hidden !important;
-// }
 }
-@media screen and (min-width:539px) and (max-width: 542px) {
-// .font-style {
-//     width: 21rem !important;
-// }
-// .header {
-//     // width: 31rem !important;
-//     font-size: 16px !important;
-// }
-}
-// @media screen and (min-width:542px) and (max-width: 569px) {
-//   .font-style {
-//     // width: 29rem !important;
-//   }
-// }
-// @media screen and (min-width:1020px) and (max-width: 1027px) {
-// .header {
-//   font-size: 33px;
-// }
-// .cimage {
-//   width: 100% !important;
-//      height: auto !important;
-//      // margin-left: 4.5rem !important;
-//  }
-// }
-// @media screen and (max-width: 1024px) and (min-width: 1023px){
-//   .img-container{
-//   width: 30.5rem !important;
-// }
-// .cimage {
-//   width: 525px !important;
-//   height: 320px !important;
-// }
-// }
-
-// @media screen and (max-width: 670px) and (min-width: 635px){
-//   .header {
-//     line-height: 33px !important;
-// }
-// }
-// .allignpara{
-//   margin-left: -15px;
-// }
-// .allignpara:not(:root:root){
-//      margin-left: -20px !important
-// }
-
-// .text-container{
-//   padding: 2.5rem;
-// }
-
-// .section-margin {
-//   margin-right: 2.5rem;
-// }
-
 ::ng-deep{
 .theme-muave.night-mode .font-style{
   color: white !important;
@@ -237,33 +163,6 @@ max-width: 600px !important;
     margin-left: 0rem !important;
 }
 }
-// .theme-muave.night-mode .section-margin{
-//   margin-right: 0 !important;
-// }
-// .theme-muave.night-mode .cimage{
-// width: 100% !important;
-//   height: 100% !important;
-//   margin-left: 0 !important;
-// }
-// .theme-muave.night-mode .img-container {
-//   margin-top: 0 !important;
-// }
-// @media only screen and (max-width: 959px) and (min-width: 600px){
-// .theme-muave.night-mode .cimage {
-//     width: 20rem !important;
-//     height: auto !important;
-//     margin-left: -0.5rem !important;
-// }
-// }
-// @media screen and (max-width: 1020px) and (min-width: 960px){
-
-// .theme-muave.night-mode .image-allign{
-//     width: 574px !important;
-//     height: 319px !important;
-//     margin-left: 4.5rem !important;
-
-// }
-// }
 
 }
 
