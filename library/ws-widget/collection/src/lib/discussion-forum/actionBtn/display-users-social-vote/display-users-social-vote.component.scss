@@ -22,7 +22,7 @@
     height: auto;
     max-height: 170px;
     overflow: auto;
-    margin-left: 65px;
+    margin-left: 0;
     margin-right: 10px;
     margin-top: 17px;
     border-top: 3px solid #865ba0 !important;
@@ -58,7 +58,7 @@
 .mat-card-size-qna-up{
    width: 150px;
     height: auto;
-    min-height: 130px;
+    min-height: 0;
     margin-left: -160px;
     margin-right: 10px;
     margin-top: -26px;
@@ -66,18 +66,30 @@
     border-bottom: 3px solid mat-color($primary) !important;
 }
 @media screen and (max-width:1024px){
-// .mat-card-size-down{
-//     width: 200px;
-//     height: auto;
-//     max-height: 170px;
-//     overflow: auto;
-//     margin-left: -220px;
-//     margin-right: 10px;
-//     margin-top: 5px;
-//     border-top: 3px solid #865ba0 !important;
-//     border-bottom: 3px solid #865ba0 !important;
-//     padding: 0px !important;
-// }
+  .mat-card-size-down{
+    width: 200px !important;
+    height: auto !important;
+    max-height: 170px !important;
+    overflow: auto !important;
+    margin-left: -220px !important;
+    margin-right: 10px !important;
+    margin-top: 35px !important;
+    border-top: 3px solid #865ba0 !important;
+    border-bottom: 3px solid #865ba0 !important;
+    padding: 0px !important;
+  }
+  .qna-card-down{
+    width: 200px !important;
+    height: auto !important;
+    max-height: 170px !important;
+    overflow: auto !important;
+    margin-left: 75px !important;
+    margin-right: 10px !important;
+    margin-top: 25px !important;
+    border-top: 3px solid #865ba0 !important;
+    border-bottom: 3px solid #865ba0 !important;
+    padding: 0px !important;
+  }
 .mat-card-size-like{
     width: 200px;
     height: auto;
@@ -91,12 +103,12 @@
     padding: 0px !important;
 }
 .mat-card-size-qna-up{
-   width: 150px;
-    height: auto;
-    min-height: 130px;
-    margin-left: 20px;
-    margin-right: 10px;
-    margin-top: -26px;
+   width: 200px !important;
+    height: auto !important;
+    margin-left: 75px !important;
+    min-height: 30px !important;
+    margin-right: 10px !important;
+    margin-top: -26px !important;
     border-top: 3px solid  mat-color($primary) !important;
     border-bottom: 3px solid mat-color($primary) !important;
 }
@@ -192,35 +204,4 @@ span{
    
     color: white !important;
   }
-}
-@media only screen and (max-width: 1024px){
-  .mat-card-size-qna-up{
-    margin-left: 75px !important;
-    min-height: 30px !important;
-  }
-  .qna-card-down{
-    width: 200px !important;
-    height: auto !important;
-    max-height: 170px !important;
-    overflow: auto !important;
-    margin-left: 75px !important;
-    margin-right: 10px !important;
-    margin-top: 25px !important;
-    border-top: 3px solid #865ba0 !important;
-    border-bottom: 3px solid #865ba0 !important;
-    padding: 0px !important;
-  }
-  .mat-card-size-down{
-    width: 200px !important;
-    height: auto !important;
-    max-height: 170px !important;
-    overflow: auto !important;
-    margin-left: -220px !important;
-    margin-right: 10px !important;
-    margin-top: 40px !important;
-    border-top: 3px solid #865ba0 !important;
-    border-bottom: 3px solid #865ba0 !important;
-    padding: 0px !important;
-  }
- 
 }
