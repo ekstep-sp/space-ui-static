@@ -155,6 +155,10 @@
   max-width: 295px;
   max-height: 35px;
 }
+.logosize:not(:root:root){
+  padding: 9px 0 0 0px;
+  max-height: 40px;
+}
 .title {
   font-size: 12px !important;
   line-height: 26px !important;
