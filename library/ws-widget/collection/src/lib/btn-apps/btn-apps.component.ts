@@ -86,9 +86,9 @@ export class BtnAppsComponent extends WidgetBaseComponent
   }
 
   ngOnInit() {
-    this.expansion$ = this.featureSrvc.triggerExpansionPanel.subscribe((newExpansion: MatExpansionPanel[] | null) => {
-     this.allOpenedPanel = newExpansion
-    })
+    // this.expansion$ = this.featureSrvc.triggerExpansionPanel.subscribe((newExpansion: MatExpansionPanel[] | null) => {
+    //  this.allOpenedPanel = newExpansion
+    // })
     this.instanceVal = this.configSvc.rootOrg || ''
     if (this.configSvc.restrictedFeatures) {
       this.isPinFeatureAvailable = !this.configSvc.restrictedFeatures.has('pinFeatures')
@@ -211,6 +211,7 @@ export class BtnAppsComponent extends WidgetBaseComponent
     }
   }
   triggerExpansion() {
-      this.featureSrvc.triggerAppsExpansionStatus(true)
+     this.featureSrvc.triggerAppsExpansion(false)
+      // this.featureSrvc.triggerAppsExpansionStatus(true)
     }
 }
