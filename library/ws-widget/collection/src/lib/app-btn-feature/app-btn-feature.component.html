@@ -1,6 +1,6 @@
 <ng-container style="margin-top: -1.2rem;" (click)="$event.stopPropagation()">
-  <ng-container *ngIf="featuredWidget.name !== 'Contribute' && featuredWidget.show === true && featuredWidget.expand === true">
-    <mat-accordion #accordion='matAccordion' class="expansion-panel-color" (click)="maintainPropagation($event)" multi="false">
+  <ng-container *ngIf="featuredWidget.show === true && featuredWidget.expand === true"  >
+    <mat-accordion #accordion='matAccordion' class="expansion-panel-color" (click)="maintainPropagation($event)" multi="false" [ngClass]="{isVisible: featuredWidget.name === 'Contribute'}">
       <mat-expansion-panel #panel>
         <mat-expansion-panel-header (click)="maintainState(panel,accordion)">
           <mat-panel-title>
@@ -11,40 +11,6 @@
                     color: featuredWidget.color,
                     innerSpan: false
                   }">
-            </ng-container>
-            <span *ngIf="featuredWidget.name !== 'Admin'" class="ml-5 text-center">
-              {{featuredWidget.name}}</span>
-            <ng-container *ngIf="featuredWidget.name === 'Admin'">
-              <img class="matdark mat-icon admin-image-black" src="/assets/instances/space/admin_panal_icon/admin_panel_settings-black.svg">
-              <img class="matdark mat-icon admin-image-white" src="/assets/instances/space/admin_panal_icon/admin_panel_settings-white.svg">
-              <span class="ml-5 text-center admin-panel"> {{featuredWidget.name}}</span>
-            </ng-container>
-          </mat-panel-title>
-        </mat-expansion-panel-header>
-        <ng-container *ngFor="let group of featuredWidget.featureWidgets">
-          <div *ngIf="group.widgetData.actionBtn.show">
-            <div [ngSwitch]="group.widgetData.config.type">
-              <div *ngSwitchCase="displayType.featureItem">
-                <ng-container [ngTemplateOutlet]="featureItem" [ngTemplateOutletContext]="group.widgetData">
-                </ng-container>
-              </div>
-            </div>
-          </div>
-        </ng-container>
-      </mat-expansion-panel>
-    </mat-accordion>
-  </ng-container>
-  <ng-container *ngIf="featuredWidget.name === 'Contribute' && featuredWidget.show === true && featuredWidget.expand === true">
-    <mat-accordion #accordion='matAccordion' class="expansion-panel-color isVisible" (click)="maintainPropagation($event)">
-      <mat-expansion-panel #panel>
-        <mat-expansion-panel-header (click)="maintainState(panel,accordion)">
-          <mat-panel-title>
-            <ng-container *ngIf="featuredWidget.name !== 'Admin'" [ngTemplateOutlet]="icon" [ngTemplateOutletContext]="{
-                      iconType: featuredWidget.iconType,
-                      icon: featuredWidget.icon,
-                      scale: 1.7,
-                      color: featuredWidget.color
-                    }">
             </ng-container>
             <span *ngIf="featuredWidget.name !== 'Admin'" class="ml-5 text-center">
               {{featuredWidget.name}}</span>

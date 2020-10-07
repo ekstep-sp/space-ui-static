@@ -16,6 +16,7 @@
     padding: 0 24px;
     display: flex;
     height: 100%;
+    align-items: center;
 }
 mat-icon {
       color: #696466;
@@ -23,9 +24,9 @@ mat-icon {
     /* justify-content: space-evenly; */
     // flex-basis: 32px;
 }
-.line {
-  line-height: 2 !important;
-}
+// .line {
+//   line-height: 2 !important;
+// }
 .a-tag {
   display: block !important;
   padding: 0 !important;
