@@ -193,3 +193,8 @@ span{
     color: white !important;
   }
 }
+@media only screen and (max-width: 1024px){
+  .mat-card-size-up{
+    margin-left: 75px !important;
+  }
+}
