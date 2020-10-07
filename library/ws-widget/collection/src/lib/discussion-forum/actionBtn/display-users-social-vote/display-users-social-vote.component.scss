@@ -66,18 +66,18 @@
     border-bottom: 3px solid mat-color($primary) !important;
 }
 @media screen and (max-width:1024px){
-.mat-card-size-down{
-    width: 200px;
-    height: auto;
-    max-height: 170px;
-    overflow: auto;
-    margin-left: -175px;
-    margin-right: 10px;
-    margin-top: 5px;
-    border-top: 3px solid #865ba0 !important;
-    border-bottom: 3px solid #865ba0 !important;
-    padding: 0px !important;
-}
+// .mat-card-size-down{
+//     width: 200px;
+//     height: auto;
+//     max-height: 170px;
+//     overflow: auto;
+//     margin-left: -220px;
+//     margin-right: 10px;
+//     margin-top: 5px;
+//     border-top: 3px solid #865ba0 !important;
+//     border-bottom: 3px solid #865ba0 !important;
+//     padding: 0px !important;
+// }
 .mat-card-size-like{
     width: 200px;
     height: auto;
@@ -194,7 +194,33 @@ span{
   }
 }
 @media only screen and (max-width: 1024px){
-  .mat-card-size-up{
+  .mat-card-size-qna-up{
     margin-left: 75px !important;
+    min-height: 30px !important;
   }
+  .qna-card-down{
+    width: 200px !important;
+    height: auto !important;
+    max-height: 170px !important;
+    overflow: auto !important;
+    margin-left: 75px !important;
+    margin-right: 10px !important;
+    margin-top: 25px !important;
+    border-top: 3px solid #865ba0 !important;
+    border-bottom: 3px solid #865ba0 !important;
+    padding: 0px !important;
+  }
+  .mat-card-size-down{
+    width: 200px !important;
+    height: auto !important;
+    max-height: 170px !important;
+    overflow: auto !important;
+    margin-left: -220px !important;
+    margin-right: 10px !important;
+    margin-top: 40px !important;
+    border-top: 3px solid #865ba0 !important;
+    border-bottom: 3px solid #865ba0 !important;
+    padding: 0px !important;
+  }
+ 
 }
