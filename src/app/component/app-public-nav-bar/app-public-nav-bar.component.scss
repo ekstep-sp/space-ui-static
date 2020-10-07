@@ -80,6 +80,7 @@
 .padding-remove-small {
   @include breakpoint-xs {
     padding: 0 !important;
+    margin-left:-15px;
   }
 }
 .mat-dialog-actions {
@@ -170,16 +171,16 @@ color: #696466;
    line-height: 12px !important;
 }
 
-@media screen and (min-width:539px) and (max-width: 542px) {
-  .logosize {
-    width: auto !important;
-  }
-}
-@media screen and (max-width: 570px) and (min-width: 520px) {
-.logosize {
-    width: auto !important;
-}
-}
+// @media screen and (min-width:539px) and (max-width: 542px) {
+//   .logosize {
+//     width: auto !important;
+//   }
+// }
+// @media screen and (max-width: 570px) and (min-width: 520px) {
+// .logosize {
+//     width: auto !important;
+// }
+// }
 ::ng-deep {
   mat-toolbar span {
     font-family: montserrat, sans-serif !important;
@@ -199,15 +200,15 @@ color: #696466;
   .signIn {
       margin-right: 40px;
   }
-  .logo {
-    padding-left: 25px !important;
-  }
+  // .logo {
+  //   padding-left: 25px !important;
+  // }
   .logosize{
     width: 285px;
   }
   }
 
-  @media screen and (max-width: 700px) and (min-width: 601px)  {
+  @media screen and (max-width: 700px) and (min-width: 600px)  {
     .logo {
       padding-left: 0 !important;
     }
@@ -276,3 +277,22 @@ color: #696466;
 //     width: auto !important;
 // }
 // }
+
+
+@media screen and (max-width:700px){
+  .justify-content-evenly{
+    justify-content: space-between;
+  }
+}
+@media screen and (max-width:300px){
+  .padding-remove-small {
+    padding: 0 !important;
+    margin-left:-12px;
+}
+}
+@media screen and (min-width:600px) and (max-width:1019px){
+.logo{
+  padding: 0px 0 0 0px !important;
+  margin-left:6px;
+}
+}

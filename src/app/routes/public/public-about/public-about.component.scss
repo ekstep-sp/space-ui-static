@@ -12,8 +12,11 @@
 
 .name {
   width: auto !important;
-  padding: 6rem 0 0 4rem;
+  padding: 6rem 0 0 2rem;
   text-align: left;
+}
+.name-login{
+  padding: 6rem 0 0 4rem !important;
 }
 
 .img-container {
@@ -273,5 +276,13 @@ word-break: break-word;
 ::ng-deep{
 .theme-muave.night-mode .text-style{
   color: white !important;
+}
+}
+@media screen and (min-width:768px){
+.pl-16{
+  padding-left:2rem !important;
+}
+.pl-login{
+  padding-left:4rem !important;
 }
 }

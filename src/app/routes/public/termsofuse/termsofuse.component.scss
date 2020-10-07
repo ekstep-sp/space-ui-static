@@ -315,6 +315,9 @@ color: #925EB0;
 .section-container {
   padding: 4rem 30px; 
  }
+ .section-container-login{
+  padding: 4rem 65px; 
+}
  
  @media screen and (max-width: 1019px) and (min-width: 700px) {
    .section-container {
@@ -337,6 +340,7 @@ color: #925EB0;
    }
  }
  
+ 
  @media screen and (max-width: 500px) {
    .section-container {
     padding: 60px 20px;
@@ -349,6 +353,12 @@ color: #925EB0;
   }
 }
 
+@media screen and (min-width:600px) and (max-width:700px){
+  .section-container-login{
+    padding: 4rem 30px; 
+  }
+
+}
  .mat-drawer-container {
     position: relative;
     z-index: 1;

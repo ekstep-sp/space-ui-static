@@ -1,11 +1,11 @@
 <div id="about" #about>
   <div class="aboutUs-container">
-    <h1 class="header heading-style pt-24 pl-16 name" name="about">About Us</h1>
+    <h1 class="header heading-style pt-24 pl-16 name" name="about" [ngClass]= "{'name-login': (authSvc.isLoggedIn$ | async) === false, 'pl-login':(authSvc.isLoggedIn$ | async) === false}">About Us</h1>
   </div>
   <div class="flex about-us-wrapper">
     <div class="col-1">
       <section *ngIf="!aboutPage?.detailaboutenable" class="text-section">
-        <div class="pt-12 pl-16 text-wrap text-style less-padding parent-wrapper" *ngFor="let content of aboutPage.section5.paragraph">
+        <div class="pt-12 pl-16 text-wrap text-style less-padding parent-wrapper" [ngClass]="{'pl-login':(authSvc.isLoggedIn$ | async) === false}" *ngFor="let content of aboutPage.section5.paragraph">
           <p [innerHTML]="content.value | pipeSafeSanitizer: 'html'"></p>
         </div>
       </section>

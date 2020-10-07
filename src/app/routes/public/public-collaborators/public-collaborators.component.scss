@@ -2,6 +2,9 @@
 @import 'ws-common';
 
 .collaborator-wrapper {
+  padding-left: 2rem;
+}
+.collaborator-wrapper-login {
   padding-left: 4rem;
 }
 
@@ -72,10 +75,16 @@ img {
 .scroller-container{
   width: 85%;
   padding: 128px 0 205px 0;
+  margin-left: 2rem;
 }
-
+.parent-scroller-container-login{
+  width: 85%;
+}
 .parent-scroller-container{
   display: flex;
+  justify-content: flex-start;
+}
+.parent-scroller-container-login{
   justify-content: center;
 }
 .container-item{

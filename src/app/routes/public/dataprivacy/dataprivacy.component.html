@@ -1,6 +1,6 @@
 <!-- ************************************************************************** -->
 <ws-public-header [publicNavBarDetails]= "dataPrivacyDetails"></ws-public-header>
-<section class="mat-drawer-container mat-drawer-container-has-open mat-drawer-transition flex section-container">
+<section class="mat-drawer-container mat-drawer-container-has-open mat-drawer-transition flex section-container" [ngClass]= "{'section-container-login': (authSvc.isLoggedIn$ | async) === false}">
   <div class="alignment">
     <h1 class="header heading-style">Data and Privacy Policy</h1>
     <div class="img-container">
