@@ -40,35 +40,37 @@ export class AppBtnFeatureService {
     // console.log(finalAcceptance)
     return finalAcceptance
   }
-
   triggerAppsExpansion(expand: boolean) {
     this.triggerExpansion.next(expand)
   }
-  triggerAppsExpansionStatus(expand: boolean) {
-    if (expand) {
-        if (this.openedPanels.length) {
-          this.openedPanels = this.openedPanels.filter((element: any) => {
-        if (element.expanded) {
-          element.expanded = false
-          return element.expanded
-        }
-        return true
-      })
-    }
-  }
-  }
-  triggerAppsExpansionClose(expansionPanel: MatExpansionPanel) {
-    if (expansionPanel.expanded === true) {
-      this.openedPanels.push(expansionPanel)
-      }
-      if (expansionPanel.expanded === false) {
-       const foundPanel = this.openedPanels.findIndex(panel => {
-          return panel._headerId === expansionPanel._headerId
-        })
-       if (foundPanel > -1) {
-        this.openedPanels =  this.openedPanels.slice(0, foundPanel)
-       }
-        }
-    this.triggerExpansionPanel.next(this.openedPanels)
-  }
+  // triggerAppsExpansion(expand: boolean) {
+  //   this.triggerExpansion.next(expand)
+  // }
+  // triggerAppsExpansionStatus(expand: boolean) {
+  //   if (expand) {
+  //       if (this.openedPanels.length) {
+  //         this.openedPanels = this.openedPanels.filter((element: any) => {
+  //       if (element.expanded) {
+  //         element.expanded = false
+  //         return element.expanded
+  //       }
+  //       return true
+  //     })
+  //   }
+  // }
+  // }
+  // triggerAppsExpansionClose(expansionPanel: MatExpansionPanel) {
+  //   if (expansionPanel.expanded === true) {
+  //     this.openedPanels.push(expansionPanel)
+  //     }
+  //     if (expansionPanel.expanded === false) {
+  //      const foundPanel = this.openedPanels.findIndex(panel => {
+  //         return panel._headerId === expansionPanel._headerId
+  //       })
+  //      if (foundPanel > -1) {
+  //       this.openedPanels =  this.openedPanels.slice(0, foundPanel)
+  //      }
+  //       }
+  //   this.triggerExpansionPanel.next(this.openedPanels)
+  // }
 }

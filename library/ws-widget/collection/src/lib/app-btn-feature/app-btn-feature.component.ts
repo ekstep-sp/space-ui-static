@@ -83,12 +83,12 @@ export class AppBtnFeatureComponent implements OnInit, OnDestroy {
   maintainState(panel: MatExpansionPanel, accordion: MatAccordion) {
     this.expansionPanel = panel
     this.mAccordion = accordion
-      this.featureService.triggerAppsExpansionClose(this.expansionPanel)
+      // this.featureService.triggerAppsExpansionClose(this.expansionPanel)
   }
   navigate(key: any, _e: any, actionBtn: any) {
-    if (actionBtn !== 'Profile' && actionBtn !== 'Settings') {
-    this.expansionPanel.expanded = false
-    }
+    // if (actionBtn !== 'Profile' && actionBtn !== 'Settings') {
+    // this.expansionPanel.expanded = false
+    // }
     this.router.navigateByUrl(key)
   }
   maintainPropagation(event: any) {
@@ -124,9 +124,9 @@ export class AppBtnFeatureComponent implements OnInit, OnDestroy {
     }
   }
 
-  setExpansion(currentExpansion: boolean) {
-    this.expand = currentExpansion
-  }
+  // setExpansion(currentExpansion: boolean) {
+  //   this.expand = currentExpansion
+  // }
 
   ngOnDestroy() {
     if (this.expansion$) {
