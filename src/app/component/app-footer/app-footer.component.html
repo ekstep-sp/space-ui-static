@@ -45,26 +45,25 @@
 <div id="display-responsive" class="mat-toolbar px-2 sm:px-10 py-1 sm:py-4"
   [ngClass]="{ 'mat-primary': !isXSmall, 'mat-primarylight': isXSmall }">
   <!-- <div class="mat-body" id="display"> -->
-  <ng-container i18n>
-
-    <p>
-      <a routerLink="/public/dataprivacy" name="helpAndContactButtonHomePage" i18n>Data Privacy</a>
+  <div>
+    <p class="display-style">
+      <a routerLink="/public/dataprivacy" name="helpAndContactButtonHomePage" i18n>Data Privacy</a> |
     </p>
-    <p>
-      <a routerLink="public/termsofuse" name="helpAndContactButtonHomePage" i18n>Terms & Conditions</a>
+    <p class="display-style">
+      <a routerLink="public/termsofuse" name="helpAndContactButtonHomePage" i18n>Terms & Conditions</a> |
     </p>
-    <p>
-      <a routerLink="/public/content-policy-and-community-guidelines" name="helpAndContactButtonHomePage" i18n>Content
-        Policy and Community Guidelines
-        <!-- Process --> </a>
+    <p class="display-style">
+        <a routerLink="/public/licencepolicy" name="termOfUseButtonHomePage" i18n>License Policy</a>
     </p>
-    <p>
-      <a routerLink="/public/licencepolicy" name="termOfUseButtonHomePage" i18n>License Policy</a></p>
-    <p>
-      <a routerLink="/public/assetguidelines" name="termOfUseButtonHomePage" i18n>Asset Guidelines</a></p>
-    <p>
+  </div>
+  <div>
+    <p class="display-style">
+        <a routerLink="/public/content-policy-and-community-guidelines" name="helpAndContactButtonHomePage" i18n>Content
+          Policy & Community Guidelines
+          <!-- Process --> </a> | </p>
+    <p class="display-style">
+      <a routerLink="/public/assetguidelines" name="termOfUseButtonHomePage" i18n>Asset Guidelines</a> | </p>
+    <p class="display-style">
       <a routerLink="/public/contact" name="helpAndContactButtonHomePage" i18n>Contact Us</a></p>
-
-  </ng-container>
-  <!-- </div> -->
+  </div>
 </div>

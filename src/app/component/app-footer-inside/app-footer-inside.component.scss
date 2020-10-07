@@ -1,4 +1,4 @@
-@import "ws-mixins";
+@import 'ws-mixins';
 
 .footer-container {
   // display: flex;
@@ -15,7 +15,10 @@
 .policy-text-style {
   font-weight: bold;
   font-size: 14px !important;
-  color: #ffffff !important;
+  color: #FFFFFF !important;
+}
+.display-style {
+  display: contents !important;
 }
 .policy {
   color: white !important;
@@ -25,10 +28,10 @@
   font-size: 12px !important;
 }
 #display-item {
-  background-color: #42428b !important;
+  background-color: #42428B !important;
 }
 #display-responsive {
-  background-color: #42428b !important;
+  background-color: #42428B !important;
 }
 @media (max-width: 971px) and (min-width: 250px) {
   #display-item {
@@ -47,19 +50,19 @@
 }
 /* text style start */
 a {
-  color: #ffffff !important;
+  color:#FFFFFF !important;
   font-weight: 500;
-  font-size: 14px;
-  line-height: 17px;
+font-size: 14px;
+line-height: 17px;
 }
 .mail-style {
-  color: #ffe22a !important;
+color: #FFE22A !important;
 }
 p {
-  color: #ffffff !important;
+  color:#FFFFFF !important;
   font-weight: normal;
-  font-size: 16px;
-  line-height: 20px;
+font-size: 16px;
+line-height: 20px;
 }
 .mat-grid-tile {
   position: initial !important;
@@ -73,17 +76,25 @@ p {
 //   flex: 1;
 // }
 .col-2 {
-  // flex: 2;
   margin-left: 4rem;
+  // flex: 2;
 }
-@media screen and (max-width: 600px) {
-  #display-responsive {
-    margin-bottom: 56px;
+
+// .mat-body p, .mat-body-1 p, .mat-typography p{
+//     margin: 0 0 6px;
+// }
+
+@media screen and (min-width:270px) and (max-width: 290px){
+  a{
+    font-size: 11px !important;
   }
 
-  @media screen and (min-width: 270px) and (max-width: 290px) {
-    a {
-      font-size: 12px !important;
-    }
-  }
+}
+@media screen and (max-width: 600px) {
+#display-responsive {
+    margin-bottom: 56px;
+}
+}
+div#display-item {
+  padding-left: 1.5rem !important;
 }

@@ -12,10 +12,16 @@
 
 .name {
   width: auto !important;
+  padding: 6rem 0 0 2rem;
+  text-align: left;
+}
+.name-login{
+  padding: 6rem 0 0 4rem !important;
 }
 
 .img-container {
   max-width: 650px;
+  padding-top: 1.25rem;
   width: 100%;
   margin:auto;
   img {
@@ -140,12 +146,10 @@ height: 65px;
   @media only screen and (max-width: 321px) {
     .header {
     font-size: 27px !important;
-    width: 217px !important;
   }
 }
 .flex {
   justify-content: flex-start;
-  margin-top: 55px;
 }
 .col-1 {
   flex: 1;
@@ -173,7 +177,7 @@ line-height: 24px;
 word-break: break-word;
   @include breakpoint-xs {
     width: 16rem;
-    padding-top: 4rem;
+    padding-top: 33px;
   }
   @include breakpoint-s {
     width: 19rem !important;;
@@ -191,7 +195,6 @@ word-break: break-word;
     section {
       padding-top: 0;
       .text-wrap {
-        text-align: justify !important;
         width: 85% !important;
         padding-left: 0 !important;
         margin: auto;
@@ -199,7 +202,11 @@ word-break: break-word;
     }
   }
   .header.heading-style {
-    padding-left: 2.4rem;
+    text-align: center;
+    padding: 45px 0;
+  }
+  .about-us-wrapper {
+    margin-top: 0;
   }
   .col-2 {
     .pr-4 {
@@ -208,6 +215,14 @@ word-break: break-word;
   }
   .less-padding {
     padding-left: 2.4rem !important;
+  }
+  .img-container {
+    padding-top: 0;
+  }
+  ::ng-deep {
+    .mb-0 {
+      margin-bottom: 0 !important;
+    }
   }
 }
    @media only screen and (max-width: 320px) {
@@ -261,5 +276,13 @@ word-break: break-word;
 ::ng-deep{
 .theme-muave.night-mode .text-style{
   color: white !important;
+}
+}
+@media screen and (min-width:768px){
+.pl-16{
+  padding-left:2rem !important;
+}
+.pl-login{
+  padding-left:4rem !important;
 }
 }

@@ -151,9 +151,13 @@
 .logosize {
   overflow-y: hidden;
   // height: 3rem;
-  padding: 8px 0 0 25px;
+  padding: 8px 0 0 0px;
   max-width: 295px;
   max-height: 35px;
+}
+.logosize:not(:root:root){
+  padding: 9px 0 0 0px;
+  max-height: 40px;
 }
 .title {
   font-size: 12px !important;
@@ -233,3 +237,8 @@
   width: $size-l;
   transform: scaleY(2);
 }
+@media screen and (min-width:1024px) {
+  .logo-dim{
+    margin-left:-5px;
+  }
+  }

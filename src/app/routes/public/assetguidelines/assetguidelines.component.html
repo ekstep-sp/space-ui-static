@@ -1,5 +1,5 @@
 <ws-public-header [publicNavBarDetails]= "assetGuidelinesDetails"></ws-public-header>
-<section class="mat-drawer-container mat-drawer-container-has-open mat-drawer-transition flex section-margin section-container">
+<section class="mat-drawer-container mat-drawer-container-has-open mat-drawer-transition flex section-margin section-container" [ngClass]= "{'section-container-login': (authSvc.isLoggedIn$ | async) === false}">
 
   <div class="allignment">
     <h1 class="header heading-style pb-24">Asset Guidelines</h1>
@@ -419,7 +419,7 @@
               class="Apple-converted-space font-style">&nbsp;</span></span>
         </li><br /><br />
 
-        <li class="li2 font-style pb-32">
+        <li class="li2 font-style">
           <span class="s1 font-style">On the whole, it is important that our commitment to societal development must
             be matched
             with respectful, appropriate, accurate and responsible sharing.</span>

@@ -1,5 +1,5 @@
 <ws-public-header [publicNavBarDetails]= "termsOfUseDetails"></ws-public-header>
-<section class="mat-drawer-container mat-drawer-container-has-open mat-drawer-transition section-container">
+<section class="mat-drawer-container mat-drawer-container-has-open mat-drawer-transition section-container" [ngClass]= "{'section-container-login': (authSvc.isLoggedIn$ | async) === false}">
   <div class="allignment">
 
     <h1 class="header heading-style mobileheader mobilealign">Terms Of Use</h1>
@@ -9,12 +9,10 @@
     </div>
     <div>
 
-      <p class="p2">&nbsp;</p>
-      <p class="p3 font-style">
+      <p class="p3 font-style exception-style">
         <span class="s1 font-style">Effective Date: 15</span><span class="s2 font-style"><sup>th</sup></span><span
           class="s1 font-style"> July, 2020</span>
       </p>
-      <p class="p2">&nbsp;</p>
       <p class="p3 font-style pt-6">
         <span class="s1 font-style">The SPaceplatform available on
           <a href="https://space.societalplatform.org/" target="_blank"><strong
@@ -501,7 +499,7 @@
         <!-- </ol> -->
         <!-- <p class="p5">&nbsp;</p> -->
         <!-- <ol class="ol1"> -->
-        <li class="li3 font-style pb-32">
+        <li class="li3 font-style pb-32 padding-style">
           <span class="s1 font-style"><strong class="font-text">Disclaimers</strong>:<br /><br />
             <p class="allign-para"> THE PLATFORM,
               INCLUDING THE

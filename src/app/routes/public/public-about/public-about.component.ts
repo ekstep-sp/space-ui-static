@@ -2,7 +2,7 @@ import { Component, OnInit, OnDestroy } from '@angular/core'
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout'
 import { DomSanitizer, SafeResourceUrl, SafeStyle } from '@angular/platform-browser'
 import { map } from 'rxjs/operators'
-import { ConfigurationsService, NsPage } from '@ws-widget/utils'
+import { ConfigurationsService, NsPage, AuthKeycloakService } from '@ws-widget/utils'
 import { Subscription } from 'rxjs'
 import { ActivatedRoute } from '@angular/router'
 import { IAboutObject } from './about.model'
@@ -55,6 +55,7 @@ export class PublicAboutComponent implements OnInit, OnDestroy {
     private breakpointObserver: BreakpointObserver,
     private domSanitizer: DomSanitizer,
     private configSvc: ConfigurationsService,
+    public authSvc: AuthKeycloakService,
     private activateRoute: ActivatedRoute,
     private readonly overlay: Overlay,
     private readonly dialog: MatDialog,

@@ -17,6 +17,9 @@
   font-size: 14px !important;
   color: #FFFFFF !important;
 }
+.display-style {
+  display: contents !important;
+}
 .policy {
   color: white !important;
   font-weight: bold !important;
@@ -87,3 +90,8 @@ line-height: 20px;
   }
 
 }
+div#display-item{
+  padding-left:4rem !important;
+  padding-right:4rem !important;
+}
+

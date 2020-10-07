@@ -43,7 +43,7 @@
       <mat-icon>more_vertical</mat-icon>
     </button> -->
       <button class="home-help" mat-icon-button id="helper" [matMenuTriggerFor]="helpMenu" *ngIf="!isHlpMenuXs">
-        <mat-icon>more_vertical</mat-icon>
+        <mat-icon class="icon-style">dehaze</mat-icon>
       </button>
     </ng-container>
   </mat-toolbar>
@@ -81,7 +81,7 @@
       <mat-icon>contact_support</mat-icon>
     </button>
     <button class="home-help" mat-icon-button id="helper" [matMenuTriggerFor]="helpMenu" *ngIf="!isHlpMenuXs">
-      <mat-icon>more_vertical</mat-icon>
+      <mat-icon class="icon-style">dehaze</mat-icon>
     </button>
   </ng-container>
 </mat-toolbar>
@@ -123,7 +123,7 @@
       </button>
 
       <button class="home-help" mat-icon-button id="helper" [matMenuTriggerFor]="helpMenu" *ngIf="!isHlpMenuXs">
-        <mat-icon>more_vertical</mat-icon>
+        <mat-icon class="icon-style">dehaze</mat-icon>
       </button>
     </ng-container>
   </mat-toolbar>
@@ -141,7 +141,7 @@
   <ng-container *ngFor="let link of links; let i = index" [wsResolverWidget]="link"></ng-container>
 </mat-menu>
 <mat-menu #helpMenu="matMenu">
-  <!-- <ws-widget-btn-feature
+  <ws-widget-btn-feature
     [widgetData]="{
       actionBtnId: 'feature_aboutUs',
       config: {
@@ -156,8 +156,8 @@
         type: 'mat-menu-item'
       }
     }"
-  ></ws-widget-btn-feature> -->
-  <ws-widget-btn-feature [widgetData]="{
+  ></ws-widget-btn-feature>
+  <!-- <ws-widget-btn-feature [widgetData]="{
             actionBtnId: 'feature_feedback',
             config: {
               type: 'mat-menu-item'
@@ -180,5 +180,5 @@
       config: {
         type: 'mat-menu-item'
       }
-    }"></ws-widget-btn-feature>
+    }"></ws-widget-btn-feature> -->
 </mat-menu>

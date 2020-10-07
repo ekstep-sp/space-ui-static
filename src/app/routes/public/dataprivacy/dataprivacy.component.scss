@@ -1,6 +1,6 @@
 @import 'ws-vars';
 @import 'ws-mixins';
-.allignment{
+.alignment{
 padding: 8px 0;
 line-height: 1.7;
 @include breakpoint-xs {
@@ -45,7 +45,7 @@ color: #696466;
 }
 .text-style{
 font-weight: 600;
-font-size: 16px;
+font-size: 24px;
 line-height: 24px;
 color: #925EB0 !important;;
 }
@@ -143,7 +143,7 @@ line-height: 33px !important;
 }
   .header{
     width: 100% !important;
-    font-size: 19px !important;
+    font-size: 24px !important;
     padding-left: 0 !important;
     text-align: center !important;
    }
@@ -157,10 +157,10 @@ line-height: 33px !important;
   // }
 }
 @media screen and (min-width:539px) and (max-width: 542px) {
-.font-style {
+/* .font-style {
     // width: 25rem !important;
     font-size: 16px !important;
-}
+} */
 .header {
     // width: 31rem !important;
     font-size: 16px !important;
@@ -185,48 +185,6 @@ line-height: 33px !important;
 .allign-paras{
   margin-left: -18px;
 }
-// @media screen and (-webkit-min-device-pixel-ratio:0) {
-//  .allignparagraph{
-//   margin-left: -15px !important;
-// }
-// }
-// _::-webkit-full-page-media, _:future, :root .safari_only {
-
-//   // color:#0000FF;
-//   // background-color:#CCCCCC;
-//   .allignparagraph{
-//   margin-left: -18px !important;
-// }
-
-// }
-
-// .allignparagraph :active {
-// margin-left: -18px !important;
-// }
-// ::i-block-chrome, .allignparagraph {
-//      margin-left: -18px !important;
-// }
-
-
-// @media screen and (-webkit-min-device-pixel-ratio:0) {
-//   .allignparagraph{
-//   margin-left: -13px;
-// }
-//    ::i-block-chrome, .seo-website {
-//     margin-left: -18px !important;
-//      }
-//     }
-// @media screen and (-webkit-min-device-pixel-ratio:0) {
-//     /* Safari and Chrome, if Chrome rule needed */
-//     .allignparagraph {
-// margin-left: -13px !important    }
-//     /* Safari 5+ ONLY */
-
-//     ::i-block-chrome,.allignparagraph {
-//      margin-left: -18px !important
-//     }
-// }
-
 
 .allignparagraph:not(:root:root){
      margin-left: -18px !important
@@ -237,54 +195,10 @@ line-height: 33px !important;
 .allign-para:not(:root:root){
   margin-left: -26px !important;
 }
-
-// @supports (-webkit-appearance:none) {
-//   .allignparagraph{
-//   margin-left: -18px !important
-// }}
-
-// @media not all and (min-resolution:.001dpcm)
-// { @supports (-webkit-appearance:none) {
-
-//     .allignparagraph{
-//   margin-left: -18px !important
-// }
-// }}
-
-// @media screen and (-webkit-min-device-pixel-ratio:0) and (min-resolution:.001dpcm)
-// {
-//     .allignparagraph {
-
-//        margin-left: -13px !important;
-
-//     }
-// }
-
 ::ng-deep{
 .theme-muave.night-mode .font-style{
   color: white !important;
 }
-// .theme-muave.night-mode .cimage{
-// width: 100% !important;
-//   height: 100% !important;
-//   margin-left: 0 !important;
-// }
-
-// @media screen and (max-width: 1020px) and (min-width: 960px){
-
-// .theme-muave.night-mode .image-allign{
-//     width: 574px !important;
-//     height: 319px !important;
-//     margin-left: 4.5rem !important;
-
-// }
-// }
-// @media screen and (max-width: 320px) and (min-width: 280px){
-// .theme-muave.night-mode .cimage {
-//     width: 16rem !important;
-// }
-// }
-
 
 .theme-muave.night-mode .img-container{
 max-width: 600px !important;
@@ -299,21 +213,15 @@ max-width: 600px !important;
 }
 
 }
-
-
-
-
-
-
-
-
 .section-container {
- padding: 4rem 60px; 
+ padding: 4rem 30px; 
 }
-
+.section-container-login{
+  padding: 4rem 65px; 
+}
 @media screen and (max-width: 1019px) and (min-width: 700px) {
   .section-container {
-    padding: 4rem 56px;
+    padding: 4rem 30px;
   }
   .img-container {
     height: 320px;
@@ -321,24 +229,37 @@ max-width: 600px !important;
 }
 
 @media screen and (max-width: 700px) and (min-width: 500px) {
-  .section-container {
+  /* .section-container {
     padding: 4rem 31px;
-  }
+  } */
 }
 
-@media screen and (max-width: 600px) and (min-width: 350px) {
+@media screen and (max-width: 600px) {
   .img-container {
-    padding: 1rem;
+    padding: 0 1rem 1rem 1rem;
+  }
+  .section-container {
+    padding: 45px 20px 60px 20px;
+  }
+  h1.header.heading-style {
+    text-align: center;
+    margin: 0 0 45px 0;
+  }
+  .last-child {
+    padding-bottom: 0;
   }
 }
 
-@media screen and (max-width: 500px) {
-  .section-container {
-    padding: 4rem 16px;
+@media screen and (min-width:600px) and (max-width:700px){
+  .section-container-login{
+    padding: 4rem 30px; 
   }
+
 }
 @media screen and (max-width: 330px) {
   .section-container {
     word-break: break-word;
   }
 }
+
+

@@ -7,6 +7,11 @@ line-height: 1.7;
    padding: 0 !important;
 }
 }
+.padding-style {
+  @include breakpoint-xs {
+    padding-bottom: 60px !important;
+  }
+}
 .cimage {
   background-size: cover;
   background-position: center;
@@ -87,6 +92,12 @@ color: #925EB0 !important;;
 .col-2 {
   flex: 1;
 }
+.exception-style {
+  @include breakpoint-xs {
+    text-align: center;
+    margin-bottom: 30px;
+  }
+}
 .header {
   margin-top: 40px;
 font-weight: 460;
@@ -100,6 +111,10 @@ color: #925EB0;
   width: 100% !important;
   font-size: 30px !important;
   line-height: 33px !important;
+  text-align: center !important;
+  margin-top: unset !important;
+  margin-bottom: 0;
+  padding-bottom: 45px;
 }
   @include breakpoint-s {
     font-size: 32px !important;
@@ -118,6 +133,7 @@ color: #925EB0;
     float: unset !important;
     // margin-left: 4rem !important;
      height: auto !important;
+     margin-bottom: 30px !important;
   }
 //   @include breakpoint-s {
 // width: 17rem !important;
@@ -138,7 +154,7 @@ color: #925EB0;
 }
   .header{
     width: 100% !important;
-    font-size: 19px !important;
+    font-size: 24px !important;
     padding-left: 0 !important;
     text-align: center !important;
    }
@@ -178,7 +194,7 @@ color: #925EB0;
     font-family: Montserrat;
     font-style: normal;
     font-weight: normal;
-    font-size: 13px !important;
+    font-size: 16px !important;
     line-height: 24px;
     color: #696466;
 }
@@ -195,7 +211,7 @@ color: #925EB0;
     font-family: Montserrat;
     font-style: normal;
     font-weight: normal;
-    font-size: 15.5px;
+    font-size: 16px;
     line-height: 24px;
     color: #696466;
 }
@@ -297,12 +313,15 @@ color: #925EB0;
 }
 
 .section-container {
-  padding: 4rem 60px; 
+  padding: 4rem 30px; 
  }
+ .section-container-login{
+  padding: 4rem 65px; 
+}
  
  @media screen and (max-width: 1019px) and (min-width: 700px) {
    .section-container {
-     padding: 4rem 56px;
+     padding: 4rem 30px;
    }
    .img-container {
      height: 320px;
@@ -321,9 +340,10 @@ color: #925EB0;
    }
  }
  
+ 
  @media screen and (max-width: 500px) {
    .section-container {
-     padding: 4rem 16px;
+    padding: 60px 20px;
    }
  }
 
@@ -333,6 +353,12 @@ color: #925EB0;
   }
 }
 
+@media screen and (min-width:600px) and (max-width:700px){
+  .section-container-login{
+    padding: 4rem 30px; 
+  }
+
+}
  .mat-drawer-container {
     position: relative;
     z-index: 1;

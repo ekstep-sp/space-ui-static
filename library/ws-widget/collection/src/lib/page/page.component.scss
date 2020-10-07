@@ -2,7 +2,9 @@
   display: block;
   overflow: hidden;
 }
-
+.icon-style {
+  color: #696466 !important;
+}
 .navbar {
   display: none;
 }
@@ -106,4 +108,9 @@
 }
 #page-toolbar{
   background-color: white !important;
+}
+@media screen and (min-width:280px) and (max-width:700px){
+.logo-dim{
+  margin-left:-15px;
+}
 }
