@@ -1,5 +1,5 @@
 <ws-public-header [publicNavBarDetails]= "assetGuidelinesDetails"></ws-public-header>
-<section class="mat-drawer-container mat-drawer-container-has-open mat-drawer-transition flex section-margin section-container">
+<section class="mat-drawer-container mat-drawer-container-has-open mat-drawer-transition flex section-margin section-container" [ngClass]= "{'section-container-login': (authSvc.isLoggedIn$ | async) === false}">
 
   <div class="allignment">
     <h1 class="header heading-style pb-24">Asset Guidelines</h1>

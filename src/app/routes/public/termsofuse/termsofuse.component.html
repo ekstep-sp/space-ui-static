@@ -1,5 +1,5 @@
 <ws-public-header [publicNavBarDetails]= "termsOfUseDetails"></ws-public-header>
-<section class="mat-drawer-container mat-drawer-container-has-open mat-drawer-transition section-container">
+<section class="mat-drawer-container mat-drawer-container-has-open mat-drawer-transition section-container" [ngClass]= "{'section-container-login': (authSvc.isLoggedIn$ | async) === false}">
   <div class="allignment">
 
     <h1 class="header heading-style mobileheader mobilealign">Terms Of Use</h1>

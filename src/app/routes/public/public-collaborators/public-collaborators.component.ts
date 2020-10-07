@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core'
 import { DomSanitizer, SafeUrl } from '@angular/platform-browser'
-import { ConfigurationsService } from '../../../../../library/ws-widget/utils/src/public-api'
+import { ConfigurationsService, AuthKeycloakService } from '../../../../../library/ws-widget/utils/src/public-api'
 import { ActivatedRoute } from '@angular/router'
 
 @Component({
@@ -21,6 +21,7 @@ export class PublicCollaboratorsComponent implements OnInit {
   constructor(
     private configSvc: ConfigurationsService,
     private domSanitizer: DomSanitizer,
+    public authSvc: AuthKeycloakService,
     private router: ActivatedRoute) {
     const instanceConfig = this.configSvc.instanceConfig
     if (instanceConfig) {

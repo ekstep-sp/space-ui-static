@@ -1,4 +1,4 @@
-<div class="collaborator-wrapper">
+<div class="collaborator-wrapper"  [ngClass]= "{'collaborator-wrapper-login': (authSvc.isLoggedIn$ | async) === false}">
   <div id="collaborator" #collaborator>
     <h1 class="header heading-style" name="collaborator">Collaborators</h1>
     <div class="org-text-padding padding-para">
@@ -8,8 +8,8 @@
     </div>
   </div>
 </div>
-<div class="parent-scroller-container">
-  <div class="scroller-container">
+<div class="parent-scroller-container" [ngClass]= "{'parent-scroller-container-login': (authSvc.isLoggedIn$ | async) === false}">
+  <div class="scroller-container" [ngClass]= "{'scroller-container-login': (authSvc.isLoggedIn$ | async) === false}">
     <ws-utils-horizontal-scroller *ngIf=" partner.src?.length" [loadStatus]="'done'">
       <div class="card-container" *ngFor="let src of partner.src;let i = index">
         <a href="{{partner.url[i]}}" target="_blank">

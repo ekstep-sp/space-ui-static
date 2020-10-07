@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core'
-import { ConfigurationsService, NsPage } from '@ws-widget/utils'
+import { ConfigurationsService, NsPage, AuthKeycloakService } from '@ws-widget/utils'
 import { SafeUrl, DomSanitizer } from '@angular/platform-browser'
 import { ActivatedRoute } from '@angular/router'
 
@@ -14,6 +14,7 @@ export class AssetguidelinesComponent implements OnInit {
   pageNavbar: Partial<NsPage.INavBackground> = this.configSvc.pageNavBar
 
   constructor(private configSvc: ConfigurationsService, private domSanitizer: DomSanitizer,
+              public authSvc: AuthKeycloakService,
               private activateRoute: ActivatedRoute) {
     const instanceConfig = this.configSvc.instanceConfig
     if (instanceConfig) {

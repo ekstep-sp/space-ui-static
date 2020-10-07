@@ -12,8 +12,11 @@
 
 .name {
   width: auto !important;
-  padding: 6rem 0 0 2rem;
+  padding: 6rem 0 0 2.5rem;
   text-align: left;
+}
+.name-login{
+  padding: 6rem 0 0 4rem !important;
 }
 
 .img-container {
@@ -277,6 +280,9 @@ word-break: break-word;
 }
 @media screen and (min-width:768px){
 .pl-16{
-  padding-left:2rem !important;
+  padding-left:2.5rem !important;
+}
+.pl-login{
+  padding-left:4rem !important;
 }
 }
