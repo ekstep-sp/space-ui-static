@@ -20,6 +20,12 @@
   padding-top: 4px;
   line-height: 1;
 }
+::ng-deep{
+.theme-muave.night-mode .title-area{
+background-color: #424242 !important;
+color:white !important
+}
+}
 
 .abstract-textarea {
   width: 100%;
