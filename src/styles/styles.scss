@@ -1,16 +1,15 @@
 @import 'ws-vars';
 @import 'ws-mixins';
 @import './utility.scss';
-@import url(https://db.onlinewebfonts.com/c/8d7db40f4a18fe878fd4e0577ddbb03b?family=Campaign+Grotesk);
+// @import url(https://db.onlinewebfonts.com/c/8d7db40f4a18fe878fd4e0577ddbb03b?family=Campaign+Grotesk);
 
 @font-face {
-  font-family: CampaignW00-Medium;
-  src: url("https://db.onlinewebfonts.com/t/8d7db40f4a18fe878fd4e0577ddbb03b.eot");
-  src: url("https://db.onlinewebfonts.com/t/8d7db40f4a18fe878fd4e0577ddbb03b.eot?#iefix") format("embedded-opentype"),
-  url("https://db.onlinewebfonts.com/t/8d7db40f4a18fe878fd4e0577ddbb03b.woff2") format("woff2"),
-  url("https://db.onlinewebfonts.com/t/8d7db40f4a18fe878fd4e0577ddbb03b.woff") format("woff"),
-  url("https://db.onlinewebfonts.com/t/8d7db40f4a18fe878fd4e0577ddbb03b.ttf") format("truetype"),
-  url("https://db.onlinewebfonts.com/t/8d7db40f4a18fe878fd4e0577ddbb03b.svg#Campaign Grotesk") format("svg");
+  font-family: "CampaignW00-Medium";
+  src: url("src/styles/font-face/8d7db40f4a18fe878fd4e0577ddbb03b.eot") format("embedded-opentype"),
+  url("src/styles/font-face/8d7db40f4a18fe878fd4e0577ddbb03b.woff2") format("woff2"),
+  url("src/styles/font-face/8d7db40f4a18fe878fd4e0577ddbb03b.woff") format("woff"),
+  url("src/styles/font-face/8d7db40f4a18fe878fd4e0577ddbb03b.ttf") format("truetype"),
+  url("src/styles/font-face/8d7db40f4a18fe878fd4e0577ddbb03b.svg#Campaign Grotesk") format("svg");
 }
 
 /* fallback */
@@ -18,14 +17,14 @@
   font-family: 'Material Icons';
   font-style: normal;
   font-weight: 400;
-  src: url("src/styles/material-styles/flUhRq6tzZclQEJ-Vdg-IuiaDsNc.woff2") format('woff2');
+  src: url("src/styles/font-face/flUhRq6tzZclQEJ-Vdg-IuiaDsNc.woff2") format('woff2');
 }
 /* fallback */
 @font-face {
   font-family: 'Material Icons Outlined';
   font-style: normal;
   font-weight: 400;
-  src: url("src/styles/material-styles/gok-H7zzDkdnRel8-DQ6KAXJ69wP1tGnf4ZGhUce.woff2") format('woff2');
+  src: url("src/styles/font-face/gok-H7zzDkdnRel8-DQ6KAXJ69wP1tGnf4ZGhUce.woff2") format('woff2');
 }
 
 
@@ -691,7 +690,7 @@ h3.shepherd-title {
 }
 
 .material-icons-outlined {
-  font-family: 'Material Icons Outlined';
+  font-family: 'Material Icons Outlined' !important;
   font-weight: normal;
   font-style: normal;
   font-size: 24px;
