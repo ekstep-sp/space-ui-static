@@ -53,7 +53,6 @@ export class AppBtnFeatureComponent implements OnInit, OnDestroy {
   ) {}
 
   ngOnInit() {
-    console.log(this.widget)
     this.expansion$ = this.featureService.triggerExpansion.subscribe((newExpansion: boolean) => {
       this.expand = newExpansion
       // console.log('expanded now is ', this.expand)
