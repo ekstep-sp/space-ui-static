@@ -10,21 +10,34 @@
     height: auto;
     max-height: 170px;
     overflow: auto;
-    margin-left: -155px;
+    margin-left: 75px;
     margin-right: 10px;
        margin-top: 25px;
     border-top: 3px solid #865ba0 !important;
     border-bottom: 3px solid #865ba0 !important;
     padding: 0px !important;
 }
+.upvotecard {
+  width: 200px !important;
+  height: auto !important;
+  max-height: 170px !important;
+  overflow: auto !important;
+  margin-left: -152px !important;
+  margin-right: 10px !important;
+  margin-top: 25px !important;
+  border-top: 3px solid #865ba0 !important;
+  border-bottom: 3px solid #865ba0 !important;
+  padding: 0px !important;
+}
+
 .mat-card-size-down{
     width: 200px;
     height: auto;
     max-height: 170px;
     overflow: auto;
-    margin-left: 65px;
+    margin-left: -220px;
     margin-right: 10px;
-    margin-top: 17px;
+    margin-top: 35px;
     border-top: 3px solid #865ba0 !important;
     border-bottom: 3px solid #865ba0 !important;
     padding: 0px !important;
@@ -35,7 +48,7 @@
     height: auto;
     max-height: 170px;
     overflow: auto;
-    margin-left: -155px;
+    margin-left: 75px;
     margin-right: 10px;
     margin-top: 15px;
     border-top: 3px solid #865ba0 !important;
@@ -50,56 +63,68 @@
     overflow: auto;
     /* margin-left: 0px; */
     /* margin-right: 10px; */
-    margin-top: 25px;
+    margin-top: 35px;
     border-top: 3px solid #865ba0 !important;
     border-bottom: 3px solid #865ba0 !important;
     padding: 0px !important;
 }
 .mat-card-size-qna-up{
-   width: 150px;
+   width: 200px;
     height: auto;
-    min-height: 130px;
-    margin-left: -160px;
+    min-height: 0;
+    margin-left: 75px;
     margin-right: 10px;
     margin-top: -26px;
     border-top: 3px solid  mat-color($primary) !important;
     border-bottom: 3px solid mat-color($primary) !important;
 }
 @media screen and (max-width:1024px){
-.mat-card-size-down{
-    width: 200px;
-    height: auto;
-    max-height: 170px;
-    overflow: auto;
-    margin-left: -175px;
-    margin-right: 10px;
-    margin-top: 5px;
+  .mat-card-size-down{
+    width: 200px !important;
+    height: auto !important;
+    max-height: 170px !important;
+    overflow: auto !important;
+    margin-left: -220px !important;
+    margin-right: 10px !important;
+    margin-top: 35px !important;
     border-top: 3px solid #865ba0 !important;
     border-bottom: 3px solid #865ba0 !important;
     padding: 0px !important;
-}
-.mat-card-size-like{
-    width: 200px;
-    height: auto;
-    max-height: 170px;
-    overflow: auto;
-    margin-left: 75px;
-    margin-right: 11px;
-    margin-top: 7px;
-    border-top: 3px solid #865ba0 !important;
-    border-bottom: 3px solid #865ba0 !important;
-    padding: 0px !important;
-}
-.mat-card-size-qna-up{
-   width: 150px;
-    height: auto;
-    min-height: 130px;
-    margin-left: 20px;
-    margin-right: 10px;
-    margin-top: -26px;
-    border-top: 3px solid  mat-color($primary) !important;
-    border-bottom: 3px solid mat-color($primary) !important;
-}
+  }
+//   .qna-card-down{
+//     width: 200px !important;
+//     height: auto !important;
+//     max-height: 170px !important;
+//     overflow: auto !important;
+//     margin-left: 75px !important;
+//     margin-right: 10px !important;
+//     margin-top: 25px !important;
+//     border-top: 3px solid #865ba0 !important;
+//     border-bottom: 3px solid #865ba0 !important;
+//     padding: 0px !important;
+//   }
+// .mat-card-size-like{
+//     width: 200px;
+//     height: auto;
+//     max-height: 170px;
+//     overflow: auto;
+//     margin-left: 75px;
+//     margin-right: 11px;
+//     margin-top: 7px;
+//     border-top: 3px solid #865ba0 !important;
+//     border-bottom: 3px solid #865ba0 !important;
+//     padding: 0px !important;
+// }
+// .mat-card-size-qna-up{
+//    width: 200px !important;
+//     height: auto !important;
+//     margin-left: 75px !important;
+//     min-height: 30px !important;
+//     margin-right: 10px !important;
+//     margin-top: -26px !important;
+//     border-top: 3px solid  mat-color($primary) !important;
+//     border-bottom: 3px solid mat-color($primary) !important;
+// }
 }
 .flex-p{
   margin-left:10px;
@@ -192,4 +217,95 @@ span{
    
     color: white !important;
   }
+}
+
+@media screen and (min-width:280px) and (max-width:320px){
+.upvotecard {
+  width: 200px !important;
+  height: auto !important;
+  max-height: 170px !important;
+  overflow: auto !important;
+  margin-left: -130px !important;
+  margin-right: 10px !important;
+  margin-top: 25px !important;
+  border-top: 3px solid #865ba0 !important;
+  border-bottom: 3px solid #865ba0 !important;
+  padding: 0px !important;
+}
+}
+
+
+.mat-card-size-qna-up:not(:root:root){
+    width: 200px !important;
+     height: auto !important;
+     min-height: 0 !important;
+     margin-left: 75px !important;
+     margin-right: 10px !important;
+     margin-top: -26px !important;
+     border-top: 3px solid  mat-color($primary) !important;
+     border-bottom: 3px solid mat-color($primary) !important;
+ }
+ .qna-down:not(:root:root){
+  width: 200px !important;
+  height: auto !important;
+  max-height: 170px !important;
+  overflow: auto !important;
+  margin-left: 75px !important;
+  margin-right: 10px !important;
+  margin-top: 25px !important;
+  border-top: 3px solid #865ba0 !important;
+  border-bottom: 3px solid #865ba0 !important;
+  padding: 0px !important;
+ }
+
+ .mat-card-size-like:not(:root:root){
+  width: 200px;
+  height: auto;
+  max-height: 170px;
+  overflow: auto;
+  margin-left: 75px;
+  margin-right: 11px;
+  margin-top: 7px;
+  border-top: 3px solid #865ba0 !important;
+  border-bottom: 3px solid #865ba0 !important;
+  padding: 0px !important;
+}
+
+
+
+@media screen and (max-width:1366px){
+.qna-card-down{
+  width: 200px !important;
+  height: auto !important;
+  max-height: 170px !important;
+  overflow: auto !important;
+  margin-left: 75px !important;
+  margin-right: 10px !important;
+  margin-top: 25px !important;
+  border-top: 3px solid #865ba0 !important;
+  border-bottom: 3px solid #865ba0 !important;
+  padding: 0px !important;
+}
+.mat-card-size-like{
+  width: 200px;
+  height: auto;
+  max-height: 170px;
+  overflow: auto;
+  margin-left: 75px;
+  margin-right: 11px;
+  margin-top: 7px;
+  border-top: 3px solid #865ba0 !important;
+  border-bottom: 3px solid #865ba0 !important;
+  padding: 0px !important;
+}
+.mat-card-size-qna-up{
+ width: 200px !important;
+  height: auto !important;
+  margin-left: 75px !important;
+  min-height: 30px !important;
+  margin-right: 10px !important;
+  margin-top: -26px !important;
+  border-top: 3px solid  mat-color($primary) !important;
+  border-bottom: 3px solid mat-color($primary) !important;
+}
 }
