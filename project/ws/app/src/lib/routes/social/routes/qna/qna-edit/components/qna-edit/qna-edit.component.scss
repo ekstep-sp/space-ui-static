@@ -6,7 +6,9 @@
   max-width: 700px;
   margin: auto;
   padding: $size-m;
-  height: calc(100vh - 168px - 52px);
+  height:auto;
+  min-height:500px;
+  // height: calc(100vh - 168px - 52px);
   overflow: auto;
   box-sizing: border-box;
 }
@@ -50,13 +52,14 @@ color:white !important
 }
 
 .save-options {
-  position: absolute;
+  // position: absolute;
   // bottom: 52px;
   display: flex;
   justify-content: center;
   align-items: center;
   width: 100%;
-  padding: 10px;
+  padding:10px 0 10px 0;
+  // padding: 10px;
 
   @include breakpoint-xs {
     bottom: 170px;
