@@ -16,8 +16,8 @@ export class TermsofuseComponent implements OnInit {
   pageNavbar: Partial<NsPage.INavBackground> = this.configSvc.pageNavBar
 
   constructor(private configSvc: ConfigurationsService, private domSanitizer: DomSanitizer,
-             public authSvc: AuthKeycloakService,
-              private activateRoute: ActivatedRoute) {
+    public authSvc: AuthKeycloakService,
+    private activateRoute: ActivatedRoute) {
     const instanceConfig = this.configSvc.instanceConfig
     if (instanceConfig) {
       this.termsOfUse = this.domSanitizer.bypassSecurityTrustResourceUrl(
