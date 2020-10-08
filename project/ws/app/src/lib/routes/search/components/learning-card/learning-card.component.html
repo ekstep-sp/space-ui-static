@@ -28,7 +28,7 @@
               check_circle</mat-icon>
             <a (click)="raiseTelemetry()" [routerLink]="(content | pipeContentRoute).url"
               [queryParams]="(content | pipeContentRoute).queryParams"
-              class="margin-remove-bottom text-truncate mat-title">{{ content.name }}</a>
+              class="margin-remove-bottom text-truncate mat-title font-size-18px">{{ content.name }}</a>
           </h1>
           <div>
             <ws-widget-display-content-type i18n-matTooltip matTooltip="Content Type"

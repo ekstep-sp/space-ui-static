@@ -1,11 +1,11 @@
-<h1 i18n>Notification Settings</h1>
-<h4 class="montserrat" i18n>Notifications you receive on modes other than the application.</h4>
+<h1 class="font-campaign" i18n>Notification Settings</h1>
+<h4 class="font-montserrat" i18n>Notifications you receive on modes other than the application.</h4>
 <div *ngIf="notificationsFetchStatus === 'fetching'" class="mt-4 text-center">
   <mat-spinner></mat-spinner>
 </div>
 <h2
   *ngIf="notificationsFetchStatus === 'error'"
-  class="ws-mat-primary-text text-center margin-top-l"
+  class="font-campaign ws-mat-primary-text text-center margin-top-l"
   i18n
 >
   Unable to fetch notification settings. Please try after sometime.
@@ -20,7 +20,7 @@
       role="button"
       (click)="group.show ? (group.show = false) : (group.show = true)"
     >
-      <h2 class="group-name">{{ group.group_name }}</h2>
+      <h2 class="group- font-montserrat">{{ group.group_name }}</h2>
       <button mat-icon-button>
         <mat-icon *ngIf="!group.show">arrow_drop_down</mat-icon>
         <mat-icon *ngIf="group.show">arrow_drop_up</mat-icon>
@@ -31,7 +31,7 @@
         class="ws-mat-primary-lite-border-bottom px-8 py-3"
         *ngFor="let event of group.events; let eventIndex = index"
       >
-        <h3 class="event-name">
+        <h3 class="event-name font-montserrat">
           {{ event.event_name }}
         </h3>
         <!-- <p class="font-normal" i18n>Where you receive these notifications</p> -->

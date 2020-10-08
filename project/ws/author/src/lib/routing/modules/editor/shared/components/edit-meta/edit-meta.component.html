@@ -199,10 +199,10 @@
           </div>
           <div class="flex flex-end margin-top-l margin-bottom-s margin-right-l">
             <button mat-raised-button type="button" id="ws-auth-edit-save-tab-one" name="ws-auth-edit-save-tab-one"
-              class="text-white ws-mat-primary-background text-white margin-right-m" (click)="data.emit('save')">
+              class="font-montserrat text-white ws-mat-primary-background text-white margin-right-m" (click)="data.emit('save')">
               <span class="text-white" i18n>Save</span>
             </button>
-            <button mat-raised-button type="button" class="text-white ws-mat-primary-background text-white"
+            <button mat-raised-button type="button" class="font-montserrat text-white ws-mat-primary-background text-white"
               (click)="formNext(1)" id="ws-auth-edit-next-tab-one" name="ws-auth-edit-next-tab-one">
               <span class="text-white" i18n>Next</span>
             </button>
@@ -644,7 +644,7 @@
                   <b [ngClass]="{ required: checkCondition('catalogPaths', 'required') }" i18n>Catalog</b>
                   <mat-icon class="ws-mat-primary-text margin-left-xs pointer" (click)="showInfo('catalogPaths')">info
                   </mat-icon>
-                  <button mat-button class="ws-mat-primary-text font-weight-500 flex flex-middle cursor-pointer"
+                  <button mat-button class="font-montserrat ws-mat-primary-text font-weight-500 flex flex-middle cursor-pointer"
                     (click)="openCatalogSelector()">
                     <mat-icon>add</mat-icon>
                     <span i18n>
@@ -671,7 +671,7 @@
                       {{ catalog }}
                     </mat-chip>
                   </mat-chip-list>
-                  <button *ngIf="(contentForm.controls.catalogPaths.value || []).length > 5" mat-button
+                  <button class="font-montserrat" *ngIf="(contentForm.controls.catalogPaths.value || []).length > 5" mat-button
                     (click)="showMoreGlance = !showMoreGlance">
                     <mat-icon>{{ !showMoreGlance ? 'arrow_drop_down' : 'arrow_drop_up' }}</mat-icon>
                     <ng-container i18n *ngIf="!showMoreGlance">Show More</ng-container>
@@ -735,10 +735,10 @@
           </div>
           <div class="flex flex-end margin-top-l margin-bottom-l margin-right-l">
             <button mat-raised-button type="button" id="ws-auth-edit-save-tab-two" name="ws-auth-edit-save-tab-two"
-              class="text-white ws-mat-primary-background text-white margin-right-m" (click)="data.emit('save')">
+              class="font-montserrat text-white ws-mat-primary-background text-white margin-right-m" (click)="data.emit('save')">
               <span class="text-white" i18n>Save</span>
             </button>
-            <button mat-raised-button type="button" class="text-white ws-mat-primary-background text-white"
+            <button mat-raised-button type="button" class="font-montserrat text-white ws-mat-primary-background text-white"
               (click)="formNext(2)" id="ws-auth-edit-next-tab-two" name="ws-auth-edit-next-tab-two">
               <span class="text-white" i18n>Next</span>
             </button>
@@ -1207,10 +1207,10 @@
           </div>
           <div class="flex flex-end margin-top-l margin-bottom-l margin-right-l">
             <button mat-raised-button type="button" id="ws-auth-edit-save-tab-three" name="ws-auth-edit-save-tab-three"
-              class="text-white ws-mat-primary-background text-white margin-right-m" (click)="data.emit('save')">
+              class="font-montserrat text-white ws-mat-primary-background text-white margin-right-m" (click)="data.emit('save')">
               <span class="text-white" i18n>Save</span>
             </button>
-            <button mat-raised-button type="button" class="text-white ws-mat-primary-background text-white"
+            <button mat-raised-button type="button" class="font-montserrat text-white ws-mat-primary-background text-white"
               (click)="formNext(3)" id="ws-auth-edit-next-tab-three" name="ws-auth-edit-next-tab-three">
               <span class="text-white" i18n>Next</span>
             </button>
@@ -1619,7 +1619,7 @@
                       }}
                     </p>
                     <button mat-icon-button
-                      class="close-button padding-remove ws-mat-primary-background-op30 text-white">
+                      class="font-montserrat close-button padding-remove ws-mat-primary-background-op30 text-white">
                       <mat-icon>close</mat-icon>
                     </button>
                   </div>
@@ -1672,10 +1672,10 @@
             <div class="flex flex-end margin-top-l margin-bottom-l margin-right-l">
               <button mat-raised-button type="button" id="ws-auth-edit-save-tab-three"
                 name="ws-auth-edit-save-tab-three"
-                class="text-white ws-mat-primary-background text-white margin-right-m" (click)="data.emit('save')">
+                class="font-montserrat text-white ws-mat-primary-background text-white margin-right-m" (click)="data.emit('save')">
                 <span class="text-white" i18n>Save</span>
               </button>
-              <button mat-raised-button type="button" class="text-white ws-mat-primary-background text-white"
+              <button mat-raised-button type="button" class="font-montserrat text-white ws-mat-primary-background text-white"
                 (click)="formNext(4)">
                 <span class="text-white" i18n>Next</span>
               </button>
@@ -1969,11 +1969,11 @@
           <div class="grid"></div>
           <div class="flex flex-end margin-top-l margin-bottom-l margin-right-l">
             <button mat-raised-button type="button" id="ws-auth-edit-meta-save-final"
-              name="ws-auth-edit-meta-save-final" class="text-white ws-mat-primary-background text-white margin-right-m"
+              name="ws-auth-edit-meta-save-final" class="font-montserrat text-white ws-mat-primary-background text-white margin-right-m"
               (click)="data.emit('save')">
               <span class="text-white" i18n>Save</span>
             </button>
-            <button mat-raised-button type="button" class="text-white ws-mat-primary-background text-white"
+            <button mat-raised-button type="button" class="font-montserrat text-white ws-mat-primary-background text-white"
               (click)="emitPushEvent()" id="ws-auth-edit-meta-push" name="ws-auth-edit-meta-push">
               <span class="text-white" i18n>
                 Done

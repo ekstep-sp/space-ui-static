@@ -35,16 +35,59 @@
   .ws-mat-primary-lite-background {
     background-color: $colorPrimaryLight;
   }
-  mat-progress-bar .mat-progress-bar-fill::after{
-    background-color:  #925EB0 !important;
+  mat-progress-bar .mat-progress-bar-fill::after {
+    background-color: #925eb0 !important;
   }
-  div.mat-progress-bar-buffer.mat-progress-bar-element{
-    background-color: #c8afd7!important;
+  div.mat-progress-bar-buffer.mat-progress-bar-element {
+    background-color: #c8afd7 !important;
   }
- /*  .mat-menu-item {
+  .mat-menu-item {
     font-size: 14px;
-    font-family: monsterrat !important;
-} */
+    font-family: Montserrat !important;
+  }
+  h1.mat-h1 {
+    font-family: CampaignW00-Medium !important;
+  }
+  div.mat-subheading-1 {
+    font-family: Montserrat !important;
+    font-size: 16px;
+  }
+  h2.font-16px {
+    font-family: Montserrat !important;
+    font-size: 18px;
+  }
+  .font-size-14px {
+    font-size: 14px !important;
+  }
+  .font-size-16px {
+    font-size: 16px !important;
+  }
+  .font-size-18px {
+    font-size: 18px !important;
+  }
+  .font-size-24px {
+    font-size: 24px !important;
+  }
+  .font-size-48px {
+    font-size: 48px !important;
+  }
+  p,
+  b,
+  mat-label,
+  input,
+  button,
+  .mat-checkbox-label,
+  .font-montserrat {
+    font-family: Montserrat !important;
+  }
+  div.font-montserrat,
+  h3.font-montserrat,
+  textarea {
+    font-family: Montserrat !important;
+  }
+  .font-campaign {
+    font-family: CampaignW00-Medium !important;
+  }
   .ws-mat-primary-lite-background-op30 {
     background: rgba($colorPrimaryLight, 0.3);
   }
@@ -55,7 +98,7 @@
   @if $is-dark {
     .mat-expansion-panel-body {
       background: #424242 !important;
-      }
+    }
     mat-toolbar {
       button[disabled] {
         color: black !important;
@@ -65,6 +108,7 @@
 
     .ws-mat-primary-text {
       color: $colorPrimaryLight !important;
+      //  font-family: montserrat!important;
     }
 
     .ws-mat-accent-text {
@@ -73,6 +117,7 @@
   } @else {
     .ws-mat-primary-text {
       color: $colorPrimary !important;
+      //  font-family: montserrat!important;
     }
 
     .ws-mat-accent-text {
@@ -85,17 +130,17 @@
   }
 
   @if $is-dark {
-    a[href^='/'][target='_self'],
-    a[href^='http'],
-    a[href^='mailto'],
-    a[target='_blank'] {
+    a[href^="/"][target="_self"],
+    a[href^="http"],
+    a[href^="mailto"],
+    a[target="_blank"] {
       color: $colorPrimaryLight;
     }
   } @else {
-    a[href^='/'][target='_self'],
-    a[href^='http'],
-    a[href^='mailto'],
-    a[target='_blank'] {
+    a[href^="/"][target="_self"],
+    a[href^="http"],
+    a[href^="mailto"],
+    a[target="_blank"] {
       color: $colorPrimary;
     }
   }
@@ -211,16 +256,12 @@
     }
 
     &::after {
-      content: '';
-      background: linear-gradient(
-        to right,
-        rgba(mat-color($background, card), 0),
-        mat-color($background, card) 50%
-      );
+      content: "";
+      background: linear-gradient(to right, rgba(mat-color($background, card), 0), mat-color($background, card) 50%);
     }
 
     &::before {
-      content: '...';
+      content: "...";
     }
   }
 
@@ -230,11 +271,7 @@
     position: absolute;
     width: 90%;
     margin-top: 24%;
-    background: linear-gradient(
-      to bottom,
-      rgba(mat-color($background, card), 0),
-      mat-color($background, card) 100%
-    );
+    background: linear-gradient(to bottom, rgba(mat-color($background, card), 0), mat-color($background, card) 100%);
   }
 
   .mat-button-toggle-checked {
@@ -264,7 +301,7 @@
   .required {
     &::after {
       color: $colorWarnDark;
-      content: ' *';
+      content: " *";
     }
   }
 }
