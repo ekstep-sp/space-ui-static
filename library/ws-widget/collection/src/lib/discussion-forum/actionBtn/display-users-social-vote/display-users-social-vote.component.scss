@@ -205,3 +205,18 @@ span{
     color: white !important;
   }
 }
+
+@media screen and (min-width:280px) and (max-width:320px){
+.upvotecard {
+  width: 200px !important;
+  height: auto !important;
+  max-height: 170px !important;
+  overflow: auto !important;
+  margin-left: -130px !important;
+  margin-right: 10px !important;
+  margin-top: 25px !important;
+  border-top: 3px solid #865ba0 !important;
+  border-bottom: 3px solid #865ba0 !important;
+  padding: 0px !important;
+}
+}

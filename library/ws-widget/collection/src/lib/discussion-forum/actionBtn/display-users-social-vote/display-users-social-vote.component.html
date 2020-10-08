@@ -1,6 +1,6 @@
 <ng-container *ngIf="voteType === 'upVote'">
   <ng-container *ngIf="iconType === 'thumbs'">
-    <mat-card class="mat-card-size-up" *ngIf="userList?.length">
+    <mat-card class="mat-card-size-up upvotecard" *ngIf="userList?.length">
       <div *ngFor="let user of userList;let i = index" class="flex-p">
         <p class="name  ws-mat-primary-text "> {{user.full_name}}</p>
         <div>
