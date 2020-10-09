@@ -93,3 +93,12 @@ mat-spinner {
 mat-chip {
       height: auto !important;
 }
+
+ @media screen and (max-width:320px){
+   .block-small-size{
+    display:block !important;
+   }
+   .user-details{
+     margin-top:15px !important;
+   }
+ }
