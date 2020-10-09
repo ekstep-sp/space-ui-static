@@ -8,6 +8,8 @@ mat-spinner {
 }
 .card-view {
   padding: 20px 0;
+
+
   .icon-section {
     width: 10%;
     min-width: 100px;
@@ -77,7 +79,11 @@ mat-spinner {
     margin-top: $size-m;
     display: flex;
     align-items: center;
+    @include breakpoint-xs {
+      display: block !important;
+        }
   }
+
 }
 ::ng-deep {
   .theme-muave.night-mode .margin-bottom-s span{
