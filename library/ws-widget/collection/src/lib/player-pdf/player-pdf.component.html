@@ -41,8 +41,8 @@
       <ws-widget-btn-fullscreen (fsState)="fullScreenState($event)" (click)="refresh()"
         [widgetData]="{ fsContainer: fullScreenContainer }">
       </ws-widget-btn-fullscreen>
-      <ng-container *ngIf="widgetData.pdfUrl && isDownloadable">
-        <button class="hidedownloads" mat-button>
+      <ng-container *ngIf="isMobile() && widgetData.pdfUrl && isDownloadable">
+        <button mat-button>
           <mat-icon color="primary" (click)="download()">cloud_download</mat-icon>
         </button>
       </ng-container>
@@ -58,13 +58,13 @@
     <ws-widget-btn-fullscreen (fsState)="fullScreenState($event)" (click)="refresh()"
       [widgetData]="{ fsContainer: fullScreenContainer }">
     </ws-widget-btn-fullscreen>
-    <ng-container *ngIf="widgetData.pdfUrl && isDownloadable">
-      <button class="hidedownload" mat-menu-item>
+    <ng-container *ngIf="isMobile() && widgetData.pdfUrl && isDownloadable">
+      <button mat-menu-item>
         <mat-icon (click)="download()">cloud_download</mat-icon>
       </button>
     </ng-container>
   </mat-menu>
-  <div class="hidedownload" [ngClass]="{ 'custom-scroll-small': !isInFullScreen }" class="pdf-page-container">
+  <div [ngClass]="{ 'custom-scroll-small': !isInFullScreen }" class="pdf-page-container">
     <div [ngClass]="{ 'custom-scroll-small': !isInFullScreen }" class="container" #pdfContainer></div>
   </div>
 </section>
