@@ -1,7 +1,7 @@
 <ng-container *ngIf="postId">
   <ng-container *ngIf="voteType === 'downVote'">
     <ng-container *ngIf="iconType === 'thumbs'">
-      <div class="tooltip">
+      <div class="tooltip" [ngClass]= "{'tooltip-reply-downvote':isReply}">
         <button name="discussion-forum-downvote-button" [disabled]="isUpdating || isDisabled"
           (click)="downVote(invalidUser.value)" type="button" mat-icon-button matTooltipPosition="above" i18n-aria-label
           aria-label="down vote" i18n-matTooltip matTooltip="Down vote"
@@ -17,7 +17,7 @@
       </div>
     </ng-container>
     <ng-container *ngIf="iconType === 'triangle'">
-      <div class="tooltip">
+      <div class="tooltip tooltip-qna" >
         <mat-icon class="vote-triangle" role="button" matTooltip="Down vote" matTooltipPosition="right"
           (click)="downVote(invalidUser.value)" [ngClass]="{ highlight: activity.userActivity.downVote }">
           arrow_drop_down</mat-icon>
@@ -57,7 +57,7 @@
       </div>
     </ng-container>
     <ng-container *ngIf="iconType === 'triangle'">
-      <div class="tooltip">
+      <div class="tooltip tooltip-qna" >
         <mat-icon class="vote-triangle" matTooltip="up vote" matTooltipPosition="right" role="button" i18n-matTooltip
           (click)="upVote(invalidUser.value)" [ngClass]="{ highlight: activity.userActivity.upVote }">arrow_drop_up
         </mat-icon>

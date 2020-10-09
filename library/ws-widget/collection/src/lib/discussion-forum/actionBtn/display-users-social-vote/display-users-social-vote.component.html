@@ -12,7 +12,7 @@
     </mat-card>
   </ng-container>
   <ng-container *ngIf="iconType === 'triangle'">
-    <mat-card class="mat-card-size-up" *ngIf="userList?.length">
+    <mat-card class=" mat-card-size-up mat-card-size-up-qna" *ngIf="userList?.length">
       <div *ngFor="let user of userList;let i = index" class="flex-p">
         <p class="name float-name ws-mat-primary-text"> {{user.full_name}}</p>
         <div class="p-width">
@@ -37,7 +37,7 @@
     </mat-card>
   </ng-container>
   <ng-container *ngIf="iconType === 'triangle'">
-    <mat-card class="mat-card-size-up" *ngIf="userListDownVote?.length">
+    <mat-card class="mat-card-size-up  mat-card-size-down-qna" *ngIf="userListDownVote?.length">
       <div *ngFor="let user of userListDownVote;let i = index" class="flex-p">
         <p class="name float-name  ws-mat-primary-text"> {{user.full_name}}</p>
         <div class="p-width">

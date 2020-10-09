@@ -105,5 +105,14 @@
     border-top: 3px solid  mat-color($primary) !important;
     border-bottom: 3px solid mat-color($primary) !important;
 }
+.tooltip-reply-downvote .tooltiptext-downvote {
+margin-left:200px;
 }
+.tooltip-qna .tooltiptext{
+  margin-left:10px !important;
+  margin-top:30px !important;
+}
+}
+
+
 

@@ -101,9 +101,21 @@ $primary: $theme-primary;
    border-top: 3px solid  mat-color($primary) !important;
    border-bottom: 3px solid mat-color($primary) !important;
 }
+.mat-card-size-up-qna{
+   margin:auto;
+   border-top: 3px solid #865ba0 !important;
+   border-bottom: 3px solid #865ba0 !important;
+   padding: 0px !important;
+}
 .mat-card-size-down-blog{
    margin-left:-220px;
    margin-top:30px;
+}
+.mat-card-size-down-qna{
+   margin:auto;
+   border-top: 3px solid #865ba0 !important;
+   border-bottom: 3px solid #865ba0 !important;
+   padding: 0px !important;
 }
 .isReply-blog-up{
    width: 200px;
