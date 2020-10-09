@@ -1,6 +1,6 @@
 <mat-toolbar [color]="navBackground?.color" [ngStyle]="navBackground?.styles">
   <ws-widget-btn-page-back [widgetData]="{ url: 'back' }"></ws-widget-btn-page-back>
-  <span class="margin-left-s text-color" i18n>User Dashboard</span>
+  <span class="margin-left-s text-color font-size-24px font-campaign" i18n>User Dashboard</span>
 </mat-toolbar>
 
 <div *ngIf="userListArray?.length == 0 && !isLoad">
