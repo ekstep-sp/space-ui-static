@@ -49,15 +49,12 @@ export class PlayerBriefComponent implements OnInit {
     }
   }
 
-
   isMobile() {
     if (this.utilitySvc.isIos) {
       return false
     }
     return true
   }
-
-
 
   get isDownloadable() {
     if (this.content) {

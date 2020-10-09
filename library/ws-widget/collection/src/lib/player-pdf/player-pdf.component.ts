@@ -193,15 +193,12 @@ export class PlayerPdfComponent extends WidgetBaseComponent
     // delete link;
   }
 
-
   isMobile() {
     if (this.utilitySvc.isIos) {
       return false
     }
     return true
   }
-
-
 
   ngOnChanges() {
     // if (this.widgetData !== this.oldData) {
