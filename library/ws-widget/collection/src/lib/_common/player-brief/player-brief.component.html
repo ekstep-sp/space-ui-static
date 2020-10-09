@@ -245,22 +245,22 @@
       </button>
     </mat-card>
   </ng-container>
-  <mat-card class="ws-mat-primary-lite-background-on-day ws-mat-primary-border-top-bolder info-container">
-    <h2 i18n>At a glance</h2>
+  <mat-card class="font-montserrat ws-mat-primary-lite-background-on-day ws-mat-primary-border-top-bolder info-container">
+    <h2 class="font-montserrat font-size-18px" i18n>At a glance</h2>
     <div class="info-item" *ngIf="content?.displayContentType">
-      <h3 class="item-heading ws-mat-primary-text" i18n>Format</h3>
+      <h3 class="item-heading ws-mat-primary-text font-montserrat" i18n>Format</h3>
       <ws-widget-display-content-type *ngIf="content?.contentType !== contentTypes.RESOURCE"
-        class="ws-mat-accent-text width-expand mat-body-strong" [displayContentType]="content?.displayContentType">
+        class="ws-mat-accent-text width-expand mat-body-strong font-montserrat" [displayContentType]="content?.displayContentType">
       </ws-widget-display-content-type>
       <div *ngIf="content?.contentType === contentTypes.RESOURCE"
-        class="ws-mat-accent-text width-expand mat-body-strong">
+        class="ws-mat-accent-text width-expand mat-body-strong font-montserrat">
         {{ content?.resourceType }}
       </div>
     </div>
     <mat-divider *ngIf="content?.displayContentType"></mat-divider>
     <div class="info-item" *ngIf="content?.complexityLevel">
-      <h3 class="item-heading ws-mat-primary-text" i18n>Level</h3>
-      <h3 class="ws-mat-accent-text width-expand">
+      <h3 class="item-heading ws-mat-primary-text font-montserrat" i18n>Level</h3>
+      <h3 class="ws-mat-accent-text width-expand font-montserrat">
         {{ content?.complexityLevel }}
       </h3>
     </div>
@@ -299,66 +299,66 @@
     <!-- Structure -->
 
     <div class="info-item" *ngIf="hasTocStructure && content?.children?.length">
-      <h3 class="item-heading ws-mat-primary-text" i18n>Structure</h3>
-      <div class="ws-mat-accent-text width-expand">
-        <h3 *ngIf="tocStructure?.course > 0">
+      <h3 class="item-heading ws-mat-primary-text font-montserrat" i18n>Structure</h3>
+      <div class="ws-mat-accent-text width-expand font-montserrat">
+        <h3 class="font-montserrat" *ngIf="tocStructure?.course > 0">
           <ng-container>{{ tocStructure?.course }}</ng-container>
           <ng-container *ngIf="tocStructure?.course === 1" i18n> Collection</ng-container>
           <ng-container *ngIf="tocStructure?.course > 1" i18n> Collections</ng-container>
         </h3>
-        <h3 *ngIf="tocStructure?.learningModule > 0">
+        <h3 class="font-montserrat" *ngIf="tocStructure?.learningModule > 0">
           <ng-container>{{ tocStructure?.learningModule }}</ng-container>
           <ng-container *ngIf="tocStructure?.learningModule === 1" i18n> Asset</ng-container>
           <ng-container *ngIf="tocStructure?.learningModule > 1" i18n> Assets</ng-container>
         </h3>
-        <h3 *ngIf="tocStructure?.video > 0">
+        <h3 class="font-montserrat" *ngIf="tocStructure?.video > 0">
           <ng-container>{{ tocStructure?.video }}</ng-container>
           <ng-container *ngIf="tocStructure?.video === 1" i18n> Video</ng-container>
           <ng-container *ngIf="tocStructure?.video > 1" i18n> Videos</ng-container>
         </h3>
-        <h3 *ngIf="tocStructure?.interactiveVideo > 0">
+        <h3 class="font-montserrat" *ngIf="tocStructure?.interactiveVideo > 0">
           <ng-container>{{ tocStructure?.interactiveVideo }}</ng-container>
           <ng-container *ngIf="tocStructure?.interactiveVideo === 1" i18n>
             Interactive Video</ng-container>
           <ng-container *ngIf="tocStructure?.interactiveVideo > 1" i18n>
             Interactive Videos</ng-container>
         </h3>
-        <h3 *ngIf="tocStructure?.youtube > 0">
+        <h3 class="font-montserrat" *ngIf="tocStructure?.youtube > 0">
           <ng-container>{{ tocStructure?.youtube }}</ng-container>
           <ng-container *ngIf="tocStructure?.youtube === 1" i18n> Youtube Video</ng-container>
           <ng-container *ngIf="tocStructure?.youtube > 1" i18n> Youtube Videos</ng-container>
         </h3>
-        <h3 *ngIf="tocStructure?.pdf > 0">
+        <h3 class="font-montserrat" *ngIf="tocStructure?.pdf > 0">
           <ng-container>{{ tocStructure?.pdf }}</ng-container>
           <ng-container *ngIf="tocStructure?.pdf === 1" i18n> PDF</ng-container>
           <ng-container *ngIf="tocStructure?.pdf > 1" i18n> PDFs</ng-container>
         </h3>
-        <h3 *ngIf="tocStructure?.podcast > 0">
+        <h3 class="font-montserrat" *ngIf="tocStructure?.podcast > 0">
           <ng-container>{{ tocStructure?.podcast }}</ng-container>
           <ng-container *ngIf="tocStructure?.podcast === 1" i18n> Podcast</ng-container>
           <ng-container *ngIf="tocStructure?.podcast > 1" i18n> Podcasts</ng-container>
         </h3>
-        <h3 *ngIf="tocStructure?.webModule > 0">
+        <h3 class="font-montserrat" *ngIf="tocStructure?.webModule > 0">
           <ng-container>{{ tocStructure?.webModule }}</ng-container>
           <ng-container *ngIf="tocStructure?.webModule === 1" i18n> Web Asset</ng-container>
           <ng-container *ngIf="tocStructure?.webModule > 1" i18n> Web Assets</ng-container>
         </h3>
-        <h3 *ngIf="tocStructure?.webPage > 0">
+        <h3 class="font-montserrat" *ngIf="tocStructure?.webPage > 0">
           <ng-container>{{ tocStructure?.webPage }}</ng-container>
           <ng-container *ngIf="tocStructure?.webPage === 1" i18n> Web Page</ng-container>
           <ng-container *ngIf="tocStructure?.webPage > 1" i18n> Web Pages</ng-container>
         </h3>
-        <h3 *ngIf="tocStructure?.quiz > 0">
+        <h3 class="font-montserrat" *ngIf="tocStructure?.quiz > 0">
           <ng-container>{{ tocStructure?.quiz }}</ng-container>
           <ng-container *ngIf="tocStructure?.quiz === 1" i18n> Quiz</ng-container>
           <ng-container *ngIf="tocStructure?.quiz > 1" i18n> Quizzes</ng-container>
         </h3>
-        <h3 *ngIf="tocStructure?.assessment > 0">
+        <h3 class="font-montserrat" *ngIf="tocStructure?.assessment > 0">
           <ng-container>{{ tocStructure?.assessment }}</ng-container>
           <ng-container *ngIf="tocStructure?.assessment === 1" i18n> Assessment</ng-container>
           <ng-container *ngIf="tocStructure?.assessment > 1" i18n> Assessments</ng-container>
         </h3>
-        <h3 *ngIf="tocStructure?.other > 0">
+        <h3 class="font-montserrat" *ngIf="tocStructure?.other > 0">
           <ng-container>{{ tocStructure?.other }}</ng-container>
           <ng-container *ngIf="tocStructure?.other === 1" i18n> Other Item</ng-container>
           <ng-container *ngIf="tocStructure?.other > 1" i18n> Other Items</ng-container>
@@ -376,8 +376,8 @@
     <mat-divider *ngIf="hasTocStructure && content?.children?.length"></mat-divider>
 
     <div class="info-item" *ngIf="content?.assetType">
-      <h3 class="item-heading ws-mat-primary-text" i18n>Type</h3>
-      <h3 class="ws-mat-accent-text width-expand">
+      <h3 class="item-heading ws-mat-primary-text font-montserrat" i18n>Type</h3>
+      <h3 class="ws-mat-accent-text width-expand font-montserrat">
         {{ content?.assetType  }}
       </h3>
     </div>
@@ -385,8 +385,8 @@
 
     <mat-divider *ngIf="hasTocStructure && content?.children?.length"></mat-divider>
     <div class="info-item" *ngIf="content?.categoryType && content?.assetType=='Knowledge'">
-      <h3 class="item-heading ws-mat-primary-text" i18n>Format</h3>
-      <h3 class="ws-mat-accent-text width-expand">
+      <h3 class="item-heading ws-mat-primary-text font-montserrat" i18n>Format</h3>
+      <h3 class="ws-mat-accent-text width-expand font-montserrat">
         {{ content?.categoryType  }}
       </h3>
 
@@ -419,8 +419,8 @@
     <!-- added licence policy details -->
     <mat-divider *ngIf="hasTocStructure && content?.children?.length"></mat-divider>
     <div class="info-item" *ngIf="content?.spaceLicense?.length">
-      <h3 class="item-heading ws-mat-primary-text" i18n>Licence</h3>
-      <h3 class="ws-mat-accent-text width-expand">
+      <h3 class="item-heading ws-mat-primary-text font-montserrat" i18n>Licence</h3>
+      <h3 class="ws-mat-accent-text width-expand font-montserrat">
         {{ content?.spaceLicense  }}
       </h3>
     </div>
@@ -428,8 +428,8 @@
 
     <mat-divider *ngIf="hasTocStructure && content?.children?.length"></mat-divider>
     <div class="info-item" *ngIf="content?.spaceLicenseAttribution?.length">
-      <h3 class="item-heading ws-mat-primary-text" i18n>Attributions</h3>
-      <h3 class="ws-mat-accent-text width-expand">
+      <h3 class="item-heading ws-mat-primary-text font-montserrat" i18n>Attributions</h3>
+      <h3 class="ws-mat-accent-text width-expand font-montserrat">
         {{ content?.spaceLicenseAttribution  }}
       </h3>
     </div>
@@ -437,8 +437,8 @@
 
     <mat-divider *ngIf="hasTocStructure && content?.children?.length"></mat-divider>
     <div class="info-item" *ngIf="content?. spaceLicenseCopyright?.length">
-      <h3 class="item-heading ws-mat-primary-text" i18n>Copyright</h3>
-      <h3 class="ws-mat-accent-text width-expand">
+      <h3 class="item-heading ws-mat-primary-text font-montserrat" i18n>Copyright</h3>
+      <h3 class="ws-mat-accent-text width-expand font-montserrat">
         {{ content?.spaceLicenseCopyright  }}
       </h3>
     </div>
@@ -446,8 +446,8 @@
 
     <mat-divider *ngIf="hasTocStructure && content?.children?.length"></mat-divider>
     <div class="info-item" *ngIf="content?. spaceAreaOfExpertise?.length">
-      <h3 class="item-heading ws-mat-primary-text" i18n>Areas of Expertise</h3>
-      <h3 class="ws-mat-accent-text width-expand">
+      <h3 class="item-heading ws-mat-primary-text font-montserrat" i18n>Areas of Expertise</h3>
+      <h3 class="ws-mat-accent-text width-expand font-montserrat">
         {{ content?.spaceAreaOfExpertise}}
       </h3>
     </div>
@@ -457,8 +457,8 @@
 
     <mat-divider *ngIf="hasTocStructure && content?.children?.length"></mat-divider>
     <div class="info-item" *ngIf="content?.sourceName?.length">
-      <h3 class="item-heading ws-mat-primary-text" i18n>Created By</h3>
-      <h3 class="ws-mat-accent-text width-expand">
+      <h3 class="item-heading ws-mat-primary-text font-montserrat" i18n>Created By</h3>
+      <h3 class="ws-mat-accent-text width-expand font-montserrat">
         {{ content?.sourceName  }} <span *ngIf="content?.sourceName === 'Other'">( {{content?.otherSourceName}} )</span>
       </h3>
     </div>
@@ -490,16 +490,16 @@
 
       <mat-divider *ngIf="hasTocStructure && content?.children?.length"></mat-divider>
       <div class="info-item" *ngIf="content?.theme?.length">
-        <h3 class="item-heading ws-mat-primary-text" i18n>SDG</h3>
-        <h3 class="ws-mat-accent-text width-expand">
+        <h3 class="item-heading ws-mat-primary-text font-montserrat" i18n>SDG</h3>
+        <h3 class="ws-mat-accent-text width-expand font-montserrat">
           {{ content?.theme  }}
         </h3>
       </div>
 
       <mat-divider *ngIf="content?.learningMode"></mat-divider>
       <div class="info-item" *ngIf="content?.region?.length">
-        <h3 class="item-heading ws-mat-primary-text" i18n>Region</h3>
-        <h3 class="ws-mat-accent-text width-expand">
+        <h3 class="item-heading ws-mat-primary-text font-montserrat" i18n>Region</h3>
+        <h3 class="ws-mat-accent-text width-expand font-montserrat">
           {{ content?.region }}
         </h3>
       </div>
@@ -512,8 +512,8 @@
       </div> -->
       <mat-divider *ngIf="content?.locale"></mat-divider>
       <div class="info-item" *ngIf="content?.hasTranslations?.length || content?.isTranslationOf?.length">
-        <h3 class="item-heading ws-mat-primary-text" i18n>Available in</h3>
-        <h3 class="ws-mat-accent-text width-expand">
+        <h3 class="item-heading ws-mat-primary-text font-montserrat" i18n>Available in</h3>
+        <h3 class="ws-mat-accent-text width-expand font-montserrat">
           <span class="cursor-pointer" (click)="goToContent(trans?.identifier)"
             *ngFor="let trans of content?.hasTranslations || content?.isTranslationOf">{{trans.locale | uppercase}}
           </span>
@@ -521,18 +521,18 @@
       </div>
       <mat-divider *ngIf="content?.hasTranslations?.length || content?.isTranslationOf?.length"></mat-divider>
       <div class="info-item" *ngIf="content?.keywords?.length">
-        <h3 class="item-heading ws-mat-primary-text" i18n>Keywords</h3>
-        <h3 class="ws-mat-accent-text width-expand">
+        <h3 class="item-heading ws-mat-primary-text font-montserrat" i18n>Keywords</h3>
+        <h3 class="ws-mat-accent-text width-expand font-montserrat">
           {{ content?.keywords?.join(', ') }}
         </h3>
       </div>
       <mat-divider *ngIf="content?.keywords?.length"></mat-divider>
       <ng-container *ngFor="let item of content?.collections">
         <div class="info-item" *ngIf="item.contentType === 'Knowledge Board' && item.status === 'Live'">
-          <h3 class="item-heading ws-mat-primary-text" i18n>Curated in KB</h3>
+          <h3 class="item-heading ws-mat-primary-text font-montserrat" i18n>Curated in KB</h3>
           <mat-chip-list>
             <mat-chip>
-              <h3 class="ws-mat-accent-text width-expand">
+              <h3 class="ws-mat-accent-text width-expand font-montserrat">
                 <ng-container *ngIf="item.contentType === 'Knowledge Board' && item.status === 'Live'">
                   <a [href]="'/app/toc/'+item.identifier+'/overview'"> {{item.name}} </a>
                 </ng-container>
@@ -544,7 +544,7 @@
       <mat-divider></mat-divider>
     </ng-container>
     <div class="text-right mt-2">
-      <button mat-button (click)="showMoreGlance = !showMoreGlance">
+      <button class="font-montserrat" mat-button (click)="showMoreGlance = !showMoreGlance">
         <mat-icon>{{!showMoreGlance ? 'arrow_drop_down': 'arrow_drop_up'}}</mat-icon>
         <ng-container i18n *ngIf="!showMoreGlance">Show More</ng-container>
         <ng-container i18n *ngIf="showMoreGlance">Show Less</ng-container>
@@ -561,7 +561,7 @@
         }">
     </ng-container>
   </div> -->
-  <div class="hidden sm:block margin-bottom-m" *ngIf="content?.creatorContacts?.length">
+  <div class="hidden sm:block margin-bottom-m font-montserrat" *ngIf="content?.creatorContacts?.length">
     <ng-container [ngTemplateOutlet]="creators" [ngTemplateOutletContext]="{
           authors: content?.creatorContacts,
           title: 'CONTACT'
@@ -574,13 +574,13 @@
 <ng-template #creators let-authors="authors" let-title="title">
   <mat-card>
     <!-- <h2 i18n *ngIf="title === 'AUTHOR'">Authors</h2> -->
-    <h2 i18n *ngIf="title === 'CONTACT'">Curator/Contact</h2>
+    <h2 class="font-montserrat font-size-18px" i18n *ngIf="title === 'CONTACT'">Curator/Contact</h2>
     <mat-divider></mat-divider>
-    <div *ngFor="let author of authors" class="author">
+    <div *ngFor="let author of authors" class="author font-montserrat">
       <ws-widget-user-image class="author-image" [imageType]="'name-initial'" [userName]="author.name || ''"
         [email]="author.email"></ws-widget-user-image>
       <div class="width-expand flex flex-middle flex-between">
-        <h3 class="margin-remove">{{ author.name }}</h3>
+        <h3 class="font-montserrat margin-remove">{{ author.name }}</h3>
         <ng-container *ngIf="mailIcon">
           <ws-widget-btn-mail-user *ngIf="askAuthorEnabled"
             [widgetData]="{ content: content, emails: [{email: author.email, name: author.name}] }">

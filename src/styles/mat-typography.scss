@@ -30,7 +30,7 @@ $typography: mat-typography-config(
 );
 @include angular-material-typography($typography);
 $typography: mat-typography-config(
-  $font-family: "'montserrat','sans-serif'",
+  $font-family: "'Montserrat'",
   $body-2: mat-typography-level(16px, 24px, 600),
   $body-1: mat-typography-level(16px, 20px, 400),
   $input: mat-typography-level(inherit, 1.125, 400),
