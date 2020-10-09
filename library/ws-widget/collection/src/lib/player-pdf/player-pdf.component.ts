@@ -69,6 +69,9 @@ export class PlayerPdfComponent extends WidgetBaseComponent
   private routerSubs: Subscription | null = null
   public isInFullScreen = false
   keystate: any
+  isShowDownloadMobile = false
+  isShowDownloadIOS = false
+  isShowDownloadAndroid = false
   constructor(
     private activatedRoute: ActivatedRoute,
     private router: Router,
@@ -96,6 +99,12 @@ export class PlayerPdfComponent extends WidgetBaseComponent
   }
 
   ngOnInit() {
+    this.activatedRoute.data.subscribe(data => {
+      console.log("pdfcontent+++", data)
+      this.isShowDownloadMobile = data.pageData.data.isMobileDownloadable
+      this.isShowDownloadIOS = data.pageData.data.isIOSDownloadable
+      this.isShowDownloadAndroid = data.pageData.data.isAndroidDownloadable
+    })
     // SimpleLinkService does not support handling of relative link switching PDFLinkService
     pdfjsViewer.SimpleLinkService.prototype.getDestinationHash =
       pdfjsViewer.PDFLinkService.prototype.getDestinationHash
@@ -134,6 +143,7 @@ export class PlayerPdfComponent extends WidgetBaseComponent
         if (this.widgetData.readValuesQueryParamsKey) {
           const { zoom, pageNumber } = this.widgetData.readValuesQueryParamsKey
           const params = this.activatedRoute.snapshot.queryParamMap
+          console.log("params+++++++++++++", params)
           if (
             Number(params.get(zoom)) !== this.zoom.value ||
             Number(params.get(pageNumber)) !== this.currentPage.value
@@ -170,6 +180,25 @@ export class PlayerPdfComponent extends WidgetBaseComponent
       }
     })
   }
+
+  get showDownloadMobile() {
+    if (!this.utilitySvc.isMobile) {
+
+      return true
+    }
+
+    if (this.isShowDownloadMobile) {
+      if (this.utilitySvc.isIos && this.isShowDownloadIOS) {
+        return true
+      }
+      if (this.utilitySvc.isAndroid && this.isShowDownloadAndroid) {
+        return true
+      }
+
+    }
+    return false
+  }
+
   get isDownloadable() {
     if (this.widgetData) {
       if (this.widgetData.pdfUrl) {

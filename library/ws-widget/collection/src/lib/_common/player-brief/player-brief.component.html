@@ -237,7 +237,8 @@
 
 <div class="md:px-2">
   <!-- <ws-widget-mark-as-complete [content]="content"></ws-widget-mark-as-complete> -->
-  <ng-container *ngIf="isMobile() && content && isDownloadable">
+  <ng-container *ngIf="showDownloadMobile && content && isDownloadable">
+
     <mat-card class="mb-4">
       <button mat-button color="primary" (click)="download()">
         <mat-icon>cloud_download</mat-icon>

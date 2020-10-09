@@ -41,7 +41,7 @@
       <ws-widget-btn-fullscreen (fsState)="fullScreenState($event)" (click)="refresh()"
         [widgetData]="{ fsContainer: fullScreenContainer }">
       </ws-widget-btn-fullscreen>
-      <ng-container *ngIf="isMobile() && widgetData.pdfUrl && isDownloadable">
+      <ng-container *ngIf="showDownloadMobile && widgetData.pdfUrl && isDownloadable">
         <button mat-button>
           <mat-icon color="primary" (click)="download()">cloud_download</mat-icon>
         </button>
@@ -58,7 +58,9 @@
     <ws-widget-btn-fullscreen (fsState)="fullScreenState($event)" (click)="refresh()"
       [widgetData]="{ fsContainer: fullScreenContainer }">
     </ws-widget-btn-fullscreen>
-    <ng-container *ngIf="isMobile() && widgetData.pdfUrl && isDownloadable">
+
+    <ng-container *ngIf="showDownloadMobile && widgetData.pdfUrl && isDownloadable">
+
       <button mat-menu-item>
         <mat-icon (click)="download()">cloud_download</mat-icon>
       </button>
