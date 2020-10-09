@@ -96,7 +96,7 @@ export class PlayerBriefComponent implements OnInit {
           // tslint:disable-next-line: ter-computed-property-spacing
         ].includes(this.content.resourceType.toLowerCase())
       ) {
-        console.log("iosss")
+
         return true
       }
       if (
