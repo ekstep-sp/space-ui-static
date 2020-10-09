@@ -14,6 +14,7 @@ export class BtnSocialLikeComponent implements OnInit {
   @Input() postId = ''
   @Input() postCreatorId = ''
   @Input() activity: NsDiscussionForum.IPostActivity = {} as NsDiscussionForum.IPostActivity
+  @Input() isReply = false
   isUpdating = false
   userId = ''
   userDataForLike: any[] = []

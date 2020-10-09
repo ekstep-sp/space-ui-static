@@ -55,13 +55,13 @@
   </div>
   <span class="margin-top-s flex flex-between" *ngIf="reply?.activity && reply?.status === 'Active'">
     <span>
-      <ws-widget-btn-social-vote [postId]="reply?.id" [activity]="reply?.activity" [voteType]="'upVote'"
-        [postCreatorId]="reply?.postCreator?.postCreatorId"></ws-widget-btn-social-vote>
-      <ws-widget-btn-social-vote class="margin-left-s" [postId]="reply?.id" [activity]="reply?.activity"
-        [voteType]="'downVote'" [postCreatorId]="reply?.postCreator?.postCreatorId">
+      <ws-widget-btn-social-vote  [isReply] = "true" [postId]="reply?.id" [activity]="reply?.activity" [voteType]="'upVote'"
+        [postCreatorId]="reply?.postCreator?.postCreatorId" ></ws-widget-btn-social-vote>
+      <ws-widget-btn-social-vote class="margin-left-s"  [isReply] = "true" [postId]="reply?.id" [activity]="reply?.activity"
+        [voteType]="'downVote'"  [postCreatorId]="reply?.postCreator?.postCreatorId">
       </ws-widget-btn-social-vote>
     </span>
-    <ws-widget-btn-social-like *ngIf="showSocialLike" [postId]="reply?.id"
+    <ws-widget-btn-social-like *ngIf="showSocialLike" [postId]="reply?.id" [isReply] = "true"
       [postCreatorId]="reply?.postCreator?.postCreatorId" [activity]="reply?.activity">
     </ws-widget-btn-social-like>
   </span>

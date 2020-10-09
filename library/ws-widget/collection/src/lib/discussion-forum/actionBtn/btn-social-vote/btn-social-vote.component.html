@@ -10,7 +10,7 @@
             matBadgeSize="small" matBadgeColor="accent">thumb_down</mat-icon>
         </button>
         <span class="tooltiptext-downvote">
-          <ws-widget-display-users-social-vote [userListDownVote]="userForDownVote" [iconType]="iconType"
+          <ws-widget-display-users-social-vote [userListDownVote]="userForDownVote" [iconType]="iconType" [isReply] = "isReply"
             [voteType]="voteType">
           </ws-widget-display-users-social-vote>
         </span>
@@ -22,7 +22,7 @@
           (click)="downVote(invalidUser.value)" [ngClass]="{ highlight: activity.userActivity.downVote }">
           arrow_drop_down</mat-icon>
         <span class="tooltiptext">
-          <ws-widget-display-users-social-vote [userListDownVote]="userForDownVote" [iconType]="iconType"
+          <ws-widget-display-users-social-vote [userListDownVote]="userForDownVote" [iconType]="iconType" [isReply]= "isReply"
             [voteType]="voteType">
           </ws-widget-display-users-social-vote>
         </span>
@@ -41,7 +41,7 @@
   </ng-container>
   <ng-container *ngIf="voteType === 'upVote'">
     <ng-container *ngIf="iconType === 'thumbs'">
-      <div class="tooltip">
+      <div class="tooltip" [ngClass]= "{'tooltip-reply':isReply}">
         <button name="discussion-forum-upvote-button" [disabled]="isUpdating || isDisabled"
           (click)="upVote(invalidUser.value)" matTooltip="Up vote" matTooltipPosition="above" type="button"
           mat-icon-button i18n-aria-label aria-label="Up vote" i18n-matTooltip
@@ -51,7 +51,7 @@
 
         </button>
         <span class="tooltiptext">
-          <ws-widget-display-users-social-vote [userList]="userForUpvote" [iconType]="iconType" [voteType]="voteType">
+          <ws-widget-display-users-social-vote [userList]="userForUpvote" [iconType]="iconType" [voteType]="voteType" [isReply]= "isReply">
           </ws-widget-display-users-social-vote>
         </span>
       </div>
@@ -62,7 +62,7 @@
           (click)="upVote(invalidUser.value)" [ngClass]="{ highlight: activity.userActivity.upVote }">arrow_drop_up
         </mat-icon>
         <span class="tooltiptext">
-          <ws-widget-display-users-social-vote [userList]="userForUpvote" [iconType]="iconType" [voteType]="voteType">
+          <ws-widget-display-users-social-vote [userList]="userForUpvote" [iconType]="iconType" [voteType]="voteType" [isReply]= "isReply">
           </ws-widget-display-users-social-vote>
         </span>
       </div>

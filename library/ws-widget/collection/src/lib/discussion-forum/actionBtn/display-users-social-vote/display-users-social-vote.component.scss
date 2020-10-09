@@ -79,13 +79,14 @@ $primary: $theme-primary;
    padding: 0px !important;
 }
 .mat-card-size-like{
-   width: 200px;
-   height: auto;
-   max-height: 170px;
-   overflow: auto;
-   margin-left: 75px;
-   margin-right: 11px;
-   margin-top: 7px;
+   // width: 200px;
+   // height: auto;
+   // max-height: 170px;
+   // overflow: auto;
+   // margin-left: 70px;
+   // margin-right: 11px;
+   // margin-top: 20px;
+   margin:auto;
    border-top: 3px solid #865ba0 !important;
    border-bottom: 3px solid #865ba0 !important;
    padding: 0px !important;
@@ -99,6 +100,33 @@ $primary: $theme-primary;
    margin-top: -26px;
    border-top: 3px solid  mat-color($primary) !important;
    border-bottom: 3px solid mat-color($primary) !important;
+}
+.mat-card-size-down-blog{
+   margin-left:-220px;
+   margin-top:30px;
+}
+.isReply-blog-up{
+   width: 200px;
+   height: auto;
+   max-height: 170px;
+   overflow: auto;
+   margin-left: -5px;
+   margin-right: 10px;
+      margin-top: 25px;
+   border-top: 3px solid #865ba0 !important;
+   border-bottom: 3px solid #865ba0 !important;
+   padding: 0px !important;
+}
+.isReply-like{
+   width: 200px;
+   height: auto;
+   max-height: 170px;
+   overflow: auto;
+   margin-left: -140px;
+   margin-top: 30px;
+   border-top: 3px solid #865ba0 !important;
+   border-bottom: 3px solid #865ba0 !important;
+   padding: 0px !important;
 }
 }
 .flex-p{
