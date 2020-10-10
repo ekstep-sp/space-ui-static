@@ -100,7 +100,6 @@ export class PlayerPdfComponent extends WidgetBaseComponent
 
   ngOnInit() {
     this.activatedRoute.data.subscribe(data => {
-      console.log("pdfcontent+++", data)
       this.isShowDownloadMobile = data.pageData.data.isMobileDownloadable
       this.isShowDownloadIOS = data.pageData.data.isIOSDownloadable
       this.isShowDownloadAndroid = data.pageData.data.isAndroidDownloadable
@@ -143,7 +142,6 @@ export class PlayerPdfComponent extends WidgetBaseComponent
         if (this.widgetData.readValuesQueryParamsKey) {
           const { zoom, pageNumber } = this.widgetData.readValuesQueryParamsKey
           const params = this.activatedRoute.snapshot.queryParamMap
-          console.log("params+++++++++++++", params)
           if (
             Number(params.get(zoom)) !== this.zoom.value ||
             Number(params.get(pageNumber)) !== this.currentPage.value

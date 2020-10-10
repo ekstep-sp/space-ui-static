@@ -49,15 +49,6 @@ export class PlayerBriefComponent implements OnInit {
 
   ngOnInit() {
 
-
-    // this.isDownloadMobile = response.pageData.data
-    console.log("data++++++++++", this.activateRoute.snapshot.data)
-
-    this
-
-
-
-
     this.getTocConfig()
     if (this.configSvc.restrictedFeatures) {
       this.isDownloadableIos = this.configSvc.restrictedFeatures.has('iosDownload')
@@ -65,15 +56,12 @@ export class PlayerBriefComponent implements OnInit {
       this.isDownloadableDesktop = this.configSvc.restrictedFeatures.has('downloadRequest')
     }
   }
-
-  isMobile() {
-    if (this.utilitySvc.isIos) {
-      return false
-    }
-    return true
-  }
-
-
+  // isMobile() {
+  //   if (this.utilitySvc.isIos) {
+  //     return false
+  //   }
+  //   return true
+  // }
   get isDownloadable() {
     if (this.content) {
       if (this.content.mimeType === 'application/pdf') {
@@ -138,7 +126,7 @@ export class PlayerBriefComponent implements OnInit {
     const url = `${this.configSvc.sitePath}/feature/toc.json`
     this.widgetContentSvc.fetchConfig(url).subscribe(data => {
       this.tocConfig = data
-      console.log("configdata", data)
+      // console.log("configdata", data)
       this.isShowDownloadMobile = data.isMobileDownloadable
       this.isShowDownloadIOS = data.isIOSDownloadable
       this.isShowDownloadAndroid = data.isAndroidDownloadable
@@ -152,15 +140,12 @@ export class PlayerBriefComponent implements OnInit {
 
     })
   }
-
-
-
+  // function for disabling download button for ios and android
   get showDownloadMobile() {
     if (!this.utilitySvc.isMobile) {
-
       return true
     }
-    console.log("isMobile++++++++++", this.tocConfig)
+    // console.log("isMobile++++++++++", this.tocConfig)
     if (this.isShowDownloadMobile) {
       if (this.utilitySvc.isIos && this.isShowDownloadIOS) {
         return true
@@ -172,10 +157,6 @@ export class PlayerBriefComponent implements OnInit {
     }
     return false
   }
-
-
-
-
   download() {
     if (this.content && !this.forPreview) {
       const link = document.createElement('a')
