@@ -102,10 +102,11 @@
           <form class="comment-form" *ngIf="allowedToComment">
             <mat-form-field class="width-1-1">
               <input matInput i18n-placeholder placeholder="Add a comment" value="commentAddRequest.postContent.body"
-                type="text" name="comment" [(ngModel)]="commentAddRequest.postContent.body" />
+              minlength="10"  #qnaComment= "ngModel" type="text" name="comment" [(ngModel)]="commentAddRequest.postContent.body" />
+                <mat-error *ngIf="(qnaComment.dirty || qnaComment.touched) && qnaComment.invalid" >Please enter more than 10 charaters</mat-error>
             </mat-form-field>
             <button mat-stroked-button color="primary" class="margin-left-s"
-              [disabled]="!commentAddRequest.postContent.body.trim().length || isPostingComment"
+              [disabled]="!commentAddRequest.postContent.body.trim().length || isPostingComment || qnaComment.invalid"
               i18n="Post comment of question" (click)="postComment()">
               Post
             </button>
