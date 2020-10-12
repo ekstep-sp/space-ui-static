@@ -90,6 +90,7 @@ export class LearningHistoryComponent implements OnInit {
   ) {}
 
   ngOnInit() {
+    this.dispatchEvent()
     this.isLtMedium$.subscribe((isLtMedium: boolean) => {
       this.screenSizeIsLtMedium = isLtMedium
     })
@@ -373,5 +374,10 @@ export class LearningHistoryComponent implements OnInit {
     } else if (num === 2) {
       this.page.p2 = event.pageIndex * 10
     }
+  }
+  dispatchEvent() {
+    setTimeout(() => {
+      window.dispatchEvent(new Event('resize'))
+    },         150)
   }
 }

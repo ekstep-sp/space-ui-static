@@ -54,6 +54,15 @@
   visibility: visible;
   opacity: 1;
 }
+.tooltip-reply  .tooltiptext{
+  visibility: hidden;
+  position: absolute;
+  z-index: 1;
+  // bottom: 125%;
+  left: 50%;
+  margin-left: 15px;
+  opacity: 0; 
+}
 .mat-card-size-qna-up{
    width: 150px;
     height: auto;
@@ -96,5 +105,14 @@
     border-top: 3px solid  mat-color($primary) !important;
     border-bottom: 3px solid mat-color($primary) !important;
 }
+.tooltip-reply-downvote .tooltiptext-downvote {
+margin-left:200px;
 }
+.tooltip-qna .tooltiptext{
+  margin-left:10px !important;
+  margin-top:30px !important;
+}
+}
+
+
 
