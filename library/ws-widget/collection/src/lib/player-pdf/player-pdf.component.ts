@@ -11,7 +11,7 @@ import {
 import { FormControl } from '@angular/forms'
 import { ActivatedRoute, Router } from '@angular/router'
 import { NsWidgetResolver, WidgetBaseComponent } from '@ws-widget/resolver'
-import { EventService, LoggerService, WsEvents, ValueService } from '@ws-widget/utils'
+import { EventService, LoggerService, WsEvents, ValueService, UtilityService } from '@ws-widget/utils'
 import * as PDFJS from 'pdfjs-dist/webpack'
 import { fromEvent, interval, merge, Subject, Subscription } from 'rxjs'
 import { debounceTime, distinctUntilChanged } from 'rxjs/operators'
@@ -69,6 +69,9 @@ export class PlayerPdfComponent extends WidgetBaseComponent
   private routerSubs: Subscription | null = null
   public isInFullScreen = false
   keystate: any
+  isShowDownloadMobile = false
+  isShowDownloadIOS = false
+  isShowDownloadAndroid = false
   constructor(
     private activatedRoute: ActivatedRoute,
     private router: Router,
@@ -77,6 +80,7 @@ export class PlayerPdfComponent extends WidgetBaseComponent
     private contentSvc: WidgetContentService,
     private viewerSvc: ViewerUtilService,
     private valueSvc: ValueService,
+    private utilitySvc: UtilityService,
   ) {
     super()
   }
@@ -95,6 +99,11 @@ export class PlayerPdfComponent extends WidgetBaseComponent
   }
 
   ngOnInit() {
+    this.activatedRoute.data.subscribe(data => {
+      this.isShowDownloadMobile = data.pageData.data.isMobileDownloadable
+      this.isShowDownloadIOS = data.pageData.data.isIOSDownloadable
+      this.isShowDownloadAndroid = data.pageData.data.isAndroidDownloadable
+    })
     // SimpleLinkService does not support handling of relative link switching PDFLinkService
     pdfjsViewer.SimpleLinkService.prototype.getDestinationHash =
       pdfjsViewer.PDFLinkService.prototype.getDestinationHash
@@ -169,6 +178,25 @@ export class PlayerPdfComponent extends WidgetBaseComponent
       }
     })
   }
+
+  get showDownloadMobile() {
+    if (!this.utilitySvc.isMobile) {
+
+      return true
+    }
+
+    if (this.isShowDownloadMobile) {
+      if (this.utilitySvc.isIos && this.isShowDownloadIOS) {
+        return true
+      }
+      if (this.utilitySvc.isAndroid && this.isShowDownloadAndroid) {
+        return true
+      }
+
+    }
+    return false
+  }
+
   get isDownloadable() {
     if (this.widgetData) {
       if (this.widgetData.pdfUrl) {
