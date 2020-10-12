@@ -8,6 +8,7 @@ import { UploadService } from '../../../../../../../author/src/lib/routing/modul
 import { CONTENT_BASE_STATIC } from '../../../../../../../author/src/lib/constants/apiEndpoints'
 import { ActivatedRoute } from '@angular/router'
 import { FOLDER_NAME_EDIT_PROFILE } from '../../../../../../../author/src/lib/constants/constant'
+import { UtilityService } from '@ws-widget/utils/src/public-api'
 
 export namespace NsEditProfile {
   export interface IResponseBody {
@@ -29,12 +30,17 @@ export namespace NsEditProfile {
   styleUrls: ['./edit-profile.component.scss'],
 })
 export class EditProfileComponent implements OnInit {
+  isShowUploadMobile = false
+  isShowUploadIOS = false
+  isShowUploadAndroid = false
   paramsForEditProfile: NsEditProfile.IResponseBody = {} as NsEditProfile.IResponseBody
   constructor(private initService: InitService,
-              private profileSvc: ProfileService,
-              private uploadService: UploadService,
-              private snackBar: MatSnackBar,
-              private activateRoute: ActivatedRoute) { }
+    private profileSvc: ProfileService,
+    private uploadService: UploadService,
+    private snackBar: MatSnackBar,
+    private activateRoute: ActivatedRoute,
+    private utilitySvc: UtilityService,
+  ) { }
   url = ''
   profileUrlParams = ''
   relativeUrl = ''
@@ -54,6 +60,12 @@ export class EditProfileComponent implements OnInit {
   isLoad = false
   ngOnInit() {
     this.activateRoute.data.subscribe(data => {
+      console.log("profiledata ++++++", data)
+
+      this.isShowUploadMobile = data.pageData.data.isMobileUpload
+      this.isShowUploadIOS = data.pageData.data.isIOSUpload
+      this.isShowUploadAndroid = data.pageData.data.isAndroidUpload
+
       if (data.pageData) {
         this.profileSvc.setUserEditProfileConfig(data.pageData.data)
         this.relativeUrl = data.pageData.data.profileImage
@@ -109,6 +121,28 @@ export class EditProfileComponent implements OnInit {
           })
     }
   }
+
+
+  get showUploadMobile() {
+    if (!this.utilitySvc.isMobile) {
+
+      return true
+    }
+
+    if (this.isShowUploadMobile) {
+      if (this.utilitySvc.isIos && this.isShowUploadIOS) {
+        return true
+      }
+      if (this.utilitySvc.isAndroid && this.isShowUploadAndroid) {
+        return true
+      }
+
+    }
+    return false
+  }
+
+
+
   // public delete() {
   //   this.url = 'https://png.pngitem.com/pimgs/s/146-1468479_my-profile-icon-blank-profile-picture-circle-hd.png'
   // }
