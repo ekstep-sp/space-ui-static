@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http'
 import { Observable } from 'rxjs'
 import { NsDiscussionForum } from '@ws-widget/collection'
 import { NsSocial } from '../models/social.model'
+import { ConfigurationsService } from '../../../../../../../../library/ws-widget/utils/src/public-api'
 
 const PROTECTED_SLAG_V8 = '/apis/protected/v8'
 
@@ -16,7 +17,8 @@ const API_END_POINTS = {
   providedIn: 'root',
 })
 export class WsSocialService {
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient,
+              private configSvc: ConfigurationsService) { }
 
   fetchAutoComplete(queryStr: string): Observable<NsDiscussionForum.IPostTag[]> {
     const req: NsSocial.IPostAutoComplete = {
@@ -29,5 +31,16 @@ export class WsSocialService {
   }
   acceptAnswer(request: NsSocial.IAcceptAnswer): Observable<any> {
     return this.http.post<any>(API_END_POINTS.SOCIAL_POST_ACCEPT_ANSWER, request)
+  }
+
+  deleteAccessForSpecificRole(data: any) {
+    if (data) {
+      const allowedForDelete = data.some((role: string) =>
+        (this.configSvc.userRoles as Set<string>).has(role))
+      if (allowedForDelete) {
+        return true
+      }
+    }
+    return false
   }
 }

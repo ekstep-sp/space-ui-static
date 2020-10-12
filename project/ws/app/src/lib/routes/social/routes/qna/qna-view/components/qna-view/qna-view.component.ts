@@ -14,6 +14,7 @@ import {
 import { TFetchStatus, ConfigurationsService, LoggerService, ValueService, NsPage } from '@ws-widget/utils'
 import { ForumService } from '../../../../forums/service/forum.service'
 import { NsUserDashboard } from '../../../../../../user-dashboard/models/user-dashboard.model'
+import { WsSocialService } from '../../../../../services/ws-social.service'
 
 @Component({
   selector: 'ws-app-qna-view',
@@ -40,6 +41,7 @@ export class QnaViewComponent implements OnInit, OnDestroy {
   isPostingComment = false
   isPostingReply = false
   allowedToEdit = false
+  allowedToDeleteForSpecificRoles = false
   allowedToComment = false
   allowedToAnswer = false
   mentions = []
@@ -108,6 +110,7 @@ export class QnaViewComponent implements OnInit, OnDestroy {
     private configSvc: ConfigurationsService,
     public dialog: MatDialog,
     private snackBar: MatSnackBar,
+    private socialSvc: WsSocialService,
     private valueSvc: ValueService,
     private readonly forumSrvc: ForumService,
   ) {
@@ -129,6 +132,8 @@ export class QnaViewComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.initData()
+    // this is called to update the postcreator id for delete qna
+    this.fetchConversationData(true)
     // this.getAllUsers()
     // this.getUserDetails()
     this.showSocialLike = (this.configSvc.restrictedFeatures && !this.configSvc.restrictedFeatures.has('socialLike')) || false
@@ -159,6 +164,10 @@ export class QnaViewComponent implements OnInit, OnDestroy {
         this.allowedToComment = true
         this.allowedToAnswer = true
       }
+      // this method will allow the access to only specific roles to delete qna thread
+      this.allowedToDeleteForSpecificRoles = this.socialSvc.deleteAccessForSpecificRole(response.socialData.data.rolesAllowedForDelete ?
+        response.socialData.data.rolesAllowedForDelete.QnA : [])
+
       if (response.resolveData.error) {
         this.errorFetchingTimeline = true
       } else {
@@ -187,6 +196,9 @@ export class QnaViewComponent implements OnInit, OnDestroy {
     this.discussionSvc.fetchPost(this.qnaConversationRequest).subscribe(
       data => {
         if (data) {
+          if (data.mainPost.postCreator.postCreatorId) {
+            this.qnaConversationRequest.postCreatorId = data.mainPost.postCreator.postCreatorId
+          }
           if (data.mainPost && data.mainPost.id && forceNew) {
             this.qnaConversation = data
             this.postFetchStatus = 'done'
@@ -298,7 +310,11 @@ export class QnaViewComponent implements OnInit, OnDestroy {
 
   deletePost(successMsg: string) {
     const dialogRef = this.dialog.open(DialogSocialDeletePostComponent, {
-      data: { postId: this.qnaConversationRequest.postId },
+      data: {
+        postId: this.qnaConversationRequest.postId,
+        // postcreator id is required for deleting the qna for  specific roles
+        postCreatorId: this.qnaConversationRequest.postCreatorId,
+      },
     })
     dialogRef.afterClosed().subscribe(
       (data: boolean) => {

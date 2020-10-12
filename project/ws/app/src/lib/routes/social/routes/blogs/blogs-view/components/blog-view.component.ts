@@ -6,6 +6,7 @@ import { DialogSocialDeletePostComponent, NsDiscussionForum, WsDiscussionForumSe
 import { combineLatest } from 'rxjs'
 import { ForumService } from '../../../forums/service/forum.service'
 import { tap } from 'rxjs/operators'
+import { WsSocialService } from '../../../../services/ws-social.service'
 
 @Component({
   selector: 'ws-app-blog-view',
@@ -53,6 +54,7 @@ export class BlogViewComponent implements OnInit {
     private route: ActivatedRoute,
     private router: Router,
     private discussionSvc: WsDiscussionForumService,
+    private socialSvc: WsSocialService,
     private readonly forumSrvc: ForumService
   ) {
     if (this.configSvc.userProfile) {
@@ -79,7 +81,9 @@ export class BlogViewComponent implements OnInit {
         this.allowedToDeleteBlog = false
       }
       // this method will allow the access to only specific user roles to delete the blog
-      this.deleteBlogsForSpecificRole(_combinedResult[0].socialData.data.rolesAllowedForDelete.blogs)
+      // tslint:disable-next-line: max-line-length
+      this.allowedToDeleteBlogForSpecificRoles = this.socialSvc.deleteAccessForSpecificRole(_combinedResult[0].socialData.data.rolesAllowedForDelete ?
+        _combinedResult[0].socialData.data.rolesAllowedForDelete.blogs : [])
 
       const idVal = _combinedResult[1].get('id')
       if (idVal) {
@@ -90,17 +94,6 @@ export class BlogViewComponent implements OnInit {
     this.showSocialLike = (this.configSvc.restrictedFeatures && !this.configSvc.restrictedFeatures.has('socialLike')) || false
 
   }
-
-  deleteBlogsForSpecificRole(blogsData: any) {
-    if (blogsData) {
-      const allowedForDelete = blogsData.some((role: string) =>
-        (this.configSvc.userRoles as Set<string>).has(role))
-      if (allowedForDelete) {
-        this.allowedToDeleteBlogForSpecificRoles = true
-      }
-    }
-  }
-
   fetchConversationData(forceNew = false) {
     if (this.fetchStatus === 'fetching') {
       return
