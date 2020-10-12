@@ -61,7 +61,7 @@
         [voteType]="'downVote'" [postCreatorId]="reply?.postCreator?.postCreatorId">
       </ws-widget-btn-social-vote>
     </span>
-    <ws-widget-btn-social-like *ngIf="showSocialLike" [postId]="reply?.id"
+    <ws-widget-btn-social-like *ngIf="showSocialLike" [postId]="reply?.id" [key]="replyPost"
       [postCreatorId]="reply?.postCreator?.postCreatorId" [activity]="reply?.activity">
     </ws-widget-btn-social-like>
   </span>

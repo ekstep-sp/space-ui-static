@@ -51,7 +51,8 @@
         *ngIf="conversation?.mainPost?.activity && conversation?.mainPost?.status === 'Active'">
         <ws-widget-btn-social-like *ngIf="showSocialLike" [postId]="conversationRequest?.postId"
           [postCreatorId]="conversation?.mainPost?.postCreator?.postCreatorId"
-          [activity]="conversation?.mainPost?.activity">
+          [activity]="conversation?.mainPost?.activity"
+          [key]="keyValue">
         </ws-widget-btn-social-like>
         <span>
           <ws-widget-btn-social-vote [postId]="conversationRequest?.postId"
@@ -94,7 +95,7 @@
             </button>
           </mat-expansion-panel>
         </mat-accordion>
-        <ws-app-blog-reply [reply]="reply" (deleteSuccess)="onDeleteReply(i)"
+        <ws-app-blog-reply  [reply]="reply" (deleteSuccess)="onDeleteReply(i)"
           *ngFor="let reply of conversation?.replyPost; let i = index">
         </ws-app-blog-reply>
       </ng-container>

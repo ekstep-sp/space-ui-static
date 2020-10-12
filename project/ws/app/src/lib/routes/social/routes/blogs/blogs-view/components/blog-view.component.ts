@@ -45,6 +45,7 @@ export class BlogViewComponent implements OnInit {
   canUserDelete = false
   mentions = []
   allowMention = false
+  keyValue = false
 
   constructor(
     public dialog: MatDialog,
@@ -120,7 +121,6 @@ export class BlogViewComponent implements OnInit {
         }
         if (!this.isFirstConversationRequestDone && data && data.mainPost) {
           this.conversation = data
-
           if (this.conversation.mainPost.status === NsDiscussionForum.EPostStatus.DRAFT) {
             this.router.navigate(['../', 'edit', this.conversationRequest.postId], {
               relativeTo: this.route,

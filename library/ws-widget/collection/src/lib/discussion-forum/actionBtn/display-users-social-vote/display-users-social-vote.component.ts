@@ -1,4 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core'
+import { BtnSocialLikeService } from '../btn-social-like/service/btn-social-like.service';
 
 @Component({
   selector: 'ws-widget-display-users-social-vote',
@@ -15,16 +16,22 @@ export class DisplayUsersSocialVoteComponent implements OnInit {
   voteType: any
   @Input()
   userLike: any[] = []
-
+  @Input() replyPost: any
   @Input()
   iconType: any
   @Input()
   userDetailsForDownVote: any
 
   userListForUpvote: any
-  constructor() { }
+  constructor(public likeService: BtnSocialLikeService) { }
 
   ngOnInit() {
-  }
-
+  //   setTimeout(() => {
+  //     this.likeService.userLikeObject.subscribe((likeObject: any) => {
+  //       // this.replyPost ? this.userList = likeObject : this.userList = this.userList
+  //       console.log(this.userList, likeObject)
+  //     })
+  //   },         100)
+  // }
+}
 }
