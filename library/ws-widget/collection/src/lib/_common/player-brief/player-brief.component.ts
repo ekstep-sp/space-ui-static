@@ -1,7 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core'
 import { NsContent } from '../../_services/widget-content.model'
 import { ConfigurationsService, UtilityService } from '../../../../../utils'
-import { Router, ActivatedRoute } from '@angular/router'
+import { Router } from '@angular/router'
 import { WidgetContentService } from '../../_services/widget-content.service'
 // import { Subscription } from 'rxjs'
 
@@ -39,7 +39,7 @@ export class PlayerBriefComponent implements OnInit {
     private utilitySvc: UtilityService,
     private router: Router,
     private widgetContentSvc: WidgetContentService,
-    private activateRoute: ActivatedRoute
+
   ) { }
   isDownloadableDesktop = false
   isDownloadableIos = false
