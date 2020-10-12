@@ -7,7 +7,7 @@
   <div #blogContainer class="blog-container">
     <ng-container *ngIf="conversation">
       <div class="flex flex-between">
-        <h1 class="ws-mat-primary-text margin-bottom-s title-style"
+        <h1 class="ws-mat-primary-text margin-bottom-s title-style font-size-24px"
           [innerHTML]="conversation?.mainPost?.postContent?.title">
         </h1>
         <button tabindex="0" *ngIf="canUserEdit || canUserDelete" type="button" mat-icon-button
@@ -23,7 +23,7 @@
           <button *ngIf="canUserDelete" (click)="deleteBlog(deleteMsg.value)" mat-menu-item i18n>Delete Blog</button>
         </ng-template>
       </mat-menu>
-      <h2 class="margin-bottom-m" [innerHTML]="conversation?.mainPost?.postContent?.abstract"></h2>
+      <h2 class="margin-bottom-m font-size-18px font-montserrat" [innerHTML]="conversation?.mainPost?.postContent?.abstract"></h2>
       <div class="flex flex-middle margin-bottom-xl">
         <div class="padding-left-s width-expand">
           <div class="flex flex-middle">
