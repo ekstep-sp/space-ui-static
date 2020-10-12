@@ -3,6 +3,7 @@ import { NsContent } from '../../_services/widget-content.model'
 import { ConfigurationsService, UtilityService } from '../../../../../utils'
 import { Router } from '@angular/router'
 import { WidgetContentService } from '../../_services/widget-content.service'
+// import { Subscription } from 'rxjs'
 
 @Component({
   selector: 'ws-widget-player-brief',
@@ -10,6 +11,8 @@ import { WidgetContentService } from '../../_services/widget-content.service'
   styleUrls: ['./player-brief.component.scss'],
 })
 export class PlayerBriefComponent implements OnInit {
+  isDownloadMobile: any
+
   @Input()
   content: NsContent.IContent | null = null
   @Input()
@@ -28,11 +31,15 @@ export class PlayerBriefComponent implements OnInit {
 
   contentTypes = NsContent.EContentTypes
   showMoreGlance = false
+  isShowDownloadMobile = false
+  isShowDownloadIOS = false
+  isShowDownloadAndroid = false
   constructor(
     public configSvc: ConfigurationsService,
     private utilitySvc: UtilityService,
     private router: Router,
     private widgetContentSvc: WidgetContentService,
+
   ) { }
   isDownloadableDesktop = false
   isDownloadableIos = false
@@ -41,6 +48,7 @@ export class PlayerBriefComponent implements OnInit {
   // disablefield = false
 
   ngOnInit() {
+
     this.getTocConfig()
     if (this.configSvc.restrictedFeatures) {
       this.isDownloadableIos = this.configSvc.restrictedFeatures.has('iosDownload')
@@ -48,6 +56,12 @@ export class PlayerBriefComponent implements OnInit {
       this.isDownloadableDesktop = this.configSvc.restrictedFeatures.has('downloadRequest')
     }
   }
+  // isMobile() {
+  //   if (this.utilitySvc.isIos) {
+  //     return false
+  //   }
+  //   return true
+  // }
 
   get isDownloadable() {
     if (this.content) {
@@ -112,6 +126,10 @@ export class PlayerBriefComponent implements OnInit {
     const url = `${this.configSvc.sitePath}/feature/toc.json`
     this.widgetContentSvc.fetchConfig(url).subscribe(data => {
       this.tocConfig = data
+      // console.log("configdata", data)
+      this.isShowDownloadMobile = data.isMobileDownloadable
+      this.isShowDownloadIOS = data.isIOSDownloadable
+      this.isShowDownloadAndroid = data.isAndroidDownloadable
       // tslint:disable-next-line: no-console
       // console.log('toc data is ', this.tocConfig)
       // verify the roles and disbale the rating component
@@ -122,7 +140,23 @@ export class PlayerBriefComponent implements OnInit {
 
     })
   }
+  // function for disabling download button for ios and android
+  get showDownloadMobile() {
+    if (!this.utilitySvc.isMobile) {
+      return true
+    }
+    // console.log("isMobile++++++++++", this.tocConfig)
+    if (this.isShowDownloadMobile) {
+      if (this.utilitySvc.isIos && this.isShowDownloadIOS) {
+        return true
+      }
+      if (this.utilitySvc.isAndroid && this.isShowDownloadAndroid) {
+        return true
+      }
 
+    }
+    return false
+  }
   download() {
     if (this.content && !this.forPreview) {
       const link = document.createElement('a')

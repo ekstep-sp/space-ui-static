@@ -151,6 +151,8 @@ const routes: Routes = [
     path: 'resource-collection',
     data: {
       resourceType: 'resource-collection',
+      pageType: 'feature',
+      pageKey: 'disscussionForum',
     },
     loadChildren: () => import('./routes/resource-collection/resource-collection.module')
       .then(u => u.ResourceCollectionModule),
