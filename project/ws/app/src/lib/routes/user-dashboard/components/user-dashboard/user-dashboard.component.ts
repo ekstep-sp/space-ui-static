@@ -77,6 +77,7 @@ export class UserDashboardComponent implements OnInit {
   ngOnInit() {
     this.userDashboardDataFromConfig = this.activateRoute.data.subscribe(data => {
       this.userDashboardData = data.pageData.data
+
       this.userDashboardDataForDailog = data.pageData.data.dailog_data,
         this.userdefaultRoles.roles = data.pageData.data.rolesAllowedForDefault
       this.errorMessage = data.pageData.data.user_list.errorMessage
