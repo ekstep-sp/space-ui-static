@@ -33,12 +33,12 @@
 .clr-clr {
   color: #865ba0 !important;
 }
-::ng-deep {
-  .mat-grid-tile .mat-figure {
-    align-items: baseline !important;
-    justify-content: start !important;
-  }
-}
+// ::ng-deep {
+//   .mat-grid-tile .mat-figure {
+//     // align-items: baseline !important;
+//     // justify-content: start !important;
+//   }
+// }
 .mat-standard-chip {
   height: auto !important;
 }
