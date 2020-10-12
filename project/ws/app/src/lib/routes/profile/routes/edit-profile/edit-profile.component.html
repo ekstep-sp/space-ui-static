@@ -1,15 +1,15 @@
 <div class="flexcontainercol">
-<div class="flexcontainer">
-<form [formGroup]="profileForm" (ngSubmit)="onSubmit()">
-<mat-card class="profile-form">
+  <div class="flexcontainer">
+    <form [formGroup]="profileForm" (ngSubmit)="onSubmit()">
+      <mat-card class="profile-form">
 
         <mat-toolbar color="primary">
           <span class="title-center">Edit Profile</span>
         </mat-toolbar>
         <div class="hoverable">
-          
+
           <img [src]="url ? url : relativeUrl">
-          <div (click)="fileInput.click()">
+          <div *ngIf="showUploadMobile" (click)="fileInput.click()">
             <mat-icon class="photo-icon ws-mat-primary-text">photo_camera</mat-icon>
             <input #fileInput type='file' (change)="onSelectFile($event.target.files[0])" accept="image/*">
           </div>
