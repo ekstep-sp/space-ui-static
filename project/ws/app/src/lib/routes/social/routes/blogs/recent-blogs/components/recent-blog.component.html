@@ -2,7 +2,7 @@
   <mat-toolbar [color]="pageNavbar.color" [ngStyle]="pageNavbar?.styles">
     <ws-widget-btn-page-back [widgetData]="{ url: 'back' }"></ws-widget-btn-page-back>
     <div>
-      <span i18n class="margin-left-xs text-white text-allign">Recent Blogs</span>
+      <span i18n class="margin-left-xs text-white font-size-24px font-campaign">Recent Blogs</span>
     </div>
     <div class="column-2">
       <div id="blogsearchbar"
@@ -91,7 +91,7 @@
       <mat-card class="margin-bottom-s" *ngFor="let result of timelineData?.result">
         <a [routerLink]="'/app/social/blogs/' + result.id">
           <div class="ws-mat-primary-text mat-h2 blog-title title-style" [innerHTML]="result.postContent.title" ></div>
-          <p class="mat-caption text-truncate">{{ result.postContent.abstract }}</p>
+          <p class="font-size-16px mat-caption text-truncate">{{ result.postContent.abstract }}</p>
         </a>
         <div class="flex flex-between flex-middle">
           <!-- <div> -->

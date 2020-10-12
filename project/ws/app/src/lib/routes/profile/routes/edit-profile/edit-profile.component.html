@@ -1,17 +1,18 @@
 <div class="flexcontainercol">
-<div class="flexcontainer">
-<form [formGroup]="profileForm" (ngSubmit)="onSubmit()">
-<mat-card class="profile-form">
+  <div class="flexcontainer">
+    <form [formGroup]="profileForm" (ngSubmit)="onSubmit()">
+      <mat-card class="profile-form">
 
         <mat-toolbar color="primary">
           <span class="title-center">Edit Profile</span>
         </mat-toolbar>
         <div class="hoverable">
-          
+
           <img [src]="url ? url : relativeUrl">
           <div (click)="fileInput.click()">
             <mat-icon class="photo-icon ws-mat-primary-text">photo_camera</mat-icon>
-            <input #fileInput type='file' (change)="onSelectFile($event.target.files[0])" accept="image/*">
+            <input class="font-montserrat" #fileInput type='file' (change)="onSelectFile($event.target.files[0])"
+              accept="image/*">
           </div>
           <!-- <mat-icon class="delete-photo" *ngIf="url" (click)="delete()">close</mat-icon> -->
         </div>
@@ -19,32 +20,32 @@
           <p>
             <mat-form-field class="width" appearance="legacy">
               <mat-label>Enter your First Name</mat-label>
-              <input matInput placeholder="First Name" formControlName="userFirstName">
+              <input class="font-montserrat" matInput placeholder="First Name" formControlName="userFirstName">
             </mat-form-field>
           </p>
           <p>
             <mat-form-field class="width" appearance="legacy">
               <mat-label>Enter your Last Name</mat-label>
-              <input matInput placeholder="Last Name" formControlName="userLastName">
+              <input class="font-montserrat" matInput placeholder="Last Name" formControlName="userLastName">
             </mat-form-field>
           </p>
           <p>
             <mat-form-field class="width" appearance="legacy">
               <mat-label>Email</mat-label>
-              <input matInput placeholder="Email" formControlName="email">
+              <input class="font-montserrat" matInput placeholder="Email" formControlName="email">
             </mat-form-field>
           </p>
           <p>
             <mat-form-field class="width" appearance="legacy">
               <mat-label>Organization</mat-label>
-              <input matInput placeholder="Organization" formControlName="userOrganisation">
+              <input class="font-montserrat" matInput placeholder="Organization" formControlName="userOrganisation">
 
             </mat-form-field>
           </p>
           <p>
             <mat-form-field class="width" appearance="legacy">
               <mat-label>Profile Link</mat-label>
-              <input matInput placeholder="Profile Link" formControlName="profileLink">
+              <input class="font-montserrat" matInput placeholder="Profile Link" formControlName="profileLink">
             </mat-form-field>
           </p>
           <p>
@@ -63,7 +64,8 @@
           <mat-spinner color="primary"></mat-spinner>
         </div>
         <div class="button-align">
-          <button type="submit" mat-raised-button [disabled]="isDisabled()" color="primary">Save</button>
+          <button type="submit" mat-raised-button [disabled]="isDisabled()" color="primary"><span
+              class="font-montserrat">Save</span></button>
         </div>
       </mat-card>
     </form>

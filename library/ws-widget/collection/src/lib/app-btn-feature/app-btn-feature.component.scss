@@ -43,6 +43,10 @@ mat-icon {
 .text-center {
   color: #696466;
 }
+ .ml-5.text-center {
+  font-family: Montserrat;
+  font-size: 14px;
+}
 .isVisible {
   display: flex !important;
   @include breakpoint-s {

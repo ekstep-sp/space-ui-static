@@ -1,11 +1,11 @@
 <mat-toolbar [color]="pageNavbar.color" [ngStyle]="pageNavbar?.styles">
   <ws-widget-btn-page-back [widgetData]="{ url: 'back' }"></ws-widget-btn-page-back>
-  <span class="ml-2 hidden sm:inline text-white" i18n>Question & Answer Forum</span>
-  <span class="ml-2 inline sm:hidden text-white" i18n>Latest Questions</span>
+  <span class="ml-2 hidden sm:inline text-white font-size-24px font-campaign" i18n>Question & Answer Forum</span>
+  <span class="font-campaign ml-2 inline sm:hidden text-white" i18n>Latest Questions</span>
 </mat-toolbar>
 <div class="qna-home-container mat-drawer-container mat-drawer-container-has-open mat-drawer-transition">
   <div class="qna-title">
-    <h1 class="mat-display-1 margin-remove hidden sm:block" i18n>Latest Questions</h1>
+    <h1 class="font-campaign mat-display-1 margin-remove hidden sm:block" i18n>Latest Questions</h1>
     <h1 *ngIf="qnaTimeline?.hits" class="margin-remove block sm:hidden">
       {{ qnaTimeline.hits | pipeCountTransform }}
       <ng-container i18n>Questions</ng-container>
@@ -18,7 +18,7 @@
   </div>
   <div class="flex align-center justify-between mt-6 mb-4">
     <div *ngIf="qnaTimeline" class="hidden sm:block" i18n-aria-label aria-label="Questions Count">
-      <h2 class="margin-remove">
+      <h2 class="margin-remove font-montserrat font-size-18px">
         {{ qnaTimeline.hits | pipeCountTransform }}
         <ng-container i18n> Questions</ng-container>
       </h2>
@@ -26,15 +26,15 @@
     <mat-button-toggle-group (change)="onTabChange($event)" i18n-name name="questionType" i18n-aria-label
       aria-label="Select question type">
       <mat-button-toggle i18n class="text-clr" [checked]="currentTab === eTimelineTypes.ALL"
-        [value]="eTimelineTypes.ALL">All
+        [value]="eTimelineTypes.ALL"><span class="font-montserrat">All</span>
       </mat-button-toggle>
       <mat-button-toggle i18n class="text-clr" [checked]="currentTab === eTimelineTypes.UNANSWERED"
         [value]="eTimelineTypes.UNANSWERED">
-        Unanswered</mat-button-toggle>
+       <span class="font-montserrat">Unanswered</span> </mat-button-toggle>
       <mat-button-toggle i18n *ngIf="allowedToEdit" [checked]="currentTab === eTimelineTypes.MY_TIMELINE"
-        [value]="eTimelineTypes.MY_TIMELINE">My Timeline</mat-button-toggle>
+        [value]="eTimelineTypes.MY_TIMELINE"><span class="font-montserrat">My Timeline</span> </mat-button-toggle>
       <mat-button-toggle i18n *ngIf="allowedToEdit" [checked]="currentTab === eTimelineTypes.MY_DRAFTS"
-        [value]="eTimelineTypes.MY_DRAFTS">My Drafts
+        [value]="eTimelineTypes.MY_DRAFTS"><span class="font-montserrat">My Drafts</span>
       </mat-button-toggle>
     </mat-button-toggle-group>
   </div>

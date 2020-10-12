@@ -1,6 +1,6 @@
 <mat-toolbar [color]="pageNavbar.color" [ngStyle]="pageNavbar?.styles">
   <ws-widget-btn-page-back [widgetData]="{ url: 'back' }"></ws-widget-btn-page-back>
-  <span i18n="page title: playlist" class="margin-left-xs text-white">Playlist</span>
+  <span i18n="page title: playlist" class="font-size-24px font-campaign margin-left-xs text-white">Playlist</span>
 </mat-toolbar>
 <div
   *ngIf="!error; else errorPage"
@@ -92,7 +92,7 @@
             <span class="create-icon-text">+</span>
           </div>
         </div>
-        <h3 class="mat-subheading-2 font-weight-500 margin-top-xxs margin-bottom-m" i18n>
+        <h3 class="font-montserrat mat-subheading-2 font-weight-500 margin-top-xxs margin-bottom-m" i18n>
           Create New
         </h3>
       </a>
@@ -112,7 +112,7 @@
     </ws-app-playlist-card>
   </ng-container>
   <ng-template #emptyPlaylist>
-    <h3 *ngIf="mode === 'ME'" class="mat-h3 w-full display-block text-center" i18n>No Playlists</h3>
+    <h3 *ngIf="mode === 'ME'" class="font-montserrat mat-h3 w-full display-block text-center" i18n>No Playlists</h3>
     <h3 *ngIf="mode === 'SHARED'" class="mat-h3 w-full display-block text-center" i18n>
       No playlist shared with you
     </h3>
