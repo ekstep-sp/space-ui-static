@@ -124,18 +124,18 @@ export class PlayerBriefComponent implements OnInit {
   }
 
   download() {
-      if (this.content && !this.forPreview) {
-        const link = document.createElement('a')
-        link.download = this.content.artifactUrl.split('/').pop() || 'resource.pdf'
-        link.target = '_self'
-        // Construct the URI
-        link.href = this.content.artifactUrl || ''
-        document.body.appendChild(link)
-        link.click()
-        // Cleanup the DOM
-        document.body.removeChild(link)
-      }
-      // delete link;
+    if (this.content && !this.forPreview) {
+      const link = document.createElement('a')
+      link.download = this.content.artifactUrl.split('/').pop() || 'resource.pdf'
+      link.target = '_self'
+      // Construct the URI
+      link.href = this.content.artifactUrl || ''
+      document.body.appendChild(link)
+      link.click()
+      // Cleanup the DOM
+      document.body.removeChild(link)
     }
     // delete link;
+  }
+  // delete link;
 }
