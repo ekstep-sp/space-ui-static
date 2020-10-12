@@ -252,6 +252,10 @@ $badge-padding: 12px;
      font-size:12px;
      margin :0 0 1.2px;
   }
+  @include breakpoint-xxs{
+    font-size:10px;
+     margin :0 0 1.2px;
+  }
  // left: 5px;
 }
 .text-outside-grid {
