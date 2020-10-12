@@ -11,7 +11,7 @@ import {
 import { FormControl } from '@angular/forms'
 import { ActivatedRoute, Router } from '@angular/router'
 import { NsWidgetResolver, WidgetBaseComponent } from '@ws-widget/resolver'
-import { EventService, LoggerService, WsEvents, ValueService } from '@ws-widget/utils'
+import { EventService, LoggerService, WsEvents, ValueService, UtilityService } from '@ws-widget/utils'
 import * as PDFJS from 'pdfjs-dist/webpack'
 import { fromEvent, interval, merge, Subject, Subscription } from 'rxjs'
 import { debounceTime, distinctUntilChanged } from 'rxjs/operators'
@@ -80,6 +80,7 @@ export class PlayerPdfComponent extends WidgetBaseComponent
     private contentSvc: WidgetContentService,
     private viewerSvc: ViewerUtilService,
     private valueSvc: ValueService,
+    private utilitySvc: UtilityService,
   ) {
     super()
   }
