@@ -34,7 +34,8 @@ export class EditProfileComponent implements OnInit {
   isShowUploadIOS = false
   isShowUploadAndroid = false
   paramsForEditProfile: NsEditProfile.IResponseBody = {} as NsEditProfile.IResponseBody
-  constructor(private initService: InitService,
+  constructor(
+    private initService: InitService,
     private profileSvc: ProfileService,
     private uploadService: UploadService,
     private snackBar: MatSnackBar,
@@ -60,8 +61,6 @@ export class EditProfileComponent implements OnInit {
   isLoad = false
   ngOnInit() {
     this.activateRoute.data.subscribe(data => {
-      console.log("profiledata ++++++", data)
-
       this.isShowUploadMobile = data.pageData.data.isMobileUpload
       this.isShowUploadIOS = data.pageData.data.isIOSUpload
       this.isShowUploadAndroid = data.pageData.data.isAndroidUpload
@@ -122,7 +121,6 @@ export class EditProfileComponent implements OnInit {
     }
   }
 
-
   get showUploadMobile() {
     if (!this.utilitySvc.isMobile) {
 
@@ -140,8 +138,6 @@ export class EditProfileComponent implements OnInit {
     }
     return false
   }
-
-
 
   // public delete() {
   //   this.url = 'https://png.pngitem.com/pimgs/s/146-1468479_my-profile-icon-blank-profile-picture-circle-hd.png'
