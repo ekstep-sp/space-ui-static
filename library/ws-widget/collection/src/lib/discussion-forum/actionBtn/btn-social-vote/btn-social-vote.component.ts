@@ -24,8 +24,9 @@ export class BtnSocialVoteComponent implements OnInit {
   userWids: any
   @Input()
   userWidsForUpvote: any
+  @Input()
+  isReply = false
   userForUpvote: any[] = []
-
   changeText: boolean
   userDetailsForUpVote: any[] = []
   userForDownVote: any[] = []

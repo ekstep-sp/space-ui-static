@@ -20,6 +20,8 @@ export class DisplayUsersSocialVoteComponent implements OnInit {
   iconType: any
   @Input()
   userDetailsForDownVote: any
+  @Input()
+  isReply = false
 
   userListForUpvote: any
   constructor() { }

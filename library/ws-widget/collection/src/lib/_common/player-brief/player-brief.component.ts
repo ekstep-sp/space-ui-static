@@ -62,6 +62,7 @@ export class PlayerBriefComponent implements OnInit {
   //   }
   //   return true
   // }
+
   get isDownloadable() {
     if (this.content) {
       if (this.content.mimeType === 'application/pdf') {
@@ -99,7 +100,6 @@ export class PlayerBriefComponent implements OnInit {
           // tslint:disable-next-line: ter-computed-property-spacing
         ].includes(this.content.resourceType.toLowerCase())
       ) {
-
         return true
       }
       if (
