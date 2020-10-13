@@ -12,7 +12,7 @@
       <div class="w-screen">
         <textarea class="mat-typography title-textarea title-area" i18n-placeholder placeholder="Title" required
           minlength="10" maxlength="150" name="title" [(ngModel)]="title" autofocus #postTitle="ngModel"></textarea>
-        <p *ngIf="(postTitle.dirty || postTitle.touched) && postTitle.invalid && postTitle?.value.trim().length"
+        <p *ngIf="(postTitle.dirty || postTitle.touched) && postTitle.invalid && (postTitle.value? postTitle.value.trim().length: false) "
           class="error-text mat-caption" i18n>
           *Title range: 10-150 characters
         </p>
