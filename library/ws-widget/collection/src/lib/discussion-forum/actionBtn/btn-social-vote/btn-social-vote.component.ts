@@ -35,6 +35,7 @@ export class BtnSocialVoteComponent implements OnInit {
   userDetailsForDownVote: any[] = []
   userId = ''
   isUpdating = false
+  updateVoteKey: any
   conversationRequest: NsDiscussionForum.IPostRequest = {
     postId: '',
     userId: '',
@@ -100,6 +101,7 @@ export class BtnSocialVoteComponent implements OnInit {
           }
         }
         this.isUpdating = false
+        this.updateVoteKey = 'true'
         this.fetchUpdateContent(request.id)
       },
       () => {
@@ -134,6 +136,7 @@ export class BtnSocialVoteComponent implements OnInit {
             this.activity.activityData.downVote += 1
           }
           this.isUpdating = false
+          this.updateVoteKey = 'false'
           this.fetchUpdateContent(request.id)
         }
       },
@@ -179,23 +182,29 @@ export class BtnSocialVoteComponent implements OnInit {
   }
   async getWidsForVote(data?: any) {
     if (data) {
+      this.userForUpvote = []
+      this.userForDownVote = []
       const wids = data.upVote
       if (wids.length) {
+      if (this.updateVoteKey === 'true') {
         // if (data.upVote.includes()) {
         const userDetails = await this.discussionSvc.getUsersByIDs(wids)
         this.userForUpvote = this.discussionSvc.addIndexToData(userDetails)
         // }
-      } else {
+      }
+    } else {
         this.userForUpvote = []
       }
       const widsForDownVote = data.downVote
       if (widsForDownVote.length) {
+        if (this.updateVoteKey === 'false') {
         const userDetailsforDownVote = await this.discussionSvc.getUsersByIDs(widsForDownVote)
         this.userForDownVote = this.discussionSvc.addIndexToData(userDetailsforDownVote)
-      } else {
-        this.userForDownVote = []
       }
     } else {
+      this.userForDownVote = []
+    }
+  } else {
     if (this.activity.activityDetails) {
       // filter for upvote
       //  if (this.activity.activityDetails) {
