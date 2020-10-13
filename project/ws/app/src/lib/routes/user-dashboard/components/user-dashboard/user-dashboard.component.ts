@@ -203,7 +203,7 @@ export class UserDashboardComponent implements OnInit {
             allRoles: getAllRoles.DATA,
             defaultValueToBeChecked: this.roles,
             // tslint:disable-next-line: prefer-template
-            userName: element.first_name + '' + element.last_name,
+            userName: element.first_name + ' ' + element.last_name,
             defaultRoles: this.userdefaultRoles.roles,
           },
         })
@@ -255,7 +255,7 @@ export class UserDashboardComponent implements OnInit {
         title: this.userDashboardDataForDailog.title,
         body: this.userDashboardDataForDailog.body,
         // tslint:disable-next-line: prefer-template
-        userName: element.first_name + '' + element.last_name,
+        userName: element.first_name + ' ' + element.last_name,
         email: element.email,
       },
     })

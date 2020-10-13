@@ -26,6 +26,15 @@
   background-color: #a77e2d !important;
   color: red !important;
 }
+::ng-deep{
+  .theme-muave.night-mode .mat-flat-button.button-color{
+    background: #865BA0 !important;
+     color: white !important;
+  }
+  .theme-muave.night-mode .white-text{
+     color: white !important;
+  }
+}
 .button-color{
   background-color: #865ba0;
   color:white !important;
