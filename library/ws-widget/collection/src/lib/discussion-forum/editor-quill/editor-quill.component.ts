@@ -1,4 +1,4 @@
-import { Component, OnInit, Output, EventEmitter, Input, OnDestroy } from '@angular/core'
+import { Component, OnInit, Output, EventEmitter, Input, OnDestroy, ElementRef, ViewChild } from '@angular/core'
 import 'quill-mention'
 import { NsUserDashboard } from '../../../../../../../project/ws/app/src/lib/routes/user-dashboard/models/user-dashboard.model'
 import { ConfigurationsService } from '../../../../../utils/src/public-api'
@@ -13,6 +13,7 @@ import { quillBaseConfig } from './config/quill-config'
 })
 export class EditorQuillComponent implements OnInit, OnDestroy {
   modules = {}
+  isValidInput = false
   @Output() textData = new EventEmitter<{
     isValid: boolean
     htmlText: string
@@ -20,6 +21,7 @@ export class EditorQuillComponent implements OnInit, OnDestroy {
     mentions?: object[]
   }>()
   @Output() mentionsData = new EventEmitter<any[]>()
+  @ViewChild('editor', { static: false }) editor: ElementRef | any
 
   @Input() htmlText = ''
   @Input() minLength = '1'
@@ -68,7 +70,6 @@ export class EditorQuillComponent implements OnInit, OnDestroy {
       dataAttributes: ['id', 'value', 'data'],
     },
   }
-
   constructor(private configSvc: ConfigurationsService,
               private activateRoute: ActivatedRoute,
               private discussionForumService: WsDiscussionForumService) {
@@ -101,6 +102,7 @@ export class EditorQuillComponent implements OnInit, OnDestroy {
     })
   }
   onContentChanged(editorEvent: any) {
+    this.isValidInput = editorEvent.text.trim().length
     const newList = this.emitMentionsEvent(editorEvent.content.ops)
     this.textData.emit({
       isValid: editorEvent.text.trim().length > this.minLength,
