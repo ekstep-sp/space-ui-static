@@ -9,13 +9,13 @@ import { BtnSocialLikeService } from '../btn-social-like/service/btn-social-like
 export class DisplayUsersSocialVoteComponent implements OnInit {
 
   @Input()
-  userList: any[] = []
+  userList: any
   @Input()
-  userListDownVote: any[] = []
+  userListDownVote: any
   @Input()
   voteType: any
   @Input()
-  userLike: any[] = []
+  userLike: any
   @Input() replyPost: any
   @Input()
   iconType: any
@@ -26,12 +26,14 @@ export class DisplayUsersSocialVoteComponent implements OnInit {
   constructor(public likeService: BtnSocialLikeService) { }
 
   ngOnInit() {
-  //   setTimeout(() => {
-  //     this.likeService.userLikeObject.subscribe((likeObject: any) => {
-  //       // this.replyPost ? this.userList = likeObject : this.userList = this.userList
-  //       console.log(this.userList, likeObject)
-  //     })
-  //   },         100)
-  // }
-}
+    // setTimeout(() => {
+    //   this.likeService.userUpVoteObject.subscribe((upVoteObject: any) => {
+    //     upVoteObject ? this.userList = upVoteObject : this.userList = this.userList
+    //   })
+    //   this.likeService.userUpVoteObject.subscribe((downVoteObject: any) => {
+    //     downVoteObject ? this.userListDownVote = downVoteObject : this.userListDownVote = this.userlistdownvote
+    //   })
+    // },         100)
+    // this.checkFunction()
+  }
 }

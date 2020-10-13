@@ -1,17 +1,18 @@
 import { Injectable } from '@angular/core'
 import { BehaviorSubject } from 'rxjs'
-import { NsDiscussionForum } from '../../../ws-discussion-forum.model';
 
 @Injectable({
   providedIn: 'root',
 })
 export class BtnSocialLikeService {
 
-userLikeObject = new BehaviorSubject<NsDiscussionForum.IPostActivity | null >(null)
+userUpVoteObject = new BehaviorSubject<[] | null >(null)
+userDownVoteObject = new BehaviorSubject<[] | null >(null)
 constructor() { }
 
-triggerStoreLikeData(likeData: any) {
-  console.log(likeData)
-this.userLikeObject.next(likeData)
+triggerStoreLikeData(upVote: any, downVote: any) {
+  // console.log(likeData)
+this.userUpVoteObject.next(upVote)
+this.userDownVoteObject.next(downVote)
 }
 }

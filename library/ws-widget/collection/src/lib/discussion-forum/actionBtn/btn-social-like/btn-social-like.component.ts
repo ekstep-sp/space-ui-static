@@ -4,9 +4,9 @@ import { MatSnackBar, MatDialog } from '@angular/material'
 import { DialogSocialActivityUserComponent } from '../../dialog/dialog-social-activity-user/dialog-social-activity-user.component'
 import { WsDiscussionForumService } from '../../ws-discussion-forum.services'
 import { NsDiscussionForum } from '../../ws-discussion-forum.model'
-import { BtnSocialLikeService } from './service/btn-social-like.service';
-import { combineLatest } from 'rxjs';
-import { ActivatedRoute } from '@angular/router';
+import { BtnSocialLikeService } from './service/btn-social-like.service'
+import { combineLatest } from 'rxjs'
+import { ActivatedRoute } from '@angular/router'
 
 @Component({
   selector: 'ws-widget-btn-social-like',
@@ -90,15 +90,18 @@ export class BtnSocialLikeComponent implements OnInit {
           this.activity.activityData.like += 1
         }
       }
-      this.fetchdetails()
+      this.fetchdetails(request.id)
     })
   }
 
-  fetchdetails(forceNew= false) {
-    if (forceNew) {
-      this.conversationRequest.sessionId = Date.now()
-      this.conversationRequest.pgNo = 0
-    }
+  fetchdetails(postId: any) {
+    // if (forceNew) {
+    //   this.conversationRequest.sessionId = Date.now()
+    //   this.conversationRequest.pgNo = 0
+    //   // if (this.key) {
+    //   // this.conversationRequest.answerId =
+    //   // }
+    // }
 
     this.discussionSvc.fetchPost(this.conversationRequest).subscribe(data => {
       console.log(data, this.userId)
@@ -109,11 +112,9 @@ export class BtnSocialLikeComponent implements OnInit {
        if (this.key) {
         data.replyPost.forEach(reply => {
           if (reply.activity.activityDetails) {
-          if (reply.activity.activityDetails.like.includes(this.userId)) {
+          if (reply.id === postId) {
           this.getWidsForLike(reply.activity.activityDetails && reply.activity.activityDetails.like)
-          } else if (!reply.activity.activityDetails.like.includes(this.userId)) {
-              this.getWidsForLike(reply.activity.activityDetails && reply.activity.activityDetails.like)
-            }
+           }
           }
          })
        } else {

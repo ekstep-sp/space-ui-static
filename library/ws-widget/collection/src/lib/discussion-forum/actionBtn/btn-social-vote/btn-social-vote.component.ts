@@ -4,6 +4,8 @@ import { MatSnackBar, MatDialog } from '@angular/material'
 import { DialogSocialActivityUserComponent } from '../../dialog/dialog-social-activity-user/dialog-social-activity-user.component'
 import { WsDiscussionForumService } from '../../ws-discussion-forum.services'
 import { NsDiscussionForum } from '../../ws-discussion-forum.model'
+import { ActivatedRoute } from '@angular/router'
+import { combineLatest } from 'rxjs'
 
 @Component({
   selector: 'ws-widget-btn-social-vote',
@@ -20,6 +22,7 @@ export class BtnSocialVoteComponent implements OnInit {
   @ViewChild('invalidUser', { static: true }) invalidUser!: ElementRef<
     any
   >
+  @Input() key: any
   @Input()
   userWids: any
   @Input()
@@ -32,20 +35,39 @@ export class BtnSocialVoteComponent implements OnInit {
   userDetailsForDownVote: any[] = []
   userId = ''
   isUpdating = false
+  conversationRequest: NsDiscussionForum.IPostRequest = {
+    postId: '',
+    userId: '',
+    answerId: '',
+    postKind: [],
+    sessionId: Date.now(),
+    sortOrder: NsDiscussionForum.EConversationSortOrder.LATEST_DESC,
+    pgNo: 0,
+    pgSize: 10,
+    postCreatorId: '',
+  }
   constructor(
     private configSvc: ConfigurationsService,
     private socialSvc: WsDiscussionForumService,
     private snackBar: MatSnackBar,
     private dialog: MatDialog,
     private discussionSvc: WsDiscussionForumService,
+    private route: ActivatedRoute,
   ) {
     this.changeText = false
     if (this.configSvc.userProfile) {
       this.userId = this.configSvc.userProfile.userId || ''
     }
+    this.conversationRequest.userId = this.userId
   }
 
   ngOnInit() {
+    combineLatest(this.route.data, this.route.paramMap).subscribe(_combinedResult => {
+      const idVal = _combinedResult[1].get('id')
+      if (idVal) {
+        this.conversationRequest.postId = idVal
+      }
+    })
     this.getWidsForVote()
 
   }
@@ -78,6 +100,7 @@ export class BtnSocialVoteComponent implements OnInit {
           }
         }
         this.isUpdating = false
+        this.fetchUpdateContent(request.id)
       },
       () => {
         this.isUpdating = false
@@ -111,6 +134,7 @@ export class BtnSocialVoteComponent implements OnInit {
             this.activity.activityData.downVote += 1
           }
           this.isUpdating = false
+          this.fetchUpdateContent(request.id)
         }
       },
       () => {
@@ -118,7 +142,32 @@ export class BtnSocialVoteComponent implements OnInit {
       },
     )
   }
+  fetchUpdateContent(postId: any) {
+    // if (forceNew) {
+    //   this.conversationRequest.sessionId = Date.now()
+    //   this.conversationRequest.pgNo = 0
+    // }
 
+    this.discussionSvc.fetchPost(this.conversationRequest).subscribe(data => {
+      if (data.mainPost.postCreator.postCreatorId) {
+        this.conversationRequest.postCreatorId = data.mainPost.postCreator.postCreatorId
+       }
+       this.activity.activityDetails = data.mainPost.activity.activityDetails
+       if (this.key) {
+        data.replyPost.forEach(reply => {
+          if (reply.activity.activityDetails) {
+          if (reply.id === postId) {
+          this.getWidsForVote(reply.activity.activityDetails)
+          }
+          }
+         })
+       } else {
+          // if (data.mainPost.activity.activityDetails) {
+       this.getWidsForVote(data.mainPost.activity.activityDetails)
+      //  }
+      }
+    })
+  }
   openVotesDialog(voteType: NsDiscussionForum.EActivityType.DOWNVOTE | NsDiscussionForum.EActivityType.UPVOTE) {
     const data: NsDiscussionForum.IDialogActivityUsers = {
       postId: this.postId,
@@ -128,7 +177,25 @@ export class BtnSocialVoteComponent implements OnInit {
       data,
     })
   }
-  async getWidsForVote() {
+  async getWidsForVote(data?: any) {
+    if (data) {
+      const wids = data.upVote
+      if (wids.length) {
+        // if (data.upVote.includes()) {
+        const userDetails = await this.discussionSvc.getUsersByIDs(wids)
+        this.userForUpvote = this.discussionSvc.addIndexToData(userDetails)
+        // }
+      } else {
+        this.userForUpvote = []
+      }
+      const widsForDownVote = data.downVote
+      if (widsForDownVote.length) {
+        const userDetailsforDownVote = await this.discussionSvc.getUsersByIDs(widsForDownVote)
+        this.userForDownVote = this.discussionSvc.addIndexToData(userDetailsforDownVote)
+      } else {
+        this.userForDownVote = []
+      }
+    } else {
     if (this.activity.activityDetails) {
       // filter for upvote
       //  if (this.activity.activityDetails) {
@@ -150,8 +217,9 @@ export class BtnSocialVoteComponent implements OnInit {
       }
     }
   }
-
+  console.log(this.userForUpvote, this.userForDownVote)
+}
+}
   // isEnabled() {
   //   this.isEnabledForDisplay = true;
   // }
-}

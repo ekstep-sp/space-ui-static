@@ -56,10 +56,10 @@
         </ws-widget-btn-social-like>
         <span>
           <ws-widget-btn-social-vote [postId]="conversationRequest?.postId"
-            [activity]="conversation?.mainPost?.activity" [voteType]="'upVote'"
+            [activity]="conversation?.mainPost?.activity" [voteType]="'upVote'" [key]="keyValue"
             [postCreatorId]="conversation?.mainPost?.postCreator?.postCreatorId">
           </ws-widget-btn-social-vote>
-          <ws-widget-btn-social-vote class="margin-left-s" [postId]="conversationRequest?.postId"
+          <ws-widget-btn-social-vote class="margin-left-s" [key]="keyValue" [postId]="conversationRequest?.postId"
             [activity]="conversation?.mainPost?.activity" [voteType]="'downVote'"
             [postCreatorId]="conversation?.mainPost?.postCreator?.postCreatorId"></ws-widget-btn-social-vote>
         </span>

@@ -56,8 +56,8 @@
   <span class="margin-top-s flex flex-between" *ngIf="reply?.activity && reply?.status === 'Active'">
     <span>
       <ws-widget-btn-social-vote [postId]="reply?.id" [activity]="reply?.activity" [voteType]="'upVote'"
-        [postCreatorId]="reply?.postCreator?.postCreatorId"></ws-widget-btn-social-vote>
-      <ws-widget-btn-social-vote class="margin-left-s" [postId]="reply?.id" [activity]="reply?.activity"
+        [postCreatorId]="reply?.postCreator?.postCreatorId" [key]="replyPost"></ws-widget-btn-social-vote>
+      <ws-widget-btn-social-vote class="margin-left-s" [postId]="reply?.id"  [key]="replyPost" [activity]="reply?.activity"
         [voteType]="'downVote'" [postCreatorId]="reply?.postCreator?.postCreatorId">
       </ws-widget-btn-social-vote>
     </span>
