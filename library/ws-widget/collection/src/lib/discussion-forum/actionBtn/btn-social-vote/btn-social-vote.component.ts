@@ -28,7 +28,6 @@ export class BtnSocialVoteComponent implements OnInit {
   @Input()
   userWidsForUpvote: any
   userForUpvote: any[] = []
-
   changeText: boolean
   userDetailsForUpVote: any[] = []
   userForDownVote: any[] = []
@@ -36,6 +35,7 @@ export class BtnSocialVoteComponent implements OnInit {
   userId = ''
   isUpdating = false
   updateVoteKey: any
+  checkKey = true
   conversationRequest: NsDiscussionForum.IPostRequest = {
     postId: '',
     userId: '',
@@ -93,6 +93,15 @@ export class BtnSocialVoteComponent implements OnInit {
       _ => {
         if (this.activity) {
           if (this.activity.userActivity.downVote) {
+            if (this.activity.activityDetails) {
+              const findIndex =  this.activity.activityDetails.downVote.findIndex(data => {
+                return data === this.userId
+              })
+              if (findIndex > -1) {
+              this.activity.activityDetails.downVote = this.activity.activityDetails.downVote.slice(0, findIndex)
+              }
+              this.activity.activityDetails.upVote.push(this.userId)
+            }
             this.activity.userActivity.downVote = false
             this.activity.activityData.downVote -= 1
           } else {
@@ -100,6 +109,7 @@ export class BtnSocialVoteComponent implements OnInit {
             this.activity.activityData.upVote += 1
           }
         }
+        this.checkKey = true
         this.isUpdating = false
         this.updateVoteKey = 'true'
         this.fetchUpdateContent(request.id)
@@ -129,12 +139,22 @@ export class BtnSocialVoteComponent implements OnInit {
       _ => {
         if (this.activity) {
           if (this.activity.userActivity.upVote) {
+            if (this.activity.activityDetails) {
+              const findIndex =  this.activity.activityDetails.upVote.findIndex(data => {
+                return data === this.userId
+              })
+              if (findIndex > -1) {
+              this.activity.activityDetails.upVote = this.activity.activityDetails.upVote.slice(0, findIndex)
+              }
+              this.activity.activityDetails.downVote.push(this.userId)
+            }
             this.activity.userActivity.upVote = false
             this.activity.activityData.upVote -= 1
           } else {
             this.activity.userActivity.downVote = true
             this.activity.activityData.downVote += 1
           }
+          this.checkKey = true
           this.isUpdating = false
           this.updateVoteKey = 'false'
           this.fetchUpdateContent(request.id)
@@ -155,18 +175,18 @@ export class BtnSocialVoteComponent implements OnInit {
       if (data.mainPost.postCreator.postCreatorId) {
         this.conversationRequest.postCreatorId = data.mainPost.postCreator.postCreatorId
        }
-       this.activity.activityDetails = data.mainPost.activity.activityDetails
+      //  this.activity.activityDetails = data.mainPost.activity.activityDetails
        if (this.key) {
         data.replyPost.forEach(reply => {
           if (reply.activity.activityDetails) {
           if (reply.id === postId) {
-          this.getWidsForVote(reply.activity.activityDetails)
+          this.getWidsForVote()
           }
           }
          })
        } else {
           // if (data.mainPost.activity.activityDetails) {
-       this.getWidsForVote(data.mainPost.activity.activityDetails)
+       this.getWidsForVote()
       //  }
       }
     })
@@ -180,31 +200,36 @@ export class BtnSocialVoteComponent implements OnInit {
       data,
     })
   }
-  async getWidsForVote(data?: any) {
-    if (data) {
-      this.userForUpvote = []
-      this.userForDownVote = []
-      const wids = data.upVote
-      if (wids.length) {
-      if (this.updateVoteKey === 'true') {
-        // if (data.upVote.includes()) {
-        const userDetails = await this.discussionSvc.getUsersByIDs(wids)
-        this.userForUpvote = this.discussionSvc.addIndexToData(userDetails)
-        // }
-      }
-    } else {
-        this.userForUpvote = []
-      }
-      const widsForDownVote = data.downVote
-      if (widsForDownVote.length) {
-        if (this.updateVoteKey === 'false') {
-        const userDetailsforDownVote = await this.discussionSvc.getUsersByIDs(widsForDownVote)
-        this.userForDownVote = this.discussionSvc.addIndexToData(userDetailsforDownVote)
-      }
-    } else {
-      this.userForDownVote = []
-    }
-  } else {
+  async getWidsForVote() {
+  //   if (data) {
+  //     // this.userForUpvote = []
+  //     // this.userForDownVote = []
+  //     const wids = data.upVote
+  //     const widsForDownVote = data.downVote
+  //     if (wids.length) {
+  //     // if (this.updateVoteKey === 'true') {
+  //       // if (data.upVote.includes()) {
+  //       const userDetails = await this.discussionSvc.getUsersByIDs(wids)
+  //       this.userForUpvote = this.discussionSvc.addIndexToData(userDetails)
+  //     //   } else {
+  //     //     const userDetailsforDownVote = await this.discussionSvc.getUsersByIDs(widsForDownVote)
+  //     //     this.userForDownVote = this.discussionSvc.addIndexToData(userDetailsforDownVote)
+  //     // }
+  //   } else {
+  //       this.userForUpvote = []
+  //     }
+  //     if (widsForDownVote.length) {
+  //       // if (this.updateVoteKey === 'false') {
+  //       const userDetailsforDownVote = await this.discussionSvc.getUsersByIDs(widsForDownVote)
+  //       this.userForDownVote = this.discussionSvc.addIndexToData(userDetailsforDownVote)
+  //     // } else {
+  //     //      const userDetails = await this.discussionSvc.getUsersByIDs(wids)
+  //     //     this.userForUpvote = this.discussionSvc.addIndexToData(userDetails)
+  //     // }
+  //   } else {
+  //     this.userForDownVote = []
+  //   }
+  // } else {
     if (this.activity.activityDetails) {
       // filter for upvote
       //  if (this.activity.activityDetails) {
@@ -225,9 +250,9 @@ export class BtnSocialVoteComponent implements OnInit {
         this.userForDownVote = this.discussionSvc.addIndexToData(userDetailsforDownVote)
       }
     }
+    console.log(this.userForUpvote, this.userForDownVote)
   }
-  console.log(this.userForUpvote, this.userForDownVote)
-}
+// }
 }
   // isEnabled() {
   //   this.isEnabledForDisplay = true;

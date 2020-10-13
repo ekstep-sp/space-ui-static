@@ -3,14 +3,14 @@
     <ng-container *ngIf="iconType === 'thumbs'">
       <div class="tooltip">
         <button name="discussion-forum-downvote-button" [disabled]="isUpdating || isDisabled"
-          (click)="downVote(invalidUser.value)" type="button" mat-icon-button matTooltipPosition="above" i18n-aria-label
+          (click)="downVote(invalidUser.value);target1" type="button" mat-icon-button matTooltipPosition="above" i18n-aria-label
           aria-label="down vote" i18n-matTooltip matTooltip="Down vote"
           [ngClass]="{ highlight: activity.userActivity.downVote }">
           <mat-icon [matBadgeHidden]="!activity?.activityData.downVote" [matBadge]="activity?.activityData.downVote"
             matBadgeSize="small" matBadgeColor="accent">thumb_down</mat-icon>
         </button>
         <span class="tooltiptext-downvote">
-          <ws-widget-display-users-social-vote [userListDownVote]="userForDownVote" [iconType]="iconType"
+          <ws-widget-display-users-social-vote #target1 [userListDownVote]="userForDownVote" [iconType]="iconType"
             [voteType]="voteType">
           </ws-widget-display-users-social-vote>
         </span>
@@ -43,7 +43,7 @@
     <ng-container *ngIf="iconType === 'thumbs'">
       <div class="tooltip">
         <button name="discussion-forum-upvote-button" [disabled]="isUpdating || isDisabled"
-          (click)="upVote(invalidUser.value)" matTooltip="Up vote" matTooltipPosition="above" type="button"
+          (click)="upVote(invalidUser.value);target" matTooltip="Up vote" matTooltipPosition="above" type="button"
           mat-icon-button i18n-aria-label aria-label="Up vote" i18n-matTooltip
           [ngClass]="{ highlight: activity.userActivity.upVote }">
           <mat-icon [matBadgeHidden]="!activity?.activityData.upVote" [matBadge]="activity?.activityData.upVote"
@@ -51,7 +51,7 @@
 
         </button>
         <span class="tooltiptext">
-          <ws-widget-display-users-social-vote [userList]="userForUpvote" [iconType]="iconType" [voteType]="voteType">
+          <ws-widget-display-users-social-vote #target [userList]="userForUpvote" [iconType]="iconType" [voteType]="voteType">
           </ws-widget-display-users-social-vote>
         </span>
       </div>

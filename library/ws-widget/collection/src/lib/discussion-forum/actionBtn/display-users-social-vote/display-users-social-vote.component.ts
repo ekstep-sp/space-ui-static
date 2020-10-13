@@ -34,6 +34,11 @@ export class DisplayUsersSocialVoteComponent implements OnInit {
     //     downVoteObject ? this.userListDownVote = downVoteObject : this.userListDownVote = this.userlistdownvote
     //   })
     // },         100)
-    // this.checkFunction()
+    this.checkFunction()
+  }
+  checkFunction() {
+    setTimeout(() => {
+      console.log(this.userList, this.userListDownVote)
+    },         100)
   }
 }
