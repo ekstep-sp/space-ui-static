@@ -23,8 +23,8 @@
     </div>
     <div>
       <button mat-flat-button [disabled]="!selection.selected?.length" color="primary" (click)="bulkChangeRole()"
-        class="mat-button mat-button-base mat-primary">
-        Bulk Change Role
+        class="mat-button mat-button-base mat-primary bulkchange-btn">
+        <span class="bulkchange-clr">Bulk Change Role</span>
       </button>
     </div>
   </div>
@@ -59,16 +59,17 @@
 
       <ng-container matColumnDef="SlNo">
         <th mat-header-cell *matHeaderCellDef class="font-size-18px font-text font-montserrat">Sl No.</th>
-        <td mat-cell  *matCellDef="let element; let i = index" >{{ i + 1 }}</td>
+        <td mat-cell *matCellDef="let element; let i = index">{{ i + 1 }}</td>
       </ng-container>
 
       <ng-container matColumnDef="first_name">
         <th mat-header-cell *matHeaderCellDef class="font-size-18px font-text header-clr" mat-sort-header>Name</th>
-        <td mat-cell  *matCellDef="let element">{{ element.first_name }} {{ element.last_name }}</td>
+        <td mat-cell *matCellDef="let element">{{ element.first_name }} {{ element.last_name }}</td>
       </ng-container>
 
       <ng-container matColumnDef="organization">
-        <th mat-header-cell *matHeaderCellDef class="font-size-18px font-text header-clr" mat-sort-header>Organization</th>
+        <th mat-header-cell *matHeaderCellDef class="font-size-18px font-text header-clr" mat-sort-header>Organization
+        </th>
         <td mat-cell class="column-align" *matCellDef="let element">{{ element.department_name}}</td>
       </ng-container>
 
@@ -79,7 +80,7 @@
 
       <ng-container matColumnDef="time_inserted">
         <th mat-header-cell *matHeaderCellDef class="font-size-18px font-text" mat-sort-header>Registered On</th>
-        <td mat-cell  class="column-align" *matCellDef="let element">{{ element.time_inserted }}</td>
+        <td mat-cell class="column-align" *matCellDef="let element">{{ element.time_inserted }}</td>
       </ng-container>
 
       <ng-container matColumnDef="Actions" stickyEnd>
