@@ -65,11 +65,11 @@ export class ShareViewerResolve
     if (!contentID) {
       throw new Error('contentID or contentType not fetched from verified url, cannot proceed')
     }
-    console.log('api to hit is ', `${CONTENT_READ}${contentID}${this.accessService.orgRootOrgAsQuery}`)
+    // console.log('api to hit is ', `${CONTENT_READ}${contentID}${this.accessService.orgRootOrgAsQuery}`)
     const content =  await this.apiService.get<NsContent.IContent>(
       `${CONTENT_READ}${contentID}${this.accessService.orgRootOrgAsQuery}`,
     ).toPromise()
-    console.log('api hit successful')
+    // console.log('api hit successful')
     this.viewerDataSvc.reset(content.identifier)
     this.viewerDataSvc.updateResource(content, null)
     return content
