@@ -88,7 +88,7 @@ export class ConfigurationsService {
     if (this.isGuestUser) {
       try {
         return JSON.parse(sessionStorage.getItem('default-user') as any)
-      } catch(e) {
+      } catch (e) {
         // tslint:disable-next-line: no-console
         console.error('An Error occured while retrieving guest user details ', e)
         return null

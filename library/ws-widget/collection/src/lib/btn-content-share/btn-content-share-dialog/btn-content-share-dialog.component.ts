@@ -176,7 +176,7 @@ export class BtnContentShareDialogComponent implements OnInit {
       window.setTimeout(() => {
         this.triggerCopiedNotification('Url copied to clipoard!')
         this.dialogRef.close()
-      }, 100)
+      },                100)
     } catch (e) {
       this.triggerCopiedNotification('copy to clipboard failed, copy manually.')
     }

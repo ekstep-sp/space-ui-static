@@ -565,18 +565,6 @@ const routes: Routes = [
       pageData: PageResolve,
     },
   },
-  /* {
-    path: 'public/share-content/:pageType/:sharableToken',
-    data: {
-      isPublic: true,
-      pageType: 'feature',
-      pageKey: 'share-content',
-    },
-    resolve: {
-      pageData: PageResolve,
-    },
-    component: PublicShareComponent,
-  }, */
   {
     path: 'public/tnc',
     component: TncComponent,
