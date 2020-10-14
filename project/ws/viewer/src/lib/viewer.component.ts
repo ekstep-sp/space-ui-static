@@ -1,4 +1,4 @@
-import { AfterViewChecked, ChangeDetectorRef, Component, OnDestroy, OnInit } from '@angular/core'
+import { AfterViewInit, ChangeDetectorRef, Component, OnDestroy, OnInit } from '@angular/core'
 import { ActivatedRoute, Router } from '@angular/router'
 import { NsContent } from '@ws-widget/collection'
 import { NsWidgetResolver } from '@ws-widget/resolver'
@@ -23,8 +23,9 @@ export enum ErrorType {
   templateUrl: './viewer.component.html',
   styleUrls: ['./viewer.component.scss'],
 })
-export class ViewerComponent implements OnInit, OnDestroy, AfterViewChecked {
+export class ViewerComponent implements OnInit, OnDestroy, AfterViewInit {
   fullScreenContainer: HTMLElement | null = null
+  guestUser = false
   content: NsContent.IContent | null = null
   errorType = ErrorType
   private isLtMedium$ = this.valueSvc.isLtMedium$
@@ -59,18 +60,31 @@ export class ViewerComponent implements OnInit, OnDestroy, AfterViewChecked {
   }
 
   getContentData(e: any) {
-    e.activatedRoute.data.subscribe((data: { content: { data: NsContent.IContent } }) => {
-      if (data.content && data.content.data) {
-        this.content = data.content.data
-        this.tocSharedSvc.fetchEmails(this.content ? this.content.creatorContacts : []).then((newIDS: any) => {
-          if (this.content) {
-            this.content.creatorContacts = [
-              ...newIDS,
-            ]
-          }
-        })
-      }
-    })
+    if (e.hasOwnProperty('activatedRoute')) {
+      this.guestUser = false
+      e.activatedRoute.data.subscribe((data: { content: { data: NsContent.IContent } }) => {
+        if (data.content && data.content.data) {
+          this.content = data.content.data
+          this.tocSharedSvc.fetchEmails(this.content ? this.content.creatorContacts : []).then((newIDS: any) => {
+            if (this.content) {
+              this.content.creatorContacts = [
+                ...newIDS,
+              ]
+            }
+          })
+        }
+      })
+    } else if (e.hasOwnProperty('route')) {
+      // this will occur for sharable routes
+      e.route.data.subscribe((data: { content: NsContent.IContent }) => {
+        if (data.content && !data.content.data) {
+          this.guestUser = true
+          window.setTimeout(() => {
+            this.content = data.content
+          })
+        }
+      })
+    }
   }
 
   ngOnInit() {
@@ -123,13 +137,14 @@ export class ViewerComponent implements OnInit, OnDestroy, AfterViewChecked {
     })
   }
 
-  ngAfterViewChecked() {
-    const container = document.getElementById('fullScreenContainer')
-    if (container) {
-      this.fullScreenContainer = container
-      this.changeDetector.detectChanges()
-    } else {
-      this.fullScreenContainer = null
+  ngAfterViewInit() {
+    if (!this.guestUser) {
+      const container = document.getElementById('fullScreenContainer')
+      if (container) {
+        this.fullScreenContainer = container
+      } else {
+        this.fullScreenContainer = null
+      }
       this.changeDetector.detectChanges()
     }
   }

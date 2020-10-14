@@ -44,8 +44,7 @@ export class PlayerBriefComponent implements OnInit {
   isDownloadableDesktop = false
   isDownloadableIos = false
   isDownloadableAndroid = false
-
-  // disablefield = false
+  hideRatings = false
 
   ngOnInit() {
 
@@ -56,14 +55,11 @@ export class PlayerBriefComponent implements OnInit {
       this.isDownloadableDesktop = this.configSvc.restrictedFeatures.has('downloadRequest')
     }
   }
-  // isMobile() {
-  //   if (this.utilitySvc.isIos) {
-  //     return false
-  //   }
-  //   return true
-  // }
 
   get isDownloadable() {
+    if (this.configSvc.isGuestUser) {
+      return false
+    }
     if (this.content) {
       if (this.content.mimeType === 'application/pdf') {
         return true
@@ -130,13 +126,13 @@ export class PlayerBriefComponent implements OnInit {
       this.isShowDownloadMobile = data.isMobileDownloadable
       this.isShowDownloadIOS = data.isIOSDownloadable
       this.isShowDownloadAndroid = data.isAndroidDownloadable
-      // tslint:disable-next-line: no-console
-      // console.log('toc data is ', this.tocConfig)
-      // verify the roles and disbale the rating component
       // tslint:disable-next-line: max-line-length
       this.enableRatings = this.widgetContentSvc.isVisibileAccToRoles(this.tocConfig.rolesAllowed.rateContent, this.tocConfig.rolesNotAllowed.rateContent)
       // tslint:disable-next-line: max-line-length
       this.mailIcon = this.widgetContentSvc.isVisibileAccToRoles(this.tocConfig.rolesAllowed.mail, this.tocConfig.rolesNotAllowed.mail)
+      if (this.configSvc.isGuestUser) {
+        this.extractFeaturesForGuest()
+      }
 
     })
   }
@@ -145,7 +141,6 @@ export class PlayerBriefComponent implements OnInit {
     if (!this.utilitySvc.isMobile) {
       return true
     }
-    // console.log("isMobile++++++++++", this.tocConfig)
     if (this.isShowDownloadMobile) {
       if (this.utilitySvc.isIos && this.isShowDownloadIOS) {
         return true
@@ -157,6 +152,12 @@ export class PlayerBriefComponent implements OnInit {
     }
     return false
   }
+  extractFeaturesForGuest() {
+    this.hideRatings = true
+    this.enableRatings = false
+    this.mailIcon = false
+  }
+
   download() {
     if (this.content && !this.forPreview) {
       const link = document.createElement('a')
@@ -169,7 +170,5 @@ export class PlayerBriefComponent implements OnInit {
       // Cleanup the DOM
       document.body.removeChild(link)
     }
-    // delete link;
   }
-  // delete link;
 }

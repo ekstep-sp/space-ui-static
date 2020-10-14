@@ -31,6 +31,11 @@ export class GeneralGuard implements CanActivate {
     /**
      * Test IF User is authenticated
      */
+    if (document.location.href.includes('public/sharecontent')) {
+      return true
+    }
+    this.configSvc.removeGuestUser()
+    // alert('removed guest user from general guard')
     if (!this.configSvc.isAuthenticated) {
       let refAppend = ''
       if (state.url) {

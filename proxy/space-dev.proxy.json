@@ -52,5 +52,14 @@
     "secure": false,
     "logLevel": "debug",
     "changeOrigin": true
+  },
+  "/custom/*": {
+    "target": "https://space.societalplatform.org",
+    "secure": false,
+    "logLevel": "debug",
+    "changeOrigin": true,
+    "pathRewrite": {
+      "^/custom": ""
+    }
   }
 }

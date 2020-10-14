@@ -1,5 +1,6 @@
-import { NgModule } from '@angular/core'
+import { NgModule,} from '@angular/core'
 import { CommonModule } from '@angular/common'
+import { FormsModule } from '@angular/forms'
 import {
   MatButtonModule,
   MatIconModule,
@@ -9,8 +10,8 @@ import {
   MatDialogModule,
   MatProgressSpinnerModule,
   MatInputModule,
+  MatProgressBarModule,
 } from '@angular/material'
-
 import { UserAutocompleteModule } from '../_common/user-autocomplete/user-autocomplete.module'
 
 import { BtnContentShareComponent } from './btn-content-share.component'
@@ -23,6 +24,7 @@ import { BtnTwitterShareModule } from '../btn-twitter-share/btn-twitter-share.mo
   declarations: [BtnContentShareComponent, BtnContentShareDialogComponent],
   imports: [
     CommonModule,
+    FormsModule,
     MatButtonModule,
     MatIconModule,
     MatTooltipModule,
@@ -30,6 +32,7 @@ import { BtnTwitterShareModule } from '../btn-twitter-share/btn-twitter-share.mo
     MatInputModule,
     MatChipsModule,
     MatDialogModule,
+    MatProgressBarModule,
     MatProgressSpinnerModule,
     UserAutocompleteModule,
     BtnLinkedinShareModule,

@@ -11,6 +11,7 @@ import { ConfigurationsService } from '../../../../../../../library/ws-widget/ut
 })
 export class VideoComponent implements OnInit {
   @Input() isScreenSizeSmall = false
+  @Input() isShared = false
   @Input() isNotEmbed = true
   @Input() isFetchingDataComplete = false
   @Input() forPreview = false
@@ -29,7 +30,7 @@ export class VideoComponent implements OnInit {
   ngOnInit() {
     if (this.configSvc.restrictedFeatures) {
       this.isRestricted =
-        !this.configSvc.restrictedFeatures.has('disscussionForum')
+        !(this.configSvc.restrictedFeatures.has('disscussionForum') && !this.isShared)
     }
     this.isTypeOfCollection = this.activatedRoute.snapshot.queryParams.collectionType ? true : false
   }

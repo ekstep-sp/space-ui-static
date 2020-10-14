@@ -552,8 +552,8 @@
       </button>
     </div>
   </mat-card>
-  <ws-widget-user-content-rating class="mb-4 block" *ngIf="content?.identifier && content?.assetType !== 'Connection'"
-    [contentId]="content?.identifier" [isDisabled]="isPreviewMode || !enableRatings">
+  <ws-widget-user-content-rating class="mb-4 block" *ngIf="content?.identifier && content?.assetType !== 'Connection' && !hideRatings" [contentId]="content?.identifier"
+    [isDisabled]="isPreviewMode || !enableRatings">
   </ws-widget-user-content-rating>
   <!-- <div class="hidden sm:block margin-bottom-m" *ngIf="content?.creatorDetails?.length">
     <ng-container [ngTemplateOutlet]="creators" [ngTemplateOutletContext]="{

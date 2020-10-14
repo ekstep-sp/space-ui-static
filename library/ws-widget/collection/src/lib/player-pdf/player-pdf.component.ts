@@ -198,6 +198,9 @@ export class PlayerPdfComponent extends WidgetBaseComponent
   }
 
   get isDownloadable() {
+    if (this.eventSvc.isGuestUser) {
+      return false
+    }
     if (this.widgetData) {
       if (this.widgetData.pdfUrl) {
         return true

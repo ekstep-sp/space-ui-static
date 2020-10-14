@@ -261,6 +261,13 @@ const routes: Routes = [
     canActivate: [GeneralGuard],
   },
   {
+    path: 'public/sharecontent/o',
+    data: {
+      topBar: ETopBar.NONE,
+    },
+    loadChildren: () => import('./routes/route-app-toc.module').then(u => u.RouteAppTocModule),
+  },
+  {
     path: 'author/toc',
     loadChildren: () => import('./routes/route-app-toc.module').then(u => u.RouteAppTocModule),
     canActivate: [GeneralGuard],
@@ -558,7 +565,18 @@ const routes: Routes = [
       pageData: PageResolve,
     },
   },
-
+  /* {
+    path: 'public/share-content/:pageType/:sharableToken',
+    data: {
+      isPublic: true,
+      pageType: 'feature',
+      pageKey: 'share-content',
+    },
+    resolve: {
+      pageData: PageResolve,
+    },
+    component: PublicShareComponent,
+  }, */
   {
     path: 'public/tnc',
     component: TncComponent,
@@ -572,6 +590,19 @@ const routes: Routes = [
   {
     path: 'public/faq/:tab',
     component: PublicFaqComponent,
+  },
+  {
+    path: 'public/sharecontent/v',
+    data: {
+      topBar: ETopBar.NONE,
+      isPublic: true,
+      pageType: 'feature',
+      pageKey: 'share-content',
+    },
+    resolve: {
+      pageData: PageResolve,
+    },
+    loadChildren: () => import('./routes/route-viewer.module').then(u => u.RouteViewerModule),
   },
   {
     path: 'viewer',

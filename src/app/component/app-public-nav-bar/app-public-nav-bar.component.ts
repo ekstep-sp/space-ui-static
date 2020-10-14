@@ -4,6 +4,7 @@ import { ConfigurationsService, NsPage, AuthKeycloakService } from '@ws-widget/u
 import { IWSPublicLoginConfig } from '../login/login.model'
 import { ActivatedRoute, Router } from '@angular/router'
 import { Subscription } from 'rxjs'
+import { filter } from 'rxjs/operators'
 
 @Component({
   selector: 'ws-app-public-nav-bar',
@@ -49,6 +50,15 @@ export class AppPublicNavBarComponent implements OnInit, OnDestroy {
     } else {
       this.redirectUrl = document.baseURI
     }
+    this.router.events.pipe(filter((_: any) => _.url)).subscribe((navigationEvent: any) => {
+      if (!navigationEvent.url.split('content-share') && !navigationEvent.url.split('contentshare')) {
+        // delete the session data, if any (if user tries to move out of reserved sharable url)
+        if (this.configSvc.isGuestUser) {
+          this.configSvc.removeGuestUser()
+          // alert('removed guest user access')
+        }
+      }
+    })
 
   }
   ngOnDestroy() {
@@ -60,6 +70,10 @@ export class AppPublicNavBarComponent implements OnInit, OnDestroy {
     this.router.navigate(['public/collaborators'], { fragment: prodID })
   }
   login(key: 'E' | 'N' | 'S') {
+    if (key === 'S' && this.configSvc.isGuestUser) {
+      this.configSvc.removeGuestUser()
+      // alert('removed guest user from signin button')
+    }
     this.authSvc.login(key, this.redirectUrl)
   }
 }

@@ -8,12 +8,6 @@
   </h3>
   <ws-widget-user-autocomplete (usersList)="updateUsers($event)"></ws-widget-user-autocomplete>
   <mat-form-field class="text-area">
-    <!-- <mat-spinner
-      class="text-center"
-      *ngIf="!message"
-      [diameter]="30"
-      [strokeWidth]="3"
-    ></mat-spinner> -->
     <textarea
       matInput
       i18n-placeholder
@@ -44,6 +38,25 @@
     Unable to share. Try later
   </div>
 </div>
+<ng-container>
+  <div class="public-share-container" *ngIf="showSharableUI">
+    <h1 *ngIf="sharableUrl?.length" class="mat-dialog-title">OR</h1>
+    <div class="loader" *ngIf="!sharableUrl?.length">
+      <mat-progress-bar mode="indeterminate"></mat-progress-bar>
+    </div>
+    <div class="public-share">
+      <div class="flex public-url-wrapper m-0">
+        <div class="button-wrapper">
+          <h3 *ngIf="sharableUrl?.length" class="mat-h3">Share with public users</h3>
+          <p class="ws-mat-primary-text" #inputElement readonly>{{sharableUrl}}</p>
+        </div>
+        <button *ngIf="sharableUrl?.length" i18n-matTooltip matTooltip="copy url to clipboard" class="button-position" (click)="copyToClipboard(inputElement)" mat-button>
+          <mat-icon>content_copy</mat-icon>
+        </button>  
+      </div>
+    </div>
+  </div>
+</ng-container>
 <input
   type="hidden"
   i18n-value="Toast msg after successfully sharing"

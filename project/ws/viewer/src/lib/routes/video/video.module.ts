@@ -59,5 +59,6 @@ import { VideoModule as VideoViewContainerModule } from '../../route-view-contai
     BtnContentFeedbackV2Module,
     VideoViewContainerModule,
   ],
+  exports: [VideoComponent],
 })
 export class VideoModule { }

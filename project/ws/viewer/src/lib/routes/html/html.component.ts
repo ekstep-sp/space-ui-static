@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit } from '@angular/core'
+import { Component, OnDestroy, OnInit, Input } from '@angular/core'
 import { ActivatedRoute } from '@angular/router'
 import { AccessControlService } from '@ws/author'
 import { NsContent, NsDiscussionForum, WidgetContentService } from '@ws-widget/collection'
@@ -22,6 +22,7 @@ export class HtmlComponent implements OnInit, OnDestroy {
   private responseSubscription: Subscription | null = null
   private viewerDataSubscription: Subscription | null = null
   forPreview = window.location.href.includes('/author/')
+  @Input() sharedContent: NsContent.IContent | null = null
   isNotEmbed = true
   isFetchingDataComplete = false
   htmlData: NsContent.IContent | null = null
@@ -88,12 +89,12 @@ export class HtmlComponent implements OnInit, OnDestroy {
           // data.content.data.artifactUrl =
           //   data.content.data.artifactUrl.startsWith('/scorm-player') ?
           //     `/apis/proxies/v8${data.content.data.artifactUrl}` : data.content.data.artifactUrl
-          data.content.data.artifactUrl =
-            data.content.data.artifactUrl.indexOf('ScormCoursePlayer') > -1
-              ? `${data.content.data.artifactUrl}&Param1=${this.uuid}`
-              : data.content.data.artifactUrl
-          const tempHtmlData = data.content.data
-          if (this.alreadyRaised && this.oldData) {
+          const tempHtmlData = data.content.data || data.content
+          tempHtmlData.artifactUrl =
+            tempHtmlData.artifactUrl.indexOf('ScormCoursePlayer') > -1
+              ? `${tempHtmlData.artifactUrl}&Param1=${this.uuid}`
+              : tempHtmlData.artifactUrl
+          if (this.alreadyRaised && this.oldData && !this.configSvc.isGuestUser) {
             this.raiseEvent(WsEvents.EnumTelemetrySubType.Unloaded, this.oldData)
             if (!this.hasFiredRealTimeProgress) {
               this.fireRealTimeProgress()
@@ -103,7 +104,7 @@ export class HtmlComponent implements OnInit, OnDestroy {
             }
             this.subApp = false
           }
-          if (tempHtmlData) {
+          if (tempHtmlData && !this.configSvc.isGuestUser) {
             this.formDiscussionForumWidget(tempHtmlData)
           }
           if (tempHtmlData && tempHtmlData.artifactUrl.indexOf('content-store') >= 0) {
@@ -112,18 +113,23 @@ export class HtmlComponent implements OnInit, OnDestroy {
           } else {
             this.htmlData = tempHtmlData
           }
-          this.raiseRealTimeProgress()
+          if (!this.configSvc.isGuestUser) {
+            this.raiseRealTimeProgress()
+          }
           if (this.htmlData) {
             this.oldData = this.htmlData
             this.alreadyRaised = true
-            this.raiseEvent(WsEvents.EnumTelemetrySubType.Loaded, this.htmlData)
-            this.responseSubscription = await fromEvent<MessageEvent>(window, 'message')
+            if (!this.configSvc.isGuestUser) {
+              this.raiseEvent(WsEvents.EnumTelemetrySubType.Loaded, this.htmlData)
+            }
+            this.responseSubscription = fromEvent<MessageEvent>(window, 'message')
               .pipe(
                 filter(
-                  (event: MessageEvent) =>
-                    Boolean(event) &&
+                  (event: MessageEvent) => {
+                    return Boolean(event) &&
                     Boolean(event.data) &&
-                    Boolean(event.source && typeof event.source.postMessage === 'function'),
+                    Boolean(event.source && typeof event.source.postMessage === 'function')
+                  }
                 ),
               )
               .subscribe(async (event: MessageEvent) => {
@@ -210,7 +216,7 @@ async  ngOnDestroy() {
       await this.saveContinueLearning(this.htmlData)
     }
   }
-    if (this.htmlData) {
+    if (this.htmlData && !this.configSvc.isGuestUser) {
       this.raiseEvent(WsEvents.EnumTelemetrySubType.Unloaded, this.htmlData)
     }
     if (this.routeDataSubscription) {
@@ -223,7 +229,7 @@ async  ngOnDestroy() {
     if (this.viewerDataSubscription) {
       this.viewerDataSubscription.unsubscribe()
     }
-    if (!this.hasFiredRealTimeProgress && !this.forPreview) {
+    if (!this.hasFiredRealTimeProgress && !this.forPreview && !this.configSvc.isGuestUser) {
       this.fireRealTimeProgress()
       if (this.realTimeProgressTimer) {
         clearTimeout(this.realTimeProgressTimer)
