@@ -1691,8 +1691,14 @@ export class EditMetaComponent implements OnInit, OnDestroy, AfterViewInit {
       this.storeData()
     }
   }
+  /**
+   * Decides whether to show or not show to a role, provided that content is not already live
+   * @param roleKey The name of property to show or not show "eample: catalogPath should not be shown to publisher"
+   * @returns boolean
+   */
   showAccToRoles(roleKey: any) {
-    // tslint:disable-next-line: max-line-length
+    if (this.contentService.getUpdatedMeta(this.contentService.currentContent).status !== 'Live') {
+      // tslint:disable-next-line: max-line-length
     if (this.uploadService.isVisibileAccToRoles(this.allowedRoles[roleKey], this.notAllowedRoles[roleKey])) {
       return true
     }
@@ -1700,5 +1706,7 @@ export class EditMetaComponent implements OnInit, OnDestroy, AfterViewInit {
       return false
     }
     return true
+    }
+    return false
   }
 }

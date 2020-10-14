@@ -9,7 +9,7 @@
         <div class="hoverable">
 
           <img [src]="url ? url : relativeUrl">
-          <div (click)="fileInput.click()">
+          <div *ngIf="showUploadMobile" (click)="fileInput.click()">
             <mat-icon class="photo-icon ws-mat-primary-text">photo_camera</mat-icon>
             <input class="font-montserrat" #fileInput type='file' (change)="onSelectFile($event.target.files[0])"
               accept="image/*">

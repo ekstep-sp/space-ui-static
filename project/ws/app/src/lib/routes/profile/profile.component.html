@@ -4,7 +4,7 @@
     <mat-icon>menu</mat-icon>
   </button>
   <span class="tabname-container">
-    <ws-widget-btn-page-back [widgetData]="{ url: 'back' }"></ws-widget-btn-page-back>
+    <ws-widget-btn-page-back (click) = "tabUpdateWithBackBtn()" [widgetData]="{ url: 'back' }"></ws-widget-btn-page-back>
     <span class="ml-2 font-size-24px font-campaign">{{ tabName }}</span>
   </span>
   <span class="spacer"></span>

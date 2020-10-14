@@ -75,13 +75,14 @@
     }
   }
 }
-.text-inside-grid {
-  position: absolute;
-  left: 5px;
-  line-height: 10px;
-}
+// .text-inside-grid {
+//   position: absolute;
+//   left: 5px;
+//   line-height: 10px;
+// }
 .text-outside-grid {
-  position: absolute;
+  margin: 0 !important;
+  ///position: absolute;
  // right: 5px;
 }
 .hidden-block-xs {

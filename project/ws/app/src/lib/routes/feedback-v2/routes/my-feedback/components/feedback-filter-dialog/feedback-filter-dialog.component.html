@@ -3,51 +3,27 @@
 <section class="mb-2">
   <div class="mat-body" i18n>Filter by:</div>
   <form [formGroup]="filterForm" id="filterForm" (ngSubmit)="applyFilters()">
-    <mat-form-field
-      class="w-full"
-      [color]="'primary'"
-      *ngIf="filterDialogData.viewedBy === feedbackRoles.User"
-    >
-      <mat-select
-        multiple
-        formControlName="feedbackType"
-        placeholder="Feedback type"
-        i18n-placeholder
-      >
+    <mat-form-field class="w-full" [color]="'primary'" *ngIf="filterDialogData.viewedBy === feedbackRoles.User">
+      <mat-select multiple formControlName="feedbackType" placeholder="Feedback type" i18n-placeholder>
         <mat-option [value]="feedbackTypes.Content" i18n>
           Content Feedback
         </mat-option>
-        <mat-option
-          [value]="feedbackTypes.Platform"
-          *ngIf="showFeedbackTypeFilter(feedbackTypes.Platform)"
-          i18n
-        >
+        <mat-option [value]="feedbackTypes.Platform" *ngIf="showFeedbackTypeFilter(feedbackTypes.Platform)" i18n>
           Platform Feedback
         </mat-option>
-        <mat-option
-          [value]="feedbackTypes.ContentRequest"
-          *ngIf="showFeedbackTypeFilter(feedbackTypes.ContentRequest)"
-          i18n
-        >
+        <mat-option [value]="feedbackTypes.ContentRequest" *ngIf="showFeedbackTypeFilter(feedbackTypes.ContentRequest)"
+          i18n>
           Content Requests
         </mat-option>
-        <mat-option
-          [value]="feedbackTypes.ServiceRequest"
-          *ngIf="showFeedbackTypeFilter(feedbackTypes.ServiceRequest)"
-          i18n
-        >
+        <mat-option [value]="feedbackTypes.ServiceRequest" *ngIf="showFeedbackTypeFilter(feedbackTypes.ServiceRequest)"
+          i18n>
           Other Requests
         </mat-option>
       </mat-select>
     </mat-form-field>
 
     <mat-form-field class="w-full" [color]="'primary'" *ngIf="showContentTypeControl()">
-      <mat-select
-        multiple
-        formControlName="contentType"
-        placeholder="Content type"
-        i18n-placeholder
-      >
+      <mat-select multiple formControlName="contentType" placeholder="Content type" i18n-placeholder>
         <!-- <mat-option [value]="contentTypes.PROGRAM" i18n>Program</mat-option> -->
         <mat-option [value]="contentTypes.COURSE" i18n>Collection</mat-option>
         <mat-option [value]="contentTypes.MODULE" i18n>Asset</mat-option>
@@ -67,5 +43,5 @@
 </section>
 
 <section>
-  <button mat-flat-button color="primary" type="submit" form="filterForm" i18n>Apply</button>
+  <button class="apply-btn" mat-flat-button color="primary" type="submit" form="filterForm" i18n>Apply</button>
 </section>
