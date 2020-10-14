@@ -21,24 +21,24 @@ export class DisplayUsersSocialVoteComponent implements OnInit {
   iconType: any
   @Input()
   userDetailsForDownVote: any
-
+  triggerdVote = false
   userListForUpvote: any
   constructor(public likeService: BtnSocialLikeService) { }
 
   ngOnInit() {
-    // setTimeout(() => {
+      this.likeService.callComponent.subscribe((data: any) => {
+        this.triggerdVote = data
+        console.log(data)
+    //   if (this.triggerdVote) {
     //   this.likeService.userUpVoteObject.subscribe((upVoteObject: any) => {
-    //     upVoteObject ? this.userList = upVoteObject : this.userList = this.userList
+    //     this.userList = upVoteObject
+    //     console.log(upVoteObject)
     //   })
-    //   this.likeService.userUpVoteObject.subscribe((downVoteObject: any) => {
-    //     downVoteObject ? this.userListDownVote = downVoteObject : this.userListDownVote = this.userlistdownvote
+    //   this.likeService.userDownVoteObject.subscribe((downVoteObject: any) => {
+    //     this.userListDownVote = downVoteObject
+    //     console.log(downVoteObject)
     //   })
-    // },         100)
-    this.checkFunction()
-  }
-  checkFunction() {
-    setTimeout(() => {
-      console.log(this.userList, this.userListDownVote)
-    },         100)
+    // }
+    })
   }
 }

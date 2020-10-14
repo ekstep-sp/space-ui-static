@@ -6,6 +6,7 @@ import { WsDiscussionForumService } from '../../ws-discussion-forum.services'
 import { NsDiscussionForum } from '../../ws-discussion-forum.model'
 import { ActivatedRoute } from '@angular/router'
 import { combineLatest } from 'rxjs'
+import { BtnSocialLikeService } from '../btn-social-like/service/btn-social-like.service';
 
 @Component({
   selector: 'ws-widget-btn-social-vote',
@@ -54,6 +55,7 @@ export class BtnSocialVoteComponent implements OnInit {
     private dialog: MatDialog,
     private discussionSvc: WsDiscussionForumService,
     private route: ActivatedRoute,
+    public voteService: BtnSocialLikeService,
   ) {
     this.changeText = false
     if (this.configSvc.userProfile) {
@@ -83,6 +85,16 @@ export class BtnSocialVoteComponent implements OnInit {
       this.downVote(this.invalidUser.nativeElement.value)
       return
     }
+    // if (!this.activity.userActivity.upVote) {
+    //   if (this.userForDownVote) {
+    //     const findIndex =  this.userForDownVote.findIndex(data => {
+    //     return data.wid === this.userId
+    //     })
+    //     if (findIndex > -1) {
+    //       this.userForDownVote = this.userForDownVote.slice(0, findIndex)
+    //     }
+    //     }
+    // }
     this.isUpdating = true
     const request: NsDiscussionForum.IPostActivityUpdateRequest = {
       activityType: NsDiscussionForum.EActivityType.UPVOTE,
@@ -93,15 +105,6 @@ export class BtnSocialVoteComponent implements OnInit {
       _ => {
         if (this.activity) {
           if (this.activity.userActivity.downVote) {
-            if (this.activity.activityDetails) {
-              const findIndex =  this.activity.activityDetails.downVote.findIndex(data => {
-                return data === this.userId
-              })
-              if (findIndex > -1) {
-              this.activity.activityDetails.downVote = this.activity.activityDetails.downVote.slice(0, findIndex)
-              }
-              this.activity.activityDetails.upVote.push(this.userId)
-            }
             this.activity.userActivity.downVote = false
             this.activity.activityData.downVote -= 1
           } else {
@@ -109,10 +112,10 @@ export class BtnSocialVoteComponent implements OnInit {
             this.activity.activityData.upVote += 1
           }
         }
-        this.checkKey = true
+        this.voteService.updateStatus(true) // event trigger ; trigger popup component
+        this.fetchUpdateContent(this.postId)
         this.isUpdating = false
-        this.updateVoteKey = 'true'
-        this.fetchUpdateContent(request.id)
+        // this.updateVoteKey = 'true'
       },
       () => {
         this.isUpdating = false
@@ -129,6 +132,16 @@ export class BtnSocialVoteComponent implements OnInit {
       this.upVote(this.invalidUser.nativeElement.value)
       return
     }
+    // if (!this.activity.userActivity.downVote) {
+    //   if (this.userForUpvote) {
+    //     const findIndex =  this.userForUpvote.findIndex(data => {
+    //     return data.wid === this.userId
+    //     })
+    //     if (findIndex > -1) {
+    //       this.userForUpvote = this.userForUpvote.slice(0, findIndex)
+    //     }
+    //     }
+    // }
     this.isUpdating = true
     const request: NsDiscussionForum.IPostActivityUpdateRequest = {
       activityType: NsDiscussionForum.EActivityType.DOWNVOTE,
@@ -139,26 +152,17 @@ export class BtnSocialVoteComponent implements OnInit {
       _ => {
         if (this.activity) {
           if (this.activity.userActivity.upVote) {
-            if (this.activity.activityDetails) {
-              const findIndex =  this.activity.activityDetails.upVote.findIndex(data => {
-                return data === this.userId
-              })
-              if (findIndex > -1) {
-              this.activity.activityDetails.upVote = this.activity.activityDetails.upVote.slice(0, findIndex)
-              }
-              this.activity.activityDetails.downVote.push(this.userId)
-            }
             this.activity.userActivity.upVote = false
             this.activity.activityData.upVote -= 1
           } else {
             this.activity.userActivity.downVote = true
             this.activity.activityData.downVote += 1
           }
-          this.checkKey = true
+          this.voteService.updateStatus(true)
           this.isUpdating = false
-          this.updateVoteKey = 'false'
-          this.fetchUpdateContent(request.id)
+          // this.updateVoteKey = 'false'
         }
+        this.fetchUpdateContent(this.postId)
       },
       () => {
         this.isUpdating = false
@@ -175,19 +179,21 @@ export class BtnSocialVoteComponent implements OnInit {
       if (data.mainPost.postCreator.postCreatorId) {
         this.conversationRequest.postCreatorId = data.mainPost.postCreator.postCreatorId
        }
-      //  this.activity.activityDetails = data.mainPost.activity.activityDetails
+       this.activity.activityDetails = data.mainPost.activity.activityDetails
        if (this.key) {
         data.replyPost.forEach(reply => {
           if (reply.activity.activityDetails) {
           if (reply.id === postId) {
-          this.getWidsForVote()
+          this.getWidsForVote(reply.activity.activityDetails)
           }
           }
+          this.voteService.updateStatus(true)
          })
        } else {
-          // if (data.mainPost.activity.activityDetails) {
-       this.getWidsForVote()
-      //  }
+          if (data.mainPost.activity.activityDetails) {
+        this.voteService.updateStatus(true)
+       this.getWidsForVote(data.mainPost.activity.activityDetails)
+       }
       }
     })
   }
@@ -200,51 +206,33 @@ export class BtnSocialVoteComponent implements OnInit {
       data,
     })
   }
-  async getWidsForVote() {
-  //   if (data) {
-  //     // this.userForUpvote = []
-  //     // this.userForDownVote = []
-  //     const wids = data.upVote
-  //     const widsForDownVote = data.downVote
-  //     if (wids.length) {
-  //     // if (this.updateVoteKey === 'true') {
-  //       // if (data.upVote.includes()) {
-  //       const userDetails = await this.discussionSvc.getUsersByIDs(wids)
-  //       this.userForUpvote = this.discussionSvc.addIndexToData(userDetails)
-  //     //   } else {
-  //     //     const userDetailsforDownVote = await this.discussionSvc.getUsersByIDs(widsForDownVote)
-  //     //     this.userForDownVote = this.discussionSvc.addIndexToData(userDetailsforDownVote)
-  //     // }
-  //   } else {
-  //       this.userForUpvote = []
-  //     }
-  //     if (widsForDownVote.length) {
-  //       // if (this.updateVoteKey === 'false') {
-  //       const userDetailsforDownVote = await this.discussionSvc.getUsersByIDs(widsForDownVote)
-  //       this.userForDownVote = this.discussionSvc.addIndexToData(userDetailsforDownVote)
-  //     // } else {
-  //     //      const userDetails = await this.discussionSvc.getUsersByIDs(wids)
-  //     //     this.userForUpvote = this.discussionSvc.addIndexToData(userDetails)
-  //     // }
-  //   } else {
-  //     this.userForDownVote = []
-  //   }
-  // } else {
+  async getWidsForVote(data?: any) {
+    if (data) {
+      const wids = data.upVote
+      const widsForDownVote = data.downVote
+      if (wids.length) {
+        const userDetails = await this.discussionSvc.getUsersByIDs(wids)
+        this.userForUpvote = this.discussionSvc.addIndexToData(userDetails)
+    } else {
+        this.userForUpvote = []
+      }
+      if (widsForDownVote.length) {
+        const userDetailsforDownVote = await this.discussionSvc.getUsersByIDs(widsForDownVote)
+        this.userForDownVote = this.discussionSvc.addIndexToData(userDetailsforDownVote)
+    } else {
+      this.userForDownVote = []
+    }
+    // this.voteService.triggerStoreLikeData(this.userForUpvote, this.userForDownVote)
+  } else {
     if (this.activity.activityDetails) {
       // filter for upvote
-      //  if (this.activity.activityDetails) {
       const wids = this.activity.activityDetails.upVote
-      // const wids = ['7b710f74-8f84-427f-bc13-f4220ed2a1c1',
-      //   'b690b9c6-a9de-49dd-94ef-1dffcc7a053c']
       if (wids.length) {
         const userDetails = await this.discussionSvc.getUsersByIDs(wids)
         this.userForUpvote = this.discussionSvc.addIndexToData(userDetails)
       }
       // filter for downvote
-      //  if (this.activity.activityDetails) {
       const widsForDownVote = this.activity.activityDetails.downVote
-      // const widsForDownVote = ['7b710f74-8f84-427f-bc13-f4220ed2a1c1', 'acbf4053-c126-4e85-a0bf-252a896535ea',
-      //   'b690b9c6-a9de-49dd-94ef-1dffcc7a053c']
       if (widsForDownVote.length) {
         const userDetailsforDownVote = await this.discussionSvc.getUsersByIDs(widsForDownVote)
         this.userForDownVote = this.discussionSvc.addIndexToData(userDetailsforDownVote)
@@ -254,6 +242,4 @@ export class BtnSocialVoteComponent implements OnInit {
   }
 // }
 }
-  // isEnabled() {
-  //   this.isEnabledForDisplay = true;
-  // }
+}
