@@ -19,15 +19,15 @@
     <mat-menu #filterMenu="matMenu" xPosition="before">
       <div mat-menu-item *ngIf="(dataType === 'authoring' && selectionType !== 'radio') || content === 'resource'">
         <mat-checkbox name="resource-checkbox" [checked]="selectedContentTypes.includes(appContentTypes.RESOURCE)"
-          (change)="filterChanged(appContentTypes.RESOURCE, $event.checked)" i18n>Resource</mat-checkbox>
+          (change)="filterChanged(appContentTypes.RESOURCE, $event.checked)" i18n><span class="font-montserrat font-size-16px">Resource</span></mat-checkbox>
       </div>
       <div *ngIf="searchableContentTypes.includes(appContentTypes.MODULE)" mat-menu-item>
         <mat-checkbox name="module-checkbox" [checked]="selectedContentTypes.includes(appContentTypes.MODULE)"
-          (change)="filterChanged(appContentTypes.MODULE, $event.checked)" i18n>Asset</mat-checkbox>
+          (change)="filterChanged(appContentTypes.MODULE, $event.checked)" i18n> <span class="font-montserrat font-size-16px">Asset</span> </mat-checkbox>
       </div>
       <div *ngIf="searchableContentTypes.includes(appContentTypes.COURSE)" mat-menu-item>
         <mat-checkbox name="course-checkbox" [checked]="selectedContentTypes.includes(appContentTypes.COURSE)"
-          (change)="filterChanged(appContentTypes.COURSE, $event.checked)" i18n>Collection</mat-checkbox>
+          (change)="filterChanged(appContentTypes.COURSE, $event.checked)" i18n><span class="font-montserrat font-size-16px">Collection</span></mat-checkbox>
       </div>
       <div *ngIf="searchableContentTypes.includes(appContentTypes.PROGRAM)" mat-menu-item>
         <mat-checkbox name="program-checkbox" [checked]="selectedContentTypes.includes(appContentTypes.PROGRAM)"
