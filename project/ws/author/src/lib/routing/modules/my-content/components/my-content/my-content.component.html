@@ -25,11 +25,11 @@
             node.displayName === 'Costs' || node.displayName === 'Catalog'
         }" class="border-bottom" *matTreeNodeDef="let node; when: hasChild" matTreeNodePadding>
         <div class="grid">
-          <h5 class="font-size-m margin-top-xs margin-remove-bottom" *ngIf="node.displayName !== 'Source'"
+          <h5 class="font-size-m margin-top-xs margin-remove-bottom font-size-18px font-montserrat" *ngIf="node.displayName !== 'Source'"
             matTreeNodeToggle>
             {{ node.displayName }}
           </h5>
-          <h5 class="font-size-m margin-top-xs margin-remove-bottom" *ngIf="node.displayName === 'Source'"
+          <h5 class="font-size-m margin-top-xs margin-remove-bottom font-size-18px font-montserrat" *ngIf="node.displayName === 'Source'"
             matTreeNodeToggle>
             Created By
           </h5>
