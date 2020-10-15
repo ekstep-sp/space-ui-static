@@ -33,6 +33,50 @@
 #display-responsive {
   background-color: #42428B !important;
 }
+.footer-playstore-buttons{
+  display: flex;
+  .rectangle{
+    border: 1px solid #C6BCB8;
+    border-radius: 10px;
+    width: 132px;
+    height: 20px;
+    padding:16px 10px;
+    display:flex;
+    align-items: center;
+    cursor: pointer;
+    a{
+      align-items: center;
+    }
+    &:first-child{
+      margin-right: 16px;
+    }
+    .appleIcon {
+      background:url('/assets/instances/space/banners/appleIcon.png') no-repeat;
+      width: 40px;
+      height: 32px;
+    }
+    .playStore{
+      background:url('/assets/instances/space/banners/playStore.png') no-repeat;
+      width: 32px;
+      height: 32px;
+    } 
+    .appStore-icon{
+      display: flex;
+      // align-items: center;
+      margin-left: 4px;
+      flex-direction: column;
+      width:80%;
+      .icon-text{
+        font-size: 10px;
+        margin: 0;
+      }
+      .appstore-text{
+        font-size: 16px;
+        margin: 0;
+      }      
+    }
+  }
+}
 @media (max-width: 971px) and (min-width: 250px) {
   #display-item {
     display: none;
@@ -40,6 +84,13 @@
   #display-responsive {
     text-align: center;
     font-size: unset !important;
+  }
+  .col-3{
+    flex: 1 1 100% !important;
+    justify-content:center !important;
+  }
+  .icon-text{
+    text-align: left;
   }
 }
 @media (min-width: 972px) {
@@ -75,11 +126,35 @@ line-height: 20px;
 // .col-1 {
 //   flex: 1;
 // }
+// .col-2 {
+//   margin-left: 4rem;
+//   // flex: 2;
+// }
+.col-1 {
+  flex: 1 1 25%;
+  text-align:left;
+}
 .col-2 {
   margin-left: 4rem;
-  // flex: 2;
+  flex: 1 1 30%;
+  text-align: left;
+}
+.col-3{
+  flex: 1 1 45%;
+  justify-content: flex-end;
 }
 
+@media only screen and (max-width: 768px) {
+  .col-3{
+  flex-direction: column;
+  }
+  .rectangle{
+   margin: 16px auto !important;
+    &:first-child{
+      margin-right: 0px;
+    }
+  }
+}
 // .mat-body p, .mat-body-1 p, .mat-typography p{
 //     margin: 0 0 6px;
 // }
