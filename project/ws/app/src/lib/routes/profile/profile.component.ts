@@ -19,18 +19,42 @@ export class ProfileComponent implements OnInit, OnDestroy {
   showText = true
   pageNavbar: Partial<NsPage.INavBackground> = this.configSvc.pageNavBar
   enabledTabs = this.activatedRoute.snapshot.data.pageData.data.enabledTabs
-
+  private routerSubscription: Subscription | null = null
   constructor(
     private dialog: MatDialog,
     private valueSvc: ValueService,
     private configSvc: ConfigurationsService,
     private activatedRoute: ActivatedRoute,
-    private router: Router,
+    private router: Router
   ) {}
 
   ngOnInit() {
     this.showText = !this.showText
     const tab = this.router.url.split('/')[3]
+    this.assignTabName(tab)
+    this.defaultSideNavBarOpenedSubscription = this.isLtMedium$.subscribe((isLtMedium: boolean) => {
+      this.screenSizeIsLtMedium = isLtMedium
+    })
+  }
+  tabUpdate(tab: string) {
+    this.tabName = tab
+    // if (!this.screenSizeIsLtMedium) {
+    //   this.showText = !this.showText
+    //  }
+  }
+  tabUpdateWithBackBtn() {
+    if (this.routerSubscription) {
+
+      this.routerSubscription.unsubscribe()
+    }
+    this.routerSubscription = this.router.events.subscribe((event: any) => {
+      if (event.url) {
+        const tab = event.url.split('/')[3]
+        this.assignTabName(tab)
+      }
+    })
+  }
+  assignTabName(tab: String) {
     if (tab === 'dashboard') {
       this.tabName = this.enabledTabs.dashboard.displayName
     } else if (tab === 'learning') {
@@ -48,15 +72,6 @@ export class ProfileComponent implements OnInit, OnDestroy {
     } else if (tab === 'settings') {
       this.tabName = this.enabledTabs.settings.displayName
     }
-    this.defaultSideNavBarOpenedSubscription = this.isLtMedium$.subscribe((isLtMedium: boolean) => {
-      this.screenSizeIsLtMedium = isLtMedium
-    })
-  }
-  tabUpdate(tab: string) {
-    this.tabName = tab
-    // if (!this.screenSizeIsLtMedium) {
-    //   this.showText = !this.showText
-    //  }
   }
   ngOnDestroy() {
     if (this.defaultSideNavBarOpenedSubscription) {

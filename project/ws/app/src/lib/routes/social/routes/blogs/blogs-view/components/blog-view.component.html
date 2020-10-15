@@ -19,8 +19,8 @@
         <ng-template matMenuContent>
           <a i18n-aria-label *ngIf="canUserEdit" aria-label="Edit Blog"
             [routerLink]="'/app/social/blogs/edit/' + conversationRequest?.postId" mat-menu-item i18n
-            class="aStyle">Edit Blog</a>
-          <button *ngIf="canUserDelete" (click)="deleteBlog(deleteMsg.value)" mat-menu-item i18n>Delete Blog</button>
+            class="aStyle"><span class="font-montserrat font-size-16px">Edit Blog</span></a>
+          <button *ngIf="canUserDelete" (click)="deleteBlog(deleteMsg.value)" mat-menu-item i18n>  <span class="font-montserrat font-size-16px">Delete Blog</span></button>
         </ng-template>
       </mat-menu>
       <h2 class="margin-bottom-m font-size-18px font-montserrat" [innerHTML]="conversation?.mainPost?.postContent?.abstract"></h2>

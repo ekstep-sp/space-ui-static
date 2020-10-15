@@ -15,3 +15,9 @@ justify-self: end;
   .line-height{
     line-height: 1.7em;
   }
+  ::ng-deep{
+  .theme-muave.night-mode .mat-flat-button.logout-btn{
+    background:#f44336!important;
+     color: white !important;
+  }
+}

@@ -3,7 +3,7 @@
     <mat-icon>close</mat-icon>
   </button>
 </div>
-<h2 class="ws-mat-primary-text">Please select the roles for {{username}} user</h2>
+<h2 class="font-size-24px font-campaign ws-mat-primary-text white-text">Please select the roles for {{username}} user</h2>
 <li *ngFor="let item of ordersData" class="text-sm font-normal" >
   <mat-checkbox
     [checked]="getSelection(item)"
@@ -11,8 +11,10 @@
     [disabled]="isDisabled(item)"
     class="mat-primary"
   >
-   {{ item.name }}
-    <!-- <label class="text-sm font-normal">{{ item.name }}</label> -->
+   <span class="font-montserrat font-size-16px">
+    {{ item.name }}
+   </span> 
+      <!-- <label class="text-sm font-normal">{{ item.name }}</label> -->
   </mat-checkbox>
 </li>
 <div align="end">

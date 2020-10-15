@@ -16,10 +16,10 @@
     <mat-menu #editMenu="matMenu">
       <ng-template matMenuContent>
         <a [routerLink]="'/app/social/blogs/edit/' + blog.id" class="aStyle" mat-menu-item i18n
-          >Edit Blog</a
+          > <span class="font-montserrat font-size-16px">Edit Blog</span></a
         >
         <button (click)="deleteBlog(blog.id, deleteMsg.value)" mat-menu-item i18n>
-          Delete Blog
+           <span class="font-montserrat font-size-16px">Delete Blog</span>
         </button>
       </ng-template>
     </mat-menu>
@@ -45,7 +45,7 @@
 <div class="margin-top-m text-center" *ngIf="postFetchStatus === 'fetching'">
   <mat-spinner></mat-spinner>
 </div>
-<h2 class="margin-top-m text-center" *ngIf="postFetchStatus === 'none'" i18n>
+<h2 class="margin-top-m text-center font-size-24px font-campaign" *ngIf="postFetchStatus === 'none'" i18n>
   No post found for you under this category
 </h2>
 <div *ngIf="postFetchStatus === 'hasMore'" class="text-center">
