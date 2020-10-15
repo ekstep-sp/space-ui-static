@@ -30,7 +30,7 @@
       </mat-button-toggle>
       <mat-button-toggle i18n class="text-clr" [checked]="currentTab === eTimelineTypes.UNANSWERED"
         [value]="eTimelineTypes.UNANSWERED">
-       <span class="font-montserrat">Unanswered</span> </mat-button-toggle>
+        <span class="font-montserrat">Unanswered</span> </mat-button-toggle>
       <mat-button-toggle i18n *ngIf="allowedToEdit" [checked]="currentTab === eTimelineTypes.MY_TIMELINE"
         [value]="eTimelineTypes.MY_TIMELINE"><span class="font-montserrat">My Timeline</span> </mat-button-toggle>
       <mat-button-toggle i18n *ngIf="allowedToEdit" [checked]="currentTab === eTimelineTypes.MY_DRAFTS"

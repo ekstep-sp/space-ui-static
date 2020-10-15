@@ -35,6 +35,9 @@
    @include breakpoint-xs {
   font-size: 0.6rem;
 }
+  @include breakpoint-xxs{
+    font-size: 0.5rem;
+}
 }
 
 ::ng-deep{
@@ -43,3 +46,18 @@
     color: white !important;
   }
 }
+
+@media only screen and (max-width: 310px) {
+  .mat-flat-button.qa-btn{
+    padding: 0 6px !important;
+
+  }
+}
+// .qstn-btn{
+//   border: 2px red solid;
+// }
+// .head-btn{
+//   border: 2px greenyellow solid;
+
+// }
+
