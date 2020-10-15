@@ -30,10 +30,12 @@ export class BlogReplyComponent implements OnInit {
   }
 
   ngOnInit() {
-    console.log(this.reply)
     this.showSocialLike = (this.configSvc.restrictedFeatures && !this.configSvc.restrictedFeatures.has('socialLike')) || false
   }
-
+ // tslint:disable-next-line:use-lifecycle-interface
+ ngOnChanges() {
+  // console.log('reply', this.reply)
+}
   deleteReply(failMsg: string) {
     if (this.reply) {
       const dialogRef = this.dialog.open(DialogSocialDeletePostComponent, {

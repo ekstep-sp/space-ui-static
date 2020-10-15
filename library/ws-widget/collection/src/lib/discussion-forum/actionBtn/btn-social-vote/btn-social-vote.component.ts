@@ -4,8 +4,6 @@ import { MatSnackBar, MatDialog } from '@angular/material'
 import { DialogSocialActivityUserComponent } from '../../dialog/dialog-social-activity-user/dialog-social-activity-user.component'
 import { WsDiscussionForumService } from '../../ws-discussion-forum.services'
 import { NsDiscussionForum } from '../../ws-discussion-forum.model'
-import { ActivatedRoute } from '@angular/router'
-import { combineLatest } from 'rxjs'
 import { BtnSocialLikeService } from '../btn-social-like/service/btn-social-like.service'
 
 @Component({
@@ -36,7 +34,7 @@ export class BtnSocialVoteComponent implements OnInit {
   userId = ''
   isUpdating = false
   updateVoteKey: any
-  checkKey = true
+  triggerClick = false
   conversationRequest: NsDiscussionForum.IPostRequest = {
     postId: '',
     userId: '',
@@ -54,7 +52,6 @@ export class BtnSocialVoteComponent implements OnInit {
     private snackBar: MatSnackBar,
     private dialog: MatDialog,
     private discussionSvc: WsDiscussionForumService,
-    private route: ActivatedRoute,
     public voteService: BtnSocialLikeService,
   ) {
     this.changeText = false
@@ -65,206 +62,119 @@ export class BtnSocialVoteComponent implements OnInit {
   }
 
   ngOnInit() {
-    combineLatest(this.route.data, this.route.paramMap).subscribe(_combinedResult => {
-      const idVal = _combinedResult[1].get('id')
-      if (idVal) {
-        this.conversationRequest.postId = idVal
-      }
-    })
     this.getWidsForVote()
-    // tslint:disable-next-line: no-unused-expression
-    // tslint:disable-next-line: no-non-null-assertion
-    // if (document.getElementById('demo') != null) {
-    //   const demo = document.getElementById('demo') as any
-    //   // tslint:disable-next-line: prefer-const
-    //   demo.addEventListener('mouseover', this.mouseOver)
-
-    // }
   }
-
-  upVote(invalidUserMsg: string) {
-    // this.getWidsForVote()
-    if (this.postCreatorId === this.userId) {
-      this.snackBar.open(invalidUserMsg)
-      return
-    }
-    if (this.activity && this.activity.userActivity.upVote) {
-      this.downVote(this.invalidUser.nativeElement.value)
-      return
-    }
-    // if (!this.activity.userActivity.upVote) {
-    //   if (this.userForDownVote) {
-    //     const findIndex =  this.userForDownVote.findIndex(data => {
-    //     return data.wid === this.userId
-    //     })
-    //     if (findIndex > -1) {
-    //       this.userForDownVote = this.userForDownVote.slice(0, findIndex)
-    //     }
-    //     }
-    // }
-    this.isUpdating = true
-    const request: NsDiscussionForum.IPostActivityUpdateRequest = {
-      activityType: NsDiscussionForum.EActivityType.UPVOTE,
-      id: this.postId,
-      userId: this.userId,
-    }
-    this.socialSvc.updateActivity(request).subscribe(
-      _ => {
-        if (this.activity) {
-          if (this.activity.userActivity.downVote) {
-            this.activity.userActivity.downVote = false
-            this.activity.activityData.downVote -= 1
-          } else {
-            this.activity.userActivity.upVote = true
-            this.activity.activityData.upVote += 1
-          }
+ // tslint:disable-next-line:use-lifecycle-interface
+ ngOnChanges() {
+   console.log('form', this.activity)
+   this.getWidsForVote()
+}
+upVote(invalidUserMsg: string) {
+  // this.getWidsForVote()
+  if (this.postCreatorId === this.userId) {
+    this.snackBar.open(invalidUserMsg)
+    return
+  }
+  if (this.activity && this.activity.userActivity.upVote) {
+    this.downVote(this.invalidUser.nativeElement.value)
+    return
+  }
+  this.isUpdating = true
+  const request: NsDiscussionForum.IPostActivityUpdateRequest = {
+    activityType: NsDiscussionForum.EActivityType.UPVOTE,
+    id: this.postId,
+    userId: this.userId,
+  }
+  this.socialSvc.updateActivity(request).subscribe(
+    _ => {
+      if (this.activity) {
+        if (this.activity.userActivity.downVote) {
+          this.activity.userActivity.downVote = false
+          this.activity.activityData.downVote -= 1
+        } else {
+          this.activity.userActivity.upVote = true
+          this.activity.activityData.upVote += 1
         }
-        this.voteService.updateStatus(true) // event trigger ; trigger popup component
-        this.fetchUpdateContent(this.postId)
+      }
+      this.voteService.updateStatus(true)
+      this.isUpdating = false
+    },
+    () => {
+      this.isUpdating = false
+    },
+  )
+}
+
+downVote(invalidUserMsg: string) {
+  if (this.postCreatorId === this.userId) {
+    this.snackBar.open(invalidUserMsg)
+    return
+  }
+  if (this.activity && this.activity.userActivity.downVote) {
+    this.upVote(this.invalidUser.nativeElement.value)
+    return
+  }
+  this.isUpdating = true
+  const request: NsDiscussionForum.IPostActivityUpdateRequest = {
+    activityType: NsDiscussionForum.EActivityType.DOWNVOTE,
+    id: this.postId,
+    userId: this.userId || '',
+  }
+  this.socialSvc.updateActivity(request).subscribe(
+    _ => {
+      if (this.activity) {
+        if (this.activity.userActivity.upVote) {
+          this.activity.userActivity.upVote = false
+          this.activity.activityData.upVote -= 1
+        } else {
+          this.activity.userActivity.downVote = true
+          this.activity.activityData.downVote += 1
+        }
         this.isUpdating = false
-        // this.updateVoteKey = 'true'
-      },
-      () => {
-        this.isUpdating = false
-      },
-    )
-  }
-
-  downVote(invalidUserMsg: string) {
-    if (this.postCreatorId === this.userId) {
-      this.snackBar.open(invalidUserMsg)
-      return
-    }
-    if (this.activity && this.activity.userActivity.downVote) {
-      this.upVote(this.invalidUser.nativeElement.value)
-      return
-    }
-    // if (!this.activity.userActivity.downVote) {
-    //   if (this.userForUpvote) {
-    //     const findIndex =  this.userForUpvote.findIndex(data => {
-    //     return data.wid === this.userId
-    //     })
-    //     if (findIndex > -1) {
-    //       this.userForUpvote = this.userForUpvote.slice(0, findIndex)
-    //     }
-    //     }
-    // }
-    this.isUpdating = true
-    const request: NsDiscussionForum.IPostActivityUpdateRequest = {
-      activityType: NsDiscussionForum.EActivityType.DOWNVOTE,
-      id: this.postId,
-      userId: this.userId || '',
-    }
-    this.socialSvc.updateActivity(request).subscribe(
-      _ => {
-        if (this.activity) {
-          if (this.activity.userActivity.upVote) {
-            this.activity.userActivity.upVote = false
-            this.activity.activityData.upVote -= 1
-          } else {
-            this.activity.userActivity.downVote = true
-            this.activity.activityData.downVote += 1
-          }
-          this.voteService.updateStatus(true)
-          this.isUpdating = false
-          // this.updateVoteKey = 'false'
-        }
-        this.fetchUpdateContent(this.postId)
-      },
-      () => {
-        this.isUpdating = false
-      },
-    )
-  }
-  fetchUpdateContent(postId: any) {
-    console.log('postid', this.postId)
-    // if (forceNew) {
-    //   this.conversationRequest.sessionId = Date.now()
-    //   this.conversationRequest.pgNo = 0
-    // }
-
-    this.discussionSvc.fetchPost(this.conversationRequest).subscribe(data => {
-
-      if (data.mainPost.postCreator.postCreatorId) {
-        this.conversationRequest.postCreatorId = data.mainPost.postCreator.postCreatorId
+        this.voteService.updateStatus(true)
       }
-      this.activity.activityDetails = data.mainPost.activity.activityDetails
-      if (this.key) {
-        data.replyPost.forEach(reply => {
-          if (reply.activity.activityDetails) {
-            if (reply.id === postId) {
-              this.getWidsForVote(reply.activity.activityDetails)
-            }
-          }
-          this.voteService.updateStatus(true)
-        })
-      } else {
-        if (data.mainPost.activity.activityDetails) {
-          this.voteService.updateStatus(true)
-          this.getWidsForVote(data.mainPost.activity.activityDetails)
-        }
-      }
-    })
-  }
-  openVotesDialog(voteType: NsDiscussionForum.EActivityType.DOWNVOTE | NsDiscussionForum.EActivityType.UPVOTE) {
-    const data: NsDiscussionForum.IDialogActivityUsers = {
-      postId: this.postId,
-      activityType: voteType,
-    }
-    this.dialog.open(DialogSocialActivityUserComponent, {
-      data,
-    })
-  }
-  async getWidsForVote(data?: any) {
-    if (data) {
-      const wids = data.upVote
-      const widsForDownVote = data.downVote
-      if (wids.length) {
-        const userDetails = await this.discussionSvc.getUsersByIDs(wids)
-        this.userForUpvote = this.discussionSvc.addIndexToData(userDetails)
-      } else {
-        this.userForUpvote = []
-      }
-      if (widsForDownVote.length) {
-        const userDetailsforDownVote = await this.discussionSvc.getUsersByIDs(widsForDownVote)
-        this.userForDownVote = this.discussionSvc.addIndexToData(userDetailsforDownVote)
-      } else {
-        this.userForDownVote = []
-      }
-    } else {
-      if (this.activity.activityDetails) {
-        // filter for upvote
-        const wids = this.activity.activityDetails.upVote
-        if (wids.length) {
-          const userDetails = await this.discussionSvc.getUsersByIDs(wids)
-          this.userForUpvote = this.discussionSvc.addIndexToData(userDetails)
-        }
-        // filter for downvote
-        const widsForDownVote = this.activity.activityDetails.downVote
-        if (widsForDownVote.length) {
-          const userDetailsforDownVote = await this.discussionSvc.getUsersByIDs(widsForDownVote)
-          this.userForDownVote = this.discussionSvc.addIndexToData(userDetailsforDownVote)
-        }
-      }
+    },
+    () => {
+      this.isUpdating = false
+    },
+  )
+}
 
+openVotesDialog(voteType: NsDiscussionForum.EActivityType.DOWNVOTE | NsDiscussionForum.EActivityType.UPVOTE) {
+  const data: NsDiscussionForum.IDialogActivityUsers = {
+    postId: this.postId,
+    activityType: voteType,
+  }
+  this.dialog.open(DialogSocialActivityUserComponent, {
+    data,
+  })
+}
+async getWidsForVote() {
+  // this.voteService.updateStatus(true)
+  if (this.activity.activityDetails) {
+    // filter for upvote
+    //  if (this.activity.activityDetails) {
+    const wids = this.activity.activityDetails.upVote
+    // const wids = ['7b710f74-8f84-427f-bc13-f4220ed2a1c1',
+    //   'b690b9c6-a9de-49dd-94ef-1dffcc7a053c']
+    if (wids.length) {
+      const userDetails = await this.discussionSvc.getUsersByIDs(wids)
+      this.userForUpvote = this.discussionSvc.addIndexToData(userDetails)
     }
-    console.log('newdata', this.userForUpvote, this.userForDownVote)
-    // }
+    // filter for downvote
+    //  if (this.activity.activityDetails) {
+    const widsForDownVote = this.activity.activityDetails.downVote
+    // const widsForDownVote = ['7b710f74-8f84-427f-bc13-f4220ed2a1c1', 'acbf4053-c126-4e85-a0bf-252a896535ea',
+    //   'b690b9c6-a9de-49dd-94ef-1dffcc7a053c']
+    if (widsForDownVote.length) {
+      const userDetailsforDownVote = await this.discussionSvc.getUsersByIDs(widsForDownVote)
+      this.userForDownVote = this.discussionSvc.addIndexToData(userDetailsforDownVote)
+    }
   }
+  console.log('value check', this.postId, this.voteType, this.userForUpvote, this.userForDownVote)
+}
 
-  triggerHover() {
-    this.voteService.triggerStoreLikeData(this.userForUpvote, this.userForDownVote)
-    this.voteService.userDownVoteObject.subscribe(data => {
-      console.log('userDownVoteObject', data)
-    })
-    this.voteService.userUpVoteObject.subscribe(data => {
-      console.log('userUpVoteObject', data)
-    })
-    console.log('this.userdata2', this.userForUpvote, 'downvote', this.userForDownVote)
-    // this.fetchUpdateContent(this.postId)
-  }
-  //   setTimeout(() => {
-  //     this.fetchUpdateContent(this.postId)
-  //   }, 1000)
-  // }
+// isEnabled() {
+//   this.isEnabledForDisplay = true;
+// }
 }

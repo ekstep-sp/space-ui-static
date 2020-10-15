@@ -14,6 +14,7 @@ import {
 import { TFetchStatus, ConfigurationsService, LoggerService, ValueService, NsPage } from '@ws-widget/utils'
 import { ForumService } from '../../../../forums/service/forum.service'
 import { NsUserDashboard } from '../../../../../../user-dashboard/models/user-dashboard.model'
+import { BtnSocialLikeService } from '@ws-widget/collection/src/lib/discussion-forum/actionBtn/btn-social-like/service/btn-social-like.service'
 
 @Component({
   selector: 'ws-app-qna-view',
@@ -110,6 +111,7 @@ export class QnaViewComponent implements OnInit, OnDestroy {
     private snackBar: MatSnackBar,
     private valueSvc: ValueService,
     private readonly forumSrvc: ForumService,
+    public voteService: BtnSocialLikeService,
   ) {
     if (this.configSvc.userProfile) {
       this.userId = this.configSvc.userProfile.userId || ''
@@ -128,6 +130,13 @@ export class QnaViewComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
+    this.voteService.callComponent.toPromise().then((data: any) => {
+      if (data) {
+        this.discussionSvc.fetchPost(this.qnaConversationRequest).subscribe((updatedData: any) => {
+          this.qnaConversation = updatedData
+      })
+    }
+    })
     this.initData()
     // this.getAllUsers()
     // this.getUserDetails()
@@ -139,6 +148,7 @@ export class QnaViewComponent implements OnInit, OnDestroy {
       this.routeSubscription.unsubscribe()
     }
   }
+
   private initData() {
     this.ngOnDestroy()
     this.routeSubscription = this.activatedRoute.data.subscribe((response: Data) => {

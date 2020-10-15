@@ -6,6 +6,7 @@ import { DialogSocialDeletePostComponent, NsDiscussionForum, WsDiscussionForumSe
 import { combineLatest } from 'rxjs'
 import { ForumService } from '../../../forums/service/forum.service'
 import { tap } from 'rxjs/operators'
+import { BtnSocialLikeService } from '@ws-widget/collection/src/lib/discussion-forum/actionBtn/btn-social-like/service/btn-social-like.service'
 
 @Component({
   selector: 'ws-app-blog-view',
@@ -46,7 +47,8 @@ export class BlogViewComponent implements OnInit {
   mentions = []
   allowMention = false
   keyValue = false
-
+  trigger = true
+  activityData: any
   constructor(
     public dialog: MatDialog,
     private snackBar: MatSnackBar,
@@ -54,7 +56,8 @@ export class BlogViewComponent implements OnInit {
     private route: ActivatedRoute,
     private router: Router,
     private discussionSvc: WsDiscussionForumService,
-    private readonly forumSrvc: ForumService
+    private readonly forumSrvc: ForumService,
+    public voteService: BtnSocialLikeService,
   ) {
     if (this.configSvc.userProfile) {
       this.userId = this.configSvc.userProfile.userId || ''
@@ -64,7 +67,14 @@ export class BlogViewComponent implements OnInit {
   }
 
   ngOnInit() {
-
+    this.voteService.callComponent.subscribe((data: any) => {
+      if (data) {
+        this.discussionSvc.fetchPost(this.conversationRequest).toPromise().then((updatedData: any) => {
+          this.conversation = updatedData
+          console.log('main', this.conversation)
+      })
+    }
+    })
     // tslint:disable-next-line: deprecation
     combineLatest(this.route.data, this.route.paramMap).subscribe(_combinedResult => {
       if (_combinedResult[0].socialData.data.allowMentionUsers) {
@@ -91,7 +101,6 @@ export class BlogViewComponent implements OnInit {
     this.showSocialLike = (this.configSvc.restrictedFeatures && !this.configSvc.restrictedFeatures.has('socialLike')) || false
 
   }
-
   deleteBlogsForSpecificRole(blogsData: any) {
     if (blogsData) {
       const allowedForDelete = blogsData.some((role: string) =>

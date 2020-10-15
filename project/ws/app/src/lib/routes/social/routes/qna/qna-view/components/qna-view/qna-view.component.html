@@ -49,7 +49,7 @@
             }} <span *ngIf="!allowedToComment" class="votes-text"> votes </span>
           </div>
           <ws-widget-btn-social-vote *ngIf="allowedToComment" class="block" [voteType]="'downVote'"
-            [postId]="qnaConversation.mainPost.id" [key]="false"
+            [postId]="qnaConversation.mainPost.id" [key]="false" 
             [postCreatorId]="qnaConversation?.mainPost?.postCreator?.postCreatorId"
             [activity]="qnaConversation.mainPost.activity" [iconType]="'triangle'"></ws-widget-btn-social-vote>
           <ws-widget-btn-social-like *ngIf="showSocialLike" class="block items-center margin-top-s"

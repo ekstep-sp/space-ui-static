@@ -52,7 +52,6 @@ export class BtnSocialLikeComponent implements OnInit {
   }
 
   ngOnInit() {
-    console.log(this.activity)
     // this.likeService.userLikeObject.subscribe((data: any) => {
     //   this.activity = data
     // })
@@ -104,7 +103,6 @@ export class BtnSocialLikeComponent implements OnInit {
     // }
 
     this.discussionSvc.fetchPost(this.conversationRequest).subscribe(data => {
-      console.log(data, this.userId)
       if (data.mainPost.postCreator.postCreatorId) {
         this.conversationRequest.postCreatorId = data.mainPost.postCreator.postCreatorId
        }
@@ -130,7 +128,6 @@ export class BtnSocialLikeComponent implements OnInit {
   }
 
   async getWidsForLike(likeIds?: string[] | undefined) {
-    console.log(likeIds, this.key)
     // let wids = [] as any
     // if (likeIds && Array.isArray(likeIds) && likeIds.length) {
     //    wids = [...likeIds]
@@ -153,6 +150,5 @@ export class BtnSocialLikeComponent implements OnInit {
       }
     }
   // }
-  console.log(this.userDataForLike)
   }
 }

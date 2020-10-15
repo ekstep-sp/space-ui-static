@@ -55,11 +55,11 @@
           [key]="keyValue">
         </ws-widget-btn-social-like>
         <span>
-          <ws-widget-btn-social-vote [postId]="conversationRequest?.postId"
+          <ws-widget-btn-social-vote [postId]="conversationRequest?.postId" (updateVote)="triggerVote()"
             [activity]="conversation?.mainPost?.activity" [voteType]="'upVote'" [key]="keyValue"
             [postCreatorId]="conversation?.mainPost?.postCreator?.postCreatorId">
           </ws-widget-btn-social-vote>
-          <ws-widget-btn-social-vote class="margin-left-s" [key]="keyValue" [postId]="conversationRequest?.postId"
+          <ws-widget-btn-social-vote class="margin-left-s" [key]="keyValue" (updateVote)="triggerVote()" [postId]="conversationRequest?.postId"
             [activity]="conversation?.mainPost?.activity" [voteType]="'downVote'"
             [postCreatorId]="conversation?.mainPost?.postCreator?.postCreatorId"></ws-widget-btn-social-vote>
         </span>
