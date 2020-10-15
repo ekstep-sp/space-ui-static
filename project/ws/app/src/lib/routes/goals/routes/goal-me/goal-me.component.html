@@ -57,7 +57,7 @@
       </div>
     </section>
     <section *ngIf="type === 'completed'" class="margin-top-m margin-bottom-xl">
-      <h2 *ngIf="!userGoals?.completedGoals?.length" class="mat-title" i18n>
+      <h2 *ngIf="!userGoals?.completedGoals?.length" class="mat-title font-size-24px" i18n>
         You have not completed any goals yet
       </h2>
       <div *ngFor="let goal of userGoals?.completedGoals" class="margin-bottom-m">
