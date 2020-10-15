@@ -199,6 +199,9 @@ export class BtnContentShareDialogComponent implements OnInit {
       }
       return false
     })
+    if (document.location.href.includes('collectionType=Collection') || document.location.href.includes('collectionType=Course')) {
+      return false
+    }
     return pageType
   }
 
