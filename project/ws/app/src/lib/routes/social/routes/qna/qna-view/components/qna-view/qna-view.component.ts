@@ -43,13 +43,14 @@ export class QnaViewComponent implements OnInit, OnDestroy {
   allowedToComment = false
   allowedToAnswer = false
   mentions = []
+  commentMentions = []
   headersForAllUsers: NsUserDashboard.IHeaders = {} as any
   userDashboardData: NsUserDashboard.IUserData | any
   widLoggedinUser: string | any
   userListData: NsUserDashboard.IUserListDataFromUserTable[] = []
   getRootOrg: string | any = ''
   getOrg: string | any = ''
-  userDataInJsonFormat: any
+  userDataInJsonFormat: any = []
 
   commentAddRequest: NsDiscussionForum.IPostCommentRequest = {
     postKind: NsDiscussionForum.EReplyKind.COMMENT,
@@ -97,6 +98,7 @@ export class QnaViewComponent implements OnInit, OnDestroy {
   allowMention = false
 
   @ViewChild('editor', { static: true }) editorQuill!: EditorQuillComponent
+  @ViewChild('commentEditor', { static: true }) commentEditorQuill!: EditorQuillComponent
   userDetails: any[] = []
   isXSmall$ = this.valueSvc.isXSmall$
   pageNavbar: Partial<NsPage.INavBackground> = this.configSvc.pageNavBar
@@ -269,6 +271,7 @@ export class QnaViewComponent implements OnInit, OnDestroy {
       () => {
         this.commentAddRequest.postContent.body = ''
         this.isPostingComment = false
+        this.triggerNotification('comment')
         this.fetchQuestionComments(true)
       },
       () => {
@@ -283,7 +286,7 @@ export class QnaViewComponent implements OnInit, OnDestroy {
     this.replyAddRequest.postKind = NsDiscussionForum.EReplyKind.REPLY
     this.discussionSvc.publishPost(this.replyAddRequest).subscribe(
       () => {
-        this.triggerNotification()
+        this.triggerNotification('reply')
         this.replyAddRequest.postContent.body = ''
         this.isPostingReply = false
         this.editorQuill.resetEditor()
@@ -352,17 +355,26 @@ export class QnaViewComponent implements OnInit, OnDestroy {
 
   onTextChange(event: { htmlText: string; isValid: boolean }) {
     this.replyAddRequest.postContent.body = event.htmlText
-    // this.replyAddRequest.postContent.body = event.htmlText || ''
     this.isValidForUserAnswer = event.isValid
   }
-  triggerNotification() {
-    if (this.mentions.length) {
-      const notificationData = this.mentions.map((mention: any) => {
+
+  onCommentTextChange(event: { htmlText: string; isValid: boolean }) {
+    this.commentAddRequest.postContent.body = event.htmlText
+  }
+  triggerNotification(parentType: 'reply' | 'comment') {
+    let mentionsData: any[] = []
+    if (parentType === 'reply') {
+      mentionsData = [...this.mentions]
+    } else if (parentType === 'comment') {
+      mentionsData = [...this.commentMentions]
+    }
+    if (mentionsData.length) {
+      const notificationData = mentionsData.map((mention: any) => {
         return {
           notificationFor: 'qna',
           QnaTitle: this.postTitle || '',
           QnaId: this.qnaConversationRequest.postId,
-          QnaCreatorID: this.qnaConversationRequest ? this.qnaConversationRequest.userId : '',
+          QnaCreatorID: this.qnaConversation.mainPost.postCreator.postCreatorId,
           taggedUserID: mention.id,
           taggedUserName: mention.name,
           taggedUserEmail: mention.email,
@@ -411,5 +423,26 @@ export class QnaViewComponent implements OnInit, OnDestroy {
       }
     }
     return obj
+  }
+
+  triggerReplyCommentNotification(notificationData: any) {
+    // send one notification such that it reaches both, the person who was mentioned in the reply comment and the creator
+    // of answer on which comment was made
+    const notificationRequest = notificationData.mentions.map((mention: any) => {
+      return {
+        notificationFor: 'qna',
+          taggedUserID: mention.id,
+          taggedUserName: mention.name,
+          taggedUserEmail: mention.email,
+          tagCreatorName: this.configSvc.userProfile ? this.configSvc.userProfile.userName || '' : '',
+          tagCreatorID: this.configSvc.userProfile ? this.configSvc.userProfile.userId || '' : '',
+          QnaTitle: this.postTitle || '',
+          QnaId: this.qnaConversationRequest.postId,
+          QnaCreatorID: notificationData.topLevelReply.postCreator.postCreatorId,
+      }
+    })
+    if (notificationRequest.length) {
+      this.forumSrvc.triggerTagNotification(notificationRequest)
+    }
   }
 }

@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core'
 import { CommonModule } from '@angular/common'
 import { EditorQuillComponent } from './editor-quill.component'
 import { FormsModule, ReactiveFormsModule } from '@angular/forms'
-import { QuillModule } from 'ngx-quill'
+import { QuillModule, QuillViewHTMLComponent } from 'ngx-quill'
 import { quillBaseConfig } from './config/quill-config'
 
 @NgModule({
@@ -13,6 +13,6 @@ import { quillBaseConfig } from './config/quill-config'
     ReactiveFormsModule,
     QuillModule.forRoot(quillBaseConfig),
   ],
-  exports: [EditorQuillComponent],
+  exports: [EditorQuillComponent, QuillViewHTMLComponent],
 })
 export class EditorQuillModule { }

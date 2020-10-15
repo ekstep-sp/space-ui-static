@@ -75,6 +75,11 @@ mat-card {
     display: block;
   }
 
+  .comment-editor {
+    display: block;
+    min-height: 50px;
+  }
+
   .comment-form {
     width: 100%;
     margin-top: $size-m;
@@ -104,4 +109,40 @@ display: block !important;
 }
 mat-chip {
   height: auto;
+}
+
+.comment-enabler {
+  cursor: pointer;
+}
+
+.quill-editor-comment-container {
+  width: 100%;
+  min-height: 50px;
+  ::ng-deep {
+    quill-editor {
+      border-radius: 5px;
+      border: 1px solid lightgrey;
+    }
+  }
+}
+
+.comment-container {
+  ::ng-deep {
+    .ngx-quill-view-html {
+      display: inline;
+      .ql-editor {
+        display: inherit;
+        p:first-of-type {
+          display: inherit;
+        }
+      }
+    }
+  }
+}
+
+.button-wrapper {
+  min-width: 200px;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
 }

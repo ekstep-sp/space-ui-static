@@ -82,7 +82,7 @@
           <div class="comment-container" *ngIf="qnaComments?.replyPost?.length">
             <div class="comment" *ngFor="let comment of qnaComments?.replyPost">
               <div>
-                {{ comment.postContent.body }}
+                <quill-view-html format="html" [content]="comment.postContent.body"></quill-view-html>
                 <span class="ws-mat-primary-text"> - {{ comment.postCreator.name }} </span>
                 <span class="mat-caption"> {{ comment.dtCreated | date }}</span>
                 <span class="mat-caption" i18n> at</span>
@@ -100,12 +100,13 @@
             <mat-spinner [diameter]="30" [strokeWidth]="3"></mat-spinner>
           </div>
           <form class="comment-form" *ngIf="allowedToComment">
-            <mat-form-field class="width-1-1">
-              <input matInput i18n-placeholder placeholder="Add a comment" value="commentAddRequest.postContent.body"
-                type="text" name="comment" [(ngModel)]="commentAddRequest.postContent.body" />
-            </mat-form-field>
+            <div class="quill-editor-comment-container">
+              <ws-widget-editor-quill class="comment-editor" placeholder="{{'comment on ' + qnaConversation.mainPost.postCreator.name + '\'s question'}}" [htmlText]="commentAddRequest?.postContent?.body || ''" [showMention]="allowMention"
+    [minLength]="'10'" (textData)="onCommentTextChange($event)" (mentionsData)="commentMentions = $event" #commentEditor>
+  </ws-widget-editor-quill>
+            </div>
             <button mat-stroked-button color="primary" class="margin-left-s"
-              [disabled]="!commentAddRequest.postContent.body.trim().length || isPostingComment"
+              [disabled]="!commentAddRequest.postContent.body || !commentAddRequest.postContent.body.trim().length || isPostingComment"
               i18n="Post comment of question" (click)="postComment()">
               Post
             </button>
@@ -131,12 +132,16 @@
         </h2>
         <ws-app-qna-reply class="reply-component" *ngIf="qnaConversation?.acceptedAnswer?.id" [isAcceptedAnswer]="true"
           [item]="qnaConversation.acceptedAnswer"
+          [allowMention]="allowMention"
+          (triggerReplyNotification)="triggerReplyCommentNotification($event)"
           [parentPostCreatorId]="qnaConversation.mainPost.postCreator.postCreatorId"
           (deleteSuccess)="onDeleteSuccess($event)" [canComment]="allowedToComment" [canVote]="allowedToComment">
         </ws-app-qna-reply>
         <div *ngFor="let answer of qnaConversation.replyPost; let i = index">
           <ws-app-qna-reply class="reply-component" [item]="answer"
+            [allowMention]="allowMention"
             [parentPostCreatorId]="qnaConversation.mainPost.postCreator.postCreatorId"
+            (triggerReplyNotification)="triggerReplyCommentNotification($event)"
             (acceptAnswerEvent)="onAnswerAccept($event)" (deleteSuccess)="onDeleteSuccess($event)"
             [canComment]="allowedToComment" [canVote]="allowedToComment"></ws-app-qna-reply>
           <mat-divider *ngIf="i !== qnaConversation.replyPost.length - 1"></mat-divider>

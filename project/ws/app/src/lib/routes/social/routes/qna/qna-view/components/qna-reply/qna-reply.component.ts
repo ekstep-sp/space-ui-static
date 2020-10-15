@@ -1,6 +1,6 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core'
+import { Component, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core'
 import { MatDialog, MatSnackBar } from '@angular/material'
-import { DialogSocialDeletePostComponent, NsDiscussionForum, WsDiscussionForumService } from '@ws-widget/collection'
+import { DialogSocialDeletePostComponent, EditorQuillComponent, NsDiscussionForum, WsDiscussionForumService } from '@ws-widget/collection'
 import { ConfigurationsService, TFetchStatus } from '@ws-widget/utils'
 import { NsSocial } from '../../../../../models/social.model'
 import { WsSocialService } from '../../../../../services/ws-social.service'
@@ -14,9 +14,11 @@ export class QnaReplyComponent implements OnInit {
 
   @Input() item!: NsDiscussionForum.ITimelineResult
   @Input() parentPostCreatorId!: string
+  @Output() triggerReplyNotification = new EventEmitter<object | undefined>()
   @Input() isAcceptedAnswer = false
   @Input() canComment = true
   @Input() canVote = true
+  @Input() allowMention = true
   @Output() acceptAnswerEvent = new EventEmitter<string>()
   @Output() deleteSuccess = new EventEmitter<{ isAccepted: boolean; id: string }>()
   isAcceptingAnswerInProgress = false
@@ -52,6 +54,8 @@ export class QnaReplyComponent implements OnInit {
   replyPostEnabled = false
   updatedBody: string | undefined
   userId = ''
+  replyCommentMentions = []
+  @ViewChild('replyCommentEditor', { static: true }) replyCommentEditor!: EditorQuillComponent
   constructor(
     private discussionSvc: WsDiscussionForumService,
     private configSvc: ConfigurationsService,
@@ -82,6 +86,7 @@ export class QnaReplyComponent implements OnInit {
       () => {
         this.isPostingComment = false
         this.commentAddRequest.postContent.body = ''
+        this.triggerNotification()
         this.fetchQuestionComments(true)
       },
       () => {
@@ -185,6 +190,18 @@ export class QnaReplyComponent implements OnInit {
   onTextChange(eventData: { isValid: boolean; htmlText: string }) {
     this.replyPostEnabled = eventData.isValid
     this.updatedBody = eventData.htmlText
+  }
+  onCommentTextChange(event: { htmlText: string; isValid: boolean }) {
+    this.commentAddRequest.postContent.body = event.htmlText
+    // this.replyAddRequest.postContent.body = event.htmlText || ''
+  }
+
+  triggerNotification() {
+    this.triggerReplyNotification.emit({
+      mentions: this.replyCommentMentions,
+      topLevelReply: this.item,
+      currentCommentData: this.commentAddRequest,
+    })
   }
 
 }

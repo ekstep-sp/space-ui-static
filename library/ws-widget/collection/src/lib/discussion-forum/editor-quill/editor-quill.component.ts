@@ -25,10 +25,11 @@ export class EditorQuillComponent implements OnInit, OnDestroy {
   @Input() minLength = '1'
   @Input() post ?= false
   @Input() showMention = false
+  @Input() placeholder = ''
   text = ''
 
   reset = false
-  placeholder = 'Ask a question, or add something you found helpful'
+  defaultPlaceholder = 'Ask a question, or add something you found helpful'
   headersForAllUsers: NsUserDashboard.IHeaders = {} as any
   userDashboardData: NsUserDashboard.IUserData | any
   widLoggedinUser: string | any
