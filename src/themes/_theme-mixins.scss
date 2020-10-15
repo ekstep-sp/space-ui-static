@@ -71,6 +71,10 @@
   .font-size-48px {
     font-size: 48px !important;
   }
+  [id^="mat-dialog-title-"] {
+    font-size: 24px;
+    font-family: CampaignW00-Medium !important;
+  }
   p,
   b,
   mat-label,
