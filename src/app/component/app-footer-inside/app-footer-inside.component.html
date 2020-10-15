@@ -41,8 +41,8 @@
     <!-- </mat-grid-tile> -->
     <!-- </mat-grid-list> -->
     <div class="col-3 footer-playstore-buttons">
-      <div class="rectangle">
-        <a class="flex" href = "https://apps.apple.com/us/app/id1530333275" target="_blank">
+      <div class="rectangle" (click)="navigateToOuterSource('https://apps.apple.com/us/app/id1530333275')">
+        <a class="flex">
         <div class="appleIcon">
         </div>
         <div class="appStore-icon">
@@ -52,8 +52,8 @@
       </a>
       </div>
     
-      <div class="rectangle">
-        <a class="flex" href="https://play.google.com/store/apps/details?id=ekstep.societal.space" target="_blank">
+      <div class="rectangle" (click)="navigateToOuterSource('https://play.google.com/store/apps/details?id=ekstep.societal.space')">
+        <a class="flex">
         <div class="playStore">
         </div>
         <div class="appStore-icon">
@@ -90,8 +90,8 @@
       <a routerLink="/public/contact" name="helpAndContactButtonHomePage" i18n>Contact Us</a></p>
   </div>
   <div class="col-3 footer-playstore-buttons">
-    <div class="rectangle">
-      <a class="flex" href = "https://apps.apple.com/us/app/id1530333275" target="_blank">
+    <div class="rectangle" (click)="navigateToOuterSource('https://apps.apple.com/us/app/id1530333275')">
+      <a class="flex">
       <div class="appleIcon">
       </div>
       <div class="appStore-icon">
@@ -100,8 +100,8 @@
       </div>
     </a>
     </div>
-  <div class="rectangle">
-      <a class="flex" href="https://play.google.com/store/apps/details?id=ekstep.societal.space" target="_blank">
+    <div class="rectangle" (click)="navigateToOuterSource('https://play.google.com/store/apps/details?id=ekstep.societal.space')">
+      <a class="flex">
       <div class="playStore">
       </div>
       <div class="appStore-icon">
