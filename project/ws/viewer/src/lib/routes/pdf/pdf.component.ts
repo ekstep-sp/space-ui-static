@@ -1,8 +1,8 @@
 import { AccessControlService } from '@ws/author'
-import { Component, OnInit, OnDestroy } from '@angular/core'
+import { Component, OnInit, OnDestroy, Input } from '@angular/core'
 import { Subscription } from 'rxjs'
 import { NsContent, NsDiscussionForum, WidgetContentService } from '@ws-widget/collection'
-import { WsEvents, EventService } from '@ws-widget/utils'
+import { WsEvents, EventService, ConfigurationsService } from '@ws-widget/utils'
 import { NsWidgetResolver } from '@ws-widget/resolver'
 import { ActivatedRoute } from '@angular/router'
 import { ViewerUtilService } from '../../viewer-util.service'
@@ -20,6 +20,7 @@ export class PdfComponent implements OnInit, OnDestroy {
   pdfData: NsContent.IContent | null = null
   oldData: NsContent.IContent | null = null
   alreadyRaised = false
+  @Input() sharedContent: NsContent.IContent | null = null
   widgetResolverPdfData: any = {
     widgetType: 'player',
     widgetSubType: 'playerPDF',
@@ -41,6 +42,7 @@ export class PdfComponent implements OnInit, OnDestroy {
     private viewerSvc: ViewerUtilService,
     private eventSvc: EventService,
     private accessControlSvc: AccessControlService,
+    private readonly config: ConfigurationsService,
   ) {}
 
   ngOnInit() {
@@ -68,11 +70,20 @@ export class PdfComponent implements OnInit, OnDestroy {
     } else {
       this.dataSubscription = this.activatedRoute.data.subscribe(
         async data => {
-          this.pdfData = data.content.data
-          if (this.alreadyRaised && this.oldData) {
+          this.prepareContent(data)
+        },
+        () => {},
+      )
+    }
+  }
+
+  prepareContent(data: any) {
+    window.setTimeout(async () => {
+      this.pdfData = data.content.data || data.content
+          if (this.alreadyRaised && this.oldData && !this.config.isGuestUser) {
             this.raiseEvent(WsEvents.EnumTelemetrySubType.Unloaded, this.oldData)
           }
-          if (this.pdfData) {
+          if (this.pdfData && !this.config.isGuestUser) {
             this.formDiscussionForumWidget(this.pdfData)
           }
 
@@ -80,7 +91,7 @@ export class PdfComponent implements OnInit, OnDestroy {
             await this.setS3Cookie(this.pdfData.identifier)
           }
           this.widgetResolverPdfData.widgetData.resumePage = 1
-          if (this.pdfData && this.pdfData.identifier) {
+          if (this.pdfData && this.pdfData.identifier && !this.config.isGuestUser) {
             if (this.activatedRoute.snapshot.queryParams.collectionId) {
               await this.fetchContinueLearning(
                 this.activatedRoute.snapshot.queryParams.collectionId,
@@ -97,16 +108,13 @@ export class PdfComponent implements OnInit, OnDestroy {
             : ''
           this.widgetResolverPdfData.widgetData.identifier = this.pdfData && this.pdfData.identifier
           this.widgetResolverPdfData = JSON.parse(JSON.stringify(this.widgetResolverPdfData))
-          if (this.pdfData) {
+          if (this.pdfData && !this.config.isGuestUser) {
             this.oldData = this.pdfData
             this.alreadyRaised = true
             this.raiseEvent(WsEvents.EnumTelemetrySubType.Loaded, this.pdfData)
           }
           this.isFetchingDataComplete = true
-        },
-        () => {},
-      )
-    }
+    })
   }
 
   formDiscussionForumWidget(content: NsContent.IContent) {

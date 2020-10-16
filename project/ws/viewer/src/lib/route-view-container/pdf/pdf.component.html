@@ -7,7 +7,7 @@
             <div id="fullScreenContainer" class="video-player">
               <ng-container *ngIf="isFetchingDataComplete" [wsResolverWidget]="widgetResolverPdfData"></ng-container>
             </div>
-            <div class="flex justify-end mt-3">
+            <div class="flex justify-end mt-3" *ngIf="!configSvc?.isGuestUser">
               <ws-widget-btn-content-download [forPreview]="forPreview" [widgetData]="
                   pdfData
                     | pipePartialContent
@@ -26,7 +26,7 @@
                   isDisabled: isPreviewMode
                 }"></ws-widget-btn-content-like>
               <ws-widget-btn-content-share [forPreview]="forPreview" [widgetData]="pdfData"
-               *ngIf="allowedToPdf" [isDisabled]="isPreviewMode">
+               *ngIf="allowedToPdf && !configSvc?.isGuestUser" [isDisabled]="isPreviewMode">
               </ws-widget-btn-content-share>
               <ws-widget-btn-goals [forPreview]="forPreview"></ws-widget-btn-goals>
               <ws-widget-btn-playlist *ngIf="allowedToPdf" [forPreview]="forPreview" [widgetData]="{

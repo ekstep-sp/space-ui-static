@@ -24,7 +24,28 @@ export class AppInterceptorService implements HttpInterceptor {
           }
         })
     }
-
+    if (this.configSvc.isGuestUser) {
+      const parsedData = this.configSvc.getGuesUserDetails()
+      if (parsedData) {
+        const token = parsedData.token
+      const org = parsedData.org
+      const rootOrg = parsedData.rootOrg
+      const wid = parsedData.wid
+      // create a new request which will work with session data exclusively, if it is present
+      const modifiedReq = req.clone({
+        setHeaders: {
+          org,
+          wid,
+          rootOrg,
+          lang: 'en',
+          hostPath: this.configSvc.hostPath,
+          Authorization: `bearer ${token}`,
+          defaultUserRequest: 'true',
+        },
+      })
+      return next.handle(modifiedReq)
+      }
+    }
     if (this.configSvc.activeOrg && this.configSvc.rootOrg) {
       // tslint:disable-next-line: max-line-length
       const stipulatedWID = (req.headers.has('wid') && req.headers.get('wid')) ? req.headers.get('wid') : ((this.configSvc.userProfile && this.configSvc.userProfile.userId) || '')
@@ -33,8 +54,10 @@ export class AppInterceptorService implements HttpInterceptor {
           org: this.configSvc.activeOrg,
           rootOrg: this.configSvc.rootOrg,
           locale: lang.join(','),
+          lang: 'en',
           wid: stipulatedWID as string,
           hostPath: this.configSvc.hostPath,
+          defaultUserRequest: 'false',
         },
       })
       return next.handle(modifiedReq)

@@ -17,6 +17,8 @@ import { VideoModule } from './routes/video/video.module'
 import { YoutubeComponent } from './routes/youtube/youtube.component'
 import { YoutubeModule } from './routes/youtube/youtube.module'
 import { PageResolve } from '../../../../../library/ws-widget/utils/src/public-api'
+import { PublicShareViewComponent } from '@ws/viewer/src/lib/components/public-share-view/public-share-view.component'
+import { ShareViewerResolve } from './share-viewer.resolve'
 
 const routes: Routes = [
   {
@@ -186,6 +188,13 @@ const routes: Routes = [
     },
   },
   {
+    path: ':sharableToken',
+    component: PublicShareViewComponent,
+    resolve: {
+      content: ShareViewerResolve,
+    },
+  },
+  {
     path: ':resourceId',
     component: ViewerComponent,
     data: {
@@ -222,9 +231,17 @@ const routes: Routes = [
         children: routes,
       },
     ])],
-  exports: [RouterModule],
+  exports: [
+    RouterModule,
+    AudioModule,
+    AudioNativeModule,
+    HtmlModule,
+    PdfModule,
+    VideoModule,
+    YoutubeModule,
+    ChannelModule],
   providers: [
-    ViewerResolve,
+    ViewerResolve, ShareViewerResolve,
   ],
 })
 export class ViewerRoutingModule { }

@@ -100,9 +100,15 @@ export class PlayerPdfComponent extends WidgetBaseComponent
 
   ngOnInit() {
     this.activatedRoute.data.subscribe(data => {
-      this.isShowDownloadMobile = data.pageData.data.isMobileDownloadable
-      this.isShowDownloadIOS = data.pageData.data.isIOSDownloadable
-      this.isShowDownloadAndroid = data.pageData.data.isAndroidDownloadable
+      if (data.hasOwnProperty('pageData')) {
+        this.isShowDownloadMobile = data.pageData.data.isMobileDownloadable
+        this.isShowDownloadIOS = data.pageData.data.isIOSDownloadable
+        this.isShowDownloadAndroid = data.pageData.data.isAndroidDownloadable
+      } else {
+        this.isShowDownloadMobile = false
+        this.isShowDownloadIOS = false
+        this.isShowDownloadAndroid = false
+      }
     })
     // SimpleLinkService does not support handling of relative link switching PDFLinkService
     pdfjsViewer.SimpleLinkService.prototype.getDestinationHash =
@@ -198,6 +204,9 @@ export class PlayerPdfComponent extends WidgetBaseComponent
   }
 
   get isDownloadable() {
+    if (this.eventSvc.isGuestUser) {
+      return false
+    }
     if (this.widgetData) {
       if (this.widgetData.pdfUrl) {
         return true

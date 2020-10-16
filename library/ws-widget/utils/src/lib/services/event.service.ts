@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core'
 import { Subject } from 'rxjs'
+import { ConfigurationsService } from './configurations.service'
 import { WsEvents } from './event.model'
 @Injectable({
   providedIn: 'root',
@@ -8,7 +9,7 @@ export class EventService {
   private eventsSubject = new Subject<WsEvents.IWsEvents<any>>()
   public events$ = this.eventsSubject.asObservable()
 
-  constructor() {
+  constructor(private readonly configSrvc: ConfigurationsService) {
     // this.focusChangeEventListener()
   }
 
@@ -30,6 +31,10 @@ export class EventService {
       from: from || '',
       to: 'Telemetry',
     })
+  }
+
+  get isGuestUser() {
+    return this.configSrvc.isGuestUser
   }
 
   // private focusChangeEventListener() {

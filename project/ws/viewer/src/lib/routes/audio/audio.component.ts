@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy } from '@angular/core'
+import { Component, OnInit, OnDestroy, Input } from '@angular/core'
 import { Subscription } from 'rxjs'
 import { ValueService } from '@ws-widget/utils'
 import { ActivatedRoute } from '@angular/router'
@@ -11,6 +11,7 @@ import {
 } from '@ws-widget/collection'
 import { ViewerUtilService } from '../../viewer-util.service'
 import { NsWidgetResolver } from '@ws-widget/resolver'
+import { map } from 'rxjs/operators'
 
 @Component({
   selector: 'viewer-audio',
@@ -21,6 +22,7 @@ export class AudioComponent implements OnInit, OnDestroy {
   private routeDataSubscription: Subscription | null = null
   private screenSizeSubscription: Subscription | null = null
   private viewerDataSubscription: Subscription | null = null
+  @Input() isShared = false
   isScreenSizeSmall = false
   isNotEmbed = true
   isFetchingDataComplete = false
@@ -69,18 +71,31 @@ export class AudioComponent implements OnInit, OnDestroy {
         })
       // this.htmlData = this.viewerDataSvc.resource
     } else {
-      this.routeDataSubscription = this.activatedRoute.data.subscribe(
+      this.routeDataSubscription = this.activatedRoute.data
+      .pipe(map((_data: any) => {
+        if (!_data.content.hasOwnProperty('data')) {
+          return {
+            content: {
+              data: {
+                ..._data.content,
+              },
+            },
+          }
+        }
+        return _data
+      }))
+      .subscribe(
         async data => {
           this.widgetResolverAudioData = null
           this.audioData = data.content.data
-          if (this.audioData) {
+          if (this.audioData && !this.isShared) {
             this.formDiscussionForumWidget(this.audioData)
           }
           if (this.audioData && this.audioData.artifactUrl.indexOf('content-store') >= 0) {
             await this.setS3Cookie(this.audioData.identifier)
           }
           this.widgetResolverAudioData = this.initWidgetResolverAudioData()
-          if (this.audioData && this.audioData.identifier) {
+          if (this.audioData && this.audioData.identifier && !this.isShared) {
             if (this.activatedRoute.snapshot.queryParams.collectionId) {
               await this.fetchContinueLearning(
                 this.activatedRoute.snapshot.queryParams.collectionId,

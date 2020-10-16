@@ -1,0 +1,15 @@
+<ng-container *ngIf="contentDisplyType === 'html'">
+    <viewer-html [sharedContent]="currentcontent"></viewer-html>
+</ng-container>
+
+<ng-container *ngIf="contentDisplyType === 'pdf'">
+    <viewer-pdf [sharedContent]="currentcontent"></viewer-pdf>
+</ng-container>
+
+<ng-container *ngIf="contentDisplyType === 'video'">
+    <viewer-video [isShared]="true"></viewer-video>
+</ng-container>
+
+<ng-container *ngIf="contentDisplyType === 'audio'">
+    <viewer-audio [isShared]="true"></viewer-audio>
+</ng-container>

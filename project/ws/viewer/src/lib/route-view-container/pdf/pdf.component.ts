@@ -31,6 +31,7 @@ export class PdfComponent implements OnInit {
   isTypeOfCollection = false
   isRestricted = false
   allowedToPdf = true
+  allowToLike = true
   constructor(
     private activatedRoute: ActivatedRoute,
     private configSvc: ConfigurationsService,
@@ -40,17 +41,27 @@ export class PdfComponent implements OnInit {
   ngOnInit() {
     this.activatedRoute.data.subscribe(_data => {
       // console.log(_data)
-      // tslint:disable-next-line: max-line-length
-      if (this.viewerService.isVisibileAccToRoles(_data.pageData.data.enableDisscussionForum.rolesAllowed.disscussionForum, _data.pageData.data.enableDisscussionForum.rolesNotAllowed.disscussionForum)) {
-        this.allowedToPdf = true
+      // tslint:disable: max-line-length
+      if (this.configSvc.isGuestUser) {
+        this.extractFeaturesForGuestUser()
       } else {
-        this.allowedToPdf = false
+        if (this.viewerService.isVisibileAccToRoles(_data.pageData.data.enableDisscussionForum.rolesAllowed.disscussionForum, _data.pageData.data.enableDisscussionForum.rolesNotAllowed.disscussionForum)) {
+          this.allowedToPdf = true
+        } else {
+          this.allowedToPdf = false
+        }
       }
     })
-    if (this.configSvc.restrictedFeatures) {
+    if (this.configSvc.restrictedFeatures && !this.configSvc.isGuestUser) {
       this.isRestricted =
         !this.configSvc.restrictedFeatures.has('disscussionForum')
     }
     this.isTypeOfCollection = this.activatedRoute.snapshot.queryParams.collectionType ? true : false
+  }
+
+  extractFeaturesForGuestUser() {
+    this.allowedToPdf = false
+    this.isRestricted = true
+    this.allowToLike = false
   }
 }

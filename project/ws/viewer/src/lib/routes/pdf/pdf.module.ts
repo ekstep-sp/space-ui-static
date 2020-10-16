@@ -58,5 +58,6 @@ import { PdfModule as PdfViewContainerModule } from '../../route-view-container/
     BtnContentFeedbackV2Module,
     PdfViewContainerModule,
   ],
+  exports: [PdfComponent],
 })
 export class PdfModule { }

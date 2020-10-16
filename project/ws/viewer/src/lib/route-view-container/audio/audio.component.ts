@@ -23,9 +23,11 @@ export class AudioComponent implements OnInit {
   @Input() forPreview = false
   isTypeOfCollection = false
   isRestricted = false
+  isShared = false
   constructor(private activatedRoute: ActivatedRoute, private configSvc: ConfigurationsService) { }
 
   ngOnInit() {
+    this.isShared = this.configSvc.isGuestUser
     if (this.configSvc.restrictedFeatures) {
       this.isRestricted =
         !this.configSvc.restrictedFeatures.has('disscussionForum')

@@ -1,7 +1,38 @@
 .text-area {
   width: 100%;
+  transition: 0.5;
 }
 
 .text-area-input {
   line-height: 1.5 !important;
+}
+
+.public-share-container {
+  margin-top: 30px;
+  h1 {
+    text-align: center;
+  }
+  .public-share {
+    p {
+      text-align: left;
+      font-size: 16px;
+    }
+  }
+}
+
+.public-url-wrapper {
+  align-items: center;
+  .button-wrapper {
+    width: 90%;
+  }
+  input {
+    width: 100%;
+    margin-top: 5px;
+  }
+  button {
+    width: 50px;
+    height: 50px;
+    cursor: pointer;
+    margin-left: 10px;
+  }
 }

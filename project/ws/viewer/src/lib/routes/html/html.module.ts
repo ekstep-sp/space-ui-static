@@ -63,5 +63,6 @@ import { AccessControlService } from '@ws/author'
     BtnContentFeedbackV2Module,
   ],
   providers: [AccessControlService],
+  exports: [HtmlComponent],
 })
 export class HtmlModule { }

@@ -73,4 +73,27 @@ export class ConfigurationsService {
     color: 'primary',
   }
   primaryNavBarConfig: NsInstanceConfig.IPrimaryNavbarConfig | null = null
+  defaultCredentials: { username?: string, password?: string } | null = null
+  isGuestUser = !!sessionStorage.getItem('default-user')
+  removeGuestUser = () => {
+    sessionStorage.removeItem('default-user')
+    this.isGuestUser = false
+    this.defaultCredentials = null
+  }
+  setGuestUserSession = (sessionData: string) => {
+    sessionStorage.setItem('default-user', sessionData)
+    this.isGuestUser = true
+  }
+  getGuesUserDetails = () => {
+    if (this.isGuestUser) {
+      try {
+        return JSON.parse(sessionStorage.getItem('default-user') as any)
+      } catch (e) {
+        // tslint:disable-next-line: no-console
+        console.error('An Error occured while retrieving guest user details ', e)
+        return null
+      }
+    }
+    return null
+  }
 }

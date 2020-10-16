@@ -8,7 +8,7 @@
               <ng-container *ngIf="isFetchingDataComplete" [wsResolverWidget]="widgetResolverVideoData"></ng-container>
             </div>
             <ng-container *ngIf="!isScreenSizeSmall">
-              <div class="flex justify-end mt-3">
+              <div class="flex justify-end mt-3" *ngIf="!isShared">
                 <ws-widget-btn-content-download [forPreview]="forPreview" [widgetData]="
                     videoData
                       | pipePartialContent
@@ -38,7 +38,7 @@
         </mat-card>
       </div>
       <div class="vidoe-title margin-top-m" *ngIf="videoData">
-        <mat-card *ngIf="isScreenSizeSmall" class="unit-meta-item">
+        <mat-card *ngIf="isScreenSizeSmall && !isShared" class="unit-meta-item">
           <div class="flex flex-between flex-wrapped">
             <div>
               <ws-widget-btn-content-download [forPreview]="forPreview" [widgetData]="

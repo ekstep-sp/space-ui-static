@@ -23,7 +23,7 @@ import {
   ValueService,
   WsEvents,
 } from '@ws-widget/utils'
-import { delay } from 'rxjs/operators'
+import { delay, filter } from 'rxjs/operators'
 import { MobileAppsService } from '../../services/mobile-apps.service'
 import { RootService } from './root.service'
 // import { SwUpdate } from '@angular/service-worker'
@@ -80,7 +80,13 @@ export class RootComponent implements OnInit, AfterViewInit {
       this.appStartRaised = true
 
     }
-    this.router.events.subscribe((event: any) => {
+    this.router.events.pipe(filter((_: any) => {
+      if (this.configSvc.isGuestUser) {
+        // to not show loader in guest mode
+        this.routeChangeInProgress = false
+      }
+      return !this.configSvc.isGuestUser
+    })).subscribe((event: any) => {
       if (event instanceof NavigationEnd) {
         if (event.url.includes('/setup/')) {
           this.isSetupPage = true

@@ -40,7 +40,7 @@ export class HtmlComponent implements OnInit, OnChanges {
     this.activatedRoute.data.subscribe(_data => {
       // console.log(_data)
       // tslint:disable-next-line: max-line-length
-      if (this.viewerService.isVisibileAccToRoles(_data.pageData.data.enableDisscussionForum.rolesAllowed.disscussionForum, _data.pageData.data.enableDisscussionForum.rolesNotAllowed.disscussionForum)) {
+      if (!this.configSvc.isGuestUser && this.viewerService.isVisibileAccToRoles(_data.pageData.data.enableDisscussionForum.rolesAllowed.disscussionForum, _data.pageData.data.enableDisscussionForum.rolesNotAllowed.disscussionForum)) {
         this.allowedToDiscussionForum = true
       } else {
         this.allowedToDiscussionForum = false

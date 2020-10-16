@@ -7,6 +7,9 @@ import { WidgetContentShareService } from '../../_services/widget-content-share.
 import { NsContent } from '../../_services/widget-content.model'
 import { NsShare } from '../../_services/widget-share.model'
 import { ICommon } from '../../_models/common.model'
+import { catchError, delay, map, tap } from 'rxjs/operators'
+import { of, Subscription } from 'rxjs'
+import { HttpClient } from '@angular/common/http'
 
 @Component({
   selector: 'ws-widget-btn-content-share-dialog',
@@ -21,6 +24,9 @@ export class BtnContentShareDialogComponent implements OnInit {
   message = ''
   isSocialMediaShareEnabled = false
   sendStatus: 'INVALID_IDS_ALL' | 'SUCCESS' | 'INVALID_ID_SOME' | 'ANY' | 'NONE' = 'NONE'
+  sharableUrl = ''
+  showSharableUI = false
+  sub$: Subscription | null = null
   constructor(
     private events: EventService,
     private snackBar: MatSnackBar,
@@ -28,9 +34,22 @@ export class BtnContentShareDialogComponent implements OnInit {
     @Inject(MAT_DIALOG_DATA) public data: { content: NsContent.IContent },
     private shareSvc: WidgetContentShareService,
     private configSvc: ConfigurationsService,
+    private readonly http: HttpClient,
   ) { }
 
   ngOnInit() {
+    this.generateSharableUrl(this.data.content, false).then(v => {
+      if (v) {
+        this.sharableUrl = v
+        this.showSharableUI = true
+        // tslint:disable-next-line: no-console
+        console.log('printing someting ', this.sharableUrl + this.showSharableUI)
+      } else {
+      }
+    }).catch(_ => {
+      this.sharableUrl = ''
+      this.showSharableUI = false
+    })
     this.shareSvc.fetchConfigFile().subscribe((data: ICommon) => {
       if (data && data.shareMessage) {
         this.message = data.shareMessage
@@ -144,5 +163,81 @@ export class BtnContentShareDialogComponent implements OnInit {
       contentId: this.data.content.identifier,
       contentType: this.data.content.contentType,
     })
+  }
+  copyToClipboard(inputElement: any) {
+    try {
+      const textArea = document.createElement('textarea')
+      textArea.value = inputElement.innerText
+      document.body.appendChild(textArea)
+      textArea.focus()
+      textArea.select()
+      document.execCommand('copy')
+      document.body.removeChild(textArea)
+      window.setTimeout(() => {
+        this.triggerCopiedNotification('Url copied to clipoard!')
+        this.dialogRef.close()
+      },                100)
+    } catch (e) {
+      this.triggerCopiedNotification('copy to clipboard failed, copy manually.')
+    }
+  }
+
+  triggerCopiedNotification(message: string) {
+    this.snackBar.open(message)
+  }
+
+  getPageType() {
+    const urlSegments = document.location.href.split('/')
+    const allowedRoutes: any = {
+      viewer: 'v',
+    }
+    let pageType = null
+    Object.keys(allowedRoutes).some((type: string) => {
+      if (urlSegments.includes(type)) {
+        pageType = allowedRoutes[type]
+        return true
+      }
+      return false
+    })
+    if (document.location.href.includes('collectionType=Collection') || document.location.href.includes('collectionType=Course')) {
+      return false
+    }
+    return pageType
+  }
+
+  generateSharableUrl(data: NsContent.IContent, dummy = true) {
+    const pageType = this.getPageType()
+    const contentID = data.identifier
+    const contentType = data.contentType
+    if (pageType) {
+      this.showSharableUI = true
+      if (dummy) {
+        // tslint:disable-next-line: max-line-length
+        return of({ data: { sharableurl: `${location.origin}/public/sharecontent/v/something` } }).pipe(delay(1200)).toPromise()
+      }
+      const requestBody = {
+        pageType,
+        contentType,
+        lexId: contentID,
+      }
+      // '/apis/public/v8/content/sharable-url/generate'
+      // tslint:disable-next-line: max-line-length
+      return this.http.post('/apis/public/v8/content/sharable-url/generate', requestBody).pipe(
+        tap(response => {
+          // tslint:disable-next-line: no-console
+          console.log('recieved data as ', response)
+        }),
+        map((v: any) => v.shareableUrl),
+        catchError(_ => of(null))
+        ).toPromise()
+    }
+    this.showSharableUI = false
+    return of(null).toPromise()
+  }
+
+  ngDestroy() {
+    if (this.sub$) {
+      this.sub$.unsubscribe()
+    }
   }
 }

@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy } from '@angular/core'
+import { Component, OnInit, OnDestroy, Input } from '@angular/core'
 import { Subscription } from 'rxjs'
 import { AccessControlService } from '@ws/author'
 import {
@@ -19,6 +19,7 @@ import { Platform } from '@angular/cdk/platform'
   styleUrls: ['./video.component.scss'],
 })
 export class VideoComponent implements OnInit, OnDestroy {
+  @Input() isShared = false
   private routeDataSubscription: Subscription | null = null
   private screenSizeSubscription: Subscription | null = null
   private viewerDataSubscription: Subscription | null = null
@@ -74,12 +75,16 @@ export class VideoComponent implements OnInit, OnDestroy {
       this.routeDataSubscription = this.activatedRoute.data.subscribe(
         async data => {
           this.widgetResolverVideoData = null
-          this.videoData = data.content.data
-          if (this.videoData) {
+          if (this. isShared) {
+            this.videoData = data.content
+          } else {
+            this.videoData = data.content.data
+          }
+          if (this.videoData && !this.isShared) {
             this.formDiscussionForumWidget(this.videoData)
           }
           this.widgetResolverVideoData = this.initWidgetResolverVideoData(this.videoData as any)
-          if (this.videoData && this.videoData.identifier) {
+          if (this.videoData && this.videoData.identifier && !this.isShared) {
             if (this.activatedRoute.snapshot.queryParams.collectionId) {
               await this.fetchContinueLearning(
                 this.activatedRoute.snapshot.queryParams.collectionId,
@@ -97,7 +102,7 @@ export class VideoComponent implements OnInit, OnDestroy {
           this.widgetResolverVideoData.widgetData.identifier = this.videoData
             ? this.videoData.identifier
             : ''
-          this.widgetResolverVideoData.widgetData.mimeType = data.content.data.mimeType
+          this.widgetResolverVideoData.widgetData.mimeType = this.isShared ? data.content.mimeType : data.content.data.mimeType
           this.widgetResolverVideoData = JSON.parse(JSON.stringify(this.widgetResolverVideoData))
           if (this.videoData && this.videoData.artifactUrl.indexOf('content-store') >= 0) {
             await this.setS3Cookie(this.videoData.identifier)
@@ -163,6 +168,9 @@ export class VideoComponent implements OnInit, OnDestroy {
     }
   }
   async fetchContinueLearning(collectionId: string, videoId: string): Promise<boolean> {
+    if (this.isShared) {
+      return Promise.resolve(true)
+    }
     return new Promise(resolve => {
       this.contentSvc.fetchContentHistory(collectionId).subscribe(
         data => {
