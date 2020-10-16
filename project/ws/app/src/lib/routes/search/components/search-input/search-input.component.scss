@@ -98,7 +98,7 @@ ws-app-search-input .feature-group {
   }
 }
 @media only screen and (max-width: 340px) {
-  .w-full {
+  .searchtextbar {
     max-width: 62% !important;
   }
   .lang-btn {
@@ -106,7 +106,7 @@ ws-app-search-input .feature-group {
   }
 }
 @media only screen and (max-width: 280px) {
-  .w-full {
+  .searchtextbar {
     max-width: 55% !important;
   }
 }
