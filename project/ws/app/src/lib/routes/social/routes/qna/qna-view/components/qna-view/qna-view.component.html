@@ -31,7 +31,7 @@
           </div>
         </div>
         <button type="button" [matMenuTriggerFor]="editMenu"
-          *ngIf="userId === qnaConversation.mainPost.postCreator.postCreatorId && allowedToEdit" mat-icon-button>
+          *ngIf="userId === qnaConversation.mainPost.postCreator.postCreatorId && allowedToEdit || allowedToDeleteForSpecificRoles" mat-icon-button>
           <mat-icon>more_vertical</mat-icon>
         </button>
       </div>
@@ -162,7 +162,7 @@
   <mat-card [hidden]="!qnaConversation || !allowedToAnswer" class="my-4">
     <h2 i18n>Your Answer</h2>
     <ws-widget-editor-quill class="editor" [htmlText]="replyAddRequest?.postContent?.body" [showMention]="allowMention"
-      [minLength]="'20'" (textData)="onTextChange($event)" (mentionsData)="mentions = $event" #editor>
+      [minLength]="'10'" (textData)="onTextChange($event)" (mentionsData)="mentions = $event" #editor>
     </ws-widget-editor-quill>
     <button mat-raised-button [disabled]="!isValidForUserAnswer || isPostingReply" color="primary"
       i18n="Post comment of question" class="margin-top-s" (click)="postReply()">
@@ -175,7 +175,7 @@
 <input type="hidden" i8n-value value="Successfully deleted" #deleteMsg />
 <mat-menu #editMenu="matMenu">
   <ng-template matMenuContent>
-    <a [routerLink]="'../edit/' + qnaConversationRequest.postId" mat-menu-item i18n class="aStyle">Edit Question</a>
-    <button (click)="deletePost(deleteMsg.value)" mat-menu-item i18n>Delete Question</button>
+    <a *ngIf = "userId === qnaConversation.mainPost.postCreator.postCreatorId && allowedToEdit" [routerLink]="'../edit/' + qnaConversationRequest.postId" mat-menu-item i18n class="aStyle">Edit Question</a>
+    <button  (click)="deletePost(deleteMsg.value)" mat-menu-item i18n>Delete Question</button>
   </ng-template>
 </mat-menu>

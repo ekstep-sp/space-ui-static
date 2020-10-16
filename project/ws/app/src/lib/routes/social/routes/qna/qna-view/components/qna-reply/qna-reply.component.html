@@ -1,104 +1,56 @@
 <div class="card-view" *ngIf="item">
   <div class="flex">
     <div class="icon-section">
-      <ws-widget-btn-social-vote *ngIf="canVote"
-        class="block"
-        [voteType]="'upVote'"
-        [postId]="item.id"
-        [activity]="item.activity"
-        [iconType]="'triangle'"
-        [postCreatorId]="item?.postCreator?.postCreatorId"
-      ></ws-widget-btn-social-vote>
+      <ws-widget-btn-social-vote *ngIf="canVote" class="block" [voteType]="'upVote'" [postId]="item.id"
+        [activity]="item.activity" [iconType]="'triangle'" [postCreatorId]="item?.postCreator?.postCreatorId">
+      </ws-widget-btn-social-vote>
       <div class="vote-count" [ngClass]="{'large-w': !canComment}">
         {{ item.activity.activityData.upVote - item.activity.activityData.downVote }}
         <span *ngIf="!canComment" class="votes-text"> votes </span>
       </div>
-      <ws-widget-btn-social-vote *ngIf="canVote"
-        class="block"
-        [voteType]="'downVote'"
-        [postId]="item.id"
-        [activity]="item.activity"
-        [iconType]="'triangle'"
-        [postCreatorId]="item?.postCreator?.postCreatorId"
-      ></ws-widget-btn-social-vote>
-      <button
-        i18n-matTooltip
-        matTooltip="Accept answer"
-        class="margin-top-s"
-        type="button"
-        mat-icon-button
-        *ngIf="
+      <ws-widget-btn-social-vote *ngIf="canVote" class="block" [voteType]="'downVote'" [postId]="item.id"
+        [activity]="item.activity" [iconType]="'triangle'" [postCreatorId]="item?.postCreator?.postCreatorId">
+      </ws-widget-btn-social-vote>
+      <button i18n-matTooltip matTooltip="Accept answer" class="margin-top-s" type="button" mat-icon-button *ngIf="
           !isAcceptedAnswer &&
           userId === parentPostCreatorId &&
           this.userId !== this.item.postCreator.postCreatorId
-        "
-        (click)="acceptAnswer(acceptAnswerMsg.value)"
-      >
-        <mat-icon *ngIf="!isAcceptingAnswerInProgress" [ngClass]="{ isAccepted: isAcceptedAnswer }"
-          >check</mat-icon
-        >
+        " (click)="acceptAnswer(acceptAnswerMsg.value)">
+        <mat-icon *ngIf="!isAcceptingAnswerInProgress" [ngClass]="{ isAccepted: isAcceptedAnswer }">check</mat-icon>
         <mat-icon *ngIf="isAcceptingAnswerInProgress">hourglass_empty</mat-icon>
       </button>
       <mat-icon *ngIf="isAcceptedAnswer" class="isAccepted">check</mat-icon>
-      <ws-widget-btn-social-like
-        *ngIf="showSocialLike"
-        class="block flex-middle margin-top-xs"
-        [postCreatorId]="item?.postCreator?.postCreatorId"
-        [postId]="item.id"
-        [activity]="item.activity"
-      >
+      <ws-widget-btn-social-like *ngIf="showSocialLike" class="block flex-middle margin-top-xs"
+        [postCreatorId]="item?.postCreator?.postCreatorId" [postId]="item.id" [activity]="item.activity">
       </ws-widget-btn-social-like>
     </div>
     <div class="body-section width-expand">
-      <div
-        *ngIf="!editMode"
-        class="margin-bottom-s"
-        [innerHtml]="item.postContent.body | pipeSafeSanitizer: 'html'"
-      ></div>
+      <div *ngIf="!editMode" class="margin-bottom-s" [innerHtml]="item.postContent.body | pipeSafeSanitizer: 'html'">
+      </div>
       <div *ngIf="editMode" class="margin-top-s margin-bottom-s padding-s ws-mat-primary-border">
-        <ws-widget-editor-quill
-          [minLength]="'20'"
-          [htmlText]="item.postContent?.body"
-          (textData)="onTextChange($event)"
-        >
+        <ws-widget-editor-quill [minLength]="'20'" [htmlText]="item.postContent?.body"
+          (textData)="onTextChange($event)">
         </ws-widget-editor-quill>
         <div class="text-right">
-          <button
-            type="button"
-            class="margin-top-s"
-            [disabled]="!replyPostEnabled"
-            mat-raised-button
-            color="primary"
-            i18n
-            (click)="editReply(editFailMsg.value)"
-          >
+          <button type="button" class="margin-top-s" [disabled]="!replyPostEnabled" mat-raised-button color="primary"
+            i18n (click)="editReply(editFailMsg.value)">
             Update
           </button>
-          <button
-            type="button"
-            class="margin-top-s margin-left-s"
-            mat-stroked-button
-            color="primary"
-            i18n
-            (click)="editMode = false"
-          >
+          <button type="button" class="margin-top-s margin-left-s" mat-stroked-button color="primary" i18n
+            (click)="editMode = false">
             Cancel
           </button>
         </div>
       </div>
       <mat-chip-list>
-        <mat-chip *ngFor="let tag of item.tags" i18n-matTooltip matTooltip="Associated Tag"
-          >{{ tag.name }}
+        <mat-chip *ngFor="let tag of item.tags" i18n-matTooltip matTooltip="Associated Tag">{{ tag.name }}
         </mat-chip>
       </mat-chip-list>
       <div class="flex flex-between margin-top-xs block-small-size">
         <div class="ws-mat-primary-text">
           <ng-container *ngIf="userId === item?.postCreator?.postCreatorId && canComment">
-            <a role="button" class="cursor-pointer" i18n (click)="editMode = true">edit</a
-            >&nbsp;&nbsp;
-            <a role="button" class="cursor-pointer" i18n (click)="deleteReply(deleteFailMsg.value)"
-              >delete</a
-            >
+            <a role="button" class="cursor-pointer" i18n (click)="editMode = true">edit</a>&nbsp;&nbsp;
+            <a role="button" class="cursor-pointer" i18n (click)="deleteReply(deleteFailMsg.value)">delete</a>
           </ng-container>
         </div>
         <div class="user-details">
@@ -112,10 +64,7 @@
               <span>{{ item.dtCreated | date: 'shortTime' }}</span>
             </div>
           </div>
-          <ws-widget-user-image
-            class="user-profile-image"
-            [email]="item.postCreator.emailId"
-          ></ws-widget-user-image>
+          <ws-widget-user-image class="user-profile-image" [email]="item.postCreator.emailId"></ws-widget-user-image>
         </div>
       </div>
       <div class="comment-container" *ngIf="commentData?.replyPost?.length">
@@ -141,10 +90,7 @@
           </button>
         </div>
       </div>
-      <div
-        class="text-center margin-top-s"
-        *ngIf="commentFetchStatus === 'fetching' || isPostingComment"
-      >
+      <div class="text-center margin-top-s" *ngIf="commentFetchStatus === 'fetching' || isPostingComment">
         <mat-spinner [diameter]="30" [strokeWidth]="3"></mat-spinner>
       </div>
       <form class="comment-form" *ngIf="canComment">
