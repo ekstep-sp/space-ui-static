@@ -101,7 +101,7 @@
           </div>
           <form class="comment-form" *ngIf="allowedToComment">
             <div class="quill-editor-comment-container">
-              <ws-widget-editor-quill class="comment-editor" placeholder="{{'comment on ' + qnaConversation.mainPost.postCreator.name + '\'s question'}}" [htmlText]="commentAddRequest?.postContent?.body || ''" [showMention]="allowMention"
+              <ws-widget-editor-quill class="comment-editor" placeholder="{{'comment on ' + qnaConversation.mainPost.postCreator.name + '\'s question'}}" [htmlText]="commentAddRequest?.postContent?.body" [showMention]="allowMention"
     [minLength]="'10'" (textData)="onCommentTextChange($event)" (mentionsData)="commentMentions = $event" #commentEditor>
   </ws-widget-editor-quill>
             </div>

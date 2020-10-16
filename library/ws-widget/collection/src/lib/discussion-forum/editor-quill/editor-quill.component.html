@@ -13,7 +13,7 @@
   </quill-editor>
   <quill-editor  *ngIf = "showMention" name="discussion-forum-input-field" class="quill-editor" [ngModel]="htmlText"
     (onContentChanged)="onContentChanged($event)" [required]="true" [minLength]="minLength" #editor="ngModel"
-    placeholder="{{ placeholder }}" [modules]="quillConfig">
+    placeholder="{{ placeholder || defaultPlaceholder  }}" [modules]="quillConfig">
   </quill-editor>
   <!-- <div id="editor1"></div> -->
   <p *ngIf="editor? (editor.dirty || editor.touched) && editor.invalid && isValidInput : false"
