@@ -24,5 +24,8 @@ export class AppFooterComponent {
       this.isXSmall = isXSmall
     })
   }
+  navigateToOuterSource(url: string) {
+    window.open(url, '_blank')
+  }
 
 }
