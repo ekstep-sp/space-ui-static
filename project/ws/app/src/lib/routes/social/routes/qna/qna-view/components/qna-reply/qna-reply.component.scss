@@ -97,6 +97,12 @@ mat-spinner {
     quill-editor {
       border-radius: 5px;
       border: 1px solid lightgrey;
+      @include breakpoint-xs{
+        min-height: 100px;
+      }
+      @include breakpoint-xxs{
+        min-height: 120px;
+      }
     }
   }
 }
@@ -142,4 +148,9 @@ mat-chip {
 
 .lmc {
   margin-top: 15px;
+}
+.margin-top-post-btn{
+  @include breakpoint-xs{
+    margin-top: 12px;
+  }
 }
