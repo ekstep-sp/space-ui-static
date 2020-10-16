@@ -52,12 +52,17 @@
     padding: 0 6px !important;
 
   }
-}
-// .qstn-btn{
-//   border: 2px red solid;
-// }
-// .head-btn{
-//   border: 2px greenyellow solid;
 
-// }
+}
+@media only screen and (min-width: 320px) and (max-width: 350px){
+  .mat-flat-button.qa-btn{
+    padding: 0 10px !important;
+
+  }
+}
+
+.mat-flat-button.qa-btn:not(:root:root){
+  padding: 0 14px !important;
+}
+
 
