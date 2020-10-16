@@ -1,4 +1,5 @@
 @import 'ws-vars';
+@import 'ws-mixins';
 
 .discussion-header {
   padding: $size-s;
@@ -13,6 +14,12 @@
     }
     .editor {
       min-height: 50px;
+      @include breakpoint-xs{
+        min-height: 80px;
+      }
+      @include breakpoint-xxs{
+        min-height: 150px;
+      }
       // padding: $size-s;
       // padding-bottom: $size-s;
     }
@@ -27,3 +34,4 @@
     text-align: center;
   }
 }
+
