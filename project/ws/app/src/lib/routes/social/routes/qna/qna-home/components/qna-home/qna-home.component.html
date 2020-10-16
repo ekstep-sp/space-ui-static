@@ -40,7 +40,7 @@
   </div>
   <mat-divider></mat-divider>
   <div *ngIf="qnaTimeline" class="mt-2">
-    <ws-app-qna-item [item]="timeline" [allowedToEdit]="allowedToEdit" *ngFor="let timeline of qnaTimeline?.result">
+    <ws-app-qna-item [item]="timeline" [allowedToEdit]="allowedToEdit" [allowedToDeleteForSpecificRoles] = "allowedToDeleteForSpecificRoles" *ngFor="let timeline of qnaTimeline?.result">
     </ws-app-qna-item>
     <h3 class="text-center mt-4" *ngIf="!qnaTimeline?.result?.length" i18n>
       No questions under this category

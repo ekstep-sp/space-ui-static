@@ -1,11 +1,11 @@
 import { Component, Input, OnDestroy, OnInit } from '@angular/core'
 import { NsWidgetResolver, WidgetBaseComponent } from '@ws-widget/resolver'
-import { ConfigurationsService, NsPage, LogoutComponent, NsAppsConfig } from '@ws-widget/utils'
+import { ConfigurationsService, NsPage, NsAppsConfig, AuthKeycloakService } from '@ws-widget/utils'
 import { Subscription } from 'rxjs'
 import { ROOT_WIDGET_CONFIG } from '../collection.config'
 import { IBtnAppsConfig } from './btn-apps.model'
 import { ActivatedRoute } from '@angular/router'
-import { MatDialog, MatExpansionPanel } from '@angular/material'
+import { MatExpansionPanel } from '@angular/material'
 import { FormControl } from '@angular/forms'
 import { distinctUntilChanged, startWith, debounceTime } from 'rxjs/operators'
 import { AppBtnFeatureService } from '../app-btn-feature/service/app-btn-feature.service'
@@ -37,10 +37,10 @@ export class BtnAppsComponent extends WidgetBaseComponent
 
   private pinnedAppsSubs?: Subscription
   constructor(
-    private dialog: MatDialog,
     private configSvc: ConfigurationsService,
     private activateRoute: ActivatedRoute,
-    private readonly featureSrvc: AppBtnFeatureService
+    private readonly featureSrvc: AppBtnFeatureService,
+    private authSvc: AuthKeycloakService,
   ) {
     super()
     if (this.configSvc.appsConfig) {
@@ -191,7 +191,9 @@ export class BtnAppsComponent extends WidgetBaseComponent
   }
 
   logout() {
-    this.dialog.open<LogoutComponent>(LogoutComponent)
+    this.authSvc.logout()
+    // opens the dailog for logout
+    // this.dialog.open<LogoutComponent>(LogoutComponent)
   }
   isAllowedForDisplay() {
     if (this.featureGroups) {

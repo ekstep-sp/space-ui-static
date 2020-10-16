@@ -13,10 +13,11 @@
   </quill-editor>
   <quill-editor  *ngIf = "showMention" name="discussion-forum-input-field" class="quill-editor" [ngModel]="htmlText"
     (onContentChanged)="onContentChanged($event)" [required]="true" [minLength]="minLength" #editor="ngModel"
-    placeholder="{{ placeholder }}" [modules]="quillConfig">
+    placeholder="{{ placeholder || defaultPlaceholder  }}" [modules]="quillConfig">
   </quill-editor>
   <!-- <div id="editor1"></div> -->
-  <p *ngIf="(editor?.dirty || editor?.touched) && editor?.invalid" class="error-text mat-caption">
+  <p *ngIf="editor? (editor.dirty || editor.touched) && editor.invalid && isValidInput : false"
+    class="error-text mat-caption">
     <ng-container i18n> Minimum </ng-container>
     {{ minLength }}
     <ng-container i18n> characters are required </ng-container>

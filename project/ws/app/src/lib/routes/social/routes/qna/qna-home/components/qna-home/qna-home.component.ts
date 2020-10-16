@@ -6,6 +6,7 @@ import { NsWidgetResolver } from '@ws-widget/resolver'
 import { NsError, ROOT_WIDGET_CONFIG, NsDiscussionForum, WsDiscussionForumService } from '@ws-widget/collection'
 import { MatButtonToggleChange } from '@angular/material'
 import { ForumService } from '../../../../forums/service/forum.service'
+import { WsSocialService } from '../../../../../services/ws-social.service'
 
 @Component({
   selector: 'ws-app-qna-home',
@@ -32,10 +33,12 @@ export class QnaHomeComponent implements OnInit, OnDestroy {
   pageNavbar: Partial<NsPage.INavBackground> = this.configSvc.pageNavBar
   allowedToAsk = true
   allowedToEdit = true
+  allowedToDeleteForSpecificRoles = false
   constructor(
     private activatedRoute: ActivatedRoute,
     private router: Router,
     private discussionSvc: WsDiscussionForumService,
+    private socialSvc: WsSocialService,
     private configSvc: ConfigurationsService,
     private readonly forumSrvc: ForumService
   ) { }
@@ -46,6 +49,11 @@ export class QnaHomeComponent implements OnInit, OnDestroy {
       const isAllowed = this.forumSrvc.isVisibileAccToRoles(_combinedResult[0].socialData.data.rolesAllowed.QnA, _combinedResult[0].socialData.data.rolesNotAllowed.QnA)
         this.allowedToAsk = isAllowed
         this.allowedToEdit = isAllowed
+        // allow users with specific roles to delete the qna thread
+      // tslint:disable-next-line: max-line-length
+      this.allowedToDeleteForSpecificRoles = this.socialSvc.deleteAccessForSpecificRole(_combinedResult[0].socialData.data.rolesAllowedForDelete ?
+      _combinedResult[0].socialData.data.rolesAllowedForDelete.QnA : [])
+
       const queryParams = _combinedResult[1].get('tab')
       if (queryParams) {
         this.currentTab = queryParams as NsDiscussionForum.ETimelineType

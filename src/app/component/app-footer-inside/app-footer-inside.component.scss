@@ -4,6 +4,7 @@
   // display: flex;
   justify-content: space-between;
   text-align: justify;
+  justify-content: center;
   @include breakpoint-xs {
     flex-direction: column;
     min-height: 80px;
@@ -38,35 +39,39 @@
   .rectangle{
     border: 1px solid #C6BCB8;
     border-radius: 10px;
-    width: 132px;
-    height: 20px;
-    padding:16px 10px;
+    width: 164px;
+    height: 52px;
     display:flex;
     align-items: center;
     cursor: pointer;
     a{
       align-items: center;
+      padding:0px 16px;
     }
     &:first-child{
-      margin-right: 16px;
+      margin-right: 20px;
     }
     .appleIcon {
-      background:url('/assets/instances/space/banners/appleIcon.png') no-repeat;
-      width: 40px;
+      width: 26.15px;
       height: 32px;
+      margin-right: 8px;
+      img{
+        width:100%;
+      }
     }
     .playStore{
-      background:url('/assets/instances/space/banners/playStore.png') no-repeat;
-      width: 32px;
+      width: 28.5px;
       height: 32px;
+      margin-right:8px;
+      img{
+        width:100%;
+      }
     } 
     .appStore-icon{
       display: flex;
-      // align-items: center;
-      margin-left: 4px;
       flex-direction: column;
-      width:80%;
-      .icon-text{
+      width:83%;
+       .icon-text{
         font-size: 10px;
         margin: 0;
       }
@@ -88,10 +93,17 @@
   .col-3{
     flex: 1 1 100% !important;
     justify-content:center !important;
+    flex-direction: column;
   }
   .icon-text{
     text-align: left;
   }
+  .rectangle{
+     margin: 16px auto !important;
+      &:first-child{
+        margin-right: 0px;
+      }
+    }
 }
 @media (min-width: 972px) {
   #display-responsive {
@@ -133,6 +145,7 @@ line-height: 20px;
 .col-1 {
   flex: 1 1 25%;
   text-align:left;
+  padding-top: 8px;
 }
 .col-2 {
   margin-left: 4rem;
@@ -142,19 +155,9 @@ line-height: 20px;
 .col-3{
   flex: 1 1 45%;
   justify-content: flex-end;
+  padding-top:8px;
 }
 
-@media only screen and (max-width: 768px) {
-  .col-3{
-  flex-direction: column;
-  }
-  .rectangle{
-   margin: 16px auto !important;
-    &:first-child{
-      margin-right: 0px;
-    }
-  }
-}
 // .mat-body p, .mat-body-1 p, .mat-typography p{
 //     margin: 0 0 6px;
 // }

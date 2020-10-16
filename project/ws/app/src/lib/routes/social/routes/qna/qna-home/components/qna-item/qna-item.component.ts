@@ -12,6 +12,7 @@ export class QnaItemComponent implements OnInit {
 
   @Input() item!: NsDiscussionForum.ITimelineResult
   @Input() allowedToEdit = true
+  @Input() allowedToDeleteForSpecificRoles = false
   userId = ''
   showSocialLike = false
   ePostStatus = NsDiscussionForum.EPostStatus
@@ -32,7 +33,8 @@ export class QnaItemComponent implements OnInit {
 
   deletePost(successMsg: string) {
     const dialogRef = this.dialog.open(DialogSocialDeletePostComponent, {
-      data: { postId: this.item.id },
+      data: { postId: this.item.id ,
+        postCreatorId: this.item.postCreator ? this.item.postCreator.postCreatorId : ''},
     })
     dialogRef.afterClosed().subscribe(data => {
       if (data) {

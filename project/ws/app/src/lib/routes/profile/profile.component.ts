@@ -54,7 +54,7 @@ export class ProfileComponent implements OnInit, OnDestroy {
       }
     })
   }
-  assignTabName(tab: String) {
+  assignTabName(tab: String = '') {
     if (tab === 'dashboard') {
       this.tabName = this.enabledTabs.dashboard.displayName
     } else if (tab === 'learning') {
@@ -70,6 +70,8 @@ export class ProfileComponent implements OnInit, OnDestroy {
     } else if (tab === 'feature-usage') {
       this.tabName = this.enabledTabs.featureUsage.displayName
     } else if (tab === 'settings') {
+      this.tabName = this.enabledTabs.settings.displayName
+    } else if (tab.match('settings.*')) {
       this.tabName = this.enabledTabs.settings.displayName
     }
   }

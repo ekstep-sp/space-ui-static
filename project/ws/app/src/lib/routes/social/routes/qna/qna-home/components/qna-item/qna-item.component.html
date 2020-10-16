@@ -31,32 +31,22 @@
           <h2 *ngIf="!item.postContent.title" class="ws-mat-primary-text question-text">
             {{ item.postContent.abstract }}
           </h2>
-          <h2
-            *ngIf="!item.postContent.title && !item.postContent.abstract"
-            class="ws-mat-primary-text question-text"
-            [innerHTML]="item.postContent.body | pipeLimitTo: 120"
-          ></h2>
+          <h2 *ngIf="!item.postContent.title && !item.postContent.abstract" class="ws-mat-primary-text question-text"
+            [innerHTML]="item.postContent.body | pipeLimitTo: 120"></h2>
         </a>
-        <mat-icon
-          *ngIf="userId === item.postCreator.postCreatorId && allowedToEdit"
-          class="cursor-pointer"
-          role="button"
-          [matMenuTriggerFor]="editMenu"
-          >more_vertical</mat-icon
-        >
+        <mat-icon *ngIf="userId === item.postCreator.postCreatorId && allowedToEdit || allowedToDeleteForSpecificRoles"
+          class="cursor-pointer" role="button" [matMenuTriggerFor]="editMenu">more_vertical</mat-icon>
       </div>
       <div class="meta-details">
         <div class="width-auto margin-right-xs">
           <mat-chip-list>
-            <mat-chip *ngFor="let tag of item.tags" i18n-matTooltip matTooltip="Tag"
-              >{{ tag.name }}
+            <mat-chip *ngFor="let tag of item.tags" i18n-matTooltip matTooltip="Tag">{{ tag.name }}
             </mat-chip>
           </mat-chip-list>
         </div>
         <div class="creation">
           <span class="mat-caption" i18n>asked</span>&nbsp;
-          <span class="mat-caption">{{ item.dtCreated | date }}</span
-          >&nbsp;
+          <span class="mat-caption">{{ item.dtCreated | date }}</span>&nbsp;
           <span class="ws-mat-primary-text">
             {{ item.postCreator.name }}
           </span>
@@ -70,7 +60,8 @@
 
 <mat-menu #editMenu="matMenu">
   <ng-template matMenuContent>
-    <a [routerLink]="'./edit/' + item.id" mat-menu-item i18n class="aStyle">Edit Question</a>
+    <a *ngIf="userId === item.postCreator.postCreatorId && allowedToEdit" [routerLink]="'./edit/' + item.id"
+      mat-menu-item i18n class="aStyle">Edit Question</a>
     <button (click)="deletePost(deleteMsg.value)" mat-menu-item i18n>Delete Question</button>
   </ng-template>
 </mat-menu>

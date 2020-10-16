@@ -1,6 +1,6 @@
-<div id="display-item" class="mat-toolbar footer-container px-2 sm:px-10 py-1 sm:py-4"
+<div id="display-item" class="mat-toolbar footer-container px-2 sm:px-10 py-1 sm:py-5"
   [ngClass]="{ 'mat-primary': !isXSmall, 'mat-primarylight': isXSmall }">
-  <div class="mat-body flex ml-2 mt-2" id="display">
+  <div class="mat-body flex" id="display">
     <!-- <mat-grid-list cols="2" rowHeight="133px"> -->
     <!-- <mat-grid-tile class="font-semibold text-xs md:text-sm xl:text-sm" i18n> -->
     <div class="col-1">
@@ -17,21 +17,21 @@
     <!-- <mat-grid-tile> -->
     <div class="col-2">
       <p class="policy-text-style policy-footer"> <a routerLink="/public/dataprivacy"
-          class="text-style policy font-size-16px" name="helpAndContactButtonHomePage" i18n>Data
+          class="text-style policy font-size-14px" name="helpAndContactButtonHomePage" i18n>Data
           Privacy</a></p>
       <p class="policy-text-style policy-footer"><a routerLink="public/termsofuse"
-          class="text-style policy font-size-16px" name="helpAndContactButtonHomePage" i18n>Terms &
+          class="text-style policy font-size-14px" name="helpAndContactButtonHomePage" i18n>Terms &
           Conditions</a></p>
       <p class="policy-text-style policy-footer"><a routerLink="/public/content-policy-and-community-guidelines"
-          class="text-style policy font-size-16px" name="helpAndContactButtonHomePage" i18n>Content Policy and Community Guidelines
+          class="text-style policy font-size-14px" name="helpAndContactButtonHomePage" i18n>Content Policy and Community Guidelines
           <!-- Process --></a></p>
       <!-- </div> -->
       <!-- <div class="mat-body" id="display"> -->
       <p class="policy-text-style policy-footer"><a routerLink="/public/licencepolicy"
-          class="text-style policy font-size-16px" name="termOfUseButtonHomePage" i18n>License Policy</a>
+          class="text-style policy font-size-14px" name="termOfUseButtonHomePage" i18n>License Policy</a>
       </p>
       <p class="policy-text-style policy-footer"><a routerLink="/public/assetguidelines"
-          class="text-style policy font-size-16px" name="termOfUseButtonHomePage" i18n>Asset
+          class="text-style policy font-size-14px" name="termOfUseButtonHomePage" i18n>Asset
           Guidelines</a>
       </p>
       <!-- <a routerLink="/public/contact" name="helpAndContactButtonHomePage" i18n>Contact Us</a> -->
@@ -43,6 +43,7 @@
       <div class="rectangle" (click)="navigateToOuterSource('https://apps.apple.com/us/app/id1530333275')">
         <a class="flex">
         <div class="appleIcon">
+          <img src = "/assets/instances/space/banners/appleIcon.png">
         </div>
         <div class="appStore-icon">
           <p class="icon-text">Available on the</p>
@@ -53,6 +54,7 @@
    <div class="rectangle" (click)="navigateToOuterSource('https://play.google.com/store/apps/details?id=ekstep.societal.space')">
     <a class="flex">
         <div class="playStore">
+          <img src = "/assets/instances/space/banners/playStore.png">
         </div>
         <div class="appStore-icon">
           <p class="icon-text">Get it on</p>
@@ -91,6 +93,7 @@
     <div class="rectangle" (click)="navigateToOuterSource('https://apps.apple.com/us/app/id1530333275')">
       <a class="flex">
       <div class="appleIcon">
+        <img src = "/assets/instances/space/banners/appleIcon.png">
       </div>
       <div class="appStore-icon">
         <p class="icon-text">Available on the</p>
@@ -101,6 +104,7 @@
   <div class="rectangle" (click)="navigateToOuterSource('https://play.google.com/store/apps/details?id=ekstep.societal.space')">
       <a class="flex">
       <div class="playStore">
+        <img src = "/assets/instances/space/banners/playStore.png">
       </div>
       <div class="appStore-icon">
         <p class="icon-text">Get it on</p>
