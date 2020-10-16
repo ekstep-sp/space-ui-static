@@ -242,3 +242,10 @@
     margin-left:-5px;
   }
   }
+
+@media screen and (max-width:310px){
+    .w-full{
+      width: 102% !important;
+
+    }
+  }
