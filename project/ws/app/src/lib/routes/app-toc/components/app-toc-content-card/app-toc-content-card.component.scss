@@ -55,3 +55,14 @@
         max-width: 180px !important;
     }
 }
+
+@media only screen and (max-width: 320px) {
+.btn-height{
+  
+    height: 40px !important;
+    min-width: 80px !important;
+    padding: 0 !important;
+  }
+
+
+}

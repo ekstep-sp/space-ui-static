@@ -86,7 +86,8 @@
           <ng-container *ngIf="contentStructure?.other > 1" i18n> Other Items</ng-container>
         </span>
       </div>
-      <button type="button" (click)="viewChildren = !viewChildren" class="margin-left-m" mat-button color="primary">
+      <button type="button" (click)="viewChildren = !viewChildren" class="margin-left-m btn-height" mat-button
+        color="primary">
         <ng-container *ngIf="!viewChildren" i18n>See All</ng-container>
         <ng-container *ngIf="viewChildren" i18n>See Less</ng-container>
       </button>
@@ -98,16 +99,17 @@
     </div>
   </ng-container>
   <div *ngIf="isResource" class="resource-container">
-    <ws-widget-display-content-type-icon class="flex" [displayContentType]="content?.displayContentType" [displayResourceType]="content?.mimeType">
+    <ws-widget-display-content-type-icon class="flex" [displayContentType]="content?.displayContentType"
+      [displayResourceType]="content?.mimeType">
     </ws-widget-display-content-type-icon>
     <div class="resource-meta width-expand">
       <a [routerLink]="resourceLink.url" [queryParams]="resourceLink.queryParams">
         <h3 *ngIf="content?.displayContentType !== enumContentTypes.ASSESSMENT"
-          class="margin-remove text-truncate wrap-text font-size-16px font-montserrat" >
+          class="margin-remove text-truncate wrap-text font-size-16px font-montserrat">
           {{ content?.name}}
         </h3>
         <h1 *ngIf="content?.displayContentType === enumContentTypes.ASSESSMENT"
-          class="margin-remove text-truncate wrap-text" >
+          class="margin-remove text-truncate wrap-text">
           {{ content?.name }}
         </h1>
       </a>
