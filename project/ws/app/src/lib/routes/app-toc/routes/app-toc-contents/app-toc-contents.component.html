@@ -3,19 +3,20 @@
     <ng-container *ngIf="content?.children?.length; else noChildren">
       <div class="toc-section">
         <h2 class="margin-remove font-size-18px font-montserrat">Table of contents</h2>
-        <button type="button" color="primary" (click)="expandAll = !expandAll" mat-button>
+        <button class="explore-collapse-btn" type="button" color="primary" (click)="expandAll = !expandAll" mat-button>
           <ng-container class="font-size-16px font-montserrat" *ngIf="!expandAll" i18n>Expand All</ng-container>
           <ng-container class="font-size-16px font-montserrat" *ngIf="expandAll" i18n>Collapse All</ng-container>
         </button>
       </div>
-      <div class="content-card font-size-16px font-montserrat" *ngFor="let card of content?.children; trackBy: contentTrackBy">
-        <ws-app-toc-content-card [forPreview]="forPreview" [expandAll]="expandAll" [rootId]="contextId" [rootContentType]="contextPath"
-          [content]="card"></ws-app-toc-content-card>
+      <div class="content-card font-size-16px font-montserrat"
+        *ngFor="let card of content?.children; trackBy: contentTrackBy">
+        <ws-app-toc-content-card [forPreview]="forPreview" [expandAll]="expandAll" [rootId]="contextId"
+          [rootContentType]="contextPath" [content]="card"></ws-app-toc-content-card>
       </div>
     </ng-container>
     <ng-template #noChildren>
-      <div *ngIf="!isPlayable" class="ws-mat-primary-default-text ws-mat-primary-lite-background px-6 py-8 font-normal text-base"
-        i18n>
+      <div *ngIf="!isPlayable"
+        class="ws-mat-primary-default-text ws-mat-primary-lite-background px-6 py-8 font-normal text-base" i18n>
         The preview for this type of content is unavailable. Please click on Start button above to view.
       </div>
       <ng-container *ngIf="isPlayable" [wsResolverWidget]="contentPlayWidgetConfig"></ng-container>
