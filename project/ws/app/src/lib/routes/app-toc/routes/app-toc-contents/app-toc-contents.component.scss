@@ -60,9 +60,9 @@ $border-color: #d8d8d8;
     }
   }
 }
-
+@media only screen and (max-width: 320px) {
 .explore-collapse-btn{
-  @include breakpoint-xxs{
+  
     padding-right: 24px !important;
     padding-left: 12px !important;
     height: 40px !important;
