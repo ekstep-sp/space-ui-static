@@ -53,7 +53,6 @@ export class BtnSocialVoteComponent implements OnInit {
   }
  // tslint:disable-next-line:use-lifecycle-interface
  ngOnChanges() {
-   console.log('form', this.activity)
    this.getWidsForVote()
 }
 upVote(invalidUserMsg: string) {
