@@ -39,3 +39,16 @@ ws-app-home .search-border {
 ws-app-home .border-right {
   border-right: 1px solid #cecece;
 }
+@media only screen and (max-width: 340px) {
+  .searchtextbar {
+    max-width: 62% !important;
+  }
+  .lang-btn {
+    padding: 0;
+  }
+}
+@media only screen and (max-width: 280px) {
+  .searchtextbar {
+    max-width: 55% !important;
+  }
+}
