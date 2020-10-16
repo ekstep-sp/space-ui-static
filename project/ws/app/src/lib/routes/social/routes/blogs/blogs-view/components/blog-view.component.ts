@@ -46,8 +46,6 @@ export class BlogViewComponent implements OnInit {
   canUserDelete = false
   mentions = []
   allowMention = false
-  keyValue = false
-  trigger = true
   activityData: any
   constructor(
     public dialog: MatDialog,
@@ -71,7 +69,7 @@ export class BlogViewComponent implements OnInit {
       if (data) {
         this.discussionSvc.fetchPost(this.conversationRequest).toPromise().then((updatedData: any) => {
           this.conversation = updatedData
-          console.log('main', this.conversation)
+          // console.log('main', this.conversation)
       })
     }
     })
@@ -99,7 +97,6 @@ export class BlogViewComponent implements OnInit {
       }
     })
     this.showSocialLike = (this.configSvc.restrictedFeatures && !this.configSvc.restrictedFeatures.has('socialLike')) || false
-
   }
   deleteBlogsForSpecificRole(blogsData: any) {
     if (blogsData) {
@@ -110,7 +107,6 @@ export class BlogViewComponent implements OnInit {
       }
     }
   }
-
   fetchConversationData(forceNew = false) {
     if (this.fetchStatus === 'fetching') {
       return

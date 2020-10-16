@@ -1,30 +1,30 @@
-<div class="tooltip">
-  <button name="discussion-forum-like-button" type="button" (click)="updateLike(invalidUser.value)" [hidden]="!postId"
-    mat-icon-button i18n-aria-label aria-label="Like / Unlike" i18n-matTooltip matTooltip="Like / Unlike"
-    matTooltipPosition="above">
-    <mat-icon *ngIf="!activity?.userActivity?.like && !isUpdating" [matBadgeHidden]="!activity?.activityData.like"
-      [matBadge]="activity?.activityData.like" matBadgeColor="accent" matBadgeSize="small" class="like-clr">
-      favorite_border</mat-icon>
-    <mat-icon class="highlight" *ngIf="activity?.userActivity?.like && !isUpdating"
-      [matBadgeHidden]="!activity?.activityData.like" [matBadge]="activity?.activityData.like" matBadgeColor="accent"
-      matBadgeSize="small">favorite</mat-icon>
-
-    <mat-icon *ngIf="isUpdating">hourglass_empty</mat-icon>
-  </button>
-
-  <!--added display-user-social-vote, to show the pop up for users who liked the blog-->
-  <span class="tooltiptext">
-    <ws-widget-display-users-social-vote [userLike]="userDataForLike">
-    </ws-widget-display-users-social-vote>
-  </span>
-</div>
-<!-- <span
-  [hidden]="!postId"
-  (click)="openLikesDialog()"
-class="like-count mat-primary-text"
-  role="button"
-  *ngIf="activity?.activityData?.like"
-  >{{ activity?.activityData.like }}</span
-> -->
-
-<input type="hidden" i18n-value value="You cannot like your own post" #invalidUser />
+<div class="tooltip" [ngClass]= "{'tooltip-reply':isReply}">
+    <button name="discussion-forum-like-button" type="button" (click)="updateLike(invalidUser.value)" [hidden]="!postId"
+      mat-icon-button i18n-aria-label aria-label="Like / Unlike" i18n-matTooltip matTooltip="Like / Unlike"
+      matTooltipPosition="above">
+      <mat-icon *ngIf="!activity?.userActivity?.like && !isUpdating" [matBadgeHidden]="!activity?.activityData.like"
+        [matBadge]="activity?.activityData.like" matBadgeColor="accent" matBadgeSize="small" class="like-clr">
+        favorite_border</mat-icon>
+      <mat-icon class="highlight" *ngIf="activity?.userActivity?.like && !isUpdating"
+        [matBadgeHidden]="!activity?.activityData.like" [matBadge]="activity?.activityData.like" matBadgeColor="accent"
+        matBadgeSize="small">favorite</mat-icon>
+  
+      <mat-icon *ngIf="isUpdating">hourglass_empty</mat-icon>
+    </button>
+  
+    <!--added display-user-social-vote, to show the pop up for users who liked the blog-->
+    <span class="tooltiptext">
+      <ws-widget-display-users-social-vote [userLike]="userDataForLike" [isReply] = "isReply">
+      </ws-widget-display-users-social-vote>
+    </span>
+  </div>
+  <!-- <span
+    [hidden]="!postId"
+    (click)="openLikesDialog()"
+  class="like-count mat-primary-text"
+    role="button"
+    *ngIf="activity?.activityData?.like"
+    >{{ activity?.activityData.like }}</span
+  > -->
+  
+  <input type="hidden" i18n-value value="You cannot like your own post" #invalidUser />

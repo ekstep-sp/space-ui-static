@@ -130,7 +130,7 @@ export class QnaViewComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
-    this.voteService.callComponent.toPromise().then((data: any) => {
+    this.voteService.callComponent.subscribe((data: any) => {
       if (data) {
         this.discussionSvc.fetchPost(this.qnaConversationRequest).subscribe((updatedData: any) => {
           this.qnaConversation = updatedData

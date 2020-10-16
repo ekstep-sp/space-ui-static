@@ -21,11 +21,12 @@ export class BtnSocialVoteComponent implements OnInit {
   @ViewChild('invalidUser', { static: true }) invalidUser!: ElementRef<
     any
   >
-  @Input() key: any
   @Input()
   userWids: any
   @Input()
   userWidsForUpvote: any
+  @Input()
+  isReply = false
   userForUpvote: any[] = []
   changeText: boolean
   userDetailsForUpVote: any[] = []
@@ -33,19 +34,6 @@ export class BtnSocialVoteComponent implements OnInit {
   userDetailsForDownVote: any[] = []
   userId = ''
   isUpdating = false
-  updateVoteKey: any
-  triggerClick = false
-  conversationRequest: NsDiscussionForum.IPostRequest = {
-    postId: '',
-    userId: '',
-    answerId: '',
-    postKind: [],
-    sessionId: Date.now(),
-    sortOrder: NsDiscussionForum.EConversationSortOrder.LATEST_DESC,
-    pgNo: 0,
-    pgSize: 10,
-    postCreatorId: '',
-  }
   constructor(
     private configSvc: ConfigurationsService,
     private socialSvc: WsDiscussionForumService,
@@ -58,7 +46,6 @@ export class BtnSocialVoteComponent implements OnInit {
     if (this.configSvc.userProfile) {
       this.userId = this.configSvc.userProfile.userId || ''
     }
-    this.conversationRequest.userId = this.userId
   }
 
   ngOnInit() {
@@ -160,6 +147,8 @@ async getWidsForVote() {
     if (wids.length) {
       const userDetails = await this.discussionSvc.getUsersByIDs(wids)
       this.userForUpvote = this.discussionSvc.addIndexToData(userDetails)
+    } else {
+      this.userForUpvote = []
     }
     // filter for downvote
     //  if (this.activity.activityDetails) {
@@ -169,9 +158,11 @@ async getWidsForVote() {
     if (widsForDownVote.length) {
       const userDetailsforDownVote = await this.discussionSvc.getUsersByIDs(widsForDownVote)
       this.userForDownVote = this.discussionSvc.addIndexToData(userDetailsforDownVote)
+    } else {
+      this.userForDownVote = []
     }
   }
-  console.log('value check', this.postId, this.voteType, this.userForUpvote, this.userForDownVote)
+  // console.log('value check', this.postId, this.voteType, this.userForUpvote, this.userForDownVote)
 }
 
 // isEnabled() {
