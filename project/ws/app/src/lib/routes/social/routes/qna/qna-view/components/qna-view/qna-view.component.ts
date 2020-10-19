@@ -15,7 +15,7 @@ import { TFetchStatus, ConfigurationsService, LoggerService, ValueService, NsPag
 import { ForumService } from '../../../../forums/service/forum.service'
 import { NsUserDashboard } from '../../../../../../user-dashboard/models/user-dashboard.model'
 import { WsSocialService } from '../../../../../services/ws-social.service'
-import { BtnSocialLikeService } from '@ws-widget/collection/src/lib/discussion-forum/actionBtn/btn-social-like/service/btn-social-like.service';
+import { BtnSocialLikeService } from '@ws-widget/collection/src/lib/discussion-forum/actionBtn/btn-social-like/service/btn-social-like.service'
 
 @Component({
   selector: 'ws-app-qna-view',
