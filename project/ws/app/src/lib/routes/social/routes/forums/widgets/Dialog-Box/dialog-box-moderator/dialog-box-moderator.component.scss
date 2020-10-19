@@ -16,5 +16,13 @@
 .theme-muave.night-mode .mat-flat-button.discard-btn {
   color: white !important;
 }
+.theme-muave.day-mode .mat-flat-button.confirm-btn {
+  background: #F44336 !important;
+  color: white !important;
+}
+.theme-muave.day-mode .mat-flat-button.discard-btn {
+  color: black !important;
+  background: white !important;
+}
 
 }
