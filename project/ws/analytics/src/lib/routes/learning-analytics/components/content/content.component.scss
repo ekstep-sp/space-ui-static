@@ -39,10 +39,18 @@ table {
 .text-inside-grid {
   position: absolute;
   // left: 5px;
+  @include breakpoint-xxs{
+    
+    margin: 0 0 1.2px;
+  }
 }
 .text-outside-grid {
   position: absolute;
   // right: 5px;
+  @include breakpoint-xxs{
+    
+    margin: 0 17px 1.2px;
+  }
 }
 .montserrat {
   font-family: montserrat, sans-serif !important;
