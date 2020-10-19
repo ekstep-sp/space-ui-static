@@ -75,11 +75,14 @@
     }
   }
 }
-// .text-inside-grid {
+.text-inside-grid {
+  @include breakpoint-xxs{
+    font-size: 10px !important;
+  }
 //   position: absolute;
 //   left: 5px;
 //   line-height: 10px;
-// }
+}
 .text-outside-grid {
   margin: 0 !important;
   ///position: absolute;
