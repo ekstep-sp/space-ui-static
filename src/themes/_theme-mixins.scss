@@ -75,13 +75,18 @@
     font-size: 24px;
     font-family: CampaignW00-Medium !important;
   }
+  span.mat-checkbox-label {
+    font-size: 16px !important;
+  }
   p,
   b,
   mat-label,
   input,
   button,
   .mat-checkbox-label,
-  .font-montserrat {
+  .font-montserrat,
+  .mat-primary-text,
+  .mat-caption {
     font-family: Montserrat !important;
   }
   div.font-montserrat,
