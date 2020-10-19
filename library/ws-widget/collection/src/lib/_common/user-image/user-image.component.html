@@ -2,10 +2,16 @@
   [src]="verifiedMicrosoftEmail?.length ? basePicUrl + verifiedMicrosoftEmail : imageUrl"
   (error)="errorOccurred = true" /> -->
 <ng-container>
-  <mat-icon class="user-icon" *ngIf="imageType === 'initial'">person</mat-icon>
+ <ng-container *ngIf="imageType === 'initial'">
+  <img  *ngIf = "enableProfilePicture" [src]="userProfilePicture ? userProfilePicture : relativeUrl">
+   <mat-icon *ngIf = "!enableProfilePicture" class="user-icon" >person</mat-icon>
+  </ng-container>
+
   <span class="mat-app-background rounded-icon" *ngIf="imageType === 'rounded'">
-    <mat-icon class="user-icon">person</mat-icon>
+    <img  *ngIf = "enableProfilePicture" [src]="userProfilePicture ? userProfilePicture : relativeUrl">
+    <mat-icon  *ngIf = "!enableProfilePicture" class="user-icon">person</mat-icon> 
   </span>
+
   <span class="name-initials-image font-normal ws-mat-primary-default-text ws-mat-primary-lite-background"
     *ngIf="imageType === 'name-initial'">{{ shortName }}</span>
 </ng-container>

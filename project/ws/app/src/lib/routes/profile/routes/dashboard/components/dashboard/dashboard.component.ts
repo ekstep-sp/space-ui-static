@@ -43,6 +43,7 @@ export class DashboardComponent implements OnInit {
   userName = ''
   userEmail = ''
   departmentName = ''
+  userProfilePicture = ''
   skillData: any
   skillFetchStatus: TFetchStatus = 'none'
   badgeApiFetchStatus: TFetchStatus = 'none'
@@ -108,6 +109,11 @@ export class DashboardComponent implements OnInit {
       this.userEmail = this.configSvc.userProfile.email || ''
       this.departmentName = (this.configSvc.userProfile.departmentName && this.configSvc.userProfile.departmentName !== 'null')
         ? this.configSvc.userProfile.departmentName : ''
+      if (this.configSvc.userProfile.source_profile_picture &&
+        this.configSvc.userProfile.source_profile_picture !== 'null' &&
+        this.configSvc.userProfile.source_profile_picture !== '') {
+           this.userProfilePicture = this.configSvc.userProfile.source_profile_picture
+        }
     }
   }
 
