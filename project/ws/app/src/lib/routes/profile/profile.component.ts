@@ -29,7 +29,8 @@ export class ProfileComponent implements OnInit, OnDestroy {
   ) {}
 
   ngOnInit() {
-    this.showText = !this.showText
+    // this will close the side nav by default
+    // this.showText = !this.showText
     const tab = this.router.url.split('/')[3]
     this.assignTabName(tab)
     this.defaultSideNavBarOpenedSubscription = this.isLtMedium$.subscribe((isLtMedium: boolean) => {
@@ -75,6 +76,7 @@ export class ProfileComponent implements OnInit, OnDestroy {
       this.tabName = this.enabledTabs.settings.displayName
     }
   }
+
   ngOnDestroy() {
     if (this.defaultSideNavBarOpenedSubscription) {
       this.defaultSideNavBarOpenedSubscription.unsubscribe()
