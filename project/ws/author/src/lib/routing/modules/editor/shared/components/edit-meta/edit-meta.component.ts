@@ -1115,6 +1115,18 @@ export class EditMetaComponent implements OnInit, OnDestroy, AfterViewInit {
     return this.contentService.checkCondition(this.contentMeta.identifier, meta, type)
   }
 
+  allowedCreatorContacts() {
+    if (
+      this.configSvc.userRoles && this.configSvc.userRoles.has('editor') &&
+      this.contentService.getOriginalMeta(this.contentService.currentContent).contentType === 'Resource'
+      ) {
+        // console.log('this is an editor, allowed to edit curator for resource, returning false')
+      return false
+    }
+    // console.log('not an editor, returning ', this.checkCondition('creatorContacts', 'disabled'))
+    return this.checkCondition('creatorContacts', 'disabled')
+  }
+
   createForm() {
     this.contentForm = this.formBuilder.group({
       accessPaths: [],
