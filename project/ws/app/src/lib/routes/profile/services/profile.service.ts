@@ -26,7 +26,7 @@ interface IResponse {
   STATUS_CODE?: number,
 }
 const endpoint = {
-  profilePid: '/apis/protected/v8/user/details/wtoken'
+  profilePid: '/apis/protected/v8/user/details/wtoken',
 }
 
 @Injectable({
@@ -39,7 +39,6 @@ export class ProfileService {
       validator_URL: `https://${this.configSvc.hostPath}/apis/protected/v8/user/validate`,
     }),
   }
-  
   baseUrl = this.configSvc.sitePath
   constructor(private http: HttpClient, private configSvc: ConfigurationsService) { }
   userData: any
