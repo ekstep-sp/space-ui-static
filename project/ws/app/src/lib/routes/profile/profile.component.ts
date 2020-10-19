@@ -4,6 +4,7 @@ import { ActivatedRoute, Router } from '@angular/router'
 import { ConfigurationsService, LogoutComponent, NsPage, ValueService } from '@ws-widget/utils'
 import { Subscription } from 'rxjs'
 import { map } from 'rxjs/operators'
+import { ProfileService } from './services/profile.service'
 
 @Component({
   selector: 'ws-app-profile',
@@ -25,10 +26,23 @@ export class ProfileComponent implements OnInit, OnDestroy {
     private valueSvc: ValueService,
     private configSvc: ConfigurationsService,
     private activatedRoute: ActivatedRoute,
-    private router: Router
+    private router: Router,
+    private profileSvc: ProfileService
   ) {}
 
   ngOnInit() {
+    this.profileSvc.showTabName.subscribe((data: any) => {
+      if (data) {
+        this.routerSubscription = this.router.events.subscribe((event: any) => {
+          if (event.url) {
+            // tslint:disable-next-line: no-shadowed-variable
+            const tab = event.url.split('/')[3]
+            this.assignTabName(tab)
+          }
+      })
+    }
+  }
+  )
     // this will close the side nav by default
     // this.showText = !this.showText
     const tab = this.router.url.split('/')[3]
@@ -59,7 +73,7 @@ export class ProfileComponent implements OnInit, OnDestroy {
     if (tab === 'dashboard') {
       this.tabName = this.enabledTabs.dashboard.displayName
     } else if (tab === 'edit-profile') {
-      this.tabName = this.enabledTabs.dashboard.displayName
+      this.tabName = this.enabledTabs.dashboard.editProfile.displayName
     }  else if (tab === 'learning') {
       this.tabName = this.enabledTabs.learning.displayName
     } else if (tab === 'competency') {

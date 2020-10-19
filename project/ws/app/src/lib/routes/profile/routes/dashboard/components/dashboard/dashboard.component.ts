@@ -202,6 +202,7 @@ export class DashboardComponent implements OnInit {
   }
   // new changes in edit-profile
   edituserdetails() {
+    this.profileSvc.updateStatus(true)
     this.router.navigate(['/app/profile/edit-profile'])
   }
 

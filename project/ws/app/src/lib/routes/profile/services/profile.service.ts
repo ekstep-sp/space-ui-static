@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core'
 import { HttpClient, HttpHeaders } from '@angular/common/http'
-import { Observable } from 'rxjs'
+import { Observable, BehaviorSubject } from 'rxjs'
 import { NSProfileData } from '../models/profile.model'
 import { ITimeSpent } from '../routes/learning/models/learning.models'
 import { ConfigurationsService } from '@ws-widget/utils'
@@ -37,7 +37,7 @@ export class ProfileService {
   baseUrl = this.configSvc.sitePath
   constructor(private http: HttpClient, private configSvc: ConfigurationsService) { }
   userData: any
-
+  showTabName = new BehaviorSubject<boolean >(false)
   fetchConfigFile(): Observable<any> {
     return this.http.get<any>(`${this.baseUrl}/feature/profile.json`).pipe()
   }
@@ -111,4 +111,7 @@ export class ProfileService {
     }
   }
 
+  updateStatus(value: boolean) {
+    this.showTabName.next(value)
+  }
 }
