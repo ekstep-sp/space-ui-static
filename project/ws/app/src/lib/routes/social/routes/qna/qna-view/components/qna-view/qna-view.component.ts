@@ -322,20 +322,26 @@ export class QnaViewComponent implements OnInit, OnDestroy {
   }
 
   deletePost(successMsg: string) {
-    const dialogRef = this.dialog.open(DialogSocialDeletePostComponent, {
-      data: {
-        postId: this.qnaConversationRequest.postId,
-        // postcreator id is required for deleting the qna for  specific roles
-        postCreatorId: this.qnaConversationRequest.postCreatorId,
-      },
-    })
-    dialogRef.afterClosed().subscribe(
-      (data: boolean) => {
-        if (data) {
-          this.router.navigate(['../'], { relativeTo: this.activatedRoute })
-          this.snackBar.open(successMsg)
-        }
-      })
+    this.discussionSvc.fetchPost(this.qnaConversationRequest).subscribe(
+      data => {
+          if (data) {
+          const dialogRef = this.dialog.open(DialogSocialDeletePostComponent, {
+            data: {
+             // postcreator id is required for deleting the qna for  specific roles
+              postCreatorId: data.mainPost.postCreator.postCreatorId,
+              postId: this.qnaConversationRequest.postId,
+            },
+          })
+          dialogRef.afterClosed().subscribe(
+            // tslint:disable-next-line: no-shadowed-variable
+            (data: boolean) => {
+              if (data) {
+                this.router.navigate(['../'], { relativeTo: this.activatedRoute })
+                this.snackBar.open(successMsg)
+              }
+            })
+          }
+        })
   }
 
   onAnswerAccept(itemId: string) {
