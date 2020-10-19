@@ -20,6 +20,22 @@ table {
     width: 100%;
   }
 }
+.fixed-padding {
+  padding: 9px !important
+}
+@media screen and (max-width: 400px) {
+  .fixed-padding {
+    padding: 9px !important
+  }
+  .text-inside-grid {
+    font-size: 10px !important;
+    margin: unset !important;
+}
+.text-outside-grid {
+  font-size: 10px !important;
+  margin: unset !important;
+}
+}
 
 .unique-users-card {
   width: 30%;

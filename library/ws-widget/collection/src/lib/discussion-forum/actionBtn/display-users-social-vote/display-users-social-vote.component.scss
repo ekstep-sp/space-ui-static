@@ -10,12 +10,13 @@ $primary: $theme-primary;
    height: auto;
    max-height: 170px;
    overflow: auto;
-   margin-left: -155px;
-   margin-right: 10px;
-      margin-top: 25px;
+   // margin-left: -155px;
+   // margin-right: 10px;
+   //    margin-top: 25px;
    border-top: 3px solid #865ba0 !important;
    border-bottom: 3px solid #865ba0 !important;
    padding: 0px !important;
+   margin: auto !important;
 }
 .mat-card-size-down{
    width: 200px;

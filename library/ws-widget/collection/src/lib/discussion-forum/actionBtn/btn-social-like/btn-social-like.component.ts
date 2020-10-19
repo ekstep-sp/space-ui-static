@@ -82,6 +82,8 @@ export class BtnSocialLikeComponent implements OnInit {
       if (wids.length) {
         const userDetails = await this.discussionSvc.getUsersByIDs(wids)
         this.userDataForLike = this.discussionSvc.addIndexToData(userDetails)
+      } else {
+        this.userDataForLike = []
       }
     }
   }
