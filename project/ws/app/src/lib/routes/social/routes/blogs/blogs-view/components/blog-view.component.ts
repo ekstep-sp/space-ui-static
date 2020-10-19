@@ -7,6 +7,7 @@ import { combineLatest } from 'rxjs'
 import { ForumService } from '../../../forums/service/forum.service'
 import { tap } from 'rxjs/operators'
 import { WsSocialService } from '../../../../services/ws-social.service'
+import { BtnSocialLikeService } from '@ws-widget/collection/src/lib/discussion-forum/actionBtn/btn-social-like/service/btn-social-like.service'
 
 @Component({
   selector: 'ws-app-blog-view',
@@ -46,7 +47,7 @@ export class BlogViewComponent implements OnInit {
   canUserDelete = false
   mentions = []
   allowMention = false
-
+  activityData: any
   constructor(
     public dialog: MatDialog,
     private snackBar: MatSnackBar,
@@ -55,7 +56,8 @@ export class BlogViewComponent implements OnInit {
     private router: Router,
     private discussionSvc: WsDiscussionForumService,
     private socialSvc: WsSocialService,
-    private readonly forumSrvc: ForumService
+    private readonly forumSrvc: ForumService,
+    public voteService: BtnSocialLikeService,
   ) {
     if (this.configSvc.userProfile) {
       this.userId = this.configSvc.userProfile.userId || ''
@@ -65,7 +67,14 @@ export class BlogViewComponent implements OnInit {
   }
 
   ngOnInit() {
-
+    this.voteService.callComponent.subscribe((data: any) => {
+      if (data) {
+        this.discussionSvc.fetchPost(this.conversationRequest).toPromise().then((updatedData: any) => {
+          this.conversation = updatedData
+          // console.log('main', this.conversation)
+      })
+    }
+    })
     // tslint:disable-next-line: deprecation
     combineLatest(this.route.data, this.route.paramMap).subscribe(_combinedResult => {
       if (_combinedResult[0].socialData.data.allowMentionUsers) {
@@ -92,7 +101,6 @@ export class BlogViewComponent implements OnInit {
       }
     })
     this.showSocialLike = (this.configSvc.restrictedFeatures && !this.configSvc.restrictedFeatures.has('socialLike')) || false
-
   }
   fetchConversationData(forceNew = false) {
     if (this.fetchStatus === 'fetching') {
@@ -113,7 +121,6 @@ export class BlogViewComponent implements OnInit {
         }
         if (!this.isFirstConversationRequestDone && data && data.mainPost) {
           this.conversation = data
-
           if (this.conversation.mainPost.status === NsDiscussionForum.EPostStatus.DRAFT) {
             this.router.navigate(['../', 'edit', this.conversationRequest.postId], {
               relativeTo: this.route,

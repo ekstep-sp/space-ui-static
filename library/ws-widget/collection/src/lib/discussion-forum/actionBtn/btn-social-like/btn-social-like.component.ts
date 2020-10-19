@@ -4,6 +4,7 @@ import { MatSnackBar, MatDialog } from '@angular/material'
 import { DialogSocialActivityUserComponent } from '../../dialog/dialog-social-activity-user/dialog-social-activity-user.component'
 import { WsDiscussionForumService } from '../../ws-discussion-forum.services'
 import { NsDiscussionForum } from '../../ws-discussion-forum.model'
+import { BtnSocialLikeService } from './service/btn-social-like.service'
 
 @Component({
   selector: 'ws-widget-btn-social-like',
@@ -24,6 +25,7 @@ export class BtnSocialLikeComponent implements OnInit {
     private snackBar: MatSnackBar,
     public dialog: MatDialog,
     private discussionSvc: WsDiscussionForumService,
+    public likeService: BtnSocialLikeService,
   ) {
     if (this.configSvc.userProfile) {
       this.userId = this.configSvc.userProfile.userId || ''
@@ -33,7 +35,10 @@ export class BtnSocialLikeComponent implements OnInit {
   ngOnInit() {
     this.getWidsForLike()
   }
-
+  // tslint:disable-next-line:use-lifecycle-interface
+  ngOnChanges() {
+    this.getWidsForLike()
+  }
   updateLike(invalidUserMsg: string) {
     if (this.postCreatorId === this.userId) {
       this.snackBar.open(invalidUserMsg)
@@ -49,7 +54,9 @@ export class BtnSocialLikeComponent implements OnInit {
       activityType: NsDiscussionForum.EActivityType.LIKE,
     }
     this.socialSvc.updateActivity(request).subscribe(_ => {
+      this.likeService.updateStatus(true)
       this.isUpdating = false
+      this.likeService.updateStatus(true)
       if (this.activity) {
         if (this.activity.userActivity.like) {
           this.activity.userActivity.like = false
