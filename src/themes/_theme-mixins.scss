@@ -253,6 +253,7 @@
 
   .ws-mat-text-block-fade-gradient {
     position: relative;
+    overflow: hidden;
 
     &::after,
     &::before {
