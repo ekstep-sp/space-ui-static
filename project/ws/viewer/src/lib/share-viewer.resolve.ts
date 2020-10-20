@@ -116,7 +116,7 @@ export class ShareViewerResolve
       const headers = new HttpHeaders()
       .set('Content-Type', 'application/x-www-form-urlencoded')
 
-      const url = '/custom/auth/realms/wingspan/protocol/openid-connect/token'
+      const url = '/auth/realms/wingspan/protocol/openid-connect/token'
       const token = await this.http.post(url, body.toString(), { headers }).toPromise() as any
       const defaultSessionData = {
         access_token: token.access_token,
