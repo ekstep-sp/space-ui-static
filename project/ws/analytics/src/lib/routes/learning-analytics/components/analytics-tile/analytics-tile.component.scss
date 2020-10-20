@@ -1,6 +1,8 @@
 .description {
-  height: 50px;
-  max-height: 50px;
+  height: max-content;
+  min-height: 50px;
+  line-height: 24px;
+  overflow: visible !important;
 }
 
 .title {
