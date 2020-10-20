@@ -6,14 +6,8 @@
   <div class="banner-container">
     <div class="banner-overlay ws-primary-tinted-50">
       <div class="page-container mt-8">
-        <a
-          name="pending-actions-button-goal-home"
-          routerLink="/app/goals/me/pending-actions"
-          *ngIf="numNotifications"
-        >
-          <mat-card
-            class="flex flex-middle padding-remove padding-top-s padding-bottom-s margin-bottom-m"
-          >
+        <a name="pending-actions-button-goal-home" routerLink="/app/goals/me/pending-actions" *ngIf="numNotifications">
+          <mat-card class="flex flex-middle padding-remove padding-top-s padding-bottom-s margin-bottom-m">
             <mat-icon color="primary" class="margin-left-s">notifications</mat-icon>
             <p class="margin-left-xs margin-remove-bottom" i18n>
               Accept or Reject goals shared with you!
@@ -26,13 +20,11 @@
         </a>
         <h1 *ngIf="userName" class="mat-display-1 margin-bottom-l">Hey {{ userName }}!</h1>
         <!-- <h2 class="mat-h2" i18n>You have made quite some progress!</h2> -->
-        <p>
-          <mat-button-toggle-group (change)="goalToggle($event?.value)" [value]="goalFor">
+        <p class="para-margin">
+          <mat-button-toggle-group (change)="goalToggle($event?.value)" [value]="goalFor" class="toggle-height">
             <mat-button-toggle value="me" i18n>My goals</mat-button-toggle>
             <ng-container *ngIf="showOthers">
-              <mat-button-toggle value="others" i18n *ngIf="isShareEnabled"
-              >For others</mat-button-toggle
-            >
+              <mat-button-toggle value="others" i18n *ngIf="isShareEnabled">For others</mat-button-toggle>
             </ng-container>
           </mat-button-toggle-group>
         </p>
