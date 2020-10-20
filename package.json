@@ -5,6 +5,7 @@
     "ng": "ng",
     "start": "node --max_old_space_size=8000 ./node_modules/@angular/cli/bin/ng serve --proxy-config proxy/localhost.proxy.json -o",
     "start:space-dev": "node --max_old_space_size=8000 ./node_modules/@angular/cli/bin/ng serve --proxy-config proxy/space-dev.proxy.json",
+    "start:space-prod": "node --max_old_space_size=80000 ./node_modules/@angular/cli/bin/ng serve --proxy-config proxy/space-prod.proxy.json",
     "prebuild": "npm run lint:fix",
     "build": "node --max_old_space_size=8000 ./node_modules/@angular/cli/bin/ng build --prod --outputPath=dist/www/en --baseHref=/ --i18nLocale=en",
     "postbuild": "npm run compress:gzip && npm run compress:brotli",

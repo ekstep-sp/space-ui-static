@@ -1691,7 +1691,7 @@
         <div class="margin-top-xl">
           <div *ngIf="contentMeta.contentType !== 'Knowledge Board' || !isClient1" class="grid">
             <div class="margin-top-xs margin-left-xl" *ngIf="checkCondition('creatorContacts', 'show')"
-              [ngClass]="{ disable: checkCondition('creatorContacts', 'disabled') }">
+              [ngClass]="{ disable: allowedCreatorContacts() }">
               <label>
                 <div class="margin-top-xs flex flex-middle">
                   <b i18n [ngClass]="{ required: checkCondition('creatorContacts', 'required') }">Curators</b>
@@ -1704,7 +1704,7 @@
               </label>
               <div class="margin-top-xs">
                 <mat-form-field appearance="outline" class="margin-top-xs" class="margin-top-xs"
-                  [ngClass]="{ 'mat-form-field-invalid': showError('creatorContacts'), 'disable': checkCondition('creatorContacts', 'disabled') }">
+                  [ngClass]="{ 'mat-form-field-invalid': showError('creatorContacts'), 'disable': allowedCreatorContacts() }">
                   <mat-chip-list #creatorChipList aria-label="Creator selection">
                     <mat-chip *ngFor="let author of contentForm.controls.creatorContacts.value"
                       [selectable]="selectable" [removable]="removable"

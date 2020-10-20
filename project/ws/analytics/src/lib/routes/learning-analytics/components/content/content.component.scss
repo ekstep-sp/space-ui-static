@@ -20,6 +20,22 @@ table {
     width: 100%;
   }
 }
+.fixed-padding {
+  padding: 9px !important
+}
+@media screen and (max-width: 400px) {
+  .fixed-padding {
+    padding: 9px !important
+  }
+  .text-inside-grid {
+    font-size: 10px !important;
+    margin: unset !important;
+}
+.text-outside-grid {
+  font-size: 10px !important;
+  margin: unset !important;
+}
+}
 
 .unique-users-card {
   width: 30%;
@@ -39,10 +55,18 @@ table {
 .text-inside-grid {
   position: absolute;
   // left: 5px;
+  @include breakpoint-xxs{
+    
+    margin: 0 0 1.2px;
+  }
 }
 .text-outside-grid {
   position: absolute;
   // right: 5px;
+  @include breakpoint-xxs{
+    
+    margin: 0 17px 1.2px;
+  }
 }
 .montserrat {
   font-family: montserrat, sans-serif !important;

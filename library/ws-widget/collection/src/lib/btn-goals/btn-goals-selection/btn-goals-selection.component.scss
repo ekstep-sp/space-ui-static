@@ -1,0 +1,25 @@
+.create-btn{
+    margin-left: 0.5rem;
+}
+// @media only screen and (max-width: 310px){
+//     .create-btn{
+//         margin-left: 0;
+//     } 
+// }
+::ng-deep{
+@media only screen and (max-width: 310px){
+.font-playlist{
+   font: 15px !important;
+}
+.mat-list-text{
+    padding: 5px !important;
+    height: auto !important;
+    font-size: 15px !important;
+    line-height: 15px !important;
+}
+.btn-font{
+    margin-left: 0 !important;
+    padding: 0 8px !important;
+}
+}
+}

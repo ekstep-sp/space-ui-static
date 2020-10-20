@@ -17,6 +17,7 @@ export class BlogReplyComponent implements OnInit {
   replyPostEnabled = false
   updatedBody: string | undefined = ''
   userId = ''
+  replyPost = true
   constructor(
     private dialog: MatDialog,
     private snackBar: MatSnackBar,
@@ -29,10 +30,12 @@ export class BlogReplyComponent implements OnInit {
   }
 
   ngOnInit() {
-
     this.showSocialLike = (this.configSvc.restrictedFeatures && !this.configSvc.restrictedFeatures.has('socialLike')) || false
   }
-
+ // tslint:disable-next-line:use-lifecycle-interface
+ ngOnChanges() {
+  // console.log('reply', this.reply)
+}
   deleteReply(failMsg: string) {
     if (this.reply) {
       const dialogRef = this.dialog.open(DialogSocialDeletePostComponent, {

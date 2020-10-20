@@ -46,7 +46,7 @@
             matTooltipPosition="left">
             edit</mat-icon>
           <mat-icon *ngIf="!checkNoAccess(goal)">edit</mat-icon>
-          <span>Edit</span>
+          <span class="font-size-16px">Edit</span>
         </button>
         <button name="share-button-goal-card"  mat-menu-item *ngIf="isShareEnabled && goal?.goalFor === 'others'" (click)="openShareGoalDialog(goal)">
           <mat-icon>share</mat-icon>
@@ -59,7 +59,7 @@
         </a>
         <button  name="delete-button-goal-card"  mat-menu-item (click)="openDeleteDialog()">
           <mat-icon>delete</mat-icon>
-          <span>Delete</span>
+          <span class="font-size-16px">Delete</span>
         </button>
       </mat-menu>
     </ng-container>

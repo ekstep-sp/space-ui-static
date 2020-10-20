@@ -15,6 +15,7 @@ import { TFetchStatus, ConfigurationsService, LoggerService, ValueService, NsPag
 import { ForumService } from '../../../../forums/service/forum.service'
 import { NsUserDashboard } from '../../../../../../user-dashboard/models/user-dashboard.model'
 import { WsSocialService } from '../../../../../services/ws-social.service'
+import { BtnSocialLikeService } from '@ws-widget/collection/src/lib/discussion-forum/actionBtn/btn-social-like/service/btn-social-like.service'
 
 @Component({
   selector: 'ws-app-qna-view',
@@ -115,6 +116,7 @@ export class QnaViewComponent implements OnInit, OnDestroy {
     private socialSvc: WsSocialService,
     private valueSvc: ValueService,
     private readonly forumSrvc: ForumService,
+    private voteService: BtnSocialLikeService
   ) {
     if (this.configSvc.userProfile) {
       this.userId = this.configSvc.userProfile.userId || ''
@@ -133,9 +135,17 @@ export class QnaViewComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
+    this.voteService.callComponent.subscribe((data: any) => {
+      if (data) {
+        this.discussionSvc.fetchPost(this.qnaConversationRequest).subscribe(
+          (updateData: any) => {
+            this.qnaConversation = updateData
+          })
+      }
+    })
     this.initData()
     // this is called to update the postcreator id for delete qna
-    this.fetchConversationData(true)
+    // this.fetchConversationData(true)
     // this.getAllUsers()
     // this.getUserDetails()
     this.showSocialLike = (this.configSvc.restrictedFeatures && !this.configSvc.restrictedFeatures.has('socialLike')) || false
@@ -312,20 +322,26 @@ export class QnaViewComponent implements OnInit, OnDestroy {
   }
 
   deletePost(successMsg: string) {
-    const dialogRef = this.dialog.open(DialogSocialDeletePostComponent, {
-      data: {
-        postId: this.qnaConversationRequest.postId,
-        // postcreator id is required for deleting the qna for  specific roles
-        postCreatorId: this.qnaConversationRequest.postCreatorId,
-      },
-    })
-    dialogRef.afterClosed().subscribe(
-      (data: boolean) => {
-        if (data) {
-          this.router.navigate(['../'], { relativeTo: this.activatedRoute })
-          this.snackBar.open(successMsg)
-        }
-      })
+    this.discussionSvc.fetchPost(this.qnaConversationRequest).subscribe(
+      data => {
+          if (data) {
+          const dialogRef = this.dialog.open(DialogSocialDeletePostComponent, {
+            data: {
+             // postcreator id is required for deleting the qna for  specific roles
+              postCreatorId: data.mainPost.postCreator.postCreatorId,
+              postId: this.qnaConversationRequest.postId,
+            },
+          })
+          dialogRef.afterClosed().subscribe(
+            // tslint:disable-next-line: no-shadowed-variable
+            (data: boolean) => {
+              if (data) {
+                this.router.navigate(['../'], { relativeTo: this.activatedRoute })
+                this.snackBar.open(successMsg)
+              }
+            })
+          }
+        })
   }
 
   onAnswerAccept(itemId: string) {

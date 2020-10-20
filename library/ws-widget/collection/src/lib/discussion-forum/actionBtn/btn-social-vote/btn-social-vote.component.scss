@@ -1,6 +1,6 @@
 @import 'ws-vars';
-
- @import 'src/themes/theme-muave.scss';
+@import 'src/themes/theme-muave.scss';
+@import 'ws-mixins';
 
  $primary: $theme-primary;
 .highlight {
@@ -33,8 +33,12 @@
   z-index: 1;
   // bottom: 125%;
   left: 50%;
-  margin-left: -60px;
+  margin-left: -200px;
   opacity: 0;
+  margin-top: 40px;
+  @include breakpoint-xs {
+    margin-left: -100px !important;
+  }
   // transition: opacity 0.3s;
 }
   .tooltip .tooltiptext-downvote  {
@@ -44,6 +48,8 @@
     /* left: 50%; */
     /* margin-left: 17px; */
     opacity: 0;
+    margin-top: 10px;
+    margin-left: -18px;
 }
 
  .tooltip:hover .tooltiptext-downvote  {
@@ -60,8 +66,14 @@
   z-index: 1;
   // bottom: 125%;
   left: 50%;
-  margin-left: 15px;
+  // margin-left: 15px;
   opacity: 0; 
+  margin-top: 40px;
+  margin-left: -40px;
+  @include breakpoint-xs {
+    margin-top: 35px !important;
+    margin-left: -40px !important;
+  }
 }
 .mat-card-size-qna-up{
    width: 150px;
@@ -106,13 +118,10 @@
     border-bottom: 3px solid mat-color($primary) !important;
 }
 .tooltip-reply-downvote .tooltiptext-downvote {
-margin-left:200px;
+margin-left:100px;
 }
 .tooltip-qna .tooltiptext{
   margin-left:10px !important;
   margin-top:30px !important;
 }
 }
-
-
-
