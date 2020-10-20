@@ -4,7 +4,7 @@
     <button type="button" mat-icon-button (click)="sideNavBarOpened = !sideNavBarOpened">
       <mat-icon>menu</mat-icon>
     </button>
-    <span class="font-size-24px font-campaign margin-left-xs">{{ analytics?.mainTitle }}</span>
+    <span class="font-size-24px font-campaign margin-left-xs text-truncate">{{ analytics?.mainTitle }}</span>
   </div>
   <span class="spacer"></span>
   <form *ngIf="!screenSizeIsLtMedium" [formGroup]="searchForm"
