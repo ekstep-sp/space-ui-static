@@ -91,7 +91,7 @@
         <div class="quill-editor-reply-comment-container">
           <ws-widget-editor-quill class="reply-comment-editor"
             placeholder="{{'comment on ' + item.postCreator.name + '\'s answer'}}"
-            [htmlText]="commentAddRequest?.postContent?.body || ''" [showMention]="allowMention" [minLength]="'10'"
+            [htmlText]="commentAddRequest?.postContent?.body" [showMention]="allowMention" [minLength]="'10'"
             (textData)="onCommentTextChange($event)" (mentionsData)="replyCommentMentions = $event" #replyCommentEditor>
           </ws-widget-editor-quill>
         </div>
