@@ -14,6 +14,7 @@ import {
 import { Subscription } from 'rxjs'
 import { filter } from 'rxjs/operators'
 import { SearchServService } from '@ws/app/src/lib/routes/search/services/search-serv.service'
+import { Router } from '@angular/router';
 
 interface IStripUnitContentData {
   key: string
@@ -70,6 +71,7 @@ export class ContentStripMultipleComponent extends WidgetBaseComponent
     private configSvc: ConfigurationsService,
     protected utilitySvc: UtilityService,
     private searchServSvc: SearchServService,
+    private router: Router,
   ) {
     super()
   }
@@ -410,19 +412,22 @@ export class ContentStripMultipleComponent extends WidgetBaseComponent
   }
 
   toggleInfo(data: IStripUnitContentData) {
-    const stripInfo = this.stripsResultDataMap[data.key].stripInfo
-    if (stripInfo) {
-      if (stripInfo.mode !== 'below') {
-        this.loggerSvc.warn(`strip info mode: ${stripInfo.mode} not implemented yet`)
-        stripInfo.mode = 'below'
-      }
-      if (stripInfo.mode === 'below') {
-        this.stripsResultDataMap[data.key].stripInfo = {
-          ...stripInfo,
-          visibilityMode: stripInfo.visibilityMode === 'hidden' ? 'visible' : 'hidden',
-        }
-      }
+    if (data.stripInfo) {
+    this.router.navigateByUrl(data.stripInfo.icon.url)
     }
+    // const stripInfo = this.stripsResultDataMap[data.key].stripInfo
+    // if (stripInfo) {
+    //   if (stripInfo.mode !== 'below') {
+    //     this.loggerSvc.warn(`strip info mode: ${stripInfo.mode} not implemented yet`)
+    //     stripInfo.mode = 'below'
+    //   }
+    //   if (stripInfo.mode === 'below') {
+    //     this.stripsResultDataMap[data.key].stripInfo = {
+    //       ...stripInfo,
+    //       visibilityMode: stripInfo.visibilityMode === 'hidden' ? 'visible' : 'hidden',
+    //     }
+    //   }
+    // }
   }
 
   checkForEmptyWidget(strip: NsContentStripMultiple.IContentStripUnit): boolean {
