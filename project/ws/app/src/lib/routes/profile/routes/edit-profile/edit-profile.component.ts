@@ -181,7 +181,8 @@ export class EditProfileComponent implements OnInit {
   }
   fetchInitialUserData() {
     try {
-      this.initService.updatePidDetails()
+      // this.initService.updatePidDetails()
+       this.profileSvc.fecthDetailsFromPid()
     } catch (e) {
       this.snackBar.open('Reload to view latest changes', '', {
         duration: 1000,

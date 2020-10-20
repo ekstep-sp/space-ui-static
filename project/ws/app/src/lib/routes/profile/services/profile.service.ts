@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core'
 import { HttpClient, HttpHeaders } from '@angular/common/http'
-import { Observable } from 'rxjs'
+import { Observable, BehaviorSubject } from 'rxjs'
 import { NSProfileData } from '../models/profile.model'
 import { ITimeSpent } from '../routes/learning/models/learning.models'
-import { ConfigurationsService } from '@ws-widget/utils'
+import { ConfigurationsService, NsUser } from '@ws-widget/utils'
 
 const PROTECTED_SLAG_V8 = `/apis/protected/v8`
 
@@ -25,9 +25,14 @@ interface IResponse {
   API_ID?: string,
   STATUS_CODE?: number,
 }
+const endpoint = {
+  profilePid: '/apis/protected/v8/user/details/wtoken',
+}
+
 @Injectable({
   providedIn: 'root',
 })
+
 export class ProfileService {
   httpOptions = {
     headers: new HttpHeaders({
@@ -37,7 +42,7 @@ export class ProfileService {
   baseUrl = this.configSvc.sitePath
   constructor(private http: HttpClient, private configSvc: ConfigurationsService) { }
   userData: any
-
+  showTabName = new BehaviorSubject<boolean >(false)
   fetchConfigFile(): Observable<any> {
     return this.http.get<any>(`${this.baseUrl}/feature/profile.json`).pipe()
   }
@@ -111,4 +116,51 @@ export class ProfileService {
     }
   }
 
+  async fecthDetailsFromPid() {
+    if (this.configSvc.instanceConfig && !Boolean(this.configSvc.instanceConfig.disablePidCheck)) {
+      let userPidProfile: NsUser.IUserPidProfile | null = null
+      try {
+        userPidProfile = await this.http
+          .get<NsUser.IUserPidProfile>(endpoint.profilePid)
+          .toPromise()
+      } catch (e) {
+        this.configSvc.userProfile = null
+        throw new Error('Invalid user')
+      }
+      if (userPidProfile) {
+        this.configSvc.unMappedUser = userPidProfile.user
+        this.configSvc.userProfile = {
+          country: userPidProfile.user.organization_location_country || null,
+          departmentName: userPidProfile.user.department_name || '',
+          email: userPidProfile.user.email,
+          givenName: userPidProfile.user.first_name,
+          userId: userPidProfile.user.wid,
+          unit: userPidProfile.user.unit_name,
+          // tslint:disable-next-line:max-line-length
+          userName: `${userPidProfile.user.first_name ? userPidProfile.user.first_name : ' '} ${
+            userPidProfile.user.last_name ? userPidProfile.user.last_name : ' '
+            }`,
+          source_profile_picture: userPidProfile.user.source_profile_picture || '',
+          dealerCode:
+            userPidProfile &&
+              userPidProfile.user.json_unmapped_fields &&
+              userPidProfile.user.json_unmapped_fields.dealer_code
+              ? userPidProfile.user.json_unmapped_fields.dealer_code
+              : null,
+          lastName: userPidProfile.user.last_name,
+          userProperties: userPidProfile.user.user_properties,
+          isManager:
+            userPidProfile &&
+              userPidProfile.user.json_unmapped_fields &&
+              userPidProfile.user.json_unmapped_fields.is_manager
+              ? userPidProfile.user.json_unmapped_fields.is_manager
+              : false,
+          // userName: `${userPidProfile.user.first_name} ${userPidProfile.user.last_name}`,
+        }
+    }
+  }
+}
+  updateStatus(value: boolean) {
+    this.showTabName.next(value)
+  }
 }
