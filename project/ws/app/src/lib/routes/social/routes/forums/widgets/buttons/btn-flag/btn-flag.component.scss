@@ -9,3 +9,20 @@
     text-decoration: underline;
   }
 }
+::ng-deep{
+  @media only screen and (max-width: 310px){
+  .mat-dialog-container {
+    padding-bottom: 1px !important;
+    
+    padding-left: 10px !important;
+    padding-top: -1px !important;
+    padding-right: 1px !important;
+    min-width: 250px !important;
+    margin-left: -15px !important;
+}
+.mat-dialog-actions {
+  
+  margin-bottom: 0 !important;
+}
+  }
+}

@@ -34,8 +34,8 @@
   .header-title {
     display: flex;
     align-items: center;
-
-    .text-truncate-title {
+    word-break: break-word;
+     .text-truncate-title {
       max-width: 100%;
       overflow: hidden !important;
       text-overflow: ellipsis !important;
