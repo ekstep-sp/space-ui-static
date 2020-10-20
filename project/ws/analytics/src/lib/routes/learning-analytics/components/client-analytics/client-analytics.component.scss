@@ -62,3 +62,40 @@
 mat-toolbar mat-form-field {
   color: white !important;
 }
+@media only screen and (min-width: 280px) and (max-width: 310px){
+  .text-truncate {
+    max-width: 47% !important;
+    overflow: hidden!important;
+    text-overflow: ellipsis!important;
+    white-space: nowrap!important;
+}
+
+}
+
+@media only screen and (min-width: 320px) and (max-width: 359px){
+  .text-truncate {
+    max-width: 64% !important;
+    overflow: hidden!important;
+    text-overflow: ellipsis!important;
+    white-space: nowrap!important;
+}
+//   .text-truncate:not(:root:root) {
+//     max-width: 64% !important;
+//     overflow: hidden!important;
+//     text-overflow: ellipsis!important;
+//     white-space: nowrap!important;
+// }
+
+}
+::ng-deep{
+@media only screen and (min-width: 360px) and (max-width: 370px){
+  .mat-icon-button{
+    width: 32px !important;
+    
+  }
+  .margin-left-xs{
+    margin-left: 3px !important;
+  }
+
+}
+}

@@ -3,4 +3,11 @@
       background: #865BA0 !important;
       color: white !important;
     }
+    @media only screen and (max-width: 310px){
+
+    .mat-dialog-container {
+      padding: 3px !important;
   }
+}
+  }
+

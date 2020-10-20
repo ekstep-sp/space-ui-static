@@ -1,5 +1,6 @@
 import { Component, OnInit, Input, OnChanges } from '@angular/core'
 import { ConfigurationsService } from '@ws-widget/utils'
+import { WidgetContentService } from '../../_services/widget-content.service'
 // import { UserMiniProfileService } from '../../mini-profile/user-mini-profile.service'
 // import { NsMiniProfile } from '../../mini-profile/mini-profile.model'
 
@@ -12,15 +13,23 @@ export class UserImageComponent implements OnInit, OnChanges {
   @Input() email = ''
   @Input() userId: string | null = null
   @Input() userName = ''
+  @Input() userProfilePicture = ''
+  @Input() enableProfilePicture = false
   @Input() imageType: 'initial' | 'rounded' | 'name-initial' = 'initial'
   basePicUrl = `/apis/protected/v8/user/profile/graph/photo/`
   errorOccurred = false
   verifiedMicrosoftEmail = ''
   shortName = ''
   imageUrl: string | null = null
-  constructor(private configSvc: ConfigurationsService) { }
-
-  ngOnInit() { }
+  constructor(private configSvc: ConfigurationsService,
+              private widgetContentSvc: WidgetContentService) { }
+ relativeUrl = ''
+  ngOnInit() {
+    this.fetchConfigData()
+    if (this.userProfilePicture) {
+      this.userProfilePicture =  this.getAuthoringUrl(this.userProfilePicture)
+    }
+   }
 
   ngOnChanges() {
     if (
@@ -46,5 +55,19 @@ export class UserImageComponent implements OnInit, OnChanges {
     } else {
       this.imageType = 'initial'
     }
+  }
+  getAuthoringUrl(url: string): string {
+    return url
+      ? `/apis/authContent/${
+      url.includes('/content-store/') ? new URL(url).pathname.slice(1) : encodeURIComponent(url)
+      }`
+      : ''
+  }
+
+    fetchConfigData() {
+      const url = `${this.configSvc.sitePath}/feature/edit-profile.json`
+      this.widgetContentSvc.fetchConfig(url).subscribe(data => {
+        this.relativeUrl = data.profileImage
+    })
   }
 }
