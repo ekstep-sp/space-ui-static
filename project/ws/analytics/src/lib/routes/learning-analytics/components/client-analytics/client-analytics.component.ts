@@ -49,6 +49,7 @@ export class ClientAnalyticsComponent implements OnInit, OnDestroy {
   filterArray: NsAnalytics.IFilterObj[] = []
   filterData: NsAnalytics.IFilter[] = []
   searchControl = new FormControl()
+  showText = true
   analytics = this.route.snapshot.data.pageData.data.analytics.subFeatures.learningAnalytics
   private filterEventSubscription: Subscription | null = null
   private searchEventSubscription: Subscription | null = null
@@ -70,6 +71,7 @@ export class ClientAnalyticsComponent implements OnInit, OnDestroy {
     })
   }
   ngOnInit() {
+    // this.showText = !this.showText
     this.defaultSideNavBarOpenedSubscription = this.isLtMedium$.subscribe((isLtMedium: boolean) => {
       this.sideNavBarOpened = !isLtMedium
       this.screenSizeIsLtMedium = isLtMedium
