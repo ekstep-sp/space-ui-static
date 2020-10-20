@@ -3,7 +3,7 @@ import { ActivatedRouteSnapshot, Resolve, Router } from '@angular/router'
 import { Observable } from 'rxjs'
 import { NsContent } from '@ws-widget/collection'
 import { IResolveResponse, ConfigurationsService } from '@ws-widget/utils'
-import { HttpParams, HttpHeaders, HttpClient } from '@angular/common/http'
+import { HttpHeaders, HttpClient } from '@angular/common/http'
 import { AccessControlService, ApiService } from '@ws/author'
 import { CONTENT_READ } from '@ws/author/src/lib/constants/apiEndpoints'
 import { ViewerDataService } from './viewer-data.service'
@@ -107,17 +107,18 @@ export class ShareViewerResolve
 
   async loginWithDefaultUser(credentials: any) {
     try {
-      const body = new HttpParams()
-      .set('username', credentials.username)
-      .set('password', credentials.password)
-      .set('client_id', credentials.client_id)
-      .set('grant_type', credentials.grant_type)
+      const body = {
+        username: credentials.username,
+        password: credentials.password,
+        grant_type: credentials.grant_type,
+        client_id: credentials.client_id,
+      }
 
       const headers = new HttpHeaders()
-      .set('Content-Type', 'application/x-www-form-urlencoded')
+      .set('Content-Type', 'application/json')
 
-      const url = '/custom/auth/realms/wingspan/protocol/openid-connect/token'
-      const token = await this.http.post(url, body.toString(), { headers }).toPromise() as any
+      const url = credentials.authApi
+      const token = await this.http.post(url, body, { headers }).toPromise() as any
       const defaultSessionData = {
         access_token: token.access_token,
         refresh_token: token.refresh_token,
