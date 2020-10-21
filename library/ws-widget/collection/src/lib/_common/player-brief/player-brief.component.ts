@@ -3,6 +3,7 @@ import { NsContent } from '../../_services/widget-content.model'
 import { ConfigurationsService, UtilityService } from '../../../../../utils'
 import { Router } from '@angular/router'
 import { WidgetContentService } from '../../_services/widget-content.service'
+import { isIOS } from '../../player-amp/player-amp.utility'
 // import { Subscription } from 'rxjs'
 
 @Component({
@@ -161,7 +162,9 @@ export class PlayerBriefComponent implements OnInit {
   download() {
     if (this.content && !this.forPreview) {
       const link = document.createElement('a')
-      link.download = this.content.artifactUrl.split('/').pop() || 'resource.pdf'
+      if (!isIOS) {
+        link.download = this.content.artifactUrl.split('/').pop() || 'resource.pdf'
+      }
       link.target = '_self'
       // Construct the URI
       link.href = this.content.artifactUrl || ''
