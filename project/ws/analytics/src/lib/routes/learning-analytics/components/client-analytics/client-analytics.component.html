@@ -5,9 +5,10 @@
       <mat-icon>menu</mat-icon>
     </button> -->
     <button aria-label="showText? 'Hide side panel' : 'Show side panel'" mat-icon-button
-    (click)="!screenSizeIsLtMedium ? (showText = !showText) : sideNavBarOpened = !sideNavBarOpened" style="color: white;">
-    <mat-icon>menu</mat-icon>
-  </button>
+      (click)="!screenSizeIsLtMedium ? (showText = !showText) : sideNavBarOpened = !sideNavBarOpened"
+      style="color: white;">
+      <mat-icon>menu</mat-icon>
+    </button>
     <ws-widget-btn-page-back [widgetData]="{ url: 'back' }"></ws-widget-btn-page-back>
     <span class="font-size-24px font-campaign margin-left-xs">{{ analytics?.mainTitle }}</span>
   </div>
@@ -22,29 +23,29 @@
   </form>
 </mat-toolbar>
 
-<mat-sidenav-container  autosize="true" class="sidenav-container">
+<mat-sidenav-container autosize="true" class="sidenav-container">
   <mat-sidenav class="sidenav " [mode]="mode$ | async" [(opened)]="sideNavBarOpened">
     <mat-nav-list class="padding-remove-top ">
       <a *ngIf="analytics?.tabs?.home?.enabled" mat-list-item [routerLink]="'/analytics/home'"
         routerLinkActive="faq-active-class mat-toolbar mat-stroked-button" (click)="sideNavOnClick('home')"
         accesskey="1">
         <mat-icon>home</mat-icon>
-        <ng-container *ngIf = "!screenSizeIsLtMedium">
-        <span  *ngIf="showText"  class="margin-left-xs">{{ analytics?.tabs?.home?.displayName }}</span>
+        <ng-container *ngIf="!screenSizeIsLtMedium">
+          <span *ngIf="showText" class="margin-left-xs">{{ analytics?.tabs?.home?.displayName }}</span>
         </ng-container>
       </a>
       <a *ngIf="analytics?.tabs?.content?.enabled" mat-list-item aria-label="Content"
         [routerLink]="'/analytics/content'" routerLinkActive="faq-active-class mat-toolbar mat-stroked-button"
         (click)="sideNavOnClick('content')" accesskey="2">
         <mat-icon>library_books</mat-icon>
-        <ng-container *ngIf = "!screenSizeIsLtMedium">
-        <span  *ngIf="showText"  class="margin-left-xs">{{ analytics?.tabs?.content?.displayName }}</span>
-      </ng-container>
+        <ng-container *ngIf="!screenSizeIsLtMedium">
+          <span *ngIf="showText" class="margin-left-xs">{{ analytics?.tabs?.content?.displayName }}</span>
+        </ng-container>
       </a>
     </mat-nav-list>
   </mat-sidenav>
-  <mat-sidenav-content >
-  
+  <mat-sidenav-content>
+
     <div *ngIf="screenSizeIsLtMedium" class="flex flex-middle">
       <!-- <button type="button" mat-icon-button (click)="sideNavBarOpened = !sideNavBarOpened">
         <mat-icon>menu</mat-icon>
