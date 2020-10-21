@@ -15,7 +15,7 @@ mat-card {
   max-width: 900px;
   margin: auto;
   width: 100%;
-  overflow-x: hidden;
+//  overflow-x: hidden;
   .icon-section {
     width: 10%;
     min-width: $icon-container-size;
@@ -161,5 +161,10 @@ mat-chip {
 .margin-top-post-btn{
   @include breakpoint-xs{
     margin-top: 12px;
+  }
+}
+@media only screen and (max-width: 700px) {
+  .views-view-wrapper {
+    overflow: hidden;
   }
 }
