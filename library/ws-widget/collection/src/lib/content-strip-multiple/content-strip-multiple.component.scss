@@ -31,3 +31,11 @@
 .bottom-align {
   margin-bottom: 161px !important;
 }
+.edit-icon {
+  color: rgba(0, 0, 0, 0.54);
+}
+::ng-deep {
+.theme-muave.night-mode .edit-icon {
+   color: white !important;
+}
+}

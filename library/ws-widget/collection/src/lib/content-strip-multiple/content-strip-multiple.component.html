@@ -33,6 +33,8 @@
                       !widgetData.isChannelStrip
                         ? stripsResultDataMap[key]?.stripTitle === 'Latest Assets' 
                         ? 'title-align'
+                        : stripsResultDataMap[key]?.stripTitle === 'Resources' 
+                        ? 'py-2 my-1'
                         : 'sub-title-align'
                         : stripsResultDataMap[key]?.stripTitle
                         ? 'mb-8'
@@ -46,7 +48,7 @@
                 <button *ngIf="stripsResultDataMap[key]?.stripInfo?.icon" type="button" mat-icon-button
                   (click)="toggleInfo(stripsResultDataMap[key])" i18n-matTooltip matTooltip="info"
                   class="margin-left-xs">
-                  <mat-icon style="color: rgba(0, 0, 0, 0.54);">{{ stripsResultDataMap[key]?.stripInfo?.icon.icon }}</mat-icon>
+                  <mat-icon class="edit-icon">{{ stripsResultDataMap[key]?.stripInfo?.icon.icon }}</mat-icon>
                 </button>
               </div>
               <button mat-icon-button (click)="setHiddenForStrip(key)" *ngIf="stripsResultDataMap[key]?.canHideStrip">
