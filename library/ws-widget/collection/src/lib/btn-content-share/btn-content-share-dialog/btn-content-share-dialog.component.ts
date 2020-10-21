@@ -199,6 +199,7 @@ export class BtnContentShareDialogComponent implements OnInit {
       }
       return false
     })
+    // enable this section if you want restriction of share in collection and asset viewer
     if (document.location.href.includes('collectionType=Collection') || document.location.href.includes('collectionType=Course')) {
       return false
     }
