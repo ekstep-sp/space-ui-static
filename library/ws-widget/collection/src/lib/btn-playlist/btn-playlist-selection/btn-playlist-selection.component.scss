@@ -6,3 +6,14 @@ mat-selection-list {
   max-height: 400px;
   overflow: auto;
 }
+
+@media only screen and (max-width: 310px){
+  .btn-margin{
+    margin-left: 0 !important;
+    padding: 0 8px !important;
+}
+
+.btn-font{
+    font-size: 14px !important;
+}
+}

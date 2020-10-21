@@ -22,9 +22,9 @@
   <ng-container *ngIf="!createPlaylistMode">
     <button name="done-button-playlist-selection" mat-raised-button color="primary" [disabled]="isDoneDisabled()"
       [mat-dialog-close]="true" i18n>Done</button>
-    <button name="create-new-button-playlist-selection" mat-raised-button class="margin-right-xs" color="primary" i18n
-      (click)="createPlaylistMode = true" i18n>Create
-      New</button>
+    <button name="create-new-button-playlist-selection" mat-raised-button class="margin-right-xs btn-margin"
+      color="primary" i18n (click)="createPlaylistMode = true" i18n><span class="btn-font">Create
+        New</span></button>
   </ng-container>
   <ng-container *ngIf="createPlaylistMode">
     <button name="create-button-playlist-selection" mat-raised-button color="primary"
