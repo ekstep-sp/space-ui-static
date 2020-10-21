@@ -58,3 +58,13 @@ li {
     padding: $size-m;
   }
 }
+@media screen and (max-width: 320px){
+.img-width{
+  width: 200px !important;
+}
+}
+@media screen and (min-width: 360px) and (max-width: 380px){
+  .img-width{
+    width: 330px !important;
+  }
+  }
