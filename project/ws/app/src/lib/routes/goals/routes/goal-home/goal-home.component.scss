@@ -47,4 +47,19 @@
     background-color: #865ba0;
     color: white !important;
   }
+
+  @media only screen and (max-width: 310px){
+    .para-margin{
+      margin-top: -8px !important;
+    }
+    .toggle-height{
+      height: 41px !important;
+  
+    }
+    .mat-button-toggle-appearance-standard .mat-button-toggle-label-content {
+      line-height: 40px !important;
+      padding: 0 7px !important;
+  }
+  }
 }
+
