@@ -1,14 +1,13 @@
 .description {
-  height: 40px;
-  max-height: 40px;
+  height: 2.6em;
+  line-height: 1.3em;
 }
-
 .title {
   margin: 12px 0;
   position: relative;
   overflow: hidden;
-  height: 2.6em;
-  line-height: 1.3em;
+  height: 2.5em;
+  line-height: 1.3em !important;
 }
 
 .info {

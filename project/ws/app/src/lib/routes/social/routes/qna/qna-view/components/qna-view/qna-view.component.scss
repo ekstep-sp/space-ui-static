@@ -14,6 +14,8 @@ mat-card {
 .views-view-wrapper {
   max-width: 900px;
   margin: auto;
+  width: 100%;
+  overflow-x: hidden;
   .icon-section {
     width: 10%;
     min-width: $icon-container-size;
