@@ -19,6 +19,17 @@
 .pad {
   padding: $size-l 0 $size-l $size-l;
 }
+.mat-h1 {
+  font-family: Montserrat !important;
+  font-style: normal !important;
+  font-weight: 500 !important;
+  font-size: 20px !important;
+  line-height: 24px !important;
+
+  /* plaform_gray */
+
+  color: #696466 !important;
+}
 
 .title-align {
   margin-bottom: 50px !important;
