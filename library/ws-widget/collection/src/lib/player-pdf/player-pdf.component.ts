@@ -210,7 +210,9 @@ export class PlayerPdfComponent extends WidgetBaseComponent
 
   get showDownloadGuest() {
     if (this.configSvc.userRoles) {
-      if (this.configSvc.userRoles.size == 3 && this.configSvc.userRoles.has('my-analytics') && this.configSvc.userRoles.has('privileged')) {
+      if (this.configSvc.userRoles.size == 3
+        && this.configSvc.userRoles.has('my-analytics')
+        && this.configSvc.userRoles.has('privileged')) {
         return true
       }
     }
