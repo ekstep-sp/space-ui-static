@@ -34,9 +34,10 @@ export class EventService {
   }
 
   get isGuestUser() {
-    return this.configSrvc.isGuestUser
-  }
 
+    return this.configSrvc.isGuestUser
+
+  }
   // private focusChangeEventListener() {
   //   fromEvent(window, 'focus').subscribe(() => {
   //     this.raiseInteractTelemetry('focus', 'gained', {})

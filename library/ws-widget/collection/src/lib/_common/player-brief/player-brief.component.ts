@@ -127,6 +127,7 @@ export class PlayerBriefComponent implements OnInit {
       this.isShowDownloadMobile = data.isMobileDownloadable
       this.isShowDownloadIOS = data.isIOSDownloadable
       this.isShowDownloadAndroid = data.isAndroidDownloadable
+
       // tslint:disable-next-line: max-line-length
       this.enableRatings = this.widgetContentSvc.isVisibileAccToRoles(this.tocConfig.rolesAllowed.rateContent, this.tocConfig.rolesNotAllowed.rateContent)
       // tslint:disable-next-line: max-line-length
@@ -149,7 +150,14 @@ export class PlayerBriefComponent implements OnInit {
       if (this.utilitySvc.isAndroid && this.isShowDownloadAndroid) {
         return true
       }
-
+    }
+    return false
+  }
+  get showDownloadGuest() {
+    if (this.configSvc.userProfile) {
+      if (this.configSvc.userProfile.email === 'guestspace2020@gmail.com') {
+        return true
+      }
     }
     return false
   }
@@ -158,7 +166,6 @@ export class PlayerBriefComponent implements OnInit {
     this.enableRatings = false
     this.mailIcon = false
   }
-
   download() {
     if (this.content && !this.forPreview) {
       const link = document.createElement('a')
