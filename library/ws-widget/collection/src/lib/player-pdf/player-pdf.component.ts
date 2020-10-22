@@ -11,7 +11,7 @@ import {
 import { FormControl } from '@angular/forms'
 import { ActivatedRoute, Router } from '@angular/router'
 import { NsWidgetResolver, WidgetBaseComponent } from '@ws-widget/resolver'
-import { EventService, LoggerService, WsEvents, ValueService, UtilityService } from '@ws-widget/utils'
+import { EventService, LoggerService, WsEvents, ValueService, UtilityService, NsUser, ConfigurationsService } from '@ws-widget/utils'
 import * as PDFJS from 'pdfjs-dist/webpack'
 import { fromEvent, interval, merge, Subject, Subscription } from 'rxjs'
 import { debounceTime, distinctUntilChanged } from 'rxjs/operators'
@@ -63,6 +63,8 @@ export class PlayerPdfComponent extends WidgetBaseComponent
   private activityStartedAt: Date | null = null
   private renderSubject = new Subject()
   private lastRenderTask: any | null = null
+  userProfile: NsUser.IUserProfile | null = null
+
   // Subscriptions
   private contextMenuSubs: Subscription | null = null
   private renderSubscriptions: Subscription | null = null
@@ -73,6 +75,7 @@ export class PlayerPdfComponent extends WidgetBaseComponent
   isShowDownloadMobile = false
   isShowDownloadIOS = false
   isShowDownloadAndroid = false
+  isShowDownloadGuest = false
   constructor(
     private activatedRoute: ActivatedRoute,
     private router: Router,
@@ -82,6 +85,7 @@ export class PlayerPdfComponent extends WidgetBaseComponent
     private viewerSvc: ViewerUtilService,
     private valueSvc: ValueService,
     private utilitySvc: UtilityService,
+    public configSvc: ConfigurationsService,
   ) {
     super()
   }
@@ -105,6 +109,8 @@ export class PlayerPdfComponent extends WidgetBaseComponent
         this.isShowDownloadMobile = data.pageData.data.isMobileDownloadable
         this.isShowDownloadIOS = data.pageData.data.isIOSDownloadable
         this.isShowDownloadAndroid = data.pageData.data.isAndroidDownloadable
+        this.isShowDownloadGuest = data.pageData.data.isGuestDownloadable
+
       } else {
         this.isShowDownloadMobile = false
         this.isShowDownloadIOS = false
@@ -191,6 +197,9 @@ export class PlayerPdfComponent extends WidgetBaseComponent
 
       return true
     }
+    // if (!this.eventSvc.isGuestUser) {
+    //   return false
+    // }
 
     if (this.isShowDownloadMobile) {
       if (this.utilitySvc.isIos && this.isShowDownloadIOS) {
@@ -199,15 +208,29 @@ export class PlayerPdfComponent extends WidgetBaseComponent
       if (this.utilitySvc.isAndroid && this.isShowDownloadAndroid) {
         return true
       }
+      // if (this.eventSvc.isGuestUser && this.isShowDownloadGuest) {
+      //   return true
+      // }
 
     }
     return false
   }
 
-  get isDownloadable() {
-    if (this.eventSvc.isGuestUser) {
-      return false
+  get showDownloadGuest() {
+    if (this.configSvc.userProfile) {
+      if (this.configSvc.userProfile.email === 'guestspace2020@gmail.com') {
+        return true
+      }
+
     }
+    return false
+
+  }
+
+  get isDownloadable() {
+    // if (this.eventSvc.isGuestUser) {
+    //   return false
+    // }
     if (this.widgetData) {
       if (this.widgetData.pdfUrl) {
         return true
