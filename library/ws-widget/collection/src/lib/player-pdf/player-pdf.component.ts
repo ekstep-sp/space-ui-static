@@ -197,10 +197,6 @@ export class PlayerPdfComponent extends WidgetBaseComponent
 
       return true
     }
-    // if (!this.eventSvc.isGuestUser) {
-    //   return false
-    // }
-
     if (this.isShowDownloadMobile) {
       if (this.utilitySvc.isIos && this.isShowDownloadIOS) {
         return true
@@ -208,10 +204,6 @@ export class PlayerPdfComponent extends WidgetBaseComponent
       if (this.utilitySvc.isAndroid && this.isShowDownloadAndroid) {
         return true
       }
-      // if (this.eventSvc.isGuestUser && this.isShowDownloadGuest) {
-      //   return true
-      // }
-
     }
     return false
   }
