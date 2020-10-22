@@ -158,19 +158,14 @@ export class PlayerBriefComponent implements OnInit {
       if (this.configSvc.userProfile.email === 'guestspace2020@gmail.com') {
         return true
       }
-
     }
     return false
-
   }
-
-
   extractFeaturesForGuest() {
     this.hideRatings = true
     this.enableRatings = false
     this.mailIcon = false
   }
-
   download() {
     if (this.content && !this.forPreview) {
       const link = document.createElement('a')
