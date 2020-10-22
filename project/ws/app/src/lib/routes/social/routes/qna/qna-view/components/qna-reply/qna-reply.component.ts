@@ -50,6 +50,7 @@ export class QnaReplyComponent implements OnInit {
   isPostingComment = false
 
   showSocialLike = false
+  isValidForUserComment = false
   editMode = false
   replyPostEnabled = false
   updatedBody: string | undefined
@@ -87,6 +88,7 @@ export class QnaReplyComponent implements OnInit {
         this.isPostingComment = false
         this.commentAddRequest.postContent.body = ''
         this.triggerNotification()
+        this.isValidForUserComment = false
         this.fetchQuestionComments(true)
       },
       () => {
@@ -179,6 +181,7 @@ export class QnaReplyComponent implements OnInit {
     this.discussionSvc.updatePost(postUpdateRequest).subscribe(
       () => {
         this.updatedBody = undefined
+        // this.triggerNotification()
       },
       () => {
         this.editMode = true
@@ -193,6 +196,7 @@ export class QnaReplyComponent implements OnInit {
   }
   onCommentTextChange(event: { htmlText: string; isValid: boolean }) {
     this.commentAddRequest.postContent.body = event.htmlText
+    this.isValidForUserComment = event.isValid
     // this.replyAddRequest.postContent.body = event.htmlText || ''
   }
 

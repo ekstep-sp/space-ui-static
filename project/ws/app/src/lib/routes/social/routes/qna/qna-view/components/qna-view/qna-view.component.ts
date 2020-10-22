@@ -89,16 +89,11 @@ export class QnaViewComponent implements OnInit, OnDestroy {
       name: NsDiscussionForum.EDiscussionType.SOCIAL,
     },
   }
-
-  // mentionConfig = {
-  //   //  this.getAllUsers()
-  //   items: this.userDataInJsonFormat,
-  //   triggerChar: '@',
-  // }
   userId = ''
   showSocialLike = false
   isValidForUserAnswer = false
   allowMention = false
+  isValidForUserCommentPost = false
 
   @ViewChild('editor', { static: true }) editorQuill!: EditorQuillComponent
   @ViewChild('commentEditor', { static: true }) commentEditorQuill!: EditorQuillComponent
@@ -294,6 +289,7 @@ export class QnaViewComponent implements OnInit, OnDestroy {
         this.commentAddRequest.postContent.body = ''
         this.isPostingComment = false
         this.triggerNotification('comment')
+        this.isValidForUserCommentPost = false
         this.fetchQuestionComments(true)
       },
       () => {
@@ -392,6 +388,7 @@ export class QnaViewComponent implements OnInit, OnDestroy {
 
   onCommentTextChange(event: { htmlText: string; isValid: boolean }) {
     this.commentAddRequest.postContent.body = event.htmlText
+    this.isValidForUserCommentPost = event.isValid
   }
   triggerNotification(parentType: 'reply' | 'comment') {
     let mentionsData: any[] = []
