@@ -20,7 +20,7 @@
         [uniqueUsers]="totalUsers"
         [description]="totalUsersDescription"
         [showToolTip]= "true"
-        (infoClick)="openInfoPopup('total_users', 'User Details')"
+        (infoClick)="openInfoPopup('total_users', 'User Details', true)"
       >
       </ws-analytics-analytics-tile>
       <ng-container *ngIf="contentData?.user_content_toc">

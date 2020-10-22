@@ -98,4 +98,3 @@ export class ConfigurationsService {
     return null
   }
 }
-
