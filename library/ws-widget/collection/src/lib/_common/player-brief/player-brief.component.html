@@ -237,7 +237,7 @@
 
 <div class="md:px-2">
   <!-- <ws-widget-mark-as-complete [content]="content"></ws-widget-mark-as-complete> -->
-  <ng-container *ngIf="showDownloadMobile && content && isDownloadable">
+  <ng-container *ngIf="showDownloadMobile && content && isDownloadable && !showDownloadGuest">
 
     <mat-card class="mb-4">
       <button mat-button color="primary" (click)="download()">
