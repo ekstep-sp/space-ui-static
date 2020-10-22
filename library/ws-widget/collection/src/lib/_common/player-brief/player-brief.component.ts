@@ -155,7 +155,7 @@ export class PlayerBriefComponent implements OnInit {
   }
   get showDownloadGuest() {
     if (this.configSvc.userRoles) {
-      if (this.configSvc.userRoles.size == 3
+      if (this.configSvc.userRoles.size === 3
         && this.configSvc.userRoles.has('my-analytics')
         && this.configSvc.userRoles.has('privileged')) {
         return true
