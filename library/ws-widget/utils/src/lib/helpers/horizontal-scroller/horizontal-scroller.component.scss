@@ -10,14 +10,14 @@ $spaceFromEnd: -$size-m;
 
 %btn {
   position: absolute;
-  top: 50%;
+  top: 44%;
   transform: translateY(-50%);
   z-index: 999;
 }
 
 .prevBtn {
   @extend %btn;
-  left: $spaceFromEnd;
+  left: 0;
   position: absolute;
   width: 35px;
   height: 60px;
@@ -37,7 +37,7 @@ opacity: 0;
 
 .nextBtn {
   @extend %btn;
-  right: $spaceFromEnd;
+  right: 10px;
   border-radius: 0px 5px 5px 0px;
   position: absolute;
   width: 35px;

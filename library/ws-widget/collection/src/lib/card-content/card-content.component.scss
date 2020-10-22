@@ -121,7 +121,7 @@ mat-card {
   position: relative;
   width: 245px;
   height: 100%;
-  min-height: 300px;
+  min-height: 340px;
   box-sizing: border-box;
   font-family: Montserrat!important;
 
@@ -137,10 +137,12 @@ mat-card {
   }
 
   .card-img {
-    height: 139px;
-    width: auto;
     display: block;
-    object-fit: contain;
+    // object-fit: contain;
+    width: 245px;
+    height: 138px;
+    border-radius: 5px 5px 0px 0px;
+    margin: -16px -16px 16px -15px !important;
   }
 
   .complexity {
@@ -389,4 +391,9 @@ $title-line-count: 2;
 }
 .rating-icon {
   margin-right: 10px;
+}
+::ng-deep {
+  .theme-muave.night-mode .ws-mat-primary-text {
+    color: #925EB0 !important;
+}
 }

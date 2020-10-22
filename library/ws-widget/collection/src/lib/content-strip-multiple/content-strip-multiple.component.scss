@@ -25,9 +25,7 @@
   font-weight: 500 !important;
   font-size: 20px !important;
   line-height: 24px !important;
-
   /* plaform_gray */
-
   color: #696466 !important;
 }
 
@@ -48,5 +46,16 @@
 ::ng-deep {
 .theme-muave.night-mode .edit-icon {
    color: white !important;
+}
+.theme-muave.night-mode .mat-h1 {
+  font-family: Montserrat !important;
+  font-style: normal !important;
+  font-weight: 500 !important;
+  font-size: 20px !important;
+  line-height: 24px !important;
+  color: white !important;
+}
+.theme-muave.day-mode h1.mat-h1 {
+  font-family: Montserrat !important;
 }
 }
