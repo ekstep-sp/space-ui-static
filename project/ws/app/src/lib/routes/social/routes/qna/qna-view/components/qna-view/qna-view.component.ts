@@ -90,11 +90,11 @@ export class QnaViewComponent implements OnInit, OnDestroy {
     },
   }
 
-  mentionConfig = {
-    //  this.getAllUsers()
-    items: this.userDataInJsonFormat,
-    triggerChar: '@',
-  }
+  // mentionConfig = {
+  //   //  this.getAllUsers()
+  //   items: this.userDataInJsonFormat,
+  //   triggerChar: '@',
+  // }
   userId = ''
   showSocialLike = false
   isValidForUserAnswer = false
@@ -429,16 +429,16 @@ export class QnaViewComponent implements OnInit, OnDestroy {
       return ''
     }
   }
-  getAllUsers(): any {
-    this.headersForAllUsers.rootOrg = this.getRootOrg
-    this.headersForAllUsers.org = this.getOrg
-    this.headersForAllUsers.wid_OrgAdmin = this.userId
-    this.discussionSvc.getAllUsersList(this.headersForAllUsers).subscribe(data => {
-      if (data.DATA != null) {
-        this.userDataInJsonFormat = this.userListJson(data.DATA)
-      }
-    })
-  }
+  // getAllUsers(): any {
+  //   this.headersForAllUsers.rootOrg = this.getRootOrg
+  //   this.headersForAllUsers.org = this.getOrg
+  //   this.headersForAllUsers.wid_OrgAdmin = this.userId
+  //   this.discussionSvc.getAllUsersList(this.headersForAllUsers).subscribe(data => {
+  //     if (data.DATA != null) {
+  //       this.userDataInJsonFormat = this.userListJson(data.DATA)
+  //     }
+  //   })
+  // }
 
   userListJson(userList: NsUserDashboard.IUserListDataFromUserTable[]) {
     // tslint:disable-next-line: prefer-const
