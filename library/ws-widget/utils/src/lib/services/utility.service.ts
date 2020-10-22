@@ -1,7 +1,8 @@
 import { Platform } from '@angular/cdk/platform'
 import { HttpClient } from '@angular/common/http'
 import { Injectable } from '@angular/core'
-import { Observable } from 'rxjs'
+import { NsContent } from '@ws-widget/collection/src/public-api'
+import { BehaviorSubject, Observable } from 'rxjs'
 interface IWindowMobileAppModified extends Window {
   appRef?: any
   webkit?: any
@@ -18,6 +19,7 @@ interface IRecursiveData {
   providedIn: 'root',
 })
 export class UtilityService {
+  public readonly currentPlayerContent$ = new BehaviorSubject<NsContent.IContent | null>(null)
   constructor(
     private http: HttpClient,
     private platform: Platform,
@@ -92,5 +94,9 @@ export class UtilityService {
       return window.webkit.messageHandlers.appRef
     }
     return null
+  }
+
+  emitCurrentContentForBriefPlayer(content: NsContent.IContent) {
+    this.currentPlayerContent$.next(content)
   }
 }

@@ -1,8 +1,8 @@
-import { AfterViewInit, ChangeDetectorRef, Component, OnDestroy, OnInit } from '@angular/core'
+import { AfterViewChecked, AfterViewInit, ChangeDetectorRef, Component, OnDestroy, OnInit } from '@angular/core'
 import { ActivatedRoute, Router } from '@angular/router'
 import { NsContent } from '@ws-widget/collection'
 import { NsWidgetResolver } from '@ws-widget/resolver'
-import { UtilityService, ValueService } from '@ws-widget/utils'
+import { ConfigurationsService, UtilityService, ValueService } from '@ws-widget/utils'
 import { Subscription } from 'rxjs'
 import { RootService } from '../../../../../src/app/component/root/root.service'
 import { TStatus, ViewerDataService } from './viewer-data.service'
@@ -23,7 +23,7 @@ export enum ErrorType {
   templateUrl: './viewer.component.html',
   styleUrls: ['./viewer.component.scss'],
 })
-export class ViewerComponent implements OnInit, OnDestroy, AfterViewInit {
+export class ViewerComponent implements OnInit, OnDestroy, AfterViewInit, AfterViewChecked {
   fullScreenContainer: HTMLElement | null = null
   guestUser = false
   content: NsContent.IContent | null = null
@@ -55,13 +55,14 @@ export class ViewerComponent implements OnInit, OnDestroy, AfterViewInit {
     private utilitySvc: UtilityService,
     private changeDetector: ChangeDetectorRef,
     private tocSharedSvc: AppTocService,
+    private readonly configService: ConfigurationsService,
+    private readonly cdr: ChangeDetectorRef,
   ) {
     this.rootSvc.showNavbarDisplay$.next(false)
   }
 
   getContentData(e: any) {
-    if (e.hasOwnProperty('activatedRoute')) {
-      this.guestUser = false
+    if (!this.configService.isGuestUser && e.hasOwnProperty('activatedRoute')) {
       e.activatedRoute.data.subscribe((data: { content: { data: NsContent.IContent } }) => {
         if (data.content && data.content.data) {
           this.content = data.content.data
@@ -80,7 +81,7 @@ export class ViewerComponent implements OnInit, OnDestroy, AfterViewInit {
         if (data.content && !data.content.data) {
           this.guestUser = true
           window.setTimeout(() => {
-            this.content = data.content
+            this.utilitySvc.emitCurrentContentForBriefPlayer(data.content)
           })
         }
       })
@@ -147,6 +148,11 @@ export class ViewerComponent implements OnInit, OnDestroy, AfterViewInit {
       }
       this.changeDetector.detectChanges()
     }
+  }
+
+  ngAfterViewChecked() {
+    this.guestUser = this.guestUser
+    this.cdr.detectChanges()
   }
 
   ngOnDestroy() {

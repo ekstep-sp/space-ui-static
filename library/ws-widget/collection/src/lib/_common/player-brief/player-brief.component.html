@@ -247,7 +247,11 @@
     </mat-card>
   </ng-container>
   <mat-card class="font-montserrat ws-mat-primary-lite-background-on-day ws-mat-primary-border-top-bolder info-container">
-    <h2 class="font-montserrat font-size-18px" i18n>At a glance</h2>
+    <h2 class="font-montserrat font-size-18px inline" i18n>At a glance</h2>
+    <button class="font-montserrat float-right" *ngIf="this.configSvc?.isGuestUser && !content" mat-button (click)="showMoreGlance = !showMoreGlance">
+      <mat-icon>arrow_drop_down</mat-icon>
+      <ng-container i18n>Show Details</ng-container>
+    </button>
     <div class="info-item" *ngIf="content?.displayContentType">
       <h3 class="item-heading ws-mat-primary-text font-montserrat" i18n>Format</h3>
       <ws-widget-display-content-type *ngIf="content?.contentType !== contentTypes.RESOURCE"
@@ -545,7 +549,7 @@
       <mat-divider></mat-divider>
     </ng-container>
     <div class="text-right mt-2">
-      <button class="font-montserrat" mat-button (click)="showMoreGlance = !showMoreGlance">
+      <button *ngIf="(!this.configSvc?.isGuestUser || content)" class="font-montserrat" mat-button (click)="showMoreGlance = !showMoreGlance">
         <mat-icon>{{!showMoreGlance ? 'arrow_drop_down': 'arrow_drop_up'}}</mat-icon>
         <ng-container i18n *ngIf="!showMoreGlance">Show More</ng-container>
         <ng-container i18n *ngIf="showMoreGlance">Show Less</ng-container>
@@ -578,8 +582,8 @@
     <h2 class="font-montserrat font-size-18px" i18n *ngIf="title === 'CONTACT'">Curator/Contact</h2>
     <mat-divider></mat-divider>
     <div *ngFor="let author of authors" class="author font-montserrat">
-      <ws-widget-user-image class="author-image" [imageType]="'name-initial'" [userName]="author.name || ''"
-        [email]="author.email"></ws-widget-user-image>
+      <!-- <ws-widget-user-image class="author-image" [imageType]="'name-initial'" [userName]="author.name || ''"
+        [email]="author.email"></ws-widget-user-image> -->
       <div class="width-expand flex flex-middle flex-between">
         <h3 class="font-montserrat margin-remove">{{ author.name }}</h3>
         <ng-container *ngIf="mailIcon">
