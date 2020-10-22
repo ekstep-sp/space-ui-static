@@ -65,12 +65,10 @@ input[type=number] {
 @media only screen and (max-width: 310px){
   .show-btn{
     display: flex !important;
-    border: 2px brown !important ;
-    
-  }
-.mat-icon-button{
+    }
+  .mat-icon-button{
   width: 30px !important;
-}
+    }
   }
 }
 
