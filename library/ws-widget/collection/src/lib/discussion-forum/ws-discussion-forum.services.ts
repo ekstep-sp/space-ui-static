@@ -112,7 +112,6 @@ export class WsDiscussionForumService {
 
   getAllUsersList(): Observable<any> {
     try {
-      console.log("userdate",this.userData.api + this.userData.userList.url)
       return this.http.get<IResponse>(this.userData.api + this.userData.userList.url)
     } catch (ex) {
       return of([])
