@@ -137,7 +137,30 @@
           <p class="description" i18n>How many users visited on each day?</p>
         </div>
         <div class="margin-m">
-          <ng-container [wsResolverWidget]="barChartDailyUsageData"> </ng-container>
+          <!-- <ng-container [wsResolverWidget]="barChartDailyUsageData"> </ng-container> -->
+            <mat-tab-group>
+              <mat-tab label="Daily" *ngIf="contentData?.daily_users?.length > 0">
+                <ng-template matTabContent>
+                  <div class="margin-s">
+                    <ng-container [wsResolverWidget]="barChartDailyUsageData"> </ng-container>
+                  </div>
+                </ng-template>
+              </mat-tab>
+              <mat-tab label="Weekly" *ngIf="contentData?.weekly_active_users?.length > 0">
+                <ng-template matTabContent>
+                  <div class="margin-s">
+                    <ng-container [wsResolverWidget]="barChartWeeklyUsageData"> </ng-container>
+                  </div>
+                </ng-template>
+              </mat-tab>
+              <mat-tab label="Monthly" *ngIf="contentData?.monthly_active_users?.length > 0">
+                <ng-template matTabContent>
+                  <div class="margin-s">
+                    <ng-container [wsResolverWidget]="barChartMonthlyUsageData"> </ng-container>
+                  </div>
+                </ng-template>
+              </mat-tab>
+            </mat-tab-group>
         </div>
       </mat-card>
     </div>

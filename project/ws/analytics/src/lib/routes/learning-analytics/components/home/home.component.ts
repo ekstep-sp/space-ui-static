@@ -66,6 +66,8 @@ export class HomeComponent implements OnInit, OnDestroy {
   barChartDailyNewUsersData: IGraphWidget = {} as IGraphWidget
   barChartWeeklyNewUsersData: IGraphWidget = {} as IGraphWidget
   barChartMonthlyNewUsersData: IGraphWidget = {} as IGraphWidget
+  barChartMonthlyUsageData: IGraphWidget = {} as IGraphWidget
+  barChartWeeklyUsageData: IGraphWidget = {} as IGraphWidget
   errorWidget: NsWidgetResolver.IRenderConfigWithTypedData<NsError.IWidgetErrorResolver> = {
     widgetType: ROOT_WIDGET_CONFIG.errorResolver._type,
     widgetSubType: ROOT_WIDGET_CONFIG.errorResolver.errorResolver,
@@ -566,7 +568,7 @@ export class HomeComponent implements OnInit, OnDestroy {
     public dialog: MatDialog,
     private graphGeneralSvc: GraphGeneralService,
     private resolver: AnalyticsResolver,
-  ) {}
+  ) { }
 
   ngOnInit() {
     this.filterEventSubscription = this.graphGeneralSvc.filterEventChangeSubject.subscribe(
@@ -1402,6 +1404,106 @@ export class HomeComponent implements OnInit, OnDestroy {
         barChartDailyUsersLabel.push(this.dailyDate)
         dailyUsersData.push(users.doc_count)
       })
+      /* For Monthly Active Users */
+
+      const monthlyUsersLabel: string[] = []
+      const barChartmonthlyUsersData: number[] = []
+      this.contentData.monthly_active_users.forEach((users: any) => {
+        this.dailyDate = new Date(users.key).toISOString()
+        this.dailyDate = this.dailyDate.split('T')[0]
+        const month = this.months[new Date(this.dailyDate).getMonth()]
+        const date = this.dailyDate.split('-')[2]
+        this.dailyDate = `${date}-${month}`
+        monthlyUsersLabel.push(this.dailyDate)
+        barChartmonthlyUsersData.push(users.doc_count)
+      })
+
+      this.barChartMonthlyUsageData = {
+        widgetType: ROOT_WIDGET_CONFIG.graph._type,
+        widgetSubType: ROOT_WIDGET_CONFIG.graph.graphGeneral,
+        widgetData: {
+          graphId: 'monthlyUsersBarChart',
+          graphType: 'bar',
+          graphHeight: '250px',
+          graphWidth: '100%',
+          graphLegend: false,
+          graphLegendPosition: 'top',
+          graphLegendFontSize: 11,
+          graphTicksFontSize: 11,
+          graphTicksXAxisDisplay: true,
+          graphTicksYAxisDisplay: true,
+          graphGridLinesDisplay: false,
+          graphXAxisMaxLimit: 20,
+          graphIsXAxisAutoSkip: true,
+          graphDefaultPalette: 'default',
+          graphYAxisLabel: '# Users',
+          graphXAxisLabel: 'Date',
+          graphIsXAxisLabel: true,
+          graphIsYAxisLabel: true,
+          graphOnClick: false,
+          graphData: {
+            labels: monthlyUsersLabel,
+            datasets: [
+              {
+                label: '',
+                backgroundColor: 'rgb(32, 150, 205)',
+                borderWidth: 1,
+                data: barChartmonthlyUsersData,
+              },
+            ],
+          },
+        },
+      }
+      /* For Weekly Active Users */
+
+      const barChartWeeklyActiveUsersLabel: string[] = []
+      const activeWeeklyUsersData: number[] = []
+      this.contentData.weekly_active_users.forEach((users: any) => {
+        this.dailyDate = new Date(users.key).toISOString()
+        this.dailyDate = this.dailyDate.split('T')[0]
+        const month = this.months[new Date(this.dailyDate).getMonth()]
+        const date = this.dailyDate.split('-')[2]
+        this.dailyDate = `${date}-${month}`
+        barChartWeeklyActiveUsersLabel.push(this.dailyDate)
+        activeWeeklyUsersData.push(users.doc_count)
+      })
+      this.barChartWeeklyUsageData = {
+        widgetType: ROOT_WIDGET_CONFIG.graph._type,
+        widgetSubType: ROOT_WIDGET_CONFIG.graph.graphGeneral,
+        widgetData: {
+          graphId: 'weeklyActiveUsersChart',
+          graphType: 'bar',
+          graphHeight: '250px',
+          graphWidth: '100%',
+          graphLegend: false,
+          graphLegendPosition: 'top',
+          graphLegendFontSize: 11,
+          graphTicksFontSize: 11,
+          graphTicksXAxisDisplay: true,
+          graphTicksYAxisDisplay: true,
+          graphGridLinesDisplay: false,
+          graphXAxisMaxLimit: 20,
+          graphIsXAxisAutoSkip: true,
+          graphDefaultPalette: 'default',
+          graphYAxisLabel: '# Users',
+          graphXAxisLabel: 'Date',
+          graphIsXAxisLabel: true,
+          graphIsYAxisLabel: true,
+          graphOnClick: false,
+          graphData: {
+            labels: barChartWeeklyActiveUsersLabel,
+            datasets: [
+              {
+                label: '',
+                backgroundColor: 'rgb(32, 150, 205)',
+                borderWidth: 1,
+                data: activeWeeklyUsersData,
+              },
+            ],
+          },
+        },
+      }
+
       this.barChartDailyUsersData = {
         widgetType: ROOT_WIDGET_CONFIG.graph._type,
         widgetSubType: ROOT_WIDGET_CONFIG.graph.graphGeneral,
