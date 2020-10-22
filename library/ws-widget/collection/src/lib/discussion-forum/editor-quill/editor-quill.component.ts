@@ -32,7 +32,6 @@ export class EditorQuillComponent implements OnInit, OnDestroy {
 
   reset = false
   defaultPlaceholder = 'Ask a question, or add something you found helpful'
-  headersForAllUsers: NsUserDashboard.IHeaders = {} as any
   userDashboardData: NsUserDashboard.IUserData | any
   widLoggedinUser: string | any
   userListData: NsUserDashboard.IUserListDataFromUserTable[] = []
@@ -138,12 +137,9 @@ export class EditorQuillComponent implements OnInit, OnDestroy {
   }
 
   getAllUsers(): any {
-    this.headersForAllUsers.rootOrg = this.getRootOrg
-    this.headersForAllUsers.org = this.getOrg
-    this.headersForAllUsers.wid_OrgAdmin = this.widLoggedinUser
-    this.discussionForumService.getAllUsersList(this.headersForAllUsers).subscribe(data => {
-      if (data.DATA != null) {
-        this.userDataInJsonFormat = this.userListJson(data.DATA)
+    this.discussionForumService.getAllUsersList().subscribe(data => {
+      if (data != null) {
+        this.userDataInJsonFormat = this.userListJson(data)
       }
     })
   }

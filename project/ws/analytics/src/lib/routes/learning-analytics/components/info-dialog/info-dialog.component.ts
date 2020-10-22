@@ -39,16 +39,23 @@ export class InfoDialogComponent implements OnInit {
   async ngOnInit() {
     try {
       this.isLoading = true
-      const eventResponse = await this.getEventSpecificRequest(this.data, false)
+      let eventResponse
+     if (this.data.showUserDetailsFromUserTable) {
+       eventResponse = this.data.totalUsersFromUserTable
+       this.assignColumnSequenceAndTitle(eventResponse)
+       this.dataSource = this.addIndexToData(eventResponse)
+     } else {
+      eventResponse = await this.getEventSpecificRequest(this.data, false)
       const dataForDialog =  await this.parseDataForDialog(eventResponse, this.data.title)
       if (dataForDialog.columnSequence.length) {
         this.columnSequence = [...dataForDialog.columnSequence]
       }
       this.title = dataForDialog.title || ''
-      const priorUserIDs = dataForDialog.users
-      const userDetails = await this.getUsersByIDs(priorUserIDs, false)
-      this.deletedUserCount = this.findDeletedUserIDs(priorUserIDs, userDetails)
-      this.dataSource = this.addIndexToData(userDetails)
+        const priorUserIDs = dataForDialog.users
+        const userDetails = await this.getUsersByIDs(priorUserIDs, false)
+        this.deletedUserCount = this.findDeletedUserIDs(priorUserIDs, userDetails)
+        this.dataSource = this.addIndexToData(userDetails)
+    }
       this.isLoading = false
     } catch (e) {
       // tslint:disable-next-line: no-console
@@ -171,4 +178,11 @@ export class InfoDialogComponent implements OnInit {
     }
   }
 
+  async assignColumnSequenceAndTitle(eventResponse: any) {
+    const dataForDialog =  await this.parseDataForDialog(eventResponse, this.data.title)
+    if (dataForDialog.columnSequence.length) {
+      this.columnSequence = [...dataForDialog.columnSequence]
+    }
+    this.title = dataForDialog.title || ''
+  }
 }
