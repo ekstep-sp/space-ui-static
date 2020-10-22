@@ -8,7 +8,7 @@
     <ng-container *ngIf="conversation">
       <div class="flex flex-between">
         <h1 class="ws-mat-primary-text margin-bottom-s title-style font-size-24px"
-          [innerHTML]="conversation?.mainPost?.postContent?.title">
+          [innerHTML]="removeTags( conversation?.mainPost?.postContent?.title)">
         </h1>
         <button tabindex="0" *ngIf="canUserEdit || canUserDelete" type="button" mat-icon-button
           [matMenuTriggerFor]="editMenu">
