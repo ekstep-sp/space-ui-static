@@ -467,7 +467,8 @@ export class QnaViewComponent implements OnInit, OnDestroy {
           tagCreatorID: this.configSvc.userProfile ? this.configSvc.userProfile.userId || '' : '',
           QnaTitle: this.postTitle || '',
           QnaId: this.qnaConversationRequest.postId,
-          QnaCreatorID: notificationData.topLevelReply.postCreator.postCreatorId,
+          // QnaCreatorID: notificationData.topLevelReply.postCreator.postCreatorId,
+          QnaCreatorID: notificationData.parentPostCreatorId,
       }
     })
     if (notificationRequest.length) {

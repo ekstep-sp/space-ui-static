@@ -94,7 +94,8 @@
               </button>
             </mat-expansion-panel>
           </mat-accordion>
-          <ws-app-blog-reply [reply]="reply" (deleteSuccess)="onDeleteReply(i)"
+          <ws-app-blog-reply [reply]="reply" (deleteSuccess)="onDeleteReply(i)"  [allowMention]="allowMention"  [parentPostCreatorId]="conversationRequest.mainPost?.postCreator?.postCreatorId"
+          (triggerReplyNotification) = "triggerReplyNotification($event)"
             *ngFor="let reply of conversation?.replyPost; let i = index">
           </ws-app-blog-reply>
         </ng-container>
