@@ -45,7 +45,7 @@
                   {{ stripsResultDataMap[key]?.stripTitle }}
                 </h1>
 
-                <button *ngIf="stripsResultDataMap[key]?.stripInfo?.icon" type="button" mat-icon-button
+                <button *ngIf="stripsResultDataMap[key]?.stripTitle === 'Based on your interests' && stripsResultDataMap[key]?.stripInfo?.icon" type="button" mat-icon-button
                   (click)="toggleInfo(stripsResultDataMap[key])" i18n-matTooltip matTooltip="info"
                   class="margin-left-xs">
                   <mat-icon class="edit-icon">{{ stripsResultDataMap[key]?.stripInfo?.icon.icon }}</mat-icon>
