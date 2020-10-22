@@ -91,7 +91,7 @@
               </div>
             </div>
             <div class="text-right" *ngIf="qnaComments?.postCount > 0">
-              <button type="button" [disabled]="commentFetchStatus === 'fetching'" (click)="fetchQuestionComments()"
+              <button type="button" class="position-right" [disabled]="commentFetchStatus === 'fetching'" (click)="fetchQuestionComments()"
                 mat-button color="primary" i18n>
                 Load More Comments
               </button>
