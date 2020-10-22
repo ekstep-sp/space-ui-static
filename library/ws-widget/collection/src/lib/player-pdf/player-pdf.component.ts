@@ -20,6 +20,7 @@ import { ROOT_WIDGET_CONFIG } from '../collection.config'
 import { NsContent } from '../_services/widget-content.model'
 import { WidgetContentService } from '../_services/widget-content.service'
 import { IWidgetsPlayerPdfData } from './player-pdf.model'
+import { isIOS } from '../player-amp/player-amp.utility'
 
 const pdfjsViewer = require('pdfjs-dist/web/pdf_viewer')
 @Component({
@@ -217,7 +218,9 @@ export class PlayerPdfComponent extends WidgetBaseComponent
   download() {
     if (this.widgetData.pdfUrl) {
       const link = document.createElement('a')
-      link.download = this.widgetData.pdfUrl
+      if (!isIOS) {
+        link.download = this.widgetData.pdfUrl
+      }
       link.target = '_self'
       // Construct the URI
       link.href = this.widgetData.pdfUrl || ''
