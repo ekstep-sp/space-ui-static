@@ -197,10 +197,6 @@ export class PlayerPdfComponent extends WidgetBaseComponent
 
       return true
     }
-    // if (!this.eventSvc.isGuestUser) {
-    //   return false
-    // }
-
     if (this.isShowDownloadMobile) {
       if (this.utilitySvc.isIos && this.isShowDownloadIOS) {
         return true
@@ -208,23 +204,19 @@ export class PlayerPdfComponent extends WidgetBaseComponent
       if (this.utilitySvc.isAndroid && this.isShowDownloadAndroid) {
         return true
       }
-      // if (this.eventSvc.isGuestUser && this.isShowDownloadGuest) {
-      //   return true
-      // }
-
     }
     return false
   }
 
   get showDownloadGuest() {
-    if (this.configSvc.userProfile) {
-      if (this.configSvc.userProfile.email === 'guestspace2020@gmail.com') {
+    if (this.configSvc.userRoles) {
+      if (this.configSvc.userRoles.size == 3
+        && this.configSvc.userRoles.has('my-analytics')
+        && this.configSvc.userRoles.has('privileged')) {
         return true
       }
-
     }
     return false
-
   }
 
   get isDownloadable() {
