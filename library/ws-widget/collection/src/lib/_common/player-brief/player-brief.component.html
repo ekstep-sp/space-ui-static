@@ -242,16 +242,18 @@
     <mat-card class="mb-4">
       <button mat-button color="primary" (click)="download()">
         <mat-icon>cloud_download</mat-icon>
-        <span i18n class="px-2">Downloads</span>
+        <span i18n class="px-2">Download</span>
       </button>
     </mat-card>
   </ng-container>
-  <mat-card class="font-montserrat ws-mat-primary-lite-background-on-day ws-mat-primary-border-top-bolder info-container">
+  <mat-card
+    class="font-montserrat ws-mat-primary-lite-background-on-day ws-mat-primary-border-top-bolder info-container">
     <h2 class="font-montserrat font-size-18px" i18n>At a glance</h2>
     <div class="info-item" *ngIf="content?.displayContentType">
       <h3 class="item-heading ws-mat-primary-text font-montserrat" i18n>Format</h3>
       <ws-widget-display-content-type *ngIf="content?.contentType !== contentTypes.RESOURCE"
-        class="ws-mat-accent-text width-expand mat-body-strong font-montserrat" [displayContentType]="content?.displayContentType">
+        class="ws-mat-accent-text width-expand mat-body-strong font-montserrat"
+        [displayContentType]="content?.displayContentType">
       </ws-widget-display-content-type>
       <div *ngIf="content?.contentType === contentTypes.RESOURCE"
         class="ws-mat-accent-text width-expand mat-body-strong font-montserrat">
@@ -552,7 +554,8 @@
       </button>
     </div>
   </mat-card>
-  <ws-widget-user-content-rating class="mb-4 block" *ngIf="content?.identifier && content?.assetType !== 'Connection' && !hideRatings" [contentId]="content?.identifier"
+  <ws-widget-user-content-rating class="mb-4 block"
+    *ngIf="content?.identifier && content?.assetType !== 'Connection' && !hideRatings" [contentId]="content?.identifier"
     [isDisabled]="isPreviewMode || !enableRatings">
   </ws-widget-user-content-rating>
   <!-- <div class="hidden sm:block margin-bottom-m" *ngIf="content?.creatorDetails?.length">
