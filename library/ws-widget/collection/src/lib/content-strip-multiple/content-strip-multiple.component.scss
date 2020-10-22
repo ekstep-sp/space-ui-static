@@ -19,3 +19,34 @@
 .pad {
   padding: $size-l 0 $size-l $size-l;
 }
+.mat-h1 {
+  font-family: Montserrat !important;
+  font-style: normal !important;
+  font-weight: 500 !important;
+  font-size: 20px !important;
+  line-height: 24px !important;
+
+  /* plaform_gray */
+
+  color: #696466 !important;
+}
+
+.title-align {
+  margin-bottom: 50px !important;
+  margin-top: 60px !important;
+}
+.sub-title-align {
+  margin-top: 106px !important;
+  margin-bottom: 50px !important;
+}
+.bottom-align {
+  margin-bottom: 161px !important;
+}
+.edit-icon {
+  color: rgba(0, 0, 0, 0.54);
+}
+::ng-deep {
+.theme-muave.night-mode .edit-icon {
+   color: white !important;
+}
+}
