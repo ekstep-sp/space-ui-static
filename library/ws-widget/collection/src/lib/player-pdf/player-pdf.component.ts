@@ -220,9 +220,7 @@ export class PlayerPdfComponent extends WidgetBaseComponent
       const link = document.createElement('a')
       if (!isIOS) {
         link.download = this.widgetData.pdfUrl
-
       }
-
       link.target = '_self'
       // Construct the URI
       link.href = this.widgetData.pdfUrl || ''
