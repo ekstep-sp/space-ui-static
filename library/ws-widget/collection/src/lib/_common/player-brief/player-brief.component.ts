@@ -1,18 +1,22 @@
-import { Component, OnInit, Input } from '@angular/core'
+import { Component, OnInit, Input, OnDestroy, ChangeDetectorRef, ChangeDetectionStrategy } from '@angular/core'
 import { NsContent } from '../../_services/widget-content.model'
 import { ConfigurationsService, UtilityService } from '../../../../../utils'
 import { Router } from '@angular/router'
 import { WidgetContentService } from '../../_services/widget-content.service'
 import { isIOS } from '../../player-amp/player-amp.utility'
+import { Subscription } from 'rxjs'
+import { distinctUntilChanged } from 'rxjs/operators'
 // import { Subscription } from 'rxjs'
 
 @Component({
   selector: 'ws-widget-player-brief',
   templateUrl: './player-brief.component.html',
   styleUrls: ['./player-brief.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class PlayerBriefComponent implements OnInit {
+export class PlayerBriefComponent implements OnInit, OnDestroy {
   isDownloadMobile: any
+  content$: Subscription | null = null
 
   @Input()
   content: NsContent.IContent | null = null
@@ -40,6 +44,7 @@ export class PlayerBriefComponent implements OnInit {
     private utilitySvc: UtilityService,
     private router: Router,
     private widgetContentSvc: WidgetContentService,
+    private readonly cdr: ChangeDetectorRef,
 
   ) { }
   isDownloadableDesktop = false
@@ -48,6 +53,19 @@ export class PlayerBriefComponent implements OnInit {
   hideRatings = false
 
   ngOnInit() {
+    if (this.configSvc.isGuestUser) {
+      // tslint:disable-next-line: max-line-length
+      this.content$ = this.utilitySvc.currentPlayerContent$.pipe(distinctUntilChanged()).subscribe((currentContent: NsContent.IContent | null) => {
+        if (currentContent) {
+          this.content = { ...currentContent }
+          // this.showMoreGlance = true
+          // this.triggerDummyEvent()
+        } else {
+          this.content = null
+          this.cdr.detectChanges()
+        }
+      })
+    }
 
     this.getTocConfig()
     if (this.configSvc.restrictedFeatures) {
@@ -183,4 +201,38 @@ export class PlayerBriefComponent implements OnInit {
       document.body.removeChild(link)
     }
   }
+
+  ngOnDestroy () {
+    if (this.content$) {
+      this.content$.unsubscribe()
+    }
+  }
+
+  /* triggerDummyEvent() {
+    this.showMoreGlance = true
+    // tslint:disable-next-line: no-console
+    console.log('content data to send is ', this.content)
+    const dummyEl = document.createElement('p')
+    const dummyEvent = document.createEvent('Event')
+    dummyEvent.initEvent('dummy', true, true)
+    dummyEl.addEventListener('dummy', (e) => {
+      // e.target matches elem
+    }, false)
+    dummyEl.dispatchEvent(dummyEvent)
+
+    return true
+  } */
 }
+
+/* else if (e.hasOwnProperty('route')) {
+  // this will occur for sharable routes
+  e.route.data.subscribe((_data: { content: NsContent.IContent }) => {
+    try {
+      // this.content = data.content
+      throw new Error('A random error to make default login work unintrupted')
+    } catch (err) {
+      alert('in error block')
+      console.log(e)
+    }
+  })
+} */
