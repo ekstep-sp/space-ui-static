@@ -27,6 +27,7 @@ export namespace NsUserDashboard {
     userDetails: IUserDetails,
     API_FOR_USER_DETAILS: string,
     rolesAllowedForDefault: string
+    timeZoneFormat: ITimeZone,
   }
   export interface IUserListDataFromUserTable {
     wid: UUID
@@ -157,5 +158,9 @@ export namespace NsUserDashboard {
   }
   export interface IUserDetails {
     url: string
+  }
+  export interface ITimeZone {
+    locales: string,
+    timeZone: string,
   }
 }
