@@ -10,7 +10,10 @@ import { DialogSocialDeletePostComponent, NsDiscussionForum, WsDiscussionForumSe
 })
 export class BlogReplyComponent implements OnInit {
   @Input() reply: NsDiscussionForum.ITimelineResult | null = null
+  @Input() allowMention = true
+  @Input() parentPostCreatorId = ''
   @Output() deleteSuccess = new EventEmitter<boolean>()
+  @Output() triggerReplyNotification = new EventEmitter<object | undefined>()
 
   showSocialLike = false
   editMode = false
@@ -18,6 +21,7 @@ export class BlogReplyComponent implements OnInit {
   updatedBody: string | undefined = ''
   userId = ''
   replyPost = true
+  replyEditMentions = []
   constructor(
     private dialog: MatDialog,
     private snackBar: MatSnackBar,
@@ -72,6 +76,7 @@ export class BlogReplyComponent implements OnInit {
       this.discussionSvc.updatePost(postUpdateRequest).subscribe(
         () => {
           this.updatedBody = undefined
+          this.triggerNotification()
         },
         () => {
           this.editMode = true
@@ -84,5 +89,12 @@ export class BlogReplyComponent implements OnInit {
   onTextChange(eventData: { isValid: boolean; htmlText: string }) {
     this.replyPostEnabled = eventData.isValid
     this.updatedBody = eventData.htmlText
+  }
+
+  triggerNotification() {
+    this.triggerReplyNotification.emit({
+      mentions: this.replyEditMentions,
+      parentPostCreatorId: this.parentPostCreatorId,
+    })
   }
 }

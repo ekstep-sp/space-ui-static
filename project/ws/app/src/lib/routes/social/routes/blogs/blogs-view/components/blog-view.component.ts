@@ -276,11 +276,34 @@ export class BlogViewComponent implements OnInit {
    removeTags(str: any) {
     if ((str === null) || (str === '')) {
         return false
-    }
-        const strNew = str.toString()
+    } else {
+        str = str.toString()
+    } 
+
     // Regular expression to identify HTML tags in
     // the input string. Replacing the identified
     // HTML tag with a null string.
-    return strNew.replace(/(<([^>]+)>)/ig, '')
+    return str.replace(/(<([^>]+)>)/ig, '')
+}
+
+triggerReplyNotification(notificationData: any) {
+  // send one notification such that it reaches both, the person who was mentioned in the reply comment and the creator
+  // of answer on which comment was made
+  const notificationRequest = notificationData.mentions.map((mention: any) => {
+    return {
+      notificationFor: 'blog',
+        taggedUserID: mention.id,
+        taggedUserName: mention.name,
+        taggedUserEmail: mention.email,
+        tagCreatorName: this.configSvc.userProfile ? this.configSvc.userProfile.userName || '' : '',
+        tagCreatorID: this.configSvc.userProfile ? this.configSvc.userProfile.userId || '' : '',
+        blogTitle: this.blogTitle || '',
+        blogId: this.conversationRequest.postId,
+        blogCreatorID: this.conversation ? this.conversation.mainPost.postCreator.postCreatorId : '',
+    }
+  })
+  if (notificationRequest.length) {
+    this.forumSrvc.triggerTagNotification(notificationRequest)
+  }
 }
 }
