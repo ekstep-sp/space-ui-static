@@ -74,7 +74,7 @@
   }
   .heading-font-size-primary {
     font-size: 48px !important;
-    line-height: 50px;
+    line-height: 50px !important;
   }
   @media (max-width: 700px) {
     h2.body-font-size-secondary {
@@ -92,6 +92,7 @@
     }
     .heading-font-size-primary {
       font-size: 28px !important;
+      line-height: 32px !important;
     }
   }
   .bold-text {
