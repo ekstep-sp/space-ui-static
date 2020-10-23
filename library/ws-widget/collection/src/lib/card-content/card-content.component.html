@@ -110,7 +110,7 @@
                 }}
               </span>
             </div>
-            <div class="ws-mat-primary-text mat-title text-truncate title-text font-montserrat font-size-18px" title="Title" i18n-title>
+            <div class="ws-mat-primary-text mat-title text-truncate title-text font-montserrat body-font-size-primary" title="Title" i18n-title>
               {{ widgetData.content.name }}
             </div>
           </a>
@@ -150,7 +150,7 @@
           </div>
           <a (click)="raiseTelemetry()" [routerLink]="(widgetData.content | pipeContentRoute).url"
             [queryParams]="(widgetData.content | pipeContentRoute).queryParams" aria-label="Content"
-            i18n-aria-label="Content | Click to view" class="ws-mat-primary-text mat-title text-truncate title-text font-montserrat font-size-18px">
+            i18n-aria-label="Content | Click to view" class="ws-mat-primary-text mat-title text-truncate title-text font-montserrat body-font-size-primary">
             {{ widgetData.content.name }}
           </a>
           <div *ngIf="widgetData?.content?.description" class="mt-4 flip-desc-text ws-mat-text-block-fade-gradient">
@@ -231,11 +231,11 @@
                 </ng-container>
               </div>
             </div>
-            <div class="ws-mat-primary-text mat-title title-text font-montserrat font-size-18px ws-mat-text-block-fade-gradient"
+            <div class="ws-mat-primary-text mat-title title-text font-montserrat body-font-size-primary ws-mat-text-block-fade-gradient"
               [matTooltip]="widgetData.content.name">
               {{ widgetData.content.name }}
             </div>
-            <div class="description-text font-montserrat font-size-16px ws-mat-text-block-fade-gradient mb-10" i18n-title title="Description">
+            <div class="description-text font-montserrat body-font-size-secondary ws-mat-text-block-fade-gradient mb-10" i18n-title title="Description">
               {{ widgetData.content.description | pipeHtmlTagRemoval }}
             </div>
           </a>
@@ -325,7 +325,7 @@
             <div class="text-gray-600 complexity flex-middle">
               <mat-icon matTooltip="{{ imageIcon[1] }}">{{ imageIcon[0] }}</mat-icon>
 
-              <div class="ws-mat-primary-text pl-2 text-lg title-text font-montserrat font-size-18px margin-bottom-xs margin-top-xs">
+              <div class="ws-mat-primary-text pl-2 text-lg title-text font-montserrat body-font-size-primary margin-bottom-xs margin-top-xs">
                 {{ widgetData.content.name }}
               </div>
               <!-- <mat-icon>check_circle_outline</mat-icon> -->
@@ -444,7 +444,7 @@
               {{ widgetData.content?.subTitle }}
             </span>
           </div>
-          <div class="ws-mat-primary-text mat-title title-text font-montserrat font-size-18px title-truncate">
+          <div class="ws-mat-primary-text mat-title title-text font-montserrat body-font-size-primary title-truncate">
             {{ widgetData.content.name }}
           </div>
           <div class="h-5">
@@ -538,7 +538,7 @@
               [displayContentType]="widgetData.content?.displayContentType" [content]="widgetData.content">
             </ws-widget-display-content-type>
           </div>
-          <div class="ws-mat-primary-text mat-title title-text font-montserrat font-size-18px title-truncate">
+          <div class="ws-mat-primary-text mat-title title-text font-montserrat body-font-size-primary title-truncate">
             {{ widgetData.content.name }}
           </div>
         </a>
@@ -652,10 +652,10 @@
               </ng-container>
             </div>
           </div>
-          <div class="ws-mat-primary-text mat-title title-text font-montserrat font-size-18px title-truncate">
+          <div class="ws-mat-primary-text mat-title title-text font-montserrat body-font-size-primary title-truncate">
             {{ widgetData.content.name }}
           </div>
-          <div class="description-text font-montserrat font-size-16px ws-mat-text-block-fade-gradient mb-4" i18n-title title="Description">
+          <div class="description-text font-montserrat body-font-size-secondary ws-mat-text-block-fade-gradient mb-4" i18n-title title="Description">
             {{ widgetData.content.description | pipeHtmlTagRemoval }}
           </div>
           <div class="text-gray-600 complexity flex-end">

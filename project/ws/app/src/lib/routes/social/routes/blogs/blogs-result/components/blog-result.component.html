@@ -16,10 +16,10 @@
     <mat-menu #editMenu="matMenu">
       <ng-template matMenuContent>
         <a [routerLink]="'/app/social/blogs/edit/' + blog.id" class="aStyle" mat-menu-item i18n
-          > <span class="font-montserrat font-size-16px">Edit Blog</span></a
+          > <span class="font-montserrat body-font-size-secondary">Edit Blog</span></a
         >
         <button (click)="deleteBlog(blog.id, deleteMsg.value)" mat-menu-item i18n>
-           <span class="font-montserrat font-size-16px">Delete Blog</span>
+           <span class="font-montserrat body-font-size-secondary">Delete Blog</span>
         </button>
       </ng-template>
     </mat-menu>

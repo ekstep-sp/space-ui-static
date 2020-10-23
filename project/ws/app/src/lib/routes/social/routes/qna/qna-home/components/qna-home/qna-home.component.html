@@ -6,7 +6,7 @@
 <div class="qna-home-container mat-drawer-container mat-drawer-container-has-open mat-drawer-transition">
   <div class="qna-title">
     <h1 class="font-montserrat font-size-20px mat-display-1 margin-remove hidden sm:block" i18n>Latest Questions</h1>
-    <h1 *ngIf="qnaTimeline?.hits" class="margin-remove block sm:hidden font-montserrat font-size-18px">
+    <h1 *ngIf="qnaTimeline?.hits" class="margin-remove block sm:hidden font-montserrat body-font-size-primary">
       {{ qnaTimeline.hits | pipeCountTransform }}
       <ng-container i18n>Questions</ng-container>
     </h1>
@@ -18,7 +18,7 @@
   </div>
   <div class="flex align-center justify-between mt-6 mb-4">
     <div *ngIf="qnaTimeline" class="hidden sm:block" i18n-aria-label aria-label="Questions Count">
-      <h2 class="margin-remove font-montserrat font-size-18px">
+      <h2 class="margin-remove font-montserrat body-font-size-primary">
         {{ qnaTimeline.hits | pipeCountTransform }}
         <ng-container i18n> Questions</ng-container>
       </h2>

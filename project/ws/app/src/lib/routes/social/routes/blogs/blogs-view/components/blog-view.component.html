@@ -7,7 +7,7 @@
   <div #blogContainer class="blog-container">
     <ng-container *ngIf="conversation">
       <div class="flex flex-between">
-        <h1 class="ws-mat-primary-text margin-bottom-s title-style font-size-24px"
+        <h1 class="ws-mat-primary-text margin-bottom-s title-style heading-font-size-secondary"
           [innerHTML]="removeTags( conversation?.mainPost?.postContent?.title)">
         </h1>
         <button tabindex="0" *ngIf="canUserEdit || canUserDelete" type="button" mat-icon-button
@@ -19,11 +19,11 @@
         <ng-template matMenuContent>
           <a i18n-aria-label *ngIf="canUserEdit" aria-label="Edit Blog"
             [routerLink]="'/app/social/blogs/edit/' + conversationRequest?.postId" mat-menu-item i18n
-            class="aStyle"><span class="font-montserrat font-size-16px">Edit Blog</span></a>
-          <button *ngIf="canUserDelete" (click)="deleteBlog(deleteMsg.value)" mat-menu-item i18n>  <span class="font-montserrat font-size-16px">Delete Blog</span></button>
+            class="aStyle"><span class="font-montserrat body-font-size-secondary">Edit Blog</span></a>
+          <button *ngIf="canUserDelete" (click)="deleteBlog(deleteMsg.value)" mat-menu-item i18n>  <span class="font-montserrat body-font-size-secondary">Delete Blog</span></button>
         </ng-template>
       </mat-menu>
-      <h2 class="margin-bottom-m font-size-18px font-montserrat" [innerHTML]="conversation?.mainPost?.postContent?.abstract"></h2>
+      <h2 class="margin-bottom-m body-font-size-primary font-montserrat" [innerHTML]="conversation?.mainPost?.postContent?.abstract"></h2>
       <div class="flex flex-middle margin-bottom-xl">
         <div class="padding-left-s width-expand">
           <div class="flex flex-middle">
@@ -78,7 +78,7 @@
                 <mat-panel-title>
                   <div class="flex flex-middle">
                     <ws-widget-user-image [email]="userEmail"></ws-widget-user-image>
-                    <span class="padding-left-s font-size-16px" i18n>Write a response</span>
+                    <span class="padding-left-s body-font-size-secondary" i18n>Write a response</span>
                   </div>
                 </mat-panel-title>
               </mat-expansion-panel-header>

@@ -10,7 +10,7 @@
 <ng-template #sentimentForm>
   <form [formGroup]="feedbackForm" (ngSubmit)="submitFeedback()">
     <section class="w-full mb-8">
-      <h3 class="mat-h3 font-size-18px font-montserrat" i18n>What was helpful?</h3>
+      <h3 class="mat-h3 body-font-size-primary font-montserrat" i18n>What was helpful?</h3>
       <div class="mat-body">
         <mat-form-field class="w-full">
           <textarea matInput [matTextareaAutosize] [matAutosizeMaxRows]="10" [matAutosizeMinRows]="3"
@@ -27,7 +27,7 @@
 
     <section class="w-full">
       <section>
-        <h3 class="mat-h3 font-size-18px font-montserrat" i18n>What can be improved?</h3>
+        <h3 class="mat-h3 body-font-size-primary font-montserrat" i18n>What can be improved?</h3>
         <div class="mat-body">
           <mat-form-field class="w-full">
             <textarea matInput [matTextareaAutosize] [matAutosizeMaxRows]="10" [matAutosizeMinRows]="3"

@@ -32,7 +32,7 @@
         This content can only be viewed in Intranet.<br />
       </ng-container>
       <ng-container *ngIf="htmlContent?.isIframeSupported === 'No' || !htmlContent?.isIframeSupported">
-        <span class="font-montserrat font-size-18px" i18n>Content will open in a new window. If you are unable to view it, click on the button
+        <span class="font-montserrat body-font-size-primary" i18n>Content will open in a new window. If you are unable to view it, click on the button
           below.</span>
         <a [routerLink]="'/app/info/faq'" [queryParams]="{ tab: 'popup' }">
           <mat-icon matTooltip="How to Disable Pop-ups" class="align-text-top ws-mat-primary-text mat-icon">help
