@@ -51,6 +51,7 @@
   div.mat-subheading-1 {
     font-family: Montserrat !important;
     font-size: 16px;
+    line-height: 24px;
   }
   h2.body-font-size-secondary {
     font-family: Montserrat !important;
@@ -73,6 +74,7 @@
   }
   .heading-font-size-primary {
     font-size: 48px !important;
+    line-height: 50px;
   }
   @media (max-width: 700px) {
     h2.body-font-size-secondary {
@@ -90,7 +92,7 @@
     }
     .heading-font-size-primary {
       font-size: 28px !important;
-    }  
+    }
   }
   .bold-text {
     font-weight: bold;

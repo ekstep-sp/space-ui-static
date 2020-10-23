@@ -8,7 +8,7 @@
 </div>
 <div *ngIf="fetchStatus === 'done' && contentData">
   <ng-container *ngIf="!onExpand">
-    <div class="flex flex-start flex-around m-2 flex-wrapped">
+    <div class="flex flex-start flex-center-mobile flex-around m-2 flex-wrapped">
       <ws-analytics-analytics-tile
         *ngIf="totalUsers > 0"
         class="unique-users-card margin-m"
