@@ -52,7 +52,7 @@
     </button>
   </mat-toolbar>
   <mat-menu class="matclasses" #pdfMenu="matMenu">
-    <button mat-menu-item (click)="refresh()" aria-label="refresh" i18n-aria-label>
+    <button mat-menu-item class="menu-btn" (click)="refresh()" aria-label="refresh" i18n-aria-label>
       <mat-icon>refresh</mat-icon>
     </button>
     <ws-widget-btn-fullscreen (fsState)="fullScreenState($event)" (click)="refresh()"
@@ -61,7 +61,7 @@
 
     <ng-container *ngIf="showDownloadMobile && widgetData.pdfUrl && isDownloadable">
 
-      <button mat-menu-item>
+      <button mat-menu-item class="menu-btn">
         <mat-icon (click)="download()">cloud_download</mat-icon>
       </button>
     </ng-container>
