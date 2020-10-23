@@ -28,8 +28,8 @@
       <div *ngIf="!editMode" class="margin-bottom-s" [innerHtml]="item.postContent.body | pipeSafeSanitizer: 'html'">
       </div>
       <div *ngIf="editMode" class="margin-top-s margin-bottom-s padding-s ws-mat-primary-border">
-        <ws-widget-editor-quill [minLength]="'20'" [htmlText]="item.postContent?.body"
-          (textData)="onTextChange($event)">
+        <ws-widget-editor-quill [minLength]="'10'" [htmlText]="item.postContent?.body" [showMention]="allowMention" 
+          (textData)="onTextChange($event)" (mentionsData)="replyEditMentions = $event" #replyCommentEditor>
         </ws-widget-editor-quill>
         <div class="text-right">
           <button type="button" class="margin-top-s" [disabled]="!replyPostEnabled" mat-raised-button color="primary"
@@ -96,7 +96,7 @@
           </ws-widget-editor-quill>
         </div>
         <button mat-stroked-button color="primary" class="margin-left-s margin-top-post-btn"
-          [disabled]="!commentAddRequest.postContent.body || !commentAddRequest.postContent.body.trim().length || isPostingComment"
+          [disabled]="!commentAddRequest.postContent.body || !commentAddRequest.postContent.body.trim().length || isPostingComment || !isValidForUserComment"
           i18n="Post comment of question" (click)="postComment()">
           Post
         </button>

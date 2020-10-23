@@ -34,7 +34,8 @@
     <div *ngIf="!editMode" class="reply-content margin-top-s"
       [innerHTML]="reply?.postContent?.body | pipeSafeSanitizer: 'html'"></div>
     <div *ngIf="editMode" class="margin-top-s padding-s mat-primary-border">
-      <ws-widget-editor-quill (textData)="onTextChange($event)" [htmlText]="reply?.postContent?.body" [minLength]="'10'">
+      <ws-widget-editor-quill (textData)="onTextChange($event)" [htmlText]="reply?.postContent?.body" [minLength]="'10'" [showMention]="allowMention"
+      (mentionsData)="replyEditMentions = $event" >
       </ws-widget-editor-quill>
       <!-- <ws-editor-quill
         [minLength]="'10'"
