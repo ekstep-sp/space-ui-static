@@ -5,17 +5,11 @@
     <ng-container i18n> ?</ng-container>
   </h2>
   <div class="flex flex-row-reverse">
-    <button
-      name="yes-button-goal-delete-dialog"
-      color="primary"
-      mat-button
-      i18n
-      (click)="deleteGoal()"
-      style="margin-left: 0.5rem;"
-    >
+    <button name="yes-button-goal-delete-dialog" color="primary" mat-button i18n (click)="deleteGoal()"
+      style="margin-left: 0.5rem;" class="goal-delete-btn-yes">
       Yes
     </button>
-    <button name="no-button-goal-delete-dialog" color="primary" mat-button i18n mat-dialog-close>
+    <button name="no-button-goal-delete-dialog" class="goal-delete-btn-no" mat-button i18n mat-dialog-close>
       No
     </button>
   </div>
