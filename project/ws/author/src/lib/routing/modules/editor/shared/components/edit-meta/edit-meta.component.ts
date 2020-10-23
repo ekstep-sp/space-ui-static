@@ -282,7 +282,7 @@ export class EditMetaComponent implements OnInit, OnDestroy, AfterViewInit {
           if (typeof value === 'string' && value) {
             this.employeeList = <any[]>[]
             this.fetchTagsStatus = 'fetching'
-            return this.editorService.fetchEmployeeList(value)
+            return this.editorService.fetchCuratorList(value)
           }
           return of([])
         }),
@@ -563,6 +563,20 @@ export class EditMetaComponent implements OnInit, OnDestroy, AfterViewInit {
     })
   }
 
+  /* populateSubmittedByInCreators() {
+    // add a new default object in curators field which will be same as current logged in user
+    if (this.contentMeta.status !== 'Reviewed' && this.configSvc.userProfile) {
+      // only add the current user if it is not present in the list already
+      if (this.contentMeta.creatorContacts.findIndex(contact => contact.id === (this.configSvc.userProfile as any).userId) < 0) {
+        this.contentForm.controls.creatorContacts.setValue([...this.contentForm.controls.creatorContacts.value, {
+          name: this.configSvc.userProfile ? this.configSvc.userProfile.userName : '',
+          email: this.configSvc.userProfile ? this.configSvc.userProfile.email : '',
+          id: this.configSvc.userProfile ? this.configSvc.userProfile.userId : '',
+        }])
+      }
+    }
+  } */
+
   assignExpiryDate() {
     this.canExpiry = !this.canExpiry
     this.contentForm.controls.expiryDate.setValue(
@@ -584,6 +598,9 @@ export class EditMetaComponent implements OnInit, OnDestroy, AfterViewInit {
             this.contentMeta[v as keyof NSContent.IContentMeta] === false)
         ) {
           this.contentForm.controls[v].setValue(this.contentMeta[v as keyof NSContent.IContentMeta])
+          /* if (v === 'creatorContacts') {
+            this.populateSubmittedByInCreators()
+          } */
         } else {
           if (v === 'expiryDate') {
             this.contentForm.controls[v].setValue(

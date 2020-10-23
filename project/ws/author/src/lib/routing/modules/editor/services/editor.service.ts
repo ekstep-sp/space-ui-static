@@ -176,6 +176,33 @@ export class EditorService {
     })
   }
 
+  filterCurators = () => (source: Observable<any>) => {
+    return new Observable(observer => {
+      return source.pipe(
+        switchMap((originalData: any) => {
+          const roleRequests = this.generateDetailsRequests(originalData)
+          return forkJoin(roleRequests).pipe(
+            map((rolesResponse: object[]) => {
+              return rolesResponse.filter((roleObj: any) => {
+                return roleObj.hasOwnProperty('roles') && Array.isArray(roleObj.roles) && roleObj.roles.includes('content-creator')
+              })
+            })
+          )
+        })
+      ).subscribe({
+        next(data) {
+          observer.next([...data])
+        },
+        error(e) {
+          observer.error(e)
+        },
+        complete() {
+          observer.complete()
+        },
+      })
+    })
+  }
+
   parseDetailsOfPublishers(combinedDetails: any[]) {
     // console.log('total users are ', combinedDetails)
     const allUsers = combinedDetails[0] // contains other meta of user
@@ -206,6 +233,21 @@ export class EditorService {
       filter((finalData: object[]) => finalData !== null)
     )
     return finalPublishers$
+  }
+
+  fetchCuratorList(data: string): Observable<any> {
+    const allMatchingUsers$ = this.userAutoComplete.fetchAutoComplete(data)
+    const filteredCuratorsDetails$ = allMatchingUsers$.pipe(
+      this.filterCurators(),
+      catchError(_ => of([]))
+    )
+    const finalCurators$ = forkJoin([allMatchingUsers$, filteredCuratorsDetails$]).pipe(
+      map((combinedDetails: any[]) => {
+        return this.parseDetailsOfPublishers(combinedDetails)
+      }),
+      filter((finalData: object[]) => finalData !== null)
+    )
+    return finalCurators$
   }
 
   searchSkills(query: string): Observable<any> {
