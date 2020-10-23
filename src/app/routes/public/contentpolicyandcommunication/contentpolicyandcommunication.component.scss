@@ -164,6 +164,10 @@ max-width: 600px !important;
 }
 }
 
+.theme-muave.night-mode a[href^="/"][target=_self], .theme-muave.night-mode a[href^=http], .theme-muave.night-mode a[href^=mailto], .theme-muave.night-mode a[target=_blank] {
+  color: #925eb0 !important;
+}
+
 }
 
 
@@ -211,3 +215,4 @@ max-width: 600px !important;
     word-break: break-word;
   }
 }
+

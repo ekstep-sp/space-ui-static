@@ -164,9 +164,11 @@ export class UserDashboardComponent implements OnInit {
   }
 
   convertTimestampToLocalDate(userList: NsUserDashboard.IUserListDataFromUserTable[]) {
+    const locales = this.userDashboardData.timeZoneFormat ? this.userDashboardData.timeZoneFormat.locales : 'en-GB'
+    const timeZone = this.userDashboardData.timeZoneFormat ? this.userDashboardData.timeZoneFormat.timeZone : 'GMT'
     return userList.map(userData => {
       const date = new Date(userData.time_inserted)
-      userData.time_inserted = date.toLocaleString()
+      userData.time_inserted = date.toLocaleString(locales , {  timeZone })
     })
   }
 

@@ -109,7 +109,7 @@
               </ws-widget-editor-quill>
             </div>
             <button mat-stroked-button color="primary" class="margin-left-s margin-top-post-btn"
-              [disabled]="!commentAddRequest.postContent.body || !commentAddRequest.postContent.body.trim().length || isPostingComment"
+              [disabled]="!commentAddRequest.postContent.body || !commentAddRequest.postContent.body.trim().length || isPostingComment || !isValidForUserCommentPost"
               i18n="Post comment of question" (click)="postComment()">
               Post
             </button>
