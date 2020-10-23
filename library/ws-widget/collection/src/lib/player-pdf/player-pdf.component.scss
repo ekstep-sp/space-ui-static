@@ -63,9 +63,9 @@ input[type=number] {
 }
 ::ng-deep{
 @media only screen and (max-width: 310px){
-  .show-btn{
-    display: flex !important;
-    }
+  // .show-btn{
+  //   display: flex !important;
+  //   }
   .mat-icon-button{
   width: 30px !important;
     }
