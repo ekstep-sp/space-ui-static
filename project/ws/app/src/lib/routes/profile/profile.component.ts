@@ -1,10 +1,9 @@
 import { Component, OnDestroy, OnInit } from '@angular/core'
 import { MatDialog } from '@angular/material'
-import { ActivatedRoute, Router } from '@angular/router'
+import { ActivatedRoute, NavigationEnd, Router } from '@angular/router'
 import { ConfigurationsService, LogoutComponent, NsPage, ValueService } from '@ws-widget/utils'
 import { Subscription } from 'rxjs'
 import { map } from 'rxjs/operators'
-import { ProfileService } from './services/profile.service'
 
 @Component({
   selector: 'ws-app-profile',
@@ -27,26 +26,17 @@ export class ProfileComponent implements OnInit, OnDestroy {
     private configSvc: ConfigurationsService,
     private activatedRoute: ActivatedRoute,
     private router: Router,
-    private profileSvc: ProfileService
   ) {}
 
   ngOnInit() {
-    this.profileSvc.showTabName.subscribe((data: any) => {
-      if (data) {
-        this.routerSubscription = this.router.events.subscribe((event: any) => {
-          if (event.url) {
-            // tslint:disable-next-line: no-shadowed-variable
-            const tab = event.url.split('/')[3]
-            this.assignTabName(tab)
-          }
-      })
-    }
-  }
-  )
-    // this will close the side nav by default
-    // this.showText = !this.showText
-    const tab = this.router.url.split('/')[3]
-    this.assignTabName(tab)
+    // tslint:disable-next-line: max-line-length
+    this.router.events.subscribe((data: any) => {
+      if (data.hasOwnProperty('routerEvent') && data.routerEvent instanceof NavigationEnd) {
+        this.assignTabName([...data.routerEvent.urlAfterRedirects.split('/')].pop())
+      } else if (data instanceof NavigationEnd) {
+        this.assignTabName([...data.urlAfterRedirects.split('/')].pop())
+      }
+    })
     this.defaultSideNavBarOpenedSubscription = this.isLtMedium$.subscribe((isLtMedium: boolean) => {
       this.screenSizeIsLtMedium = isLtMedium
     })
