@@ -61,6 +61,18 @@ input[type=number] {
     display: none;
   }
 }
+::ng-deep{
+@media only screen and (max-width: 310px){
+  // .show-btn{
+  //   display: flex !important;
+  //   }
+  .mat-icon-button{
+  width: 30px !important;
+    }
+  }
+}
+
+
 // @media only screen and (max-width: 823px) {
 // .hidedownload{
 //   display: none !important;
