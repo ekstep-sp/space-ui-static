@@ -249,7 +249,7 @@ $badge-padding: 12px;
 .text-inside-grid {
   position: absolute;
   @include breakpoint-xs {
-    font-size: 12px;
+    font-size: 10px;
     margin: 0 0 1.2px;
   }
   @include breakpoint-xxs {
@@ -261,7 +261,7 @@ $badge-padding: 12px;
 .text-outside-grid {
   position: absolute;
   @include breakpoint-xs {
-    font-size: 12px;
+    font-size: 10px;
     margin: auto;
   }
   // right: 5px;
