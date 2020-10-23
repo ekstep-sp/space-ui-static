@@ -75,6 +75,7 @@ export class ConfigurationsService {
   primaryNavBarConfig: NsInstanceConfig.IPrimaryNavbarConfig | null = null
   defaultCredentials: { username?: string, password?: string } | null = null
   isGuestUser = !!sessionStorage.getItem('default-user')
+
   removeGuestUser = () => {
     sessionStorage.removeItem('default-user')
     this.isGuestUser = false

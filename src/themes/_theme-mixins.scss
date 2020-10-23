@@ -45,31 +45,55 @@
     font-size: 14px;
     font-family: Montserrat !important;
   }
-  h1.mat-h1 {
+  /*   h1.mat-h1 {
     font-family: CampaignW00-Medium !important;
-  }
+  } */
   div.mat-subheading-1 {
     font-family: Montserrat !important;
     font-size: 16px;
   }
-  h2.font-16px {
+  h2.body-font-size-secondary {
     font-family: Montserrat !important;
     font-size: 18px;
   }
   .font-size-14px {
     font-size: 14px !important;
   }
-  .font-size-16px {
+  .body-font-size-secondary {
     font-size: 16px !important;
   }
-  .font-size-18px {
+  .body-font-size-primary {
     font-size: 18px !important;
   }
-  .font-size-24px {
+  .font-size-20px {
+    font-size: 20px !important;
+  }
+  .heading-font-size-secondary {
     font-size: 24px !important;
   }
-  .font-size-48px {
+  .heading-font-size-primary {
     font-size: 48px !important;
+  }
+  @media (max-width: 700px) {
+    h2.body-font-size-secondary {
+      font-family: Montserrat !important;
+      font-size: 18px;
+    }
+    .body-font-size-secondary {
+      font-size: 14px !important;
+    }
+    .body-font-size-primary {
+      font-size: 16px !important;
+    }
+    .heading-font-size-secondary {
+      font-size: 20px !important;
+    }
+    .heading-font-size-primary {
+      font-size: 28px !important;
+    }  
+  }
+  .bold-text {
+    font-weight: bold;
   }
   [id^="mat-dialog-title-"] {
     font-size: 24px;
@@ -124,6 +148,9 @@
       color: $colorAccentLight !important;
     }
   } @else {
+    .color-platform-gray {
+      color: #696466;
+    }
     .ws-mat-primary-text {
       color: $colorPrimary !important;
       //  font-family: montserrat!important;

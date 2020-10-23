@@ -1,9 +1,9 @@
 <div class="header flex-header">
   <mat-toolbar [color]="pageNavbar.color" [ngStyle]="pageNavbar?.styles">
     <ws-widget-btn-page-back [widgetData]="{ url: 'back' }"></ws-widget-btn-page-back>
-    <div>
-      <span i18n class="margin-left-xs text-white font-size-24px font-campaign">Recent Blogs</span>
-    </div>
+  
+      <span i18n class="margin-left-xs text-white font-size-20px font-montserrat text-truncate inline">Recent Blogs</span>
+  
     <div class="column-2">
       <div id="blogsearchbar"
         class="flex items-center border search border-solid search-border text-white justify-search">
@@ -90,8 +90,8 @@
     <div>
       <mat-card class="margin-bottom-s" *ngFor="let result of timelineData?.result">
         <a [routerLink]="'/app/social/blogs/' + result.id">
-          <div class="ws-mat-primary-text mat-h2 blog-title title-style" [innerHTML]="result.postContent.title" ></div>
-          <p class="font-size-16px mat-caption text-truncate">{{ result.postContent.abstract }}</p>
+          <div class="font-montserrat body-font-size-primary ws-mat-primary-text mat-h2 blog-title title-style" [innerHTML]="result.postContent.title" ></div>
+          <p class="body-font-size-secondary mat-caption text-truncate">{{ result.postContent.abstract }}</p>
         </a>
         <div class="flex flex-between flex-middle">
           <!-- <div> -->

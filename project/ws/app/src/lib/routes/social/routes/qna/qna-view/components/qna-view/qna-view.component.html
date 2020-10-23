@@ -1,6 +1,6 @@
 <mat-toolbar [color]="pageNavbar.color" [ngStyle]="pageNavbar?.styles">
   <ws-widget-btn-page-back [widgetData]="{ url: '/app/social/qna' }"></ws-widget-btn-page-back>
-  <span i18n class="ml-2 text-white font-campaign font-size-24px">Question</span>
+  <span i18n class="ml-2 text-white font-montserrat font-size-20px">Question</span>
 </mat-toolbar>
 
 <div class="views-view-wrapper">
@@ -91,7 +91,7 @@
               </div>
             </div>
             <div class="text-right" *ngIf="qnaComments?.postCount > 0">
-              <button type="button" [disabled]="commentFetchStatus === 'fetching'" (click)="fetchQuestionComments()"
+              <button type="button" class="position-right" [disabled]="commentFetchStatus === 'fetching'" (click)="fetchQuestionComments()"
                 mat-button color="primary" i18n>
                 Load More Comments
               </button>

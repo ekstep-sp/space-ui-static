@@ -1,7 +1,7 @@
 <div class="p-4">
   <div class="search-holder">
     <div class="flex flex-middle mb-4 cursor-pointer" (click)="showInfo = !showInfo">
-      <h2 class="font-size-24px mat-h2 ws-mat-primary-text font-weight-bold margin-remove" i18n>
+      <h2 class="heading-font-size-secondary mat-h2 ws-mat-primary-text font-weight-bold margin-remove" i18n>
         What are your interests?
       </h2>
       <mat-icon class="ml-4 clr-clr">info</mat-icon>
@@ -48,7 +48,7 @@
   </div>
 
   <div class="interest-holder">
-    <h2 class="font-montserrat font-size-18px mat-h2 ws-mat-primary-text font-weight-bold" i18n>
+    <h2 class="font-montserrat body-font-size-primary mat-h2 ws-mat-primary-text font-weight-bold" i18n>
       My Interests
     </h2>
     <div class="mt-4 text-center" *ngIf="isFetchingUserInterests">
@@ -78,7 +78,7 @@
     </mat-chip-list>
 
     <ng-container *ngIf="suggestedInterests?.length">
-      <h2 class="font-montserrat font-size-18px mat-h2 ws-mat-primary-text font-weight-bold margin-top-l montserrat" i18n>
+      <h2 class="font-montserrat body-font-size-primary mat-h2 ws-mat-primary-text font-weight-bold margin-top-l montserrat" i18n>
         Our Suggestions
       </h2>
       <div class="">
@@ -88,7 +88,7 @@
             <mat-expansion-panel #mep="matExpansionPanel" [expanded]="true">
               <mat-expansion-panel-header>
                 <mat-panel-title>SDGs </mat-panel-title>
-                <span class="view font-montserrat font-size-16px"> ( {{ sdgs.length }} )</span>
+                <span class="view font-montserrat body-font-size-secondary"> ( {{ sdgs.length }} )</span>
               </mat-expansion-panel-header>
               <mat-chip-list>
                 <mat-chip
@@ -149,7 +149,7 @@
             <mat-expansion-panel #mep1="matExpansionPanel">
               <mat-expansion-panel-header>
                 <mat-panel-title>Region </mat-panel-title>
-                <span class="view font-montserrat font-size-16px"> ( {{ region.length }} )</span>
+                <span class="view font-montserrat body-font-size-secondary"> ( {{ region.length }} )</span>
               </mat-expansion-panel-header>
               <mat-chip-list>
                 <mat-chip
@@ -209,7 +209,7 @@
             <mat-expansion-panel #mep2="matExpansionPanel">
               <mat-expansion-panel-header>
                 <mat-panel-title>Others </mat-panel-title>
-                <span class="view font-montserrat font-size-16px"> ( {{ others.length }} )</span>
+                <span class="view font-montserrat body-font-size-secondary"> ( {{ others.length }} )</span>
               </mat-expansion-panel-header>
               <mat-chip-list>
                 <mat-chip

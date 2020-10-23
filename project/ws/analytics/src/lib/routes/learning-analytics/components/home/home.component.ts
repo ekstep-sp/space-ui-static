@@ -14,6 +14,7 @@ import { LearningAnalyticsService } from '../../services/learning-analytics.serv
 import { FormControl } from '@angular/forms'
 import { MatDialog } from '@angular/material'
 import { InfoDialogComponent } from '../info-dialog/info-dialog.component'
+import { ActivatedRoute } from '@angular/router'
 @Component({
   selector: 'ws-analytics-home',
   templateUrl: './home.component.html',
@@ -66,6 +67,8 @@ export class HomeComponent implements OnInit, OnDestroy {
   barChartDailyNewUsersData: IGraphWidget = {} as IGraphWidget
   barChartWeeklyNewUsersData: IGraphWidget = {} as IGraphWidget
   barChartMonthlyNewUsersData: IGraphWidget = {} as IGraphWidget
+  barChartMonthlyUsageData: IGraphWidget = {} as IGraphWidget
+  barChartWeeklyUsageData: IGraphWidget = {} as IGraphWidget
   errorWidget: NsWidgetResolver.IRenderConfigWithTypedData<NsError.IWidgetErrorResolver> = {
     widgetType: ROOT_WIDGET_CONFIG.errorResolver._type,
     widgetSubType: ROOT_WIDGET_CONFIG.errorResolver.errorResolver,
@@ -87,7 +90,9 @@ export class HomeComponent implements OnInit, OnDestroy {
   ]
   selected = 'All'
   hourlyData: any
+  totalUsersCount = 0
   filterFetchStatus: TFetchStatus = 'none'
+  totalUsersFromUserTable: any = []
   private filterEventSubscription: Subscription | null = null
   private removeEventSubscription: Subscription | null = null
   private dateEventSubscription: Subscription | null = null
@@ -566,9 +571,12 @@ export class HomeComponent implements OnInit, OnDestroy {
     public dialog: MatDialog,
     private graphGeneralSvc: GraphGeneralService,
     private resolver: AnalyticsResolver,
+    private activateRoute: ActivatedRoute,
   ) {}
 
-  ngOnInit() {
+  async ngOnInit() {
+    this.getUserDataFromConfig()
+    // await this.getUserCountFromUserTable()
     this.filterEventSubscription = this.graphGeneralSvc.filterEventChangeSubject.subscribe(
       (filterEvent: any) => {
         const filter = {
@@ -741,6 +749,7 @@ export class HomeComponent implements OnInit, OnDestroy {
     searchQuery: string,
     filterArray: NsAnalytics.IFilterObj[],
   ) {
+
     this.fetchStatus = 'fetching'
     this.analyticsSrv
       .timeSpent(endDate, startDate, contentType, filterArray, searchQuery)
@@ -869,11 +878,13 @@ export class HomeComponent implements OnInit, OnDestroy {
       }
     }
   }
-  populateChartData() {
+  async populateChartData() {
     if (this.contentData) {
+      await this.getUserCountFromUserTable()
       // all contents count
       this.contentUsers = this.contentData.content_users
-      this.totalUsers = this.contentData.totalUsers
+      // this.totalUsers = this.contentData.totalUsers
+      this.totalUsers = this.totalUsersCount
       this.hits = this.contentData.num_of_hits
       this.contentAccessed = this.contentData.all_content_accessed
 
@@ -1402,6 +1413,106 @@ export class HomeComponent implements OnInit, OnDestroy {
         barChartDailyUsersLabel.push(this.dailyDate)
         dailyUsersData.push(users.doc_count)
       })
+      /* For Monthly Active Users */
+
+      const monthlyUsersLabel: string[] = []
+      const barChartmonthlyUsersData: number[] = []
+      this.contentData.monthly_active_users.forEach((users: any) => {
+        this.dailyDate = new Date(users.key).toISOString()
+        this.dailyDate = this.dailyDate.split('T')[0]
+        const month = this.months[new Date(this.dailyDate).getMonth()]
+        const date = this.dailyDate.split('-')[2]
+        this.dailyDate = `${date}-${month}`
+        monthlyUsersLabel.push(this.dailyDate)
+        barChartmonthlyUsersData.push(users.doc_count)
+      })
+
+      this.barChartMonthlyUsageData = {
+        widgetType: ROOT_WIDGET_CONFIG.graph._type,
+        widgetSubType: ROOT_WIDGET_CONFIG.graph.graphGeneral,
+        widgetData: {
+          graphId: 'monthlyUsersBarChart',
+          graphType: 'bar',
+          graphHeight: '250px',
+          graphWidth: '100%',
+          graphLegend: false,
+          graphLegendPosition: 'top',
+          graphLegendFontSize: 11,
+          graphTicksFontSize: 11,
+          graphTicksXAxisDisplay: true,
+          graphTicksYAxisDisplay: true,
+          graphGridLinesDisplay: false,
+          graphXAxisMaxLimit: 20,
+          graphIsXAxisAutoSkip: true,
+          graphDefaultPalette: 'default',
+          graphYAxisLabel: '# Users',
+          graphXAxisLabel: 'Date',
+          graphIsXAxisLabel: true,
+          graphIsYAxisLabel: true,
+          graphOnClick: false,
+          graphData: {
+            labels: monthlyUsersLabel,
+            datasets: [
+              {
+                label: '',
+                backgroundColor: 'rgb(32, 150, 205)',
+                borderWidth: 1,
+                data: barChartmonthlyUsersData,
+              },
+            ],
+          },
+        },
+      }
+      /* For Weekly Active Users */
+
+      const barChartWeeklyActiveUsersLabel: string[] = []
+      const activeWeeklyUsersData: number[] = []
+      this.contentData.weekly_active_users.forEach((users: any) => {
+        this.dailyDate = new Date(users.key).toISOString()
+        this.dailyDate = this.dailyDate.split('T')[0]
+        const month = this.months[new Date(this.dailyDate).getMonth()]
+        const date = this.dailyDate.split('-')[2]
+        this.dailyDate = `${date}-${month}`
+        barChartWeeklyActiveUsersLabel.push(this.dailyDate)
+        activeWeeklyUsersData.push(users.doc_count)
+      })
+      this.barChartWeeklyUsageData = {
+        widgetType: ROOT_WIDGET_CONFIG.graph._type,
+        widgetSubType: ROOT_WIDGET_CONFIG.graph.graphGeneral,
+        widgetData: {
+          graphId: 'weeklyActiveUsersChart',
+          graphType: 'bar',
+          graphHeight: '250px',
+          graphWidth: '100%',
+          graphLegend: false,
+          graphLegendPosition: 'top',
+          graphLegendFontSize: 11,
+          graphTicksFontSize: 11,
+          graphTicksXAxisDisplay: true,
+          graphTicksYAxisDisplay: true,
+          graphGridLinesDisplay: false,
+          graphXAxisMaxLimit: 20,
+          graphIsXAxisAutoSkip: true,
+          graphDefaultPalette: 'default',
+          graphYAxisLabel: '# Users',
+          graphXAxisLabel: 'Date',
+          graphIsXAxisLabel: true,
+          graphIsYAxisLabel: true,
+          graphOnClick: false,
+          graphData: {
+            labels: barChartWeeklyActiveUsersLabel,
+            datasets: [
+              {
+                label: '',
+                backgroundColor: 'rgb(32, 150, 205)',
+                borderWidth: 1,
+                data: activeWeeklyUsersData,
+              },
+            ],
+          },
+        },
+      }
+
       this.barChartDailyUsersData = {
         widgetType: ROOT_WIDGET_CONFIG.graph._type,
         widgetSubType: ROOT_WIDGET_CONFIG.graph.graphGeneral,
@@ -1635,8 +1746,12 @@ export class HomeComponent implements OnInit, OnDestroy {
     }
   }
 
-  async openInfoPopup(eventType: string, titleToUse?: string) {
+  async openInfoPopup(eventType: string, titleToUse?: string, showUserDetailsFromUserTable = false) {
+  if (showUserDetailsFromUserTable) {
+    await this.getAllUsers()
+  }
     this.openDialog({
+      showUserDetailsFromUserTable,
       event: eventType,
       title: titleToUse,
       width: '50%',
@@ -1646,6 +1761,7 @@ export class HomeComponent implements OnInit, OnDestroy {
       contentType: this.contentType,
       searchQuery: this.searchQuery,
       filters: this.filterArray,
+      totalUsersFromUserTable: this.totalUsersFromUserTable,
     })
   }
 
@@ -1655,5 +1771,42 @@ export class HomeComponent implements OnInit, OnDestroy {
       width: _data.width,
       height: _data.height,
     })
+  }
+
+  getUserDataFromConfig() {
+    this.activateRoute.data.subscribe(data => {
+      if (data) {
+        const userListData = data.pageData.data.userSubmissionApiDetails
+        this.analyticsSrv.setUserDataFromConfig(userListData)
+      }
+    })
+  }
+  async getUserCountFromUserTable(): Promise<any> {
+    let params: any
+    if (this.startDate && this.endDate) {
+      params = {
+        startDate: `${this.startDate} 00:00:00`,
+        endDate: `${this.endDate} 23:59:59.9999`,
+      }
+    }
+    const data = await this.analyticsSrv.getUserCountByTimeStamp(params)
+    if (data.ok) {
+      this.totalUsersCount = data.DATA
+    }
+    this.totalUsers = 0
+  }
+
+  async getAllUsers(): Promise<any> {
+    let params: any
+    if (this.startDate && this.endDate) {
+      params = {
+        startDate: `${this.startDate} 00:00:00`,
+        endDate: `${this.endDate} 23:59:59.9999`,
+      }
+    }
+    const data = await this.analyticsSrv.getAllUsers(params)
+    if (data.ok) {
+      this.totalUsersFromUserTable = data.DATA
+    }
   }
 }

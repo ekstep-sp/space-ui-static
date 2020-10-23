@@ -272,4 +272,15 @@ export class BlogViewComponent implements OnInit {
       return ''
     }
   }
+
+   removeTags(str: any) {
+    if ((str === null) || (str === '')) {
+        return false
+    }
+        const strNew = str.toString()
+    // Regular expression to identify HTML tags in
+    // the input string. Replacing the identified
+    // HTML tag with a null string.
+    return strNew.replace(/(<([^>]+)>)/ig, '')
+}
 }

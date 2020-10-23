@@ -2,13 +2,13 @@
   <div class="main-container">
     <ng-container *ngIf="content?.children?.length; else noChildren">
       <div class="toc-section">
-        <h2 class="margin-remove font-size-18px font-montserrat">Table of contents</h2>
+        <h2 class="margin-remove body-font-size-primary font-montserrat">Table of contents</h2>
         <button class="explore-collapse-btn" type="button" color="primary" (click)="expandAll = !expandAll" mat-button>
-          <ng-container class="font-size-16px font-montserrat" *ngIf="!expandAll" i18n>Expand All</ng-container>
-          <ng-container class="font-size-16px font-montserrat" *ngIf="expandAll" i18n>Collapse All</ng-container>
+          <ng-container class="body-font-size-secondary font-montserrat" *ngIf="!expandAll" i18n>Expand All</ng-container>
+          <ng-container class="body-font-size-secondary font-montserrat" *ngIf="expandAll" i18n>Collapse All</ng-container>
         </button>
       </div>
-      <div class="content-card font-size-16px font-montserrat"
+      <div class="content-card body-font-size-secondary font-montserrat"
         *ngFor="let card of content?.children; trackBy: contentTrackBy">
         <ws-app-toc-content-card [forPreview]="forPreview" [expandAll]="expandAll" [rootId]="contextId"
           [rootContentType]="contextPath" [content]="card"></ws-app-toc-content-card>

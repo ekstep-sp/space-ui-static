@@ -11,7 +11,7 @@ import {
 import { FormControl } from '@angular/forms'
 import { ActivatedRoute, Router } from '@angular/router'
 import { NsWidgetResolver, WidgetBaseComponent } from '@ws-widget/resolver'
-import { EventService, LoggerService, WsEvents, ValueService, UtilityService } from '@ws-widget/utils'
+import { EventService, LoggerService, WsEvents, ValueService, UtilityService, NsUser, ConfigurationsService } from '@ws-widget/utils'
 import * as PDFJS from 'pdfjs-dist/webpack'
 import { fromEvent, interval, merge, Subject, Subscription } from 'rxjs'
 import { debounceTime, distinctUntilChanged } from 'rxjs/operators'
@@ -20,6 +20,7 @@ import { ROOT_WIDGET_CONFIG } from '../collection.config'
 import { NsContent } from '../_services/widget-content.model'
 import { WidgetContentService } from '../_services/widget-content.service'
 import { IWidgetsPlayerPdfData } from './player-pdf.model'
+import { isIOS } from '../player-amp/player-amp.utility'
 
 const pdfjsViewer = require('pdfjs-dist/web/pdf_viewer')
 @Component({
@@ -62,6 +63,8 @@ export class PlayerPdfComponent extends WidgetBaseComponent
   private activityStartedAt: Date | null = null
   private renderSubject = new Subject()
   private lastRenderTask: any | null = null
+  userProfile: NsUser.IUserProfile | null = null
+
   // Subscriptions
   private contextMenuSubs: Subscription | null = null
   private renderSubscriptions: Subscription | null = null
@@ -72,6 +75,7 @@ export class PlayerPdfComponent extends WidgetBaseComponent
   isShowDownloadMobile = false
   isShowDownloadIOS = false
   isShowDownloadAndroid = false
+  isShowDownloadGuest = false
   constructor(
     private activatedRoute: ActivatedRoute,
     private router: Router,
@@ -81,6 +85,7 @@ export class PlayerPdfComponent extends WidgetBaseComponent
     private viewerSvc: ViewerUtilService,
     private valueSvc: ValueService,
     private utilitySvc: UtilityService,
+    public configSvc: ConfigurationsService,
   ) {
     super()
   }
@@ -104,6 +109,8 @@ export class PlayerPdfComponent extends WidgetBaseComponent
         this.isShowDownloadMobile = data.pageData.data.isMobileDownloadable
         this.isShowDownloadIOS = data.pageData.data.isIOSDownloadable
         this.isShowDownloadAndroid = data.pageData.data.isAndroidDownloadable
+        this.isShowDownloadGuest = data.pageData.data.isGuestDownloadable
+
       } else {
         this.isShowDownloadMobile = false
         this.isShowDownloadIOS = false
@@ -190,7 +197,6 @@ export class PlayerPdfComponent extends WidgetBaseComponent
 
       return true
     }
-
     if (this.isShowDownloadMobile) {
       if (this.utilitySvc.isIos && this.isShowDownloadIOS) {
         return true
@@ -198,15 +204,25 @@ export class PlayerPdfComponent extends WidgetBaseComponent
       if (this.utilitySvc.isAndroid && this.isShowDownloadAndroid) {
         return true
       }
+    }
+    return false
+  }
 
+  get showDownloadGuest() {
+    if (this.configSvc.userRoles) {
+      if (this.configSvc.userRoles.size === 3
+        && this.configSvc.userRoles.has('my-analytics')
+        && this.configSvc.userRoles.has('privileged')) {
+        return true
+      }
     }
     return false
   }
 
   get isDownloadable() {
-    if (this.eventSvc.isGuestUser) {
-      return false
-    }
+    // if (this.eventSvc.isGuestUser) {
+    //   return false
+    // }
     if (this.widgetData) {
       if (this.widgetData.pdfUrl) {
         return true
@@ -217,7 +233,9 @@ export class PlayerPdfComponent extends WidgetBaseComponent
   download() {
     if (this.widgetData.pdfUrl) {
       const link = document.createElement('a')
-      link.download = this.widgetData.pdfUrl
+      if (!isIOS) {
+        link.download = this.widgetData.pdfUrl
+      }
       link.target = '_self'
       // Construct the URI
       link.href = this.widgetData.pdfUrl || ''

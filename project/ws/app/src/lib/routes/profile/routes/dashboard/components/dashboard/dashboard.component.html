@@ -4,10 +4,10 @@
       <div class="user-avatar ws-mat-primary-lite-background-on-day">
         <ws-widget-user-image class="user-image" [email]="userEmail" [imageType]="'rounded'" [userProfilePicture]= "userProfilePicture" [enableProfilePicture] = "true"></ws-widget-user-image>
         <div class="user-name">
-          <div class="name-edit"><h2 class="font-size-18px font-montserrat pl-4 ws-mat-primary-text sm:pl-0">{{ userName }}</h2>
+          <div class="name-edit"><h2 class="body-font-size-primary font-montserrat pl-4 ws-mat-primary-text sm:pl-0">{{ userName }}</h2>
             <mat-icon  class="icon-space" (click)="edituserdetails()">create</mat-icon>
           </div>
-          <h3 class="font-bold font-size-16px font-montserrat margin-zero pl-4 sm:pl-0">{{ departmentName }}</h3>
+          <h3 class="font-bold body-font-size-secondary font-montserrat margin-zero pl-4 sm:pl-0">{{ departmentName }}</h3>
         </div>
             <!-- <button mat-button  class="profile-form" color="primary" (click)="edituserdetails()"> -->
               <!-- <mat-icon (click)="edituserdetails()">create</mat-icon> -->
@@ -19,7 +19,7 @@
       <div class="p-4" *ngIf="enabledTabs?.subFeatures?.interests">
         <div class="flex flex-middle mb-4">
           <mat-icon>tag_faces</mat-icon>
-          <span class="font-bold font-size-16px mat-title margin-zero pl-4" i18n="interest you follow">
+          <span class="font-bold body-font-size-secondary mat-title margin-zero pl-4" i18n="interest you follow">
             Your Interests</span>
           <span class="spacer"></span>
 

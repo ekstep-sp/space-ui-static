@@ -1,12 +1,12 @@
 <mat-toolbar [color]="pageNavbar.color" [ngStyle]="pageNavbar?.styles">
   <ws-widget-btn-page-back [widgetData]="{ url: 'back' }"></ws-widget-btn-page-back>
-  <span i18n="page title: playlist create" class="font-size-24px font-campaign margin-left-xs text-white">Create Playlist</span>
+  <span i18n="page title: playlist create" class="font-size-20px font-montserrat margin-left-xs text-white">Create Playlist</span>
 </mat-toolbar>
 <main
   class="page-container margin-top-xl margin-bottom-xl mat-drawer-container mat-drawer-container-has-open mat-drawer-transition"
 >
   <form #playlistForm [formGroup]="createPlaylistForm">
-    <h2 class="font-size-18px font-montserrat mat-h2 margin-bottom-xs" i18n>Enter Playlist Details</h2>
+    <h2 class="body-font-size-primary font-montserrat mat-h2 margin-bottom-xs" i18n>Enter Playlist Details</h2>
     <mat-form-field class="width-1-1 margin-bottom-m" appearance="fill">
       <mat-label i18n>Name</mat-label>
       <mat-error i18n>Playlist title should be 1-100 characters</mat-error>
@@ -19,14 +19,14 @@
         required
       />
     </mat-form-field>
-    <h2 class="font-size-18px font-montserrat mat-h2 margin-bottom-xs" i18n>Add Content</h2>
+    <h2 class="body-font-size-primary font-montserrat mat-h2 margin-bottom-xs" i18n>Add Content</h2>
     <ws-widget-picker-content
       [widgetData]="pickerContentData"
       (change)="onContentSelectionChanged($event?.content, $event?.checked)"
     >
     </ws-widget-picker-content>
     <ng-container *ngIf="isShareEnabled && allowedToSharePlaylist">
-      <h2 class="mat-h2 font-size-18px font-montserrat margin-top-m margin-bottom-xs" i18n>Share With</h2>
+      <h2 class="mat-h2 body-font-size-primary font-montserrat margin-top-m margin-bottom-xs" i18n>Share With</h2>
       <ws-widget-user-autocomplete
         class="block"
         (usersList)="updateUsers($event)"

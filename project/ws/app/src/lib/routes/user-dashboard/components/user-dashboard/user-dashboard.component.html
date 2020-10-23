@@ -1,6 +1,6 @@
 <mat-toolbar [color]="navBackground?.color" [ngStyle]="navBackground?.styles">
   <ws-widget-btn-page-back [widgetData]="{ url: 'back' }"></ws-widget-btn-page-back>
-  <span class="margin-left-s text-color font-size-24px font-campaign" i18n>User Dashboard</span>
+  <span class="margin-left-s text-color font-size-20px font-montserrat" i18n>User Dashboard</span>
 </mat-toolbar>
 
 <div *ngIf="userListArray?.length == 0 && !isLoad">
@@ -58,33 +58,33 @@
       </ng-container>
 
       <ng-container matColumnDef="SlNo">
-        <th mat-header-cell *matHeaderCellDef class="font-size-18px font-text font-montserrat">Sl No.</th>
+        <th mat-header-cell *matHeaderCellDef class="body-font-size-primary font-text font-montserrat">Sl No.</th>
         <td mat-cell *matCellDef="let element; let i = index">{{ i + 1 }}</td>
       </ng-container>
 
       <ng-container matColumnDef="first_name">
-        <th mat-header-cell *matHeaderCellDef class="font-size-18px font-text header-clr" mat-sort-header>Name</th>
+        <th mat-header-cell *matHeaderCellDef class="body-font-size-primary font-text header-clr" mat-sort-header>Name</th>
         <td mat-cell *matCellDef="let element">{{ element.first_name }} {{ element.last_name }}</td>
       </ng-container>
 
       <ng-container matColumnDef="organization">
-        <th mat-header-cell *matHeaderCellDef class="font-size-18px font-text header-clr" mat-sort-header>Organization
+        <th mat-header-cell *matHeaderCellDef class="body-font-size-primary font-text header-clr" mat-sort-header>Organization
         </th>
         <td mat-cell class="column-align" *matCellDef="let element">{{ element.department_name}}</td>
       </ng-container>
 
       <ng-container matColumnDef="email">
-        <th mat-header-cell *matHeaderCellDef class="font-size-18px font-text" mat-sort-header>Email</th>
+        <th mat-header-cell *matHeaderCellDef class="body-font-size-primary font-text" mat-sort-header>Email</th>
         <td mat-cell class="column-align" *matCellDef="let element">{{ element.email }}</td>
       </ng-container>
 
       <ng-container matColumnDef="time_inserted">
-        <th mat-header-cell *matHeaderCellDef class="font-size-18px font-text" mat-sort-header>Registered On</th>
+        <th mat-header-cell *matHeaderCellDef class="body-font-size-primary font-text" mat-sort-header>Registered On</th>
         <td mat-cell class="column-align" *matCellDef="let element">{{ element.time_inserted }}</td>
       </ng-container>
 
       <ng-container matColumnDef="Actions" stickyEnd>
-        <th mat-header-cell *matHeaderCellDef class="font-size-18px font-text font-montserrat">Actions</th>
+        <th mat-header-cell *matHeaderCellDef class="body-font-size-primary font-text font-montserrat">Actions</th>
         <td mat-cell *matCellDef="let element">
           <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
             <mat-icon (click)="removeSelectedFromCheckbox()">more_vert</mat-icon>

@@ -1,6 +1,6 @@
 <div [hidden]="isRestricted">
   <div class="discussion-body mb-6">
-    <div *ngIf="discussionFetchStatus === 'none'" class="no-conversation mat-toolbar font-size-18px" i18n>
+    <div *ngIf="discussionFetchStatus === 'none'" class="no-conversation mat-toolbar body-font-size-primary" i18n>
       There aren’t any conversations yet
     </div>
     <ws-widget-discussion-post
@@ -30,7 +30,7 @@
     </div>
   </div>
   <div class="discussion-header mat-toolbar shadow" [hidden]="widgetData.isLoggedInUserRestricted">
-    <p class="ws-mat-primary-text font-medium text-xl font-size-16px" i18n>Start a new thread</p>
+    <p class="ws-mat-primary-text font-medium text-xl body-font-size-secondary" i18n>Start a new thread</p>
     <div class="question-container">
       <ws-widget-user-image
         class="user-image"

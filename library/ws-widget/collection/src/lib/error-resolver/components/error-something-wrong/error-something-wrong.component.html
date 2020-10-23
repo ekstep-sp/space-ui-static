@@ -1,21 +1,17 @@
 <div class="error-not-found flex flex-wrapped margin-left-m margin-top-xl margin-right-m">
   <div class="error-logo">
-    <img
-      alt
-      class="error-image"
-      *ngIf="errorData"
-      [src]="isDarkMode ? errorData?.errorImageDark : errorData?.errorImageLite"
-    />
-    <div class="error-message ws-mat-primary-text font-weight-bold font-size-24px font-campaign" i18n>
+    <img alt class="error-image img-width" *ngIf="errorData"
+      [src]="isDarkMode ? errorData?.errorImageDark : errorData?.errorImageLite" />
+    <div class="error-message ws-mat-primary-text font-weight-bold font-size-20px font-montserrat" i18n>
       Oops! Something went wrong
     </div>
   </div>
   <div class="error-support">
-    <div class="support-message font-size-24px font-campaign" i18n>We are facing some technical difﬁculties.</div>
-    <div class="support-message font-size-24px font-campaign" i18n>You might want to:</div>
+    <div class="support-message font-size-20px font-montserrat" i18n>We are facing some technical difﬁculties.</div>
+    <div class="support-message font-size-20px font-montserrat" i18n>You might want to:</div>
     <ul>
-      <li class="font-size-16px font-montserrat" i18n>Empty the cache and reload the page.</li>
-      <li class="font-size-16px font-montserrat">
+      <li class="body-font-size-secondary font-montserrat" i18n>Empty the cache and reload the page.</li>
+      <li class="body-font-size-secondary font-montserrat">
         <ng-container i18n>Do you suspect a site problem? </ng-container>
       </li>
     </ul>
@@ -27,12 +23,7 @@
     >
       Report the issue
     </a> -->
-    <a
-      mat-raised-button
-      color="primary"
-      *ngIf="errorData?.mailId"
-      [routerLink]="'/app/feedback/platform_feedback'"
-    >
+    <a mat-raised-button color="primary" *ngIf="errorData?.mailId" [routerLink]="'/app/feedback/platform_feedback'">
       Report the issue
     </a>
   </div>

@@ -1,6 +1,6 @@
 <mat-toolbar [color]="pageNavbar.color" [ngStyle]="pageNavbar?.styles">
   <ws-widget-btn-page-back [widgetData]="{ url: 'back' }"></ws-widget-btn-page-back>
-  <span class="font-size-24px font-campaign margin-left-xs text-truncate text-white" i18n>
+  <span class="font-size-20px font-montserrat margin-left-xs text-truncate text-white" i18n>
     Notifications
   </span>
   <span class="spacer"></span>
@@ -24,7 +24,7 @@
   </button>
 
   <div class="mb-8" *ngIf="actionNotifications.length">
-    <h3 class="mat-h3 font-size-18px font-montserrat" i18n>For Your Action</h3>
+    <h3 class="mat-h3 body-font-size-primary font-montserrat" i18n>For Your Action</h3>
 
     <ul class="list-none p-0 mb-4 mat-toolbar">
       <ng-container *ngFor="let notification of actionNotifications">
@@ -61,7 +61,7 @@
   </div>
 
   <div *ngIf="infoNotifications.length">
-    <h3 class="mat-h3 font-size-18px font-montserrat" i18n>For Your Information</h3>
+    <h3 class="mat-h3 body-font-size-primary font-montserrat" i18n>For Your Information</h3>
 
     <ul class="list-none p-0 mat-toolbar">
       <ng-container *ngFor="let notification of infoNotifications">

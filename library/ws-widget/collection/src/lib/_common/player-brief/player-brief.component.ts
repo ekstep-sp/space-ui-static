@@ -3,6 +3,7 @@ import { NsContent } from '../../_services/widget-content.model'
 import { ConfigurationsService, UtilityService } from '../../../../../utils'
 import { Router } from '@angular/router'
 import { WidgetContentService } from '../../_services/widget-content.service'
+import { isIOS } from '../../player-amp/player-amp.utility'
 // import { Subscription } from 'rxjs'
 
 @Component({
@@ -126,6 +127,7 @@ export class PlayerBriefComponent implements OnInit {
       this.isShowDownloadMobile = data.isMobileDownloadable
       this.isShowDownloadIOS = data.isIOSDownloadable
       this.isShowDownloadAndroid = data.isAndroidDownloadable
+
       // tslint:disable-next-line: max-line-length
       this.enableRatings = this.widgetContentSvc.isVisibileAccToRoles(this.tocConfig.rolesAllowed.rateContent, this.tocConfig.rolesNotAllowed.rateContent)
       // tslint:disable-next-line: max-line-length
@@ -148,7 +150,16 @@ export class PlayerBriefComponent implements OnInit {
       if (this.utilitySvc.isAndroid && this.isShowDownloadAndroid) {
         return true
       }
-
+    }
+    return false
+  }
+  get showDownloadGuest() {
+    if (this.configSvc.userRoles) {
+      if (this.configSvc.userRoles.size === 3
+        && this.configSvc.userRoles.has('my-analytics')
+        && this.configSvc.userRoles.has('privileged')) {
+        return true
+      }
     }
     return false
   }
@@ -157,11 +168,12 @@ export class PlayerBriefComponent implements OnInit {
     this.enableRatings = false
     this.mailIcon = false
   }
-
   download() {
     if (this.content && !this.forPreview) {
       const link = document.createElement('a')
-      link.download = this.content.artifactUrl.split('/').pop() || 'resource.pdf'
+      if (!isIOS) {
+        link.download = this.content.artifactUrl.split('/').pop() || 'resource.pdf'
+      }
       link.target = '_self'
       // Construct the URI
       link.href = this.content.artifactUrl || ''

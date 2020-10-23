@@ -25,7 +25,7 @@
     <div class="question-section">
       <div class="question-title">
         <a [routerLink]="['./', item.id]">
-          <h2 *ngIf="item.postContent.title" class="font-size-18px font-montserrat ws-mat-primary-text question-text">
+          <h2 *ngIf="item.postContent.title" class="body-font-size-primary font-montserrat ws-mat-primary-text question-text">
             {{ item.postContent.title }}
           </h2>
           <h2 *ngIf="!item.postContent.title" class="ws-mat-primary-text question-text">

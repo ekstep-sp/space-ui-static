@@ -8,7 +8,7 @@
     "
   >
     <div class="width-expand">
-      <h2 class="font-montserrat font-size-18px mat-title margin-bottom-xs text-truncate">{{ goal?.name }}</h2>
+      <h2 class="font-montserrat body-font-size-primary mat-title margin-bottom-xs text-truncate">{{ goal?.name }}</h2>
       <div class="font-montserrat margin-bottom-xs">
         <ng-container *ngIf="goal?.goalFor === 'others'">
           <ng-container *ngTemplateOutlet="
@@ -46,7 +46,7 @@
             matTooltipPosition="left">
             edit</mat-icon>
           <mat-icon *ngIf="!checkNoAccess(goal)">edit</mat-icon>
-          <span class="font-size-16px">Edit</span>
+          <span class="body-font-size-secondary">Edit</span>
         </button>
         <button name="share-button-goal-card"  mat-menu-item *ngIf="isShareEnabled && goal?.goalFor === 'others'" (click)="openShareGoalDialog(goal)">
           <mat-icon>share</mat-icon>
@@ -59,7 +59,7 @@
         </a>
         <button  name="delete-button-goal-card"  mat-menu-item (click)="openDeleteDialog()">
           <mat-icon>delete</mat-icon>
-          <span class="font-size-16px">Delete</span>
+          <span class="body-font-size-secondary">Delete</span>
         </button>
       </mat-menu>
     </ng-container>

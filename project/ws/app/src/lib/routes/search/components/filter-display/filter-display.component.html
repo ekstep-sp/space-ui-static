@@ -1,5 +1,5 @@
 <div class="flex flex-between flex-middle">
-  <h2 class="mat-h2 margin-remove padding-left-m font-size-24px" i18n>Filters</h2>
+  <h2 class="mat-h2 margin-remove padding-left-m heading-font-size-secondary" i18n>Filters</h2>
   <span class="spacer"></span>
   <button [hidden]="!filtersResetAble" (click)="removeFilters()" type="button" mat-icon-button>
     <mat-icon>restore</mat-icon>
@@ -12,7 +12,7 @@
   <ng-container  *ngFor="let filter of filtersResponse; trackBy: filterUnitResponseTrackBy">
   <mat-expansion-panel [expanded]="filter.checked || isExpanded" *ngIf="filter.type !== 'contentType'">
     <mat-expansion-panel-header >
-      <span class="font-montserrat font-size-18px">{{ translatedFilters[filter.displayName.toLowerCase()]?.translatedField || filter.displayName }}</span>
+      <span class="font-montserrat body-font-size-primary">{{ translatedFilters[filter.displayName.toLowerCase()]?.translatedField || filter.displayName }}</span>
     </mat-expansion-panel-header>
     <ng-container  *ngTemplateOutlet="
         filtersHolder;

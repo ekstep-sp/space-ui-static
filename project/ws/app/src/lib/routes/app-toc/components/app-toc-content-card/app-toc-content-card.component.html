@@ -5,7 +5,7 @@
         (click)="viewChildren = !viewChildren" [wsUtilsDefaultThumbnail]="defaultThumbnail" />
       <div class="flex flex-between width-expand">
         <div class="text-truncate cursor-pointer" (click)="viewChildren = !viewChildren">
-          <h2 class="font-size-18px font-montserrat margin-remove text-truncate">{{ content?.name }}</h2>
+          <h2 class="body-font-size-primary font-montserrat margin-remove text-truncate">{{ content?.name }}</h2>
           <div>
             <span class="mat-body-strong">{{ content?.displayContentType }}</span>
             <span>
@@ -105,7 +105,7 @@
     <div class="resource-meta width-expand">
       <a [routerLink]="resourceLink.url" [queryParams]="resourceLink.queryParams">
         <h3 *ngIf="content?.displayContentType !== enumContentTypes.ASSESSMENT"
-          class="margin-remove text-truncate wrap-text font-size-16px font-montserrat">
+          class="margin-remove text-truncate wrap-text body-font-size-secondary font-montserrat">
           {{ content?.name}}
         </h3>
         <h1 *ngIf="content?.displayContentType === enumContentTypes.ASSESSMENT"
