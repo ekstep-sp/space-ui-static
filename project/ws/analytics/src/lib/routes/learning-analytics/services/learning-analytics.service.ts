@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core'
 import { Observable } from 'rxjs'
 import { NsAnalytics } from '../models/learning-analytics.model'
 import { NsUserDashboard } from '@ws/app/src/lib/routes/user-dashboard/models/user-dashboard.model'
+import moment from 'moment'
 
 const PROTECTED_SLAG_V8 = `/apis/proxies/v8/LA/api`
 
@@ -159,5 +160,16 @@ export class LearningAnalyticsService {
         }
         return Promise.resolve({ ok: false, error: null, DATA: [] })
       }
+  }
+  getLocalTime(time: any) {
+    const locales = this.userData.timeZoneFormat ? this.userData.timeZoneFormat.locales : 'en-US'
+    const timeZone = this.userData.timeZoneFormat ? this.userData.timeZoneFormat.timeZone : 'GMT'
+    let date = new Date(time)
+    const invdate = new Date(date.toLocaleString(locales, {
+      timeZone,
+      }))
+      const diff = date.getTime() - invdate.getTime()
+      date = new Date(date.getTime() + diff)
+    return moment.utc(date).format('YYYY-MM-DD HH:mm:ss.SSS')
   }
 }

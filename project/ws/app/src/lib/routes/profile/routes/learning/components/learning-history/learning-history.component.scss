@@ -1,5 +1,5 @@
-@import 'ws-mixins';
-@import 'ws-vars';
+@import "ws-mixins";
+@import "ws-vars";
 
 .lh-header {
   text-align: center;
@@ -249,20 +249,20 @@ $badge-padding: 12px;
 .text-inside-grid {
   position: absolute;
   @include breakpoint-xs {
-     font-size:12px;
-     margin :0 0 1.2px;
+    font-size: 12px;
+    margin: 0 0 1.2px;
   }
-  @include breakpoint-xxs{
-    font-size:10px;
-     margin :0 0 1.2px;
+  @include breakpoint-xxs {
+    font-size: 10px;
+    margin: 0 0 1.2px;
   }
- // left: 5px;
+  // left: 5px;
 }
 .text-outside-grid {
   position: absolute;
   @include breakpoint-xs {
-     font-size:12px;
-     margin:auto;
+    font-size: 12px;
+    margin: auto;
   }
   // right: 5px;
 }
@@ -284,9 +284,13 @@ $badge-padding: 12px;
 .montserrat {
   font-family: montserrat, sans-serif !important;
 }
-::ng-deep{
-.mat-tab-body-content {
+::ng-deep {
+  .mat-tab-body-content {
     overflow: initial !important;
+  }
 }
+@media (max-width: 700px) {
+  mat-grid-tile.mat-body-strong.mat-grid-tile {
+    overflow: visible;
+  }
 }
-

@@ -50,3 +50,9 @@
   cursor: default;
   // color: whi !important;
 }
+::ng-deep{
+.theme-muave.night-mode .mat-input-element.caret-clr{
+  caret-color: white !important;
+
+}
+}

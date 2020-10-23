@@ -48,8 +48,10 @@ export class QnaReplyComponent implements OnInit {
   commentData: NsDiscussionForum.IPostResult | undefined
   commentFetchStatus: TFetchStatus | undefined
   isPostingComment = false
+  replyEditMentions = []
 
   showSocialLike = false
+  isValidForUserComment = false
   editMode = false
   replyPostEnabled = false
   updatedBody: string | undefined
@@ -86,7 +88,8 @@ export class QnaReplyComponent implements OnInit {
       () => {
         this.isPostingComment = false
         this.commentAddRequest.postContent.body = ''
-        this.triggerNotification()
+        this.triggerNotification('comment')
+        this.isValidForUserComment = false
         this.fetchQuestionComments(true)
       },
       () => {
@@ -179,6 +182,7 @@ export class QnaReplyComponent implements OnInit {
     this.discussionSvc.updatePost(postUpdateRequest).subscribe(
       () => {
         this.updatedBody = undefined
+        this.triggerNotification('reply')
       },
       () => {
         this.editMode = true
@@ -193,13 +197,21 @@ export class QnaReplyComponent implements OnInit {
   }
   onCommentTextChange(event: { htmlText: string; isValid: boolean }) {
     this.commentAddRequest.postContent.body = event.htmlText
+    this.isValidForUserComment = event.isValid
     // this.replyAddRequest.postContent.body = event.htmlText || ''
   }
 
-  triggerNotification() {
+  triggerNotification(parentType: 'reply' | 'comment') {
+    let mentionsData: any[] = []
+    if (parentType === 'reply') {
+      mentionsData = [...this.replyEditMentions]
+    } else if (parentType === 'comment') {
+      mentionsData = [...this.replyCommentMentions]
+    }
     this.triggerReplyNotification.emit({
-      mentions: this.replyCommentMentions,
+      mentions: mentionsData,
       topLevelReply: this.item,
+      parentPostCreatorId: this.parentPostCreatorId,
       currentCommentData: this.commentAddRequest,
     })
   }
