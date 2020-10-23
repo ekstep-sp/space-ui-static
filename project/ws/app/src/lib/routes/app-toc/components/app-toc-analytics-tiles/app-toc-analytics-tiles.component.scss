@@ -4,3 +4,8 @@
   height: 4.2em;
   line-height: 1.4em;
 }
+::ng-deep{
+.theme-muave.night-mode .ws-mat-primary-text.link-text {
+  color: #925EB0 !important;
+}
+}
