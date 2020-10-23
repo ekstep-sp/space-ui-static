@@ -116,3 +116,12 @@ span{
 }
 
 
+@media (max-width: 700px) {
+  
+  .title-text-truncate {
+    max-width: 100%;
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
+    white-space: nowrap !important;
+  }
+}
