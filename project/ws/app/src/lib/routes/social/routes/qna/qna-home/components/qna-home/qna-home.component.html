@@ -1,11 +1,11 @@
 <mat-toolbar [color]="pageNavbar.color" [ngStyle]="pageNavbar?.styles">
   <ws-widget-btn-page-back [widgetData]="{ url: 'back' }"></ws-widget-btn-page-back>
   <span class="ml-2 hidden sm:inline text-white font-size-20px font-montserrat" i18n>Question & Answer Forum</span>
-  <span class="font-campaign font-size-24px ml-2 inline sm:hidden text-white text-truncate" i18n>Latest Questions</span>
+  <span class="font-montserrat font-size-20px ml-2 inline sm:hidden text-white text-truncate" i18n>Latest Questions</span>
 </mat-toolbar>
 <div class="qna-home-container mat-drawer-container mat-drawer-container-has-open mat-drawer-transition">
   <div class="qna-title">
-    <h1 class="font-campaign font-size-24px mat-display-1 margin-remove hidden sm:block" i18n>Latest Questions</h1>
+    <h1 class="font-montserrat font-size-20px mat-display-1 margin-remove hidden sm:block" i18n>Latest Questions</h1>
     <h1 *ngIf="qnaTimeline?.hits" class="margin-remove block sm:hidden font-montserrat font-size-18px">
       {{ qnaTimeline.hits | pipeCountTransform }}
       <ng-container i18n>Questions</ng-container>
