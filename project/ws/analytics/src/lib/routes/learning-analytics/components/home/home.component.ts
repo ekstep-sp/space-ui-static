@@ -1784,9 +1784,11 @@ export class HomeComponent implements OnInit, OnDestroy {
   async getUserCountFromUserTable(): Promise<any> {
     let params: any
     if (this.startDate && this.endDate) {
+      const startDate = `${this.startDate} 00:00:00`
+      const endDate = `${this.endDate} 23:59:59`
       params = {
-        startDate: `${this.startDate} 00:00:00`,
-        endDate: `${this.endDate} 23:59:59.9999`,
+        startDate: this.analyticsSrv.getLocalTime(startDate),
+        endDate: this.analyticsSrv.getLocalTime(endDate),
       }
     }
     const data = await this.analyticsSrv.getUserCountByTimeStamp(params)
@@ -1799,9 +1801,11 @@ export class HomeComponent implements OnInit, OnDestroy {
   async getAllUsers(): Promise<any> {
     let params: any
     if (this.startDate && this.endDate) {
+    const startDate = `${this.startDate} 00:00:00`
+    const endDate = `${this.endDate} 23:59:59`
       params = {
-        startDate: `${this.startDate} 00:00:00`,
-        endDate: `${this.endDate} 23:59:59.9999`,
+        startDate:  this.analyticsSrv.getLocalTime(startDate),
+        endDate: this.analyticsSrv.getLocalTime(endDate),
       }
     }
     const data = await this.analyticsSrv.getAllUsers(params)
