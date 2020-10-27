@@ -3,7 +3,6 @@ import {
   Component,
   ElementRef,
   Input,
-  OnChanges,
   OnDestroy,
   OnInit,
   ViewChild,
@@ -29,7 +28,7 @@ const pdfjsViewer = require('pdfjs-dist/web/pdf_viewer')
   styleUrls: ['./player-pdf.component.scss'],
 })
 export class PlayerPdfComponent extends WidgetBaseComponent
-  implements OnInit, AfterViewInit, OnDestroy, OnChanges, NsWidgetResolver.IWidgetData<any> {
+  implements OnInit, AfterViewInit, OnDestroy, NsWidgetResolver.IWidgetData<any> {
   @Input() widgetData!: IWidgetsPlayerPdfData
   @ViewChild('fullScreenContainer', { static: true })
   containerSection!: ElementRef<HTMLElement>
@@ -246,22 +245,7 @@ export class PlayerPdfComponent extends WidgetBaseComponent
     }
     // delete link;
   }
-  ngOnChanges() {
-    // if (this.widgetData !== this.oldData) {
-    //   if (this.totalPages > 0) {
-    //     this.saveContinueLearning()
-    //     this.fireRealTimeProgress()
-    //     this.realTimeProgressRequest = {
-    //       content_type: 'Resource',
-    //       current: ['0'],
-    //       max_size: 0,
-    //       mime_type: NsContent.EMimeTypes.PDF,
-    //       user_id_type: 'uuid',
-    //     }
-    //     this.current = ['1']
-    //   }
-    // }
-  }
+
   ngAfterViewInit() {
     this.contextMenuSubs = fromEvent(this.pdfContainer.nativeElement, 'contextmenu').subscribe(e =>
       e.preventDefault(),
