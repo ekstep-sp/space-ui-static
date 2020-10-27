@@ -47,6 +47,7 @@
           <mat-icon color="primary" (click)="download()">cloud_download</mat-icon>
         </button>
       </ng-container>
+
     </div>
     <button class="hidden-gt-xs text-white show-btn" mat-icon-button [matMenuTriggerFor]="pdfMenu">
       <mat-icon>more_vert</mat-icon>
@@ -67,6 +68,7 @@
         <mat-icon (click)="download()">cloud_download</mat-icon>
       </button>
     </ng-container>
+
   </mat-menu>
   <div [ngClass]="{ 'custom-scroll-small': !isInFullScreen }" class="pdf-page-container">
     <div [ngClass]="{ 'custom-scroll-small': !isInFullScreen }" class="container" #pdfContainer></div>

@@ -111,6 +111,7 @@ export class PlayerPdfComponent extends WidgetBaseComponent
         this.isShowDownloadAndroid = data.pageData.data.isAndroidDownloadable
         this.isShowDownloadGuest = data.pageData.data.isGuestDownloadable
 
+
       } else {
         this.isShowDownloadMobile = false
         this.isShowDownloadIOS = false
@@ -255,7 +256,24 @@ export class PlayerPdfComponent extends WidgetBaseComponent
     }
     // delete link;
   }
+  ngOnChanges() {
+    // if (this.widgetData !== this.oldData) {
+    //   if (this.totalPages > 0) {
+    //     this.saveContinueLearning()
+    //     this.fireRealTimeProgress()
+    //     this.realTimeProgressRequest = {
+    //       content_type: 'Resource',
+    //       current: ['0'],
+    //       max_size: 0,
+    //       mime_type: NsContent.EMimeTypes.PDF,
+    //       user_id_type: 'uuid',
+    //     }
+    //     this.current = ['1']
+    //   }
+    // }
 
+
+  }
   ngAfterViewInit() {
     this.contextMenuSubs = fromEvent(this.pdfContainer.nativeElement, 'contextmenu').subscribe(e =>
       e.preventDefault(),
@@ -277,6 +295,8 @@ export class PlayerPdfComponent extends WidgetBaseComponent
         }
       }
     })
+
+
   }
   ngOnDestroy() {
     if (this.identifier) {

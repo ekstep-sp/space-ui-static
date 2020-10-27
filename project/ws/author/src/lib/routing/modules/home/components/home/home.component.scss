@@ -69,3 +69,10 @@
 .create-button {
   outline: none;
 }
+
+::ng-deep{
+  .authoring-sidenav-height{
+    height: calc(100vh - 110px) !important
+
+  }
+}
