@@ -76,7 +76,7 @@ export class PlayerPdfComponent extends WidgetBaseComponent
   isShowDownloadIOS = false
   isShowDownloadAndroid = false
   isShowDownloadGuest = false
-  showDownloadPublicGuest = false
+
   constructor(
     private activatedRoute: ActivatedRoute,
     private router: Router,
@@ -192,8 +192,7 @@ export class PlayerPdfComponent extends WidgetBaseComponent
         this.loadPageNum(this.currentPage.value - 1)
       }
     })
-    this.showDownloadPublicGuest = this.publicDownloadGuest()
-    console.log("++++++++++++---------onit", this.showDownloadPublicGuest)
+
 
   }
 
@@ -221,15 +220,6 @@ export class PlayerPdfComponent extends WidgetBaseComponent
         return true
       }
     }
-    return false
-  }
-
-  publicDownloadGuest() {
-    console.log("++++++++publicDowmload", this.configSvc.isGuestUser)
-    if (this.configSvc.isGuestUser) {
-      return true
-    }
-
     return false
   }
 
