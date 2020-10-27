@@ -192,3 +192,15 @@
     }
   }
 }
+::ng-deep{
+@media only screen and (max-width: 310px){
+
+  // .calender-btn{
+  //   margin-top: 5px !important;
+  // }
+  .mat-datepicker-content .mat-calendar {
+    width: auto !important;
+    height: auto !important;
+  }
+  }
+  }
