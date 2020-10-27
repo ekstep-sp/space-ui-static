@@ -29,7 +29,6 @@ export class ShareViewerResolve
 
   async resolve(route: ActivatedRouteSnapshot): Promise<any> {
     try {
-      debugger
       return await this.handleDefaultUserLogin(route)
     } catch (err) {
       console.log('catched error in share view ', err)
