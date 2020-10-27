@@ -1,4 +1,6 @@
   @import 'src/themes/theme-muave.scss';
+  @import 'ws-vars';
+  @import 'ws-mixins';
 
  $primary: $theme-primary;
 
@@ -9,6 +11,9 @@
   background-color: #FFFFFF;
   box-shadow: 0 2px 12px 0 rgba(30, 30, 30, 0.08);
   z-index:1;
+  @include breakpoint-xxs{
+  width: 230px;
+  }
 }
 
 .ql-mention-list {
@@ -27,7 +32,8 @@
 }
 .ql-mention-list-item {
     cursor: pointer;
-    height: 40px;
+    // height: 40px;
+    height:auto;
     line-height: 40px;
     font-size: 14px;
     padding: 0 20px;
