@@ -6,7 +6,7 @@ import { WidgetContentService } from '../_services/widget-content.service'
 import { NsContent } from '../_services/widget-content.model'
 import {
   TFetchStatus,
-  LoggerService,
+  // LoggerService,
   EventService,
   ConfigurationsService,
   UtilityService,
@@ -66,7 +66,6 @@ export class ContentStripMultipleComponent extends WidgetBaseComponent
   constructor(
     private contentStripSvc: ContentStripMultipleService,
     private contentSvc: WidgetContentService,
-    private loggerSvc: LoggerService,
     private eventSvc: EventService,
     private configSvc: ConfigurationsService,
     protected utilitySvc: UtilityService,
@@ -411,7 +410,7 @@ export class ContentStripMultipleComponent extends WidgetBaseComponent
     this.showParentError = this.errorDataCount === totalCount
   }
 
-  toggleInfo(data: IStripUnitContentData) {
+  toggleInfo(data: any) {
     if (data.stripInfo) {
     this.router.navigateByUrl(data.stripInfo.icon.url)
     }
