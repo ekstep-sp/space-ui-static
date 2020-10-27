@@ -76,6 +76,7 @@ export class PlayerPdfComponent extends WidgetBaseComponent
   isShowDownloadIOS = false
   isShowDownloadAndroid = false
   isShowDownloadGuest = false
+  showDownloadPublicGuest = false
   constructor(
     private activatedRoute: ActivatedRoute,
     private router: Router,
@@ -110,6 +111,7 @@ export class PlayerPdfComponent extends WidgetBaseComponent
         this.isShowDownloadIOS = data.pageData.data.isIOSDownloadable
         this.isShowDownloadAndroid = data.pageData.data.isAndroidDownloadable
         this.isShowDownloadGuest = data.pageData.data.isGuestDownloadable
+
 
       } else {
         this.isShowDownloadMobile = false
@@ -190,6 +192,9 @@ export class PlayerPdfComponent extends WidgetBaseComponent
         this.loadPageNum(this.currentPage.value - 1)
       }
     })
+    this.showDownloadPublicGuest = this.publicDownloadGuest()
+    console.log("++++++++++++---------onit", this.showDownloadPublicGuest)
+
   }
 
   get showDownloadMobile() {
@@ -218,6 +223,21 @@ export class PlayerPdfComponent extends WidgetBaseComponent
     }
     return false
   }
+
+  publicDownloadGuest() {
+    console.log("++++++++publicDowmload", this.configSvc.isGuestUser)
+    if (this.configSvc.isGuestUser) {
+      return true
+    }
+
+    return false
+  }
+
+  //  get timeoutdownloadGuest(){
+  //   return setTimeout(() => {
+  //     this.publicDownloadGuest()
+  //   }, 1000);
+  // }
 
   get isDownloadable() {
     // if (this.eventSvc.isGuestUser) {
@@ -261,6 +281,8 @@ export class PlayerPdfComponent extends WidgetBaseComponent
     //     this.current = ['1']
     //   }
     // }
+
+
   }
   ngAfterViewInit() {
     this.contextMenuSubs = fromEvent(this.pdfContainer.nativeElement, 'contextmenu').subscribe(e =>
@@ -283,6 +305,8 @@ export class PlayerPdfComponent extends WidgetBaseComponent
         }
       }
     })
+
+
   }
   ngOnDestroy() {
     if (this.identifier) {
