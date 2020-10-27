@@ -76,6 +76,7 @@ export class PlayerPdfComponent extends WidgetBaseComponent
   isShowDownloadIOS = false
   isShowDownloadAndroid = false
   isShowDownloadGuest = false
+  showDownloadPublicGuest = false
   constructor(
     private activatedRoute: ActivatedRoute,
     private router: Router,
@@ -190,6 +191,7 @@ export class PlayerPdfComponent extends WidgetBaseComponent
         this.loadPageNum(this.currentPage.value - 1)
       }
     })
+    this.showDownloadPublicGuest = this.publicDownloadGuest()
   }
 
   get showDownloadMobile() {
@@ -216,6 +218,14 @@ export class PlayerPdfComponent extends WidgetBaseComponent
         return true
       }
     }
+    return false
+  }
+
+  publicDownloadGuest() {
+    if (this.configSvc.isGuestUser) {
+      return true
+    }
+
     return false
   }
 
