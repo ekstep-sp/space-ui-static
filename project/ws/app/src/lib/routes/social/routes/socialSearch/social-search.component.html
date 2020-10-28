@@ -79,13 +79,13 @@
     </button>
 
     <mat-card style="padding-bottom: 0.5rem; margin-bottom: 1%;" *ngFor="let post of searchResult.result">
-      {{ searchResult.result.postCreatorId }}
+    {{ searchResult.result.postCreatorId }}
 
       <div class="flex">
         <div class="flex-auto text-center" style="width: 15%;" *ngIf="post.postKind != 'Blog'">
           <div class="flex flex-col justify-center bg-grey-lighter" style="height: 100%;">
             <div class="text-grey-darker text-center px-4 py-2 m-2">
-              <ws-widget-btn-social-vote class="block" [voteType]="'upVote'" [postId]="post.id"
+              <ws-widget-btn-social-vote class="block" [voteType]="'upVote'" [postId]="post.id" [isSocial] = "true"
                 [postCreatorId]="post.postCreator?.postCreatorId" [activity]="post.activity" [iconType]="'triangle'">
               </ws-widget-btn-social-vote>
             </div>
@@ -93,7 +93,7 @@
               {{ post.activity.activityData.upVote - post.activity.activityData.downVote }}
             </div>
             <div class="text-grey-darker text-center px-4 py-2 m-2">
-              <ws-widget-btn-social-vote class="block" [voteType]="'downVote'" [postId]="post.id"
+              <ws-widget-btn-social-vote class="block" [voteType]="'downVote'" [postId]="post.id"  [isSocial] = "true"
                 [postCreatorId]="post?.postCreator?.postCreatorId" [activity]="post.activity" [iconType]="'triangle'">
               </ws-widget-btn-social-vote>
             </div>
@@ -120,14 +120,14 @@
               <div class="flex flex-middle">
                 <span class="ws-mat-primary-text mat-caption pr-4"><span i18n>Modified:
                   </span>{{ post.dtLastModified | date }}</span>
-                <ws-widget-btn-social-vote class="block" [voteType]="'upVote'" [postId]="post.id"
+                <ws-widget-btn-social-vote class="block" [voteType]="'upVote'" [postId]="post.id"  [isSocial] = "true"
                   [postCreatorId]="post.postCreator?.postCreatorId" [activity]="post.activity" [iconType]="'triangle'">
                 </ws-widget-btn-social-vote>
 
                 <span class="ws-mat-primary-text flex flex-middle">{{
                   post.activity.activityData.upVote
                 }}</span>
-                <ws-widget-btn-social-vote class="block" [voteType]="'downVote'" [postId]="post.id"
+                <ws-widget-btn-social-vote class="block" [voteType]="'downVote'" [postId]="post.id"  [isSocial] = "true"
                   [postCreatorId]="post?.postCreator?.postCreatorId" [activity]="post.activity" [iconType]="'triangle'">
                 </ws-widget-btn-social-vote>
                 <span class="ws-mat-primary-text flex flex-middle">{{
