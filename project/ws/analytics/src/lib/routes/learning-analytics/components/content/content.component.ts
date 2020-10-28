@@ -8,6 +8,7 @@ import { Subscription } from 'rxjs'
 import { AnalyticsResolver } from '../../resolvers/learning-analytics-filters.resolver'
 import { ActivatedRoute } from '@angular/router'
 import { GraphGeneralService, IGraphWidget, ROOT_WIDGET_CONFIG } from '@ws-widget/collection'
+import { START_DATE, END_DATE } from '@ws/author/src/lib/constants/constant'
 
 @Component({
   selector: 'ws-analytics-content',
@@ -42,6 +43,7 @@ export class ContentComponent implements OnInit, OnDestroy {
     { status: false, data: [] },
   ]
   userProgressData: any
+  liveContentDetails: any
   displayedColumns: string[] = ['name', 'users']
   dataSource: any
   coursesDescription = 'Total number of courses'
@@ -311,6 +313,7 @@ export class ContentComponent implements OnInit, OnDestroy {
   ) { }
 
   ngOnInit() {
+    this.getUserDataFromConfig()
     this.isLtMedium$.subscribe((isLtMedium: boolean) => {
       this.screenSizeIsLtMedium = isLtMedium
     })
@@ -688,7 +691,7 @@ export class ContentComponent implements OnInit, OnDestroy {
     this.onExpand = true
   }
 
-  getFilteredCourse(
+   async getFilteredCourse(
     index: number,
     endDate: string,
     startDate: string,
@@ -710,6 +713,7 @@ export class ContentComponent implements OnInit, OnDestroy {
       contentType = 'Resource'
       this.resourceFetchStatus = 'fetching'
     }
+   await this.getContentDetails(startDate, endDate, 'en', 'Live')
     this.analyticsSrv
       .content(endDate, startDate, contentType, filterArray, searchQuery)
       .subscribe(
@@ -823,5 +827,26 @@ export class ContentComponent implements OnInit, OnDestroy {
     if (this.removeEventSubscription) {
       this.removeEventSubscription.unsubscribe()
     }
+  }
+  getUserDataFromConfig() {
+    this.route.data.subscribe(data => {
+      if (data) {
+        this.analyticsSrv.setUserDataFromConfig(data.pageData.data)
+      }
+    })
+  }
+  //  stores the live content details
+  async getContentDetails(startDate: string, endDate: string, langCode: string = 'en', contentStatus: string = 'Live'): Promise<any> {
+    let params: any
+    if (startDate && endDate) {
+      params = {
+        langCode,
+        contentStatus,
+        startDate: this.analyticsSrv.getLocalTime(startDate, START_DATE),
+        endDate: this.analyticsSrv.getLocalTime(endDate, END_DATE),
+      }
+    }
+  const response = await this.analyticsSrv.getContentCount(params)
+  this.liveContentDetails = (response.ok) ? response.data : ''
   }
 }

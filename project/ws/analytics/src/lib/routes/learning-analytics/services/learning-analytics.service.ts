@@ -4,9 +4,10 @@ import { Observable } from 'rxjs'
 import { NsAnalytics } from '../models/learning-analytics.model'
 import { NsUserDashboard } from '@ws/app/src/lib/routes/user-dashboard/models/user-dashboard.model'
 import moment from 'moment'
+import { START_DATE } from '@ws/author/src/lib/constants/constant'
 
 const PROTECTED_SLAG_V8 = `/apis/proxies/v8/LA/api`
-
+const COUNT = `/apis/protected/v8/content/count`
 const LA_API_END_POINTS = {
   TIME_SPENT: `${PROTECTED_SLAG_V8}/la/timespent`,
   CONTENT: `${PROTECTED_SLAG_V8}/la/content`,
@@ -16,7 +17,6 @@ const LA_API_END_POINTS = {
     TOTAL_USER_INSIGHTS: `${PROTECTED_SLAG_V8}/la/totaluserinsights`,
   },
 }
-
 interface IResponse {
   ok: boolean
   error?: string | null,
@@ -108,18 +108,33 @@ export class LearningAnalyticsService {
       `${LA_API_END_POINTS.HOURLY}?aggsSize=200&endDate=${selectedEndDate}&startDate=${selectedStartDate}&from=0&contentType=${contentType}&search_query=${searchQuery}&filters=${filters}&week=${filterKey}`,
     )
   }
-
+  async getContentCount(params: any): Promise<any> {
+    try {
+    const response =  await this.http.get<any>(`${COUNT}` , { params }).toPromise()
+    if (response && response.responseCode === 'OK') {
+      return Promise.resolve({
+        ok: true,
+        error: null,
+        data: response.result.response,
+         })
+    }
+      return Promise.resolve({
+        ok: false,
+        error: null,
+        data: '',
+      })
+  } catch (ex) {
+    if (ex) {
+      return Promise.resolve({
+        ok: false,
+        error: ex,
+      })
+    }
+  }
+  }
   setUserDataFromConfig(userDataFromConfig: NsUserDashboard.IUserData) {
     this.userData = userDataFromConfig
   }
-
-  // getUserCountByTimeStamp(params: {startDate: any, endDate: any}): Observable<any> {
-  //   try {
-  //     return this.http.get(this.userData.api + this.userData.userCount.url, { params })
-  //   } catch (ex) {
-  //     return of()
-  //   }
-  // }
   async getUserCountByTimeStamp(params: {startDate: any, endDate: any}): Promise<IResponse> {
     try {
       const response: any =  await this.http.get(this.userData.apiEndPoint + this.userData.userCount.url, { params }).toPromise()
@@ -161,15 +176,25 @@ export class LearningAnalyticsService {
         return Promise.resolve({ ok: false, error: null, DATA: [] })
       }
   }
-  getLocalTime(time: any) {
+  // convertion of timestamp on based on timezone
+  getLocalTime(newDate: string, dateType: string) {
+   const upadatedDate =  this.getUpdatedDate(newDate, dateType)
     const locales = this.userData.timeZoneFormat ? this.userData.timeZoneFormat.locales : 'en-US'
     const timeZone = this.userData.timeZoneFormat ? this.userData.timeZoneFormat.timeZone : 'GMT'
-    let date = new Date(time)
+    let date = new Date(upadatedDate)
     const invdate = new Date(date.toLocaleString(locales, {
       timeZone,
       }))
       const diff = date.getTime() - invdate.getTime()
       date = new Date(date.getTime() + diff)
     return moment.utc(date).format('YYYY-MM-DD HH:mm:ss.SSS')
+  }
+  // returns the date in a format required for converting to GMT format
+  getUpdatedDate(date: string, dateType: string) {
+    // if date is already in utc format(utc time abbrevation as Z) then there is no need to append any timestamp
+    if (date.endsWith('Z')) {
+      return date
+    }
+      return (dateType === START_DATE) ? `${date} 00:00:00` : `${date} 23:59:59`
   }
 }
