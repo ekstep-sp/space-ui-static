@@ -6,6 +6,7 @@ import { WsDiscussionForumService } from '../ws-discussion-forum.services'
 import { ActivatedRoute } from '@angular/router'
 import { uniqBy } from 'lodash'
 import { quillBaseConfig } from './config/quill-config'
+import { debounceTime, distinctUntilChanged } from 'rxjs/operators'
 @Component({
   selector: 'ws-widget-editor-quill',
   templateUrl: './editor-quill.component.html',
@@ -22,6 +23,7 @@ export class EditorQuillComponent implements OnInit, OnDestroy {
   }>()
   @Output() mentionsData = new EventEmitter<any[]>()
   @ViewChild('editor', { static: false }) editor: ElementRef | any
+  @ViewChild('editorEvent', { static: false }) editorEvent: Element | any
 
   @Input() htmlText = ''
   @Input() minLength = '1'
@@ -137,8 +139,8 @@ export class EditorQuillComponent implements OnInit, OnDestroy {
   }
 
   getAllUsers(): any {
-    this.discussionForumService.getAllUsersList().subscribe(data => {
-      if (data != null) {
+    this.discussionForumService.getAllUsersList().pipe(debounceTime(500), distinctUntilChanged()).subscribe(data => {
+      if (data) {
         this.userDataInJsonFormat = this.userListJson(data)
       }
     })
