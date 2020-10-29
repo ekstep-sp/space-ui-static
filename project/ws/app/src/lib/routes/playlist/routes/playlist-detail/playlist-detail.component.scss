@@ -5,7 +5,8 @@
 .playlist-header {
   .banner-container {
     color: white;
-    height: 248px;
+    // height: 248px;
+    min-height: 280px;
     background-size: cover;
     background-image: url('/assets/images/banners/playlist.jpg');
     background-position: center center;
@@ -20,6 +21,9 @@
       left: 0;
       z-index: 1;
     }
+     @include breakpoint-xs{
+       min-height: 260px;
+     }
   }
 }
 
