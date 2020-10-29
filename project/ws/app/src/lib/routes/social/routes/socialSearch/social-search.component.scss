@@ -254,3 +254,17 @@ h1 {
   align-items: center;
   justify-content: center;
 }
+@media screen and (max-width: 280px){
+.search-width-galaxyfold{
+  max-width: 110px !important;
+}
+.width-size{
+  min-width: 145px !important;
+}
+.padding-right-span{
+  padding-right: 0 !important;
+}
+}
+.padding-right-span{
+  padding-right: 1rem;
+}

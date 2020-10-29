@@ -4,7 +4,7 @@
   <span class="spacer"></span>
   <div class="flex items-center border search border-solid search-border border-color width-size">
 
-    <div class="w-full search">
+    <div class="w-full search search-width-galaxyfold">
 
       <mat-form-field appearance="none" class="autocomplete-form field-size " color="primary" [floatLabel]="'never'">
         <input type="search" (keydown.enter)="triggerSearch()"
@@ -118,7 +118,7 @@
             </div>
             <div class="flex flex-between" *ngIf="post?.activity">
               <div class="flex flex-middle">
-                <span class="ws-mat-primary-text mat-caption pr-4"><span i18n>Modified:
+                <span class="ws-mat-primary-text mat-caption padding-right-span"><span i18n>Modified:
                   </span>{{ post.dtLastModified | date }}</span>
                 <ws-widget-btn-social-vote class="block" [voteType]="'upVote'" [postId]="post.id"
                   [postCreatorId]="post.postCreator?.postCreatorId" [activity]="post.activity" [iconType]="'triangle'">
