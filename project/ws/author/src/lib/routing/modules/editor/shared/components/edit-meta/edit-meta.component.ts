@@ -1394,7 +1394,6 @@ export class EditMetaComponent implements OnInit, OnDestroy, AfterViewInit {
     if (textToUpdate && this.contentForm.controls.contentType.value === 'Resource') {
       const meta = {
         artifactUrl: textToUpdate,
-        isIframeSupported: 'No',
         isInIntranet: false,
       } as NSContent.IContentMeta
       this.contentService.setUpdatedMeta(meta, this.contentService.currentContent)
