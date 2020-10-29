@@ -21,7 +21,7 @@
         <mat-icon class="vote-triangle" role="button" matTooltip="Down vote" matTooltipPosition="right"
           (click)="downVote(invalidUser.value)" [ngClass]="{ highlight: activity.userActivity.downVote }">
           arrow_drop_down</mat-icon>
-        <span class="tooltiptext">
+        <span class="tooltiptext" [ngClass]= "{ 'tooltip-social':isSocial }" >
           <ws-widget-display-users-social-vote [userListDownVote]="userForDownVote" [iconType]="iconType" [isReply]= "isReply"
             [voteType]="voteType">
           </ws-widget-display-users-social-vote>
@@ -61,7 +61,8 @@
         <mat-icon class="vote-triangle" matTooltip="up vote" matTooltipPosition="right" role="button" i18n-matTooltip
           (click)="upVote(invalidUser.value)" [ngClass]="{ highlight: activity.userActivity.upVote }">arrow_drop_up
         </mat-icon>
-        <span class="tooltiptext">
+
+        <span class="tooltiptext" [ngClass]= "{ 'tooltip-social':isSocial }" >
           <ws-widget-display-users-social-vote [userList]="userForUpvote" [iconType]="iconType" [voteType]="voteType" [isReply]= "isReply">
           </ws-widget-display-users-social-vote>
         </span>

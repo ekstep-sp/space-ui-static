@@ -118,10 +118,6 @@ export class WsDiscussionForumService {
     }
 
   }
-  //  async getUserDetails(widUser: any) {
-  //   const userData =  await this.getUsersByIDs(widUser)
-  //   return this.addIndexToData(userData)
-  // }
 
   addIndexToData(objects: any) {
     if (Array.isArray(objects)) {
