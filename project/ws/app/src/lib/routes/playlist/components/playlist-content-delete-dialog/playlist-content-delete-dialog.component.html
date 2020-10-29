@@ -3,24 +3,12 @@
   <strong>"{{ playlistTitle }}"</strong>?
 </h2>
 <mat-dialog-actions class="flex-row-reverse">
-  <button
-    name="cancel-button-playlist-content-delete"
-    class="margin-left-xs"
-    mat-button
-    (click)="dialogRef.close(false)"
-    mat-dialog-close
-    i18n
-  >
+  <button name="cancel-button-playlist-content-delete" class="margin-left-xs" mat-button
+    (click)="dialogRef.close(false)" mat-dialog-close i18n>
     Cancel
   </button>
-  <button
-    name="yes-button-playlist-content-delete"
-    mat-raised-button
-    style="color: white; background: #865ba0;"
-    color="primary"
-    (click)="dialogRef.close(true)"
-    i18n
-  >
+  <button name="yes-button-playlist-content-delete" mat-raised-button class="playlist-content-delete-btn-yes"
+    color="primary" (click)="dialogRef.close(true)" i18n>
     Yes
   </button>
 </mat-dialog-actions>
