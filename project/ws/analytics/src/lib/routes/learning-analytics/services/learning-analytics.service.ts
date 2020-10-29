@@ -195,6 +195,6 @@ export class LearningAnalyticsService {
     if (date.endsWith('Z')) {
       return date
     }
-      return (dateType === START_DATE) ? `${date} 00:00:00` : `${date} 23:59:59`
+      return (dateType === START_DATE) ? `${date}T00:00:00` : `${date}T23:59:59`
   }
 }
