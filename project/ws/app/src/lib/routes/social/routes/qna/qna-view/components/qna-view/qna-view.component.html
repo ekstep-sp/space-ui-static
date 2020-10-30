@@ -4,7 +4,10 @@
 </mat-toolbar>
 
 <div class="views-view-wrapper">
-  <mat-card>
+  <h1 *ngIf="!qnaConversation" style="width: fit-content;margin: auto;margin-top: 15px; padding:10px" class="ws-mat-primary-text margin-bottom-s">
+    Question may be in draft state or unavailable.
+  </h1>
+  <mat-card *ngIf="qnaConversation">
     <h2 class="text-center margin-top-m" *ngIf="postFetchStatus === 'none'" i18n>
       No question exists for the provided id
     </h2>

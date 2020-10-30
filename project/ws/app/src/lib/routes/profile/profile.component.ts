@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit } from '@angular/core'
+import { AfterViewInit, Component, OnDestroy, OnInit } from '@angular/core'
 import { MatDialog } from '@angular/material'
 import { ActivatedRoute, NavigationEnd, Router } from '@angular/router'
 import { ConfigurationsService, LogoutComponent, NsPage, ValueService } from '@ws-widget/utils'
@@ -10,7 +10,7 @@ import { map } from 'rxjs/operators'
   templateUrl: './profile.component.html',
   styleUrls: ['./profile.component.scss'],
 })
-export class ProfileComponent implements OnInit, OnDestroy {
+export class ProfileComponent implements OnInit, OnDestroy, AfterViewInit {
   tabName = ''
   private defaultSideNavBarOpenedSubscription: Subscription | null = null
   isLtMedium$ = this.valueSvc.isLtMedium$
@@ -20,6 +20,11 @@ export class ProfileComponent implements OnInit, OnDestroy {
   pageNavbar: Partial<NsPage.INavBackground> = this.configSvc.pageNavBar
   enabledTabs = this.activatedRoute.snapshot.data.pageData.data.enabledTabs
   private routerSubscription: Subscription | null = null
+  clickedOnArrow = false
+  navElement: any
+  leftValue: any
+  defaultleftValue = '0px'
+
   constructor(
     private dialog: MatDialog,
     private valueSvc: ValueService,
@@ -91,4 +96,19 @@ export class ProfileComponent implements OnInit, OnDestroy {
   logout() {
     this.dialog.open<LogoutComponent>(LogoutComponent)
   }
+  triggerToggle(toggleVariable: any) {
+toggleVariable.toggle()
+  }
+
+  handleRouteChange() {
+  const toggleElement = document.getElementsByClassName('toggle-span')[0]
+  toggleElement['style']['left'] = '0px'
+  }
+ngAfterViewInit(): void {
+  // Called after ngAfterContentInit when the component's view has been initialized. Applies to components only.
+  // Add 'implements AfterViewInit' to the class.
+  this.navElement = document.getElementsByClassName('mat-nav-list')[0]
+  this.leftValue = `${this.navElement['offsetWidth'] + 10}px`
+  this.defaultleftValue = '0px'
+}
 }
