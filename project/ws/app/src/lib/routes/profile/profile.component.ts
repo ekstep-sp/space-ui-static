@@ -101,8 +101,8 @@ toggleVariable.toggle()
   }
 
   handleRouteChange() {
-  const toggleElement = document.getElementsByClassName('toggle-span')[0]
-  toggleElement['style']['left'] = '0px'
+//  const toggleElement = document.getElementsByClassName('toggle-span')[0]
+//  toggleElement['style']['left'] = '0px'
   }
 ngAfterViewInit(): void {
   // Called after ngAfterContentInit when the component's view has been initialized. Applies to components only.
