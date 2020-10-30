@@ -46,7 +46,6 @@ export class PdfComponent implements OnInit, OnDestroy {
   ) {}
 
   ngOnInit() {
-    debugger
     if (
       this.activatedRoute.snapshot.queryParamMap.get('preview') &&
       !this.accessControlSvc.authoringConfig.newDesign

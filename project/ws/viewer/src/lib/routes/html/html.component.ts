@@ -86,10 +86,6 @@ export class HtmlComponent implements OnInit, OnDestroy {
     } else {
       this.routeDataSubscription = this.activatedRoute.data.subscribe(
         async data => {
-          debugger
-          // data.content.data.artifactUrl =
-          //   data.content.data.artifactUrl.startsWith('/scorm-player') ?
-          //     `/apis/proxies/v8${data.content.data.artifactUrl}` : data.content.data.artifactUrl
           let tempHtmlData = data.hasOwnProperty('content') && data.content.hasOwnProperty('data') ? data.content.data : null
           if (!tempHtmlData && this.configSvc.isGuestUser) {
             tempHtmlData = this.activatedRoute.snapshot.children[0].data.content

@@ -77,7 +77,6 @@ export class ConfigurationsService {
   isGuestUser = !!sessionStorage.getItem('default-user')
 
   removeGuestUser = () => {
-    debugger
     sessionStorage.removeItem('default-user')
     this.isGuestUser = false
     this.defaultCredentials = null
