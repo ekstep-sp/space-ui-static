@@ -82,6 +82,7 @@ export class WidgetContentService {
       .toPromise()
   }
   fetchContentRatings(contentIds: { contentIds: string[] }) {
+    debugger
     return this.http
       .post(`${API_END_POINTS.CONTENT_RATING}/rating`, contentIds)
       .toPromise()
@@ -176,12 +177,15 @@ export class WidgetContentService {
     return this.http.post<NSSearch.ISearchV6ApiResult>(API_END_POINTS.CONTENT_SEARCH_V6, req)
   }
   fetchContentRating(contentId: string): Observable<{ rating: number }> {
+    debugger
     return this.http.get<{ rating: number }>(`${API_END_POINTS.CONTENT_RATING}/${contentId}`)
   }
   deleteContentRating(contentId: string): Observable<any> {
+    debugger
     return this.http.delete(`${API_END_POINTS.CONTENT_RATING}/${contentId}`)
   }
   addContentRating(contentId: string, data: { rating: number }): Observable<any> {
+    debugger
     return this.http.post<any>(`${API_END_POINTS.CONTENT_RATING}/${contentId}`, data)
   }
 
