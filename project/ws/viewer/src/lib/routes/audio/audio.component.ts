@@ -41,7 +41,7 @@ export class AudioComponent implements OnInit, OnDestroy {
     private valueSvc: ValueService,
     private viewerSvc: ViewerUtilService,
     private accessControlSvc: AccessControlService,
-  ) {}
+  ) { }
 
   ngOnInit() {
     this.screenSizeSubscription = this.valueSvc.isXSmall$.subscribe(data => {
@@ -77,21 +77,21 @@ export class AudioComponent implements OnInit, OnDestroy {
           data: this.activatedRoute.snapshot.children[0].data.content,
         },
       }
-        )
+      )
     } else {
       this.audioDataSub$ = this.activatedRoute.data
-      .pipe(map((_data: any) => {
-        if (!_data.content.hasOwnProperty('data')) {
-          return {
-            content: {
-              data: {
-                ..._data.content,
+        .pipe(map((_data: any) => {
+          if (!_data.content.hasOwnProperty('data')) {
+            return {
+              content: {
+                data: {
+                  ..._data.content,
+                },
               },
-            },
+            }
           }
-        }
-        return _data
-      }))
+          return _data
+        }))
     }
     if (this.audioDataSub$) {
       this.routeDataSubscription = this.audioDataSub$.subscribe(
@@ -129,7 +129,7 @@ export class AudioComponent implements OnInit, OnDestroy {
           this.widgetResolverAudioData = JSON.parse(JSON.stringify(this.widgetResolverAudioData))
           this.isFetchingDataComplete = true
         },
-        () => {},
+        () => { },
       )
     }
   }

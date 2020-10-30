@@ -32,6 +32,7 @@ export class BtnGoalsComponent extends WidgetBaseComponent
   }
 
   ngOnInit() {
+
     if (this.configSvc.restrictedFeatures) {
       this.isGoalsEnabled = !this.configSvc.restrictedFeatures.has('goals')
     }

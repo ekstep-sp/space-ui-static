@@ -13,6 +13,7 @@ export class AudioComponent implements OnInit {
   @Input() isFetchingDataComplete = false
   @Input() isNotEmbed = true
   @Input() audioData: NsContent.IContent | null = null
+
   @Input() widgetResolverAudioData: NsWidgetResolver.IRenderConfigWithTypedData<
     IWidgetsPlayerMediaData
   > | null = null

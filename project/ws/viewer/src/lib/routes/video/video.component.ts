@@ -34,6 +34,7 @@ export class VideoComponent implements OnInit, OnDestroy {
   discussionForumWidget: NsWidgetResolver.IRenderConfigWithTypedData<
     NsDiscussionForum.IDiscussionForumInput
   > | null = null
+  @Input() sharedContent: NsContent.IContent | null = null
   constructor(
     private activatedRoute: ActivatedRoute,
     private valueSvc: ValueService,
@@ -41,7 +42,7 @@ export class VideoComponent implements OnInit, OnDestroy {
     private contentSvc: WidgetContentService,
     private platform: Platform,
     private accessControlSvc: AccessControlService,
-  ) {}
+  ) { }
 
   ngOnInit() {
     this.screenSizeSubscription = this.valueSvc.isXSmall$.subscribe(data => {
@@ -75,7 +76,7 @@ export class VideoComponent implements OnInit, OnDestroy {
       this.routeDataSubscription = this.activatedRoute.data.subscribe(
         async data => {
           this.widgetResolverVideoData = null
-          if (this. isShared) {
+          if (this.isShared) {
             this.videoData = this.activatedRoute.snapshot.children[0].data.content
           } else {
             this.videoData = data.content.data
@@ -111,7 +112,7 @@ export class VideoComponent implements OnInit, OnDestroy {
           }
           this.isFetchingDataComplete = true
         },
-        () => {},
+        () => { },
       )
     }
   }
@@ -195,7 +196,7 @@ export class VideoComponent implements OnInit, OnDestroy {
     await this.contentSvc
       .setS3Cookie(contentId)
       .toPromise()
-      .catch(() => {})
+      .catch(() => { })
     return
   }
 }
