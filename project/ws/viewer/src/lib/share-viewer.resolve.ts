@@ -29,7 +29,8 @@ export class ShareViewerResolve
     try {
       return await this.handleDefaultUserLogin(route)
     } catch (err) {
-      console.log('catched error in share view ', err)
+      // tslint:disable-next-line: no-console
+      // console.log('catched error in share view ', err)
       return this.router.navigate([`/page/home`])
     }
   }
@@ -54,7 +55,8 @@ export class ShareViewerResolve
         return this.router.navigate([`/page/home`])
       }
     } catch (e) {
-      console.log('catched error while routing again ', e)
+      // tslint:disable-next-line: no-console
+      // console.log('catched error while routing again ', e)
       this.router.navigate(['/'])
     }
   }
