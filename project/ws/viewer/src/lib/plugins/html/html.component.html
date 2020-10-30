@@ -34,7 +34,7 @@
       <ng-container *ngIf="htmlContent?.isIframeSupported === 'No' || !htmlContent?.isIframeSupported">
         <span class="font-montserrat body-font-size-primary" i18n>Content will open in a new window. If you are unable to view it, click on the button
           below.</span>
-        <a [routerLink]="'/app/info/faq'" [queryParams]="{ tab: 'popup' }">
+        <a *ngIf="!configSvc?.isGuestUser" [routerLink]="'/app/info/faq'" [queryParams]="{ tab: 'popup' }">
           <mat-icon matTooltip="How to Disable Pop-ups" class="align-text-top ws-mat-primary-text mat-icon">help
           </mat-icon>
         </a>
@@ -58,7 +58,7 @@
         target="_blank" #mobileOpenInNewTab>Open in New Tab</a>
 
       <button [ngClass]="!mobAppSvc?.isMobile ? 'block' : 'hidden'" class="btn-clr" mat-raised-button color="primary"
-        type="button" i18n mat-button (click)="openInNewTab()">
+        type="button" i18n mat-button (click)="openInNewTab(true)">
         <span class="font-montserrat">Open in New Window</span>
       </button>
       <button type="button" *ngIf="

@@ -8,8 +8,6 @@ import { AccessControlService, ApiService } from '@ws/author'
 import { CONTENT_READ } from '@ws/author/src/lib/constants/apiEndpoints'
 import { ViewerDataService } from './viewer-data.service'
 import { WidgetResolverService } from '@ws-widget/resolver/src/public-api'
-// tslint:disable: no-debugger
-// tslint:disable: no-console
 
 @Injectable()
 export class ShareViewerResolve

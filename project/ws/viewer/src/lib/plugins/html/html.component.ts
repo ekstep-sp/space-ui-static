@@ -1,4 +1,4 @@
-import { Component, ElementRef, Input, OnChanges, OnInit, ViewChild } from '@angular/core'
+import { Component, ElementRef, Input, OnInit, ViewChild, OnChanges } from '@angular/core'
 import { MatSnackBar } from '@angular/material/snack-bar'
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser'
 import { Router } from '@angular/router'
@@ -28,6 +28,7 @@ export class HtmlComponent implements OnInit, OnChanges {
   intranetUrlPatterns: string[] | undefined = []
   isIntranetUrl = false
   progress = 100
+  loaderIntervalTimeout: any
   constructor(
     private domSanitizer: DomSanitizer,
     public mobAppSvc: MobileAppsService,
@@ -60,18 +61,8 @@ export class HtmlComponent implements OnInit, OnChanges {
         iframeSupport = this.htmlContent.isIframeSupported.toLowerCase()
         if (iframeSupport === 'no') {
           this.showIframeSupportWarning = true
-          setTimeout(
-            () => {
-              this.openInNewTab()
-            },
-            3000,
-          )
-          setInterval(
-            () => {
-              this.progress -= 1
-            },
-            30,
-          )
+          this.loaderIntervalTimeout = setTimeout(() => this.openInNewTab(), 3000)
+          setInterval(() => this.progress -= 1, 30)
         } else if (iframeSupport === 'maybe') {
           this.showIframeSupportWarning = true
         } else {
@@ -87,16 +78,6 @@ export class HtmlComponent implements OnInit, OnChanges {
           }
         })
       }
-      // if (this.htmlContent.isInIntranet || this.isIntranetUrl) {
-      //   this.checkIfIntranet().subscribe(
-      //     data => {
-      //       this.isUserInIntranet = data ? true : false
-      //     },
-      //     () => {
-      //       this.isUserInIntranet = false
-      //     },
-      //   )
-      // }
       this.showIsLoadingMessage = false
       if (this.htmlContent.isIframeSupported !== 'No') {
         setTimeout(
@@ -131,7 +112,11 @@ export class HtmlComponent implements OnInit, OnChanges {
     ])
   }
 
-  openInNewTab() {
+  openInNewTab(triggeredManually = false) {
+    if (triggeredManually) {
+      window.clearTimeout(this.loaderIntervalTimeout)
+      this.progress = -1
+    }
     const redirecturl = this.prepare()
     if (this.htmlContent) {
       if (this.mobAppSvc && this.mobAppSvc.isMobile) {

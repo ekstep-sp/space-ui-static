@@ -1,7 +1,7 @@
 import { AfterViewInit, Component, ElementRef, Input, OnDestroy, OnInit, ViewChild } from '@angular/core'
 import { ActivatedRoute } from '@angular/router'
 import { NsWidgetResolver, WidgetBaseComponent } from '@ws-widget/resolver'
-import { EventService, ValueService } from '@ws-widget/utils'
+import { ConfigurationsService, EventService, ValueService } from '@ws-widget/utils'
 import videoJs from 'video.js'
 import { ViewerUtilService } from '../../../../../../project/ws/viewer/src/lib/viewer-util.service'
 import { ROOT_WIDGET_CONFIG } from '../collection.config'
@@ -60,6 +60,7 @@ export class PlayerVideoComponent extends WidgetBaseComponent
     private viewerSvc: ViewerUtilService,
     private activatedRoute: ActivatedRoute,
     private valueSvc: ValueService,
+    private readonly configSvc: ConfigurationsService
   ) {
     super()
   }
@@ -174,7 +175,7 @@ export class PlayerVideoComponent extends WidgetBaseComponent
       }
     }
     const saveCLearning: saveContinueLearningFunction = data => {
-      if (this.widgetData.identifier) {
+      if (this.widgetData.identifier && !this.configSvc.isGuestUser) {
         if (this.activatedRoute.snapshot.queryParams.collectionType &&
           this.activatedRoute.snapshot.queryParams.collectionType.toLowerCase() === 'playlist') {
           const continueLearningData = {

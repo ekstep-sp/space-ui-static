@@ -86,10 +86,14 @@ export class HtmlComponent implements OnInit, OnDestroy {
     } else {
       this.routeDataSubscription = this.activatedRoute.data.subscribe(
         async data => {
+          debugger
           // data.content.data.artifactUrl =
           //   data.content.data.artifactUrl.startsWith('/scorm-player') ?
           //     `/apis/proxies/v8${data.content.data.artifactUrl}` : data.content.data.artifactUrl
-          const tempHtmlData = data.content.data || data.content
+          let tempHtmlData = data.hasOwnProperty('content') && data.content.hasOwnProperty('data') ? data.content.data : null
+          if (!tempHtmlData && this.configSvc.isGuestUser) {
+            tempHtmlData = this.activatedRoute.snapshot.children[0].data.content
+          }
           tempHtmlData.artifactUrl =
             tempHtmlData.artifactUrl.indexOf('ScormCoursePlayer') > -1
               ? `${tempHtmlData.artifactUrl}&Param1=${this.uuid}`
@@ -211,7 +215,7 @@ export class HtmlComponent implements OnInit, OnDestroy {
   }
 
 async  ngOnDestroy() {
-  if (this.htmlData) {
+  if (this.htmlData && !this.configSvc.isGuestUser) {
     if (!this.subApp || this.activatedRoute.snapshot.queryParams.collectionId) {
       await this.saveContinueLearning(this.htmlData)
     }

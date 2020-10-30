@@ -61,29 +61,27 @@ export class ViewerComponent implements OnInit, OnDestroy, AfterViewInit, AfterV
     this.rootSvc.showNavbarDisplay$.next(false)
   }
 
-  getContentData(e: any) {
-    if (!this.configService.isGuestUser && e.hasOwnProperty('activatedRoute')) {
-      e.activatedRoute.data.subscribe((data: { content: { data: NsContent.IContent } }) => {
-        if (data.content && data.content.data) {
-          this.content = data.content.data
-          this.tocSharedSvc.fetchEmails(this.content ? this.content.creatorContacts : []).then((newIDS: any) => {
-            if (this.content) {
-              this.content.creatorContacts = [
-                ...newIDS,
-              ]
-            }
-          })
-        }
-      })
-    } else if (e.hasOwnProperty('route')) {
-      // this will occur for sharable routes
-      e.route.data.subscribe((data: { content: NsContent.IContent }) => {
-        if (data.content && !data.content.data) {
-          this.guestUser = true
-          window.setTimeout(() => {
-            this.utilitySvc.emitCurrentContentForBriefPlayer(data.content)
-          })
-        }
+  getContentData(e: any, sentDirectly = false) {
+    if (!sentDirectly) {
+      if (!this.configService.isGuestUser && e.hasOwnProperty('activatedRoute')) {
+        e.activatedRoute.data.subscribe((data: { content: { data: NsContent.IContent } }) => {
+          if (data.content && data.content.data) {
+            this.content = data.content.data
+            this.tocSharedSvc.fetchEmails(this.content ? this.content.creatorContacts : []).then((newIDS: any) => {
+              if (this.content) {
+                this.content.creatorContacts = [
+                  ...newIDS,
+                ]
+              }
+            })
+          }
+        })
+      }
+    } else {
+      this.guestUser = true
+      window.setTimeout(() => {
+        // this.utilitySvc.emitCurrentContentForBriefPlayer(e)
+        this.content = e
       })
     }
   }

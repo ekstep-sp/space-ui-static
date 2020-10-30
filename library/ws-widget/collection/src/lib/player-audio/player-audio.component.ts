@@ -11,7 +11,7 @@ import {
 import videoJs from 'video.js'
 import { ROOT_WIDGET_CONFIG } from '../collection.config'
 import { IWidgetsPlayerMediaData } from '../_models/player-media.model'
-import { EventService } from '@ws-widget/utils'
+import { ConfigurationsService, EventService } from '@ws-widget/utils'
 import {
   videoJsInitializer,
   telemetryEventDispatcherFunction,
@@ -57,6 +57,7 @@ export class PlayerAudioComponent extends WidgetBaseComponent
     private contentSvc: WidgetContentService,
     private viewerSvc: ViewerUtilService,
     private activatedRoute: ActivatedRoute,
+    private readonly configService: ConfigurationsService,
   ) {
     super()
   }
@@ -85,12 +86,12 @@ export class PlayerAudioComponent extends WidgetBaseComponent
   }
   private initializePlayer() {
     const dispatcher: telemetryEventDispatcherFunction = event => {
-      if (this.widgetData.identifier) {
+      if (this.widgetData.identifier && !this.configService.isGuestUser) {
         this.eventSvc.dispatchEvent(event)
       }
     }
     const saveCLearning: saveContinueLearningFunction = data => {
-      if (this.widgetData.identifier) {
+      if (this.widgetData.identifier && !this.configService.isGuestUser) {
         if (this.activatedRoute.snapshot.queryParams.collectionType &&
           this.activatedRoute.snapshot.queryParams.collectionType.toLowerCase() === 'playlist') {
           const continueLearningData = {

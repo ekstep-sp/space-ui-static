@@ -76,7 +76,7 @@ export class VideoComponent implements OnInit, OnDestroy {
         async data => {
           this.widgetResolverVideoData = null
           if (this. isShared) {
-            this.videoData = data.content
+            this.videoData = this.activatedRoute.snapshot.children[0].data.content
           } else {
             this.videoData = data.content.data
           }
@@ -84,14 +84,16 @@ export class VideoComponent implements OnInit, OnDestroy {
             this.formDiscussionForumWidget(this.videoData)
           }
           this.widgetResolverVideoData = this.initWidgetResolverVideoData(this.videoData as any)
-          if (this.videoData && this.videoData.identifier && !this.isShared) {
-            if (this.activatedRoute.snapshot.queryParams.collectionId) {
-              await this.fetchContinueLearning(
-                this.activatedRoute.snapshot.queryParams.collectionId,
-                this.videoData.identifier,
-              )
-            } else {
-              await this.fetchContinueLearning(this.videoData.identifier, this.videoData.identifier)
+          if (!this.isShared) {
+            if (this.videoData && this.videoData.identifier) {
+              if (this.activatedRoute.snapshot.queryParams.collectionId) {
+                await this.fetchContinueLearning(
+                  this.activatedRoute.snapshot.queryParams.collectionId,
+                  this.videoData.identifier,
+                )
+              } else {
+                await this.fetchContinueLearning(this.videoData.identifier, this.videoData.identifier)
+              }
             }
           }
           this.widgetResolverVideoData.widgetData.url = this.videoData
@@ -102,7 +104,7 @@ export class VideoComponent implements OnInit, OnDestroy {
           this.widgetResolverVideoData.widgetData.identifier = this.videoData
             ? this.videoData.identifier
             : ''
-          this.widgetResolverVideoData.widgetData.mimeType = this.isShared ? data.content.mimeType : data.content.data.mimeType
+          this.widgetResolverVideoData.widgetData.mimeType = this.videoData ? this.videoData.mimeType : null
           this.widgetResolverVideoData = JSON.parse(JSON.stringify(this.widgetResolverVideoData))
           if (this.videoData && this.videoData.artifactUrl.indexOf('content-store') >= 0) {
             await this.setS3Cookie(this.videoData.identifier)
@@ -168,9 +170,6 @@ export class VideoComponent implements OnInit, OnDestroy {
     }
   }
   async fetchContinueLearning(collectionId: string, videoId: string): Promise<boolean> {
-    if (this.isShared) {
-      return Promise.resolve(true)
-    }
     return new Promise(resolve => {
       this.contentSvc.fetchContentHistory(collectionId).subscribe(
         data => {

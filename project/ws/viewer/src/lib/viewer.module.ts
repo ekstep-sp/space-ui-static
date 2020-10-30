@@ -46,7 +46,7 @@ import { ViewerComponent } from './viewer.component'
 import { ViewerTocComponent } from './components/viewer-toc/viewer-toc.component'
 import { ViewerTopBarModule } from './components/viewer-top-bar/viewer-top-bar.module'
 import { PublicShareViewComponent } from './components/public-share-view/public-share-view.component'
-import { SharedModule } from '@ws/author/src/lib/modules/shared/shared.module'
+import { SharedModule } from '@ws/author/src/lib/modules/shared/shared.module';
 
 @NgModule({
   declarations: [ViewerComponent, ViewerTocComponent, PublicShareViewComponent],
