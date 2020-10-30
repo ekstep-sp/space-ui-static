@@ -17,7 +17,6 @@ span.tabname-container {
   align-items: center;
 }
 ::ng-deep{
-
 .theme-muave.night-mode .mat-list-base .mat-list-item .mat-list-item-content{
   display: flex;
   flex-direction: row;
@@ -26,19 +25,22 @@ span.tabname-container {
   padding: 0 16px;
   position: relative;
   height: inherit;
-  background: #424242 !important;
+  padding-left: 97px;
+ // background: #424242 !important;
+}
+.mat-list-item-content {
+    padding-left: 97px !important;
 }
 }
 span.toggle-arrow {
   position: absolute;
   z-index: 11111;
-  left: 95%;
-  top: 35px;
+  left: 100%;
+  top: 25px;
   cursor: pointer;
   display: inline-block;
-  padding: 6px;
-  height: 8px;
-  width: 8px;
+  height: 42px;
+  width: 42px;
   display: flex;
     justify-content: center;
     align-items: center;
@@ -46,9 +48,17 @@ span.toggle-arrow {
   background-color: #C6BCB8;
   border: 1px solid #C6BCB8;
 }
-span.pos-x {
-  left: 86% !important;
+.mat-tab-label-content {
+  font-size: 24px;
 }
+.mat-toolbar-selected{
+background-color: #42428B !important;
+color:#ffff !important;
+font-weight: bold !important;
+}
+/* span.pos-x {
+  left: 86% !important;
+} */
 mat-icon.double-arraow {
   font-size: 14px;
   position: absolute;
@@ -56,7 +66,22 @@ mat-icon.double-arraow {
   left: 25%;
 }
 img.arrow-icon {
-  height: 6px;
+  height: 14px;
+  width:9.5px;
+}
+.mat-list-item-content {
+  justify-content: center!important;
+}
+.mat-icon{
+  font-size: 30px;
+}
+a.mat-list-item {
+ display:flex;
+ align-items: center;
+}
+.padding-left-s{
+  padding-left:20px!important;
+  margin-top: 8px;
 }
 .rotate-ve-180{
 transform: rotate(-180deg) !important;
@@ -85,7 +110,12 @@ span.toggle-span {
 
 }
 
-
+mat-sidenav.nav-opened {
+  width: 417px;
+}
+ mat-sidenav.nav-closed {
+  width: 216px;
+} 
 @media only screen and (min-width: 800px) {
   span.toggle-span {
     display: none;
@@ -93,6 +123,31 @@ span.toggle-span {
 }
 
 @media only screen and (max-width: 800px) {
+  ::ng-deep{
+    .theme-muave.night-mode .mat-list-base .mat-list-item .mat-list-item-content{
+  
+      padding-left: 10px;
+     // background: #424242 !important;
+    }
+    .mat-list-item-content {
+        padding-left: 10px !important;
+    }
+    }
+    a.mat-list-item {
+      display: flex !important;
+      align-items: center !important;
+      justify-content: center !important;
+  }
+  a.mat-list-item {
+    display:flex !important;
+    align-items: center !important;
+   }
+mat-sidenav.nav-opened {
+  width: 157px;
+}
+ mat-sidenav.nav-closed {
+  width: 117px;
+} 
 
   span.toggle-arrow {
     display: none;
