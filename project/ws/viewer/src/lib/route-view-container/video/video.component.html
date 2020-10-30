@@ -8,7 +8,8 @@
               <ng-container *ngIf="isFetchingDataComplete" [wsResolverWidget]="widgetResolverVideoData"></ng-container>
             </div>
             <ng-container *ngIf="!isScreenSizeSmall">
-              <div class="flex justify-end mt-3" *ngIf="!isShared">
+
+              <div class="flex justify-end mt-3" *ngIf="isShared">
                 <ws-widget-btn-content-download [forPreview]="forPreview" [widgetData]="
                     videoData
                       | pipePartialContent
@@ -25,9 +26,17 @@
                 <ws-widget-btn-content-like [forPreview]="forPreview"
                   [widgetData]="videoData | pipePartialContent: ['identifier']">
                 </ws-widget-btn-content-like>
-                <ws-widget-btn-content-share [forPreview]="forPreview"></ws-widget-btn-content-share>
+
+                <ws-widget-btn-content-share [forPreview]="forPreview"
+                  [widgetData]="videoData | pipePartialContent: ['identifier']"></ws-widget-btn-content-share>
                 <ws-widget-btn-goals [forPreview]="forPreview"></ws-widget-btn-goals>
-                <ws-widget-btn-playlist [forPreview]="forPreview"></ws-widget-btn-playlist>
+                <ws-widget-btn-playlist [forPreview]="forPreview" [widgetData]="{
+                  contentId: videoData?.identifier,
+                  contentName: videoData?.name,
+                  contentType: 'Resource',
+                  mode: 'dialog',
+                  isDisabled: isPreviewMode
+                }"></ws-widget-btn-playlist>
                 <ws-widget-btn-content-feedback [forPreview]="forPreview"></ws-widget-btn-content-feedback>
                 <ws-widget-btn-content-feedback-v2 [forPreview]="forPreview"
                   [widgetData]="videoData | pipePartialContent: ['identifier', 'name']">
@@ -37,8 +46,10 @@
           </mat-card-content>
         </mat-card>
       </div>
+
       <div class="vidoe-title margin-top-m" *ngIf="videoData">
-        <mat-card *ngIf="isScreenSizeSmall && !isShared" class="unit-meta-item">
+
+        <mat-card *ngIf="isScreenSizeSmall && isShared" class="unit-meta-item">
           <div class="flex flex-between flex-wrapped">
             <div>
               <ws-widget-btn-content-download [forPreview]="forPreview" [widgetData]="
@@ -57,10 +68,18 @@
               <ws-widget-btn-content-like [forPreview]="forPreview"
                 [widgetData]="videoData | pipePartialContent: ['identifier']">
               </ws-widget-btn-content-like>
-              <ws-widget-btn-content-share [forPreview]="forPreview"></ws-widget-btn-content-share>
+              <ws-widget-btn-content-share [forPreview]="forPreview"
+                [widgetData]="videoData | pipePartialContent: ['identifier']"></ws-widget-btn-content-share>
               <ws-widget-btn-goals [forPreview]="forPreview"></ws-widget-btn-goals>
-              <ws-widget-btn-playlist [forPreview]="forPreview"></ws-widget-btn-playlist>
-              <ws-widget-btn-content-feedback [forPreview]="forPreview"></ws-widget-btn-content-feedback>
+              <ws-widget-btn-playlist [forPreview]="forPreview" [widgetData]="{
+                contentId: videoData?.identifier,
+                contentName: videoData?.name,
+                contentType: 'Resource',
+                mode: 'dialog',
+                isDisabled: isPreviewMode
+              }"></ws-widget-btn-playlist>
+              <ws-widget-btn-content-feedback [forPreview]="forPreview"
+                [widgetData]="videoData | pipePartialContent: ['identifier', 'name']"></ws-widget-btn-content-feedback>
             </div>
           </div>
         </mat-card>

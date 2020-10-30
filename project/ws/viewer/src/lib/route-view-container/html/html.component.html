@@ -37,9 +37,10 @@
                   isDisabled: isPreviewMode
                 }">
               </ws-widget-btn-content-like>
-              <ws-widget-btn-content-share *ngIf="allowedToDiscussionForum" [forPreview]="forPreview" [widgetData]="htmlData"
-                [isDisabled]="isPreviewMode">
+              <ws-widget-btn-content-share *ngIf="allowedToDiscussionForum" [forPreview]="forPreview"
+                [widgetData]="htmlData" [isDisabled]="isPreviewMode">
               </ws-widget-btn-content-share>
+              html{{forPreview}}
               <ws-widget-btn-goals *ngIf="!configSvc?.isGuestUser" [forPreview]="forPreview"></ws-widget-btn-goals>
               <ws-widget-btn-playlist *ngIf="!configSvc?.isGuestUser" [forPreview]="forPreview" [widgetData]="{
                   contentId: htmlData?.identifier,
@@ -51,7 +52,7 @@
               </ws-widget-btn-playlist>
               <!-- <ws-widget-btn-content-feedback></ws-widget-btn-content-feedback> -->
               <ws-widget-btn-content-feedback-v2 *ngIf="allowedToDiscussionForum && !configSvc?.isGuestUser"
-               [forPreview]="forPreview" [widgetData]="{
+                [forPreview]="forPreview" [widgetData]="{
                   identifier: htmlData.identifier,
                   name: htmlData.name,
                   isDisabled: isPreviewMode
@@ -63,7 +64,8 @@
       </div>
     </div>
   </div>
-  <div class="padding-m" *ngIf="discussionForumWidget && isRestricted && htmlData?.assetType !== 'Connection' && allowedToDiscussionForum">
+  <div class="padding-m"
+    *ngIf="discussionForumWidget && isRestricted && htmlData?.assetType !== 'Connection' && allowedToDiscussionForum">
     <div class="video-discussion-forum-in">
       <h2 class="mat-toolbar discussion-head font-montserrat body-font-size-primary">Discussion Forum</h2>
       <ng-container [wsResolverWidget]="discussionForumWidget"></ng-container>

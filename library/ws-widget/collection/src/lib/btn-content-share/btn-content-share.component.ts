@@ -24,6 +24,7 @@ export class BtnContentShareComponent extends WidgetBaseComponent
   }
 
   ngOnInit() {
+
     if (this.configSvc.restrictedFeatures) {
       this.isShareEnabled = !this.configSvc.restrictedFeatures.has('share')
     }

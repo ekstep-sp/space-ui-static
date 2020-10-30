@@ -28,6 +28,7 @@ export class AudioComponent implements OnInit, OnDestroy {
   isFetchingDataComplete = false
   forPreview = window.location.href.includes('/author/')
   audioData: NsContent.IContent | null = null
+  @Input() sharedContent: NsContent.IContent | null = null
   widgetResolverAudioData: NsWidgetResolver.IRenderConfigWithTypedData<
     IWidgetsPlayerMediaData
   > | null = null
@@ -40,7 +41,7 @@ export class AudioComponent implements OnInit, OnDestroy {
     private valueSvc: ValueService,
     private viewerSvc: ViewerUtilService,
     private accessControlSvc: AccessControlService,
-  ) {}
+  ) { }
 
   ngOnInit() {
     this.screenSizeSubscription = this.valueSvc.isXSmall$.subscribe(data => {
@@ -72,55 +73,55 @@ export class AudioComponent implements OnInit, OnDestroy {
       // this.htmlData = this.viewerDataSvc.resource
     } else {
       this.routeDataSubscription = this.activatedRoute.data
-      .pipe(map((_data: any) => {
-        if (!_data.content.hasOwnProperty('data')) {
-          return {
-            content: {
-              data: {
-                ..._data.content,
+        .pipe(map((_data: any) => {
+          if (!_data.content.hasOwnProperty('data')) {
+            return {
+              content: {
+                data: {
+                  ..._data.content,
+                },
               },
-            },
-          }
-        }
-        return _data
-      }))
-      .subscribe(
-        async data => {
-          this.widgetResolverAudioData = null
-          this.audioData = data.content.data
-          if (this.audioData && !this.isShared) {
-            this.formDiscussionForumWidget(this.audioData)
-          }
-          if (this.audioData && this.audioData.artifactUrl.indexOf('content-store') >= 0) {
-            await this.setS3Cookie(this.audioData.identifier)
-          }
-          this.widgetResolverAudioData = this.initWidgetResolverAudioData()
-          if (this.audioData && this.audioData.identifier && !this.isShared) {
-            if (this.activatedRoute.snapshot.queryParams.collectionId) {
-              await this.fetchContinueLearning(
-                this.activatedRoute.snapshot.queryParams.collectionId,
-                this.audioData.identifier,
-              )
-            } else {
-              await this.fetchContinueLearning(this.audioData.identifier, this.audioData.identifier)
             }
           }
-          if (this.forPreview) {
-            this.widgetResolverAudioData.widgetData.disableTelemetry = true
-          }
-          this.widgetResolverAudioData.widgetData.url = this.audioData
-            ? this.forPreview
-              ? this.viewerSvc.getAuthoringUrl(this.audioData.artifactUrl)
-              : this.audioData.artifactUrl
-            : ''
-          this.widgetResolverAudioData.widgetData.identifier = this.audioData
-            ? this.audioData.identifier
-            : ''
-          this.widgetResolverAudioData = JSON.parse(JSON.stringify(this.widgetResolverAudioData))
-          this.isFetchingDataComplete = true
-        },
-        () => {},
-      )
+          return _data
+        }))
+        .subscribe(
+          async data => {
+            this.widgetResolverAudioData = null
+            this.audioData = data.content.data
+            if (this.audioData && !this.isShared) {
+              this.formDiscussionForumWidget(this.audioData)
+            }
+            if (this.audioData && this.audioData.artifactUrl.indexOf('content-store') >= 0) {
+              await this.setS3Cookie(this.audioData.identifier)
+            }
+            this.widgetResolverAudioData = this.initWidgetResolverAudioData()
+            if (this.audioData && this.audioData.identifier && !this.isShared) {
+              if (this.activatedRoute.snapshot.queryParams.collectionId) {
+                await this.fetchContinueLearning(
+                  this.activatedRoute.snapshot.queryParams.collectionId,
+                  this.audioData.identifier,
+                )
+              } else {
+                await this.fetchContinueLearning(this.audioData.identifier, this.audioData.identifier)
+              }
+            }
+            if (this.forPreview) {
+              this.widgetResolverAudioData.widgetData.disableTelemetry = true
+            }
+            this.widgetResolverAudioData.widgetData.url = this.audioData
+              ? this.forPreview
+                ? this.viewerSvc.getAuthoringUrl(this.audioData.artifactUrl)
+                : this.audioData.artifactUrl
+              : ''
+            this.widgetResolverAudioData.widgetData.identifier = this.audioData
+              ? this.audioData.identifier
+              : ''
+            this.widgetResolverAudioData = JSON.parse(JSON.stringify(this.widgetResolverAudioData))
+            this.isFetchingDataComplete = true
+          },
+          () => { },
+        )
     }
   }
 

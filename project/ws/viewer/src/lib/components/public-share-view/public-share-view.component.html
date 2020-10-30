@@ -7,9 +7,9 @@
 </ng-container>
 
 <ng-container *ngIf="contentDisplyType === 'video'">
-    <viewer-video [isShared]="true"></viewer-video>
+    <viewer-video [sharedContent]="currentcontent" [isShared]="true"></viewer-video>
 </ng-container>
 
 <ng-container *ngIf="contentDisplyType === 'audio'">
-    <viewer-audio [isShared]="true"></viewer-audio>
+    <viewer-audio [sharedContent]="currentcontent" [isShared]="true"></viewer-audio>
 </ng-container>

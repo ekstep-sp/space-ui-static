@@ -8,6 +8,7 @@
   (click)="getPlaylists($event)" [matMenuTriggerFor]="menu">
   <mat-icon>playlist_add</mat-icon>
 </button>
+
 <mat-menu #menu="matMenu">
   <ng-template matMenuContent>
     <div (click)="$event.stopPropagation()">
