@@ -1,7 +1,7 @@
 <mat-toolbar [color]="pageNavbar.color" [ngStyle]="pageNavbar?.styles">
   <ws-widget-btn-page-back [widgetData]="{ url: 'back' }"></ws-widget-btn-page-back>
 
-  <span i18n class="margin-left-xs text-white font-size-20px font-montserrat">My Blogs</span>
+  <span i18n class="margin-left-xs text-white font-size-navbar-heading font-montserrat">My Blogs</span>
   <span class="spacer"></span>
   <a [routerLink]="'/app/social/blogs/edit'" class="btn" mat-raised-button i18n>
     <mat-icon class="mat-icon-color"> create </mat-icon><span>&nbsp;Write a Blog</span></a

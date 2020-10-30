@@ -66,8 +66,8 @@
   .body-font-size-primary {
     font-size: 18px !important;
   }
-  .font-size-20px {
-    font-size: 20px !important;
+  .font-size-navbar-heading {
+    font-size: 24px !important;
   }
   .heading-font-size-secondary {
     font-size: 24px !important;
@@ -94,6 +94,10 @@
       font-size: 28px !important;
       line-height: 32px !important;
     }
+
+  .font-size-navbar-heading {
+    font-size: 20px !important;
+  }
   }
   .bold-text {
     font-weight: bold;

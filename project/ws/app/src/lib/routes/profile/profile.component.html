@@ -1,7 +1,7 @@
 <mat-toolbar [color]="pageNavbar.color" [ngStyle]="pageNavbar?.styles">
   <span class="tabname-container">
     <ws-widget-btn-page-back (click)="tabUpdateWithBackBtn()" [widgetData]="{ url: 'back' }"></ws-widget-btn-page-back>
-    <span class="ml-2 font-size-20px font-montserrat">{{ tabName }}</span>
+    <span class="ml-2 font-size-navbar-heading font-montserrat">{{ tabName }}</span>
   </span>
   <span class="spacer"></span>
   <!-- <button (click)="logout()" style="color: white;" mat-button>
@@ -10,7 +10,7 @@
   </button> -->
   <button *ngIf="screenSizeIsLtMedium" aria-label="showText? 'Hide side panel' : 'Show side panel'" mat-icon-button
     (click)="!screenSizeIsLtMedium ? (showText = !showText) : sideNavBar.toggle()" style="color: white;">
-    <mat-icon>menu</mat-icon>
+    <mat-icon class="color-white">menu</mat-icon>
   </button>
 </mat-toolbar>
 <!-- <span class="toggle-span" [ngStyle]="{left:sideNavBar.opened? leftValue: defaultleftValue}" (click)="!screenSizeIsLtMedium ? (showText = !showText) : triggerToggle(sideNavBar)">
@@ -31,9 +31,8 @@
           }}</span>
         </ng-container>
       </a>
-<span class="toggle-arrow" [ngClass]="{'pos-x': !showText}" (click)="!screenSizeIsLtMedium ? (showText = !showText) : triggerToggle(sideNavBar)">
-  <img class="arrow-icon" [ngClass]="{'rotate-ve-180': !showText}" src="/assets/instances/space/common/arrow.png">
-  <img class="arrow-icon" [ngClass]="{'rotate-ve-180': !showText}" src="/assets/instances/space/common/arrow.png">
+<span *ngIf="!screenSizeIsLtMedium" class="toggle-arrow" [ngClass]="{'pos-x': !showText}" (click)="!screenSizeIsLtMedium ? (showText = !showText) : triggerToggle(sideNavBar)">
+  <img class="arrow-icon" [ngClass]="{'rotate-ve-180': !showText}" src="/assets/instances/space/common/arrow_double.png">
 </span>
       <a mat-list-item *ngIf="enabledTabs?.learning?.enabled" routerLinkActive="mat-toolbar-selected" (click)="
           tabUpdate(enabledTabs?.learning?.displayName);
