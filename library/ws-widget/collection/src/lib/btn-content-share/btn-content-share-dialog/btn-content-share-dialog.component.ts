@@ -176,6 +176,7 @@ export class BtnContentShareDialogComponent implements OnInit {
       window.setTimeout(() => {
         this.triggerCopiedNotification('Url copied to clipoard!')
         this.dialogRef.close()
+      // tslint:disable-next-line:align
       }, 100)
     } catch (e) {
       this.triggerCopiedNotification('copy to clipboard failed, copy manually.')
@@ -207,7 +208,6 @@ export class BtnContentShareDialogComponent implements OnInit {
   }
 
   generateSharableUrl(data: NsContent.IContent, dummy = true) {
-    console.log("data+++++", data)
     const pageType = this.getPageType()
     const contentID = data.identifier
     const contentType = data.contentType
