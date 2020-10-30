@@ -1,7 +1,6 @@
-import { Component, OnDestroy, OnInit } from '@angular/core'
+import { Component, EventEmitter, OnDestroy, OnInit, Output } from '@angular/core'
 import { ActivatedRoute } from '@angular/router'
-import { NsContent, VIEWER_ROUTE_FROM_MIME } from '@ws-widget/collection'
-import { ConfigurationsService } from '@ws-widget/utils/src/public-api'
+import { NsContent,  VIEWER_ROUTE_FROM_MIME } from '@ws-widget/collection'
 import { Subscription } from 'rxjs'
 
 @Component({
@@ -17,16 +16,18 @@ export class PublicShareViewComponent implements OnInit, OnDestroy {
   contentDisplyType = ''
   resourceType = ''
   currentcontent: NsContent.IContent | null = null
+  @Output() guestData = new EventEmitter<NsContent.IContent>()
   constructor(
     private readonly route: ActivatedRoute,
-    private readonly configSrvc: ConfigurationsService
   ) { }
 
   ngOnInit() {
-    if (this.route) {
-      this.routeSub$ = this.route.data.subscribe((data: any) => {
-        this.initContentView(data.content)
-      })
+    try {
+      const guestDataToSend = this.route.snapshot.children[0].data
+      this.guestData.emit(guestDataToSend.content)
+      this.initContentView(guestDataToSend.content)
+    } catch (_e) {
+      // this will catch error everytime user is clicking on back button from public viewer, at that time children are no longer there
     }
   }
 
@@ -42,7 +43,7 @@ export class PublicShareViewComponent implements OnInit, OnDestroy {
 
   ngOnDestroy() {
     // alert('removed guest from public-share-view')
-    this.configSrvc.removeGuestUser()
+    // this.configSrvc.removeGuestUser()
     if (this.routeSub$) {
       this.routeSub$.unsubscribe()
     }

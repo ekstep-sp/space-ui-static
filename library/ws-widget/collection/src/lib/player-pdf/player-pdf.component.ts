@@ -279,7 +279,7 @@ export class PlayerPdfComponent extends WidgetBaseComponent
 
   }
   ngOnDestroy() {
-    if (this.identifier) {
+    if (this.identifier && !this.configSvc.isGuestUser) {
       this.saveContinueLearning(this.identifier)
       this.fireRealTimeProgress(this.identifier)
     }
@@ -292,7 +292,7 @@ export class PlayerPdfComponent extends WidgetBaseComponent
     if (this.runnerSubs) {
       this.runnerSubs.unsubscribe()
     }
-    if (!this.widgetData.disableTelemetry) {
+    if (!this.widgetData.disableTelemetry && !this.configSvc.isGuestUser) {
       this.eventDispatcher(WsEvents.EnumTelemetrySubType.Unloaded)
     }
     if (this.routerSubs) {

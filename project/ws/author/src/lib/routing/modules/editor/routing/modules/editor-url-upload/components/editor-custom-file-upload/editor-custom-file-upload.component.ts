@@ -183,7 +183,7 @@ export class EditorCustomFileUploadComponent implements OnInit {
       fileName: false,
       eval: false,
       externalReference: false,
-      iframe: false,
+      iframe: true,
       isSubmitPressed: false,
       preview: false,
       url: '',
@@ -337,6 +337,7 @@ export class EditorCustomFileUploadComponent implements OnInit {
           this.fileUploadForm.controls.artifactUploadUrl.setValue(url)
           this.fileUploadForm.controls.downloadUrl.setValue(v ? v.downloadURL : '')
           this.fileUploadForm.controls.mimeType.setValue(this.mimeType)
+          this.fileUploadForm.controls.isIframeSupported.setValue('Yes')
           /* if (this.mimeType === 'application/x-mpegURL') {
             this.fileUploadForm.controls.transcoding.setValue({
               lastTranscodedOn: null,

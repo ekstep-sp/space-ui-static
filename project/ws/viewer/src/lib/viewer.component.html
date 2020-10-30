@@ -14,8 +14,7 @@
           </viewer-viewer-toc>
         </mat-tab>
         <mat-tab i18n-label label="Details">
-          <ws-widget-player-brief *ngIf="guestUser" [forPreview]="forPreview"></ws-widget-player-brief>
-          <ws-widget-player-brief *ngIf="!guestUser"[forPreview]="forPreview" [content]="content"></ws-widget-player-brief>
+          <ws-widget-player-brief [forPreview]="forPreview" [content]="content"></ws-widget-player-brief>
         </mat-tab>
       </mat-tab-group>
     </mat-sidenav>
@@ -66,10 +65,19 @@
       <section *ngIf="status === 'pending'">
         <mat-spinner></mat-spinner>
       </section>
-      <router-outlet (activate)="getContentData($event)"></router-outlet>
+      <ng-container *ngIf="!configService?.isGuestUser; else guestTemplateContainer">
+        <ng-container *ngTemplateOutlet="routerLogic"></ng-container>
+      </ng-container>
     </mat-sidenav-content>
   </mat-sidenav-container>
 </section>
 <div class="full-height-width-iframe" *ngIf="!isNotEmbed">
   <router-outlet></router-outlet>
 </div>
+
+<ng-template #routerLogic>
+  <router-outlet (activate)="getContentData($event)"></router-outlet>
+</ng-template>
+<ng-template #guestTemplateContainer>
+  <ws-public-share-view (guestData)="getContentData($event, true)"></ws-public-share-view>
+</ng-template>

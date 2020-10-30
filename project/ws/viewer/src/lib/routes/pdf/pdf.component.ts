@@ -67,19 +67,21 @@ export class PdfComponent implements OnInit, OnDestroy {
           this.widgetResolverPdfData.widgetData.disableTelemetry = true
           this.isFetchingDataComplete = true
         })
-    } else {
-      this.dataSubscription = this.activatedRoute.data.subscribe(
-        async data => {
-          this.prepareContent(data)
-        },
-        () => {},
-      )
-    }
+    } else if (this.config.isGuestUser) {
+        this.prepareContent(this.sharedContent)
+      } else {
+        this.dataSubscription = this.activatedRoute.data.subscribe(
+          async data => {
+            this.prepareContent(data.content.data)
+          },
+          () => {},
+        )
+      }
   }
 
   prepareContent(data: any) {
     window.setTimeout(async () => {
-      this.pdfData = data.content.data || data.content
+      this.pdfData = data
           if (this.alreadyRaised && this.oldData && !this.config.isGuestUser) {
             this.raiseEvent(WsEvents.EnumTelemetrySubType.Unloaded, this.oldData)
           }
@@ -182,7 +184,7 @@ export class PdfComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy() {
-    if (this.pdfData) {
+    if (this.pdfData && !this.config.isGuestUser) {
       this.raiseEvent(WsEvents.EnumTelemetrySubType.Unloaded, this.pdfData)
     }
     if (this.dataSubscription) {

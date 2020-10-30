@@ -96,36 +96,6 @@ export class AppTocService {
     }
   }
 
-  /* fetchEmails(users: any[]) {
-    debugger
-    // fetch the email id of users using id
-    const usersQuery$ = from(users.map(user => user.name))
-    const request$ = usersQuery$.pipe(
-      map(v => v ? v.split(' ')[0] : v),
-    // tslint:disable-next-line: align
-    map(v => this.userAutoComplete.fetchAutoComplete(v)
-    ))
-    request$.pipe(
-      map((u: any) => {
-        debugger
-      return { id: u.wid, email: u.email, name: u.name }
-    }),
-      filter((d: any) => {
-    debugger
-    return users.includes(d.wid)
-  }
-    ),
-      tap(v => {
-      debugger
-      console.log('value is ', v)
-    }),
-      toArray())
-    .subscribe(_ => {
-      debugger
-      console.log('final val is ', _)
-    })
-  } */
-
   async fetchEmails(users: any[]) {
     const userDetailsPromise = users.map(u => {
       return this.userAutoComplete.fetchAutoComplete(u.name.split(' ')[0]).toPromise()

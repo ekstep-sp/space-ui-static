@@ -1,5 +1,5 @@
 import { Component, OnInit, OnDestroy, Input } from '@angular/core'
-import { Subscription } from 'rxjs'
+import { Observable, of, Subscription } from 'rxjs'
 import { ValueService } from '@ws-widget/utils'
 import { ActivatedRoute } from '@angular/router'
 import { AccessControlService } from '@ws/author'
@@ -22,6 +22,7 @@ export class AudioComponent implements OnInit, OnDestroy {
   private routeDataSubscription: Subscription | null = null
   private screenSizeSubscription: Subscription | null = null
   private viewerDataSubscription: Subscription | null = null
+  private audioDataSub$: Observable<any> | null = null
   @Input() isShared = false
   isScreenSizeSmall = false
   isNotEmbed = true
@@ -70,8 +71,15 @@ export class AudioComponent implements OnInit, OnDestroy {
           this.isFetchingDataComplete = true
         })
       // this.htmlData = this.viewerDataSvc.resource
+    } else if (this.isShared) {
+      this.audioDataSub$ = of({
+        content: {
+          data: this.activatedRoute.snapshot.children[0].data.content,
+        },
+      }
+        )
     } else {
-      this.routeDataSubscription = this.activatedRoute.data
+      this.audioDataSub$ = this.activatedRoute.data
       .pipe(map((_data: any) => {
         if (!_data.content.hasOwnProperty('data')) {
           return {
@@ -84,7 +92,9 @@ export class AudioComponent implements OnInit, OnDestroy {
         }
         return _data
       }))
-      .subscribe(
+    }
+    if (this.audioDataSub$) {
+      this.routeDataSubscription = this.audioDataSub$.subscribe(
         async data => {
           this.widgetResolverAudioData = null
           this.audioData = data.content.data
