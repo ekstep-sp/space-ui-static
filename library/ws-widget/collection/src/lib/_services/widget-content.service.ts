@@ -125,6 +125,7 @@ export class WidgetContentService {
     })
   }
   saveContinueLearning(content: NsContent.IViewerContinueLearningRequest): Observable<any> {
+    debugger
     const url = API_END_POINTS.USER_CONTINUE_LEARNING
     return this.http.post<any>(url, content)
   }
