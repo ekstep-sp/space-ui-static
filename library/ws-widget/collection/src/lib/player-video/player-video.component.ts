@@ -87,11 +87,13 @@ export class PlayerVideoComponent extends WidgetBaseComponent
     }
   }
   ngOnDestroy() {
-    if (this.player) {
-      this.player.dispose()
-    }
-    if (this.dispose) {
-      this.dispose()
+    if (!this.configSvc.isGuestUser) {
+      if (this.player) {
+        this.player.dispose()
+      }
+      if (this.dispose) {
+        this.dispose()
+      }
     }
     if (this.defaultSideNavBarOpenedSubscription) {
       this.defaultSideNavBarOpenedSubscription.unsubscribe()
