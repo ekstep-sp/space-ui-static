@@ -26,7 +26,7 @@ export class PublicShareViewComponent implements OnInit, OnDestroy {
       const guestDataToSend = this.route.snapshot.children[0].data
       this.guestData.emit(guestDataToSend.content)
       this.initContentView(guestDataToSend.content)
-    } catch (_e: any) {
+    } catch (_e) {
       // this will catch error everytime user is clicking on back button from public viewer, at that time children are no longer there
     }
   }
