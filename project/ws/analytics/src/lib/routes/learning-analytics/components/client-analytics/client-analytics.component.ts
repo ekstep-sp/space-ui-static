@@ -111,7 +111,9 @@ export class ClientAnalyticsComponent implements OnInit, OnDestroy {
     }
   }
   search(search: string) {
-    this.resolver.setSearchFilterEvent({ searchQuery: search })
+    if (search) {
+      this.resolver.setSearchFilterEvent({ searchQuery: search })
+    }
   }
 
   add(filter: NsAnalytics.IFilter): void {
