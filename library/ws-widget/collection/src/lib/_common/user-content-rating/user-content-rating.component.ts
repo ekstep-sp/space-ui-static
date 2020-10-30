@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core'
+import { ChangeDetectorRef, Component, Input, OnInit } from '@angular/core'
 import { ConfigurationsService, EventService } from '@ws-widget/utils'
 import { WidgetContentService } from '../../_services/widget-content.service'
 
@@ -19,20 +19,30 @@ export class UserContentRatingComponent implements OnInit {
     private events: EventService,
     private contentSvc: WidgetContentService,
     private configSvc: ConfigurationsService,
+    private readonly cdr: ChangeDetectorRef,
   ) { }
 
   ngOnInit() {
-    if (!this.forPreview) {
+    if (this.configSvc.isGuestUser) {
+      this.isRequesting = false
+      this.isDisabled = true
+    } else if (!this.forPreview) {
       this.contentSvc.fetchContentRating(this.contentId).subscribe(
         result => {
           this.isRequesting = false
           this.userRating = result.rating
+          this.cdr.detectChanges()
         },
         _err => {
           this.isRequesting = false
+          this.cdr.detectChanges()
         },
       )
     }
+  }
+
+  get isRatingsDisabled() {
+    return this.isRequesting || this.isDisabled
   }
 
   addRating(index: number) {

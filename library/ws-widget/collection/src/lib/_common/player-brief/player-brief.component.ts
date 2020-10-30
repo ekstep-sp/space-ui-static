@@ -181,6 +181,13 @@ export class PlayerBriefComponent implements OnInit, OnDestroy {
     }
     return false
   }
+
+  get isRatingsDisabled() {
+    if (this.configSvc.isGuestUser) {
+      return true
+    }
+    return this.isPreviewMode || !this.enableRatings
+  }
   extractFeaturesForGuest() {
     this.hideRatings = true
     this.enableRatings = false
