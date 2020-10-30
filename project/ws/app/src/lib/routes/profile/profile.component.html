@@ -24,7 +24,7 @@
           tabUpdate(enabledTabs?.dashboard?.displayName);
           screenSizeIsLtMedium ? sideNavBar.toggle() : null
         " routerLink="/app/profile/dashboard" matTooltip="{{ enabledTabs?.dashboard?.displayName }}">
-        <mat-icon>account_circle</mat-icon>
+        <mat-icon class="icon-white">account_circle</mat-icon>
         <ng-container *ngIf="!screenSizeIsLtMedium">
           <span *ngIf="showText" class="padding-left-s">{{
             enabledTabs?.dashboard?.displayName
@@ -38,7 +38,7 @@
           tabUpdate(enabledTabs?.learning?.displayName);
           screenSizeIsLtMedium ? sideNavBar.toggle() : null
         "   routerLink="/app/profile/learning/history" matTooltip="{{ enabledTabs?.learning?.displayName }}">
-        <mat-icon>history</mat-icon>
+        <mat-icon class="icon-white">history</mat-icon>
         <ng-container *ngIf="!screenSizeIsLtMedium">
           <span *ngIf="showText" class="padding-left-s">{{
           enabledTabs?.learning?.displayName
@@ -64,7 +64,7 @@
           tabUpdate(enabledTabs?.interests?.displayName);
           screenSizeIsLtMedium ? sideNavBar.toggle() : null
         "   routerLink="/app/profile/interest" matTooltip="{{ enabledTabs?.interests?.displayName }}">
-        <mat-icon>tag_faces</mat-icon>
+        <mat-icon class="icon-white">tag_faces</mat-icon>
         <ng-container *ngIf="!screenSizeIsLtMedium">
           <span *ngIf="showText" class="padding-left-s">{{
           enabledTabs?.interests?.displayName
@@ -107,7 +107,7 @@
           tabUpdate(enabledTabs?.settings?.displayName);
           screenSizeIsLtMedium ? sideNavBar.toggle() : null
         "   routerLink="/app/profile/settings" matTooltip="{{ enabledTabs?.settings?.displayName }}">
-        <mat-icon>settings</mat-icon>
+        <mat-icon class="icon-white">settings</mat-icon>
         <ng-container *ngIf="!screenSizeIsLtMedium">
           <span *ngIf="showText" class="padding-left-s">
             {{ enabledTabs?.settings?.displayName }}</span>

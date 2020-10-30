@@ -136,6 +136,9 @@
   }
 
   @if $is-dark {
+    mat-icon.icon-white{
+color:#ffff;
+    }
     .mat-expansion-panel-body {
       background: #424242 !important;
     }
