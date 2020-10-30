@@ -207,6 +207,7 @@ export class BtnContentShareDialogComponent implements OnInit {
   }
 
   generateSharableUrl(data: NsContent.IContent, dummy = true) {
+    console.log("data+++++", data)
     const pageType = this.getPageType()
     const contentID = data.identifier
     const contentType = data.contentType

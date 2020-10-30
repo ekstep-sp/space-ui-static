@@ -27,8 +27,13 @@
                   [widgetData]="videoData | pipePartialContent: ['identifier']">
                 </ws-widget-btn-content-like>
 
-                <ws-widget-btn-content-share [forPreview]="forPreview"
-                  [widgetData]="videoData | pipePartialContent: ['identifier']"></ws-widget-btn-content-share>
+                <ws-widget-btn-content-share [forPreview]="forPreview" [widgetData]="{
+                  identifier: videoData?.identifier,
+                  contentType: 'Resource',
+                  name: videoData?.name,
+                  mode: 'dialog',
+                  isDisabled: isPreviewMode
+                }" [isDisabled]="isPreviewMode"></ws-widget-btn-content-share>
                 <ws-widget-btn-goals [forPreview]="forPreview"></ws-widget-btn-goals>
                 <ws-widget-btn-playlist [forPreview]="forPreview" [widgetData]="{
                   contentId: videoData?.identifier,
@@ -68,8 +73,13 @@
               <ws-widget-btn-content-like [forPreview]="forPreview"
                 [widgetData]="videoData | pipePartialContent: ['identifier']">
               </ws-widget-btn-content-like>
-              <ws-widget-btn-content-share [forPreview]="forPreview"
-                [widgetData]="videoData | pipePartialContent: ['identifier']"></ws-widget-btn-content-share>
+              <ws-widget-btn-content-share [forPreview]="forPreview" [widgetData]="{
+                identifier: videoData?.identifier,
+                contentType: 'Resource',
+                name: videoData?.name,
+                mode: 'dialog',
+                isDisabled: isPreviewMode
+              }" [isDisabled]="isPreviewMode"></ws-widget-btn-content-share>
               <ws-widget-btn-goals [forPreview]="forPreview"></ws-widget-btn-goals>
               <ws-widget-btn-playlist [forPreview]="forPreview" [widgetData]="{
                 contentId: videoData?.identifier,
