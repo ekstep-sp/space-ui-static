@@ -13,6 +13,7 @@ import {
   ConfigurationsService,
   UserPreferenceService,
   UtilityService,
+  ValueService,
 } from '@ws-widget/utils'
 import { debounceTime, distinctUntilChanged } from 'rxjs/operators'
 import { BtnSettingsService } from '@ws-widget/collection'
@@ -55,6 +56,10 @@ export class SettingsComponent implements OnInit, OnDestroy {
   isIntranetAllowed = true
   showIntranetSettings = false
   isLanguageEnabled = true
+  defaultSideNavBarOpenedSubscription: any
+  isLtMedium$ = this.valueSvc.isLtMedium$
+  screenSizeIsLtMedium = false
+  showText = true
   // showProfileSettings = false
 
   constructor(
@@ -65,6 +70,7 @@ export class SettingsComponent implements OnInit, OnDestroy {
     private userPrefSvc: UserPreferenceService,
     private snackBar: MatSnackBar,
     private route: ActivatedRoute,
+    private valueSvc: ValueService,
     private utilitySvc: UtilityService,
   ) { }
 
@@ -88,6 +94,9 @@ export class SettingsComponent implements OnInit, OnDestroy {
         break
     }
     this.initSettings()
+    this.defaultSideNavBarOpenedSubscription = this.isLtMedium$.subscribe((isLtMedium: boolean) => {
+      this.screenSizeIsLtMedium = isLtMedium
+    })
   }
 
   private initSettings() {

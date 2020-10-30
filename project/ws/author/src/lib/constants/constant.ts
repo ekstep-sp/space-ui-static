@@ -27,3 +27,5 @@ export const AVAILABLE_LOCALES = [
   'cz',
   'en',
 ]
+export const START_DATE = 'startDate'
+export const END_DATE = 'endDate'

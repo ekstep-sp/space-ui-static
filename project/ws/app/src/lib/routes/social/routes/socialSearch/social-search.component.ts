@@ -8,6 +8,7 @@ import { ActivatedRoute, Router } from '@angular/router'
 import { SocialForum } from '../forums/models/SocialForumposts.model'
 import { ForumHandlerService } from '../forums/service/EmitterService/forum-handler.service'
 import { SocialSearchService } from './api/social-search.service'
+import { BtnSocialLikeService } from '@ws-widget/collection/src/lib/discussion-forum/actionBtn/btn-social-like/service/btn-social-like.service'
 
 @Component({
   selector: 'ws-app-social-search',
@@ -24,6 +25,7 @@ export class SocialSearchComponent implements OnInit {
     private activated: ActivatedRoute,
 
     private socialServ: SocialSearchService,
+    public voteService: BtnSocialLikeService,
     private readonly router: Router
 
   ) {
@@ -193,6 +195,13 @@ export class SocialSearchComponent implements OnInit {
 
   }
   ngOnInit() {
+    this.voteService.callComponent.subscribe(data => {
+     if (data) {
+      this.socialServ.fetchSearchTimelineData(this.socialSearchReq).toPromise().then((updatedData: any) => {
+        this.searchResult = updatedData
+    })
+  }
+    })
     this.defaultSideNavBarOpenedSubscription = this.isLtMedium$.subscribe(
       (isLtMedium: boolean) => {
         this.screenSizeIsLtMedium = isLtMedium

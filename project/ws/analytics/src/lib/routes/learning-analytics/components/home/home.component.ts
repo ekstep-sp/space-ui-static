@@ -15,6 +15,7 @@ import { FormControl } from '@angular/forms'
 import { MatDialog } from '@angular/material'
 import { InfoDialogComponent } from '../info-dialog/info-dialog.component'
 import { ActivatedRoute } from '@angular/router'
+import { END_DATE, START_DATE } from '@ws/author/src/lib/constants/constant'
 @Component({
   selector: 'ws-analytics-home',
   templateUrl: './home.component.html',
@@ -576,7 +577,6 @@ export class HomeComponent implements OnInit, OnDestroy {
 
   async ngOnInit() {
     this.getUserDataFromConfig()
-    // await this.getUserCountFromUserTable()
     this.filterEventSubscription = this.graphGeneralSvc.filterEventChangeSubject.subscribe(
       (filterEvent: any) => {
         const filter = {
@@ -880,7 +880,7 @@ export class HomeComponent implements OnInit, OnDestroy {
   }
   async populateChartData() {
     if (this.contentData) {
-      await this.getUserCountFromUserTable()
+      await this.getUserCountFromUserTable(this.startDate, this.endDate)
       // all contents count
       this.contentUsers = this.contentData.content_users
       // this.totalUsers = this.contentData.totalUsers
@@ -1748,7 +1748,7 @@ export class HomeComponent implements OnInit, OnDestroy {
 
   async openInfoPopup(eventType: string, titleToUse?: string, showUserDetailsFromUserTable = false) {
   if (showUserDetailsFromUserTable) {
-    await this.getAllUsers()
+    await this.getAllUsers(this.startDate, this.endDate)
   }
     this.openDialog({
       showUserDetailsFromUserTable,
@@ -1781,14 +1781,12 @@ export class HomeComponent implements OnInit, OnDestroy {
       }
     })
   }
-  async getUserCountFromUserTable(): Promise<any> {
+  async getUserCountFromUserTable(startDate: string, endDate: string): Promise<any> {
     let params: any
-    if (this.startDate && this.endDate) {
-      const startDate = `${this.startDate} 00:00:00`
-      const endDate = `${this.endDate} 23:59:59`
+    if (startDate && endDate) {
       params = {
-        startDate: this.analyticsSrv.getLocalTime(startDate),
-        endDate: this.analyticsSrv.getLocalTime(endDate),
+        startDate: this.analyticsSrv.getLocalTime(startDate, START_DATE),
+        endDate: this.analyticsSrv.getLocalTime(endDate, END_DATE),
       }
     }
     const data = await this.analyticsSrv.getUserCountByTimeStamp(params)
@@ -1798,14 +1796,12 @@ export class HomeComponent implements OnInit, OnDestroy {
     this.totalUsers = 0
   }
 
-  async getAllUsers(): Promise<any> {
+  async getAllUsers(startDate: string, endDate: string): Promise<any> {
     let params: any
-    if (this.startDate && this.endDate) {
-    const startDate = `${this.startDate} 00:00:00`
-    const endDate = `${this.endDate} 23:59:59`
+    if (startDate && endDate) {
       params = {
-        startDate:  this.analyticsSrv.getLocalTime(startDate),
-        endDate: this.analyticsSrv.getLocalTime(endDate),
+        startDate:  this.analyticsSrv.getLocalTime(startDate, START_DATE),
+        endDate: this.analyticsSrv.getLocalTime(endDate, END_DATE),
       }
     }
     const data = await this.analyticsSrv.getAllUsers(params)

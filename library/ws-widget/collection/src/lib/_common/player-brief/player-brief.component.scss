@@ -1,5 +1,5 @@
-@import 'ws-vars';
-@import 'ws-mixins';
+@import "ws-vars";
+@import "ws-mixins";
 
 .info-container {
   padding: $size-s $size-m;
@@ -43,15 +43,12 @@
   }
 }
 
-
-
-::ng-deep{
-  @media only screen and (max-width: 1366px){
-    .hidedownload{
+::ng-deep {
+  @media only screen and (max-width: 1366px) {
+    .hidedownload {
       display: none !important;
     }
-
-   .mat-ink-bar {
+    .mat-ink-bar {
       // background-color: var(--primary-color,$orange) !important;
       display: none !important;
       visibility: hidden !important;
@@ -59,8 +56,11 @@
       height: 0px !important;
       width: 0px !important;
     }
-   
   }
+}
 
-
+@media only screen and (max-width: 1366px) {
+  h3 {
+    font-size: 14px !important;
+  }
 }

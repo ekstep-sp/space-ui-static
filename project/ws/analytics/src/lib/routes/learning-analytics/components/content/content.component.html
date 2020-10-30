@@ -1,16 +1,31 @@
 <ng-container *ngIf="!onExpand">
   <div *ngIf="userProgressData && courseFetchStatus === 'done'" class="flex flex-start flex-around m-2 flex-wrapped">
+    <!--live content-->
+    <ws-analytics-analytics-tile *ngIf="liveContentDetails?.Course > 0" class="unique-users-card margin-m"
+       [title]="analytics?.liveContent?.collection?.title"
+      [uniqueUsers]="liveContentDetails?.Course" [description]="analytics?.liveContent?.collection?.description">
+    </ws-analytics-analytics-tile>
+    <ws-analytics-analytics-tile *ngIf="liveContentDetails?.Collection > 0" class="unique-users-card margin-m"
+       [title]="analytics?.liveContent?.assets?.title" 
+      [uniqueUsers]="liveContentDetails?.Collection" [description]="analytics?.liveContent?.assets?.description">
+    </ws-analytics-analytics-tile>
+    <ws-analytics-analytics-tile *ngIf="liveContentDetails?.Resource > 0" class="unique-users-card margin-m"
+       [title]="analytics?.liveContent?.resources?.title" 
+      [uniqueUsers]="liveContentDetails?.Resource" [description]="analytics?.liveContent?.resources?.description">
+    </ws-analytics-analytics-tile>
+
+    <!--curated content-->
     <ws-analytics-analytics-tile *ngIf="userProgressData?.course_count > 0" class="unique-users-card margin-m"
-      (clickEvent)="onClick($event)" [title]="'# Courses'" [category2]="''" [category3]="''" [category1]="''"
-      [uniqueUsers]="userProgressData?.course_count" [description]="coursesDescription">
+      (clickEvent)="onClick($event)" [title]="analytics?.curatedContent?.collection?.title || '# Curated Collection'" [category2]="''" [category3]="''" [category1]="''"
+      [uniqueUsers]="userProgressData?.course_count" [description]="analytics?.curatedContent?.collection?.description || coursesDescription">
     </ws-analytics-analytics-tile>
     <ws-analytics-analytics-tile *ngIf="userProgressData?.collection_count > 0" class="unique-users-card margin-m"
-      (clickEvent)="onClick($event)" [title]="'# Modules'" [category2]="''" [category3]="''" [category1]="''"
-      [uniqueUsers]="userProgressData?.collection_count" [description]="modulesDescription">
+      (clickEvent)="onClick($event)" [title]="analytics?.curatedContent?.assets?.title || '# curatedModules'" [category2]="''" [category3]="''" [category1]="''"
+      [uniqueUsers]="userProgressData?.collection_count" [description]=" analytics?.curatedContent?.assets?.description || modulesDescription">
     </ws-analytics-analytics-tile>
     <ws-analytics-analytics-tile *ngIf="userProgressData?.resource_count > 0" class="unique-users-card margin-m"
-      (clickEvent)="onClick($event)" [title]="'# Resources'" [category2]="''" [category3]="''" [category1]="''"
-      [uniqueUsers]="userProgressData?.resource_count" [description]="resourcesDescription">
+      (clickEvent)="onClick($event)" [title]=" analytics?.curatedContent?.resources?.title || '# curatedResources'" [category2]="''" [category3]="''" [category1]="''"
+      [uniqueUsers]="userProgressData?.resource_count" [description]=" analytics?.curatedContent?.resources?.description || resourcesDescription">
     </ws-analytics-analytics-tile>
   </div>
   <div *ngIf="userProgressData && courseFetchStatus === 'done'" class="flex flex-between m-3 flex-wrapped">

@@ -25,7 +25,7 @@ export class PublicAboutComponent implements OnInit, OnDestroy {
   pageNavbar: Partial<NsPage.INavBackground> = this.configSvc.pageNavBar
   aboutPage: IAboutObject | null = null
   private subscriptionAbout: Subscription | null = null
-
+  imageUrl = ''
   isSmallScreen$ = this.breakpointObserver
     .observe(Breakpoints.XSmall)
     .pipe(map(breakPointState => breakPointState.matches))
@@ -62,6 +62,7 @@ export class PublicAboutComponent implements OnInit, OnDestroy {
   ) { }
 
   ngOnInit() {
+    this.imageUrl = this.loadImageUrl()
     this.subscriptionAbout = this.activateRoute.data.subscribe(data => {
       this.aboutPage = data.pageData.data
 
@@ -109,5 +110,8 @@ export class PublicAboutComponent implements OnInit, OnDestroy {
       data: this.aboutPage ? this.aboutPage.introVideo.en : null,
       panelClass: 'custom-padding',
     })
+  }
+  loadImageUrl() {
+    return (this.configSvc.isDarkMode) ? 'assets/instances/space/banners/darkmodeaboutus.png' : 'assets/instances/space/banners/about.png'
   }
 }
