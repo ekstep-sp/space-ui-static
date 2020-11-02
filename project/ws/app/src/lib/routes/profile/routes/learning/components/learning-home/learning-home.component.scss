@@ -1,0 +1,8 @@
+a.mat-tab-link {
+    height: 80px !important;
+}
+@media only screen and (max-width: 1000px) {
+    a.mat-tab-link {
+        height: 50px !important;
+    }
+}

@@ -20,13 +20,13 @@
 <mat-sidenav-container autosize="true" class="sidenav-content-min-height">
   <mat-sidenav [ngClass]="{'nav-opened': showText,'nav-closed': !showText}" #sideNavBar [position]="screenSizeIsLtMedium ? 'end' : 'start'" [opened]="!screenSizeIsLtMedium" [mode]="screenSizeIsLtMedium ? 'over' : 'side'">
     <mat-nav-list class="">
-      <a mat-list-item *ngIf="enabledTabs?.dashboard?.enabled" routerLinkActive="mat-toolbar-selected" (click)="
+      <a mat-list-item class="navs-height" *ngIf="enabledTabs?.dashboard?.enabled" routerLinkActive="mat-toolbar-selected" (click)="
           tabUpdate(enabledTabs?.dashboard?.displayName);
           screenSizeIsLtMedium ? sideNavBar.toggle() : null
         " routerLink="/app/profile/dashboard" matTooltip="{{ enabledTabs?.dashboard?.displayName }}">
         <mat-icon class="icon-white">account_circle</mat-icon>
         <ng-container *ngIf="!screenSizeIsLtMedium">
-          <span *ngIf="showText" class="padding-left-s">{{
+          <span *ngIf="showText" class="padding-left-s heading-font-size-secondary">{{
             enabledTabs?.dashboard?.displayName
           }}</span>
         </ng-container>
@@ -34,13 +34,13 @@
 <span *ngIf="!screenSizeIsLtMedium" class="toggle-arrow" [ngClass]="{'pos-x': !showText}" (click)="!screenSizeIsLtMedium ? (showText = !showText) : triggerToggle(sideNavBar)">
   <img class="arrow-icon" [ngClass]="{'rotate-ve-180': !showText}" src="/assets/instances/space/common/arrow_double.png">
 </span>
-      <a mat-list-item *ngIf="enabledTabs?.learning?.enabled" routerLinkActive="mat-toolbar-selected" (click)="
+      <a class="navs-height" mat-list-item *ngIf="enabledTabs?.learning?.enabled" routerLinkActive="mat-toolbar-selected" (click)="
           tabUpdate(enabledTabs?.learning?.displayName);
           screenSizeIsLtMedium ? sideNavBar.toggle() : null
         "   routerLink="/app/profile/learning/history" matTooltip="{{ enabledTabs?.learning?.displayName }}">
         <mat-icon class="icon-white">history</mat-icon>
         <ng-container *ngIf="!screenSizeIsLtMedium">
-          <span *ngIf="showText" class="padding-left-s">{{
+          <span *ngIf="showText" class="padding-left-s heading-font-size-secondary">{{
           enabledTabs?.learning?.displayName
         }}</span>
         </ng-container>
@@ -60,13 +60,13 @@
             {{ enabledTabs?.achievements?.displayName }}</span>
         </ng-container>
       </a>
-      <a mat-list-item *ngIf="enabledTabs?.interests?.enabled" routerLinkActive="mat-toolbar-selected" (click)="
+      <a class="navs-height" mat-list-item *ngIf="enabledTabs?.interests?.enabled" routerLinkActive="mat-toolbar-selected" (click)="
           tabUpdate(enabledTabs?.interests?.displayName);
           screenSizeIsLtMedium ? sideNavBar.toggle() : null
         "   routerLink="/app/profile/interest" matTooltip="{{ enabledTabs?.interests?.displayName }}">
         <mat-icon class="icon-white">tag_faces</mat-icon>
         <ng-container *ngIf="!screenSizeIsLtMedium">
-          <span *ngIf="showText" class="padding-left-s">{{
+          <span *ngIf="showText" class="padding-left-s heading-font-size-secondary">{{
           enabledTabs?.interests?.displayName
         }}</span>
         </ng-container>
@@ -103,13 +103,13 @@
             {{ enabledTabs?.featureUsage?.displayName }}</span>
         </ng-container>
       </a>
-      <a mat-list-item *ngIf="enabledTabs?.settings?.enabled" routerLinkActive="mat-toolbar-selected" (click)="
+      <a class="navs-height" mat-list-item *ngIf="enabledTabs?.settings?.enabled" routerLinkActive="mat-toolbar-selected" (click)="
           tabUpdate(enabledTabs?.settings?.displayName);
           screenSizeIsLtMedium ? sideNavBar.toggle() : null
         "   routerLink="/app/profile/settings" matTooltip="{{ enabledTabs?.settings?.displayName }}">
         <mat-icon class="icon-white">settings</mat-icon>
         <ng-container *ngIf="!screenSizeIsLtMedium">
-          <span *ngIf="showText" class="padding-left-s">
+          <span *ngIf="showText" class="padding-left-s heading-font-size-secondary">
             {{ enabledTabs?.settings?.displayName }}</span>
         </ng-container>
       </a>

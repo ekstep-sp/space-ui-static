@@ -120,6 +120,14 @@ mat-toolbar span {
   color: white !important;
 }
 
+.theme-muave.day-mode .mat-toolbar.mat-primary{
+  background: rgba(146, 94, 176, 0.65) !important;
+}
+
+.theme-muave.night-mode .mat-toolbar.mat-primary{
+  background: rgba(146, 94, 176, 0.65) !important;
+}
+
 .mat-form-field-type-mat-input {
   background: transparent !important;
 }

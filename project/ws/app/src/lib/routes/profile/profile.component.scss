@@ -35,7 +35,7 @@ span.toggle-arrow {
   position: absolute;
   z-index: 11111;
   left: 100%;
-  top: 25px;
+  top: 55px;
   cursor: pointer;
   display: inline-block;
   height: 42px;
@@ -171,4 +171,15 @@ mat-sidenav.nav-closed {
 
 .color-white{
 color:#ffff;
+}
+
+.navs-height{
+height: 70px !important;
+}
+
+
+@media only screen and (max-width: 800px) {
+  .navs-height{
+    height:50px !important;
+  }
 }
