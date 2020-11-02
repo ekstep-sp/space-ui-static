@@ -55,6 +55,7 @@ export namespace NsContentStripMultiple {
       icon: string
       scale: number
       style?: any // added for UI
+      url?: string
     }
     widget: NsWidgetResolver.IRenderConfigWithAnyData
   }
