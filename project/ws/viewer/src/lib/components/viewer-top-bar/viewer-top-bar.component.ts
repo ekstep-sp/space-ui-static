@@ -14,6 +14,7 @@ export class ViewerTopBarComponent implements OnInit, OnDestroy {
   @Input() frameReference: any
   @Input() forPreview = false
   @Output() toggle = new EventEmitter()
+  @Input() showFullScreenButton = true
   private viewerDataServiceSubscription: Subscription | null = null
   private paramSubscription: Subscription | null = null
   private viewerDataServiceResourceSubscription: Subscription | null = null

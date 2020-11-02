@@ -37,6 +37,7 @@ export class ViewerComponent implements OnInit, OnDestroy, AfterViewInit, AfterV
   status: TStatus = 'none'
   error: any | null = null
   isNotEmbed = true
+  renderingPDF = false
   errorWidgetData: NsWidgetResolver.IRenderConfigWithTypedData<any> = {
     widgetType: 'errorResolver',
     widgetSubType: 'errorResolver',
@@ -83,6 +84,11 @@ export class ViewerComponent implements OnInit, OnDestroy, AfterViewInit, AfterV
         // this.utilitySvc.emitCurrentContentForBriefPlayer(e)
         this.content = e
       })
+    }
+    if (this.content && this.content.mimeType.includes('pdf')) {
+      this.renderingPDF = true
+    } else {
+      this.renderingPDF = false
     }
   }
 

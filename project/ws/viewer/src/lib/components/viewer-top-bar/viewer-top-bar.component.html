@@ -48,7 +48,7 @@
   >
     <mat-icon style="color: white;">skip_next</mat-icon>
   </a>
-  <a mat-icon-button class="clr">
+  <a mat-icon-button class="clr" *ngIf="showFullScreenButton">
     <ws-widget-btn-fullscreen
       [widgetType]="'actionButton'"
       [widgetSubType]="'actionButtonFullscreen'"
