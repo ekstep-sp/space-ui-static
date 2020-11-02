@@ -75,16 +75,6 @@ td{
   margin: 0; 
   color: #ba000d;
 }
-/* td {
-    text-align: center;
-  }
-
-  th.mat-header-cell {
-    text-align: center;
-  }
-
-  td.mat-cell.cdk-column-Details.mat-column-Details {
-    text-align: left
-  } */
-
-
+td.mat-cell.cdk-column-Name.mat-column-Name, td.mat-cell.cdk-column-E-mail.mat-column-E-mail {
+  padding: 5px;
+}
