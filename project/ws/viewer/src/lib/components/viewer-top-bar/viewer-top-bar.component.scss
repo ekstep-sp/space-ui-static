@@ -15,3 +15,9 @@
 .text-truncate {
   overflow: inherit !important;
 }
+
+.width-expand {
+  text-overflow: ellipsis !important;
+  overflow-x: hidden !important;
+  padding: 10px;
+}
