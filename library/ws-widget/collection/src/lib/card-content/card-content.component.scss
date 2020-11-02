@@ -401,9 +401,10 @@ $title-line-count: 2;
 }
 .duration {
   margin-right: 5px;
+  white-space: nowrap;
 }
 .rating-icon {
-  margin-right: 10px;
+  margin-right: 2px;
 }
 ::ng-deep {
   .theme-muave.night-mode .ws-mat-primary-text {
