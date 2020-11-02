@@ -1,96 +1,3 @@
-// @import 'ws-vars';
-// @import 'ws-mixins';
-
-// .video-container {
-//   height: auto;
-//   overflow: auto;
-// }
-
-// .video-player-summary-container {
-//   height: auto;
-//   display: flex;
-//   justify-content: center;
-//   width: 100%;
-//   flex-wrap: wrap;
-// }
-
-// .video-player-container {
-//   height: auto;
-//   width: 100%;
-//   max-width: 640px;
-// }
-
-// .video-summary {
-//   height: 640px;
-//   width: 100%;
-//   max-width: 320px;
-// }
-
-// .video-player {
-//   height: 360px;
-//   width: 640px;
-// }
-
-// .vidoe-title {
-//   height: 200px;
-//   width: 100%;
-//   max-width: 640px;
-// }
-
-// .video-discussion-forum-in {
-//   height: 250px;
-//   width: 100%;
-// }
-
-// .video-discussion-forum-out {
-//   height: 250px;
-//   width: 100%;
-// }
-
-// @import 'ws-vars';
-// @import 'ws-mixins';
-
-// .video-player-summary-container {
-//   height: auto;
-//   display: flex;
-//   justify-content: center;
-//   width: 100%;
-//   flex-wrap: wrap;
-// }
-
-// .video-player-container {
-//   height: auto;
-//   width: 100%;
-//   max-width: 640px;
-// }
-
-// .video-summary {
-//   height: 640px;
-//   width: 100%;
-//   max-width: 256px;
-// }
-
-// .video-player {
-//   height: 360px;
-//   width: 640px;
-// }
-
-// .vidoe-title {
-//   height: 200px;
-//   width: 100%;
-//   max-width: 640px;
-// }
-
-// .video-discussion-forum-in {
-//   height: 250px;
-//   width: 100%;
-// }
-
-// .video-discussion-forum-out {
-//   height: 250px;
-//   width: 100%;
-// }
-
 @import 'ws-vars';
 @import 'ws-mixins';
 
@@ -107,7 +14,6 @@
   padding-top: $size-m;
   @include breakpoint-xs {
     padding: $size-xs;
-    padding-top: 40vh;
   }
 }
 
@@ -158,11 +64,10 @@
 }
 
 .video-player-m {
-  position: fixed;
-  top: 55px;
+  top: 0;
   left: 0px;
   height: 40vh;
-  width: 100vw;
+  width: 100%;
   z-index: 1000;
   background: black;
   @include breakpoint-gt-xs {

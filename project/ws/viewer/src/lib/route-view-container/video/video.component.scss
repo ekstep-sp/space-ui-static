@@ -14,7 +14,6 @@
   padding-top: $size-m;
   @include breakpoint-xs {
     padding: $size-xs;
-    padding-top: 40vh;
   }
 }
 
@@ -60,11 +59,10 @@
     height: 55vh;
   }
   @include breakpoint-xs {
-    position: fixed;
-    top: 55px;
+    top: 0;
     left: 0px;
     height: 40vh;
-    width: 100vw;
+    width: 100%;
     z-index: 1000;
     background: black;
   }
