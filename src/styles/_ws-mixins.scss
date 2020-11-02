@@ -61,6 +61,11 @@
     @content;
   }
 }
+@mixin breakpoint-lt-mm {
+  @media only screen and (max-width: 1024px) {
+    @content;
+  }
+}
 @mixin breakpoint-lt-l {
   @media only screen and (max-width: 1279px) {
     @content;

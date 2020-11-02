@@ -19,3 +19,57 @@
 .pad {
   padding: $size-l 0 $size-l $size-l;
 }
+.mat-h1 {
+  font-family: Montserrat !important;
+  font-style: normal !important;
+  font-weight: 500 !important;
+  font-size: 20px !important;
+  line-height: 24px !important;
+  /* plaform_gray */
+  color: #696466 !important;
+}
+
+.title-align {
+  margin-bottom: 50px !important;
+  margin-top: 60px !important;
+}
+.sub-title-align {
+  margin-top: 106px !important;
+  margin-bottom: 50px !important;
+}
+.bottom-align {
+  margin-bottom: 161px !important;
+}
+.edit-icon {
+  color: rgba(0, 0, 0, 0.54);
+}
+::ng-deep {
+.theme-muave.night-mode .edit-icon {
+   color: white !important;
+}
+.theme-muave.night-mode .mat-h1 {
+  font-family: Montserrat !important;
+  font-style: normal !important;
+  font-weight: 500 !important;
+  font-size: 20px !important;
+  line-height: 24px !important;
+  color: white !important;
+}
+.theme-muave.day-mode h1.mat-h1 {
+  font-family: Montserrat !important;
+}
+}
+.medium {
+  padding-left: 2rem;
+  padding-right: 2.7rem;
+}
+@media screen and (min-width:530px) and (max-width:540px) {
+.medium {
+  padding-left: 10rem !important;
+}
+}
+@media screen and (min-width:279px) and (max-width:320px) {
+  .medium {
+    padding:0 16px !important;
+  }
+  }

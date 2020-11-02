@@ -48,14 +48,14 @@
         <div class="flex justify-between items-center">
           <div>
             <ws-widget-display-content-type i18n-title title="Content Type"
-              *ngIf="widgetData.content?.displayContentType" class="mr-4 font-normal"
+              *ngIf="widgetData.content?.displayContentType" class="mr-4 font-normal font-montserrat content-type"
               [displayContentType]="widgetData.content?.displayContentType" [content]="widgetData.content">
             </ws-widget-display-content-type>
             <span *ngIf="widgetData.content.duration" i18n-title title="Duration">
               {{ widgetData.content.duration | pipeDurationTransform: 'hms' }}
             </span>
           </div>
-          <button mat-icon-button i18n-aria-label aria-label="action items" [matMenuTriggerFor]="cardMenu">
+          <button mat-icon-button i18n-aria-label class="vertical-icon" aria-label="action items" [matMenuTriggerFor]="cardMenu">
             <mat-icon>more_vertical</mat-icon>
           </button>
         </div>
@@ -101,7 +101,7 @@
             i18n-aria-label>
             <div class="card-header-meta">
               <ws-widget-display-content-type i18n-title title="Content Type"
-                *ngIf="widgetData.content?.displayContentType" class="ws-mat-primary-text font-normal"
+                *ngIf="widgetData.content?.displayContentType" class="ws-mat-primary-text font-normal font-montserrat content-type"
                 [displayContentType]="widgetData.content?.displayContentType" [content]="widgetData.content">
               </ws-widget-display-content-type>
               <span *ngIf="widgetData.content.duration" class="text-gray-600" i18n-title title="Duration">
@@ -139,7 +139,7 @@
         <mat-card-content>
           <div class="card-header-meta">
             <ws-widget-display-content-type i18n-title title="Content Type"
-              *ngIf="widgetData.content?.displayContentType" class="ws-mat-primary-text font-normal"
+              *ngIf="widgetData.content?.displayContentType" class="ws-mat-primary-text font-normal font-montserrat content-type"
               [displayContentType]="widgetData.content?.displayContentType" [content]="widgetData.content">
             </ws-widget-display-content-type>
             <span *ngIf="widgetData.content.duration" class="text-gray-600" i18n-title title="Duration">
@@ -153,7 +153,7 @@
             i18n-aria-label="Content | Click to view" class="ws-mat-primary-text mat-title text-truncate title-text font-montserrat body-font-size-primary">
             {{ widgetData.content.name }}
           </a>
-          <div *ngIf="widgetData?.content?.description" class="mt-4 flip-desc-text ws-mat-text-block-fade-gradient">
+          <div *ngIf="widgetData?.content?.description" class="mt-4 flip-desc-text ">
             {{ widgetData?.content?.description }}
           </div>
           <div class="mt-4 flex justify-between items-center flip-actions">
@@ -225,39 +225,49 @@
                 class="mode-tag px-2 ws-mat-accent-background">
                 Newly Added
               </div>
-              <div class="duration" i18n-title title="Duration" style="height: 1rem;">
+              <!-- <div class="duration" i18n-title title="Duration" style="height: 1rem;">
                 <ng-container *ngIf="widgetData.content.duration">
                   {{ widgetData.content.duration | pipeDurationTransform: 'hms' }}
                 </ng-container>
-              </div>
+              </div> -->
             </div>
-            <div class="ws-mat-primary-text mat-title title-text font-montserrat body-font-size-primary ws-mat-text-block-fade-gradient"
+            <div class="ws-mat-primary-text mat-title title-text body-font-size-primary font-montserrat "
               [matTooltip]="widgetData.content.name">
               {{ widgetData.content.name }}
             </div>
-            <div class="description-text font-montserrat body-font-size-secondary ws-mat-text-block-fade-gradient mb-10" i18n-title title="Description">
+            <div class="description-text body-align body-font-size-secondary font-montserrat"  i18n-title title="Description">
               {{ widgetData.content.description | pipeHtmlTagRemoval }}
             </div>
           </a>
           <div *ngIf="widgetData.content?.displayContentType"
-            class="mt-4 flex justify-between items-center absolute bottom-0 left-0 right-0 px-3 py-2">
+            class="flex justify-between items-center absolute bottom-0 font-montserrat left-0 right-0 px-3 card-footer">
             <ws-widget-display-content-type i18n-title title="Content Type"
-              *ngIf="widgetData.content?.displayContentType" class="ws-mat-primary-text font-normal font-montserrat"
+              *ngIf="widgetData.content?.displayContentType" class="ws-mat-primary-text font-normal font-montserrat content-type"
               [displayContentType]="widgetData.content?.displayContentType" [content]="widgetData.content">
             </ws-widget-display-content-type>
             <div class="flex items-center">
+                <div class="text-gray-600 flex-between flex-center">
+                    <div class="duration flex" i18n-title title="Duration">
+                        <mat-icon class="duration-icon" *ngIf="widgetData.content.duration">
+                            query_builder
+                        </mat-icon>
+                      <div *ngIf="widgetData.content.duration">
+                        {{ widgetData.content.duration | pipeDurationTransform: 'hms' }}
+                      </div>
+                    </div>
+                  </div> 
               <ng-container *ngIf="widgetData.content?.assetType !== 'Connection'" [ngTemplateOutlet]="rating">
               </ng-container>
-              <button type="button" mat-icon-button i18n-aria-label aria-label="action items"
+              <button type="button" mat-icon-button class="vertical-icon" i18n-aria-label aria-label="action items"
                 [matMenuTriggerFor]="cardMenu">
                 <mat-icon>more_vertical</mat-icon>
               </button>
             </div>
           </div>
           <div *ngIf="!widgetData.content?.displayContentType"
-            class="mt-4 justify-between items-center absolute bottom-0 left-0 right-0 px-3 py-2">
+            class="justify-between items-center absolute bottom-0 left-0 right-0 px-3 font-montserrat card-footer">
             <ws-widget-display-content-type i18n-title title="Content Type"
-              *ngIf="widgetData.content?.displayContentType" class="ws-mat-primary-text font-normal"
+              *ngIf="widgetData.content?.displayContentType" class="ws-mat-primary-text font-normal font-montserrat content-type"
               [displayContentType]="widgetData.content?.displayContentType" [content]="widgetData.content">
             </ws-widget-display-content-type>
             <div class="float-right flex items-center">
@@ -534,7 +544,7 @@
           <div *ngIf="widgetData.content?.resourceType || widgetData.content?.contentType"
             class="back-color px-4 py-2 -mx-4 text-white">
             <ws-widget-display-content-type i18n-title title="Content Type"
-              *ngIf="widgetData.content?.displayContentType" class="font-normal text-xs"
+              *ngIf="widgetData.content?.displayContentType" class="font-normal text-xs font-montserrat content-type"
               [displayContentType]="widgetData.content?.displayContentType" [content]="widgetData.content">
             </ws-widget-display-content-type>
           </div>
@@ -557,7 +567,7 @@
 </ng-template>
 
 <ng-template #rating>
-  <div class="flex items-center mr-2">
+  <div class="flex items-center rating-icon">
     <mat-icon class="mr-1" *ngIf="widgetData.content.averageRating == 5" color="accent">star</mat-icon>
     <mat-icon class="mr-1" *ngIf="widgetData.content.averageRating && widgetData.content.averageRating != 5"
       color="accent">star_half</mat-icon>
@@ -645,24 +655,34 @@
         <a (click)="raiseTelemetry()" [routerLink]="(widgetData.content | pipeContentRoute).url"
           [queryParams]="(widgetData.content | pipeContentRoute).queryParams" role="link" aria-label="Content"
           i18n-aria-label>
-          <div class="text-gray-600 complexity flex-between flex-center">
+          <!-- <div class="text-gray-600 complexity flex-between flex-center">
             <div class="duration" i18n-title title="Duration" style="height: 1rem;">
-              <ng-container *ngIf="widgetData.content.duration">
-                {{ widgetData.content.duration | pipeDurationTransform: 'hms' }}
+              <ng-container *ngIf="widgetData.contents.duration">
+                {{ widgetData.contents.duration | pipeDurationTransform: 'hms' }}
               </ng-container>
             </div>
-          </div>
+          </div> -->
           <div class="ws-mat-primary-text mat-title title-text font-montserrat body-font-size-primary title-truncate">
-            {{ widgetData.content.name }}
-          </div>
-          <div class="description-text font-montserrat body-font-size-secondary ws-mat-text-block-fade-gradient mb-4" i18n-title title="Description">
-            {{ widgetData.content.description | pipeHtmlTagRemoval }}
-          </div>
+              {{ widgetData.content.name }}
+            </div>
+            <div class="description-text font-montserrat body-font-size-secondary mb-4"  i18n-title title="Description">
+              {{ widgetData.content.description | pipeHtmlTagRemoval }}
+            </div>
           <div class="text-gray-600 complexity flex-end">
             <div class="flex items-center">
+                <div class="text-gray-600 flex-between flex-center">
+                    <div class="duration" i18n-title title="Duration">
+                        <mat-icon>
+                            query_builder
+                        </mat-icon>
+                      <ng-container *ngIf="widgetData.content.duration">
+                        {{ widgetData.content.duration | pipeDurationTransform: 'hms' }}
+                      </ng-container>
+                    </div>
+                  </div> 
               <ng-container *ngIf="widgetData.content.assetType !== 'Connection'" [ngTemplateOutlet]="rating">
               </ng-container>
-              <button type="button" mat-icon-button i18n-aria-label aria-label="action items"
+              <button type="button" class="vertical-icon" mat-icon-button i18n-aria-label aria-label="action items"
                 [matMenuTriggerFor]="cardMenu">
                 <mat-icon>more_vertical</mat-icon>
               </button>
