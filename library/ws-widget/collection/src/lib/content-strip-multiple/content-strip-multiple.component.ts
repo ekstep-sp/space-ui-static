@@ -14,7 +14,7 @@ import {
 import { Subscription } from 'rxjs'
 import { filter } from 'rxjs/operators'
 import { SearchServService } from '@ws/app/src/lib/routes/search/services/search-serv.service'
-import { Router } from '@angular/router';
+import { Router } from '@angular/router'
 
 interface IStripUnitContentData {
   key: string
