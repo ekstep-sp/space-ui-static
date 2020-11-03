@@ -48,6 +48,7 @@ import { FeedbackFormComponent } from '@ws/author/src/lib/modules/shared/compone
 import { LicenseInfoDisplayDialogComponent } from '../license-info-display-dialog/license-info-display-dialog.component'
 import { AssetTypeInfoDisplayDialogComponent } from '../asset-type-info-display-dialog/asset-type-info-display-dialog.component'
 import { ActivatedRoute } from '@angular/router'
+import { cloneDeep } from 'lodash'
 
 interface ILicenseMetaInfo {
   parent: string[],
@@ -705,10 +706,24 @@ export class EditMetaComponent implements OnInit, OnDestroy, AfterViewInit {
     this.infoType = this.infoType === type ? '' : type
   }
 
+  getCurrentMeta() {
+    const currentFormData = JSON.parse(JSON.stringify(this.contentForm.value))
+    const updatedMEtaFromseperateComponents = this.contentService.getUpdatedMeta(this.contentService.currentContent)
+    const finalCurrentMeta = {
+      ...currentFormData,
+      mimeType: updatedMEtaFromseperateComponents.mimeType,
+      artifactUrl: updatedMEtaFromseperateComponents.artifactUrl,
+      artifactUploadUrl: updatedMEtaFromseperateComponents.artifactUploadUrl,
+      artifactLinkUrl: updatedMEtaFromseperateComponents.artifactLinkUrl,
+
+    }
+    return cloneDeep(finalCurrentMeta)
+  }
+
   storeData() {
     try {
       const meta = <any>{}
-      const currentMeta: NSContent.IContentMeta = JSON.parse(JSON.stringify(this.contentForm.value))
+      const currentMeta: NSContent.IContentMeta = this.getCurrentMeta()
       const originalMeta = this.contentService.getOriginalMeta(this.contentMeta.identifier)
       if (originalMeta && this.isEditEnabled) {
         const expiryDate = this.contentForm.value.expiryDate
