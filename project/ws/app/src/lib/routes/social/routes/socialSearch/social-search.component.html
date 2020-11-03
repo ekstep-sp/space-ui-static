@@ -2,7 +2,7 @@
   <ws-widget-btn-page-back [widgetData]="{ url: 'back' }"></ws-widget-btn-page-back>
   <span class="ml-2 text-white" i18n>Search</span>
   <span class="spacer"></span>
-  <div class="flex items-center border search border-solid search-border border-color width-size">
+  <div class="flex items-center border search border-solid search-border border-color width-size web-search">
 
     <div class="w-full search search-width-galaxyfold">
 
@@ -31,7 +31,22 @@
   (click)="sideNavBarOpened = !sideNavBarOpened">
   <mat-icon>filter_list</mat-icon>
 </button> -->
+<div class="mbl-search flex items-center mt-3 mb-3 border search border-solid search-border border-color width-size">
 
+  <div class="w-full search">
+
+    <mat-form-field appearance="none" class="autocomplete-form field-size " color="primary" [floatLabel]="'never'">
+      <input type="search" (keydown.enter)="triggerSearch()"
+        class="border-2 border-gray-300 bg-white pr-16 rounded-lg text-sm focus:outline-none  justify-search color-spl"
+        i18n-placeholder="search content" [placeholder]="placeHolder" i18-aria-label aria-label="Query"
+        style="width:90%;margin-left: 10%;padding-top:10px;" matInput [(ngModel)]="queryEntered" />
+    </mat-form-field>
+  </div>
+  <div class="flex items-center justify-center w-8 sm:w-16 cursor-pointer search-size">
+    <mat-icon (click)="getSearchResults('firstCall')">search
+    </mat-icon>
+  </div>
+</div>
 <mat-sidenav-container autosize="true" class="sidenav-content-min-height">
   <mat-sidenav #sideNavBar [opened]="sideNavBarOpened" (closed)="closeFilter(false)"
     [mode]="screenSizeIsLtMedium ? 'over' : 'side'">

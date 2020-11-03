@@ -27,13 +27,13 @@
   </section>
   <section class="flex flex-wrapped" *ngIf="quarterOrInput">
     <!-- <form [formGroup]="dateForm"> -->
-    <mat-form-field>
+    <mat-form-field class="-mt-2 mr-2">
       <input matInput [matDatepicker]="picker" [max]="maxDate" placeholder="Start Date"
         (dateInput)="inputChange('start', $event)" [formControl]="dateStart" autocomplete="off" />
       <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
       <mat-datepicker #picker></mat-datepicker>
     </mat-form-field>
-    <mat-form-field>
+    <mat-form-field class="-mt-2 mr-2">
       <input matInput [matDatepicker]="picker1" [max]="maxDate" placeholder="End Date"
         (dateInput)="inputChange('end', $event)" [formControl]="dateEnd" autocomplete="off" />
       <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
