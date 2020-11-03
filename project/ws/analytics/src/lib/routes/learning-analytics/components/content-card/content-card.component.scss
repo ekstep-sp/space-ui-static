@@ -24,3 +24,12 @@
     display: block;
   }
 }
+.ellipsis {
+  -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    display: -webkit-box;
+    overflow: hidden;
+}
+mat-grid-tile {
+  overflow: unset !important;
+}
