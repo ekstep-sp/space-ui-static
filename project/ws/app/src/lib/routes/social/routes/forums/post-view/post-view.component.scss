@@ -89,3 +89,8 @@ ws-widget-user-image {
   justify-content: space-between;
   flex-grow: 100;
 }
+@media screen and (max-width: 320px) {
+  .w-size {
+    width: 0;
+  }
+}
