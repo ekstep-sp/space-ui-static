@@ -116,11 +116,14 @@
                 <span class="ws-mat-primary-text"><span i18n>Part Of: </span>{{ post?.source?.forumName }}</span>
               </div>
             </div>
-            <div class="flex flex-between" *ngIf="post?.activity">
-              <div class="flex flex-middle">
+            <div class="flex flex-wrap" *ngIf="post?.activity">
+              <div class="flex flex-middle min-w-150">
                 <span class="ws-mat-primary-text mat-caption padding-right-span"><span i18n>Modified:
                   </span>{{ post.dtLastModified | date }}</span>
-                <ws-widget-btn-social-vote class="block" [voteType]="'upVote'" [postId]="post.id"  [isSocial] = "true"
+              </div>
+              <div class="flex full-w-flex">
+                <div class="flex align-items-center">
+                  <ws-widget-btn-social-vote class="block" [voteType]="'upVote'" [postId]="post.id"  [isSocial] = "true"
                   [postCreatorId]="post.postCreator?.postCreatorId" [activity]="post.activity" [iconType]="'triangle'">
                 </ws-widget-btn-social-vote>
 
@@ -133,10 +136,13 @@
                 <span class="ws-mat-primary-text flex flex-middle">{{
                   post.activity.activityData.downVote
                 }}</span>
+                </div>
+                <div class="flex space-between">
+                  <span class="ws-mat-primary-text flex flex-middle">
+                    <mat-icon class="px-2 grey-icons">comment</mat-icon>{{ post.replyCount }}
+                  </span>
+                </div>
               </div>
-              <span class="ws-mat-primary-text flex flex-middle">
-                <mat-icon class="px-2 grey-icons">comment</mat-icon>{{ post.replyCount }}
-              </span>
             </div>
           </div>
           <mat-card-content>
