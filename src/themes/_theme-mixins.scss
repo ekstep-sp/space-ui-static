@@ -358,3 +358,64 @@ color:#ffff;
     }
   }
 }
+
+
+
+::ng-deep{
+  .small-typography 
+  {
+    span.mat-tab-label.mat-tab-label-content {
+      font-size: 20px !important;
+      height: 80px !important;
+      font-family: Montserrat !important;
+    }
+    .mat-tab-labels{
+      height: 80px !important;
+      align-items: center !important;
+      font-family: Montserrat !important;
+    } 
+  
+  }
+  .normal-typography 
+  {
+    span.mat-tab-label.mat-tab-label-content {
+      font-size: 24px !important;
+      height: 80px !important;
+      font-family: Montserrat !important;
+    }
+    .mat-tab-labels{
+      height: 80px !important;
+      align-items: center !important;
+      font-family: Montserrat !important;
+    } 
+  
+  }
+  .large-typography 
+  {
+    span.mat-tab-label.mat-tab-label-content {
+      font-size: 24px !important;
+      height: 80px !important;
+      font-family: Montserrat !important;
+    }
+    .mat-tab-labels{
+      height: 80px !important;
+      align-items: center !important;
+      font-family: Montserrat !important;
+    } 
+  
+  }
+
+  .x-large-typography 
+  {
+    span.mat-tab-label.mat-tab-label-content {
+      font-size: 24px !important;
+      height: 80px !important;
+      font-family: Montserrat !important;
+    }
+    .mat-tab-labels{
+      height: 80px !important;
+      align-items: center !important;
+      font-family: Montserrat !important;
+    } 
+  
+  }}

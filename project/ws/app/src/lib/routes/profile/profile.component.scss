@@ -51,13 +51,16 @@ span.toggle-arrow {
   font-size: 24px;
 }
 .mat-toolbar-selected {
-  background-color: #42428b !important;
- // color: #ffff !important;
+  background-color:  rgba(66, 66, 139, 0.65) !important;
   font-weight: bold !important;
 }
 a.mat-list-item.mat-toolbar-selected { 
   ::ng-deep  {
     div.mat-list-item-content {
+
+      span{
+        color:#ffff !important;
+      }
   color: #ffff !important;
 }
 .mat-icon{
@@ -123,7 +126,29 @@ mat-sidenav.nav-opened {
 mat-sidenav.nav-closed {
   width: 216px;
 }
+
+.font-size-sidebar-content{
+  font-size: 1.5em;
+}
+::ng-deep{
+.x-large-typography 
+{
+  .font-size-sidebar-content{
+    font-size: 24px !important;
+}
+}}
+
+::ng-deep{
+  .large-typography 
+  {
+    .font-size-sidebar-content{
+      font-size: 24px !important;
+  }
+  }}
 @media only screen and (min-width: 800px) {
+  .font-size-sidebar-content{
+    font-size: 1.5em;
+  }
   span.toggle-span {
     display: none;
   }
