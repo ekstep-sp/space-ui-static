@@ -207,7 +207,7 @@ h1 {
 }
 @media screen and (max-width: 320px) {
   .field-size{
-    width:125px;
+    width: 100%;
   }
  .width-size{
   max-width: 500px;
@@ -268,3 +268,35 @@ h1 {
 .padding-right-span{
   padding-right: 1rem;
 }
+@media screen and (min-width:766px) {
+.mbl-search {
+display: none !important;
+}
+.web-search {
+display: flex !important;
+}
+}
+@media screen and (max-width:765px) {
+  .color-spl {
+    color: black !important;
+  }
+  .mbl-search {
+  display: flex !important;
+  }
+  .web-search {
+  display: none !important;
+  }
+  .border-color{
+    color:#925ba0 !important;
+  }
+  }
+  ::ng-deep {
+    @media screen and (max-width:765px) {
+    .theme-muave.night-mode .color-spl {
+     color: white !important;
+    }
+    .theme-muave.night-mode .color-spl {
+     color: white !important;
+    }
+  }
+  }
