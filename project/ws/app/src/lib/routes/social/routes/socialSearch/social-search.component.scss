@@ -254,7 +254,7 @@ h1 {
   align-items: center;
   justify-content: center;
 }
-@media screen and (max-width: 280px){
+@media screen and (max-width: 281px){
 .search-width-galaxyfold{
   max-width: 110px !important;
 }
@@ -264,9 +264,29 @@ h1 {
 .padding-right-span{
   padding-right: 0 !important;
 }
+.modifier {
+  display: block;
+  width: 100%;
+}
 }
 .padding-right-span{
   padding-right: 1rem;
+}
+
+.min-w-150 {
+  min-width: 150px;
+}
+
+.full-w-flex {
+  align-items: center;
+  justify-content: space-between;
+  flex-grow: 100;
+}
+
+@media screen and (max-width: 310px) {
+  .flex-wrap {
+    padding-top: 20px;
+  }
 }
 @media screen and (min-width:766px) {
 .mbl-search {
