@@ -162,13 +162,17 @@ mat-sidenav.nav-closed {
 
 @media only screen and (max-width: 800px) {
   ::ng-deep {
+
+    .left .mat-list-item-content {
+      padding-left: 0px !important;
+    }
     .theme-muave.night-mode .mat-list-base .mat-list-item .mat-list-item-content {
-      padding-left: 10px;
+     // padding-left: 10px;
       // background: #424242 !important;
     }
-    .mat-list-item-content {
+    /* .mat-list-item-content {
       padding-left: 10px !important;
-    }
+    } */
   }
   a.mat-list-item {
     display: flex !important;
