@@ -67,7 +67,7 @@
     font-size: 18px !important;
   }
   .font-size-navbar-heading {
-    font-size: 24px !important;
+    font-size: 1.2em;
     font-weight: 600;
   }
   .heading-font-size-secondary {
@@ -374,10 +374,13 @@ color:#ffff;
       align-items: center !important;
       font-family: Montserrat !important;
     } 
-  
   }
+
   .normal-typography 
   {
+    .font-size-navbar-heading {
+      font-size: 24px !important;
+      font-weight: 600;}
    .tab span.mat-tab-label.mat-tab-label-content {
       font-size: 24px !important;
       height: 80px !important;
@@ -388,10 +391,14 @@ color:#ffff;
       align-items: center !important;
       font-family: Montserrat !important;
     } 
-  
   }
+
   .large-typography 
   {
+    .font-size-navbar-heading {
+      font-size: 24px !important;
+      font-weight: 600;
+    }
    .tab span.mat-tab-label.mat-tab-label-content {
       font-size: 24px !important;
       height: 80px !important;
@@ -407,6 +414,10 @@ color:#ffff;
 
   .x-large-typography 
   {
+    .font-size-navbar-heading {
+      font-size: 24px !important;
+      font-weight: 600;
+    }
    .tab span.mat-tab-label.mat-tab-label-content {
       font-size: 24px !important;
       height: 80px !important;
@@ -416,6 +427,6 @@ color:#ffff;
       height: 80px !important;
       align-items: center !important;
       font-family: Montserrat !important;
-    } 
-  
-  }}
+    }   
+  }
+}
