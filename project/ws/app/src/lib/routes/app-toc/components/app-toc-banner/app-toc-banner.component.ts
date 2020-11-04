@@ -18,7 +18,7 @@ import { NsAnalytics } from '../../models/app-toc-analytics.model'
 import { NsAppToc } from '../../models/app-toc.model'
 import { AppTocService } from '../../services/app-toc.service'
 import { AppTocDialogIntroVideoComponent } from '../app-toc-dialog-intro-video/app-toc-dialog-intro-video.component'
-import { MobileAppsService } from 'src/app/services/mobile-apps.service'
+// import { MobileAppsService } from 'src/app/services/mobile-apps.service'
 import { ForumService } from '../../../social/routes/forums/service/forum.service'
 
 @Component({
@@ -80,7 +80,6 @@ export class AppTocBannerComponent implements OnInit, OnChanges, OnDestroy {
     private progressSvc: ContentProgressService,
     private contentSvc: WidgetContentService,
     private utilitySvc: UtilityService,
-    private mobileAppsSvc: MobileAppsService,
     private authAccessService: AccessControlService,
     private contentService: WidgetContentService,
     private readonly forumSvc: ForumService
@@ -269,7 +268,7 @@ export class AppTocBannerComponent implements OnInit, OnChanges, OnDestroy {
       const isResource = this.content.contentType === NsContent.EContentTypes.KNOWLEDGE_ARTIFACT ||
         this.content.contentType === NsContent.EContentTypes.RESOURCE || !this.content.children.length
       if (isResource) {
-        this.mobileAppsSvc.sendViewerData(this.content)
+        // this.mobileAppsSvc.sendViewerData(this.content)
       }
       return isResource
     }
