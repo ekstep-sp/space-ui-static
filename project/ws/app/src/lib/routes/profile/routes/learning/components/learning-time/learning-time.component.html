@@ -23,11 +23,11 @@
       </div>
 
       <div *ngIf="!showDateRange" class="text-center">
-        <button type="button" mat-icon-button (click)="changeWeek('prev')" [disabled]="!isPrevDateValid" accesskey="<">
+        <button type="button" class="responsive-maticon" mat-icon-button (click)="changeWeek('prev')" [disabled]="!isPrevDateValid" accesskey="<">
           <mat-icon>arrow_left</mat-icon>
         </button>
         <span class="mat-body-strong">{{ pickerValue1 | date }} - {{ pickerValue2 | date }}</span>
-        <button type="button" mat-icon-button (click)="changeWeek('next')" [disabled]="!isNextDateValid" accesskey=">">
+        <button type="button" class="responsive-maticon" mat-icon-button (click)="changeWeek('next')" [disabled]="!isNextDateValid" accesskey=">">
           <mat-icon>arrow_right</mat-icon>
         </button>
       </div>
