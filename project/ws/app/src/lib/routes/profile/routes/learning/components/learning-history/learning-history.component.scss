@@ -284,11 +284,11 @@ $badge-padding: 12px;
 .montserrat {
   font-family: montserrat, sans-serif !important;
 }
-::ng-deep {
-  .mat-tab-body-content {
-    overflow: initial !important;
-  }
-}
+// ::ng-deep {
+//   .mat-tab-body-content {
+//     overflow: initial !important;
+//   }
+// }
 @media (max-width: 1030px) {
   mat-grid-tile.mat-body-strong.mat-grid-tile {
     overflow: visible;

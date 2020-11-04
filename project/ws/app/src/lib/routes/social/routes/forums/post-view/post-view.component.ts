@@ -5,6 +5,7 @@ import { TFetchStatus, ConfigurationsService, NsPage } from '@ws-widget/utils'
 import { DialogSocialDeletePostComponent, NsDiscussionForum, WsDiscussionForumService } from '@ws-widget/collection'
 import { combineLatest } from 'rxjs'
 import { ForumService } from '../service/forum.service'
+import { BtnSocialLikeService } from '@ws-widget/collection/src/lib/discussion-forum/actionBtn/btn-social-like/service/btn-social-like.service'
 
 @Component({
   selector: 'ws-app-post-view',
@@ -45,6 +46,7 @@ export class PostViewComponent implements OnInit {
     private router: Router,
     private discussionSvc: WsDiscussionForumService,
     private readonly forumSrvc: ForumService,
+    private voteService: BtnSocialLikeService,
   ) {
     if (this.configSvc.userProfile) {
       this.userId = this.configSvc.userProfile.userId || ''
@@ -54,6 +56,14 @@ export class PostViewComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.voteService.callComponent.subscribe((data: any) => {
+      if (data) {
+        this.discussionSvc.fetchPost(this.conversationRequest).toPromise().then((updatedData: any) => {
+          this.conversation = updatedData
+          // console.log('main', this.conversation)
+      })
+    }
+    })
     combineLatest([this.route.data, this.route.paramMap]).subscribe(_combinedResult => {
       // tslint:disable-next-line: max-line-length
       if (!this.forumSrvc.isVisibileAccToRoles(_combinedResult[0].socialData.data.rolesAllowed.blogs, _combinedResult[0].socialData.data.rolesNotAllowed.blogs)) {
