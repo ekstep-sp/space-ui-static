@@ -192,6 +192,12 @@
     }
   }
 }
+@media only screen and (max-width:768px) {
+  .responsive-maticon{
+   width: 28px;
+  }
+}
+
 ::ng-deep{
 @media only screen and (max-width: 310px){
 
