@@ -12,7 +12,7 @@
   <ng-container  *ngFor="let filter of filtersResponse; trackBy: filterUnitResponseTrackBy">
   <mat-expansion-panel [expanded]="filter.checked || isExpanded" *ngIf="filter.type !== 'contentType'">
     <mat-expansion-panel-header >
-      <span class="font-montserrat body-font-size-primary">{{ translatedFilters[filter.displayName.toLowerCase()]?.translatedField || filter.displayName }}</span>
+      <span class="font-montserrat">{{ translatedFilters[filter.displayName.toLowerCase()]?.translatedField || filter.displayName }}</span>
     </mat-expansion-panel-header>
     <ng-container  *ngTemplateOutlet="
         filtersHolder;
