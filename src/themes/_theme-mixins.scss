@@ -364,12 +364,12 @@ color:#ffff;
 ::ng-deep{
   .small-typography 
   {
-    span.mat-tab-label.mat-tab-label-content {
+   .tab span.mat-tab-label.mat-tab-label-content {
       font-size: 20px !important;
       height: 80px !important;
       font-family: Montserrat !important;
     }
-    .mat-tab-labels{
+    .tab .mat-tab-labels{
       height: 80px !important;
       align-items: center !important;
       font-family: Montserrat !important;
@@ -378,12 +378,12 @@ color:#ffff;
   }
   .normal-typography 
   {
-    span.mat-tab-label.mat-tab-label-content {
+   .tab span.mat-tab-label.mat-tab-label-content {
       font-size: 24px !important;
       height: 80px !important;
       font-family: Montserrat !important;
     }
-    .mat-tab-labels{
+   .tab .mat-tab-labels{
       height: 80px !important;
       align-items: center !important;
       font-family: Montserrat !important;
@@ -392,12 +392,12 @@ color:#ffff;
   }
   .large-typography 
   {
-    span.mat-tab-label.mat-tab-label-content {
+   .tab span.mat-tab-label.mat-tab-label-content {
       font-size: 24px !important;
       height: 80px !important;
       font-family: Montserrat !important;
     }
-    .mat-tab-labels{
+   .tab .mat-tab-labels{
       height: 80px !important;
       align-items: center !important;
       font-family: Montserrat !important;
@@ -407,12 +407,12 @@ color:#ffff;
 
   .x-large-typography 
   {
-    span.mat-tab-label.mat-tab-label-content {
+   .tab span.mat-tab-label.mat-tab-label-content {
       font-size: 24px !important;
       height: 80px !important;
       font-family: Montserrat !important;
     }
-    .mat-tab-labels{
+   .tab .mat-tab-labels{
       height: 80px !important;
       align-items: center !important;
       font-family: Montserrat !important;

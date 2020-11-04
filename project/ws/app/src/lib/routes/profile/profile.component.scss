@@ -16,7 +16,7 @@ span.tabname-container {
   align-items: center;
 }
 ::ng-deep {
-  .theme-muave.night-mode .mat-list-base .mat-list-item .mat-list-item-content {
+  .theme-muave.night-mode .mat-list-base .left .mat-list-item-content {
     display: flex;
     flex-direction: row;
     align-items: center;
@@ -27,7 +27,7 @@ span.tabname-container {
     padding-left: 97px;
     // background: #424242 !important;
   }
-  .mat-list-item-content {
+ .left .mat-list-item-content {
     padding-left: 97px !important;
   }
 }

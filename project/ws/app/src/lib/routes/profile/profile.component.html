@@ -20,7 +20,7 @@
 <mat-sidenav-container autosize="true" class="sidenav-content-min-height">
   <mat-sidenav [ngClass]="{'nav-opened': showText,'nav-closed': !showText}" #sideNavBar [position]="screenSizeIsLtMedium ? 'end' : 'start'" [opened]="!screenSizeIsLtMedium" [mode]="screenSizeIsLtMedium ? 'over' : 'side'">
     <mat-nav-list class="">
-      <a mat-list-item class="navs-height" *ngIf="enabledTabs?.dashboard?.enabled" routerLinkActive="mat-toolbar-selected" (click)="
+      <a mat-list-item class="navs-height left" *ngIf="enabledTabs?.dashboard?.enabled" routerLinkActive="mat-toolbar-selected" (click)="
           tabUpdate(enabledTabs?.dashboard?.displayName);
           screenSizeIsLtMedium ? sideNavBar.toggle() : null
         " routerLink="/app/profile/dashboard" matTooltip="{{ enabledTabs?.dashboard?.displayName }}">
@@ -34,7 +34,7 @@
 <span *ngIf="!screenSizeIsLtMedium" class="toggle-arrow" [ngClass]="{'pos-x': !showText}" (click)="!screenSizeIsLtMedium ? (showText = !showText) : triggerToggle(sideNavBar)">
   <img class="arrow-icon" [ngClass]="{'rotate-ve-180': !showText}" src="/assets/instances/space/common/arrow_double.png">
 </span>
-      <a class="navs-height" mat-list-item *ngIf="enabledTabs?.learning?.enabled" routerLinkActive="mat-toolbar-selected" (click)="
+      <a class="navs-height left" mat-list-item *ngIf="enabledTabs?.learning?.enabled" routerLinkActive="mat-toolbar-selected" (click)="
           tabUpdate(enabledTabs?.learning?.displayName);
           screenSizeIsLtMedium ? sideNavBar.toggle() : null
         "   routerLink="/app/profile/learning/history" matTooltip="{{ enabledTabs?.learning?.displayName }}">
@@ -45,7 +45,7 @@
         }}</span>
         </ng-container>
       </a>
-      <a mat-list-item *ngIf="enabledTabs?.achievements?.enabled" routerLinkActive="mat-toolbar-selected" (click)="
+      <a class="left" mat-list-item *ngIf="enabledTabs?.achievements?.enabled" routerLinkActive="mat-toolbar-selected" (click)="
           tabUpdate(enabledTabs?.achievements?.displayName);
           screenSizeIsLtMedium ? sideNavBar.toggle() : null
         "   routerLink="/app/profile/competency/badges" matTooltip="{{ enabledTabs?.achievements?.displayName }}">
@@ -60,7 +60,7 @@
             {{ enabledTabs?.achievements?.displayName }}</span>
         </ng-container>
       </a>
-      <a class="navs-height" mat-list-item *ngIf="enabledTabs?.interests?.enabled" routerLinkActive="mat-toolbar-selected" (click)="
+      <a class="navs-height left" mat-list-item *ngIf="enabledTabs?.interests?.enabled" routerLinkActive="mat-toolbar-selected" (click)="
           tabUpdate(enabledTabs?.interests?.displayName);
           screenSizeIsLtMedium ? sideNavBar.toggle() : null
         "   routerLink="/app/profile/interest" matTooltip="{{ enabledTabs?.interests?.displayName }}">
@@ -71,7 +71,7 @@
         }}</span>
         </ng-container>
       </a>
-      <a mat-list-item *ngIf="enabledTabs?.plans?.enabled" routerLinkActive="mat-toolbar-selected" (click)="
+      <a mat-list-item class="left" *ngIf="enabledTabs?.plans?.enabled" routerLinkActive="mat-toolbar-selected" (click)="
           tabUpdate(enabledTabs?.plans?.displayName);
           screenSizeIsLtMedium ? sideNavBar.toggle() : null
         "   routerLink="/app/profile/plans" matTooltip="{{ enabledTabs?.plans?.displayName }}">
@@ -82,7 +82,7 @@
         }}</span>
         </ng-container>
       </a>
-      <a mat-list-item *ngIf="enabledTabs?.collaborators?.enabled" routerLinkActive="mat-toolbar-selected" (click)="
+      <a mat-list-item class="left" *ngIf="enabledTabs?.collaborators?.enabled" routerLinkActive="mat-toolbar-selected" (click)="
           tabUpdate(enabledTabs?.collaborators?.displayName);
           screenSizeIsLtMedium ? sideNavBar.toggle() : null
         "   routerLink="/app/profile/collaborators" matTooltip="{{ enabledTabs?.collaborators?.displayName }}">
@@ -93,7 +93,7 @@
         }}</span>
         </ng-container>
       </a>
-      <a mat-list-item *ngIf="enabledTabs?.featureUsage?.enabled" routerLinkActive="mat-toolbar-selected" (click)="
+      <a mat-list-item  class="left" *ngIf="enabledTabs?.featureUsage?.enabled" routerLinkActive="mat-toolbar-selected" (click)="
           tabUpdate(enabledTabs?.featureUsage?.displayName);
           screenSizeIsLtMedium ? sideNavBar.toggle() : null
         "   routerLink="/app/profile/feature-usage" matTooltip="{{ enabledTabs?.featureUsage?.displayName }}">
@@ -103,7 +103,7 @@
             {{ enabledTabs?.featureUsage?.displayName }}</span>
         </ng-container>
       </a>
-      <a class="navs-height" mat-list-item *ngIf="enabledTabs?.settings?.enabled" routerLinkActive="mat-toolbar-selected" (click)="
+      <a class="navs-height left" mat-list-item *ngIf="enabledTabs?.settings?.enabled" routerLinkActive="mat-toolbar-selected" (click)="
           tabUpdate(enabledTabs?.settings?.displayName);
           screenSizeIsLtMedium ? sideNavBar.toggle() : null
         "   routerLink="/app/profile/settings" matTooltip="{{ enabledTabs?.settings?.displayName }}">
