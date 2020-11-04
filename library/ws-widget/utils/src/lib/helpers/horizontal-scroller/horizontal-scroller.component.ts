@@ -20,6 +20,8 @@ export class HorizontalScrollerComponent implements OnInit, OnChanges, OnDestroy
   onHover = false
   @Output()
   loadNext = new EventEmitter()
+  @Input()
+  public: any
   @ViewChild('horizontalScrollElem', { static: true })
   horizontalScrollElem: ElementRef | null = null
 

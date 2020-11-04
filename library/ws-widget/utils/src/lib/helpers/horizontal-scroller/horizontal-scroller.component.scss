@@ -14,7 +14,9 @@ $spaceFromEnd: -$size-m;
   transform: translateY(-50%);
   z-index: 999;
 }
-
+.active {
+  top:48% !important;
+}
 .prevBtn {
   @extend %btn;
   left: 0;

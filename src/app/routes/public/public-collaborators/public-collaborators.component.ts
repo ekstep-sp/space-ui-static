@@ -11,6 +11,7 @@ import { ActivatedRoute } from '@angular/router'
 export class PublicCollaboratorsComponent implements OnInit {
   @ViewChild('carousel', { static: false }) carousel: any
   images: any[] = []
+  scrollKey = true
 
   collaboratorBanner: SafeUrl | null = null
   partner = {

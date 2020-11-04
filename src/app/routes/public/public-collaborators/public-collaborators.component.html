@@ -10,7 +10,7 @@
 </div>
 <div class="parent-scroller-container" [ngClass]= "{'parent-scroller-container-login': (authSvc.isLoggedIn$ | async) === false}">
   <div class="scroller-container" [ngClass]= "{'scroller-container-login': (authSvc.isLoggedIn$ | async) === false}">
-    <ws-utils-horizontal-scroller *ngIf=" partner.src?.length" [loadStatus]="'done'">
+    <ws-utils-horizontal-scroller *ngIf=" partner.src?.length" [loadStatus]="'done'" [public]="scrollKey">
       <div class="card-container" *ngFor="let src of partner.src;let i = index">
         <a href="{{partner.url[i]}}" target="_blank">
           <img src="{{ src }}">
