@@ -11,3 +11,17 @@
   background-color: transparent !important;
   box-shadow: none !important;
 }
+@media screen and (min-width: 280px) and (max-width: 320px) {
+.isWeb {
+display: none !important;
+}
+.ismbl {
+  display: block !important;
+}
+}
+.ismbl {
+  display: none;
+}
+.isWeb {
+  display: block;
+}

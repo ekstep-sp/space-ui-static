@@ -3,11 +3,21 @@
 
   <span i18n class="margin-left-xs text-white font-size-navbar-heading font-montserrat">My Blogs</span>
   <span class="spacer"></span>
-  <a [routerLink]="'/app/social/blogs/edit'" class="btn" mat-raised-button i18n>
+  <a [routerLink]="'/app/social/blogs/edit'" class="btn isWeb" mat-raised-button i18n>
     <mat-icon class="mat-icon-color"> create </mat-icon><span>&nbsp;Write a Blog</span></a
   >
+  <button tabindex="0"  class="btn ismbl "type="button" mat-icon-button
+  [matMenuTriggerFor]="editMenu">
+  <mat-icon>more_vert</mat-icon>
+</button>
+<mat-menu #editMenu="matMenu">
+    <ng-template matMenuContent>
+        <a [routerLink]="'/app/social/blogs/edit'" class="btn"  mat-menu-item i18n>
+          <mat-icon class="mat-icon-color"> create </mat-icon><span>&nbsp;Write a Blog</span></a
+        >
+    </ng-template>
+  </mat-menu>
 </mat-toolbar>
-
 <div
   class="my-blogs-container mat-drawer-container mat-drawer-container-has-open mat-drawer-transition"
 >
