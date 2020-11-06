@@ -29,8 +29,10 @@
     </div>
   </div>
   <div class="flex margin-top-s">
-    <div class="margin-left-s margin-auto" *ngIf="!editMode && post.postContent.title.length"
+    <div class="margin-left-s margin-auto" >
+    <div *ngIf="!editMode && post.postContent.title.length"
       [innerHTML]="post.postContent.title"></div>
+    </div>
     <!-- <mat-chip-list>
       <mat-chip *ngFor="let tag of qnaConversation.mainPost.tags" i18n-matTooltip matTooltip="Associated Tag">
         {{ tag.name }}
