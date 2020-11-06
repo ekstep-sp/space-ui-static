@@ -6,6 +6,9 @@
     <ws-widget-discussion-post
       [post]="reply"
       (deleteSuccess)="onDeletePost(i)"
+      [allowMention]="allowMention"
+      [parentPostCreatorId]="contentCreatorId"
+      (triggerReplyNotification)="triggerReplyCommentNotification($event)"
       *ngFor="let reply of discussionResult.result; let i = index"
     ></ws-widget-discussion-post>
     <div
@@ -38,13 +41,15 @@
         [email]="userEmail"
         [userName]="userName"
         [imageType]="'name-initial'"
-      >
+    >
       </ws-widget-user-image>
       <div class="editor width-expand mat-app-background">
         <!-- [minLength]="'20'" -->
         <ws-widget-editor-quill
           (textData)="onTextChange($event)"
           #editorQuill
+          [showMention]="allowMention"
+          (mentionsData)="commentMentions = $event"
         ></ws-widget-editor-quill>
       </div>
     </div>

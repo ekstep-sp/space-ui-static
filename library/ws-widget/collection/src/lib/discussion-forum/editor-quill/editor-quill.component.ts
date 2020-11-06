@@ -101,6 +101,12 @@ export class EditorQuillComponent implements OnInit, OnDestroy {
         this.getRootOrg = data.socialData.data.userListData.root_org,
           this.getOrg = data.socialData.data.userListData.org
       }
+      if (data.pageData) {
+        this.userDashboardData = data.pageData.data.userListData
+        this.discussionForumService.setUserDashboardConfig(this.userDashboardData)
+        this.getRootOrg = data.pageData.data.userListData.root_org,
+          this.getOrg = data.pageData.data.userListData.org
+      }
     })
   }
   onContentChanged(editorEvent: any) {

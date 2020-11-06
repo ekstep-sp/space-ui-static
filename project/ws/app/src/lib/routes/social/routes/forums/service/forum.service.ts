@@ -148,6 +148,23 @@ export class ForumService {
             },
           }
         }
+        if (_tag.notificationFor === 'discussionForum') {
+          request = {
+            'event-id': 'tagged_in_comment',
+            'tag-value-pair': {
+              '#blogTitle': _tag.ContentTitle,
+              '#type': 'qna',
+              '#postUrl': window.location.href,
+              '#taggedBy': _tag.tagCreatorName,
+              '#taggedUser': _tag.taggedUserName,
+            },
+            recipients: {
+              actor: [_tag.tagCreatorID],
+              taggedUser: [_tag.taggedUserID],
+              author: [_tag.ContentCreatorID],
+            },
+          }
+        }
         return this.http.post(NOTIFICATION, request).toPromise()
       })
       return Promise.all(notificationPromises)

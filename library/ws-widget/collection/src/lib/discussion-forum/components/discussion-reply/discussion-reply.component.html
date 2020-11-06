@@ -27,15 +27,17 @@
   </div>
 
   <div class="flex margin-top-s">
+    <div *ngIf="!editMode" class="margin-left-s margin-auto" [innerHTML]="reply.postContent.body"></div>
     <div *ngIf="reply.activity && reply.status === 'Active'">
       <ws-widget-btn-social-vote [postId]="reply.id" [activity]="reply.activity" [voteType]="'upVote'"
         [postCreatorId]="reply?.postCreator?.postCreatorId"></ws-widget-btn-social-vote>
     </div>
-    <div *ngIf="!editMode" class="margin-left-s margin-auto" [innerHTML]="reply.postContent.body"></div>
   </div>
   <div *ngIf="editMode" class="margin-top-s padding-s mat-primary-border">
     <!-- [minLength]="'10'" -->
-    <ws-widget-editor-quill [htmlText]="reply.postContent.body" (textData)="onReplyTextChange($event)">
+    <ws-widget-editor-quill  [showMention]="allowMention"
+    (mentionsData)="replyCommentMentions = $event"
+    [htmlText]="reply.postContent.body" (textData)="onReplyTextChange($event)">
     </ws-widget-editor-quill>
     <div class="text-right">
       <button name="discussion-reply-update-button" type="button" class="margin-top-s" [disabled]="!replyPostEnabled"

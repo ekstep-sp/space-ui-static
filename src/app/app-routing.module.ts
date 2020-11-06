@@ -596,6 +596,8 @@ const routes: Routes = [
     path: 'viewer',
     data: {
       topBar: ETopBar.NONE,
+      pageType: 'feature',
+      pageKey: 'disscussionForum',
     },
     loadChildren: () => import('./routes/route-viewer.module').then(u => u.RouteViewerModule),
     canActivate: [GeneralGuard],

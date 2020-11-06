@@ -5,6 +5,7 @@ import { MatDialog, MatSnackBar } from '@angular/material'
 import { WsDiscussionForumService } from '../../ws-discussion-forum.services'
 import { EditorQuillComponent } from '../../editor-quill/editor-quill.component'
 import { DialogSocialDeletePostComponent } from '../../dialog/dialog-social-delete-post/dialog-social-delete-post.component'
+// import { BtnSocialLikeService } from '../../actionBtn/btn-social-like/service/btn-social-like.service';
 
 @Component({
   selector: 'ws-widget-discussion-post',
@@ -13,8 +14,11 @@ import { DialogSocialDeletePostComponent } from '../../dialog/dialog-social-dele
 })
 export class DiscussionPostComponent implements OnInit {
 
+  @Input() allowMention = false
   @Input() post!: NsDiscussionForum.ITimelineResult
   @Output() deleteSuccess = new EventEmitter<boolean>()
+  @Output() triggerReplyNotification = new EventEmitter<object | undefined>()
+  @Input()  parentPostCreatorId!: string
   @ViewChild('discussionReplyEditor', { static: true }) discussionReplyEditor: EditorQuillComponent | null = null
   editMode = false
   postPublishEnabled = false
@@ -39,6 +43,23 @@ export class DiscussionPostComponent implements OnInit {
   }
   postReplies: NsDiscussionForum.ITimelineResult[] = []
   isNewRepliesAvailable = false
+  mentions = []
+  commentMentions = []
+  replyCommentMentions = []
+  isPostingComment = false
+  replyEditMentions = []
+  commentAddRequest: NsDiscussionForum.IPostCommentRequest = {
+    postKind: NsDiscussionForum.EReplyKind.COMMENT,
+    parentId: '',
+    postCreator: '',
+    postContent: {
+      body: '',
+    },
+    source: {
+      id: '',
+      name: NsDiscussionForum.EDiscussionType.SOCIAL,
+    },
+  }
   constructor(
     private dialog: MatDialog,
     private snackBar: MatSnackBar,
@@ -89,6 +110,7 @@ export class DiscussionPostComponent implements OnInit {
     }
     this.discussionSvc.updatePost(postUpdateRequest).subscribe(
       _data => {
+        this.triggerNotification('reply')
         this.updatedBody = undefined
         if (this.post.lastEdited) {
           this.post.lastEdited.dtLastEdited = Date.now().toString()
@@ -121,6 +143,7 @@ export class DiscussionPostComponent implements OnInit {
     this.discussionSvc.publishPost(request).subscribe(
       (_data: any) => {
         this.fetchPostReplies(true)
+        this.triggerNotification('comment')
         this.isPostingReply = false
         this.replyPlaceholderToggler = !this.replyPlaceholderToggler
         if (this.discussionReplyEditor) {
@@ -175,5 +198,18 @@ export class DiscussionPostComponent implements OnInit {
   onDeleteReply(replyIndex: number) {
     this.postReplies.splice(replyIndex, 1)
   }
-
+  triggerNotification(parentType: 'reply' | 'comment') {
+    let mentionsData: any[] = []
+    if (parentType === 'reply') {
+      mentionsData = [...this.replyEditMentions]
+    } else if (parentType === 'comment') {
+      mentionsData = [...this.replyCommentMentions]
+    }
+    this.triggerReplyNotification.emit({
+      mentions: mentionsData,
+      topLevelReply: this.post,
+      parentPostCreatorId: this.parentPostCreatorId,
+      currentCommentData: this.commentAddRequest,
+    })
+  }
 }
