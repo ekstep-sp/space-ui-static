@@ -60,6 +60,7 @@ export class ViewerComponent implements OnInit, OnDestroy, AfterViewInit, AfterV
     private readonly cdr: ChangeDetectorRef,
   ) {
     this.rootSvc.showNavbarDisplay$.next(false)
+    this.rootSvc.showBottomNav$.next(true)
   }
 
   getContentData(e: any, sentDirectly = false) {

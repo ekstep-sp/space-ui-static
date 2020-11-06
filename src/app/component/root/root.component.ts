@@ -1,5 +1,4 @@
 import {
-  AfterViewInit,
   ChangeDetectorRef,
   Component,
   ElementRef,
@@ -26,6 +25,7 @@ import {
 import { delay, filter } from 'rxjs/operators'
 import { MobileAppsService } from '../../services/mobile-apps.service'
 import { RootService } from './root.service'
+import {combineLatest} from 'rxjs'
 // import { SwUpdate } from '@angular/service-worker'
 // import { environment } from '../../../environments/environment'
 // import { MatDialog } from '@angular/material'
@@ -36,7 +36,7 @@ import { RootService } from './root.service'
   templateUrl: './root.component.html',
   styleUrls: ['./root.component.scss'],
 })
-export class RootComponent implements OnInit, AfterViewInit {
+export class RootComponent implements OnInit {
   @ViewChild('previewContainer', { read: ViewContainerRef, static: true })
   previewContainerViewRef: ViewContainerRef | null = null
   @ViewChild('appUpdateTitle', { static: true })
@@ -52,6 +52,7 @@ export class RootComponent implements OnInit, AfterViewInit {
   isInIframe = false
   appStartRaised = false
   isSetupPage = false
+  showBottomNavbar = true
   constructor(
     private router: Router,
     public authSvc: AuthKeycloakService,
@@ -123,50 +124,9 @@ export class RootComponent implements OnInit, AfterViewInit {
     this.rootSvc.showNavbarDisplay$.pipe(delay(500)).subscribe(display => {
       this.showNavbar = display
     })
+    combineLatest([this.rootSvc.showNavbarDisplay$, this.rootSvc.showBottomNav$]).pipe(delay(500)).subscribe(display => {
+      this.showNavbar = display[0]
+      this.showBottomNavbar = display[1]
+    })
   }
-
-  ngAfterViewInit() {
-    // this.initAppUpdateCheck()
-  }
-
-  // initAppUpdateCheck() {
-  //   this.logger.log('LOGGING IN ROOT FOR PWA INIT CHECK')
-  //   if (environment.production) {
-  //     const appIsStable$ = this.appRef.isStable.pipe(
-  //       first(isStable => isStable),
-  //     )
-  //     const everySixHours$ = interval(6 * 60 * 60 * 1000)
-  //     const everySixHoursOnceAppIsStable$ = concat(appIsStable$, everySixHours$)
-  //     everySixHoursOnceAppIsStable$.subscribe(() => this.swUpdate.checkForUpdate())
-  //     if (this.swUpdate.isEnabled) {
-  //       this.swUpdate.available.subscribe(() => {
-  //         const dialogRef = this.dialog.open(DialogConfirmComponent, {
-  //           data: {
-  //             title: (this.appUpdateTitleRef && this.appUpdateTitleRef.nativeElement.value) || '',
-  //             body: (this.appUpdateBodyRef && this.appUpdateBodyRef.nativeElement.value) || '',
-  //           },
-  //         })
-  //         dialogRef.afterClosed().subscribe(
-  //           result => {
-  //             if (result) {
-  //               this.swUpdate.activateUpdate().then(() => {
-  //                 if ('caches' in window) {
-  //                   caches.keys()
-  //                     .then(keyList => {
-  //                       timer(2000).subscribe(
-  //                         _ => window.location.reload(),
-  //                       )
-  //                       return Promise.all(keyList.map(key => {
-  //                         return caches.delete(key)
-  //                       }))
-  //                     })
-  //                 }
-  //               })
-  //             }
-  //           },
-  //         )
-  //       })
-  //     }
-  //   }
-  // }
 }

@@ -7,5 +7,6 @@ import { BehaviorSubject } from 'rxjs'
 export class RootService {
 
   showNavbarDisplay$ = new BehaviorSubject<boolean>(true)
+  showBottomNav$ = new BehaviorSubject<boolean>(true)
   constructor() { }
 }
