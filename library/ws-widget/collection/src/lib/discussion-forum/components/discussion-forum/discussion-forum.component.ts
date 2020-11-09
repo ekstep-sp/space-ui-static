@@ -5,6 +5,9 @@ import { ConfigurationsService, TFetchStatus } from '@ws-widget/utils'
 import { EditorQuillComponent } from '../../editor-quill/editor-quill.component'
 import { NsDiscussionForum } from '../../ws-discussion-forum.model'
 import { WsDiscussionForumService } from '../../ws-discussion-forum.services'
+import { ActivatedRoute, Data } from '@angular/router'
+import { BtnSocialLikeService } from '../../actionBtn/btn-social-like/service/btn-social-like.service'
+import { ForumService } from '@ws/app/src/lib/routes/social/routes/forums/service/forum.service';
 
 @Component({
   selector: 'ws-widget-discussion-forum',
@@ -15,7 +18,7 @@ export class DiscussionForumComponent extends WidgetBaseComponent
   implements OnInit, NsWidgetResolver.IWidgetData<NsDiscussionForum.IDiscussionForumInput> {
   @Input() widgetData!: NsDiscussionForum.IDiscussionForumInput
 
-  @ViewChild('editorQuill', { static: true }) editorQuill: EditorQuillComponent | null = null
+  @ViewChild('editorQuill', { static: true }) editorQuill!: EditorQuillComponent
   @ViewChild('postEnabled', { static: true }) postEnabled: ElementRef<
     HTMLInputElement
   > | null = null
@@ -57,10 +60,18 @@ export class DiscussionForumComponent extends WidgetBaseComponent
   userEmail = ''
   userId = ''
   userName = ''
+  allowMention = false
+  mentions = []
+  commentMentions = []
+  contentCreatorId: any
   constructor(
     private snackBar: MatSnackBar,
     private discussionSvc: WsDiscussionForumService,
     private configSvc: ConfigurationsService,
+    private activatedRoute: ActivatedRoute,
+    private voteService: BtnSocialLikeService,
+    private readonly forumSrvc: ForumService,
+
   ) {
     super()
     if (this.configSvc.userProfile) {
@@ -73,6 +84,14 @@ export class DiscussionForumComponent extends WidgetBaseComponent
   }
 
   ngOnInit() {
+    this.voteService.callComponent.subscribe((data: any) => {
+      if (data) {
+        this.discussionSvc.fetchTimelineData(this.discussionRequest).subscribe(
+          (updateData: any) => {
+            this.discussionResult = updateData
+          })
+      }
+    })
     if (this.configSvc.restrictedFeatures) {
       this.isRestricted =
         this.configSvc.restrictedFeatures.has('disscussionForum') ||
@@ -88,6 +107,13 @@ export class DiscussionForumComponent extends WidgetBaseComponent
       }
       this.fetchDiscussion()
     }
+    this.activatedRoute.data.subscribe((response: Data) => {
+      this.contentCreatorId = response.content.data.creator
+     if (response.pageData.data.allowMentionUsers) {
+      this.allowMention = response.pageData.data.allowMentionUsers
+    }
+  })
+  console.log(this.widgetData, this.discussionRequest)
   }
 
   fetchDiscussion(refresh = false) {
@@ -143,6 +169,7 @@ export class DiscussionForumComponent extends WidgetBaseComponent
     }
     this.discussionSvc.publishPost(postPublishRequest).subscribe(
       (_data: any) => {
+        this.triggerNotification('comment')
         this.editorText = undefined
         this.isValidPost = false
         this.isPostingDiscussion = false
@@ -181,5 +208,51 @@ export class DiscussionForumComponent extends WidgetBaseComponent
     this.discussionSvc.fetchAllPosts(this.conversationRequest).subscribe(data => {
       this.discussionConverstionResult = Object.keys(data)
     })
+  }
+  triggerNotification(parentType: 'reply' | 'comment') {
+    let mentionsData: any[] = []
+    if (parentType === 'reply') {
+      mentionsData = [...this.mentions]
+    } else if (parentType === 'comment') {
+      mentionsData = [...this.commentMentions]
+    }
+    if (mentionsData.length) {
+      const notificationData = mentionsData.map((mention: any) => {
+        return {
+          notificationFor: 'discussionForum',
+          ContentTitle: this.widgetData.title || '',
+          ContentId: this.widgetData.id,
+          ContentCreatorID: this.contentCreatorId,
+          taggedUserID: mention.id,
+          taggedUserName: mention.name,
+          taggedUserEmail: mention.email,
+          tagCreatorName: this.configSvc.userProfile ? this.configSvc.userProfile.userName || '' : '',
+          tagCreatorID: this.configSvc.userProfile ? this.configSvc.userProfile.userId || '' : '',
+        }
+      })
+      console.log('notificarion data', notificationData)
+      this.forumSrvc.triggerTagNotification(notificationData)
+    }
+  }
+  triggerReplyCommentNotification(notificationData: any) {
+    // send one notification such that it reaches both, the person who was mentioned in the reply comment and the creator
+    // of answer on which comment was made
+    const notificationRequest = notificationData.mentions.map((mention: any) => {
+      return {
+        notificationFor: 'qna',
+          taggedUserID: mention.id,
+          taggedUserName: mention.name,
+          taggedUserEmail: mention.email,
+          tagCreatorName: this.configSvc.userProfile ? this.configSvc.userProfile.userName || '' : '',
+          tagCreatorID: this.configSvc.userProfile ? this.configSvc.userProfile.userId || '' : '',
+          QnaTitle: this.widgetData.title || '',
+          QnaId: this.widgetData.id,
+          // QnaCreatorID: notificationData.topLevelReply.postCreator.postCreatorId,
+          QnaCreatorID: notificationData.parentPostCreatorId,
+      }
+    })
+    if (notificationRequest.length) {
+      this.forumSrvc.triggerTagNotification(notificationRequest)
+    }
   }
 }

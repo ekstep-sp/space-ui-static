@@ -34,10 +34,10 @@
       <ng-container *ngIf="htmlContent?.isIframeSupported === 'No' || !htmlContent?.isIframeSupported">
         <span class="font-montserrat body-font-size-primary" i18n>Content will open in a new window. If you are unable to view it, click on the button
           below.</span>
-        <a *ngIf="!configSvc?.isGuestUser" [routerLink]="'/app/info/faq'" [queryParams]="{ tab: 'popup' }">
+        <!-- <a *ngIf="!configSvc?.isGuestUser" [routerLink]="'/app/info/faq'" [queryParams]="{ tab: 'popup' }">
           <mat-icon matTooltip="How to Disable Pop-ups" class="align-text-top ws-mat-primary-text mat-icon">help
           </mat-icon>
-        </a>
+        </a> -->
       </ng-container>
     </h2>
     <h2 class="mat-h2" *ngIf="

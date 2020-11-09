@@ -14,10 +14,28 @@ export class DiscussionReplyComponent implements OnInit {
 
   @Input() reply!: NsDiscussionForum.ITimelineResult
   @Output() deleteSuccess = new EventEmitter<boolean>()
+  @Input() allowMention = false
+  @Output() triggerReplyNotification = new EventEmitter<object | undefined>()
+  @Input()  parentPostCreatorId!: string
   userId = ''
   editMode = false
   replyPostEnabled = false
   updatedBody: string | undefined
+  replyCommentMentions = []
+  isPostingComment = false
+  replyEditMentions = []
+  commentAddRequest: NsDiscussionForum.IPostCommentRequest = {
+    postKind: NsDiscussionForum.EReplyKind.COMMENT,
+    parentId: '',
+    postCreator: '',
+    postContent: {
+      body: '',
+    },
+    source: {
+      id: '',
+      name: NsDiscussionForum.EDiscussionType.SOCIAL,
+    },
+  }
   constructor(
     private dialog: MatDialog,
     private snackBar: MatSnackBar,
@@ -62,6 +80,7 @@ export class DiscussionReplyComponent implements OnInit {
     }
     this.discussionSvc.updatePost(postUpdateRequest).subscribe(
       _ => {
+        this.triggerNotification('reply')
         this.updatedBody = undefined
         if (this.reply.lastEdited) {
           this.reply.lastEdited.dtLastEdited = Date.now().toString()
@@ -79,5 +98,18 @@ export class DiscussionReplyComponent implements OnInit {
     this.replyPostEnabled = eventData.isValid
     this.updatedBody = eventData.htmlText
   }
-
+  triggerNotification(parentType: 'reply' | 'comment') {
+    let mentionsData: any[] = []
+    if (parentType === 'reply') {
+      mentionsData = [...this.replyEditMentions]
+    } else if (parentType === 'comment') {
+      mentionsData = [...this.replyCommentMentions]
+    }
+    this.triggerReplyNotification.emit({
+      mentions: mentionsData,
+      topLevelReply: this.reply,
+      parentPostCreatorId: this.parentPostCreatorId,
+      currentCommentData: this.commentAddRequest,
+    })
+  }
 }

@@ -29,21 +29,27 @@
     </div>
   </div>
   <div class="flex margin-top-s">
-    <div *ngIf="post.activity && post.status === 'Active'">
-      <ws-widget-btn-social-vote [postId]="post.id" [activity]="post.activity" [voteType]="'upVote'"
-        [postCreatorId]="post?.postCreator?.postCreatorId"></ws-widget-btn-social-vote>
-    </div>
-    <div class="margin-left-s margin-auto" *ngIf="!editMode && post.postContent.title.length"
+    <div class="margin-left-s margin-auto" >
+    <div *ngIf="!editMode && post.postContent.title.length"
       [innerHTML]="post.postContent.title"></div>
+    </div>
     <!-- <mat-chip-list>
       <mat-chip *ngFor="let tag of qnaConversation.mainPost.tags" i18n-matTooltip matTooltip="Associated Tag">
         {{ tag.name }}
       </mat-chip>
     </mat-chip-list> -->
+    <div *ngIf="post.activity && post.status === 'Active'">
+      <ws-widget-btn-social-vote [postId]="post.id" [activity]="post.activity" [voteType]="'upVote'"
+        [postCreatorId]="post?.postCreator?.postCreatorId"></ws-widget-btn-social-vote>
+    </div>
   </div>
+  
   <div *ngIf="editMode" class="margin-top-s padding-s mat-primary-border">
     <!-- [minLength]="'10'" -->
-    <ws-widget-editor-quill [htmlText]="post.postContent.title" (textData)="onTextChange($event)">
+    <ws-widget-editor-quill
+    [showMention]="allowMention"
+    (mentionsData)="replyEditMentions = $event"
+     [htmlText]="post.postContent.title" (textData)="onTextChange($event)">
     </ws-widget-editor-quill>
     <div class="text-right">
       <button type="button" name="discussion-post-update-button" class="margin-top-s" [disabled]="!postPublishEnabled"
@@ -65,12 +71,12 @@
     </ws-widget-btn-social-like>
   </span> -->
 
-  <ws-widget-discussion-reply *ngFor="let reply of postReplies; let i = index" [reply]="reply"
+  <ws-widget-discussion-reply *ngFor="let reply of postReplies; let i = index" [reply]="reply" [allowMention]="allowMention"
     (deleteSuccess)="onDeleteReply(i)"></ws-widget-discussion-reply>
-  <div *ngIf="replyFetchStatus === 'fetching'" class="margin-top-s text-center">
+  <!-- <div *ngIf="replyFetchStatus === 'fetching'" class="margin-top-s text-center">
     <mat-spinner class="display-inline-block" [diameter]="30" [strokeWidth]="3"></mat-spinner>
     <div class="mat-caption" class="margin-top-xs">Fetching replies</div>
-  </div>
+  </div> -->
   <div *ngIf="replyFetchStatus === 'hasMore' || isNewRepliesAvailable"
     class="text-center margin-top-xs margin-bottom-s flex flex-around">
     <button name="discussion-post-load-previous-replies-button" type="button" mat-stroked-button color="primary"
@@ -92,7 +98,10 @@
       </div>
       <div [hidden]="!replyPlaceholderToggler" class="">
         <!-- [minLength]="'10'" -->
-        <ws-widget-editor-quill class="write-reply-editor" (textData)="onReplyTextChange($event)"
+        <ws-widget-editor-quill class="write-reply-editor" 
+        [showMention]="allowMention"
+        (mentionsData)="replyCommentMentions = $event"
+        (textData)="onReplyTextChange($event)"
           #discussionReplyEditor></ws-widget-editor-quill>
         <div class="text-right padding-top-s mat-app-background">
           <button name="discussion-post-reply-button" [disabled]="!isValidReply || isPostingReply"
@@ -103,9 +112,9 @@
             (click)="replyPlaceholderToggler = !replyPlaceholderToggler" i18n>
             Cancel
           </button>
-          <div *ngIf="isPostingReply" class="text-center">
+          <!-- <div *ngIf="isPostingReply" class="text-center">
             <mat-spinner class="display-inline-block" [diameter]="30" [strokeWidth]="3"></mat-spinner>
-          </div>
+          </div> -->
         </div>
       </div>
     </div>
