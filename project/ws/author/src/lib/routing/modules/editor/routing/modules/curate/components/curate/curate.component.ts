@@ -362,9 +362,26 @@ export class CurateComponent implements OnInit, OnDestroy {
     return publisherDetails.find(v => v.id === this.accessService.userId) ? true : false
   }
 
+  /**
+   * Finds actual updated content
+   * @param sampleUpdatedContent
+   * @returns the new object which is supposed to be saved on preview
+   */
+  findActualUpdatedContent(sampleUpdatedContent: any) {
+    const originalContent = this.contentService.getOriginalMeta(this.contentService.currentContent) as any
+    const actualUpdatedContent: any = {}
+    Object.keys(sampleUpdatedContent).forEach(key => {
+      if (originalContent.hasOwnProperty(key) && originalContent[key] !== sampleUpdatedContent[key]) {
+        actualUpdatedContent[key] = sampleUpdatedContent[key]
+      }
+    })
+    return actualUpdatedContent
+  }
+
   preview() {
     const updatedContent = this.contentService.upDatedContent[this.currentContent] || {}
-    const saveCall = Object.keys(updatedContent).length
+    const actualUpdatedContent = this.findActualUpdatedContent(updatedContent)
+    const saveCall = Object.keys(actualUpdatedContent).length
       ? this.triggerSave(updatedContent, this.currentContent)
       : of({} as any)
     this.loaderService.changeLoad.next(true)
