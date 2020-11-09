@@ -31,7 +31,7 @@
           }}</span>
         </ng-container>
       </a>
-<span *ngIf="!screenSizeIsLtMedium" class="toggle-arrow" [ngClass]="{'pos-x': !showText}" (click)="!screenSizeIsLtMedium ? (showText = !showText) : triggerToggle(sideNavBar)">
+<span *ngIf="!screenSizeIsLtMedium" class="toggle-arrow" [ngClass]="{'pos-x': !showText}" (click)="!screenSizeIsLtMedium ? (showText = !showText) : triggerToggle(sideNavBar);triggerNav()">
   <img class="arrow-icon" [ngClass]="{'rotate-ve-180': !showText}" src="/assets/instances/space/common/arrow_double.png">
 </span>
       <a class="navs-height left" mat-list-item *ngIf="enabledTabs?.learning?.enabled" routerLinkActive="mat-toolbar-selected" (click)="

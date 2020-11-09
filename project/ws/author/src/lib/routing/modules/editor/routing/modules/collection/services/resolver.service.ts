@@ -6,6 +6,7 @@ import { EditorContentService } from '@ws/author/src/lib/routing/modules/editor/
 import { NSContent } from '../../../../../../../interface/content'
 import { IContentNode, IContentTreeNode } from '../interface/icontent-tree'
 import { AuthInitService } from './../../../../../../../services/init.service'
+import { BehaviorSubject } from 'rxjs';
 
 @Injectable()
 /**
@@ -14,6 +15,7 @@ import { AuthInitService } from './../../../../../../../services/init.service'
  */
 export class CollectionResolverService {
   // The set to hold the content type for which the lazy loading of children is required
+  sideNavStatus = new BehaviorSubject<boolean>(true)
   lazyLoad = new Set<string>()
   private _uniqueId = 0
   constructor(
@@ -235,5 +237,8 @@ export class CollectionResolverService {
     _maxDepth: number,
   ): boolean {
     return true
+  }
+  triggerSideNav(value: boolean) {
+    this.sideNavStatus.next(value)
   }
 }

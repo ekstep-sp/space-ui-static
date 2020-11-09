@@ -21,6 +21,7 @@ import { FormControl } from '@angular/forms'
 import { Subscription } from 'rxjs'
 import { Router, ActivatedRoute } from '@angular/router'
 import { MatSnackBar, MatSelectChange, MatTabChangeEvent } from '@angular/material'
+import { ProfileService } from '../../services/profile.service'
 
 @Component({
   selector: 'ws-app-settings',
@@ -72,9 +73,13 @@ export class SettingsComponent implements OnInit, OnDestroy {
     private route: ActivatedRoute,
     private valueSvc: ValueService,
     private utilitySvc: UtilityService,
+    public profileSvc: ProfileService,
   ) { }
 
   ngOnInit() {
+    this.profileSvc.navtrigger.subscribe(() => {
+      this.dispatchEventForSideNav()
+    })
     this.dispatchEvent()
     const tab = this.route.snapshot.queryParamMap.get('tab')
     if (this.configSvc.restrictedFeatures) {
@@ -271,5 +276,10 @@ export class SettingsComponent implements OnInit, OnDestroy {
     setTimeout(() => {
       window.dispatchEvent(new Event('resize'))
     },         150)
+  }
+  dispatchEventForSideNav() {
+    setTimeout(() => {
+      window.dispatchEvent(new Event('resize'))
+    },         50)
   }
 }

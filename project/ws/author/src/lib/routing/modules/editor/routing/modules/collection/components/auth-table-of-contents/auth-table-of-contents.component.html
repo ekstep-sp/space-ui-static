@@ -3,7 +3,7 @@
     <div *ngIf="!menubtn" class="p-2 pt-4 transitionD">
       <button
         mat-icon-button
-        (click)="drawer = !drawer; menubtn = !menubtn"
+        (click)="drawer = !drawer; menubtn = !menubtn;sideNav()"
         i18n-aria-label
         aria-label="Maximize side panel"
         i18n-matTooltip
@@ -23,7 +23,7 @@
       <button
         *ngIf="!mediumScreen"
         mat-icon-button
-        (click)="drawer = !drawer; menubtn = !menubtn"
+        (click)="drawer = !drawer; menubtn = !menubtn;sideNav()"
         i18n-aria-label
         aria-label="Open side panel"
         i18n-matTooltip
@@ -35,7 +35,7 @@
       <button
         *ngIf="mediumScreen"
         mat-icon-button
-        (click)="closeSidenav()"
+        (click)="closeSidenav();sideNav()"
         i18n-aria-label
         aria-label="Close side panel"
         i18n-matTooltip

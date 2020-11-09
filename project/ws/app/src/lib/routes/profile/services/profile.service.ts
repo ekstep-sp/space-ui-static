@@ -34,6 +34,7 @@ const endpoint = {
 })
 
 export class ProfileService {
+  navtrigger = new BehaviorSubject<boolean>(true)
   httpOptions = {
     headers: new HttpHeaders({
       validator_URL: `https://${this.configSvc.hostPath}/apis/protected/v8/user/validate`,
@@ -162,5 +163,8 @@ export class ProfileService {
 }
   updateStatus(value: boolean) {
     this.showTabName.next(value)
+  }
+  updateNavStatus(value: boolean) {
+    this.navtrigger.next(value)
   }
 }

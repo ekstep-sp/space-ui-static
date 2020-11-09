@@ -16,6 +16,7 @@ import { CollectionStoreService } from './../../services/store.service'
 import { BreakpointObserver, Breakpoints, BreakpointState } from '@angular/cdk/layout'
 import { map } from 'rxjs/operators'
 import { ConfigurationsService } from '@ws-widget/utils/src/public-api'
+import { CollectionResolverService } from '../../services/resolver.service';
 @Component({
   selector: 'ws-auth-table-of-contents',
   templateUrl: './auth-table-of-contents.component.html',
@@ -54,6 +55,7 @@ export class AuthTableOfContentsComponent implements OnInit, OnDestroy {
     .observe([Breakpoints.XSmall, Breakpoints.Small])
     .pipe(map((res: BreakpointState) => res.matches))
   leftarrow = true
+  status = true
   constructor(
     private dialog: MatDialog,
     private snackBar: MatSnackBar,
@@ -63,6 +65,7 @@ export class AuthTableOfContentsComponent implements OnInit, OnDestroy {
     private authInitService: AuthInitService,
     private breakpointObserver: BreakpointObserver,
     private readonly configSvc: ConfigurationsService,
+    public editorSvc: CollectionResolverService,
   ) {}
 
   private _transformer = (node: IContentNode, level: number): IContentTreeNode => {
@@ -466,5 +469,8 @@ export class AuthTableOfContentsComponent implements OnInit, OnDestroy {
       default:
         break
     }
+  }
+  sideNav() {
+    this.editorSvc.triggerSideNav(!this.status)
   }
 }
