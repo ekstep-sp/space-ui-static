@@ -11,6 +11,7 @@ import {
   OnInit,
   Output,
   ViewChild,
+  AfterViewChecked,
 } from '@angular/core'
 import { FormBuilder, FormControl, FormGroup } from '@angular/forms'
 import { MatAutocompleteSelectedEvent } from '@angular/material'
@@ -27,7 +28,7 @@ import { NSContent } from '@ws/author/src/lib/interface/content'
 import { NotificationComponent } from '@ws/author/src/lib/modules/shared/components/notification/notification.component'
 import { EditorContentService } from '@ws/author/src/lib/routing/modules/editor/services/editor-content.service'
 import { EditorService } from '@ws/author/src/lib/routing/modules/editor/services/editor.service'
-import { Observable, of, Subscription } from 'rxjs'
+import { Observable, of, Subscription, Subject } from 'rxjs'
 import { InterestService } from '../../../../../../../../../app/src/lib/routes/profile/routes/interest/services/interest.service'
 import { UploadService } from '../../services/upload.service'
 import { CatalogSelectComponent } from '../catalog-select/catalog-select.component'
@@ -43,13 +44,14 @@ import {
   switchMap,
   map,
   pairwise,
+  delay,
 } from 'rxjs/operators'
 import { FeedbackFormComponent } from '@ws/author/src/lib/modules/shared/components/feedback-form/feedback-form.component'
 import { LicenseInfoDisplayDialogComponent } from '../license-info-display-dialog/license-info-display-dialog.component'
 import { AssetTypeInfoDisplayDialogComponent } from '../asset-type-info-display-dialog/asset-type-info-display-dialog.component'
 import { ActivatedRoute } from '@angular/router'
 import { cloneDeep } from 'lodash'
-import { CollectionResolverService } from '../../../routing/modules/collection/services/resolver.service';
+import { CollectionResolverService } from '../../../routing/modules/collection/services/resolver.service'
 
 interface ILicenseMetaInfo {
   parent: string[],
@@ -73,7 +75,7 @@ interface IAssetTypeMetaInfo {
   templateUrl: './edit-meta.component.html',
   styleUrls: ['./edit-meta.component.scss'],
 })
-export class EditMetaComponent implements OnInit, OnDestroy, AfterViewInit {
+export class EditMetaComponent implements OnInit, OnDestroy, AfterViewInit, AfterViewChecked {
   contentMeta!: NSContent.IContentMeta
   isMobile = false
   promptUserForAssetType = false
@@ -165,6 +167,8 @@ export class EditMetaComponent implements OnInit, OnDestroy, AfterViewInit {
   allowedRoles: any
   notAllowedRoles: any
   filteredOptions$: Observable<string[]> = of([])
+  mycustomObs: Subject<boolean> | null = null
+  tabTracker$: any = null
 
   constructor(
     private formBuilder: FormBuilder,
@@ -192,6 +196,20 @@ export class EditMetaComponent implements OnInit, OnDestroy, AfterViewInit {
       this.ref.detectChanges()
       // tslint:disable-next-line: align
     }, 100)
+    this.mycustomObs = new Subject<any>()
+    this.trackTabChanges()
+  }
+  trackTabChanges() {
+    if (this.mycustomObs) {
+      this.tabTracker$ = this.mycustomObs.pipe(delay(100)).subscribe(response => {
+        this.dispatchEventForSideNav()
+      })
+    }
+  }
+  ngAfterViewChecked() {
+    if (this.mycustomObs) {
+      this.mycustomObs.next(true)
+    }
   }
 
   ngOnInit() {
