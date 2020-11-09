@@ -4,6 +4,7 @@ import { ActivatedRoute, NavigationEnd, Router } from '@angular/router'
 import { ConfigurationsService, LogoutComponent, NsPage, ValueService } from '@ws-widget/utils'
 import { Subscription } from 'rxjs'
 import { map } from 'rxjs/operators'
+import { ProfileService } from './services/profile.service';
 
 @Component({
   selector: 'ws-app-profile',
@@ -24,6 +25,7 @@ export class ProfileComponent implements OnInit, OnDestroy, AfterViewInit {
   navElement: any
   leftValue: any
   defaultleftValue = '0px'
+  status = true
 
   constructor(
     private dialog: MatDialog,
@@ -31,6 +33,7 @@ export class ProfileComponent implements OnInit, OnDestroy, AfterViewInit {
     private configSvc: ConfigurationsService,
     private activatedRoute: ActivatedRoute,
     private router: Router,
+    public profileSvc: ProfileService,
   ) {}
 
   ngOnInit() {
@@ -97,7 +100,10 @@ export class ProfileComponent implements OnInit, OnDestroy, AfterViewInit {
     this.dialog.open<LogoutComponent>(LogoutComponent)
   }
   triggerToggle(toggleVariable: any) {
-toggleVariable.toggle()
+   toggleVariable.toggle()
+  }
+  triggerNav() {
+    this.profileSvc.updateNavStatus(!status)
   }
 
   handleRouteChange() {
