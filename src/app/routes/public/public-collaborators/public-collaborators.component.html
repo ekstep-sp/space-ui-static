@@ -13,7 +13,7 @@
     <ws-utils-horizontal-scroller *ngIf=" partner.src?.length" [loadStatus]="'done'" [public]="scrollKey">
       <div class="card-container" *ngFor="let src of partner.src;let i = index">
         <a href="{{partner.url[i]}}" target="_blank">
-          <img src="{{ src }}">
+          <img loading="lazy" src="{{ src }}">
         </a>
       </div>
     </ws-utils-horizontal-scroller>

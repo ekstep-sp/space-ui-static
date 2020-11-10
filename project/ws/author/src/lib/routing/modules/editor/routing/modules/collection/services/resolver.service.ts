@@ -6,7 +6,6 @@ import { EditorContentService } from '@ws/author/src/lib/routing/modules/editor/
 import { NSContent } from '../../../../../../../interface/content'
 import { IContentNode, IContentTreeNode } from '../interface/icontent-tree'
 import { AuthInitService } from './../../../../../../../services/init.service'
-import { BehaviorSubject } from 'rxjs'
 
 @Injectable()
 /**
