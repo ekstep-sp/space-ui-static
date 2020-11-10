@@ -4,19 +4,11 @@
     <span class="ml-2 font-size-navbar-heading font-montserrat">{{ tabName }}</span>
   </span>
   <span class="spacer"></span>
-  <!-- <button (click)="logout()" style="color: white;" mat-button>
-    <mat-icon>power_settings_new</mat-icon>&nbsp;
-    <span i18n>Logout</span>
-  </button> -->
   <button *ngIf="screenSizeIsLtMedium" aria-label="showText? 'Hide side panel' : 'Show side panel'" mat-icon-button
     (click)="!screenSizeIsLtMedium ? (showText = !showText) : sideNavBar.toggle()" style="color: white;">
     <mat-icon class="color-white">menu</mat-icon>
   </button>
 </mat-toolbar>
-<!-- <span class="toggle-span" [ngStyle]="{left:sideNavBar.opened? leftValue: defaultleftValue}" (click)="!screenSizeIsLtMedium ? (showText = !showText) : triggerToggle(sideNavBar)">
-  <img class="arrow-icon" [ngClass]="{'rotate-ve-180': !sideNavBar.opened}" src="/assets/instances/space/common/arrow.png">
-  <img class="arrow-icon" [ngClass]="{'rotate-ve-180': !sideNavBar.opened}" src="/assets/instances/space/common/arrow.png">
-</span> -->
 <mat-sidenav-container autosize="true" class="sidenav-content-min-height">
   <mat-sidenav [ngClass]="{'nav-opened': showText,'nav-closed': !showText}" #sideNavBar [position]="screenSizeIsLtMedium ? 'end' : 'start'" [opened]="!screenSizeIsLtMedium" [mode]="screenSizeIsLtMedium ? 'over' : 'side'">
     <mat-nav-list class="">
@@ -50,11 +42,6 @@
           screenSizeIsLtMedium ? sideNavBar.toggle() : null
         "   routerLink="/app/profile/competency/badges" matTooltip="{{ enabledTabs?.achievements?.displayName }}">
         <mat-icon>emoji_events</mat-icon>
-        <!-- The code below displays name for mobile view
-           <span *ngIf="showText || screenSizeIsLtMedium" class="padding-left-s">
-          {{ enabledTabs?.achievements?.displayName }}</span> 
-         -->
-        <!--The code below displays name for web view-->
         <ng-container *ngIf="!screenSizeIsLtMedium">
           <span *ngIf="showText" class="padding-left-s">
             {{ enabledTabs?.achievements?.displayName }}</span>

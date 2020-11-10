@@ -25,10 +25,11 @@ span.tabname-container {
     position: relative;
     height: inherit;
     padding-left: 97px;
-    // background: #424242 !important;
+    width: 100%;
   }
  .left .mat-list-item-content {
     padding-left: 97px !important;
+    width: 100%;
   }
 }
 span.toggle-arrow {
@@ -162,17 +163,11 @@ mat-sidenav.nav-closed {
 
 @media only screen and (max-width: 800px) {
   ::ng-deep {
-
     .left .mat-list-item-content {
       padding-left: 0px !important;
+      display: flex;
+      justify-content: center;
     }
-    .theme-muave.night-mode .mat-list-base .mat-list-item .mat-list-item-content {
-     // padding-left: 10px;
-      // background: #424242 !important;
-    }
-    /* .mat-list-item-content {
-      padding-left: 10px !important;
-    } */
   }
   a.mat-list-item {
     display: flex !important;
@@ -193,9 +188,6 @@ mat-sidenav.nav-closed {
   span.toggle-arrow {
     display: none;
   }
-  /* .pos-x-mobile {
-    left: 0 !important;
-  } */
 }
 
 .color-white{
