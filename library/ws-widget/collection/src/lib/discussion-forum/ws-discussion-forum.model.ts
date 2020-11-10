@@ -11,6 +11,7 @@ export namespace NsDiscussionForum {
     QUERY = 'Query',
     REPLY = 'Reply',
     COMMENT = 'Comment',
+    DISCUSSION_FORUM = 'Discussion_Forum',
   }
   export enum ETimelineType {
     ALL = 'all',
