@@ -15,7 +15,7 @@ import { BehaviorSubject } from 'rxjs'
  */
 export class CollectionResolverService {
   // The set to hold the content type for which the lazy loading of children is required
-  sideNavStatus = new BehaviorSubject<boolean>(true)
+  // sideNavStatus = new BehaviorSubject<boolean>(true)
   lazyLoad = new Set<string>()
   private _uniqueId = 0
   constructor(
@@ -237,8 +237,5 @@ export class CollectionResolverService {
     _maxDepth: number,
   ): boolean {
     return true
-  }
-  triggerSideNav(value: boolean) {
-    this.sideNavStatus.next(value)
   }
 }

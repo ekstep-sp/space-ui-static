@@ -51,7 +51,7 @@ import { LicenseInfoDisplayDialogComponent } from '../license-info-display-dialo
 import { AssetTypeInfoDisplayDialogComponent } from '../asset-type-info-display-dialog/asset-type-info-display-dialog.component'
 import { ActivatedRoute } from '@angular/router'
 import { cloneDeep } from 'lodash'
-import { CollectionResolverService } from '../../../routing/modules/collection/services/resolver.service'
+// import { CollectionResolverService } from '../../../routing/modules/collection/services/resolver.service'
 
 interface ILicenseMetaInfo {
   parent: string[],
@@ -185,7 +185,7 @@ export class EditMetaComponent implements OnInit, OnDestroy, AfterViewInit, Afte
     private accessService: AccessControlService,
     private valueSvc: ValueService,
     private route: ActivatedRoute,
-    public editorSvc: CollectionResolverService,
+    // public editorSvc: CollectionResolverService,
   ) {
     this.contentTracker.previousContent = this.contentService.currentContent
   }
@@ -213,9 +213,9 @@ export class EditMetaComponent implements OnInit, OnDestroy, AfterViewInit, Afte
   }
 
   ngOnInit() {
-    this.editorSvc.sideNavStatus.subscribe(() => {
-      this.dispatchEventForSideNav()
-    })
+    // this.editorSvc.sideNavStatus.subscribe(() => {
+    //   this.dispatchEventForSideNav()
+    // })
     this.route.data.subscribe(data => {
       this.allowedRoles = data.pageData.data.allowedRoles
       this.notAllowedRoles = data.pageData.data.notAllowedRoles
