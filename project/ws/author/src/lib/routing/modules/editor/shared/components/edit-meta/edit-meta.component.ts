@@ -201,7 +201,7 @@ export class EditMetaComponent implements OnInit, OnDestroy, AfterViewInit, Afte
   }
   trackTabChanges() {
     if (this.mycustomObs) {
-      this.tabTracker$ = this.mycustomObs.pipe(delay(100)).subscribe(() => {
+      this.tabTracker$ = this.mycustomObs.pipe(delay(80)).subscribe(() => {
         this.dispatchEventForSideNav()
       })
     }
