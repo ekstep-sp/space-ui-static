@@ -25,11 +25,7 @@ import {
 import { delay, filter } from 'rxjs/operators'
 import { MobileAppsService } from '../../services/mobile-apps.service'
 import { RootService } from './root.service'
-import {combineLatest} from 'rxjs'
-// import { SwUpdate } from '@angular/service-worker'
-// import { environment } from '../../../environments/environment'
-// import { MatDialog } from '@angular/material'
-// import { DialogConfirmComponent } from '../dialog-confirm/dialog-confirm.component'
+import { combineLatest } from 'rxjs'
 
 @Component({
   selector: 'ws-root',

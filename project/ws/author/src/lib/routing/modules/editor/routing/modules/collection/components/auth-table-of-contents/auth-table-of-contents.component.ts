@@ -16,7 +16,7 @@ import { CollectionStoreService } from './../../services/store.service'
 import { BreakpointObserver, Breakpoints, BreakpointState } from '@angular/cdk/layout'
 import { map } from 'rxjs/operators'
 import { ConfigurationsService } from '@ws-widget/utils/src/public-api'
-import { CollectionResolverService } from '../../services/resolver.service';
+import { CollectionResolverService } from '../../services/resolver.service'
 @Component({
   selector: 'ws-auth-table-of-contents',
   templateUrl: './auth-table-of-contents.component.html',

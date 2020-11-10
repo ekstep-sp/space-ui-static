@@ -7,7 +7,7 @@ import { NsDiscussionForum } from '../../ws-discussion-forum.model'
 import { WsDiscussionForumService } from '../../ws-discussion-forum.services'
 import { ActivatedRoute, Data } from '@angular/router'
 import { BtnSocialLikeService } from '../../actionBtn/btn-social-like/service/btn-social-like.service'
-import { ForumService } from '@ws/app/src/lib/routes/social/routes/forums/service/forum.service';
+import { ForumService } from '@ws/app/src/lib/routes/social/routes/forums/service/forum.service'
 
 @Component({
   selector: 'ws-widget-discussion-forum',
@@ -113,7 +113,7 @@ export class DiscussionForumComponent extends WidgetBaseComponent
       this.allowMention = response.pageData.data.allowMentionUsers
     }
   })
-  console.log(this.widgetData, this.discussionRequest)
+  // console.log(this.widgetData, this.discussionRequest)
   }
 
   fetchDiscussion(refresh = false) {
@@ -230,7 +230,7 @@ export class DiscussionForumComponent extends WidgetBaseComponent
           tagCreatorID: this.configSvc.userProfile ? this.configSvc.userProfile.userId || '' : '',
         }
       })
-      console.log('notificarion data', notificationData)
+      // console.log('notificarion data', notificationData)
       this.forumSrvc.triggerTagNotification(notificationData)
     }
   }

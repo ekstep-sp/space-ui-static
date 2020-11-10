@@ -4,7 +4,7 @@ import { ActivatedRoute, NavigationEnd, Router } from '@angular/router'
 import { ConfigurationsService, LogoutComponent, NsPage, ValueService } from '@ws-widget/utils'
 import { Subscription } from 'rxjs'
 import { map } from 'rxjs/operators'
-import { ProfileService } from './services/profile.service';
+import { ProfileService } from './services/profile.service'
 
 @Component({
   selector: 'ws-app-profile',
