@@ -161,7 +161,7 @@ export class DiscussionForumComponent extends WidgetBaseComponent
         title: this.editorText || '',
       },
       postCreator: this.userId,
-      postKind: NsDiscussionForum.EPostKind.BLOG,
+      postKind: NsDiscussionForum.EPostKind.DISCUSSION_FORUM,
       source: {
         id: this.widgetData.id,
         name: this.widgetData.name,
