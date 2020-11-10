@@ -153,7 +153,7 @@ export class ForumService {
             'event-id': 'tagged_in_comment',
             'tag-value-pair': {
               '#blogTitle': _tag.ContentTitle,
-              '#type': 'qna',
+              '#type': 'discussion forum',
               '#postUrl': window.location.href,
               '#taggedBy': _tag.tagCreatorName,
               '#taggedUser': _tag.taggedUserName,
