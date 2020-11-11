@@ -118,7 +118,7 @@ export class DiscussionForumComponent extends WidgetBaseComponent
 
   fetchDiscussion(refresh = false) {
     this.discussionFetchStatus = 'fetching'
-    this.discussionRequest.postKind = [NsDiscussionForum.EPostKind.BLOG]
+    this.discussionRequest.postKind = [NsDiscussionForum.EPostKind.DISCUSSION_FORUM]
     if (refresh) {
       this.discussionRequest.sessionId = Date.now()
       this.discussionRequest.pgNo = 0

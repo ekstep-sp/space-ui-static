@@ -164,8 +164,11 @@ const routes: Routes = [
     component: VideoComponent,
     data: {
       resourceType: 'video',
+      pageType: 'feature',
+      pageKey: 'disscussionForum',
     },
     resolve: {
+      pageData: PageResolve,
       content: ViewerResolve,
     },
   },
