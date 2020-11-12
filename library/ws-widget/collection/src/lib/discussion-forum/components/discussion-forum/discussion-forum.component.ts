@@ -72,7 +72,6 @@ export class DiscussionForumComponent extends WidgetBaseComponent
     private activatedRoute: ActivatedRoute,
     private voteService: BtnSocialLikeService,
     private readonly forumSrvc: ForumService,
-
   ) {
     super()
     if (this.configSvc.userProfile) {
@@ -87,8 +86,15 @@ export class DiscussionForumComponent extends WidgetBaseComponent
   ngOnInit() {
     this.voteService.callComponent.subscribe((data: any) => {
       if (data) {
-          this.fetchDiscussion(true)
+          // this.fetchDiscussion(true)
         // console.log(this.discussionResult)
+        this.discussionRequest.sessionId = Date.now()
+        this.discussionRequest.pgNo = 0
+        this.discussionSvc.fetchTimelineData(this.discussionRequest).subscribe(
+          (updateData: any) => {
+            this.discussionResult = updateData
+            // this.cdr.detectChanges()
+          })
       }
     })
     if (this.configSvc.restrictedFeatures) {
@@ -114,7 +120,7 @@ export class DiscussionForumComponent extends WidgetBaseComponent
   })
   // console.log(this.widgetData, this.discussionRequest)
   }
-  trackByFn(index: any, _item: any) {
+  trackByFn(index: any) {
     return index // or item.id
   }
   fetchDiscussion(refresh = false) {
