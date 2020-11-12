@@ -6,7 +6,6 @@ import { WsDiscussionForumService } from '../../ws-discussion-forum.services'
 import { EditorQuillComponent } from '../../editor-quill/editor-quill.component'
 import { DialogSocialDeletePostComponent } from '../../dialog/dialog-social-delete-post/dialog-social-delete-post.component'
 import { BtnSocialLikeService } from '../../actionBtn/btn-social-like/service/btn-social-like.service'
-// import { BtnSocialLikeService } from '../../actionBtn/btn-social-like/service/btn-social-like.service';
 
 @Component({
   selector: 'ws-widget-discussion-post',
@@ -219,7 +218,7 @@ export class DiscussionPostComponent implements OnInit {
       currentCommentData: this.commentAddRequest,
     })
   }
-  trackByFn(index: any, item: any) {
+  trackByFn(index: any) {
     return index // or item.id
   }
 }
