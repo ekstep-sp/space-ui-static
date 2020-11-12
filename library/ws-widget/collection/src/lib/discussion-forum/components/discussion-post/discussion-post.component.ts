@@ -5,6 +5,7 @@ import { MatDialog, MatSnackBar } from '@angular/material'
 import { WsDiscussionForumService } from '../../ws-discussion-forum.services'
 import { EditorQuillComponent } from '../../editor-quill/editor-quill.component'
 import { DialogSocialDeletePostComponent } from '../../dialog/dialog-social-delete-post/dialog-social-delete-post.component'
+import { BtnSocialLikeService } from '../../actionBtn/btn-social-like/service/btn-social-like.service'
 // import { BtnSocialLikeService } from '../../actionBtn/btn-social-like/service/btn-social-like.service';
 
 @Component({
@@ -65,6 +66,7 @@ export class DiscussionPostComponent implements OnInit {
     private snackBar: MatSnackBar,
     private configSvc: ConfigurationsService,
     private discussionSvc: WsDiscussionForumService,
+    private voteService: BtnSocialLikeService,
   ) {
     if (this.configSvc.userProfile) {
       this.userId = this.configSvc.userProfile.userId || ''
@@ -75,6 +77,11 @@ export class DiscussionPostComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.voteService.callComponent.subscribe((data: any) => {
+      if (data) {
+          this.fetchPostReplies(true)
+      }
+    })
     this.conversationRequest.postId = this.post.id
     this.fetchPostReplies()
   }
@@ -211,5 +218,8 @@ export class DiscussionPostComponent implements OnInit {
       parentPostCreatorId: this.parentPostCreatorId,
       currentCommentData: this.commentAddRequest,
     })
+  }
+  trackByFn(index: any, item: any) {
+    return index // or item.id
   }
 }

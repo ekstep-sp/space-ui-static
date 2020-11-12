@@ -9,14 +9,14 @@
       [allowMention]="allowMention"
       [parentPostCreatorId]="contentCreatorId"
       (triggerReplyNotification)="triggerReplyCommentNotification($event)"
-      *ngFor="let reply of discussionResult.result; let i = index"
+      *ngFor="let reply of discussionResult.result; let i = index;trackBy: trackByFn"
     ></ws-widget-discussion-post>
-    <div
+    <!-- <div
       *ngIf="discussionFetchStatus === 'fetching'"
       class="margin-top-s margin-bottom-s text-center"
     >
       <mat-spinner class="display-inline-block" [strokeWidth]="5"></mat-spinner>
-    </div>
+    </div> -->
     <div class="text-center margin-top-s" *ngIf="discussionFetchStatus === 'hasMore'">
       <button
         name="discussion-forum-show-more-posts-button"
@@ -67,9 +67,9 @@
       >
         <span class="font-montserrat">Post</span>
       </button>
-      <div *ngIf="isPostingDiscussion" class="text-center">
+      <!-- <div *ngIf="isPostingDiscussion" class="text-center">
         <mat-spinner class="display-inline-block" [diameter]="30" [strokeWidth]="3"></mat-spinner>
-      </div>
+      </div> -->
       <div></div>
     </div>
     <div></div>

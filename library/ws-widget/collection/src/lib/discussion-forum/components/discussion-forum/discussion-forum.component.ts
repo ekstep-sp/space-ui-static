@@ -38,6 +38,7 @@ export class DiscussionForumComponent extends WidgetBaseComponent
   }
   isRestricted = true
   discussionConverstionResult: any
+  dataRefresher: any
 
   discussionFetchStatus: TFetchStatus = 'none'
   discussionRequest: NsDiscussionForum.ITimelineRequest = {
@@ -86,10 +87,8 @@ export class DiscussionForumComponent extends WidgetBaseComponent
   ngOnInit() {
     this.voteService.callComponent.subscribe((data: any) => {
       if (data) {
-        this.discussionSvc.fetchTimelineData(this.discussionRequest).subscribe(
-          (updateData: any) => {
-            this.discussionResult = updateData
-          })
+          this.fetchDiscussion(true)
+        // console.log(this.discussionResult)
       }
     })
     if (this.configSvc.restrictedFeatures) {
@@ -115,7 +114,9 @@ export class DiscussionForumComponent extends WidgetBaseComponent
   })
   // console.log(this.widgetData, this.discussionRequest)
   }
-
+  trackByFn(index: any, item: any) {
+    return index // or item.id
+  }
   fetchDiscussion(refresh = false) {
     this.discussionFetchStatus = 'fetching'
     this.discussionRequest.postKind = [NsDiscussionForum.EPostKind.DISCUSSION_FORUM]
