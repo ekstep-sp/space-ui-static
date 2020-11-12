@@ -34,9 +34,7 @@ export class BtnFeatureComponent extends WidgetBaseComponent
   implements OnInit, OnDestroy, NsWidgetResolver.IWidgetData<NsPage.INavLink> {
   @Input() widgetData!: NsPage.INavLink
   @Input() showFixedLength = false
-  // @Input()
-  // @HostBinding('id')
-  // public id!: string
+
   readonly displayType = typeMap
   badgeCount = ''
   defaultIconSize = 24
