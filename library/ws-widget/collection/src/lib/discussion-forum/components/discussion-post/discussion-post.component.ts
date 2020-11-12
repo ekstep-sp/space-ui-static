@@ -219,7 +219,7 @@ export class DiscussionPostComponent implements OnInit {
       currentCommentData: this.commentAddRequest,
     })
   }
-  trackByFn(index: any, item: any) {
+  trackByFn(index: any, _item: any) {
     return index // or item.id
   }
 }
