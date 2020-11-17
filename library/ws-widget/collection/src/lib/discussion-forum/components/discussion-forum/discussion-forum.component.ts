@@ -93,6 +93,16 @@ export class DiscussionForumComponent extends WidgetBaseComponent
         this.discussionSvc.fetchTimelineData(this.discussionRequest).subscribe(
           (updateData: any) => {
             this.discussionResult = updateData
+            this.discussionResult.hits = updateData.hits
+            this.discussionResult.result = [...this.discussionResult.result, ...updateData.result]
+            if (updateData.hits > this.discussionResult.result.length) {
+              this.discussionFetchStatus = 'hasMore'
+                // tslint:disable-next-line: whitespace
+                ; (this.discussionRequest.pgNo as number) += 1
+            } else {
+              this.discussionFetchStatus = 'done'
+              // this.fetchAllPosts()
+            }
             // this.cdr.detectChanges()
           })
       }
@@ -246,16 +256,16 @@ export class DiscussionForumComponent extends WidgetBaseComponent
     // of answer on which comment was made
     const notificationRequest = notificationData.mentions.map((mention: any) => {
       return {
-        notificationFor: 'qna',
+        notificationFor: 'discussionForum',
           taggedUserID: mention.id,
           taggedUserName: mention.name,
           taggedUserEmail: mention.email,
           tagCreatorName: this.configSvc.userProfile ? this.configSvc.userProfile.userName || '' : '',
           tagCreatorID: this.configSvc.userProfile ? this.configSvc.userProfile.userId || '' : '',
-          QnaTitle: this.widgetData.title || '',
-          QnaId: this.widgetData.id,
+          ContentTitle: this.widgetData.title || '',
+          ContentId: this.widgetData.id,
           // QnaCreatorID: notificationData.topLevelReply.postCreator.postCreatorId,
-          QnaCreatorID: notificationData.parentPostCreatorId,
+          ContentCreatorID: notificationData.parentPostCreatorId,
       }
     })
     if (notificationRequest.length) {
