@@ -103,6 +103,7 @@
   }
   .rectangle{
      margin: 16px auto !important;
+     display: none !important;
       &:first-child{
         margin-right: 0px;
       }
