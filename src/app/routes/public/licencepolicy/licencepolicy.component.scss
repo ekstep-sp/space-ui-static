@@ -120,6 +120,9 @@ line-height: 33px !important;
 //   }
   // height: 17rem;
 }
+.colortheme{
+  color:#865ba0 !important;
+}
 @media screen and (min-width:280px) and (max-width: 320px) {
   //   .cimage {
   //   width: 15rem !important;
@@ -299,5 +302,8 @@ max-width: 600px !important;
     visibility: visible !important;
     position: initial;
  
+  }
+  .colortheme{
+    color:#865ba0 !important;
   }
    }

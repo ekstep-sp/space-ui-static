@@ -130,6 +130,7 @@ line-height: 33px !important;
 //   }
   // height: 17rem;
 }
+
 @media screen and (min-width:280px) and (max-width: 320px) {
   // .cimage {
   //   width: 16rem !important;
@@ -205,6 +206,10 @@ max-width: 600px !important;
     // padding: 10px !important;
     margin-top: 0 !important;
 }
+.theme-muave.night-mode a[target=_blank] {
+  color: #865ba0 !important;
+}
+
 .theme-muave.night-mode .cimage{
 
     width: 100% important;
@@ -275,6 +280,9 @@ max-width: 600px !important;
   position: initial;
 
  }
+ .colortheme{
+  color:#865ba0 !important;
+}
   }
 
 
