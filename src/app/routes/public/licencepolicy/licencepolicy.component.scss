@@ -60,6 +60,10 @@ color: #925EB0 !important;;
 .spaceallignment{
   padding-left: 0rem !important;
 }
+.licensePolicy-links-responsive{
+  visibility: hidden !important;
+  position: absolute;
+  }
 @media screen and (max-width: 450px) {
   .spaceallign{
   padding-left:0.8em;
@@ -287,3 +291,13 @@ max-width: 600px !important;
     padding-top: 0;
   }
 }
+@media only screen and (max-width: 768px) {
+  .licensePolicy-links{
+    display: none !important;
+  }
+  .licensePolicy-links-responsive {
+    visibility: visible !important;
+    position: initial;
+ 
+  }
+   }

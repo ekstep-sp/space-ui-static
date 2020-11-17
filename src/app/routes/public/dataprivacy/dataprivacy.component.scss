@@ -219,6 +219,10 @@ max-width: 600px !important;
 .section-container-login{
   padding: 4rem 65px; 
 }
+.dataprivacy-links-responsive{
+  visibility: hidden !important;
+  position: absolute;
+}
 @media screen and (max-width: 1019px) and (min-width: 700px) {
   .section-container {
     padding: 4rem 30px;
@@ -233,6 +237,7 @@ max-width: 600px !important;
     padding: 4rem 31px;
   } */
 }
+
 
 @media screen and (max-width: 600px) {
   .img-container {
@@ -261,5 +266,15 @@ max-width: 600px !important;
     word-break: break-word;
   }
 }
+@media only screen and (max-width: 768px) {
+ .dataprivacy-links{
+  display: none !important;
+ }
+ .dataprivacy-links-responsive {
+  visibility: visible !important;
+  position: initial;
+
+ }
+  }
 
 
