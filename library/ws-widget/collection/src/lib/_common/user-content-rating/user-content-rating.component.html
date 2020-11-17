@@ -6,7 +6,6 @@
         i18n-aria-label
         aria-label="Rating"
         name="user-content-rating-star-{{ i + 1 }}"
-        [disabled]="isRatingsDisabled"
         class="rating-button"
         mat-icon-button
         *ngFor="let _ of [1, 2, 3, 4, 5]; let i = index"
