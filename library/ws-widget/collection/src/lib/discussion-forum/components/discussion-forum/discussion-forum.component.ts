@@ -262,10 +262,10 @@ export class DiscussionForumComponent extends WidgetBaseComponent
           taggedUserEmail: mention.email,
           tagCreatorName: this.configSvc.userProfile ? this.configSvc.userProfile.userName || '' : '',
           tagCreatorID: this.configSvc.userProfile ? this.configSvc.userProfile.userId || '' : '',
-          QnaTitle: this.widgetData.title || '',
-          QnaId: this.widgetData.id,
+          ContentTitle: this.widgetData.title || '',
+          ContentId: this.widgetData.id,
           // QnaCreatorID: notificationData.topLevelReply.postCreator.postCreatorId,
-          QnaCreatorID: notificationData.parentPostCreatorId,
+          ContentCreatorID: notificationData.parentPostCreatorId,
       }
     })
     if (notificationRequest.length) {
