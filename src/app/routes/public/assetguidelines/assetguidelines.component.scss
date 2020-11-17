@@ -32,6 +32,10 @@ height: auto !important;
     margin-top: 0em !important;
   }
 }
+.assetguidelines-links-responsive{
+  visibility: hidden !important;
+  position: absolute;
+  }
 
 .font-style{
 font-family: Montserrat;
@@ -228,3 +232,15 @@ max-width: 600px !important;
     padding: 60px 20px;
    }
  }
+ @media only screen and (max-width: 768px) {
+  .assetguidelines-links{
+    display: none !important;
+  }
+  .assetguidelines-links-responsive {
+    visibility: visible !important;
+   position: initial;
+  }
+  .colortheme{
+    color:#865ba0 !important;
+  }
+   }

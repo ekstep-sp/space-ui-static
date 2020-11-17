@@ -120,6 +120,10 @@ line-height: 33px !important;
      margin-bottom: 30px;
   }
 }
+.contentpolicy-links-responsive{
+visibility: hidden !important;
+position: absolute;
+  }
 @media screen and (min-width:280px) and (max-width: 320px) {
   .header{
     width: 100% !important;
@@ -215,4 +219,16 @@ max-width: 600px !important;
     word-break: break-word;
   }
 }
+@media only screen and (max-width: 768px) {
+  .contentpolicy-links{
+    display: none !important;
+  }
+  .contentpolicy-links-responsive {
+  visibility: visible !important;
+  position: initial;
+  } 
+  .colortheme{
+    color:#865ba0 !important;
+  }
+   }
 

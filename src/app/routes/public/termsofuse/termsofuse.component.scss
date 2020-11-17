@@ -53,6 +53,9 @@ font-size: 16px;
 line-height: 24px;
 color: #925EB0 !important;;
 }
+.colortheme{
+  color:#865ba0 !important;
+}
 .font-text{
     font-size: 16px;
     line-height: 24px;
@@ -62,6 +65,10 @@ color: #925EB0 !important;;
 .spaceallignment{
   padding-left: 0rem !important;
 }
+.termsofuse-links-responsive{
+  visibility: hidden !important;
+  position: absolute;
+  }
 @media screen and (max-width: 450px) {
   .spaceallign{
   padding-left:0.8em;
@@ -367,3 +374,16 @@ color: #925EB0;
     // display: block;
      overflow: hidden !important;
 }
+@media only screen and (max-width: 768px) {
+  .termsofuse-links{
+    display: none !important;
+  }
+  .termsofuse-links-responsive {
+    visibility: visible !important;
+    position: initial;
+ 
+  }
+  .colortheme{
+    color:#865ba0 !important;
+  }
+   }
