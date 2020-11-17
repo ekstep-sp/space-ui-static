@@ -246,7 +246,7 @@ export class DiscussionForumComponent extends WidgetBaseComponent
     // of answer on which comment was made
     const notificationRequest = notificationData.mentions.map((mention: any) => {
       return {
-        notificationFor: 'qna',
+        notificationFor: 'discussionForum',
           taggedUserID: mention.id,
           taggedUserName: mention.name,
           taggedUserEmail: mention.email,
