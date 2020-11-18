@@ -6,6 +6,7 @@ import { MatTreeFlatDataSource, MatTreeFlattener } from '@angular/material/tree'
 import { TFetchStatus } from '@ws-widget/utils'
 import { UploadService } from '../../services/upload.service'
 import { ICatalog, ITodoItemFlatNode, TodoItemNode } from './models/catalog-model'
+import { sortBy, cloneDeep } from 'lodash'
 
 // const TREE_DATA = {
 //   Groceries: {
@@ -111,8 +112,7 @@ export class CatalogSelectComponent implements OnInit {
     this.catalogData.forEach((data: ICatalog) => {
       this.flatCatalogData.push(data)
       const name = data.name
-      const childrens = data.child
-      // const childrens = sortBy(data.child, 'nodeId')
+      const childrens = cloneDeep(data.child)
       if (childrens.length === 0) {
         this.treeData[name] = null
       } else {
@@ -120,8 +120,7 @@ export class CatalogSelectComponent implements OnInit {
         childrens.forEach((child: ICatalog) => {
           this.flatCatalogData.push(child)
           const childName = child.name
-          const grandChildren = child.child
-          // const grandChildren = sortBy(child.child, 'nodeId')
+          const grandChildren = cloneDeep(child.child)
           if (grandChildren.length === 0) {
             childData[childName] = null
           } else {
