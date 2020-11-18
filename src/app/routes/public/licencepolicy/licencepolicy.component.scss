@@ -64,6 +64,9 @@ color: #925EB0 !important;;
   visibility: hidden !important;
   position: absolute;
   }
+  .licensePolicy-links{
+    cursor: pointer;
+  }
 @media screen and (max-width: 450px) {
   .spaceallign{
   padding-left:0.8em;
@@ -301,6 +304,7 @@ max-width: 600px !important;
   .licensePolicy-links-responsive {
     visibility: visible !important;
     position: initial;
+    cursor: pointer;
  
   }
   .colortheme{
