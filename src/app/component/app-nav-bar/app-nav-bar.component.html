@@ -48,6 +48,12 @@
 
 <ng-template #navbarSide let-item="item">
   <ng-container *ngIf="item.type === 'widgetButton'" [wsResolverWidget]="item.config"></ng-container>
+  <ng-container *ngIf="item.type === 'searchNewUIBtn' && !hideGlobalSearch">
+    <label class="expandSearch">
+      <input [formControl]="globalSearch" (keyup.enter)="triggerGlobalSearch()" type="text" placeholder="Search content..." name="search">
+      <mat-icon (click)="triggerGlobalSearch()" class="searchIcon">search</mat-icon>
+    </label>
+  </ng-container>
   <ws-widget-btn-feature class="item.widgetHostClass" style="padding-left:20px;padding-right: 17px;"
     *ngIf="item.type === 'featureButton'" [id]="item.config.actionBtnId" [widgetData]="item.config"
     [showFixedLength]="true">dfnj

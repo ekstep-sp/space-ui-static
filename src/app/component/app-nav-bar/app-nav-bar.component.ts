@@ -4,6 +4,7 @@ import { IBtnAppsConfig, CustomTourService } from '@ws-widget/collection'
 import { NsWidgetResolver } from '@ws-widget/resolver'
 import { ConfigurationsService, NsInstanceConfig, NsPage } from '@ws-widget/utils'
 import { Router, NavigationStart, NavigationEnd, Event } from '@angular/router'
+import { FormControl } from '@angular/forms'
 
 @Component({
   selector: 'ws-app-nav-bar',
@@ -33,6 +34,8 @@ export class AppNavBarComponent implements OnInit, OnChanges {
   isTourGuideClosed = false
   showAppNavBar = false
   popupTour: any
+  globalSearch = new FormControl('')
+  hideGlobalSearch = false
   constructor(
     private domSanitizer: DomSanitizer,
     private configSvc: ConfigurationsService,
@@ -60,7 +63,12 @@ export class AppNavBarComponent implements OnInit, OnChanges {
         } else {
           this.showAppNavBar = true
         }
-
+        if (e.url.includes('app/search/learning')) {
+          this.hideGlobalSearch = true
+        } else {
+          this.hideGlobalSearch = false
+          this.globalSearch.setValue('')
+        }
       }
     })
 
@@ -135,5 +143,19 @@ export class AppNavBarComponent implements OnInit, OnChanges {
       this.isTourGuideClosed = false
     }
 
+  }
+
+  triggerGlobalSearch() {
+    const termToSearch = this.globalSearch.value.trim() ? this.globalSearch.value.trim() : ''
+    // tslint:disable-next-line: max-line-length
+    const lang = this.configSvc.userPreference && this.configSvc.userPreference.selectedLocale ? this.configSvc.userPreference.selectedLocale : 'en'
+    const filters = { contentType: ['Resource', 'Course', 'Collection'] }
+    this.router.navigate(['/app/search/learning'], {
+      queryParams: {
+        lang,
+        q: termToSearch,
+        f: JSON.stringify(filters),
+      },
+    })
   }
 }
