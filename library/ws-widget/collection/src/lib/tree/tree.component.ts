@@ -15,6 +15,7 @@ import _ from 'lodash'
 export class TreeComponent extends WidgetBaseComponent
   implements OnChanges, NsWidgetResolver.IWidgetData<IWsTree[]> {
   @Input() widgetData!: IWsTree[]
+  tempExploreCatalog: any
   finalCatalogItems: any
   filteredCatalogItems: any
   nestedTreeControl: NestedTreeControl<IWsTree>
@@ -41,65 +42,68 @@ export class TreeComponent extends WidgetBaseComponent
       this.nestedDataSource.data = this.finalCatalogItems || []
     }
   }
-  mergeCatalogNode(catalogElem: any) {
+   mergeCatalogNode(catalogElem: any) {
     // tslint:disable-next-line:no-parameter-reassignment
+   //  catalogElem =  sortBy(this.catalogItems, 'value')
     this.catalogSvc.fetchCatalog().subscribe((res: any) => {
-      this.finalCatalogItems = _.cloneDeep(catalogElem)
-      catalogElem.forEach((catalog: any) => {
-        // tslint:disable-next-line:no-shadowed-variable
-        res.Common.child.forEach((parent: any, index: any) => {
-          if (catalog.value === parent.name) {
-            catalog.nodeId = parent.nodeId
-            parent.child = parent.child.filter((v: any, i: any) => parent.child.findIndex((item: any) => item.name === v.name) === i)
-            this.finalCatalogItems[index].children = parent.child
-            if (catalog.children.length > 0) {
-              this.mergeChildNode(parent, catalog, index)
-            }
-          }
-        })
+    this.tempExploreCatalog = res.Common.child
+    this.finalCatalogItems =  _.cloneDeep(catalogElem)
+        catalogElem.forEach((catalog: any) => {
+           // tslint:disable-next-line:no-shadowed-variable
+            this.tempExploreCatalog.forEach((parent: any, index: any) => {
+           if (catalog.value === parent.name) {
+             catalog.nodeId = parent.nodeId
+             parent.child = parent.child.filter((v: any, i: any) => parent.child.findIndex((item: any) => item.name === v.name) === i)
+             this.finalCatalogItems[index].children = parent.child
+             this.finalCatalogItems[index].nodeId = parent.nodeId
+             if (catalog.children.length > 0) {
+               this.mergeChildNode(parent, catalog, index)
+              }
+           }
+ })
+ })
+ this.nestedDataSource.data = this.finalCatalogItems
+ console.log(this.finalCatalogItems)
+})
+// console.log(this.nestedDataSource.data)
+   }
+ mergeChildNode(parent: any, catalog: any, index1: any) {
+   // tslint:disable-next-line:no-parameter-reassignment
+   if (parent.child) {
+   catalog.children.forEach((catalogChild: any) => {
+     parent.child.forEach((child: any, index: any) => {
+       if (catalogChild.value === child.name) {
+        this.finalCatalogItems[index1].children[index].nodeId = child.nodeId
+         this.finalCatalogItems[index1].children[index].url = catalogChild.url
+         this.finalCatalogItems[index1].children[index].value = child.name
+        this.finalCatalogItems[index1].children[index].children = child.child
+         if (catalogChild.children.length > 0) {
+          child.child = child.child.filter((objOne: any) => {
+            return catalogChild.children.some((objTwo: any) => {
+                return objOne.name === objTwo.value
+            })
+          })
+          this.finalCatalogItems[index1].children[index].children = child.child
+           this.mergeGrandChildren(child , catalogChild, index1, index)
+        }
+         }
+     })
+   })
+ }
+ }
+ mergeGrandChildren(firstChild: any, catalogChild: any, index1: any, index2: any) {
+   // tslint:disable-next-line:max-line-length
+   if (firstChild.child) {
+    catalogChild.children.forEach((catalogGrandChild: any) => {
+      firstChild.child.forEach((grandChild: any, index: any) => {
+       if (catalogGrandChild.value === grandChild.name) {
+        this.finalCatalogItems[index1].children[index2].children[index].nodeId = grandChild.nodeId
+         this.finalCatalogItems[index1].children[index2].children[index].url = catalogGrandChild.url
+         this.finalCatalogItems[index1].children[index2].children[index].value = grandChild.name
+         this.finalCatalogItems[index1].children[index2].children[index].children = grandChild.child
+         }
       })
-      this.nestedDataSource.data = this.finalCatalogItems
-      console.log(this.finalCatalogItems)
     })
-    // console.log(this.nestedDataSource.data)
-  }
-  mergeChildNode(parent: any, catalog: any, index1: any) {
-    // tslint:disable-next-line:no-parameter-reassignment
-    if (parent.child) {
-      catalog.children.forEach((catalogChild: any) => {
-        parent.child.forEach((child: any, index: any) => {
-          if (catalogChild.value === child.name) {
-            this.finalCatalogItems[index1].children[index].nodeId = child.nodeId
-            this.finalCatalogItems[index1].children[index].url = catalogChild.url
-            this.finalCatalogItems[index1].children[index].value = child.name
-            this.finalCatalogItems[index1].children[index].children = child.child
-            if (catalogChild.children.length > 0) {
-              child.child = child.child.filter((objOne: any) => {
-                return catalogChild.children.some((objTwo: any) => {
-                  return objOne.name === objTwo.value
-                })
-              })
-              this.finalCatalogItems[index1].children[index].children = child.child
-              this.mergeGrandChildren(child, catalogChild, index1, index)
-            }
-          }
-        })
-      })
-    }
-  }
-  mergeGrandChildren(firstChild: any, catalogChild: any, index1: any, index2: any) {
-    // tslint:disable-next-line:max-line-length
-    if (firstChild.child) {
-      catalogChild.children.forEach((catalogGrandChild: any) => {
-        firstChild.child.forEach((grandChild: any, index: any) => {
-          if (catalogGrandChild.value === grandChild.name) {
-            this.finalCatalogItems[index1].children[index2].children[index].nodeId = grandChild.nodeId
-            this.finalCatalogItems[index1].children[index2].children[index].url = catalogGrandChild.url
-            this.finalCatalogItems[index1].children[index2].children[index].value = grandChild.name
-            this.finalCatalogItems[index1].children[index2].children[index].children = grandChild.child
-          }
-        })
-      })
-    }
-  }
+   }
+ }
 }
