@@ -3,9 +3,14 @@ import { Observable, of } from 'rxjs'
 import { HttpClient } from '@angular/common/http'
 import { tap } from 'rxjs/operators'
 import { NSSearch } from '../_services/widget-search.model'
+import { ConfigurationsService } from '@ws-widget/utils/src/public-api';
 
 const API_END_POINTS = {
   catalog: '/apis/protected/v8/catalog',
+}
+const PROTECTED_SLAG_V8 = '/apis/protected/v8'
+const API_END_POINT = {
+  CATALOG_AUTHORING: `${PROTECTED_SLAG_V8}/social/catalog`,
 }
 
 @Injectable({
@@ -18,6 +23,7 @@ export class TreeCatalogService {
 
   constructor(
     private http: HttpClient,
+    private configSvc: ConfigurationsService
   ) { }
 
   getCatalog(url: string, type?: string, tags?: string) {
@@ -40,5 +46,11 @@ export class TreeCatalogService {
     }
 
     return this._catalog$
+  }
+  fetchCatalog(): Observable<any> {
+    return this.http.post(`${API_END_POINT.CATALOG_AUTHORING}`, {
+      rootOrg: this.configSvc.rootOrg,
+      org: this.configSvc.org,
+    })
   }
 }

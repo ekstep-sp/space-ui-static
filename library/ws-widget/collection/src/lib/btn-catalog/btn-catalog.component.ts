@@ -5,8 +5,6 @@ import { NSSearch } from '../_services/widget-search.model'
 import { NsWidgetResolver, WidgetBaseComponent } from '@ws-widget/resolver'
 import { Router, NavigationEnd } from '@angular/router'
 import { filter } from 'rxjs/internal/operators/filter'
-import { sortBy } from 'lodash'
-
 @Component({
   selector: 'ws-widget-btn-catalog',
   templateUrl: './btn-catalog.component.html',
@@ -14,9 +12,9 @@ import { sortBy } from 'lodash'
 })
 export class BtnCatalogComponent extends WidgetBaseComponent
   implements NsWidgetResolver.IWidgetData<any> {
-
+    tempExploreCatalog: any
+    finalCatalogItems: any
   constructor(private catalogSvc: TreeCatalogService,
-
               private readonly router: Router
   ) {
     super()
@@ -42,10 +40,9 @@ export class BtnCatalogComponent extends WidgetBaseComponent
         } else {
           this.catalogItems = catalog
         }
-        this.catalogItems = sortBy(this.catalogItems, 'displayName')
+        // this.catalogItems = sortBy(this.catalogItems, 'displayName')
       },
       () => this.catalogFetchStatus = 'error',
     )
   }
-
 }
