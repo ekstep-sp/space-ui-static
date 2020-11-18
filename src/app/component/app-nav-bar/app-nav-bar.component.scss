@@ -52,6 +52,9 @@
     padding: 8px 34px 8px 8px;
     outline: none;
     width:200px;
+    &:focus {
+      background: white;
+    }
   }
   .searchIcon{
     position: absolute;
