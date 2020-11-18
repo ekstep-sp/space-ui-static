@@ -5,7 +5,6 @@ import { NSSearch } from '../_services/widget-search.model'
 import { NsWidgetResolver, WidgetBaseComponent } from '@ws-widget/resolver'
 import { Router, NavigationEnd } from '@angular/router'
 import { filter } from 'rxjs/internal/operators/filter'
-import { sortBy } from 'lodash'
 @Component({
   selector: 'ws-widget-btn-catalog',
   templateUrl: './btn-catalog.component.html',
