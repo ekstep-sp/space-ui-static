@@ -76,11 +76,11 @@ export class DiscussionPostComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.voteService.callComponent.subscribe((data: any) => {
-      if (data) {
-          this.fetchPostReplies(true)
-      }
-    })
+    // this.voteService.callComponent.subscribe((data: any) => {
+    //   if (data) {
+    //       this.fetchPostReplies(true)
+    //   }
+    // })
     this.conversationRequest.postId = this.post.id
     this.fetchPostReplies()
   }
