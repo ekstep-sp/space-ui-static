@@ -84,29 +84,29 @@ export class DiscussionForumComponent extends WidgetBaseComponent
   }
 
   ngOnInit() {
-    this.voteService.callComponent.subscribe((data: any) => {
-      if (data) {
-          // this.fetchDiscussion(true)
-        // console.log(this.discussionResult)
-        this.discussionRequest.sessionId = Date.now()
-        this.discussionRequest.pgNo = 0
-        this.discussionSvc.fetchTimelineData(this.discussionRequest).subscribe(
-          (updateData: any) => {
-            this.discussionResult = updateData
-            // this.discussionResult.hits = updateData.hits
-            // this.discussionResult.result = [...this.discussionResult.result, ...updateData.result]
-            if (updateData.hits > this.discussionResult.result.length) {
-              this.discussionFetchStatus = 'hasMore'
-                // tslint:disable-next-line: whitespace
-                ; (this.discussionRequest.pgNo as number) += 1
-            } else {
-              this.discussionFetchStatus = 'done'
-              // this.fetchAllPosts()
-            }
-            // this.cdr.detectChanges()
-          })
-      }
-    })
+    // this.voteService.callComponent.subscribe((data: any) => {
+    //   if (data) {
+    //       // this.fetchDiscussion(true)
+    //     // console.log(this.discussionResult)
+    //     this.discussionRequest.sessionId = Date.now()
+    //     this.discussionRequest.pgNo = 0
+    //     this.discussionSvc.fetchTimelineData(this.discussionRequest).subscribe(
+    //       (updateData: any) => {
+    //         this.discussionResult = updateData
+    //         // this.discussionResult.hits = updateData.hits
+    //         // this.discussionResult.result = [...this.discussionResult.result, ...updateData.result]
+    //         if (updateData.hits > this.discussionResult.result.length) {
+    //           this.discussionFetchStatus = 'hasMore'
+    //             // tslint:disable-next-line: whitespace
+    //             ; (this.discussionRequest.pgNo as number) += 1
+    //         } else {
+    //           this.discussionFetchStatus = 'done'
+    //           // this.fetchAllPosts()
+    //         }
+    //         // this.cdr.detectChanges()
+    //       })
+    //   }
+    // })
     if (this.configSvc.restrictedFeatures) {
       this.isRestricted =
         this.configSvc.restrictedFeatures.has('disscussionForum') ||
