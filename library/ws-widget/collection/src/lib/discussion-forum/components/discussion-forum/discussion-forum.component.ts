@@ -93,8 +93,8 @@ export class DiscussionForumComponent extends WidgetBaseComponent
         this.discussionSvc.fetchTimelineData(this.discussionRequest).subscribe(
           (updateData: any) => {
             this.discussionResult = updateData
-            this.discussionResult.hits = updateData.hits
-            this.discussionResult.result = [...this.discussionResult.result, ...updateData.result]
+            // this.discussionResult.hits = updateData.hits
+            // this.discussionResult.result = [...this.discussionResult.result, ...updateData.result]
             if (updateData.hits > this.discussionResult.result.length) {
               this.discussionFetchStatus = 'hasMore'
                 // tslint:disable-next-line: whitespace
