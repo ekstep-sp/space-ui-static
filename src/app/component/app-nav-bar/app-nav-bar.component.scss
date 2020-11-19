@@ -52,6 +52,7 @@
     padding: 8px 34px 8px 8px;
     outline: none;
     width:200px;
+    display:flex;
     &:focus {
       background: white;
     }
@@ -60,13 +61,19 @@
     position: absolute;
     top: 0;
     right: 0;
-    padding: 8px 4px 8px 8px ;
+    padding: 6px 8px 0px 0px ;
     color: #777;
     cursor: pointer;
     user-select: none;
   }
 }
-
+@media only screen and (max-width: 800px) {
+.expandSearch {
+ input {
+    width: 100px;
+ }
+}
+}
 
 @media only screen and (min-width: 357px) and (max-width: 599px) {
   .app-logo {
