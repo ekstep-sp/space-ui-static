@@ -43,7 +43,7 @@
         </mat-checkbox>
       </div> -->
     </mat-menu>
-    <button name="language-button" mat-button *ngIf="availableLanguages?.length" [matMenuTriggerFor]="sortLang" type="button">
+    <button name="language-button" class="laguage-button" mat-button *ngIf="availableLanguages?.length" [matMenuTriggerFor]="sortLang" type="button">
       <mat-icon>language</mat-icon>
       <span class="uppercase">
         {{ language || 'en' }}
