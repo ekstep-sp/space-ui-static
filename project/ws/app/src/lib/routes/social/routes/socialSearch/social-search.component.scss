@@ -309,6 +309,12 @@ display: flex !important;
   .border-color{
     color:#925ba0 !important;
   }
+  .mat-drawer{
+    width: 100%;
+    left: 0px;
+    right: 0px;
+  }
+
   }
   ::ng-deep {
     @media screen and (max-width:765px) {
