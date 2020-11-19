@@ -148,3 +148,12 @@
   padding:0;
   margin:0 16px;
 }
+
+@media only screen and (max-width: 768px) {
+  .btn-margin{
+    margin:0 8px;
+  }
+  .custom-padding {
+    margin-left: 0px;
+  }
+}
