@@ -150,6 +150,7 @@ export class PlayerBriefComponent implements OnInit, OnDestroy {
       // tslint:disable-next-line: max-line-length
       this.enableRatings = this.widgetContentSvc.isVisibileAccToRoles(this.tocConfig.rolesAllowed.rateContent, this.tocConfig.rolesNotAllowed.rateContent)
       // tslint:disable-next-line: max-line-length
+      debugger
       this.mailIcon = this.widgetContentSvc.isVisibileAccToRoles(this.tocConfig.rolesAllowed.mail, this.tocConfig.rolesNotAllowed.mail)
       this.mailIcon$.next(this.mailIcon)
       if (this.configSvc.isGuestUser) {

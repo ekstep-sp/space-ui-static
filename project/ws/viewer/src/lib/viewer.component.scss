@@ -36,5 +36,8 @@
 }
 
 .sidenavContent::-webkit-scrollbar {
-  width: 5px !important
+  width: 5px !important;
+}
+.sidenavContent {
+  overflow-x: hidden !important;
 }
