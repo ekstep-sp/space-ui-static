@@ -4,7 +4,7 @@ import { ConfigurationsService, UtilityService } from '../../../../../utils'
 import { Router } from '@angular/router'
 import { WidgetContentService } from '../../_services/widget-content.service'
 import { isIOS } from '../../player-amp/player-amp.utility'
-import { Subscription } from 'rxjs'
+import { BehaviorSubject, Subscription } from 'rxjs'
 import { distinctUntilChanged } from 'rxjs/operators'
 // import { Subscription } from 'rxjs'
 
@@ -33,6 +33,7 @@ export class PlayerBriefComponent implements OnInit, OnDestroy {
   tocConfig: any = null
   enableRatings = false
   mailIcon = false
+  mailIcon$ = new BehaviorSubject<boolean>(this.mailIcon)
 
   contentTypes = NsContent.EContentTypes
   showMoreGlance = false
@@ -149,7 +150,9 @@ export class PlayerBriefComponent implements OnInit, OnDestroy {
       // tslint:disable-next-line: max-line-length
       this.enableRatings = this.widgetContentSvc.isVisibileAccToRoles(this.tocConfig.rolesAllowed.rateContent, this.tocConfig.rolesNotAllowed.rateContent)
       // tslint:disable-next-line: max-line-length
+      debugger
       this.mailIcon = this.widgetContentSvc.isVisibileAccToRoles(this.tocConfig.rolesAllowed.mail, this.tocConfig.rolesNotAllowed.mail)
+      this.mailIcon$.next(this.mailIcon)
       if (this.configSvc.isGuestUser) {
         this.extractFeaturesForGuest()
       }
@@ -212,6 +215,9 @@ export class PlayerBriefComponent implements OnInit, OnDestroy {
   ngOnDestroy () {
     if (this.content$) {
       this.content$.unsubscribe()
+    }
+    if (this.mailIcon$) {
+      this.mailIcon$.unsubscribe()
     }
   }
 

@@ -590,8 +590,9 @@
         [email]="author.email"></ws-widget-user-image> -->
       <div class="width-expand flex flex-middle flex-between">
         <h3 class="font-montserrat margin-remove">{{ author.name }}</h3>
-        <ng-container *ngIf="mailIcon">
-          <ws-widget-btn-mail-user *ngIf="askAuthorEnabled"
+        <ng-container *ngIf="(mailIcon$ | async)">
+          <ws-widget-btn-mail-user
+            *ngIf="askAuthorEnabled"
             [widgetData]="{ content: content, emails: [{email: author.email, name: author.name}] }">
           </ws-widget-btn-mail-user>
         </ng-container>
