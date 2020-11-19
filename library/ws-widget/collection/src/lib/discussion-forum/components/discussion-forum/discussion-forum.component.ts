@@ -6,7 +6,7 @@ import { EditorQuillComponent } from '../../editor-quill/editor-quill.component'
 import { NsDiscussionForum } from '../../ws-discussion-forum.model'
 import { WsDiscussionForumService } from '../../ws-discussion-forum.services'
 import { ActivatedRoute, Data } from '@angular/router'
-import { BtnSocialLikeService } from '../../actionBtn/btn-social-like/service/btn-social-like.service'
+// import { BtnSocialLikeService } from '../../actionBtn/btn-social-like/service/btn-social-like.service'
 import { ForumService } from '@ws/app/src/lib/routes/social/routes/forums/service/forum.service'
 
 @Component({
@@ -70,7 +70,7 @@ export class DiscussionForumComponent extends WidgetBaseComponent
     private discussionSvc: WsDiscussionForumService,
     private configSvc: ConfigurationsService,
     private activatedRoute: ActivatedRoute,
-    private voteService: BtnSocialLikeService,
+    // private voteService: BtnSocialLikeService,
     private readonly forumSrvc: ForumService,
   ) {
     super()

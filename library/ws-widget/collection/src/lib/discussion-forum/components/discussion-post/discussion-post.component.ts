@@ -5,7 +5,8 @@ import { MatDialog, MatSnackBar } from '@angular/material'
 import { WsDiscussionForumService } from '../../ws-discussion-forum.services'
 import { EditorQuillComponent } from '../../editor-quill/editor-quill.component'
 import { DialogSocialDeletePostComponent } from '../../dialog/dialog-social-delete-post/dialog-social-delete-post.component'
-import { BtnSocialLikeService } from '../../actionBtn/btn-social-like/service/btn-social-like.service'
+import { ForumService } from '@ws/app/src/lib/routes/social/routes/forums/service/forum.service';
+// import { BtnSocialLikeService } from '../../actionBtn/btn-social-like/service/btn-social-like.service'
 
 @Component({
   selector: 'ws-widget-discussion-post',
@@ -15,6 +16,7 @@ import { BtnSocialLikeService } from '../../actionBtn/btn-social-like/service/bt
 export class DiscussionPostComponent implements OnInit {
 
   @Input() allowMention = false
+  @Input() widgetData!: NsDiscussionForum.IDiscussionForumInput
   @Input() post!: NsDiscussionForum.ITimelineResult
   @Output() deleteSuccess = new EventEmitter<boolean>()
   @Output() triggerReplyNotification = new EventEmitter<object | undefined>()
@@ -65,7 +67,8 @@ export class DiscussionPostComponent implements OnInit {
     private snackBar: MatSnackBar,
     private configSvc: ConfigurationsService,
     private discussionSvc: WsDiscussionForumService,
-    private voteService: BtnSocialLikeService,
+    private readonly forumSrvc: ForumService
+    // private voteService: BtnSocialLikeService,
   ) {
     if (this.configSvc.userProfile) {
       this.userId = this.configSvc.userProfile.userId || ''
@@ -220,5 +223,26 @@ export class DiscussionPostComponent implements OnInit {
   }
   trackByFn(index: any) {
     return index // or item.id
+  }
+  triggerReplyCommentNotification(notificationData: any) {
+    // send one notification such that it reaches both, the person who was mentioned in the reply comment and the creator
+    // of answer on which comment was made
+    const notificationRequest = notificationData.mentions.map((mention: any) => {
+      return {
+        notificationFor: 'discussionForum',
+          taggedUserID: mention.id,
+          taggedUserName: mention.name,
+          taggedUserEmail: mention.email,
+          tagCreatorName: this.configSvc.userProfile ? this.configSvc.userProfile.userName || '' : '',
+          tagCreatorID: this.configSvc.userProfile ? this.configSvc.userProfile.userId || '' : '',
+          ContentTitle: this.widgetData.title || '',
+          ContentId: this.widgetData.id,
+          // QnaCreatorID: notificationData.topLevelReply.postCreator.postCreatorId,
+          ContentCreatorID: notificationData.parentPostCreatorId,
+      }
+    })
+    if (notificationRequest.length) {
+      this.forumSrvc.triggerTagNotification(notificationRequest)
+    }
   }
 }
