@@ -71,8 +71,8 @@
     </ws-widget-btn-social-like>
   </span> -->
 
-  <ws-widget-discussion-reply *ngFor="let reply of postReplies; let i = index" [reply]="reply" [allowMention]="allowMention"
-    (deleteSuccess)="onDeleteReply(i)"></ws-widget-discussion-reply>
+  <ws-widget-discussion-reply  (triggerReplyNotification)="triggerReplyCommentNotification($event)" *ngFor="let reply of postReplies; let i = index" [reply]="reply" [allowMention]="allowMention"
+    (deleteSuccess)="onDeleteReply(i)" [parentPostCreatorId]="parentPostCreatorId"></ws-widget-discussion-reply>
   <!-- <div *ngIf="replyFetchStatus === 'fetching'" class="margin-top-s text-center">
     <mat-spinner class="display-inline-block" [diameter]="30" [strokeWidth]="3"></mat-spinner>
     <div class="mat-caption" class="margin-top-xs">Fetching replies</div>

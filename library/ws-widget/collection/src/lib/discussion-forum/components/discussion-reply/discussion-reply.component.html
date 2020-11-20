@@ -36,7 +36,7 @@
   <div *ngIf="editMode" class="margin-top-s padding-s mat-primary-border">
     <!-- [minLength]="'10'" -->
     <ws-widget-editor-quill  [showMention]="allowMention"
-    (mentionsData)="replyCommentMentions = $event"
+    (mentionsData)="replyEditMentions = $event"
     [htmlText]="reply.postContent.body" (textData)="onReplyTextChange($event)">
     </ws-widget-editor-quill>
     <div class="text-right">

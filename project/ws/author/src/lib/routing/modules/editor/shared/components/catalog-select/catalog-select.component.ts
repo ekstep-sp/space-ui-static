@@ -6,7 +6,7 @@ import { MatTreeFlatDataSource, MatTreeFlattener } from '@angular/material/tree'
 import { TFetchStatus } from '@ws-widget/utils'
 import { UploadService } from '../../services/upload.service'
 import { ICatalog, ITodoItemFlatNode, TodoItemNode } from './models/catalog-model'
-import { sortBy, cloneDeep } from 'lodash'
+import { cloneDeep } from 'lodash'
 
 // const TREE_DATA = {
 //   Groceries: {
