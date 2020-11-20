@@ -721,3 +721,20 @@ h3.shepherd-title {
   -webkit-font-feature-settings: 'liga';
   -webkit-font-smoothing: antialiased;
 }
+.mat-list-item{
+  line-height: initial !important;
+}
+@media screen and (max-width:700px) {
+  .mat-form-field-infix{
+    width: 75px !important;
+  }
+}
+.x-large-typography .mat-form-field-subscript-wrapper {
+  font-size: 12px;
+}
+
+@media screen and (max-width:768px) {
+.mat-tab-body-content{
+  overflow:hidden;
+}
+}

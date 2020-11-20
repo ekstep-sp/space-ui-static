@@ -72,10 +72,6 @@
 // }
 
 @media screen and (max-width: 768px) {
-  #blogsearchbar {
-    visibility: hidden;
-    display: none !important;
-  }
   .blogs-containers {
     width: 350px;
     margin: auto;
@@ -95,6 +91,20 @@
   // padding-right: 0px;
   // justify-content: end;
   // }
+}
+@media screen and (max-width:700px) {
+  .justify-search{
+    max-width: 130px !important;
+    .mat-form-field-infix{
+      width: 75px !important;
+    }
+  }
+}
+@media screen and (max-width:639px) {
+  #blogsearchbar {
+    visibility: hidden;
+    display: none !important;
+  }
 }
 .justify-search {
   width: 100%;
@@ -133,6 +143,14 @@
   width: 100%;
   margin-left: 10%;
   padding-top: 10px;
+}
+// flex items-center justify-center w-8 sm:w-16 cursor-pointer
+.searchBar{
+  display: flex;
+  align-items: center;
+  cursor: pointer; 
+  justify-content: center;
+  width: 8px;
 }
 @media screen and (max-width: 375px) {
   #blogsearchbar {
