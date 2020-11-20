@@ -93,7 +93,7 @@
         </div>
         <span class="h-full border border-solid text-gray-500 my-1"></span>
       </div>
-      <div class="flex-1 min-w-0 ml-4 mb-8">
+      <div class="flex-1 min-w-0 ml-4 mb-8 heading">
         <h3 class="mat-subheading-2" i18n>Set the Duration</h3>
         <span *ngIf="suggestedDuration" class="mat-body-strong flex items-center">
           <ng-container i18n>Requires</ng-container>
@@ -119,7 +119,7 @@
           <ng-container i18n>day(s)</ng-container>
         </div>
         <ng-container *ngIf="mode !== 'edit' && isShareEnabled">
-          <h3 class="mat-subheading-2 margin-bottom-xs" i18n>This Goal is for</h3>
+          <h3 class="mat-subheading-2 margin-bottom-xs sub-heading" i18n>This Goal is for</h3>
           <p class="margin-bottom-xl">
             <mat-radio-group aria-label="Select an option" formControlName="type">
               <mat-radio-button
