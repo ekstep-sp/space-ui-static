@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core'
+import { Component, Input, OnChanges } from '@angular/core'
 import { ROOT_WIDGET_CONFIG } from '@ws-widget/collection'
 import { NsAnalytics } from '../../models/learning-analytics.model'
 @Component({
@@ -6,7 +6,7 @@ import { NsAnalytics } from '../../models/learning-analytics.model'
   templateUrl: './content-card.component.html',
   styleUrls: ['./content-card.component.scss'],
 })
-export class ContentCardComponent implements OnInit {
+export class ContentCardComponent implements OnChanges {
   @Input() pieData: any
   @Input() completed = 0
   @Input() source = ''
@@ -16,6 +16,8 @@ export class ContentCardComponent implements OnInit {
   @Input() contentUrl = ''
   @Input() isExternal = false
   @Input() contentData: any
+  @Input() displayChart = false
+  nonGraphData = {}
   widgetPieGraph: NsAnalytics.IGraphWidget = {} as NsAnalytics.IGraphWidget
   margin = {
     top: 25,
@@ -27,9 +29,18 @@ export class ContentCardComponent implements OnInit {
   labels: string[] = []
   constructor() { }
 
-  ngOnInit() {
-    this.graphData(this.contentData.data)
+  ngOnChanges() {
+    debugger
+    if (this.contentData.hasOwnProperty('type') && this.contentData.type) {
+      this.displayChart = false
+      this.nonGraphData = this.contentData.data
+      console.log('recieved in cards ', this.nonGraphData)
+    } else {
+      this.displayChart = true
+      this.graphData(this.contentData.data)
+    }
   }
+
   graphData(pieData: any) {
     this.labels = ['0-25%', '25-50%', '50-75%', '75-100%']
     pieData.forEach((cur: any) => {
