@@ -84,7 +84,7 @@ upVote(invalidUserMsg: string) {
           this.activity.activityData.upVote += 1
         }
       }
-      this.voteService.updateStatus(true)
+      this.voteService.updateStatus(true, request.id, this.postCreatorId)
       this.isUpdating = false
     },
     () => {
@@ -119,7 +119,7 @@ downVote(invalidUserMsg: string) {
           this.activity.activityData.downVote += 1
         }
         this.isUpdating = false
-        this.voteService.updateStatus(true)
+        this.voteService.updateStatus(true, request.id, this.postCreatorId)
       }
     },
     () => {

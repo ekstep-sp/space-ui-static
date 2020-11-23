@@ -6,8 +6,10 @@ import { EditorQuillComponent } from '../../editor-quill/editor-quill.component'
 import { NsDiscussionForum } from '../../ws-discussion-forum.model'
 import { WsDiscussionForumService } from '../../ws-discussion-forum.services'
 import { ActivatedRoute, Data } from '@angular/router'
-// import { BtnSocialLikeService } from '../../actionBtn/btn-social-like/service/btn-social-like.service'
+import { BtnSocialLikeService } from '../../actionBtn/btn-social-like/service/btn-social-like.service'
 import { ForumService } from '@ws/app/src/lib/routes/social/routes/forums/service/forum.service'
+// tslint:disable-next-line:import-name
+import _ from 'lodash'
 
 @Component({
   selector: 'ws-widget-discussion-forum',
@@ -65,12 +67,13 @@ export class DiscussionForumComponent extends WidgetBaseComponent
   mentions = []
   commentMentions = []
   contentCreatorId: any
+  result: any
   constructor(
     private snackBar: MatSnackBar,
     private discussionSvc: WsDiscussionForumService,
     private configSvc: ConfigurationsService,
     private activatedRoute: ActivatedRoute,
-    // private voteService: BtnSocialLikeService,
+    private voteService: BtnSocialLikeService,
     private readonly forumSrvc: ForumService,
   ) {
     super()
@@ -84,29 +87,42 @@ export class DiscussionForumComponent extends WidgetBaseComponent
   }
 
   ngOnInit() {
-    // this.voteService.callComponent.subscribe((data: any) => {
-    //   if (data) {
-    //       // this.fetchDiscussion(true)
-    //     // console.log(this.discussionResult)
-    //     this.discussionRequest.sessionId = Date.now()
-    //     this.discussionRequest.pgNo = 0
-    //     this.discussionSvc.fetchTimelineData(this.discussionRequest).subscribe(
-    //       (updateData: any) => {
-    //         this.discussionResult = updateData
-    //         // this.discussionResult.hits = updateData.hits
-    //         // this.discussionResult.result = [...this.discussionResult.result, ...updateData.result]
-    //         if (updateData.hits > this.discussionResult.result.length) {
-    //           this.discussionFetchStatus = 'hasMore'
-    //             // tslint:disable-next-line: whitespace
-    //             ; (this.discussionRequest.pgNo as number) += 1
-    //         } else {
-    //           this.discussionFetchStatus = 'done'
-    //           // this.fetchAllPosts()
-    //         }
-    //         // this.cdr.detectChanges()
-    //       })
-    //   }
-    // })
+    this.voteService.postId.subscribe((data: any) => {
+      if (data) {
+        console.log(data, this.discussionResult.result)
+        this.result = _.cloneDeep(this.discussionResult.result)
+      this.result.forEach((post: any, index: any) => {
+        if (data === post.id) {
+          // tslint:disable-next-line:max-line-length
+          if (!post.activity.userActivity.upVote && !post.activity.userActivity.downVote) {
+           if (post.activity.activityDetails.upVote.length > 0) {
+            post.activity.activityDetails.upVote = post.activity.activityDetails.upVote.filter((element: any) => {
+              if (element === this.userId) {
+                return false
+              }
+              return true
+            })
+          }
+        }
+          if (post.activity.userActivity) {
+            if (post.activity.userActivity.upVote) {
+              post.activity.activityDetails.upVote.push(this.userId)
+              // tslint:disable-next-line:max-line-length
+              post.activity.activityDetails.upVote = post.activity.activityDetails.upVote.filter((v: any, i: any) => post.activity.activityDetails.upVote.findIndex((item: any) => item === v) === i)
+            }
+            if (post.activity.userActivity.downVote) {
+              post.activity.activityDetails.downVote.push(this.userId)
+              // tslint:disable-next-line:max-line-length
+              post.activity.activityDetails.downVote = post.activity.activityDetails.downVote.filter((v: any, i: any) => post.activity.activityDetails.downVote.findIndex((item: any) => item === v) === i)
+            }
+          }
+          console.log('matching', this.userId)
+          // this.fetchPostReplies(true)
+          this.discussionResult.result[index] = post
+        }
+      })
+    }
+    })
     if (this.configSvc.restrictedFeatures) {
       this.isRestricted =
         this.configSvc.restrictedFeatures.has('disscussionForum') ||
@@ -124,11 +140,11 @@ export class DiscussionForumComponent extends WidgetBaseComponent
     }
     this.activatedRoute.data.subscribe((response: Data) => {
       this.contentCreatorId = response.content.data.creator
-     if (response.pageData.data.allowMentionUsers) {
-      this.allowMention = response.pageData.data.allowMentionUsers
-    }
-  })
-  // console.log(this.widgetData, this.discussionRequest)
+      if (response.pageData.data.allowMentionUsers) {
+        this.allowMention = response.pageData.data.allowMentionUsers
+      }
+    })
+    // console.log(this.widgetData, this.discussionRequest)
   }
   trackByFn(index: any) {
     return index // or item.id
@@ -257,15 +273,15 @@ export class DiscussionForumComponent extends WidgetBaseComponent
     const notificationRequest = notificationData.mentions.map((mention: any) => {
       return {
         notificationFor: 'discussionForum',
-          taggedUserID: mention.id,
-          taggedUserName: mention.name,
-          taggedUserEmail: mention.email,
-          tagCreatorName: this.configSvc.userProfile ? this.configSvc.userProfile.userName || '' : '',
-          tagCreatorID: this.configSvc.userProfile ? this.configSvc.userProfile.userId || '' : '',
-          ContentTitle: this.widgetData.title || '',
-          ContentId: this.widgetData.id,
-          // QnaCreatorID: notificationData.topLevelReply.postCreator.postCreatorId,
-          ContentCreatorID: notificationData.parentPostCreatorId,
+        taggedUserID: mention.id,
+        taggedUserName: mention.name,
+        taggedUserEmail: mention.email,
+        tagCreatorName: this.configSvc.userProfile ? this.configSvc.userProfile.userName || '' : '',
+        tagCreatorID: this.configSvc.userProfile ? this.configSvc.userProfile.userId || '' : '',
+        ContentTitle: this.widgetData.title || '',
+        ContentId: this.widgetData.id,
+        // QnaCreatorID: notificationData.topLevelReply.postCreator.postCreatorId,
+        ContentCreatorID: notificationData.parentPostCreatorId,
       }
     })
     if (notificationRequest.length) {

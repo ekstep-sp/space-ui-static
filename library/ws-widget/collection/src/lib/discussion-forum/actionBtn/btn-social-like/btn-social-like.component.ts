@@ -54,9 +54,8 @@ export class BtnSocialLikeComponent implements OnInit {
       activityType: NsDiscussionForum.EActivityType.LIKE,
     }
     this.socialSvc.updateActivity(request).subscribe(_ => {
-      this.likeService.updateStatus(true)
+      this.likeService.updateStatus(true, request.id, request.userId)
       this.isUpdating = false
-      this.likeService.updateStatus(true)
       if (this.activity) {
         if (this.activity.userActivity.like) {
           this.activity.userActivity.like = false
