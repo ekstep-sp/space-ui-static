@@ -89,7 +89,7 @@ export class DiscussionForumComponent extends WidgetBaseComponent
   ngOnInit() {
     this.voteService.postId.subscribe((data: any) => {
       if (data) {
-        console.log(data, this.discussionResult.result)
+        // console.log(data, this.discussionResult.result)
         this.result = _.cloneDeep(this.discussionResult.result)
       this.result.forEach((post: any, index: any) => {
         if (data === post.id) {
@@ -116,7 +116,6 @@ export class DiscussionForumComponent extends WidgetBaseComponent
               post.activity.activityDetails.downVote = post.activity.activityDetails.downVote.filter((v: any, i: any) => post.activity.activityDetails.downVote.findIndex((item: any) => item === v) === i)
             }
           }
-          console.log('matching', this.userId)
           // this.fetchPostReplies(true)
           this.discussionResult.result[index] = post
         }

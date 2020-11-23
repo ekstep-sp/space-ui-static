@@ -84,7 +84,7 @@ export class DiscussionPostComponent implements OnInit {
 
   ngOnInit() {
     this.voteService.postId.subscribe((data: any) => {
-      console.log(data, this.post, this.postReplies)
+      // console.log(data, this.post, this.postReplies)
       this.result = _.cloneDeep(this.postReplies)
       this.result.forEach((post: any, index: any) => {
       if (data === post.id) {
@@ -116,26 +116,8 @@ export class DiscussionPostComponent implements OnInit {
       }
     })
     })
+    this.fetchPostReplies()
     this.conversationRequest.postId = this.post.id
-  }
-  // tslint:disable-next-line:no-shadowed-variable
-  async getWidsForVote(activity: any, post: any) {
-    if (activity.activityDetails) {
-      const wids = activity.activityDetails.upVote
-      if (wids.length) {
-        const userDetails = await this.discussionSvc.getUsersByIDs(wids)
-        post.activity.activityDetails.upVote = this.discussionSvc.addIndexToData(userDetails)
-      } else {
-        post.activity.activityDetails.upVote = []
-      }
-      const widsForDownVote = activity.activityDetails.downVote
-      if (widsForDownVote.length) {
-        const userDetailsforDownVote = await this.discussionSvc.getUsersByIDs(widsForDownVote)
-       post.activity.activityDetails.downVote = this.discussionSvc.addIndexToData(userDetailsforDownVote)
-      } else {
-        post.activity.activityDetails.downVote = []
-      }
-    }
   }
   deletePost(failMsg: string) {
     const dialogRef = this.dialog.open(DialogSocialDeletePostComponent, {
