@@ -5,8 +5,11 @@ import { MatDialog, MatSnackBar } from '@angular/material'
 import { WsDiscussionForumService } from '../../ws-discussion-forum.services'
 import { EditorQuillComponent } from '../../editor-quill/editor-quill.component'
 import { DialogSocialDeletePostComponent } from '../../dialog/dialog-social-delete-post/dialog-social-delete-post.component'
-import { ForumService } from '@ws/app/src/lib/routes/social/routes/forums/service/forum.service';
-// import { BtnSocialLikeService } from '../../actionBtn/btn-social-like/service/btn-social-like.service'
+import { ForumService } from '@ws/app/src/lib/routes/social/routes/forums/service/forum.service'
+import { BtnSocialLikeService } from '../../actionBtn/btn-social-like/service/btn-social-like.service'
+// tslint:disable-next-line:import-name
+import _ from 'lodash'
+// import { post } from 'selenium-webdriver/http';
 
 @Component({
   selector: 'ws-widget-discussion-post',
@@ -62,13 +65,14 @@ export class DiscussionPostComponent implements OnInit {
       name: NsDiscussionForum.EDiscussionType.SOCIAL,
     },
   }
+  result: any
   constructor(
     private dialog: MatDialog,
     private snackBar: MatSnackBar,
     private configSvc: ConfigurationsService,
     private discussionSvc: WsDiscussionForumService,
-    private readonly forumSrvc: ForumService
-    // private voteService: BtnSocialLikeService,
+    private readonly forumSrvc: ForumService,
+    private voteService: BtnSocialLikeService,
   ) {
     if (this.configSvc.userProfile) {
       this.userId = this.configSvc.userProfile.userId || ''
@@ -79,15 +83,42 @@ export class DiscussionPostComponent implements OnInit {
   }
 
   ngOnInit() {
-    // this.voteService.callComponent.subscribe((data: any) => {
-    //   if (data) {
-    //       this.fetchPostReplies(true)
-    //   }
-    // })
-    this.conversationRequest.postId = this.post.id
+    this.voteService.postId.subscribe((data: any) => {
+      // console.log(data, this.post, this.postReplies)
+      this.result = _.cloneDeep(this.postReplies)
+      this.result.forEach((post: any, index: any) => {
+      if (data === post.id) {
+       // tslint:disable-next-line:max-line-length
+       if (!post.activity.userActivity.upVote && !post.activity.userActivity.downVote) {
+        if (post.activity.activityDetails.upVote.length > 0) {
+         post.activity.activityDetails.upVote = post.activity.activityDetails.upVote.filter((element: any) => {
+           if (element === this.userId) {
+             return false
+           }
+           return true
+         })
+       }
+     }
+       if (post.activity.userActivity) {
+         if (post.activity.userActivity.upVote) {
+           post.activity.activityDetails.upVote.push(this.userId)
+           // tslint:disable-next-line:max-line-length
+           post.activity.activityDetails.upVote = post.activity.activityDetails.upVote.filter((v: any, i: any) => post.activity.activityDetails.upVote.findIndex((item: any) => item === v) === i)
+         }
+         if (post.activity.userActivity.downVote) {
+           post.activity.activityDetails.downVote.push(this.userId)
+           // tslint:disable-next-line:max-line-length
+           post.activity.activityDetails.downVote = post.activity.activityDetails.downVote.filter((v: any, i: any) => post.activity.activityDetails.downVote.findIndex((item: any) => item === v) === i)
+         }
+       }
+       // this.fetchPostReplies(true)
+       this.postReplies[index] = post
+      }
+    })
+    })
     this.fetchPostReplies()
+    this.conversationRequest.postId = this.post.id
   }
-
   deletePost(failMsg: string) {
     const dialogRef = this.dialog.open(DialogSocialDeletePostComponent, {
       data: { postId: this.post.id },
