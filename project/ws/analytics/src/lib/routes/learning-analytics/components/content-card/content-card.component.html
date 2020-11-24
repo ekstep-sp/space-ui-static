@@ -10,7 +10,12 @@
       <p class="mat-body-1">{{ nonGraphData?.totalUsers }}</p>
     </mat-grid-tile>
     <mat-grid-tile style="overflow: visible!important;">
-      <p>Eye Icon</p>
+      <mat-icon class="mat-icon notranslate material-icons mat-icon-no-color ws-mat-primary-text info" 
+      role="img" 
+      aria-hidden="true" 
+      (click)="triggerInfoPopup(false)"
+      i18n-matTooltip matTooltip="More Info"
+      >visibility</mat-icon>
     </mat-grid-tile>
   </mat-grid-list>
   <ng-container *ngIf="displayChart">
@@ -46,7 +51,7 @@
       <mat-icon class="mat-icon notranslate material-icons mat-icon-no-color ws-mat-primary-text info" 
       role="img" 
       aria-hidden="true" 
-      (click)="triggerInfoPopup(true)"
+      (click)="triggerInfoPopup(false)"
       i18n-matTooltip matTooltip="More Info"
       >visibility</mat-icon>
     </mat-grid-tile>
@@ -81,7 +86,7 @@
       <mat-icon class="mat-icon notranslate material-icons mat-icon-no-color ws-mat-primary-text info" 
       role="img" 
       aria-hidden="true" 
-      (click)="triggerInfoPopup(true)"
+      (click)="triggerInfoPopup(false)"
       i18n-matTooltip matTooltip="More Info"
       >visibility</mat-icon>
     </mat-grid-tile>
@@ -116,7 +121,7 @@
       <mat-icon class="mat-icon notranslate material-icons mat-icon-no-color ws-mat-primary-text info" 
       role="img" 
       aria-hidden="true" 
-      (click)="triggerInfoPopup(true)"
+      (click)="triggerInfoPopup(false)"
       i18n-matTooltip matTooltip="More Info"
       >visibility</mat-icon>
     </mat-grid-tile>
@@ -149,7 +154,7 @@
       <mat-icon class="mat-icon notranslate material-icons mat-icon-no-color ws-mat-primary-text info" 
       role="img" 
       aria-hidden="true" 
-      (click)="triggerInfoPopup(true)"
+      (click)="triggerInfoPopup(false)"
       i18n-matTooltip matTooltip="More Info"
       >visibility</mat-icon>
     </mat-grid-tile>
@@ -184,7 +189,7 @@
       <mat-icon class="mat-icon notranslate material-icons mat-icon-no-color ws-mat-primary-text info" 
       role="img" 
       aria-hidden="true" 
-      (click)="triggerInfoPopup(true)"
+      (click)="triggerInfoPopup(false)"
       i18n-matTooltip matTooltip="More Info"
       >visibility</mat-icon>
     </mat-grid-tile>
@@ -215,7 +220,7 @@
       <mat-icon class="mat-icon notranslate material-icons mat-icon-no-color ws-mat-primary-text info" 
       role="img" 
       aria-hidden="true" 
-      (click)="triggerInfoPopup(true)"
+      (click)="triggerInfoPopup(false)"
       i18n-matTooltip matTooltip="More Info"
       >visibility</mat-icon>
     </mat-grid-tile>

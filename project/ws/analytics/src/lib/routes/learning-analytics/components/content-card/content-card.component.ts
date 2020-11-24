@@ -4,8 +4,6 @@ import { ROOT_WIDGET_CONFIG } from '@ws-widget/collection'
 import { NsAnalytics } from '../../models/learning-analytics.model'
 import { InfoDialogComponent } from '../info-dialog/info-dialog.component'
 import { MatDialog } from '@angular/material'
-import { LearningAnalyticsService } from '../../services/learning-analytics.service'
-import { END_DATE, START_DATE } from '@ws/author/src/lib/constants/constant'
 @Component({
   selector: 'ws-analytics-content-card',
   templateUrl: './content-card.component.html',
@@ -21,14 +19,14 @@ export class ContentCardComponent implements OnChanges {
   @Input() contentUrl = ''
   @Input() isExternal = false
   @Input() contentData: any
-  totalUsersFromUserTable: any = []
+  userList: any = []
   @Output() infoClick = new EventEmitter<string>()
   // @Input() showToolTip = false
   @Input() showUsers = false
   searchQuery = ''
   startDate = ''
   endDate = ''
-  contentType = 'Course'
+  contentType = ''
   filterArray: NsAnalytics.IFilterObj[] = []
   @Input() displayChart = false
   nonGraphData = {}
@@ -43,11 +41,9 @@ export class ContentCardComponent implements OnChanges {
   labels: string[] = []
   constructor(
     public dialog: MatDialog,
-    private analyticsSrv: LearningAnalyticsService,
   ) { }
 
   ngOnChanges() {
-    debugger
     if (this.contentData.hasOwnProperty('type') && this.contentData.type) {
       this.displayChart = false
       this.nonGraphData = this.contentData.data
@@ -59,11 +55,11 @@ export class ContentCardComponent implements OnChanges {
   }
   async triggerInfoPopup(showUserDetailsFromUserTable = false) {
    
-      const eventType = 'content_viewed_by_users';
+      const eventType = 'getting_users_content';
       const titleToUse = 'Users List';
-      // await this.getAllUsers(this.startDate, this.endDate)
+      // await this.getAllUsers()
+      // this.dummyUsers();
       this.dummyUsers();
-
       this.openDialog({
         event: eventType,
         title: titleToUse,
@@ -71,11 +67,10 @@ export class ContentCardComponent implements OnChanges {
         height: '55%',
         startDate: this.startDate,
         endDate: this.endDate,
-        contentType: this.contentType,
         searchQuery: this.searchQuery,
         filters: this.filterArray,
-        totalUsersFromUserTable: this.totalUsersFromUserTable,
-        showUserDetailsFromUserTable: showUserDetailsFromUserTable
+        showUserDetailsFromUserTable: showUserDetailsFromUserTable,
+        userList: this.userList
       })
     }
 
@@ -86,44 +81,23 @@ export class ContentCardComponent implements OnChanges {
         height: _data.height,
       })
     }
-    async getAllUsers(startDate: string, endDate: string): Promise<any> {
-      let params: any
-      if (startDate && endDate) {
-        params = {
-          startDate:  this.analyticsSrv.getLocalTime(startDate, START_DATE),
-          endDate: this.analyticsSrv.getLocalTime(endDate, END_DATE),
-        }
-      }
-      const data = await this.analyticsSrv.getAllUsers(params)
-      if (data.ok) {
-        this.totalUsersFromUserTable = data.DATA
-      }
+    async getAllUsers(): Promise<any> {
+      
+      return Promise.resolve(
+        this.userList = [this.contentData.data]
+      )
     }
-      dummyUsers()
+      dummyUsers(): Promise<any>
       {
-        this.totalUsersFromUserTable = [
-          {
-          "department_name": "Rang De",
-          "email": "Ram@rangde.org",
-          "first_name": "RamKrishna",
-          "last_name": "NK",
-          "wid": "109e239b-bf55-47d6-943a-c8f6bf27bac9"
-        },
-      {
-        "department_name": "Paso Pacifico",
-        "email": "sarah@pasopacifico.org",
-        "first_name": "Sarah",
-        "last_name": "Otterestrom",
-        "wid": "2a18603f-f51e-434c-a3ce-852db6c3f496"
-      },
-      {
-        "department_name": "Vismaya Kalike",
-        "email": "vig9295@gmail.com",
-        "first_name": "Vignesh",
-        "last_name": "Prasad",
-        "wid": "872a5cc0-7b83-45dd-827c-cbb1439b666b"
-      }]
-  
+        return Promise.resolve(
+          this.userList =[
+          '7b710f74-8f84-427f-bc13-f4220ed2a1c1',
+          '0e419282-16aa-4b03-8d81-a1f93175f7f7',
+          'efc891e6-b464-4efb-9a4f-64eed7c7b339',
+          'c7e3179f-6497-4b39-a923-e949459d53e3',
+          '95e7fec9-e55d-4350-9253-831c71183574',
+        ])
+          
       }
      
   

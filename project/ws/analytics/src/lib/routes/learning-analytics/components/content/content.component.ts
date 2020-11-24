@@ -731,7 +731,6 @@ export class ContentComponent implements OnInit, OnDestroy {
   processContent(endDate: string, startDate: string, contentType: any, filterArray: any[], searchQuery: string) {
     if (contentType === 'blogs') {
       // tslint:disable: no-debugger
-      debugger
       // get blog data and then parse it properly
       this.sub$ = this.analyticsSrv.socialForumIDS(endDate, startDate, contentType, true).pipe(
         switchMap((source: any) => this.analyticsSrv.getSocialAnalysisUsingIDS(source.data, contentType, true)),
