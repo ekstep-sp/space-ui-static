@@ -1,6 +1,11 @@
+import { Output,EventEmitter } from '@angular/core'
 import { Component, Input, OnInit } from '@angular/core'
 import { ROOT_WIDGET_CONFIG } from '@ws-widget/collection'
 import { NsAnalytics } from '../../models/learning-analytics.model'
+import { InfoDialogComponent } from '../info-dialog/info-dialog.component'
+import { MatDialog } from '@angular/material'
+import { LearningAnalyticsService } from '../../services/learning-analytics.service'
+import { END_DATE, START_DATE } from '@ws/author/src/lib/constants/constant'
 @Component({
   selector: 'ws-analytics-content-card',
   templateUrl: './content-card.component.html',
@@ -16,6 +21,15 @@ export class ContentCardComponent implements OnInit {
   @Input() contentUrl = ''
   @Input() isExternal = false
   @Input() contentData: any
+  totalUsersFromUserTable: any = []
+  @Output() infoClick = new EventEmitter<string>()
+  // @Input() showToolTip = false
+  @Input() showUsers = false
+  searchQuery = ''
+  startDate = ''
+  endDate = ''
+  contentType = 'Course'
+  filterArray: NsAnalytics.IFilterObj[] = []
   widgetPieGraph: NsAnalytics.IGraphWidget = {} as NsAnalytics.IGraphWidget
   margin = {
     top: 25,
@@ -25,11 +39,84 @@ export class ContentCardComponent implements OnInit {
   }
   graphData1: number[] = []
   labels: string[] = []
-  constructor() { }
+  constructor(
+    public dialog: MatDialog,
+    private analyticsSrv: LearningAnalyticsService,
+  ) { }
 
   ngOnInit() {
     this.graphData(this.contentData.data)
   }
+  async triggerInfoPopup(showUserDetailsFromUserTable = false) {
+   
+      const eventType = 'content_viewed_by_users';
+      const titleToUse = 'Users List';
+      // await this.getAllUsers(this.startDate, this.endDate)
+      this.dummyUsers();
+
+      this.openDialog({
+        event: eventType,
+        title: titleToUse,
+        width: '50%',
+        height: '55%',
+        startDate: this.startDate,
+        endDate: this.endDate,
+        contentType: this.contentType,
+        searchQuery: this.searchQuery,
+        filters: this.filterArray,
+        totalUsersFromUserTable: this.totalUsersFromUserTable,
+        showUserDetailsFromUserTable: showUserDetailsFromUserTable
+      })
+    }
+
+    openDialog(_data: any) {
+      this.dialog.open(InfoDialogComponent, {
+        data: _data,
+        width: _data.width,
+        height: _data.height,
+      })
+    }
+    async getAllUsers(startDate: string, endDate: string): Promise<any> {
+      let params: any
+      if (startDate && endDate) {
+        params = {
+          startDate:  this.analyticsSrv.getLocalTime(startDate, START_DATE),
+          endDate: this.analyticsSrv.getLocalTime(endDate, END_DATE),
+        }
+      }
+      const data = await this.analyticsSrv.getAllUsers(params)
+      if (data.ok) {
+        this.totalUsersFromUserTable = data.DATA
+      }
+    }
+      dummyUsers()
+      {
+        this.totalUsersFromUserTable = [
+          {
+          "department_name": "Rang De",
+          "email": "Ram@rangde.org",
+          "first_name": "RamKrishna",
+          "last_name": "NK",
+          "wid": "109e239b-bf55-47d6-943a-c8f6bf27bac9"
+        },
+      {
+        "department_name": "Paso Pacifico",
+        "email": "sarah@pasopacifico.org",
+        "first_name": "Sarah",
+        "last_name": "Otterestrom",
+        "wid": "2a18603f-f51e-434c-a3ce-852db6c3f496"
+      },
+      {
+        "department_name": "Vismaya Kalike",
+        "email": "vig9295@gmail.com",
+        "first_name": "Vignesh",
+        "last_name": "Prasad",
+        "wid": "872a5cc0-7b83-45dd-827c-cbb1439b666b"
+      }]
+  
+      }
+     
+  
   graphData(pieData: any) {
     this.labels = ['0-25%', '25-50%', '50-75%', '75-100%']
     pieData.forEach((cur: any) => {
@@ -63,4 +150,7 @@ export class ContentCardComponent implements OnInit {
       },
     }
   }
+
+
+  
 }

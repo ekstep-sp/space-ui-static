@@ -139,7 +139,7 @@
               </ng-template>
               <div *ngIf="courseFetchStatus === 'done'">
                 <mat-card *ngIf="!screenSizeIsLtMedium" class="fixed-padding">
-                  <mat-grid-list *ngIf="showTime && showViews" cols="5" rowHeight="35px">
+                  <mat-grid-list *ngIf="showTime && showViews" cols="6" rowHeight="35px">
                     <mat-grid-tile class="font-semibold text-xs md:text-sm xl:text-sm" i18n>
                       <p class="text-inside-grid">Collection Name</p>
                     </mat-grid-tile>
@@ -152,10 +152,15 @@
                     <mat-grid-tile class="font-semibold text-xs md:text-sm xl:text-sm" i18n>
                       <p class="text-outside-grid">Average Time (mins)</p>
                     </mat-grid-tile>
-                    <mat-grid-tile class="font-semibold text-xs md:text-sm xl:text-sm" i18n>Progress</mat-grid-tile>
+                    <mat-grid-tile class="font-semibold text-xs md:text-sm xl:text-sm" i18n>
+                      <p class="text-outside-grid">Progress</p>
+                    </mat-grid-tile>
+                    <mat-grid-tile class="font-semibold text-xs md:text-sm xl:text-sm" i18n>
+                      <p class="text-outside-grid">View Users</p>
+                    </mat-grid-tile>
                     <!-- <mat-grid-tile class="font-semibold text-xs md:text-sm xl:text-sm" i18n>Source</mat-grid-tile> -->
                   </mat-grid-list>
-                  <mat-grid-list *ngIf="showTime && !showViews" cols="4" rowHeight="35px">
+                  <mat-grid-list *ngIf="showTime && !showViews" cols="5" rowHeight="35px">
                     <mat-grid-tile class="font-semibold text-xs md:text-sm xl:text-sm" i18n>
                       <p class="text-inside-grid">Collection Name</p>
                     </mat-grid-tile>
@@ -168,10 +173,15 @@
                     <mat-grid-tile class="font-semibold text-xs md:text-sm xl:text-sm" i18n>
                       <p class="text-outside-grid">Average Time (mins)</p>
                     </mat-grid-tile>
-                    <mat-grid-tile class="font-semibold text-xs md:text-sm xl:text-sm" i18n>Progress</mat-grid-tile>
+                    <mat-grid-tile class="font-semibold text-xs md:text-sm xl:text-sm" i18n>
+                      <p class="text-outside-grid">Progress</p>
+                    </mat-grid-tile>
+                    <mat-grid-tile class="font-semibold text-xs md:text-sm xl:text-sm" i18n>
+                      <p class="text-outside-grid">View Users</p>
+                    </mat-grid-tile>
                     <!-- <mat-grid-tile class="font-semibold text-xs md:text-sm xl:text-sm" i18n>Source</mat-grid-tile> -->
                   </mat-grid-list>
-                  <mat-grid-list *ngIf="!showTime && showViews" cols="4" rowHeight="35px">
+                  <mat-grid-list *ngIf="!showTime && showViews" cols="5" rowHeight="35px">
                     <mat-grid-tile class="font-semibold text-xs md:text-sm xl:text-sm" i18n>
                       <p class="text-inside-grid">Collection Name</p>
                     </mat-grid-tile>
@@ -184,10 +194,15 @@
                     <!-- <mat-grid-tile class="font-semibold text-xs md:text-sm xl:text-sm" i18n>
                       <p class="text-outside-grid">Average Time (mins)</p>
                     </mat-grid-tile> -->
-                    <mat-grid-tile class="font-semibold text-xs md:text-sm xl:text-sm" i18n>Progress</mat-grid-tile>
+                    <mat-grid-tile class="font-semibold text-xs md:text-sm xl:text-sm" i18n>
+                      <p class="text-outside-grid">Progress</p>
+                    </mat-grid-tile>
+                    <mat-grid-tile class="font-semibold text-xs md:text-sm xl:text-sm" i18n>
+                      <p class="text-outside-grid">View Users</p>
+                    </mat-grid-tile>
                     <!-- <mat-grid-tile class="font-semibold text-xs md:text-sm xl:text-sm" i18n>Source</mat-grid-tile> -->
                   </mat-grid-list>
-                  <mat-grid-list *ngIf="!showTime && !showViews" cols="3" rowHeight="35px">
+                  <mat-grid-list *ngIf="!showTime && !showViews" cols="4" rowHeight="35px">
                     <mat-grid-tile class="font-semibold text-xs md:text-sm xl:text-sm" i18n>
                       <p class="text-inside-grid">Collection Name</p>
                     </mat-grid-tile>
@@ -200,12 +215,17 @@
                     <!-- <mat-grid-tile class="font-semibold text-xs md:text-sm xl:text-sm" i18n>
                       <p class="text-outside-grid">Average Time (mins)</p>
                     </mat-grid-tile> -->
-                    <mat-grid-tile class="font-semibold text-xs md:text-sm xl:text-sm" i18n>Progress</mat-grid-tile>
-                    <!-- <mat-grid-tile class="font-semibold text-xs md:text-sm xl:text-sm" i18n>Source</mat-grid-tile> -->
+                    <mat-grid-tile class="font-semibold text-xs md:text-sm xl:text-sm" i18n>
+                      <p class="text-outside-grid">Progress</p>
+                    </mat-grid-tile>
+                    <mat-grid-tile class="font-semibold text-xs md:text-sm xl:text-sm" i18n>
+                      <p class="text-outside-grid">View Users</p>
+                    </mat-grid-tile>
+                     <!-- <mat-grid-tile class="font-semibold text-xs md:text-sm xl:text-sm" i18n>Source</mat-grid-tile> -->
                   </mat-grid-list>
                 </mat-card>
                 <mat-card *ngIf="screenSizeIsLtMedium" class="fixed-padding">
-                  <mat-grid-list *ngIf="showViews" cols="4" rowHeight="35px">
+                  <mat-grid-list *ngIf="showViews" cols="5" rowHeight="35px">
                     <mat-grid-tile class="font-semibold text-xs md:text-sm xl:text-sm" i18n>
                       <p class="text-inside-grid">Collection Name</p>
                     </mat-grid-tile>
@@ -218,10 +238,15 @@
                     <!-- <mat-grid-tile class="font-semibold text-xs md:text-sm xl:text-sm" i18n>
                       <p class="text-outside-grid">Average Time (mins)</p>
                     </mat-grid-tile> -->
-                    <mat-grid-tile class="font-semibold text-xs md:text-sm xl:text-sm" i18n>Progress</mat-grid-tile>
+                    <mat-grid-tile class="font-semibold text-xs md:text-sm xl:text-sm" i18n>
+                      <p class="text-outside-grid">Progress</p>
+                    </mat-grid-tile>
+                    <mat-grid-tile class="font-semibold text-xs md:text-sm xl:text-sm" i18n>
+                      <p class="text-outside-grid">View Users</p>
+                    </mat-grid-tile>
                     <!-- <mat-grid-tile class="font-semibold text-xs md:text-sm xl:text-sm" i18n>Source</mat-grid-tile> -->
                   </mat-grid-list>
-                  <mat-grid-list *ngIf="!showViews" cols="3" rowHeight="35px">
+                  <mat-grid-list *ngIf="!showViews" cols="4" rowHeight="35px">
                     <mat-grid-tile class="font-semibold text-xs md:text-sm xl:text-sm" i18n>
                       <p class="text-inside-grid">Collection Name</p>
                     </mat-grid-tile>
@@ -234,12 +259,18 @@
                     <!-- <mat-grid-tile class="font-semibold text-xs md:text-sm xl:text-sm" i18n>
                       <p class="text-outside-grid">Average Time (mins)</p>
                     </mat-grid-tile> -->
-                    <mat-grid-tile class="font-semibold text-xs md:text-sm xl:text-sm" i18n>Progress</mat-grid-tile>
+                    <mat-grid-tile class="font-semibold text-xs md:text-sm xl:text-sm" i18n>
+                      <p class="text-outside-grid">Progress</p>
+                    </mat-grid-tile>
+                    <mat-grid-tile class="font-semibold text-xs md:text-sm xl:text-sm" i18n>
+                      <p class="text-outside-grid">View Users</p>
+                    </mat-grid-tile>
                     <!-- <mat-grid-tile class="font-semibold text-xs md:text-sm xl:text-sm" i18n>Source</mat-grid-tile> -->
                   </mat-grid-list>
                 </mat-card>
                 <div *ngFor="let data of progressData | slice: page.p1:page.p1 + 10">
                   <ws-analytics-content-card [contentData]="data"></ws-analytics-content-card>
+        
                 </div>
                 <mat-paginator *ngIf="progressData?.length > 10" showFirstLastButtons [length]="progressData.length"
                   [pageSize]="10" (page)="changePage($event, 1)">
@@ -267,7 +298,7 @@
               </ng-template>
               <ng-container *ngIf="modulesFetchStatus === 'done'">
                 <mat-card *ngIf="!screenSizeIsLtMedium" class="fixed-padding">
-                  <mat-grid-list *ngIf="showTime && showViews" cols="5" rowHeight="35px">
+                  <mat-grid-list *ngIf="showTime && showViews" cols="6" rowHeight="35px">
                     <mat-grid-tile class="font-semibold text-xs md:text-sm xl:text-sm" i18n>
                       <p class="text-inside-grid">Asset Name</p>
                     </mat-grid-tile>
@@ -280,10 +311,15 @@
                     <mat-grid-tile class="font-semibold text-xs md:text-sm xl:text-sm" i18n>
                       <p class="text-outside-grid">Average Time (mins)</p>
                     </mat-grid-tile>
-                    <mat-grid-tile class="font-semibold text-xs md:text-sm xl:text-sm" i18n>Progress</mat-grid-tile>
+                    <mat-grid-tile class="font-semibold text-xs md:text-sm xl:text-sm" i18n>
+                      <p class="text-outside-grid">Progress</p>
+                    </mat-grid-tile>
+                    <mat-grid-tile class="font-semibold text-xs md:text-sm xl:text-sm" i18n>
+                      <p class="text-outside-grid">View Users</p>
+                    </mat-grid-tile>
                     <!-- <mat-grid-tile class="font-semibold text-xs md:text-sm xl:text-sm" i18n>Source</mat-grid-tile> -->
                   </mat-grid-list>
-                  <mat-grid-list *ngIf="!showTime && showViews" cols="4" rowHeight="35px">
+                  <mat-grid-list *ngIf="!showTime && showViews" cols="5" rowHeight="35px">
                     <mat-grid-tile class="font-semibold text-xs md:text-sm xl:text-sm" i18n>
                       <p class="text-inside-grid">Asset Name</p>
                     </mat-grid-tile>
@@ -296,10 +332,15 @@
                     <!-- <mat-grid-tile class="font-semibold text-xs md:text-sm xl:text-sm" i18n>
                       <p class="text-outside-grid">Average Time (mins)</p>
                     </mat-grid-tile> -->
-                    <mat-grid-tile class="font-semibold text-xs md:text-sm xl:text-sm" i18n>Progress</mat-grid-tile>
+                    <mat-grid-tile class="font-semibold text-xs md:text-sm xl:text-sm" i18n>
+                      <p class="text-outside-grid">Progress</p>
+                    </mat-grid-tile>
+                    <mat-grid-tile class="font-semibold text-xs md:text-sm xl:text-sm" i18n>
+                      <p class="text-outside-grid">View Users</p>
+                    </mat-grid-tile>
                     <!-- <mat-grid-tile class="font-semibold text-xs md:text-sm xl:text-sm" i18n>Source</mat-grid-tile> -->
                   </mat-grid-list>
-                  <mat-grid-list *ngIf="showTime && !showViews" cols="4" rowHeight="35px">
+                  <mat-grid-list *ngIf="showTime && !showViews" cols="5" rowHeight="35px">
                     <mat-grid-tile class="font-semibold text-xs md:text-sm xl:text-sm" i18n>
                       <p class="text-inside-grid">Asset Name</p>
                     </mat-grid-tile>
@@ -312,10 +353,15 @@
                     <mat-grid-tile class="font-semibold text-xs md:text-sm xl:text-sm" i18n>
                       <p class="text-outside-grid">Average Time (mins)</p>
                     </mat-grid-tile>
-                    <mat-grid-tile class="font-semibold text-xs md:text-sm xl:text-sm" i18n>Progress</mat-grid-tile>
+                    <mat-grid-tile class="font-semibold text-xs md:text-sm xl:text-sm" i18n>
+                      <p class="text-outside-grid">Progress</p>
+                    </mat-grid-tile>
+                    <mat-grid-tile class="font-semibold text-xs md:text-sm xl:text-sm" i18n>
+                      <p class="text-outside-grid">View Users</p>
+                    </mat-grid-tile>
                     <!-- <mat-grid-tile class="font-semibold text-xs md:text-sm xl:text-sm" i18n>Source</mat-grid-tile> -->
                   </mat-grid-list>
-                  <mat-grid-list *ngIf="!showTime && !showViews" cols="3" rowHeight="35px">
+                  <mat-grid-list *ngIf="!showTime && !showViews" cols="4" rowHeight="35px">
                     <mat-grid-tile class="font-semibold text-xs md:text-sm xl:text-sm" i18n>
                       <p class="text-inside-grid">Asset Name</p>
                     </mat-grid-tile>
@@ -328,12 +374,17 @@
                     <!-- <mat-grid-tile class="font-semibold text-xs md:text-sm xl:text-sm" i18n>
                         <p class="text-outside-grid">Average Time (mins)</p>
                       </mat-grid-tile> -->
-                    <mat-grid-tile class="font-semibold text-xs md:text-sm xl:text-sm" i18n>Progress</mat-grid-tile>
-                    <!-- <mat-grid-tile class="font-semibold text-xs md:text-sm xl:text-sm" i18n>Source</mat-grid-tile> -->
+                      <mat-grid-tile class="font-semibold text-xs md:text-sm xl:text-sm" i18n>
+                        <p class="text-outside-grid">Progress</p>
+                      </mat-grid-tile>
+                      <mat-grid-tile class="font-semibold text-xs md:text-sm xl:text-sm" i18n>
+                        <p class="text-outside-grid">View Users</p>
+                      </mat-grid-tile>
+                      <!-- <mat-grid-tile class="font-semibold text-xs md:text-sm xl:text-sm" i18n>Source</mat-grid-tile> -->
                   </mat-grid-list>
                 </mat-card>
                 <mat-card *ngIf="screenSizeIsLtMedium" class="fixed-padding">
-                  <mat-grid-list *ngIf="showViews" cols="4" rowHeight="35px">
+                  <mat-grid-list *ngIf="showViews" cols="5" rowHeight="35px">
                     <mat-grid-tile class="font-semibold text-xs md:text-sm xl:text-sm" i18n>
                       <p class="text-inside-grid">Asset Name</p>
                     </mat-grid-tile>
@@ -346,10 +397,15 @@
                     <!-- <mat-grid-tile class="font-semibold text-xs md:text-sm xl:text-sm" i18n>
                       <p class="text-outside-grid">Average Time (mins)</p>
                     </mat-grid-tile> -->
-                    <mat-grid-tile class="font-semibold text-xs md:text-sm xl:text-sm" i18n>Progress</mat-grid-tile>
+                    <mat-grid-tile class="font-semibold text-xs md:text-sm xl:text-sm" i18n>
+                      <p class="text-outside-grid">Progress</p>
+                    </mat-grid-tile>
+                    <mat-grid-tile class="font-semibold text-xs md:text-sm xl:text-sm" i18n>
+                      <p class="text-outside-grid">View Users</p>
+                    </mat-grid-tile>
                     <!-- <mat-grid-tile class="font-semibold text-xs md:text-sm xl:text-sm" i18n>Source</mat-grid-tile> -->
                   </mat-grid-list>
-                  <mat-grid-list *ngIf="!showViews" cols="3" rowHeight="35px">
+                  <mat-grid-list *ngIf="!showViews" cols="4" rowHeight="35px">
                     <mat-grid-tile class="font-semibold text-xs md:text-sm xl:text-sm" i18n>
                       <p class="text-inside-grid">Asset Name</p>
                     </mat-grid-tile>
@@ -362,7 +418,12 @@
                     <!-- <mat-grid-tile class="font-semibold text-xs md:text-sm xl:text-sm" i18n>
                       <p class="text-outside-grid">Average Time (mins)</p>
                     </mat-grid-tile> -->
-                    <mat-grid-tile class="font-semibold text-xs md:text-sm xl:text-sm" i18n>Progress</mat-grid-tile>
+                    <mat-grid-tile class="font-semibold text-xs md:text-sm xl:text-sm" i18n>
+                      <p class="text-outside-grid">Progress</p>
+                    </mat-grid-tile>
+                    <mat-grid-tile class="font-semibold text-xs md:text-sm xl:text-sm" i18n>
+                      <p class="text-outside-grid">View Users</p>
+                    </mat-grid-tile>
                     <!-- <mat-grid-tile class="font-semibold text-xs md:text-sm xl:text-sm" i18n>Source</mat-grid-tile> -->
                   </mat-grid-list>
                 </mat-card>
@@ -395,7 +456,7 @@
               </ng-template>
               <ng-container *ngIf="resourceFetchStatus === 'done'">
                 <mat-card *ngIf="!screenSizeIsLtMedium" class="fixed-padding">
-                  <mat-grid-list *ngIf="showTime && showViews" cols="5" rowHeight="35px">
+                  <mat-grid-list *ngIf="showTime && showViews" cols="6" rowHeight="35px">
                     <mat-grid-tile class="font-semibold text-xs md:text-sm xl:text-sm" i18n>
                       <p class="text-inside-grid">Resource Name</p>
                     </mat-grid-tile>
@@ -408,10 +469,15 @@
                     <mat-grid-tile class="font-semibold text-xs md:text-sm xl:text-sm" i18n>
                       <p class="text-outside-grid">Average Time (mins)</p>
                     </mat-grid-tile>
-                    <mat-grid-tile class="font-semibold text-xs md:text-sm xl:text-sm" i18n>Progress</mat-grid-tile>
+                    <mat-grid-tile class="font-semibold text-xs md:text-sm xl:text-sm" i18n>
+                      <p class="text-outside-grid">Progress</p>
+                    </mat-grid-tile>
+                    <mat-grid-tile class="font-semibold text-xs md:text-sm xl:text-sm" i18n>
+                      <p class="text-outside-grid">View Users</p>
+                    </mat-grid-tile>
                     <!-- <mat-grid-tile class="font-semibold text-xs md:text-sm xl:text-sm" i18n>Source</mat-grid-tile> -->
                   </mat-grid-list>
-                  <mat-grid-list *ngIf="!showTime && showViews" cols="4" rowHeight="35px">
+                  <mat-grid-list *ngIf="!showTime && showViews" cols="5" rowHeight="35px">
                     <mat-grid-tile class="font-semibold text-xs md:text-sm xl:text-sm" i18n>
                       <p class="text-inside-grid">Resource Name</p>
                     </mat-grid-tile>
@@ -424,10 +490,15 @@
                     <!-- <mat-grid-tile class="font-semibold text-xs md:text-sm xl:text-sm" i18n>
                        <p class="text-outside-grid">Average Time (mins)</p>
                      </mat-grid-tile> -->
-                    <mat-grid-tile class="font-semibold text-xs md:text-sm xl:text-sm" i18n>Progress</mat-grid-tile>
-                    <!-- <mat-grid-tile class="font-semibold text-xs md:text-sm xl:text-sm" i18n>Source</mat-grid-tile> -->
+                     <mat-grid-tile class="font-semibold text-xs md:text-sm xl:text-sm" i18n>
+                      <p class="text-outside-grid">Progress</p>
+                    </mat-grid-tile>
+                    <mat-grid-tile class="font-semibold text-xs md:text-sm xl:text-sm" i18n>
+                      <p class="text-outside-grid">View Users</p>
+                    </mat-grid-tile>
+                     <!-- <mat-grid-tile class="font-semibold text-xs md:text-sm xl:text-sm" i18n>Source</mat-grid-tile> -->
                   </mat-grid-list>
-                  <mat-grid-list *ngIf="showTime && !showViews" cols="4" rowHeight="35px">
+                  <mat-grid-list *ngIf="showTime && !showViews" cols="5" rowHeight="35px">
                     <mat-grid-tile class="font-semibold text-xs md:text-sm xl:text-sm" i18n>
                       <p class="text-inside-grid">Resource Name</p>
                     </mat-grid-tile>
@@ -440,10 +511,15 @@
                     <mat-grid-tile class="font-semibold text-xs md:text-sm xl:text-sm" i18n>
                       <p class="text-outside-grid">Average Time (mins)</p>
                     </mat-grid-tile>
-                    <mat-grid-tile class="font-semibold text-xs md:text-sm xl:text-sm" i18n>Progress</mat-grid-tile>
+                    <mat-grid-tile class="font-semibold text-xs md:text-sm xl:text-sm" i18n>
+                      <p class="text-outside-grid">Progress</p>
+                    </mat-grid-tile>
+                    <mat-grid-tile class="font-semibold text-xs md:text-sm xl:text-sm" i18n>
+                      <p class="text-outside-grid">View Users</p>
+                    </mat-grid-tile>
                     <!-- <mat-grid-tile class="font-semibold text-xs md:text-sm xl:text-sm" i18n>Source</mat-grid-tile> -->
                   </mat-grid-list>
-                  <mat-grid-list *ngIf="!showTime && !showViews" cols="3" rowHeight="35px">
+                  <mat-grid-list *ngIf="!showTime && !showViews" cols="4" rowHeight="35px">
                     <mat-grid-tile class="font-semibold text-xs md:text-sm xl:text-sm" i18n>
                       <p class="text-inside-grid">Resource Name</p>
                     </mat-grid-tile>
@@ -456,12 +532,17 @@
                     <!-- <mat-grid-tile class="font-semibold text-xs md:text-sm xl:text-sm" i18n>
                        <p class="text-outside-grid">Average Time (mins)</p>
                      </mat-grid-tile> -->
-                    <mat-grid-tile class="font-semibold text-xs md:text-sm xl:text-sm" i18n>Progress</mat-grid-tile>
-                    <!-- <mat-grid-tile class="font-semibold text-xs md:text-sm xl:text-sm" i18n>Source</mat-grid-tile> -->
+                     <mat-grid-tile class="font-semibold text-xs md:text-sm xl:text-sm" i18n>
+                      <p class="text-outside-grid">Progress</p>
+                    </mat-grid-tile>
+                    <mat-grid-tile class="font-semibold text-xs md:text-sm xl:text-sm" i18n>
+                      <p class="text-outside-grid">View Users</p>
+                    </mat-grid-tile>
+                     <!-- <mat-grid-tile class="font-semibold text-xs md:text-sm xl:text-sm" i18n>Source</mat-grid-tile> -->
                   </mat-grid-list>
                 </mat-card>
                 <mat-card *ngIf="screenSizeIsLtMedium" class="fixed-padding">
-                  <mat-grid-list *ngIf="showViews" cols="4" rowHeight="35px">
+                  <mat-grid-list *ngIf="showViews" cols="5" rowHeight="35px">
                     <mat-grid-tile class="font-semibold text-xs md:text-sm xl:text-sm" i18n>
                       <p class="text-inside-grid">Resource Name</p>
                     </mat-grid-tile>
@@ -474,10 +555,15 @@
                     <!-- <mat-grid-tile class="font-semibold text-xs md:text-sm xl:text-sm" i18n>
                       <p class="text-outside-grid">Average Time (mins)</p>
                     </mat-grid-tile> -->
-                    <mat-grid-tile class="font-semibold text-xs md:text-sm xl:text-sm" i18n>Progress</mat-grid-tile>
+                    <mat-grid-tile class="font-semibold text-xs md:text-sm xl:text-sm" i18n>
+                      <p class="text-outside-grid">Progress</p>
+                    </mat-grid-tile>
+                    <mat-grid-tile class="font-semibold text-xs md:text-sm xl:text-sm" i18n>
+                      <p class="text-outside-grid">View Users</p>
+                    </mat-grid-tile>
                     <!-- <mat-grid-tile class="font-semibold text-xs md:text-sm xl:text-sm" i18n>Source</mat-grid-tile> -->
                   </mat-grid-list>
-                  <mat-grid-list *ngIf="!showViews" cols="3" rowHeight="35px">
+                  <mat-grid-list *ngIf="!showViews" cols="5" rowHeight="35px">
                     <mat-grid-tile class="font-semibold text-xs md:text-sm xl:text-sm" i18n>
                       <p class="text-inside-grid">Resource Name</p>
                     </mat-grid-tile>
@@ -490,7 +576,12 @@
                     <!-- <mat-grid-tile class="font-semibold text-xs md:text-sm xl:text-sm" i18n>
                       <p class="text-outside-grid">Average Time (mins)</p>
                     </mat-grid-tile> -->
-                    <mat-grid-tile class="font-semibold text-xs md:text-sm xl:text-sm" i18n>Progress</mat-grid-tile>
+                    <mat-grid-tile class="font-semibold text-xs md:text-sm xl:text-sm" i18n>
+                      <p class="text-outside-grid">Progress</p>
+                    </mat-grid-tile>
+                    <mat-grid-tile class="font-semibold text-xs md:text-sm xl:text-sm" i18n>
+                      <p class="text-outside-grid">View Users</p>
+                    </mat-grid-tile>
                     <!-- <mat-grid-tile class="font-semibold text-xs md:text-sm xl:text-sm" i18n>Source</mat-grid-tile> -->
                   </mat-grid-list>
                 </mat-card>
@@ -523,6 +614,14 @@
     </mat-card>
   </ng-container>
 </ng-container>
+<!-- <ng-container>
+                <ws-analytics-content-card
+                        class="unique-users-card margin-m"
+                        (clickEvent)="onClick($event)"
+                        (infoClick)="openInfoPopup('user_accessed_content', 'User Details')"
+                      >
+                </ws-analytics-content-card>
+</ng-container> -->
 <ng-container *ngIf="onExpand">
   <mat-card class="margin-s">
     <button mat-raised-button color="primary" class="margin-top-xl margin-left-s" matTooltip="Back" i18n-matTooltip

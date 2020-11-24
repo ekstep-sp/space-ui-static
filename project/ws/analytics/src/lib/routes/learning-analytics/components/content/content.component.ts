@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild, OnDestroy } from '@angular/core'
+import { Component, OnInit, ViewChild, OnDestroy, Output, EventEmitter } from '@angular/core'
 import { PageEvent } from '@angular/material'
 import { LearningAnalyticsService } from '../../services/learning-analytics.service'
 import { MatPaginator } from '@angular/material/paginator'
@@ -9,6 +9,7 @@ import { AnalyticsResolver } from '../../resolvers/learning-analytics-filters.re
 import { ActivatedRoute } from '@angular/router'
 import { GraphGeneralService, IGraphWidget, ROOT_WIDGET_CONFIG } from '@ws-widget/collection'
 import { START_DATE, END_DATE } from '@ws/author/src/lib/constants/constant'
+import { Input } from '@angular/core'
 
 @Component({
   selector: 'ws-analytics-content',
@@ -32,6 +33,10 @@ export class ContentComponent implements OnInit, OnDestroy {
   myProgress: any
   othersProgress: any
   progressData: any
+  @Input() title!: string
+  @Output() infoClick = new EventEmitter<string>()
+  totalUsersFromUserTable: any = []
+
   page = {
     p1: 0,
     p2: 0,

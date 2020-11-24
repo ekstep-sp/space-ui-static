@@ -1,5 +1,5 @@
 <mat-card class="plans-card-module goal-class">
-  <mat-grid-list *ngIf="!contentData?.screenSizeIsLtMedium && contentData?.totalViews && contentData?.avgTime" cols="5"
+  <mat-grid-list *ngIf="!contentData?.screenSizeIsLtMedium && contentData?.totalViews && contentData?.avgTime" cols="6"
     rowHeight="70px">
     <mat-grid-tile>
       <div class="text-inside-grid hidden sm:block">
@@ -30,9 +30,17 @@
     <mat-grid-tile style="overflow: visible!important;">
       <ng-container [wsResolverWidget]="widgetPieGraph"></ng-container>
     </mat-grid-tile>
+    <mat-grid-tile style="overflow: visible!important;">
+      <mat-icon class="mat-icon notranslate material-icons mat-icon-no-color ws-mat-primary-text info" 
+      role="img" 
+      aria-hidden="true" 
+      (click)="triggerInfoPopup(true)"
+      i18n-matTooltip matTooltip="More Info"
+      >visibility</mat-icon>
+    </mat-grid-tile>
     <!-- <mat-grid-tile>{{ source }}</mat-grid-tile> -->
   </mat-grid-list>
-  <mat-grid-list *ngIf="!contentData?.screenSizeIsLtMedium && !contentData?.totalViews && contentData?.avgTime" cols="4"
+  <mat-grid-list *ngIf="!contentData?.screenSizeIsLtMedium && !contentData?.totalViews && contentData?.avgTime" cols="5"
     rowHeight="70px">
     <mat-grid-tile>
       <div class="text-inside-grid hidden sm:block">
@@ -63,9 +71,17 @@
     <mat-grid-tile style="overflow: visible!important;">
       <ng-container [wsResolverWidget]="widgetPieGraph"></ng-container>
     </mat-grid-tile>
+    <mat-grid-tile style="overflow: visible!important;">
+      <mat-icon class="mat-icon notranslate material-icons mat-icon-no-color ws-mat-primary-text info" 
+      role="img" 
+      aria-hidden="true" 
+      (click)="triggerInfoPopup(true)"
+      i18n-matTooltip matTooltip="More Info"
+      >visibility</mat-icon>
+    </mat-grid-tile>
     <!-- <mat-grid-tile>{{ source }}</mat-grid-tile> -->
   </mat-grid-list>
-  <mat-grid-list *ngIf="!contentData?.screenSizeIsLtMedium && contentData?.totalViews && !contentData?.avgTime" cols="4"
+  <mat-grid-list *ngIf="!contentData?.screenSizeIsLtMedium && contentData?.totalViews && !contentData?.avgTime" cols="5"
     rowHeight="70px">
     <mat-grid-tile>
       <div class="text-inside-grid hidden sm:block">
@@ -96,10 +112,19 @@
     <mat-grid-tile style="overflow: visible!important;">
       <ng-container [wsResolverWidget]="widgetPieGraph"></ng-container>
     </mat-grid-tile>
+    <mat-grid-tile style="overflow: visible!important;">
+      <mat-icon class="mat-icon notranslate material-icons mat-icon-no-color ws-mat-primary-text info" 
+      role="img" 
+      aria-hidden="true" 
+      (click)="triggerInfoPopup(true)"
+      i18n-matTooltip matTooltip="More Info"
+      >visibility</mat-icon>
+    </mat-grid-tile>
     <!-- <mat-grid-tile>{{ source }}</mat-grid-tile> -->
   </mat-grid-list>
+  
   <mat-grid-list *ngIf="!contentData?.screenSizeIsLtMedium && !contentData?.totalViews && !contentData?.avgTime"
-    cols="3" rowHeight="70px">
+    cols="4" rowHeight="70px">
     <mat-grid-tile>
       <div class="text-inside-grid hidden sm:block">
         <a *ngIf="contentData?.isExternal" [href]="contentData?.contentUrl" target="_blank"><span
@@ -129,9 +154,17 @@
     <mat-grid-tile style="overflow: visible!important;">
       <ng-container [wsResolverWidget]="widgetPieGraph"></ng-container>
     </mat-grid-tile>
+    <mat-grid-tile style="overflow: visible!important;">
+      <mat-icon class="mat-icon notranslate material-icons mat-icon-no-color ws-mat-primary-text info" 
+      role="img" 
+      aria-hidden="true" 
+      (click)="triggerInfoPopup(true)"
+      i18n-matTooltip matTooltip="More Info"
+      >visibility</mat-icon>
+    </mat-grid-tile>
     <!-- <mat-grid-tile>{{ source }}</mat-grid-tile> -->
   </mat-grid-list>
-  <mat-grid-list *ngIf="contentData?.screenSizeIsLtMedium && contentData?.totalViews" cols="4" rowHeight="70px">
+  <mat-grid-list *ngIf="contentData?.screenSizeIsLtMedium && contentData?.totalViews" cols="5" rowHeight="70px">
     <mat-grid-tile>
       <div class="text-inside-grid hidden sm:block">
         <a *ngIf="contentData?.isExternal" [href]="contentData?.contentUrl" target="_blank"><span
@@ -161,9 +194,17 @@
     <mat-grid-tile style="overflow: visible!important;">
       <ng-container [wsResolverWidget]="widgetPieGraph"></ng-container>
     </mat-grid-tile>
+    <mat-grid-tile style="overflow: visible!important;">
+      <mat-icon class="mat-icon notranslate material-icons mat-icon-no-color ws-mat-primary-text info" 
+      role="img" 
+      aria-hidden="true" 
+      (click)="triggerInfoPopup(true)"
+      i18n-matTooltip matTooltip="More Info"
+      >visibility</mat-icon>
+    </mat-grid-tile>
     <!-- <mat-grid-tile>{{ source }}</mat-grid-tile> -->
   </mat-grid-list>
-  <mat-grid-list *ngIf="contentData?.screenSizeIsLtMedium && !contentData?.totalViews" cols="3" rowHeight="70px">
+  <mat-grid-list *ngIf="contentData?.screenSizeIsLtMedium && !contentData?.totalViews" cols="4" rowHeight="70px">
     <mat-grid-tile>
       <div class="text-inside-grid hidden sm:block">
         <a *ngIf="contentData?.isExternal" [href]="contentData?.contentUrl" target="_blank"><span
@@ -193,6 +234,15 @@
     <mat-grid-tile style="overflow: visible!important;">
       <ng-container [wsResolverWidget]="widgetPieGraph"></ng-container>
     </mat-grid-tile>
+    <mat-grid-tile style="overflow: visible!important;">
+      <mat-icon class="mat-icon notranslate material-icons mat-icon-no-color ws-mat-primary-text info" 
+      role="img" 
+      aria-hidden="true" 
+      (click)="triggerInfoPopup(true)"
+      i18n-matTooltip matTooltip="More Info"
+      >visibility</mat-icon>
+    </mat-grid-tile>
     <!-- <mat-grid-tile>{{ source }}</mat-grid-tile> -->
   </mat-grid-list>
+  
 </mat-card>
