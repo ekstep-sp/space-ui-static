@@ -1,5 +1,5 @@
 import { Output,EventEmitter } from '@angular/core'
-import { Component, Input, OnInit } from '@angular/core'
+import { Component, Input,OnChanges } from '@angular/core'
 import { ROOT_WIDGET_CONFIG } from '@ws-widget/collection'
 import { NsAnalytics } from '../../models/learning-analytics.model'
 import { InfoDialogComponent } from '../info-dialog/info-dialog.component'
@@ -11,7 +11,7 @@ import { END_DATE, START_DATE } from '@ws/author/src/lib/constants/constant'
   templateUrl: './content-card.component.html',
   styleUrls: ['./content-card.component.scss'],
 })
-export class ContentCardComponent implements OnInit {
+export class ContentCardComponent implements OnChanges {
   @Input() pieData: any
   @Input() completed = 0
   @Input() source = ''
@@ -30,6 +30,8 @@ export class ContentCardComponent implements OnInit {
   endDate = ''
   contentType = 'Course'
   filterArray: NsAnalytics.IFilterObj[] = []
+  @Input() displayChart = false
+  nonGraphData = {}
   widgetPieGraph: NsAnalytics.IGraphWidget = {} as NsAnalytics.IGraphWidget
   margin = {
     top: 25,
@@ -44,8 +46,16 @@ export class ContentCardComponent implements OnInit {
     private analyticsSrv: LearningAnalyticsService,
   ) { }
 
-  ngOnInit() {
-    this.graphData(this.contentData.data)
+  ngOnChanges() {
+    debugger
+    if (this.contentData.hasOwnProperty('type') && this.contentData.type) {
+      this.displayChart = false
+      this.nonGraphData = this.contentData.data
+      console.log('recieved in cards ', this.nonGraphData)
+    } else {
+      this.displayChart = true
+      this.graphData(this.contentData.data)
+    }
   }
   async triggerInfoPopup(showUserDetailsFromUserTable = false) {
    

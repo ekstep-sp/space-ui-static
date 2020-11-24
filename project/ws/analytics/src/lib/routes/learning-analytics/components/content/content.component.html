@@ -105,19 +105,6 @@
         </div>
       </mat-card>
     </ng-container>
-    <!-- <ng-container *ngIf="userProgressData?.content_type?.length > 0">
-      <mat-card class="graph-card-client margin-s">
-        <div class="margin-top-m margin-left-m">
-          <p class="margin-remove-bottom font-bold text-left ws-mat-primary-text" i18n>Users by
-            Content Type
-          </p>
-          <p class="description" i18n>This chart displays # of unique users for each content type</p>
-        </div>
-        <div class="margin-m">
-          <ng-container [wsResolverWidget]="pieContentTypeChartData"> </ng-container>
-        </div>
-      </mat-card>
-    </ng-container> -->
   </div>
   <ng-container>
     <mat-card class="graph-bar-card-client">
@@ -209,19 +196,13 @@
                     <mat-grid-tile class="font-semibold text-xs md:text-sm xl:text-sm" i18n>
                       <p class="text-outside-grid">Total Users</p>
                     </mat-grid-tile>
-                    <!-- <mat-grid-tile class="font-semibold text-xs md:text-sm xl:text-sm" i18n>
-                      <p class="text-outside-grid">Total Views</p>
-                    </mat-grid-tile> -->
-                    <!-- <mat-grid-tile class="font-semibold text-xs md:text-sm xl:text-sm" i18n>
-                      <p class="text-outside-grid">Average Time (mins)</p>
-                    </mat-grid-tile> -->
                     <mat-grid-tile class="font-semibold text-xs md:text-sm xl:text-sm" i18n>
                       <p class="text-outside-grid">Progress</p>
                     </mat-grid-tile>
                     <mat-grid-tile class="font-semibold text-xs md:text-sm xl:text-sm" i18n>
                       <p class="text-outside-grid">View Users</p>
                     </mat-grid-tile>
-                     <!-- <mat-grid-tile class="font-semibold text-xs md:text-sm xl:text-sm" i18n>Source</mat-grid-tile> -->
+                    <!-- <mat-grid-tile class="font-semibold text-xs md:text-sm xl:text-sm" i18n>Source</mat-grid-tile> -->
                   </mat-grid-list>
                 </mat-card>
                 <mat-card *ngIf="screenSizeIsLtMedium" class="fixed-padding">
@@ -268,20 +249,21 @@
                     <!-- <mat-grid-tile class="font-semibold text-xs md:text-sm xl:text-sm" i18n>Source</mat-grid-tile> -->
                   </mat-grid-list>
                 </mat-card>
-                <div *ngFor="let data of progressData | slice: page.p1:page.p1 + 10">
-                  <ws-analytics-content-card [contentData]="data"></ws-analytics-content-card>
-        
-                </div>
-                <mat-paginator *ngIf="progressData?.length > 10" showFirstLastButtons [length]="progressData.length"
-                  [pageSize]="10" (page)="changePage($event, 1)">
-                </mat-paginator>
-                <div *ngIf="progressData.length === 0" class="progress">
-                  <div class="progress-container">
-                    <div class="progress-content flex flex-center flex-wrapped margin-top-xl">
-                      <h4 i18n>No Collection progress Data found</h4>
+                <ng-container *ngIf="!progressData?.type">
+                  <div *ngFor="let data of progressData">
+                    <ws-analytics-content-card [contentData]="data" [displayChart]="true"></ws-analytics-content-card>
+                  </div>
+                  <mat-paginator *ngIf="progressData?.length > 10" showFirstLastButtons [length]="progressData.length"
+                    [pageSize]="10" (page)="changePage($event, 1)">
+                  </mat-paginator>
+                  <div *ngIf="progressData.length === 0" class="progress">
+                    <div class="progress-container">
+                      <div class="progress-content flex flex-center flex-wrapped margin-top-xl">
+                        <h4 i18n>No Collection progress Data found</h4>
+                      </div>
                     </div>
                   </div>
-                </div>
+                </ng-container>
               </div>
               <div *ngIf="courseFetchStatus === 'error'" class="learning-container text-center">
                 <h4 i18n class="text-center coming-soon-msg p-4 flex ws-mat-primary-text montserrat">
@@ -361,7 +343,7 @@
                     </mat-grid-tile>
                     <!-- <mat-grid-tile class="font-semibold text-xs md:text-sm xl:text-sm" i18n>Source</mat-grid-tile> -->
                   </mat-grid-list>
-                  <mat-grid-list *ngIf="!showTime && !showViews" cols="4" rowHeight="35px">
+                  <mat-grid-list *ngIf="!showTime && !showViews" cols="3" rowHeight="35px">
                     <mat-grid-tile class="font-semibold text-xs md:text-sm xl:text-sm" i18n>
                       <p class="text-inside-grid">Asset Name</p>
                     </mat-grid-tile>
@@ -380,7 +362,7 @@
                       <mat-grid-tile class="font-semibold text-xs md:text-sm xl:text-sm" i18n>
                         <p class="text-outside-grid">View Users</p>
                       </mat-grid-tile>
-                      <!-- <mat-grid-tile class="font-semibold text-xs md:text-sm xl:text-sm" i18n>Source</mat-grid-tile> -->
+                    <!-- <mat-grid-tile class="font-semibold text-xs md:text-sm xl:text-sm" i18n>Source</mat-grid-tile> -->
                   </mat-grid-list>
                 </mat-card>
                 <mat-card *ngIf="screenSizeIsLtMedium" class="fixed-padding">
@@ -427,19 +409,21 @@
                     <!-- <mat-grid-tile class="font-semibold text-xs md:text-sm xl:text-sm" i18n>Source</mat-grid-tile> -->
                   </mat-grid-list>
                 </mat-card>
-                <div *ngFor="let data of progressData | slice: page.p2:page.p2 + 10">
-                  <ws-analytics-content-card [contentData]="data"></ws-analytics-content-card>
-                </div>
-                <mat-paginator *ngIf="progressData?.length > 10" showFirstLastButtons [length]="progressData.length"
-                  [pageSize]="10" (page)="changePage($event, 2)">
-                </mat-paginator>
-                <div *ngIf="progressData.length === 0" class="progress">
-                  <div class="progress-container">
-                    <div class="progress-content flex flex-center margin-top-xl">
-                      <h4 i18n>No Asset progress data found</h4>
+                <ng-container *ngIf="!progressData?.type">
+                  <div *ngFor="let data of progressData | slice: page.p2:page.p2 + 10">
+                    <ws-analytics-content-card [contentData]="data" [displayChart]="true"></ws-analytics-content-card>
+                  </div>
+                  <mat-paginator *ngIf="progressData?.length > 10" showFirstLastButtons [length]="progressData.length"
+                    [pageSize]="10" (page)="changePage($event, 2)">
+                  </mat-paginator>
+                  <div *ngIf="progressData?.length === 0" class="progress">
+                    <div class="progress-container">
+                      <div class="progress-content flex flex-center margin-top-xl">
+                        <h4 i18n>No Asset progress data found</h4>
+                      </div>
                     </div>
                   </div>
-                </div>
+                </ng-container>
               </ng-container>
               <div *ngIf="modulesFetchStatus === 'error'" class="learning-container text-center">
                 <h4 i18n class="text-center coming-soon-msg p-4 flex ws-mat-primary-text montserrat">
@@ -496,7 +480,7 @@
                     <mat-grid-tile class="font-semibold text-xs md:text-sm xl:text-sm" i18n>
                       <p class="text-outside-grid">View Users</p>
                     </mat-grid-tile>
-                     <!-- <mat-grid-tile class="font-semibold text-xs md:text-sm xl:text-sm" i18n>Source</mat-grid-tile> -->
+                    <!-- <mat-grid-tile class="font-semibold text-xs md:text-sm xl:text-sm" i18n>Source</mat-grid-tile> -->
                   </mat-grid-list>
                   <mat-grid-list *ngIf="showTime && !showViews" cols="5" rowHeight="35px">
                     <mat-grid-tile class="font-semibold text-xs md:text-sm xl:text-sm" i18n>
@@ -538,7 +522,7 @@
                     <mat-grid-tile class="font-semibold text-xs md:text-sm xl:text-sm" i18n>
                       <p class="text-outside-grid">View Users</p>
                     </mat-grid-tile>
-                     <!-- <mat-grid-tile class="font-semibold text-xs md:text-sm xl:text-sm" i18n>Source</mat-grid-tile> -->
+                    <!-- <mat-grid-tile class="font-semibold text-xs md:text-sm xl:text-sm" i18n>Source</mat-grid-tile> -->
                   </mat-grid-list>
                 </mat-card>
                 <mat-card *ngIf="screenSizeIsLtMedium" class="fixed-padding">
@@ -570,9 +554,9 @@
                     <mat-grid-tile class="font-semibold text-xs md:text-sm xl:text-sm" i18n>
                       <p class="text-outside-grid">Total Users</p>
                     </mat-grid-tile>
-                    <!-- <mat-grid-tile class="font-semibold text-xs md:text-sm xl:text-sm" i18n>
+                    <mat-grid-tile class="font-semibold text-xs md:text-sm xl:text-sm" i18n>
                       <p class="text-outside-grid">Total Views</p>
-                    </mat-grid-tile> -->
+                    </mat-grid-tile>
                     <!-- <mat-grid-tile class="font-semibold text-xs md:text-sm xl:text-sm" i18n>
                       <p class="text-outside-grid">Average Time (mins)</p>
                     </mat-grid-tile> -->
@@ -585,19 +569,21 @@
                     <!-- <mat-grid-tile class="font-semibold text-xs md:text-sm xl:text-sm" i18n>Source</mat-grid-tile> -->
                   </mat-grid-list>
                 </mat-card>
-                <div *ngFor="let data of progressData | slice: page.p2:page.p2 + 10">
-                  <ws-analytics-content-card [contentData]="data"></ws-analytics-content-card>
-                </div>
-                <mat-paginator *ngIf="progressData?.length > 10" showFirstLastButtons [length]="progressData.length"
-                  [pageSize]="10" (page)="changePage($event, 2)">
-                </mat-paginator>
-                <div *ngIf="progressData.length === 0" class="progress">
-                  <div class="progress-container">
-                    <div class="progress-content flex flex-center margin-top-xl">
-                      <h4 i18n>No resource progress data found</h4>
+                <ng-container *ngIf="!progressData?.type">
+                  <div *ngFor="let data of progressData | slice: page.p2:page.p2 + 10">
+                    <ws-analytics-content-card [contentData]="data" [displayChart]="true"></ws-analytics-content-card>
+                  </div>
+                  <mat-paginator *ngIf="progressData?.length > 10" showFirstLastButtons [length]="progressData.length"
+                    [pageSize]="10" (page)="changePage($event, 2)">
+                  </mat-paginator>
+                  <div *ngIf="progressData.length === 0" class="progress">
+                    <div class="progress-container">
+                      <div class="progress-content flex flex-center margin-top-xl">
+                        <h4 i18n>No resource progress data found</h4>
+                      </div>
                     </div>
                   </div>
-                </div>
+                </ng-container>
               </ng-container>
               <div *ngIf="resourceFetchStatus === 'error'" class="learning-container text-center">
                 <h4 i18n class="text-center coming-soon-msg p-4 flex ws-mat-primary-text montserrat">
@@ -608,20 +594,89 @@
                 <mat-spinner></mat-spinner>
               </div>
             </mat-tab>
+            <mat-tab *ngIf="analytics?.subTabs?.blogs">
+              <ng-template mat-tab-label>
+                <span accesskey="3" class="font-bold" i18n>Blogs</span>
+              </ng-template>
+              <ng-container *ngIf="blogFetchStatus === 'done'">
+                <mat-card *ngIf="!screenSizeIsLtMedium" class="fixed-padding">
+                  <mat-grid-list *ngIf="showTime && showViews" cols="3" rowHeight="35px">
+                    <mat-grid-tile class="font-semibold text-xs md:text-sm xl:text-sm" i18n>
+                      <p class="text-inside-grid">Blog Name</p>
+                    </mat-grid-tile>
+                    <mat-grid-tile class="font-semibold text-xs md:text-sm xl:text-sm" i18n>
+                      <p class="text-outside-grid">Total Users</p>
+                    </mat-grid-tile>
+                    <mat-grid-tile class="font-semibold text-xs md:text-sm xl:text-sm" i18n>View User List</mat-grid-tile>
+                  </mat-grid-list>
+                  <mat-grid-list *ngIf="!showTime && showViews" cols="3" rowHeight="35px">
+                    <mat-grid-tile class="font-semibold text-xs md:text-sm xl:text-sm" i18n>
+                      <p class="text-inside-grid">Blog Name</p>
+                    </mat-grid-tile>
+                    <mat-grid-tile class="font-semibold text-xs md:text-sm xl:text-sm" i18n>
+                      <p class="text-outside-grid">Total Users</p>
+                    </mat-grid-tile>
+                    <mat-grid-tile class="font-semibold text-xs md:text-sm xl:text-sm" i18n>View User List</mat-grid-tile>
+                  </mat-grid-list>
+                  <mat-grid-list *ngIf="showTime && !showViews" cols="3" rowHeight="35px">
+                    <mat-grid-tile class="font-semibold text-xs md:text-sm xl:text-sm" i18n>
+                      <p class="text-inside-grid">Blog Name</p>
+                    </mat-grid-tile>
+                    <mat-grid-tile class="font-semibold text-xs md:text-sm xl:text-sm" i18n>
+                      <p class="text-outside-grid">Total Users</p>
+                    </mat-grid-tile>
+                    <mat-grid-tile class="font-semibold text-xs md:text-sm xl:text-sm" i18n>View User List</mat-grid-tile>
+                  </mat-grid-list>
+                  <mat-grid-list *ngIf="!showTime && !showViews" cols="3" rowHeight="35px">
+                    <mat-grid-tile class="font-semibold text-xs md:text-sm xl:text-sm" i18n>
+                      <p class="text-inside-grid">Blog Name</p>
+                    </mat-grid-tile>
+                    <mat-grid-tile class="font-semibold text-xs md:text-sm xl:text-sm" i18n>
+                      <p class="text-outside-grid">Total Users</p>
+                    </mat-grid-tile>
+                    <mat-grid-tile class="font-semibold text-xs md:text-sm xl:text-sm" i18n>View User List</mat-grid-tile>
+                  </mat-grid-list>
+                </mat-card>
+                <mat-card *ngIf="screenSizeIsLtMedium" class="fixed-padding">
+                  <mat-grid-list *ngIf="!showViews" cols="3" rowHeight="35px">
+                    <mat-grid-tile class="font-semibold text-xs md:text-sm xl:text-sm" i18n>
+                      <p class="text-inside-grid">Blog Name</p>
+                    </mat-grid-tile>
+                    <mat-grid-tile class="font-semibold text-xs md:text-sm xl:text-sm" i18n>
+                      <p class="text-outside-grid">Total Users</p>
+                    </mat-grid-tile>
+                    <mat-grid-tile class="font-semibold text-xs md:text-sm xl:text-sm" i18n>View User List</mat-grid-tile>
+                  </mat-grid-list>
+                </mat-card>
+                <div *ngFor="let data of progressData?.data">
+                  <ws-analytics-content-card [contentData]="{ type: progressData?.type, data: data}" [displayChart]="false"></ws-analytics-content-card>
+                </div>
+                <mat-paginator *ngIf="progressData?.length > 10" showFirstLastButtons [length]="progressData.length"
+                  [pageSize]="10" (page)="changePage($event, 2)">
+                </mat-paginator>
+                <div *ngIf="progressData?.data?.length === 0" class="progress">
+                  <div class="progress-container">
+                    <div class="progress-content flex flex-center margin-top-xl">
+                      <h4 i18n>No blog data found</h4>
+                    </div>
+                  </div>
+                </div>
+              </ng-container>
+              <div *ngIf="blogFetchStatus === 'error'" class="learning-container text-center">
+                <h4 i18n class="text-center coming-soon-msg p-4 flex ws-mat-primary-text montserrat">
+                  We are gathering the data to provide insights! Coming soon...
+                </h4>
+              </div>
+              <div *ngIf="blogFetchStatus === 'fetching'" class="flex flex-center margin-xl padding-xl">
+                <mat-spinner></mat-spinner>
+              </div>
+            </mat-tab>
           </mat-tab-group>
         </div>
       </ng-container>
     </mat-card>
   </ng-container>
 </ng-container>
-<!-- <ng-container>
-                <ws-analytics-content-card
-                        class="unique-users-card margin-m"
-                        (clickEvent)="onClick($event)"
-                        (infoClick)="openInfoPopup('user_accessed_content', 'User Details')"
-                      >
-                </ws-analytics-content-card>
-</ng-container> -->
 <ng-container *ngIf="onExpand">
   <mat-card class="margin-s">
     <button mat-raised-button color="primary" class="margin-top-xl margin-left-s" matTooltip="Back" i18n-matTooltip

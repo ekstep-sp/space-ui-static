@@ -4,7 +4,8 @@ import { LearningAnalyticsService } from '../../services/learning-analytics.serv
 import { MatPaginator } from '@angular/material/paginator'
 import { NsAnalytics } from '../../models/learning-analytics.model'
 import { TFetchStatus, ValueService } from '@ws-widget/utils'
-import { Subscription } from 'rxjs'
+import { Subscription, of } from 'rxjs'
+import { catchError, switchMap, map } from 'rxjs/operators'
 import { AnalyticsResolver } from '../../resolvers/learning-analytics-filters.resolver'
 import { ActivatedRoute } from '@angular/router'
 import { GraphGeneralService, IGraphWidget, ROOT_WIDGET_CONFIG } from '@ws-widget/collection'
@@ -26,6 +27,7 @@ export class ContentComponent implements OnInit, OnDestroy {
   courseFetchStatus: TFetchStatus = 'fetching'
   modulesFetchStatus: TFetchStatus = 'fetching'
   resourceFetchStatus: TFetchStatus = 'fetching'
+  blogFetchStatus: TFetchStatus = 'fetching'
   getUserLearning = true
   error = false
   filterArray: NsAnalytics.IFilterObj[] = []
@@ -42,6 +44,7 @@ export class ContentComponent implements OnInit, OnDestroy {
     p2: 0,
   }
   onExpand = false
+  sub$: Subscription | null = null
   progressData1 = [
     { status: false, data: [] },
     { status: false, data: [] },
@@ -717,20 +720,54 @@ export class ContentComponent implements OnInit, OnDestroy {
     } else if (index === 2 && this.analytics.subTabs.modules && this.analytics.subTabs.resources) {
       contentType = 'Resource'
       this.resourceFetchStatus = 'fetching'
+    } else if (index === 3 && this.analytics.subTabs.blogs) {
+      contentType = 'blogs'
+      this.blogFetchStatus = 'fetching'
     }
    await this.getContentDetails(startDate, endDate, 'en', 'Live')
-    this.analyticsSrv
+   this.processContent(endDate, startDate, contentType as any, filterArray, searchQuery)
+  }
+
+  processContent(endDate: string, startDate: string, contentType: any, filterArray: any[], searchQuery: string) {
+    if (contentType === 'blogs') {
+      // tslint:disable: no-debugger
+      debugger
+      // get blog data and then parse it properly
+      this.sub$ = this.analyticsSrv.socialForumIDS(endDate, startDate, contentType, true).pipe(
+        switchMap((source: any) => this.analyticsSrv.getSocialAnalysisUsingIDS(source.data, contentType, true)),
+        map((response: any) => {
+          const type = response.type
+          const newData = response.data.map((data: any) => {
+            return { ...data, totalUsers: data.user_visits.length }
+          })
+          return { type, data: newData }
+        }),
+        catchError(e => {
+        // tslint:disable-next-line: no-console
+        console.log('An Error occured while fetching details from the server', e)
+        return of({ type: contentType, data: [] })
+      })).subscribe((response: any) => {
+        // tslint:disable-next-line: no-console
+        console.log('recieved final data as ', response)
+        this.progressData = response
+        this.blogFetchStatus = 'done'
+      // tslint:disable-next-line: align
+      }, err => {
+        // tslint:disable-next-line: no-console
+        console.error('An error occured while retrieving data ', err)
+        this.blogFetchStatus = 'done'
+        this.progressData = {
+          type: contentType,
+          data: [],
+        }
+      })
+    } else {
+      this.analyticsSrv
       .content(endDate, startDate, contentType, filterArray, searchQuery)
       .subscribe(
         (history: any) => {
           this.userProgressData = history
           this.progressData = []
-          /* if (history.learning_history[0].total_view) {
-            this.showViews = true
-          }
-          if (history.learning_history[0].avg_time) {
-            this.showTime = true
-          } */
           this.myProgress = history.learning_history
           this.othersProgress = history.learning_history_progress_range
           this.myProgress.map((cur: any, i: any) => {
@@ -785,6 +822,9 @@ export class ContentComponent implements OnInit, OnDestroy {
                 this.modulesFetchStatus = 'done'
               } else if (contentType === 'Resource') {
                 this.resourceFetchStatus = 'done'
+                this.blogFetchStatus = 'done'
+              } else if (contentType === 'blogs') {
+                this.blogFetchStatus = 'done'
               }
             },
             // tslint:disable-next-line:align
@@ -807,10 +847,13 @@ export class ContentComponent implements OnInit, OnDestroy {
             this.modulesFetchStatus = 'error'
           } else if (contentType === 'Resource') {
             this.resourceFetchStatus = 'error'
+          } else if (contentType === 'Blog') {
+            this.blogFetchStatus = 'done'
           }
           this.userFetchStatus = 'error'
         },
       )
+    }
   }
   changePage(event: PageEvent, num: number) {
     if (num === 1) {
@@ -831,6 +874,9 @@ export class ContentComponent implements OnInit, OnDestroy {
     }
     if (this.removeEventSubscription) {
       this.removeEventSubscription.unsubscribe()
+    }
+    if (this.sub$) {
+      this.sub$.unsubscribe()
     }
   }
   getUserDataFromConfig() {
