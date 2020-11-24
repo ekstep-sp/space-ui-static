@@ -9,7 +9,7 @@
       [allowMention]="allowMention"
       [parentPostCreatorId]="contentCreatorId"
       (triggerReplyNotification)="triggerReplyCommentNotification($event)"
-      *ngFor="let reply of discussionResult.result; let i = index"
+      *ngFor="let reply of discussionResult.result; let i = index;trackBy:trackByFn"
       [widgetData]="widgetData"
     ></ws-widget-discussion-post>
     <!-- <div
