@@ -85,8 +85,7 @@ export class BtnFeatureComponent extends WidgetBaseComponent
       !this.widgetData.actionBtn &&
       this.widgetData.actionBtnId &&
       this.configurationsSvc.appsConfig
-    ) 
-    {
+    ) {
       this.widgetData.actionBtn = this.configurationsSvc.appsConfig.features[this.widgetData.actionBtnId]
       if (this.widgetData.actionBtn && this.widgetData.actionBtn.badgeEndpoint) {
         this.navigationSubs = this.router.events.subscribe((e: Event) => {

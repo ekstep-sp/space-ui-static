@@ -108,16 +108,11 @@ export class InfoDialogComponent implements OnInit {
         ],
       )
     }
-    else if(eventData.event == "getting_users_content")
-    {
-      
-        return Promise.resolve(
-           
-            eventData.userList
-          
+    if (eventData.event === 'getting_users_content') {
+    return Promise.resolve(
+    eventData.userList
         )
-      
-    }
+      }
     return this.analyticsSrv.usersInsights(
       eventData.event,
       eventData.endDate,

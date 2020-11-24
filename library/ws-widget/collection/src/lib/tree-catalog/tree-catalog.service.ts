@@ -3,7 +3,7 @@ import { Observable, of } from 'rxjs'
 import { HttpClient } from '@angular/common/http'
 import { tap } from 'rxjs/operators'
 import { NSSearch } from '../_services/widget-search.model'
-import { ConfigurationsService } from '@ws-widget/utils/src/public-api';
+import { ConfigurationsService } from '@ws-widget/utils/src/public-api'
 
 const API_END_POINTS = {
   catalog: '/apis/protected/v8/catalog',

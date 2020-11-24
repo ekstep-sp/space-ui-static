@@ -1809,5 +1809,4 @@ export class HomeComponent implements OnInit, OnDestroy {
       this.totalUsersFromUserTable = data.DATA
     }
   }
-  
 }

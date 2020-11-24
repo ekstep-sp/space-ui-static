@@ -230,7 +230,7 @@ export class DiscussionPostComponent implements OnInit {
           (this.conversationRequest.pgNo as number) += 1
         }
       },
-      _ => {
+      _e => {
         this.replyFetchStatus = 'error'
       })
   }
