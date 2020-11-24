@@ -28,17 +28,23 @@
 
   <div class="flex margin-top-s">
     <div *ngIf="!editMode" class="margin-left-s margin-auto line-space" [innerHTML]="reply.postContent.body"></div>
-    <div *ngIf="reply.activity && reply.status === 'Active'">
+    <div *ngIf="!editMode && reply.activity && reply.status === 'Active'">
       <ws-widget-btn-social-vote [postId]="reply.id" [activity]="reply.activity" [voteType]="'upVote'"
         [postCreatorId]="reply?.postCreator?.postCreatorId"></ws-widget-btn-social-vote>
     </div>
   </div>
   <div *ngIf="editMode" class="margin-top-s padding-s mat-primary-border">
     <!-- [minLength]="'10'" -->
-    <ws-widget-editor-quill  [showMention]="allowMention"
-    (mentionsData)="replyEditMentions = $event"
-    [htmlText]="reply.postContent.body" (textData)="onReplyTextChange($event)">
-    </ws-widget-editor-quill>
+    <div class="flex">
+      <ws-widget-editor-quill [showMention]="allowMention" (mentionsData)="replyEditMentions = $event"
+        class="margin-left-s margin-auto line-space" [htmlText]="reply.postContent.body"
+        (textData)="onReplyTextChange($event)">
+      </ws-widget-editor-quill>
+      <div *ngIf="editMode && reply.activity && reply.status === 'Active'">
+        <ws-widget-btn-social-vote [postId]="reply.id" [activity]="reply.activity" [voteType]="'upVote'"
+          [postCreatorId]="reply?.postCreator?.postCreatorId"></ws-widget-btn-social-vote>
+      </div>
+    </div>
     <div class="text-right">
       <button name="discussion-reply-update-button" type="button" class="margin-top-s" [disabled]="!replyPostEnabled"
         mat-raised-button color="primary" i18n (click)="editReply(editFailMsg.value)">
