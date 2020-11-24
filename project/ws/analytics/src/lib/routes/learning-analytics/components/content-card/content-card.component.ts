@@ -89,6 +89,13 @@ export class ContentCardComponent implements OnChanges {
     }
       dummyUsers(): Promise<any>
       {
+        if(this.contentData.type == 'blogs')
+        {
+          return Promise.resolve(
+            this.userList =this.contentData.data.user_visits.map(function(wid: { userID: any }){return wid.userID})
+            )
+        }
+        else{
         return Promise.resolve(
           this.userList =[
           '7b710f74-8f84-427f-bc13-f4220ed2a1c1',
@@ -96,8 +103,10 @@ export class ContentCardComponent implements OnChanges {
           'efc891e6-b464-4efb-9a4f-64eed7c7b339',
           'c7e3179f-6497-4b39-a923-e949459d53e3',
           '95e7fec9-e55d-4350-9253-831c71183574',
-        ])
+          'acbf4053-c126-4e85-a0bf-252a896535ea'
           
+        ])
+      }
       }
      
   

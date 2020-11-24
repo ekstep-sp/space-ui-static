@@ -102,7 +102,7 @@ export class LearningAnalyticsService {
   getSocialAnalysisUsingIDS(blogIdData: any[], type: 'blogs' | 'qna', dummy = false) {
     // store the names in set and then recover the names from set
     // tslint:disable: no-debugger
-    debugger
+    
     this.nameMap = new Map()
     const ids = blogIdData.map(data => {
       this.nameMap.set(data.id, data.title)
@@ -468,13 +468,13 @@ export class LearningAnalyticsService {
     }
     return sub$.pipe(
       catchError(e => {
-        debugger
+        
          // tslint:disable-next-line: no-console
         console.log('some error occured here ', e)
         return of({ result: { data: [] } })
       }),
       map((values: any) => {
-        debugger
+        
       const newValues = {
         type: values.result.type,
         data: values.result.data.map((v: any) => {
@@ -489,7 +489,7 @@ export class LearningAnalyticsService {
     }), tap(_v => {
       // tslint:disable-next-line: no-console
       console.log('recieved final values as ', _v)
-      debugger
+      
       this.nameMap.clear()
     }
       ))
