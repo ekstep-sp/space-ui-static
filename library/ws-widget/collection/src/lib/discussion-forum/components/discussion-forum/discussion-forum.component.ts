@@ -145,7 +145,7 @@ export class DiscussionForumComponent extends WidgetBaseComponent
     })
     // console.log(this.widgetData, this.discussionRequest)
   }
-  trackByFn(index: any, reply: any) {
+  trackByFn(_index: any, reply: any) {
     return reply.id // or item.id
   }
   fetchDiscussion(refresh = false) {

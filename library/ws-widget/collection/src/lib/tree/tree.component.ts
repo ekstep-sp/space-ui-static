@@ -63,7 +63,6 @@ export class TreeComponent extends WidgetBaseComponent
  })
  })
  this.nestedDataSource.data = this.finalCatalogItems
- console.log(this.finalCatalogItems)
 })
 // console.log(this.nestedDataSource.data)
    }
