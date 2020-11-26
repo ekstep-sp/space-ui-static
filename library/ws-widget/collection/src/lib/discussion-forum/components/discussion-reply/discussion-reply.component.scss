@@ -1,4 +1,6 @@
 @import 'ws-vars';
+@import 'ws-mixins';
+
 
 .reply-container {
   // display: flex;
@@ -35,3 +37,14 @@
     align-items: flex-start;
   }
 }
+  .isMobile {
+    @include breakpoint-xs {
+      flex-direction: column !important;
+    }
+   }
+   .isWeb {
+   display: flex !important;
+   @include breakpoint-xs {
+    display: none !important;
+   }
+   }
