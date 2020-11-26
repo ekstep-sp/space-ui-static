@@ -102,6 +102,7 @@
         [showMention]="allowMention"
         (mentionsData)="replyCommentMentions = $event"
         (textData)="onReplyTextChange($event)"
+        [placeholdercss]="true"
           #discussionReplyEditor></ws-widget-editor-quill>
         <div class="text-right padding-top-s mat-app-background">
           <button name="discussion-post-reply-button" [disabled]="!isValidReply || isPostingReply"
