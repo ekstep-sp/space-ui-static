@@ -13,8 +13,8 @@ const LA_API_END_POINTS = {
   TIME_SPENT: `${PROTECTED_SLAG_V8}/la/timespent`,
   CONTENT: `${PROTECTED_SLAG_V8}/la/content`,
   HOURLY: `${PROTECTED_SLAG_V8}/la/hourlyUsage`,
-  SOCIAL_FORUM_ANALYSIS: (type: 'blogs' | 'qna') => `${PROTECTED_SLAG_V8}/la/social-forum/${type}/analytics`,
-  SOCIAL_FORUM_IDS: (blogOrQna: string) => `/apis/protected/v8/post/list/${blogOrQna}` ,
+  SOCIAL_FORUM_ANALYSIS: (_type: 'blogs' | 'qna') => `${PROTECTED_SLAG_V8}/la/social-forum/blogs/usage`,
+  SOCIAL_FORUM_IDS: (blogOrQna: string) => `/apis/protected/v8/social/post/list/${blogOrQna}` ,
   INSIGHTS: {
     USER_INSIGHTS: `${PROTECTED_SLAG_V8}/la/userinsights`,
     TOTAL_USER_INSIGHTS: `${PROTECTED_SLAG_V8}/la/totaluserinsights`,
@@ -102,7 +102,7 @@ export class LearningAnalyticsService {
   getSocialAnalysisUsingIDS(blogIdData: any[], type: 'blogs' | 'qna', dummy = false) {
     // store the names in set and then recover the names from set
     // tslint:disable: no-debugger
-        this.nameMap = new Map()
+    this.nameMap = new Map()
     const ids = blogIdData.map(data => {
       this.nameMap.set(data.id, data.title)
       return data.id
@@ -467,7 +467,7 @@ export class LearningAnalyticsService {
     }
     return sub$.pipe(
       catchError(e => {
-        // tslint:disable-next-line: no-console
+         // tslint:disable-next-line: no-console
         console.log('some error occured here ', e)
         return of({ result: { data: [] } })
       }),
@@ -475,9 +475,10 @@ export class LearningAnalyticsService {
       const newValues = {
         type: values.result.type,
         data: values.result.data.map((v: any) => {
+          const title = this.nameMap.get(v.key.split('/').pop())
         return {
           ...v,
-          title: this.nameMap.get(v.key.split('/').pop()),
+          title:  title ? title.replace('<p>', '').replace('</p>', '') : title,
         }
       }),
     }
@@ -485,18 +486,19 @@ export class LearningAnalyticsService {
     // tslint:disable-next-line: align
     }), tap(_v => {
       // tslint:disable-next-line: no-console
+      console.log('recieved final values as ', _v)
       this.nameMap.clear()
     }
       ))
   }
 
   socialForumIDS(
-    selectedEndDate: string,
-    selectedStartDate: string,
+    _selectedEndDate: string,
+    _selectedStartDate: string,
     contentType: string,
     dummy = false
   ): Observable<any> {
-    const socialType: 'blogs' | 'qna' = contentType || 'blogs' as any
+    const socialType: 'blog' | 'qna' = contentType || 'blog' as any
     if (dummy) {
       return of({
         ok: true,
@@ -566,8 +568,12 @@ export class LearningAnalyticsService {
     }
     return this.http.get<null>(
       // tslint:disable-next-line: max-line-length
-      `${LA_API_END_POINTS.SOCIAL_FORUM_IDS(socialType)}?endDate=${selectedEndDate}&startDate=${selectedStartDate}`,
-    )
+      `${LA_API_END_POINTS.SOCIAL_FORUM_IDS(socialType)}?endDate=${_selectedEndDate}&startDate=${_selectedStartDate}`,
+      // `${LA_API_END_POINTS.SOCIAL_FORUM_IDS(socialType)}`,
+    ).pipe(tap(d => {
+      // tslint:disable-next-line: no-console
+      console.log('data recieved initially looks like ', d)
+    }))
   }
 
   hourlyFilterData(

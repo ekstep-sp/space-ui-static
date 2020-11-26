@@ -682,10 +682,10 @@
                     </mat-grid-tile>
                   </mat-grid-list>
                 </mat-card>
-                <div *ngFor="let data of progressData?.data">
+                <div *ngFor="let data of progressData?.data | slice: page.p2:page.p2 + 10">
                   <ws-analytics-content-card [contentData]="{ type: progressData?.type, data: data}" [displayChart]="false"></ws-analytics-content-card>
                 </div>
-                <mat-paginator *ngIf="progressData?.length > 10" showFirstLastButtons [length]="progressData.length"
+                <mat-paginator *ngIf="progressData?.data?.length > 10" showFirstLastButtons [length]="progressData?.data?.length"
                   [pageSize]="10" (page)="changePage($event, 2)">
                 </mat-paginator>
                 <div *ngIf="progressData?.data?.length === 0" class="progress">

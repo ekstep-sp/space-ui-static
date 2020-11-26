@@ -95,7 +95,7 @@ p {
 .mat-error {
   font-family: $font-family-montserrat !important;
 }
-a[target='_blank'] {
+a[target='_blank'], a[target='_self'] {
   font-weight: bold;
   color: #865ba0 !important;
 }

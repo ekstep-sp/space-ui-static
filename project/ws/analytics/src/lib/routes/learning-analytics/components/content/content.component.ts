@@ -37,6 +37,7 @@ export class ContentComponent implements OnInit, OnDestroy {
   @Input() title!: string
   @Output() infoClick = new EventEmitter<string>()
   totalUsersFromUserTable: any = []
+  currentTab = 0
 
   page = {
     p1: 0,
@@ -331,7 +332,7 @@ export class ContentComponent implements OnInit, OnDestroy {
           value: filterEvent.filterName,
         }
         this.filterArray.push(filter)
-        this.getFilteredCourse(0, this.endDate, this.startDate, this.searchQuery, this.filterArray)
+        this.getFilteredCourse(this.currentTab, this.endDate, this.startDate, this.searchQuery, this.filterArray)
       },
     )
     this.removeEventSubscription = this.resolver.removeFilterEventChangeSubject.subscribe(
@@ -353,21 +354,28 @@ export class ContentComponent implements OnInit, OnDestroy {
             }
           })
         }
-        this.getFilteredCourse(0, this.endDate, this.startDate, this.searchQuery, this.filterArray)
+        this.getFilteredCourse(this.currentTab, this.endDate, this.startDate, this.searchQuery, this.filterArray)
       },
     )
     this.dateEventSubscription = this.resolver.dateEventChangeSubject.subscribe(
       (dateEvent: any) => {
         this.startDate = dateEvent.startDate
         this.endDate = dateEvent.endDate
-        this.getFilteredCourse(0, this.endDate, this.startDate, this.searchQuery, this.filterArray)
+        if (this.currentTab === 3) {
+          const startDateForBlog = this.startDate.indexOf('T') > -1 ? new Date(this.startDate).toISOString().split('T')[0] : this.startDate
+          const endDateForBlog = this.endDate.indexOf('T') > -1 ? new Date(this.endDate).toISOString().split('T')[0] : this.endDate
+          // call it exclusively for blog tab
+          this.getFilteredCourse(this.currentTab, endDateForBlog, startDateForBlog, this.searchQuery, this.filterArray)
+        } else {
+          this.getFilteredCourse(this.currentTab, this.endDate, this.startDate, this.searchQuery, this.filterArray)
+        }
       },
     )
 
     this.searchEventSubscription = this.resolver.searchEventChangeSubject.subscribe(
       (searchEvent: any) => {
         this.searchQuery = searchEvent.searchQuery
-        this.getFilteredCourse(0, this.endDate, this.startDate, this.searchQuery, this.filterArray)
+        this.getFilteredCourse(this.currentTab, this.endDate, this.startDate, this.searchQuery, this.filterArray)
       },
     )
   }
@@ -390,6 +398,7 @@ export class ContentComponent implements OnInit, OnDestroy {
       })
   }
   onTabChangeClient(selectedIndex: number) {
+    this.currentTab = selectedIndex
     this.getFilteredCourse(
       selectedIndex,
       this.endDate,
@@ -720,40 +729,54 @@ export class ContentComponent implements OnInit, OnDestroy {
       contentType = 'Resource'
       this.resourceFetchStatus = 'fetching'
     } else if (index === 3 && this.analytics.subTabs.blogs) {
-      contentType = 'blogs'
+      contentType = 'blog'
       this.blogFetchStatus = 'fetching'
     }
    await this.getContentDetails(startDate, endDate, 'en', 'Live')
    this.processContent(endDate, startDate, contentType as any, filterArray, searchQuery)
   }
 
+  filterBlogsBasedOnSearchQuery(dataToProcess: any, _searchQuery: string, _filterArray: any[], objectRef = 'title') {
+    const filteredData = dataToProcess.data.filter((obj: any) => {
+      if (obj[objectRef] && obj[objectRef].includes(_searchQuery)) {
+        return true
+      }
+      return false
+    })
+    return {
+      ...dataToProcess,
+      data: filteredData,
+    }
+  }
+
   processContent(endDate: string, startDate: string, contentType: any, filterArray: any[], searchQuery: string) {
-    if (contentType === 'blogs') {
+    if (contentType === 'blog') {
       // tslint:disable: no-debugger
       // get blog data and then parse it properly
-      this.sub$ = this.analyticsSrv.socialForumIDS(endDate, startDate, contentType, true).pipe(
-        switchMap((source: any) => this.analyticsSrv.getSocialAnalysisUsingIDS(source.data, contentType, true)),
+      this.sub$ = this.analyticsSrv.socialForumIDS(endDate, startDate, contentType).pipe(
+        switchMap((source: any) => this.analyticsSrv.getSocialAnalysisUsingIDS(source.data, contentType)),
         map((response: any) => {
-          const type = response.type
+          const type = response.type || contentType
           const newData = response.data.map((data: any) => {
             return { ...data, totalUsers: data.user_visits.length }
           })
           return { type, data: newData }
         }),
-        catchError(e => {
+        catchError(_e => {
         // tslint:disable-next-line: no-console
-        console.log('An Error occured while fetching details from the server', e)
+        // console.log('An Error occured while fetching details from the server', e)
         return of({ type: contentType, data: [] })
       })).subscribe((response: any) => {
         // tslint:disable-next-line: no-console
-        console.log('recieved final data as ', response)
-        this.progressData = response
+        // console.log('recieved final data as ', response)
+        // filter if there is any sear query present
+        this.progressData = this.filterBlogsBasedOnSearchQuery(response, searchQuery, filterArray)
         this.blogFetchStatus = 'done'
       // tslint:disable-next-line: align
-      }, err => {
+      }, _err => {
         // tslint:disable-next-line: no-console
-        console.error('An error occured while retrieving data ', err)
-        this.blogFetchStatus = 'done'
+        // console.error('An error occured while retrieving data ', err)
+        this.blogFetchStatus = 'error'
         this.progressData = {
           type: contentType,
           data: [],
@@ -781,6 +804,7 @@ export class ContentComponent implements OnInit, OnDestroy {
                 avgTime: cur.avg_time / 60,
                 totalViews: cur.total_view,
                 completed: cur.num_of_users || 0,
+                users_accessed: cur.users_accessed || [],
                 legend: i === 0 ? true : false,
                 contentUrl: cur.is_external
                   ? cur.content_url

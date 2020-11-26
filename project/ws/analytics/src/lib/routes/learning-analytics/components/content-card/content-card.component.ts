@@ -1,4 +1,4 @@
-import { Output, EventEmitter, Component, Input, OnChanges } from '@angular/core'
+import { Output, EventEmitter, Component, Input, OnInit } from '@angular/core'
 import { ROOT_WIDGET_CONFIG } from '@ws-widget/collection'
 import { NsAnalytics } from '../../models/learning-analytics.model'
 import { InfoDialogComponent } from '../info-dialog/info-dialog.component'
@@ -8,7 +8,7 @@ import { MatDialog } from '@angular/material'
   templateUrl: './content-card.component.html',
   styleUrls: ['./content-card.component.scss'],
 })
-export class ContentCardComponent implements OnChanges {
+export class ContentCardComponent implements OnInit {
   @Input() pieData: any
   @Input() completed = 0
   @Input() source = ''
@@ -42,7 +42,7 @@ export class ContentCardComponent implements OnChanges {
     public dialog: MatDialog,
   ) { }
 
-  ngOnChanges() {
+  ngOnInit() {
     if (this.contentData.hasOwnProperty('type') && this.contentData.type) {
       this.displayChart = false
       this.nonGraphData = this.contentData.data
@@ -52,11 +52,10 @@ export class ContentCardComponent implements OnChanges {
     }
   }
   async triggerInfoPopup(showUserDetailsFromUserTable = false) {
-         const eventType = 'getting_users_content'
+      const eventType = 'getting_users_content'
       const titleToUse = 'Users List'
       // await this.getAllUsers()
       // this.dummyUsers();
-      this.dummyUsers()
       this.openDialog({
         showUserDetailsFromUserTable,
         event: eventType,
@@ -67,7 +66,7 @@ export class ContentCardComponent implements OnChanges {
         endDate: this.endDate,
         searchQuery: this.searchQuery,
         filters: this.filterArray,
-        userList: this.userList,
+        userList: await this.getAllUsers(),
       })
     }
 
@@ -79,26 +78,11 @@ export class ContentCardComponent implements OnChanges {
       })
     }
     async getAllUsers(): Promise<any> {
-            return Promise.resolve(
-        this.userList = [this.contentData.data]
-      )
+      if (this.displayChart) {
+        return this.contentData.users_accessed.map((user: any) => user.key)
+      } return this.contentData.data.user_visits.map((user: any) => user.userID)
     }
-      dummyUsers(): Promise<any> {
-        if (this.contentData.type === 'blogs') {
-          return Promise.resolve(
-            this.userList = this.contentData.data.user_visits.map((wid: { userID: any }) => wid.userID)
-            )
-        }
-        return Promise.resolve(
-          this.userList = [
-          '7b710f74-8f84-427f-bc13-f4220ed2a1c1',
-          '0e419282-16aa-4b03-8d81-a1f93175f7f7',
-          'efc891e6-b464-4efb-9a4f-64eed7c7b339',
-          'c7e3179f-6497-4b39-a923-e949459d53e3',
-          '95e7fec9-e55d-4350-9253-831c71183574',
-          'acbf4053-c126-4e85-a0bf-252a896535ea',
-           ])
-      }
+
     graphData(pieData: any) {
     this.labels = ['0-25%', '25-50%', '50-75%', '75-100%']
     pieData.forEach((cur: any) => {

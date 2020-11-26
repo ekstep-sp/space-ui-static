@@ -1,9 +1,9 @@
 <mat-card class="plans-card-module goal-class">
   <mat-grid-list *ngIf="!displayChart" cols="3" rowHeight="70px">
     <mat-grid-tile>
-      <div class="text-inside-grid">
-        <a [routerLink]="'/'+ nonGraphData?.key"><span
-            class="mat-body-1">{{ nonGraphData?.title}}</span></a>
+      <div class="text-inside-grid block">
+        <a [routerLink]="'/'+ nonGraphData?.key" target="_self"><span
+            class="mat-body-1 ellipsis">{{ nonGraphData?.title}}</span></a>
       </div>
     </mat-grid-tile>
     <mat-grid-tile>
