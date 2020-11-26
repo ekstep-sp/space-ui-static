@@ -83,7 +83,6 @@ export class EditorQuillComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
-console.log(this.placeholdercss)
     if (this.post) {
       this.placeholder = 'Add a post ...'
     }
