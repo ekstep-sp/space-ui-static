@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http'
+import { HttpClient, HttpHeaders } from '@angular/common/http'
 import { Injectable } from '@angular/core'
 import { Observable, of } from 'rxjs'
 import { NsAnalytics } from '../models/learning-analytics.model'
@@ -13,7 +13,7 @@ const LA_API_END_POINTS = {
   TIME_SPENT: `${PROTECTED_SLAG_V8}/la/timespent`,
   CONTENT: `${PROTECTED_SLAG_V8}/la/content`,
   HOURLY: `${PROTECTED_SLAG_V8}/la/hourlyUsage`,
-  SOCIAL_FORUM_ANALYSIS: (_type: 'blogs' | 'qna') => `${PROTECTED_SLAG_V8}/la/social-forum/blogs/usage`,
+  SOCIAL_FORUM_ANALYSIS: (_type: 'blogs' | 'qna') => `${PROTECTED_SLAG_V8}/la/socialforum/blogs/usage`,
   SOCIAL_FORUM_IDS: (blogOrQna: string) => `/apis/protected/v8/social/post/list/${blogOrQna}` ,
   INSIGHTS: {
     USER_INSIGHTS: `${PROTECTED_SLAG_V8}/la/userinsights`,
@@ -463,7 +463,10 @@ export class LearningAnalyticsService {
         },
     })
     } else {
-      sub$ = this.http.post(LA_API_END_POINTS.SOCIAL_FORUM_ANALYSIS(type), { id: ids })
+      const headers = new HttpHeaders({
+        id: ids.join(','),
+      })
+      sub$ = this.http.get(LA_API_END_POINTS.SOCIAL_FORUM_ANALYSIS(type), { headers })
     }
     return sub$.pipe(
       catchError(e => {
