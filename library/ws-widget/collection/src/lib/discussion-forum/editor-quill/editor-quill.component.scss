@@ -1,3 +1,5 @@
+@import 'ws-mixins';
+
 .quill-editor {
   display: block;
   height: 100%;
@@ -19,6 +21,15 @@
   max-height:150px !important;
   font-size: 16px!important;
 }
-
+.customClass .ql-editor {
+  @include breakpoint-xs {
+    min-height: 200px !important;
+    max-height: unset !important
+    }
 }
-
+}
+.customClass {
+  @include breakpoint-xs {
+  min-height: 200px !important;
+  }
+}
