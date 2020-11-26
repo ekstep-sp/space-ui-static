@@ -71,3 +71,24 @@ table {
 .montserrat {
   font-family: montserrat, sans-serif !important;
 }
+
+@media screen and (max-width:768px){
+  .responsive-grid-list{
+    .responsive-grid-tile{
+      width:25% !important;
+      text-align: center !important;
+      &:nth-child(1){
+        left:0 !important;
+      }
+      &:nth-child(2){
+        left: 25% !important;
+      }
+      &:nth-child(3){
+        left: 50% !important;
+      }
+      &:nth-child(4){
+        left: 75% !important;
+      }
+    }
+  }
+}
