@@ -24,6 +24,10 @@
 .line-space {
   line-height: 30px;
 }
+
+.align-properly {
+    flex-direction: row;
+  }
 @media only screen and (max-width:469px){
   .datePost{
     justify-content: space-between;
@@ -37,14 +41,17 @@
     align-items: flex-start;
   }
 }
-  .isMobile {
-    @include breakpoint-xs {
-      flex-direction: column !important;
+
+@media only screen and (max-width: 281px) {
+  .align-properly {
+    flex-direction: column;
+    text-align: end;
+    .isMobile {
+      margin-top: 15px;
     }
-   }
-   .isWeb {
-   display: flex !important;
-   @include breakpoint-xs {
-    display: none !important;
-   }
-   }
+  }
+  .full-width-fold {
+    width: 100%;
+    margin-left: 0 !important;
+  }
+}

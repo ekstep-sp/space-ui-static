@@ -35,7 +35,7 @@
   </div>
   <div *ngIf="editMode" class="margin-top-s padding-s mat-primary-border">
     <!-- [minLength]="'10'" -->
-    <div class="flex">
+    <div class="flex align-properly">
       <ws-widget-editor-quill [showMention]="allowMention" (mentionsData)="replyEditMentions = $event"
         class="margin-left-s margin-auto line-space" [htmlText]="reply.postContent.body"
         (textData)="onReplyTextChange($event)">
@@ -46,11 +46,11 @@
       </div>
     </div>
     <div class="text-right">
-      <button name="discussion-reply-update-button" type="button" class="margin-top-s" [disabled]="!replyPostEnabled"
+      <button name="discussion-reply-update-button" type="button" class="margin-top-s full-width-fold" [disabled]="!replyPostEnabled"
         mat-raised-button color="primary" i18n (click)="editReply(editFailMsg.value)">
         Update
       </button>
-      <button name="discussion-reply-cancel-update-button" type="button" class="margin-top-s margin-left-s"
+      <button name="discussion-reply-cancel-update-button" type="button" class="margin-top-s margin-left-s full-width-fold"
         mat-stroked-button color="primary" i18n (click)="editMode = false">
         Cancel
       </button>
