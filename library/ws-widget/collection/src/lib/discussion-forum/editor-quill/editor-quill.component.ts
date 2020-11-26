@@ -30,6 +30,8 @@ export class EditorQuillComponent implements OnInit, OnDestroy {
   @Input() post ?= false
   @Input() showMention = false
   @Input() placeholder = ''
+  @Input() placeholdercss = false
+
   text = ''
 
   reset = false
@@ -81,7 +83,7 @@ export class EditorQuillComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
-
+console.log(this.placeholdercss)
     if (this.post) {
       this.placeholder = 'Add a post ...'
     }

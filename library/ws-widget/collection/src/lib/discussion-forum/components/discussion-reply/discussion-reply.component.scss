@@ -1,4 +1,6 @@
 @import 'ws-vars';
+@import 'ws-mixins';
+
 
 .reply-container {
   // display: flex;
@@ -22,6 +24,10 @@
 .line-space {
   line-height: 30px;
 }
+
+.align-properly {
+    flex-direction: row;
+  }
 @media only screen and (max-width:469px){
   .datePost{
     justify-content: space-between;
@@ -33,5 +39,19 @@
     flex-direction: column;
     justify-content: flex-start;
     align-items: flex-start;
+  }
+}
+
+@media only screen and (max-width: 281px) {
+  .align-properly {
+    flex-direction: column;
+    text-align: end;
+    .isMobile {
+      margin-top: 15px;
+    }
+  }
+  .full-width-fold {
+    width: 100%;
+    margin-left: 0 !important;
   }
 }
