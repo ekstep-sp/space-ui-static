@@ -1,5 +1,25 @@
 <mat-card class="plans-card-module goal-class">
-  <mat-grid-list *ngIf="!contentData?.screenSizeIsLtMedium && contentData?.totalViews && contentData?.avgTime" cols="5"
+  <mat-grid-list *ngIf="!displayChart" cols="3" rowHeight="70px">
+    <mat-grid-tile>
+      <div class="text-inside-grid block">
+        <a [routerLink]="'/'+ nonGraphData?.key" target="_self"><span
+            class="mat-body-1 ellipsis">{{ nonGraphData?.title}}</span></a>
+      </div>
+    </mat-grid-tile>
+    <mat-grid-tile>
+      <p class="mat-body-1">{{ nonGraphData?.totalUsers }}</p>
+    </mat-grid-tile>
+    <mat-grid-tile style="overflow: visible!important;">
+      <mat-icon class="mat-icon notranslate material-icons mat-icon-no-color ws-mat-primary-text info" 
+      role="img" 
+      aria-hidden="true" 
+      (click)="triggerInfoPopup(false)"
+      i18n-matTooltip matTooltip="More Info"
+      >visibility</mat-icon>
+    </mat-grid-tile>
+  </mat-grid-list>
+  <ng-container *ngIf="displayChart">
+    <mat-grid-list *ngIf="!contentData?.screenSizeIsLtMedium && contentData?.totalViews && contentData?.avgTime" cols="6"
     rowHeight="70px">
     <mat-grid-tile>
       <div class="text-inside-grid hidden sm:block">
@@ -15,9 +35,6 @@
             class="text-xs ellipsis">{{ contentData?.name }}</span></a>
       </div>
     </mat-grid-tile>
-    <!-- <mat-grid-tile>
-      <ws-analytics-progress-radial [mode]="'determinate'" [progress]="progress"></ws-analytics-progress-radial>
-    </mat-grid-tile> -->
     <mat-grid-tile>
       <p class="text-outside-grid">{{ contentData?.completed }}</p>
     </mat-grid-tile>
@@ -30,9 +47,17 @@
     <mat-grid-tile style="overflow: visible!important;">
       <ng-container [wsResolverWidget]="widgetPieGraph"></ng-container>
     </mat-grid-tile>
+    <mat-grid-tile style="overflow: visible!important;">
+      <mat-icon class="mat-icon notranslate material-icons mat-icon-no-color ws-mat-primary-text info" 
+      role="img" 
+      aria-hidden="true" 
+      (click)="triggerInfoPopup(false)"
+      i18n-matTooltip matTooltip="More Info"
+      >visibility</mat-icon>
+    </mat-grid-tile>
     <!-- <mat-grid-tile>{{ source }}</mat-grid-tile> -->
   </mat-grid-list>
-  <mat-grid-list *ngIf="!contentData?.screenSizeIsLtMedium && !contentData?.totalViews && contentData?.avgTime" cols="4"
+  <mat-grid-list *ngIf="!contentData?.screenSizeIsLtMedium && !contentData?.totalViews && contentData?.avgTime" cols="5"
     rowHeight="70px">
     <mat-grid-tile>
       <div class="text-inside-grid hidden sm:block">
@@ -48,24 +73,26 @@
             class="text-xs ellipsis">{{ contentData?.name }}</span></a>
       </div>
     </mat-grid-tile>
-    <!-- <mat-grid-tile>
-      <ws-analytics-progress-radial [mode]="'determinate'" [progress]="progress"></ws-analytics-progress-radial>
-    </mat-grid-tile> -->
     <mat-grid-tile>
       <p class="text-outside-grid">{{ contentData?.completed }}</p>
     </mat-grid-tile>
-    <!-- <mat-grid-tile>
-      <p class="text-outside-grid">{{ contentData?.totalViews }}</p>
-    </mat-grid-tile> -->
     <mat-grid-tile>
       <p class="text-outside-grid">{{ contentData?.avgTime.toFixed(2) }}</p>
     </mat-grid-tile>
     <mat-grid-tile style="overflow: visible!important;">
       <ng-container [wsResolverWidget]="widgetPieGraph"></ng-container>
     </mat-grid-tile>
+    <mat-grid-tile style="overflow: visible!important;">
+      <mat-icon class="mat-icon notranslate material-icons mat-icon-no-color ws-mat-primary-text info" 
+      role="img" 
+      aria-hidden="true" 
+      (click)="triggerInfoPopup(false)"
+      i18n-matTooltip matTooltip="More Info"
+      >visibility</mat-icon>
+    </mat-grid-tile>
     <!-- <mat-grid-tile>{{ source }}</mat-grid-tile> -->
   </mat-grid-list>
-  <mat-grid-list *ngIf="!contentData?.screenSizeIsLtMedium && contentData?.totalViews && !contentData?.avgTime" cols="4"
+  <mat-grid-list *ngIf="!contentData?.screenSizeIsLtMedium && contentData?.totalViews && !contentData?.avgTime" cols="5"
     rowHeight="70px">
     <mat-grid-tile>
       <div class="text-inside-grid hidden sm:block">
@@ -81,25 +108,28 @@
             class="text-xs ellipsis">{{ contentData?.name }}</span></a>
       </div>
     </mat-grid-tile>
-    <!-- <mat-grid-tile>
-      <ws-analytics-progress-radial [mode]="'determinate'" [progress]="progress"></ws-analytics-progress-radial>
-    </mat-grid-tile> -->
     <mat-grid-tile>
       <p class="text-outside-grid">{{ contentData?.completed }}</p>
     </mat-grid-tile>
     <mat-grid-tile>
       <p class="text-outside-grid">{{ contentData?.totalViews }}</p>
     </mat-grid-tile>
-    <!-- <mat-grid-tile>
-       <p class="text-outside-grid">{{ contentData?.avgTime.toFixed(2) }}</p>
-     </mat-grid-tile> -->
     <mat-grid-tile style="overflow: visible!important;">
       <ng-container [wsResolverWidget]="widgetPieGraph"></ng-container>
     </mat-grid-tile>
+    <mat-grid-tile style="overflow: visible!important;">
+      <mat-icon class="mat-icon notranslate material-icons mat-icon-no-color ws-mat-primary-text info" 
+      role="img" 
+      aria-hidden="true" 
+      (click)="triggerInfoPopup(false)"
+      i18n-matTooltip matTooltip="More Info"
+      >visibility</mat-icon>
+    </mat-grid-tile>
     <!-- <mat-grid-tile>{{ source }}</mat-grid-tile> -->
   </mat-grid-list>
+  
   <mat-grid-list *ngIf="!contentData?.screenSizeIsLtMedium && !contentData?.totalViews && !contentData?.avgTime"
-    cols="3" rowHeight="70px">
+    cols="4" rowHeight="70px">
     <mat-grid-tile>
       <div class="text-inside-grid hidden sm:block">
         <a *ngIf="contentData?.isExternal" [href]="contentData?.contentUrl" target="_blank"><span
@@ -114,24 +144,23 @@
             class="text-xs ellipsis">{{ contentData?.name }}</span></a>
       </div>
     </mat-grid-tile>
-    <!-- <mat-grid-tile>
-      <ws-analytics-progress-radial [mode]="'determinate'" [progress]="progress"></ws-analytics-progress-radial>
-    </mat-grid-tile> -->
     <mat-grid-tile>
       <p class="text-outside-grid">{{ contentData?.completed }}</p>
     </mat-grid-tile>
-    <!-- <mat-grid-tile>
-      <p class="text-outside-grid">{{ contentData?.totalViews }}</p>
-    </mat-grid-tile> -->
-    <!-- <mat-grid-tile>
-       <p class="text-outside-grid">{{ contentData?.avgTime.toFixed(2) }}</p>
-     </mat-grid-tile> -->
     <mat-grid-tile style="overflow: visible!important;">
       <ng-container [wsResolverWidget]="widgetPieGraph"></ng-container>
     </mat-grid-tile>
+    <mat-grid-tile style="overflow: visible!important;">
+      <mat-icon class="mat-icon notranslate material-icons mat-icon-no-color ws-mat-primary-text info" 
+      role="img" 
+      aria-hidden="true" 
+      (click)="triggerInfoPopup(false)"
+      i18n-matTooltip matTooltip="More Info"
+      >visibility</mat-icon>
+    </mat-grid-tile>
     <!-- <mat-grid-tile>{{ source }}</mat-grid-tile> -->
   </mat-grid-list>
-  <mat-grid-list *ngIf="contentData?.screenSizeIsLtMedium && contentData?.totalViews" cols="4" rowHeight="70px">
+  <mat-grid-list *ngIf="contentData?.screenSizeIsLtMedium && contentData?.totalViews" cols="5" rowHeight="70px">
     <mat-grid-tile>
       <div class="text-inside-grid hidden sm:block">
         <a *ngIf="contentData?.isExternal" [href]="contentData?.contentUrl" target="_blank"><span
@@ -146,24 +175,27 @@
             class="text-xs ellipsis">{{ contentData?.name }}</span></a>
       </div>
     </mat-grid-tile>
-    <!-- <mat-grid-tile>
-      <ws-analytics-progress-radial [mode]="'determinate'" [progress]="progress"></ws-analytics-progress-radial>
-    </mat-grid-tile> -->
     <mat-grid-tile>
       <p class="text-outside-grid">{{ contentData?.completed }}</p>
     </mat-grid-tile>
+    <!--thi is the concerned section-->
     <mat-grid-tile>
       <p class="text-outside-grid">{{ contentData?.totalViews }}</p>
     </mat-grid-tile>
-    <!-- <mat-grid-tile>
-       <p class="text-outside-grid">{{ contentData?.avgTime.toFixed(2) }}</p>
-     </mat-grid-tile> -->
     <mat-grid-tile style="overflow: visible!important;">
       <ng-container [wsResolverWidget]="widgetPieGraph"></ng-container>
     </mat-grid-tile>
+    <mat-grid-tile style="overflow: visible!important;">
+      <mat-icon class="mat-icon notranslate material-icons mat-icon-no-color ws-mat-primary-text info" 
+      role="img" 
+      aria-hidden="true" 
+      (click)="triggerInfoPopup(false)"
+      i18n-matTooltip matTooltip="More Info"
+      >visibility</mat-icon>
+    </mat-grid-tile>
     <!-- <mat-grid-tile>{{ source }}</mat-grid-tile> -->
   </mat-grid-list>
-  <mat-grid-list *ngIf="contentData?.screenSizeIsLtMedium && !contentData?.totalViews" cols="3" rowHeight="70px">
+  <mat-grid-list *ngIf="contentData?.screenSizeIsLtMedium && !contentData?.totalViews" cols="4" rowHeight="70px">
     <mat-grid-tile>
       <div class="text-inside-grid hidden sm:block">
         <a *ngIf="contentData?.isExternal" [href]="contentData?.contentUrl" target="_blank"><span
@@ -178,21 +210,21 @@
             class="text-xs ellipsis">{{ contentData?.name }}</span></a>
       </div>
     </mat-grid-tile>
-    <!-- <mat-grid-tile>
-      <ws-analytics-progress-radial [mode]="'determinate'" [progress]="progress"></ws-analytics-progress-radial>
-    </mat-grid-tile> -->
     <mat-grid-tile>
       <p class="text-outside-grid">{{ contentData?.completed }}</p>
     </mat-grid-tile>
-    <!-- <mat-grid-tile>
-      <p class="text-outside-grid">{{ contentData?.totalViews }}</p>
-    </mat-grid-tile> -->
-    <!-- <mat-grid-tile>
-       <p class="text-outside-grid">{{ contentData?.avgTime.toFixed(2) }}</p>
-     </mat-grid-tile> -->
     <mat-grid-tile style="overflow: visible!important;">
       <ng-container [wsResolverWidget]="widgetPieGraph"></ng-container>
     </mat-grid-tile>
+    <mat-grid-tile style="overflow: visible!important;">
+      <mat-icon class="mat-icon notranslate material-icons mat-icon-no-color ws-mat-primary-text info" 
+      role="img" 
+      aria-hidden="true" 
+      (click)="triggerInfoPopup(false)"
+      i18n-matTooltip matTooltip="More Info"
+      >visibility</mat-icon>
+    </mat-grid-tile>
     <!-- <mat-grid-tile>{{ source }}</mat-grid-tile> -->
   </mat-grid-list>
+</ng-container>
 </mat-card>

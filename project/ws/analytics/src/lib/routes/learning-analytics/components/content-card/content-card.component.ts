@@ -1,6 +1,8 @@
-import { Component, Input, OnInit } from '@angular/core'
+import { Output, EventEmitter, Component, Input, OnInit } from '@angular/core'
 import { ROOT_WIDGET_CONFIG } from '@ws-widget/collection'
 import { NsAnalytics } from '../../models/learning-analytics.model'
+import { InfoDialogComponent } from '../info-dialog/info-dialog.component'
+import { MatDialog } from '@angular/material'
 @Component({
   selector: 'ws-analytics-content-card',
   templateUrl: './content-card.component.html',
@@ -16,6 +18,17 @@ export class ContentCardComponent implements OnInit {
   @Input() contentUrl = ''
   @Input() isExternal = false
   @Input() contentData: any
+  userList: any = []
+  @Output() infoClick = new EventEmitter<string>()
+  // @Input() showToolTip = false
+  @Input() showUsers = false
+  searchQuery = ''
+  startDate = ''
+  endDate = ''
+  contentType = ''
+  filterArray: NsAnalytics.IFilterObj[] = []
+  @Input() displayChart = false
+  nonGraphData = {}
   widgetPieGraph: NsAnalytics.IGraphWidget = {} as NsAnalytics.IGraphWidget
   margin = {
     top: 25,
@@ -25,12 +38,52 @@ export class ContentCardComponent implements OnInit {
   }
   graphData1: number[] = []
   labels: string[] = []
-  constructor() { }
+  constructor(
+    public dialog: MatDialog,
+  ) { }
 
   ngOnInit() {
-    this.graphData(this.contentData.data)
+    if (this.contentData.hasOwnProperty('type') && this.contentData.type) {
+      this.displayChart = false
+      this.nonGraphData = this.contentData.data
+    } else {
+      this.displayChart = true
+      this.graphData(this.contentData.data)
+    }
   }
-  graphData(pieData: any) {
+  async triggerInfoPopup(showUserDetailsFromUserTable = false) {
+      const eventType = 'getting_users_content'
+      const titleToUse = 'Users List'
+      // await this.getAllUsers()
+      // this.dummyUsers();
+      this.openDialog({
+        showUserDetailsFromUserTable,
+        event: eventType,
+        title: titleToUse,
+        width: '50%',
+        height: '55%',
+        startDate: this.startDate,
+        endDate: this.endDate,
+        searchQuery: this.searchQuery,
+        filters: this.filterArray,
+        userList: await this.getAllUsers(),
+      })
+    }
+
+    openDialog(_data: any) {
+      this.dialog.open(InfoDialogComponent, {
+        data: _data,
+        width: _data.width,
+        height: _data.height,
+      })
+    }
+    async getAllUsers(): Promise<any> {
+      if (this.displayChart) {
+        return this.contentData.users_accessed.map((user: any) => user.key)
+      } return this.contentData.data.user_visits.map((user: any) => user.userID)
+    }
+
+    graphData(pieData: any) {
     this.labels = ['0-25%', '25-50%', '50-75%', '75-100%']
     pieData.forEach((cur: any) => {
       this.graphData1.push(cur.y)

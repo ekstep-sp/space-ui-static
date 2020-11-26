@@ -98,16 +98,21 @@ export class InfoDialogComponent implements OnInit {
 
   getEventSpecificRequest(eventData: any, tryDummy = false): Promise<any> {
     if (tryDummy) {
-      return Promise.resolve({
-        userIds: [
+      return Promise.resolve(
+        [
           '7b710f74-8f84-427f-bc13-f4220ed2a1c1',
           '0e419282-16aa-4b03-8d81-a1f93175f7f7',
           'efc891e6-b464-4efb-9a4f-64eed7c7b339',
           'c7e3179f-6497-4b39-a923-e949459d53e3',
           '95e7fec9-e55d-4350-9253-831c71183574',
         ],
-      })
+      )
     }
+    if (eventData.event === 'getting_users_content') {
+    return Promise.resolve(
+    eventData.userList
+        )
+      }
     return this.analyticsSrv.usersInsights(
       eventData.event,
       eventData.endDate,
