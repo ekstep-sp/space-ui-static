@@ -19,6 +19,9 @@
   align-items: center
 }
 
+.line-space {
+  line-height: 30px;
+}
 @media only screen and (max-width:469px){
   .datePost{
     justify-content: space-between;
