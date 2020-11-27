@@ -127,7 +127,7 @@
               <div *ngIf="courseFetchStatus === 'done'">
                 <mat-card *ngIf="!screenSizeIsLtMedium" class="fixed-padding">
                   <mat-grid-list *ngIf="showTime && showViews" cols="6" rowHeight="35px">
-                    <mat-grid-tile class="font-semibold text-xs md:text-sm xl:text-sm" i18n>
+                    <mat-grid-tile class="font-semibold text-xs md:text-sm xl:text-sm responsive-title" i18n>
                       <p class="text-inside-grid">Collection Name</p>
                     </mat-grid-tile>
                     <mat-grid-tile class="font-semibold text-xs md:text-sm xl:text-sm" i18n>
@@ -149,7 +149,7 @@
                     <!-- <mat-grid-tile class="font-semibold text-xs md:text-sm xl:text-sm" i18n>Source</mat-grid-tile> -->
                   </mat-grid-list>
                   <mat-grid-list *ngIf="showTime && !showViews" cols="5" rowHeight="35px">
-                    <mat-grid-tile class="font-semibold text-xs md:text-sm xl:text-sm" i18n>
+                    <mat-grid-tile class="font-semibold text-xs md:text-sm xl:text-sm responsive-title" i18n>
                       <p class="text-inside-grid">Collection Name</p>
                     </mat-grid-tile>
                     <mat-grid-tile class="font-semibold text-xs md:text-sm xl:text-sm" i18n>
@@ -171,7 +171,7 @@
                     <!-- <mat-grid-tile class="font-semibold text-xs md:text-sm xl:text-sm" i18n>Source</mat-grid-tile> -->
                   </mat-grid-list>
                   <mat-grid-list *ngIf="!showTime && showViews" cols="5" rowHeight="35px">
-                    <mat-grid-tile class="font-semibold text-xs md:text-sm xl:text-sm" i18n>
+                    <mat-grid-tile class="font-semibold text-xs md:text-sm xl:text-sm responsive-title" i18n>
                       <p class="text-inside-grid">Collection Name</p>
                     </mat-grid-tile>
                     <mat-grid-tile class="font-semibold text-xs md:text-sm xl:text-sm" i18n>
@@ -193,7 +193,7 @@
                     <!-- <mat-grid-tile class="font-semibold text-xs md:text-sm xl:text-sm" i18n>Source</mat-grid-tile> -->
                   </mat-grid-list>
                   <mat-grid-list *ngIf="!showTime && !showViews" cols="4" rowHeight="35px">
-                    <mat-grid-tile class="font-semibold text-xs md:text-sm xl:text-sm" i18n>
+                    <mat-grid-tile class="font-semibold text-xs md:text-sm xl:text-sm responsive-title" i18n>
                       <p class="text-inside-grid">Collection Name</p>
                     </mat-grid-tile>
                     <mat-grid-tile class="font-semibold text-xs md:text-sm xl:text-sm" i18n>
@@ -211,7 +211,7 @@
                 </mat-card>
                 <mat-card *ngIf="screenSizeIsLtMedium" class="fixed-padding">
                   <mat-grid-list *ngIf="showViews" cols="5" rowHeight="35px">
-                    <mat-grid-tile class="font-semibold text-xs md:text-sm xl:text-sm" i18n>
+                    <mat-grid-tile class="font-semibold text-xs md:text-sm xl:text-sm responsive-title" i18n>
                       <p class="text-inside-grid">Collection Name</p>
                     </mat-grid-tile>
                     <mat-grid-tile class="font-semibold text-xs md:text-sm xl:text-sm" i18n>
@@ -233,7 +233,7 @@
                     <!-- <mat-grid-tile class="font-semibold text-xs md:text-sm xl:text-sm" i18n>Source</mat-grid-tile> -->
                   </mat-grid-list>
                   <mat-grid-list *ngIf="!showViews" cols="4" rowHeight="35px">
-                    <mat-grid-tile class="font-semibold text-xs md:text-sm xl:text-sm" i18n>
+                    <mat-grid-tile class="font-semibold text-xs md:text-sm xl:text-sm responsive-title" i18n>
                       <p class="text-inside-grid">Collection Name</p>
                     </mat-grid-tile>
                     <mat-grid-tile class="font-semibold text-xs md:text-sm xl:text-sm" i18n>
@@ -453,7 +453,7 @@
               <ng-container *ngIf="resourceFetchStatus === 'done'">
                 <mat-card *ngIf="!screenSizeIsLtMedium" class="fixed-padding">
                   <mat-grid-list *ngIf="showTime && showViews" cols="6" rowHeight="35px">
-                    <mat-grid-tile class="font-semibold text-xs md:text-sm xl:text-sm" i18n>
+                    <mat-grid-tile class="font-semibold text-xs md:text-sm xl:text-sm responsive-title" i18n>
                       <p class="text-inside-grid">Resource Name</p>
                     </mat-grid-tile>
                     <mat-grid-tile class="font-semibold text-xs md:text-sm xl:text-sm" i18n>
@@ -475,7 +475,7 @@
                     <!-- <mat-grid-tile class="font-semibold text-xs md:text-sm xl:text-sm" i18n>Source</mat-grid-tile> -->
                   </mat-grid-list>
                   <mat-grid-list *ngIf="!showTime && showViews" cols="5" rowHeight="35px">
-                    <mat-grid-tile class="font-semibold text-xs md:text-sm xl:text-sm" i18n>
+                    <mat-grid-tile class="font-semibold text-xs md:text-sm xl:text-sm responsive-title" i18n>
                       <p class="text-inside-grid">Resource Name</p>
                     </mat-grid-tile>
                     <mat-grid-tile class="font-semibold text-xs md:text-sm xl:text-sm" i18n>
@@ -497,7 +497,7 @@
                     <!-- <mat-grid-tile class="font-semibold text-xs md:text-sm xl:text-sm" i18n>Source</mat-grid-tile> -->
                   </mat-grid-list>
                   <mat-grid-list *ngIf="showTime && !showViews" cols="5" rowHeight="35px">
-                    <mat-grid-tile class="font-semibold text-xs md:text-sm xl:text-sm" i18n>
+                    <mat-grid-tile class="font-semibold text-xs md:text-sm xl:text-sm responsive-title" i18n>
                       <p class="text-inside-grid">Resource Name</p>
                     </mat-grid-tile>
                     <mat-grid-tile class="font-semibold text-xs md:text-sm xl:text-sm" i18n>
@@ -519,7 +519,7 @@
                     <!-- <mat-grid-tile class="font-semibold text-xs md:text-sm xl:text-sm" i18n>Source</mat-grid-tile> -->
                   </mat-grid-list>
                   <mat-grid-list *ngIf="!showTime && !showViews" cols="4" rowHeight="35px">
-                    <mat-grid-tile class="font-semibold text-xs md:text-sm xl:text-sm" i18n>
+                    <mat-grid-tile class="font-semibold text-xs md:text-sm xl:text-sm responsive-title" i18n>
                       <p class="text-inside-grid">Resource Name</p>
                     </mat-grid-tile>
                     <mat-grid-tile class="font-semibold text-xs md:text-sm xl:text-sm" i18n>
@@ -543,7 +543,7 @@
                 </mat-card>
                 <mat-card *ngIf="screenSizeIsLtMedium" class="fixed-padding">
                   <mat-grid-list *ngIf="showViews" cols="5" rowHeight="35px">
-                    <mat-grid-tile class="font-semibold text-xs md:text-sm xl:text-sm" i18n>
+                    <mat-grid-tile class="font-semibold text-xs md:text-sm xl:text-sm responsive-title" i18n>
                       <p class="text-inside-grid">Resource Name</p>
                     </mat-grid-tile>
                     <mat-grid-tile class="font-semibold text-xs md:text-sm xl:text-sm" i18n>
@@ -565,7 +565,7 @@
                     <!-- <mat-grid-tile class="font-semibold text-xs md:text-sm xl:text-sm" i18n>Source</mat-grid-tile> -->
                   </mat-grid-list>
                   <mat-grid-list class="responsive-grid-list" *ngIf="!showViews" cols="5" rowHeight="50px">
-                    <mat-grid-tile class="responsive-grid-tile font-semibold text-xs md:text-sm xl:text-sm" i18n>
+                    <mat-grid-tile class="responsive-grid-tile font-semibold text-xs md:text-sm xl:text-sm responsive-title" i18n>
                       <p class="text-inside-grid">Resource Name</p>
                     </mat-grid-tile>
                     <mat-grid-tile class="responsive-grid-tile font-semibold text-xs md:text-sm xl:text-sm" i18n>
