@@ -131,8 +131,6 @@ export class LearningAnalyticsService {
       return newValues
     // tslint:disable-next-line: align
     }), tap(_v => {
-      // tslint:disable-next-line: no-console
-      console.log('recieved final values as ', _v)
       this.nameMap.clear()
     }
       ))
@@ -150,10 +148,7 @@ export class LearningAnalyticsService {
       // tslint:disable-next-line: max-line-length
       `${LA_API_END_POINTS.SOCIAL_FORUM_IDS(socialType)}?endDate=${endDate}&startDate=${startDate}`,
       // `${LA_API_END_POINTS.SOCIAL_FORUM_IDS(socialType)}`,
-    ).pipe(tap(d => {
-      // tslint:disable-next-line: no-console
-      console.log('data recieved initially looks like ', d)
-    }))
+    )
   }
 
   hourlyFilterData(
