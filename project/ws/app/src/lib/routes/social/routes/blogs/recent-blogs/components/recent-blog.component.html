@@ -67,9 +67,9 @@
           <div class="w-full search">
             <mat-form-field appearance="none" class="autocomplete-form" color="primary" [floatLabel]="'never'">
               <input type="search" (keydown.enter)="triggerSearch()"
-                class="border-2 border-gray-300 pr-16 ws-mat-primary-text rounded-lg .text-xs focus:outline-none placeholder-color"
+                class="border-2 border-gray-300 pr-16 ws-mat-primary-text rounded-lg .text-xs focus:outline-none placeholder-color align-input-responsive"
                 i18n-placeholder="search content" [placeholder]="placeHolder" i18-aria-label aria-label="Query"
-                style="width: 90%; margin-left: 10%; padding-top: 8px;" matInput [(ngModel)]="queryEntered" />
+                style="width: 90%; margin-left: 10%;" matInput [(ngModel)]="queryEntered" />
             </mat-form-field>
           </div>
           <a [routerLink]="['/app/social/socialSearch/view-search']" [queryParams]="{ search: queryEntered }">

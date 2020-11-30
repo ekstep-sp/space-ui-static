@@ -294,5 +294,18 @@
 }
 
 .align-input:not(:root:root){
-  padding-top: 24px;
+  width: 100%;
+  margin-left: 10%;
+  padding-top: 48px;
+}
+
+@media screen and (max-width:768px){
+  .align-input-responsive:not(:root:root){
+  padding-top: 26px;
+}
+}
+@media screen and (max-width:768px){
+  .align-input-responsive{
+  padding-top: 8px;
+}
 }
