@@ -303,7 +303,8 @@ display: flex !important;
   .mbl-search {
   display: flex !important;
   max-width: 100% !important;
-  width: 100% !important;
+  width: 95% !important;
+  margin: 0.7rem auto !important;
   }
   .web-search {
   display: none !important;
@@ -316,7 +317,6 @@ display: flex !important;
     left: 0px;
     right: 0px;
   }
-
   }
   ::ng-deep {
     @media screen and (max-width:765px) {
