@@ -29,10 +29,13 @@ table {
   }
   .text-inside-grid {
     font-size: 10px !important;
+    line-height: 15px;
     margin: unset !important;
 }
 .text-outside-grid {
   font-size: 10px !important;
+  line-height: 15px;
+  padding-left: 5px;
   margin: unset !important;
 }
 }
@@ -95,5 +98,6 @@ table {
 @media screen and (max-width:768px){
   .responsive-title{
      line-height:13px;
+     padding-left:5px;
   }
 }
