@@ -6,11 +6,11 @@
 
     <div class="w-full search search-width-galaxyfold">
 
-      <mat-form-field appearance="none" class="autocomplete-form field-size " color="primary" [floatLabel]="'never'">
+      <mat-form-field appearance="none" class="autocomplete-form field-size search-bar" color="primary" [floatLabel]="'never'">
         <input type="search" (keydown.enter)="triggerSearch()"
           class="border-2 border-gray-300 bg-white pr-16 rounded-lg text-sm focus:outline-none  justify-search"
           i18n-placeholder="search content" [placeholder]="placeHolder" i18-aria-label aria-label="Query"
-          style="width:90%;margin-left: 10%;padding-top:10px;" matInput [(ngModel)]="queryEntered" />
+          style="width:90%;margin-left:5%;padding-top:10px;" matInput [(ngModel)]="queryEntered" />
       </mat-form-field>
     </div>
     <div class="flex items-center justify-center w-8 sm:w-16 cursor-pointer search-size">
@@ -35,11 +35,11 @@
 
   <div class="w-full search">
 
-    <mat-form-field appearance="none" class="autocomplete-form field-size " color="primary" [floatLabel]="'never'">
+    <mat-form-field appearance="none" class="autocomplete-form field-size search-bar" color="primary" [floatLabel]="'never'">
       <input type="search" (keydown.enter)="triggerSearch()"
         class="border-2 border-gray-300 bg-white pr-16 rounded-lg text-sm focus:outline-none  justify-search color-spl"
         i18n-placeholder="search content" [placeholder]="placeHolder" i18-aria-label aria-label="Query"
-        style="width:90%;margin-left: 10%;padding-top:10px;" matInput [(ngModel)]="queryEntered" />
+        style="width:90%;margin-left:5%;padding-top:10px;" matInput [(ngModel)]="queryEntered" />
     </mat-form-field>
   </div>
   <div class="flex items-center justify-center w-8 sm:w-16 cursor-pointer search-size">

@@ -303,7 +303,7 @@ display: flex !important;
   .mbl-search {
   display: flex !important;
   max-width: 100% !important;
-  width: 95% !important;
+  width: 92% !important;
   margin: 0.7rem auto !important;
   }
   .web-search {
@@ -327,4 +327,7 @@ display: flex !important;
      color: white !important;
     }
   }
+  }
+  .search-bar{
+    width: 100%;
   }
