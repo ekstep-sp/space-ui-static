@@ -14,7 +14,7 @@ export class UserContentRatingComponent implements OnInit {
   userRating = 0
   @Input() forPreview = false
   averageRatings = 0
-
+  @Input() parentElem: any = null
   constructor(
     private events: EventService,
     private contentSvc: WidgetContentService,

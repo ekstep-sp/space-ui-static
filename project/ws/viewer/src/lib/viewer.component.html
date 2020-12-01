@@ -6,6 +6,7 @@
     (toggle)="toggleSideBar()">
   </viewer-viewer-top-bar>
   <mat-sidenav-container autosize class="viewer-sidenav-container">
+
     <mat-sidenav [ngClass]="isTypeOfCollection?'viewer-sidenav':'viewer-sidenav-standalone'" position="end"
       [opened]="sideNavBarOpened" [mode]="mode">
       <mat-tab-group>

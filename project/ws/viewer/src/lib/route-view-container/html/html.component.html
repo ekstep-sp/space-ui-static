@@ -11,63 +11,86 @@
               <viewer-plugin-html [htmlContent]="htmlData">
               </viewer-plugin-html>
             </div>
-            <div class="flex justify-end mt-3">
-              <ws-widget-btn-fullscreen [widgetType]="'actionButton'" [widgetSubType]="'actionButtonFullscreen'"
-                [widgetData]="{ fsContainer: htmlContainer }">
-              </ws-widget-btn-fullscreen>
-              <ws-widget-btn-content-download *ngIf="!configSvc?.isGuestUser" [forPreview]="forPreview" [widgetData]="
-                  htmlData
-                    | pipePartialContent
-                      : [
-                          'identifier',
-                          'contentType',
-                          'resourceType',
-                          'mimeType',
-                          'downloadUrl',
-                          'isExternal',
-                  'artifactUrl'
-                        ]
-                ">
-              </ws-widget-btn-content-download>
-              <!-- <ws-widget-btn-content-like
-                              [widgetData]="htmlData | pipePartialContent: ['identifier']"
-                            ></ws-widget-btn-content-like> -->
-              <ws-widget-btn-content-like *ngIf="!configSvc?.isGuestUser" [forPreview]="forPreview" [widgetData]="{
-                  identifier: htmlData.identifier,
-                  isDisabled: isPreviewMode
-                }">
-              </ws-widget-btn-content-like>
-              <ws-widget-btn-content-share *ngIf="allowedToDiscussionForum" [forPreview]="forPreview"
-                [widgetData]="htmlData" [isDisabled]="isPreviewMode">
-              </ws-widget-btn-content-share>
-              <ws-widget-btn-goals *ngIf="!configSvc?.isGuestUser" [forPreview]="forPreview"></ws-widget-btn-goals>
-              <ws-widget-btn-playlist *ngIf="!configSvc?.isGuestUser" [forPreview]="forPreview" [widgetData]="{
-                  contentId: htmlData?.identifier,
-                  contentName: htmlData?.name,
-                  contentType: 'Resource',
-                  mode: 'dialog',
-                  isDisabled: isPreviewMode
-                }">
-              </ws-widget-btn-playlist>
-              <!-- <ws-widget-btn-content-feedback></ws-widget-btn-content-feedback> -->
-              <ws-widget-btn-content-feedback-v2 *ngIf="allowedToDiscussionForum && !configSvc?.isGuestUser"
-                [forPreview]="forPreview" [widgetData]="{
-                  identifier: htmlData.identifier,
-                  name: htmlData.name,
-                  isDisabled: isPreviewMode
-                }">
-              </ws-widget-btn-content-feedback-v2>
-            </div>
           </mat-card-content>
         </mat-card>
       </div>
+      <div class="mt-5 padding-m">
+          <mat-card class="viewer-style">
+              <div class="flex justify-end mt-3">
+                  <ng-container *ngIf="!hideRatings">
+                      <ws-widget-user-content-rating class="block flex-auto" [parentElem]="parentNode"
+                      *ngIf="!this.configSvc?.isGuestUser && content?.identifier && content?.assetType !== 'Connection'" [contentId]="content?.identifier"
+                      [isDisabled]="isRatingsDisabled">
+                    </ws-widget-user-content-rating>
+                    </ng-container>
+                <ws-widget-btn-fullscreen [widgetType]="'actionButton'" [widgetSubType]="'actionButtonFullscreen'"
+                  [widgetData]="{ fsContainer: htmlContainer }">
+                </ws-widget-btn-fullscreen>
+                <ws-widget-btn-content-download *ngIf="!configSvc?.isGuestUser" [forPreview]="forPreview" [widgetData]="
+                    htmlData
+                      | pipePartialContent
+                        : [
+                            'identifier',
+                            'contentType',
+                            'resourceType',
+                            'mimeType',
+                            'downloadUrl',
+                            'isExternal',
+                    'artifactUrl'
+                          ]
+                  ">
+                </ws-widget-btn-content-download>
+                <!-- <ws-widget-btn-content-like
+                                [widgetData]="htmlData | pipePartialContent: ['identifier']"
+                              ></ws-widget-btn-content-like> -->
+                <ws-widget-btn-content-like *ngIf="!configSvc?.isGuestUser" [forPreview]="forPreview" [widgetData]="{
+                    identifier: htmlData.identifier,
+                    isDisabled: isPreviewMode
+                  }">
+                </ws-widget-btn-content-like>
+                <ws-widget-btn-content-share *ngIf="allowedToDiscussionForum" [forPreview]="forPreview"
+                  [widgetData]="htmlData" [isDisabled]="isPreviewMode">
+                </ws-widget-btn-content-share>
+                <ws-widget-btn-goals
+                [forPreview]="forPreview"
+                *ngIf="isGoalsEnabled && btnGoalsConfig"
+                [widgetData]="btnGoalsConfig"
+              >
+              </ws-widget-btn-goals>
+                <ws-widget-btn-goals *ngIf="!configSvc?.isGuestUser" [forPreview]="forPreview"></ws-widget-btn-goals>
+                <ws-widget-btn-playlist *ngIf="!configSvc?.isGuestUser" [forPreview]="forPreview" [widgetData]="{
+                    contentId: htmlData?.identifier,
+                    contentName: htmlData?.name,
+                    contentType: 'Resource',
+                    mode: 'dialog',
+                    isDisabled: isPreviewMode
+                  }">
+                </ws-widget-btn-playlist>
+                <!-- <ws-widget-btn-content-feedback></ws-widget-btn-content-feedback> -->
+                <ws-widget-btn-content-feedback-v2 *ngIf="allowedToDiscussionForum && !configSvc?.isGuestUser"
+                  [forPreview]="forPreview" [widgetData]="{
+                    identifier: htmlData.identifier,
+                    name: htmlData.name,
+                    isDisabled: isPreviewMode
+                  }">
+                </ws-widget-btn-content-feedback-v2>
+              </div>
+          </mat-card>
+      </div>
     </div>
   </div>
+  <!-- At a glance tab -->
+  <div>
+      <ws-widget-player-brief [forPreview]="forPreview" [content]="content"></ws-widget-player-brief>
+  </div>
+  <!--End-->
   <div class="padding-m"
     *ngIf="discussionForumWidget && isRestricted && htmlData?.assetType !== 'Connection' && allowedToDiscussionForum">
     <div class="video-discussion-forum-in">
-      <h2 class="mat-toolbar discussion-head font-montserrat body-font-size-primary space">Discussion Forum</h2>
-      <ng-container [wsResolverWidget]="discussionForumWidget"></ng-container>
+      <mat-card class="viewer-style">
+          <h2 class="discussion-head font-montserrat body-font-size-primary space">Comments / Discussion</h2>
+          <ng-container [wsResolverWidget]="discussionForumWidget"></ng-container>
+      </mat-card>
     </div>
   </div>
 </div>

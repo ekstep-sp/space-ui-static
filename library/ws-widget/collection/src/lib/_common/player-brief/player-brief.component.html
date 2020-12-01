@@ -235,7 +235,7 @@
 
 
 
-<div class="md:px-2">
+<div class="padding-m">
   <!-- <ws-widget-mark-as-complete [content]="content"></ws-widget-mark-as-complete> -->
   <ng-container *ngIf="showDownloadMobile && content && isDownloadable && !showDownloadGuest">
 
@@ -246,7 +246,7 @@
       </button>
     </mat-card>
   </ng-container>
-  <mat-card class="font-montserrat ws-mat-primary-lite-background-on-day ws-mat-primary-border-top-bolder info-container break-word">
+  <mat-card class="viewer-style font-montserrat ws-mat-primary-lite-background-on-day info-container break-word">
     <h2 class="font-montserrat heading-font-size-secondary inline" i18n>At a glance</h2>
     <button class="font-montserrat float-right" *ngIf="this.configSvc?.isGuestUser && !content" mat-button (click)="showMoreGlance = !showMoreGlance">
       <mat-icon>arrow_drop_down</mat-icon>
@@ -557,12 +557,12 @@
       </button>
     </div>
   </mat-card>
-  <ng-container *ngIf="!hideRatings">
+  <!-- <ng-container *ngIf="!hideRatings">
     <ws-widget-user-content-rating class="mb-4 block"
     *ngIf="!this.configSvc?.isGuestUser && content?.identifier && content?.assetType !== 'Connection'" [contentId]="content?.identifier"
     [isDisabled]="isRatingsDisabled">
   </ws-widget-user-content-rating>
-  </ng-container>
+  </ng-container> -->
   <!-- <div class="hidden sm:block margin-bottom-m" *ngIf="content?.creatorDetails?.length">
     <ng-container [ngTemplateOutlet]="creators" [ngTemplateOutletContext]="{
           authors: content?.creatorDetails,
@@ -570,13 +570,14 @@
         }">
     </ng-container>
   </div> -->
-  <div class="hidden sm:block margin-bottom-m font-montserrat" *ngIf="content?.creatorContacts?.length">
+
+  <!-- <div class="hidden sm:block margin-bottom-m font-montserrat" *ngIf="content?.creatorContacts?.length">
     <ng-container [ngTemplateOutlet]="creators" [ngTemplateOutletContext]="{
           authors: content?.creatorContacts,
           title: 'CONTACT'
         }">
     </ng-container>
-  </div>
+  </div> -->
 </div>
 
 

@@ -1,8 +1,8 @@
 <div [hidden]="isRestricted">
   <div class="discussion-body mb-6">
-    <div *ngIf="discussionFetchStatus === 'none'" class="no-conversation mat-toolbar body-font-size-primary" i18n>
+    <!-- <div *ngIf="discussionFetchStatus === 'none'" class="no-conversation mat-toolbar body-font-size-primary" i18n>
       There aren’t any conversations yet
-    </div>
+    </div> -->
     <ws-widget-discussion-post
       [post]="reply"
       (deleteSuccess)="onDeletePost(i)"
@@ -24,7 +24,7 @@
         mat-stroked-button
         [color]="'primary'"
         [disabled]="discussionFetchStatus === 'fetching'"
-        class="width-1-1"
+        class="width-1-1 btn-style"
         type="button"
         i18n
         (click)="fetchDiscussion()"
@@ -33,7 +33,7 @@
       </button>
     </div>
   </div>
-  <div class="discussion-header mat-toolbar shadow" [hidden]="widgetData.isLoggedInUserRestricted">
+  <div class="discussion-header" [hidden]="widgetData.isLoggedInUserRestricted">
     <p class="ws-mat-primary-text font-medium text-xl body-font-size-secondary" i18n>Start a new thread</p>
     <div class="question-container">
       <ws-widget-user-image

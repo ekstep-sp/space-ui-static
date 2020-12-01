@@ -1,4 +1,4 @@
-<mat-toolbar
+<!-- <mat-toolbar
   [color]="pageNavbar.color"
   [ngStyle]="pageNavbar?.styles"
   class="mat-primary mat-elevation-z3"
@@ -16,9 +16,6 @@
   <mat-icon style="cursor: pointer; color: white;" (click)="back()" *ngIf="forChannel"
     >arrow_back</mat-icon
   >
-  <!-- <a *ngIf="logo" mat-button routerLink="/page/home" i18n-matTooltip matTooltip="Home">
-    <img [src]="appIcon" i18n-alt alt="Application Logo" class="app-logo" />
-  </a> -->
   <a
     mat-icon-button
     class="width-auto"
@@ -58,4 +55,29 @@
   <a mat-icon-button class="width-auto clr" (click)="toggleSideBar()" accesskey="M">
     <mat-icon>menu</mat-icon>
   </a>
-</mat-toolbar>
+</mat-toolbar> -->
+<div class="toolbar flex">
+<div class="flex">
+    <ws-widget-btn-page-back
+    class="ml-4"
+    *ngIf="!forChannel"
+    [widgetData]="{
+      url: isTypeOfCollection
+        ? collectionType === 'Playlist'
+          ? '/app/playlist/me/' + collectionId
+          : (forPreview ? '/author' : '/app') + '/toc/' + collectionId + '/overview'
+        : (forPreview ? '/author' : '/app') + '/toc/' + resourceId + '/overview'
+    }"
+  ></ws-widget-btn-page-back>
+  <h2 class="heading-style pl-2 font-montserrat pt-1" [matTooltip]="resourceName">
+          {{ resourceName | lowercase }}
+  </h2>
+</div>
+  <div class="flex flex-auto justify-end mt-3">
+    <img src= "/assets/instances/space/common/round_account_circle_white.png" class="pr-2 prf-icon -mt-2">
+    <h5 class="pr-5">Kamaleeswary</h5>
+    <a mat-icon-button class="width-auto clr" (click)="toggleSideBar()" accesskey="M">
+        <mat-icon>menu</mat-icon>
+      </a>
+  </div>
+</div>

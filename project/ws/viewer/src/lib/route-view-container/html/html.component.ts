@@ -1,5 +1,5 @@
 import { Component, Input, OnInit, OnChanges, SimpleChanges } from '@angular/core'
-import { NsContent, NsDiscussionForum } from '@ws-widget/collection'
+import { NsContent, NsDiscussionForum, WidgetContentService, NsGoal } from '@ws-widget/collection'
 import { NsWidgetResolver } from '@ws-widget/resolver'
 import { ActivatedRoute } from '@angular/router'
 import { SafeHtml, DomSanitizer } from '@angular/platform-browser'
@@ -27,17 +27,31 @@ export class HtmlComponent implements OnInit, OnChanges {
   isScormContent = false
   isRestricted = false
   allowedToDiscussionForum = true
+  content: NsContent.IContent | null = null
+  hideRatings = false
+  enableRatings = false
+  tocConfig: any = null
+  mailIcon = false
+  parentNode = 'viewer'
+  btnGoalsConfig: NsGoal.IBtnGoal | null = null
+  isGoalsEnabled = false
+
   constructor(
     private activatedRoute: ActivatedRoute,
     private domSanitizer: DomSanitizer,
     private pipeLimitTo: PipeLimitToPipe,
     private valueSvc: ValueService,
     private configSvc: ConfigurationsService,
-    private viewerService: ViewerDataService
+    private viewerService: ViewerDataService,
+    private widgetContentSvc: WidgetContentService
   ) { }
 
   ngOnInit() {
     this.activatedRoute.data.subscribe(_data => {
+      this.content = _data.content.data
+      this.tocConfig = _data.pageData.data.viewerConfig
+      // tslint:disable-next-line: max-line-length
+      this.enableRatings = this.widgetContentSvc.isVisibileAccToRoles(this.tocConfig.rolesAllowed.rateContent, this.tocConfig.rolesNotAllowed.rateContent)
       // console.log(_data)
       // tslint:disable-next-line: max-line-length
       if (!this.configSvc.isGuestUser && this.viewerService.isVisibileAccToRoles(_data.pageData.data.enableDisscussionForum.rolesAllowed.disscussionForum, _data.pageData.data.enableDisscussionForum.rolesNotAllowed.disscussionForum)) {
@@ -54,6 +68,19 @@ export class HtmlComponent implements OnInit, OnChanges {
     this.valueSvc.isLtMedium$.subscribe(isLtMd => {
       this.isLtMedium = isLtMd
     })
+    if (this.configSvc.isGuestUser) {
+      this.extractFeaturesForGuest()
+    }
+    if (this.content) {
+    this.btnGoalsConfig = {
+      contentId: this.content.identifier,
+      contentName: this.content.name,
+      contentType: this.content.contentType,
+    }
+  }
+  if (this.configSvc.restrictedFeatures) {
+    this.isGoalsEnabled = !this.configSvc.restrictedFeatures.has('goals')
+  }
   }
 
   ngOnChanges(changes: SimpleChanges) {
@@ -75,5 +102,16 @@ export class HtmlComponent implements OnInit, OnChanges {
         }
       }
     }
+  }
+  get isRatingsDisabled() {
+    if (this.configSvc.isGuestUser) {
+      return true
+    }
+    return this.isPreviewMode || !this.enableRatings
+  }
+  extractFeaturesForGuest() {
+    this.hideRatings = true
+    this.enableRatings = false
+    this.mailIcon = false
   }
 }

@@ -34,4 +34,12 @@
     text-align: center;
   }
 }
-
+::ng-deep {
+.mat-toolbar-gray {
+  background: darkgray !important;
+}
+.theme-muave.day-mode .btn-style {
+  background: white !important;
+  color: rgba(0, 0, 0, 0.87) !important;
+}
+}
