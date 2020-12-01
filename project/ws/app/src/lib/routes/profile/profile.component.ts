@@ -72,7 +72,7 @@ export class ProfileComponent implements OnInit, OnDestroy, AfterViewInit {
       this.tabName = this.enabledTabs.dashboard.displayName
     } else if (tab === 'edit-profile') {
       this.tabName = this.enabledTabs.dashboard.editProfile.displayName
-    }  else if (tab === 'learning') {
+    }  else if (tab === 'learning.*' || tab === 'history' || tab  === 'time') {
       this.tabName = this.enabledTabs.learning.displayName
     } else if (tab === 'competency') {
       this.tabName = this.enabledTabs.achievements.displayName
