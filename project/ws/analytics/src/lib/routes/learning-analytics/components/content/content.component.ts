@@ -10,6 +10,7 @@ import { AnalyticsResolver } from '../../resolvers/learning-analytics-filters.re
 import { ActivatedRoute } from '@angular/router'
 import { GraphGeneralService, IGraphWidget, ROOT_WIDGET_CONFIG } from '@ws-widget/collection'
 import { START_DATE, END_DATE } from '@ws/author/src/lib/constants/constant'
+import { sortBy } from 'lodash'
 
 @Component({
   selector: 'ws-analytics-content',
@@ -770,7 +771,9 @@ export class ContentComponent implements OnInit, OnDestroy {
         // tslint:disable-next-line: no-console
         // console.log('recieved final data as ', response)
         // filter if there is any sear query present
-        this.progressData = this.filterBlogsBasedOnSearchQuery(response, searchQuery, filterArray)
+        const filteredData = this.filterBlogsBasedOnSearchQuery(response, searchQuery, filterArray)
+        filteredData.data = sortBy(filteredData.data, ['totalUsers']).reverse()
+        this.progressData = filteredData
         this.blogFetchStatus = 'done'
       // tslint:disable-next-line: align
       }, _err => {
