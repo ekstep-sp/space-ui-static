@@ -69,6 +69,10 @@ export class AppTocBannerComponent implements OnInit, OnChanges, OnDestroy {
   tocConfig: any = null
   toResume = false
   isLoad = true
+  hideRatings = false
+  enableRatings = false
+  mailIcon = false
+  parentElem = 'toc'
 
   constructor(
     private sanitizer: DomSanitizer,
@@ -157,6 +161,8 @@ export class AppTocBannerComponent implements OnInit, OnChanges, OnDestroy {
   }
 
   updateAccessVariables(_configData: any) {
+    // tslint:disable-next-line:max-line-length
+    this.enableRatings = this.forumSvc.isVisibileAccToRoles(this.tocConfig.rolesAllowed.rateContent, this.tocConfig.rolesNotAllowed.rateContent)
     if (_configData.rolesAllowed || _configData.rolesNotAllowed) {
       const response = this.forumSvc.isVisibileAccToRoles(_configData.rolesAllowed.feedback, _configData.rolesNotAllowed.feedback)
       const shareResponse = this.forumSvc.isVisibileAccToRoles(_configData.rolesAllowed.share, _configData.rolesNotAllowed.share)
@@ -476,5 +482,16 @@ export class AppTocBannerComponent implements OnInit, OnChanges, OnDestroy {
         this.toResume = false
       }
     })
+  }
+  get isRatingsDisabled() {
+    if (this.configSvc.isGuestUser) {
+      return true
+    }
+    return  !this.enableRatings
+  }
+  extractFeaturesForGuest() {
+    this.hideRatings = true
+    this.enableRatings = false
+    this.mailIcon = false
   }
 }

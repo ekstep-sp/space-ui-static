@@ -1,7 +1,7 @@
 import { Component, OnInit, Input, OnDestroy, ChangeDetectorRef, ChangeDetectionStrategy } from '@angular/core'
 import { NsContent } from '../../_services/widget-content.model'
 import { ConfigurationsService, UtilityService } from '../../../../../utils'
-import { Router } from '@angular/router'
+import { Router, ActivatedRoute } from '@angular/router'
 import { WidgetContentService } from '../../_services/widget-content.service'
 import { isIOS } from '../../player-amp/player-amp.utility'
 import { BehaviorSubject, Subscription } from 'rxjs'
@@ -46,6 +46,7 @@ export class PlayerBriefComponent implements OnInit, OnDestroy {
     private router: Router,
     private widgetContentSvc: WidgetContentService,
     private readonly cdr: ChangeDetectorRef,
+    public activatedRoute: ActivatedRoute,
 
   ) { }
   isDownloadableDesktop = false
@@ -67,7 +68,6 @@ export class PlayerBriefComponent implements OnInit, OnDestroy {
         }
       })
     }
-
     this.getTocConfig()
     if (this.configSvc.restrictedFeatures) {
       this.isDownloadableIos = this.configSvc.restrictedFeatures.has('iosDownload')
@@ -142,7 +142,7 @@ export class PlayerBriefComponent implements OnInit, OnDestroy {
     const url = `${this.configSvc.sitePath}/feature/toc.json`
     this.widgetContentSvc.fetchConfig(url).subscribe(data => {
       this.tocConfig = data
-      // console.log("configdata", data)
+      console.log("configdata", data)
       this.isShowDownloadMobile = data.isMobileDownloadable
       this.isShowDownloadIOS = data.isIOSDownloadable
       this.isShowDownloadAndroid = data.isAndroidDownloadable
@@ -211,7 +211,7 @@ export class PlayerBriefComponent implements OnInit, OnDestroy {
     }
   }
 
-  ngOnDestroy () {
+  ngOnDestroy() {
     if (this.content$) {
       this.content$.unsubscribe()
     }
