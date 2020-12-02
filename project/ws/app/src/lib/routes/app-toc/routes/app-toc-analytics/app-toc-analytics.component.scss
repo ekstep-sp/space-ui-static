@@ -102,3 +102,9 @@
 .montserrat {
   font-family: montserrat, sans-serif !important;
 }
+
+@media screen and (max-width: 720px) {
+  .views-by{
+    margin-top:10px
+  }
+}
