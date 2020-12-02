@@ -11,7 +11,7 @@
 </mat-toolbar>
 <mat-sidenav-container autosize="true" class="sidenav-content-min-height">
   <mat-sidenav [ngClass]="{'nav-opened': showText,'nav-closed': !showText}" #sideNavBar [position]="screenSizeIsLtMedium ? 'end' : 'start'" [opened]="!screenSizeIsLtMedium" [mode]="screenSizeIsLtMedium ? 'over' : 'side'">
-    <mat-nav-list class="">
+    <mat-nav-list class="pt-0:important">
       <a mat-list-item class="navs-height left" *ngIf="enabledTabs?.dashboard?.enabled" routerLinkActive="mat-toolbar-selected" (click)="
           tabUpdate(enabledTabs?.dashboard?.displayName);
           screenSizeIsLtMedium ? sideNavBar.toggle() : null
