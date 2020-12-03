@@ -49,6 +49,8 @@ export class AppTocAnalyticsComponent implements OnInit, OnDestroy {
   fetchStatus: TFetchStatus = 'none'
   prefChangeSubscription: Subscription | null = null
   onsiteOffshoreData: IGraphWidget = {} as IGraphWidget
+  usersAnalyticsVisible = true
+  orgAnalyticsVisible = true
   apiLinkAccess = this.route.snapshot.data.pageData.data.analytics
   errorWidget: NsWidgetResolver.IRenderConfigWithTypedData<NsError.IWidgetErrorResolver> = {
     widgetType: ROOT_WIDGET_CONFIG.errorResolver._type,
@@ -308,8 +310,15 @@ export class AppTocAnalyticsComponent implements OnInit, OnDestroy {
       const parentRoute = this.route.parent
       this.routeParentSubscription = parentRoute.data.subscribe((data: Data) => {
         this.initData(data)
+        this.setVisibilityRoles(data.pageData.data)
       })
     }
+  }
+
+  setVisibilityRoles(data: Data) {
+    debugger
+    this.usersAnalyticsVisible = this.tocSharedSvc.isVisibileAccToRoles(data.rolesAllowed.usersAnalytics, data.rolesNotAllowed.usersAnalytics)
+    this.orgAnalyticsVisible = this.tocSharedSvc.isVisibileAccToRoles(data.rolesAllowed.orgAnalytics, data.rolesNotAllowed.orgAnalytics)
   }
 
   ngOnDestroy() {

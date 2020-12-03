@@ -217,7 +217,7 @@
           [title]="'Unique Users'"
           [category2]="'Country-wise'"
           [category3]="'Device-wise'"
-          [category1]="'Job Profile-wise'"
+          [category1]="orgAnalyticsVisible ? 'Job Profile-wise': ''"
           [uniqueUsers]="uniqueUsers"
           [description]="uniqueUsersDescription"
           [analyticsDataClient]="analyticsDataClient"
@@ -249,7 +249,7 @@
           (clickEvent)="onClick($event)"
           [title]="'Views'"
           [category3]="'Device-wise'"
-          [category1]="'Job Profile-wise'"
+          [category1]="orgAnalyticsVisible ? 'Job Profile-wise': ''"
           [category2]="'Country-wise'"
           [uniqueUsers]="hits"
           [description]="hitsDescription"
@@ -281,7 +281,7 @@
         class="flex flex-around m-3 flex-wrapped"
         id="departments"
       >
-        <ng-container>
+        <ng-container *ngIf="usersAnalyticsVisible">
           <mat-card class="graph-card-client">
             <!-- <div class="flex flex-between flex-middle mat-toolbar mat-primary">
             <div class="flex flex-middle p-2">
@@ -316,7 +316,7 @@
             </div>
           </mat-card>
         </ng-container>
-        <ng-container>
+        <ng-container *ngIf="orgAnalyticsVisible">
           <mat-card class="graph-card-client views-by">
             <!-- <div class="flex flex-between flex-middle mat-toolbar mat-primary">
             <div class="flex flex-middle p-2">
