@@ -1,11 +1,11 @@
 import { Component, OnInit, ViewChild, OnDestroy, Output, EventEmitter, Input } from '@angular/core'
-import { PageEvent } from '@angular/material'
+import { MatSnackBar, PageEvent } from '@angular/material'
 import { LearningAnalyticsService } from '../../services/learning-analytics.service'
 import { MatPaginator } from '@angular/material/paginator'
 import { NsAnalytics } from '../../models/learning-analytics.model'
 import { TFetchStatus, ValueService } from '@ws-widget/utils'
 import { Subscription, of } from 'rxjs'
-import { catchError, switchMap, map } from 'rxjs/operators'
+import { catchError, switchMap, map, tap } from 'rxjs/operators'
 import { AnalyticsResolver } from '../../resolvers/learning-analytics-filters.resolver'
 import { ActivatedRoute } from '@angular/router'
 import { GraphGeneralService, IGraphWidget, ROOT_WIDGET_CONFIG } from '@ws-widget/collection'
@@ -319,6 +319,7 @@ export class ContentComponent implements OnInit, OnDestroy {
     private resolver: AnalyticsResolver,
     private route: ActivatedRoute,
     private valueSvc: ValueService,
+    private snackBar: MatSnackBar,
   ) { }
 
   ngOnInit() {
@@ -788,6 +789,17 @@ export class ContentComponent implements OnInit, OnDestroy {
     } else {
       this.analyticsSrv
       .content(endDate, startDate, contentType, filterArray, searchQuery)
+      // tslint:disable-next-line: no-console
+      .pipe(
+        tap(d => console.log('recieved data as ', d)),
+        switchMap((originalData: any) => {
+          if (contentType === 'Resource') {
+            // tslint:disable-next-line: max-line-length
+            return this.analyticsSrv.getAndMergeExternalResources(contentType, originalData, { startDate, endDate, searchQuery, dummy: true })
+          }
+          return of(originalData)
+        })
+        )
       .subscribe(
         (history: any) => {
           this.userProgressData = history
@@ -796,7 +808,7 @@ export class ContentComponent implements OnInit, OnDestroy {
           this.othersProgress = history.learning_history_progress_range
           this.myProgress.map((cur: any, i: any) => {
             const others = this.othersProgress[cur.content_id]
-            if (others && others.length === 4) {
+            if (others && others.length === 4 && !cur.is_external) {
               const obj: any = {
                 screenSizeIsLtMedium: this.screenSizeIsLtMedium,
                 name: cur.content_name,
@@ -834,6 +846,19 @@ export class ContentComponent implements OnInit, OnDestroy {
                     color: 'rgb(106, 176, 76)',
                   },
                 ],
+              }
+              this.progressData.push(obj)
+            } else if (contentType === 'Resource') {
+              // handle logic for external resources
+              const obj: any = {
+                screenSizeIsLtMedium: this.screenSizeIsLtMedium,
+                name: cur.content_name,
+                id: cur.content_id,
+                completed: cur.num_of_users,
+                isExternal: true,
+                users_accessed: cur.users_accessed || [],
+                contentUrl: `https://space.societalplatform.org/app/toc/${cur.content_id}`,
+                data: [],
               }
               this.progressData.push(obj)
             }
@@ -924,5 +949,9 @@ export class ContentComponent implements OnInit, OnDestroy {
     }
   const response = await this.analyticsSrv.getContentCount(params)
   this.liveContentDetails = (response.ok) ? response.data : ''
+  }
+
+  openProgressInfoNotification() {
+    this.snackBar.open('Progress marked as Not available is for external resources')
   }
 }
