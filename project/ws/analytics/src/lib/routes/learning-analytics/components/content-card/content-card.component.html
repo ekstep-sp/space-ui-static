@@ -148,7 +148,10 @@
       <p class="text-outside-grid">{{ contentData?.completed }}</p>
     </mat-grid-tile>
     <mat-grid-tile style="overflow: visible!important;">
-      <ng-container [wsResolverWidget]="widgetPieGraph"></ng-container>
+      <ng-container *ngIf="contentData?.data?.length" [wsResolverWidget]="widgetPieGraph"></ng-container>
+      <ng-container *ngIf="contentData?.data?.length <= 0">
+        <p class="text-outline-grid">Not Available</p>
+      </ng-container>
     </mat-grid-tile>
     <mat-grid-tile style="overflow: visible!important;">
       <mat-icon class="mat-icon notranslate material-icons mat-icon-no-color ws-mat-primary-text info" 
