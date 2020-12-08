@@ -1,0 +1,25 @@
+    <ng-container *ngIf="isCollection">
+    <ul class="timeline">
+    <h3 class="parent_node" style="color:darkblue" *ngIf="!hasChild">{{content?.name}}</h3>
+    <ng-container *ngFor="let child of content?.children; trackBy: contentTrackBy">
+            <ws-app-app-toc-content-details-tree [forPreview]="forPreview" [expandAll]="expandAll" [rootId]="rootId"
+            [rootContentType]="rootContentType" [content]="child" [hasChild]="true"></ws-app-app-toc-content-details-tree>
+    </ng-container>
+    </ul>
+    </ng-container>
+    <li class="event" *ngIf="isResource">
+            <div class="flex">
+               <div class="resource-container mr-3">
+                   <ws-widget-display-content-type-icon class="flex contentType_icon" [displayContentType]="content?.displayContentType"
+                       [displayResourceType]="content?.mimeType">
+                   </ws-widget-display-content-type-icon>
+               </div>
+               <a [routerLink]="resourceLink.url" [queryParams]="resourceLink.queryParams">
+               <h4 class="child_node">{{content?.name}}</h4>
+               </a>
+               <div *ngIf="content?.duration" class="ml-6 flex timer">
+                   <mat-icon class="timer_icon platform_gray"> query_builder</mat-icon>
+                   <span class="mat-body-strong platform_gray">{{ content?.duration | pipeDurationTransform: 'hms' }}</span>
+               </div>
+           </div>
+           </li>

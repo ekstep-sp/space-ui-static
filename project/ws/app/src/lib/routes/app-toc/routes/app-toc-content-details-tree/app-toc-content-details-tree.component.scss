@@ -1,0 +1,98 @@
+/*timeline*/
+.timeline {
+    // border-left: 1px solid black;
+    /* border-bottom-right-radius: 4px; */
+    /* border-top-right-radius: 4px; */
+    background: fade(#42428b, 3%);
+    color: fade(white, 80%);
+    /* margin: 50px auto; */
+    position: relative;
+    line-height: 1.4em;
+    font-size: 1.03em;
+    /* padding: 50px; */
+    list-style: none;
+    text-align: left;
+    font-weight: 100;
+    //  max-width: 30%;
+    &:before, &:after {
+        position: absolute;
+        display: block;
+        top: 0;
+      }
+    &:after {
+        left: -10px;
+        border-radius: 50%;
+        height: 15px;
+        width: 15px;
+        content: "";
+        top: 5px;
+        /* color: rgba(146, 94, 176, 0.15) !important; */
+        background:#F2ECF6;
+        /* color: currentColor; */
+        border: 2px solid #42428b;
+}
+}
+.event {
+    border-bottom: 1px dashed fade(#42428b, 10%);
+    /* padding-bottom: 25px; */
+    /* margin-bottom: 50px; */
+    position: relative;
+
+    &:last-of-type { 
+      padding-bottom: 0;
+      margin-bottom: 0; 
+      border: none;      
+    }
+
+    &:before, &:after {
+      position: absolute;
+      display: block;
+      top: 0;
+    }
+
+    // &:before {
+    //   left: (((@date * 0.6) + 50px + 4px + 120px + (4px * 2)) * 1.5) * -1;    
+    //   color: fade(#42428b, 40%);    
+    //   content: attr(data-date);
+    //   text-align: right;
+    //   font-weight: 100;    
+    //   font-size: 0.9em;
+    //   min-width: @date;
+    //   font-family: @font-title;
+    // }
+
+    &:after {
+        left: -47px;
+        background: #42428b;
+        border-radius: 50%;
+        height: 12px;
+        width: 12px;
+        content: "";
+        top: 6px;
+    }
+  }
+h5 {
+    margin-top: -4px;
+}
+.timer {
+    // opacity: 50%;
+    line-height: 29px;
+}
+.timer_icon {
+    line-height: 29px;
+    font-size: 20px;
+}
+.parent_node {
+    color: #42428b;
+    font-weight: bold !important;
+}
+.child_node {
+    color: darkslateblue !important;
+    // opacity: 78%;
+}
+.contentType_icon {
+    color: #42428b;
+}
+.platform_gray {
+    color: #696466;
+}

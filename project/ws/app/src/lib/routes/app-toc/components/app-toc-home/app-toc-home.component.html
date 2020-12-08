@@ -18,47 +18,55 @@
 <ng-container>
   <div role="main" class="toc-body" *ngIf="!errorCode; else tocError">
     <nav mat-tab-nav-bar class="toc-links mat-app-background">
-      <a
+      <div class="excep-style flex">
+          <a 
+          class="text-style"
+          mat-tab-link
+          [routerLink]="'./overview'"
+          routerLinkActive="link-active"
+          i18n
+          >Overview</a
+        >
+        <a
+          class="text-style"
+          mat-tab-link
+          *ngIf="content?.resourceType === 'Certification'"
+          [routerLink]="'./certification'"
+          routerLinkActive="link-active"
+        >
+          <ng-container *ngIf="content?.isExternal === true" i18n>Certification</ng-container>
+          <ng-container *ngIf="content?.isExternal === false" i18n>Take Certification</ng-container>
+        </a>
+        <a
+        class="text-style"
         mat-tab-link
-        [routerLink]="'./overview'"
-        routerLinkActive="ws-mat-primary-text link-active"
+        [routerLink]="'./ataglance'"
+        routerLinkActive="link-active"
         i18n
-        >Overview</a
+        >At A Glance</a
       >
-      <a
-        mat-tab-link
-        *ngIf="content?.resourceType === 'Certification'"
-        [routerLink]="'./certification'"
-        routerLinkActive="ws-mat-primary-text link-active"
-      >
-        <ng-container *ngIf="content?.isExternal === true" i18n>Certification</ng-container>
-        <ng-container *ngIf="content?.isExternal === false" i18n>Take Certification</ng-container>
-      </a>
-
-      <a
-        *ngIf="content?.children?.length"
-        mat-tab-link
-        [routerLink]="'./contents'"
-        routerLinkActive="ws-mat-primary-text link-active"
-        i18n
-        >TOC</a
-      >
-      <a
-        *ngIf="enableAnalytics"
-        [disabled]="forPreview"
-        mat-tab-link
-        [routerLink]="'./analytics'"
-        routerLinkActive="ws-mat-primary-text link-active"
-        i18n
-        >Analytics</a
-      >
-      <a
-      mat-tab-link
-      [routerLink]="'./ataglance'"
-      routerLinkActive="ws-mat-primary-text link-active"
-      i18n
-      >At a glance</a
-    >
+        <a
+          class="text-style"
+          *ngIf="content?.children?.length"
+          mat-tab-link
+          [routerLink]="'./contents'"
+          routerLinkActive="link-active"
+          i18n
+          >Contents</a
+        >
+      </div>
+   <div>
+      <button
+    *ngIf="enableAnalytics"
+    [disabled]="forPreview"
+    [routerLink]="'./analytics'"
+    mat-flat-button
+    [color]="'primary'"
+    i18n
+    class="clr"
+    >Analytics</button
+  >
+   </div>
     </nav>
     <router-outlet></router-outlet>
 

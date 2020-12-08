@@ -11,6 +11,7 @@ export class UserContentRatingComponent implements OnInit {
   @Input() contentId!: string
   @Input() isDisabled = false
   @Input() parentElem: any = null
+  @Input() mobileView = false
   isRequesting = true
   userRating = 0
   @Input() forPreview = false

@@ -12,8 +12,7 @@ import { ContentCertificationResolver } from './routes/app-toc-certification/res
 import { AppTocContentsComponent } from './routes/app-toc-contents/app-toc-contents.component'
 import { AppTocHomeComponent } from './routes/app-toc-home/app-toc-home.component'
 import { AppTocOverviewComponent as AppTocOverviewRootComponent } from './routes/app-toc-overview/app-toc-overview.component'
-import { PlayerBriefComponent } from '@ws-widget/collection/src/lib/_common/player-brief/player-brief.component'
-import { ViewerResolve } from '@ws/viewer/src/lib/viewer.resolve';
+import { AtaglanceComponent } from '@ws-widget/collection/src/lib/_common/ataglance/ataglance.component'
 
 const routes: Routes = [
   {
@@ -53,10 +52,7 @@ const routes: Routes = [
       },
       {
         path: 'ataglance',
-        component: PlayerBriefComponent,
-        resolve: {
-          content: ViewerResolve,
-        },
+        component: AtaglanceComponent,
       },
       {
         path: 'discussion',

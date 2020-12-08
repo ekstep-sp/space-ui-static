@@ -1,23 +1,23 @@
-import { Component, OnInit, Input, OnDestroy, ChangeDetectorRef, ChangeDetectionStrategy } from '@angular/core'
+import { Component, OnInit, Input, OnDestroy, ChangeDetectorRef } from '@angular/core'
 import { NsContent } from '../../_services/widget-content.model'
 import { ConfigurationsService, UtilityService } from '../../../../../utils'
-import { Router } from '@angular/router'
+import { Router, ActivatedRoute, Data } from '@angular/router'
 import { WidgetContentService } from '../../_services/widget-content.service'
 import { isIOS } from '../../player-amp/player-amp.utility'
 import { BehaviorSubject, Subscription } from 'rxjs'
 import { distinctUntilChanged } from 'rxjs/operators'
-// import { Subscription } from 'rxjs'
+import { AppTocService } from '@ws/app/src/lib/routes/app-toc/services/app-toc.service'
 
 @Component({
-  selector: 'ws-widget-player-brief',
-  templateUrl: './player-brief.component.html',
-  styleUrls: ['./player-brief.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush,
+  selector: 'ws-widget-ataglance',
+  templateUrl: './ataglance.component.html',
+  styleUrls: ['./ataglance.component.scss'],
 })
-export class PlayerBriefComponent implements OnInit, OnDestroy {
+export class AtaglanceComponent implements OnInit, OnDestroy {
   isDownloadMobile: any
   content$: Subscription | null = null
-
+  @Input()
+  overview = false
   @Input()
   content: NsContent.IContent | null = null
   @Input()
@@ -36,17 +36,20 @@ export class PlayerBriefComponent implements OnInit, OnDestroy {
   mailIcon$ = new BehaviorSubject<boolean>(this.mailIcon)
 
   contentTypes = NsContent.EContentTypes
-  showMoreGlance = false
+  showMoreGlance = true
   isShowDownloadMobile = false
   isShowDownloadIOS = false
   isShowDownloadAndroid = false
+  routeParentSubscription: Subscription | null = null
+
   constructor(
     public configSvc: ConfigurationsService,
     private utilitySvc: UtilityService,
     private router: Router,
     private widgetContentSvc: WidgetContentService,
     private readonly cdr: ChangeDetectorRef,
-
+    public activatedRoute: ActivatedRoute,
+    private tocSharedSvc: AppTocService,
   ) { }
   isDownloadableDesktop = false
   isDownloadableIos = false
@@ -67,12 +70,52 @@ export class PlayerBriefComponent implements OnInit, OnDestroy {
         }
       })
     }
-
+    if (!this.content) {
+      if (this.activatedRoute && this.activatedRoute.parent) {
+        const parentRoute = this.activatedRoute.parent
+        this.routeParentSubscription = parentRoute.data.subscribe((data: Data) => {
+          this.content = data.content.data
+        })
+      }
+    }
+    if (!this.tocStructure) {
+      this.resetAndFetchTocStructure()
+    }
+    // console.log(this.content)
     this.getTocConfig()
     if (this.configSvc.restrictedFeatures) {
       this.isDownloadableIos = this.configSvc.restrictedFeatures.has('iosDownload')
       this.isDownloadableAndroid = this.configSvc.restrictedFeatures.has('androidDownload')
       this.isDownloadableDesktop = this.configSvc.restrictedFeatures.has('downloadRequest')
+    }
+  }
+  resetAndFetchTocStructure() {
+    this.tocStructure = {
+      assessment: 0,
+      course: 0,
+      handsOn: 0,
+      interactiveVideo: 0,
+      learningModule: 0,
+      other: 0,
+      pdf: 0,
+      podcast: 0,
+      quiz: 0,
+      video: 0,
+      webModule: 0,
+      webPage: 0,
+      youtube: 0,
+    }
+    if (this.content) {
+      this.hasTocStructure = false
+      this.tocStructure.learningModule = this.content.contentType === 'Collection' ? -1 : 0
+      this.tocStructure.course = this.content.contentType === 'Course' ? -1 : 0
+      this.tocStructure = this.tocSharedSvc.getTocStructure(this.content, this.tocStructure)
+      for (const progType in this.tocStructure) {
+        if (this.tocStructure[progType] > 0) {
+          this.hasTocStructure = true
+          break
+        }
+      }
     }
   }
 
@@ -142,7 +185,6 @@ export class PlayerBriefComponent implements OnInit, OnDestroy {
     const url = `${this.configSvc.sitePath}/feature/toc.json`
     this.widgetContentSvc.fetchConfig(url).subscribe(data => {
       this.tocConfig = data
-      // console.log("configdata", data)
       this.isShowDownloadMobile = data.isMobileDownloadable
       this.isShowDownloadIOS = data.isIOSDownloadable
       this.isShowDownloadAndroid = data.isAndroidDownloadable
@@ -211,7 +253,7 @@ export class PlayerBriefComponent implements OnInit, OnDestroy {
     }
   }
 
-  ngOnDestroy () {
+  ngOnDestroy() {
     if (this.content$) {
       this.content$.unsubscribe()
     }
@@ -231,6 +273,7 @@ export class PlayerBriefComponent implements OnInit, OnDestroy {
       // e.target matches elem
     }, false)
     dummyEl.dispatchEvent(dummyEvent)
+
     return true
   } */
 }

@@ -9,7 +9,7 @@
 }
 .toc-body {
   @extend %container-padding;
-  padding-top: 0px !important;
+  margin-top: 15px !important;
   .toc-links {
     position: sticky;
     top: 0px;
@@ -17,7 +17,7 @@
     z-index: 1;
     .link-active {
       font-weight: bold;
-      border-bottom: 2px solid;
+      border-bottom: 1px solid;
     }
   }
 }
@@ -63,4 +63,17 @@
 .editDetails {
   margin: auto;
   display: flex;
+}
+.clr {
+  color: white !important;
+}
+.excep-style {
+  width: 100%;
+  background: white;
+}
+.text-style {
+    font-size: 24px;
+    padding-bottom: 20px;
+    margin: 0px 10px;
+    color: #696466 !important;
 }

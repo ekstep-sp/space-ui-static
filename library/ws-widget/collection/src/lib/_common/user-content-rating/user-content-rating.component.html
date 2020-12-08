@@ -22,7 +22,7 @@
   <ng-container *ngIf="parentElem === 'viewer' || parentElem === 'toc' && enableFeature && contentId">
         <div class="flex">
           <h2 class="font-montserrat star-icon" *ngIf="parentElem === 'viewer' && !isDisabled" i18n>How would you like to rate us</h2>
-          <h3 class="pr-2 pt-2 count-style" *ngIf="parentElem === 'toc'">{{ratingCount}}</h3>
+          <h3 class="pr-2 pt-2 count-style text-white" *ngIf="parentElem === 'toc'" [ngStyle]="{ 'color': mobileView ? 'black' : 'white'}">{{ratingCount | number: '1.1-1'}}</h3>
           <button
             i18n-aria-label
             aria-label="Rating"
@@ -31,9 +31,9 @@
             mat-icon-button
             *ngFor="let _ of [1, 2, 3, 4, 5]; let i = index"
             (click)="addRating(i)"
-            style="color: #865ba0;"
+            style="color: yellow;"
           >
-            <mat-icon class="rating-icon">
+            <mat-icon class="rating-icon-overview">
               {{ (userRating || -1) > i ? 'star' : 'star_border' }}</mat-icon
             >
           </button>

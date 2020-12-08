@@ -10,12 +10,13 @@
     [disabled]="widgetData?.isDisabled || widgetData?.status === 'Deleted'"
     class="highlight"
   >
-    <mat-icon *ngIf="!showCount" class="like-clr">
+    <mat-icon *ngIf="!showCount" class="like-clr" [ngClass]="{'color': overview}">
       favorite_border
     </mat-icon>
     <mat-icon
       *ngIf="showCount"
       class="like-clr"
+      [ngClass]="{'color': overview}"
       matBadge="{{ likesCount }}"
       matBadgeColor="accent"
       class="badge-notify"
@@ -34,7 +35,7 @@
     i18n-matTooltip="UnLike Button"
     class="highlight"
   >
-    <mat-icon *ngIf="!showCount" class="like-clr">favorite</mat-icon>
+    <mat-icon *ngIf="!showCount" class="like-clr" [ngClass]="{'color': overview}">favorite</mat-icon>
     <mat-icon
       *ngIf="showCount"
       matBadge="{{ likesCount }}"

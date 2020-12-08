@@ -1,0 +1,112 @@
+@import "ws-vars";
+@import "ws-mixins";
+
+.info-container {
+  padding: $size-s $size-m;
+  margin-bottom: $size-m;
+  border-radius: 0;
+  background: rgba(146, 94, 176, 0.12) !important;
+
+  .info-item {
+    // display: flex;
+    align-items: center;
+    padding: $size-xs 0;
+    box-sizing: border-box;
+    // width: 9%;
+    flex: 0 1 30%;
+
+    h3 {
+      margin: 0;
+      font-weight: bold !important;
+      font-size: 18px;
+      color: #696466;
+    }
+
+    .item-heading {
+      width: 100%;
+      min-width: 80px;
+      max-width: 140px;
+      color: #696466 !important;
+    /* opacity: 50%; */
+    font-weight: normal;
+    font-size: 16px;
+    }
+
+    .item-icon {
+      $icon-size: 20px;
+      width: $icon-size;
+      height: $icon-size;
+      font-size: $icon-size;
+      margin-left: $size-xs;
+    }
+  }
+}
+
+.author {
+    padding: 0;
+//   padding: $size-s 0;
+  display: flex;
+
+  .author-image {
+    margin-right: $size-s;
+    $size: 44px;
+    height: $size;
+    width: $size;
+  }
+}
+
+::ng-deep {
+  @media only screen and (max-width: 1366px) {
+    .hidedownload {
+      display: none !important;
+    }
+    .mat-ink-bar {
+      // background-color: var(--primary-color,$orange) !important;
+      display: none !important;
+      visibility: hidden !important;
+      transition: none !important;
+      height: 0px !important;
+      width: 0px !important;
+    }
+  }
+}
+
+@media only screen and (max-width: 1366px) {
+  h3 {
+    font-size: 14px !important;
+  }
+}
+.break-word{
+  word-wrap: break-word;
+  hyphens: auto;
+}
+.style-card {
+padding: 16px 0;
+}
+.viewer-style {
+    display: flex !important; 
+    @include breakpoint-xs {
+        display: block !important;
+    }
+}
+.custom-flex {
+    flex-direction: row;
+    flex-wrap: wrap;
+    flex: auto;
+    display: flex !important;
+    @include breakpoint-xs {
+        display: block !important;
+    }
+}
+.flex-keyword {
+    flex: 1 1 0% !important;
+}
+.keyword {
+    color: #FFFFFF !important;
+    font-weight: 500 !important;
+    font-size: 14px;
+    line-height: 22px;
+}
+.mat-chip {
+    border-radius: 6px !important;
+}

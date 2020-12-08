@@ -73,6 +73,7 @@ export class AppTocBannerComponent implements OnInit, OnChanges, OnDestroy {
   enableRatings = false
   mailIcon = false
   parentElem = 'toc'
+  class = true
 
   constructor(
     private sanitizer: DomSanitizer,
