@@ -9,7 +9,7 @@
     </ng-container>
     <li class="event" *ngIf="isResource">
             <div class="flex">
-               <div class="resource-container mr-3">
+               <div class="resource-container mr-3 contentType">
                    <ws-widget-display-content-type-icon class="flex contentType_icon" [displayContentType]="content?.displayContentType"
                        [displayResourceType]="content?.mimeType">
                    </ws-widget-display-content-type-icon>
@@ -17,9 +17,26 @@
                <a [routerLink]="resourceLink.url" [queryParams]="resourceLink.queryParams">
                <h4 class="child_node">{{content?.name}}</h4>
                </a>
-               <div *ngIf="content?.duration" class="ml-6 flex timer">
-                   <mat-icon class="timer_icon platform_gray"> query_builder</mat-icon>
-                   <span class="mat-body-strong platform_gray">{{ content?.duration | pipeDurationTransform: 'hms' }}</span>
-               </div>
+               <ng-container *ngIf="content?.duration">
+               <div class="hidden-block-xs">
+                    <ng-container [ngTemplateOutlet]="timer"></ng-container>
+                  </div>
+                  <button mat-icon-button class="visible-block-xs ml-6 flex" [matMenuTriggerFor]="timerMenu">
+                    <mat-icon class="timer_icon platform_gray">query_builder</mat-icon>
+                  </button>
+                </ng-container>
            </div>
            </li>
+
+           <mat-menu #timerMenu="matMenu">
+                <div mat-menu-item>
+                        <mat-icon class="timer_icon platform_gray"> query_builder</mat-icon>
+                        <span class="mat-body-strong platform_gray timer">{{ content?.duration | pipeDurationTransform: 'hms' }}</span>
+                </div>
+            </mat-menu>
+            <ng-template #timer>
+                    <div class="ml-3 flex">
+                            <mat-icon class="timer_icon platform_gray"> query_builder</mat-icon>
+                            <span class="mat-body-strong platform_gray timer">{{ content?.duration | pipeDurationTransform: 'hms' }}</span>
+                        </div>
+            </ng-template>

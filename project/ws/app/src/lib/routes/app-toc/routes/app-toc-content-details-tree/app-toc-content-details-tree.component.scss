@@ -1,3 +1,5 @@
+@import 'ws-vars';
+@import 'ws-mixins';
 /*timeline*/
 .timeline {
     // border-left: 1px solid black;
@@ -13,6 +15,9 @@
     list-style: none;
     text-align: left;
     font-weight: 100;
+    @include breakpoint-xs {
+        padding-left: 13px !important;
+    }
     //  max-width: 30%;
     &:before, &:after {
         position: absolute;
@@ -20,7 +25,7 @@
         top: 0;
       }
     &:after {
-        left: -10px;
+        left: -10px !important;
         border-radius: 50%;
         height: 15px;
         width: 15px;
@@ -69,6 +74,10 @@
         width: 12px;
         content: "";
         top: 6px;
+        @include breakpoint-xs {
+            left: -19px !important;
+            top: 12px !important;
+        }
     }
   }
 h5 {
@@ -76,11 +85,17 @@ h5 {
 }
 .timer {
     // opacity: 50%;
-    line-height: 29px;
+    line-height: 29px !important;
+    @include breakpoint-xs {
+        line-height: unset !important;
+    }
 }
 .timer_icon {
     line-height: 29px;
     font-size: 20px;
+    @include breakpoint-xs {
+        line-height: unset !important;
+    }
 }
 .parent_node {
     color: #42428b;
@@ -93,6 +108,26 @@ h5 {
 .contentType_icon {
     color: #42428b;
 }
+.contentType {
+    @include breakpoint-xs {
+        margin-top: 0.75rem !important;
+    }
+}
 .platform_gray {
     color: #696466;
 }
+.hidden-block-xs {
+    display: block !important;
+  
+    @include breakpoint-xs {
+      display: none !important;
+    }
+  }
+  
+  .visible-block-xs {
+    display: none !important;
+  
+    @include breakpoint-xs {
+      display: block !important;
+    }
+  }

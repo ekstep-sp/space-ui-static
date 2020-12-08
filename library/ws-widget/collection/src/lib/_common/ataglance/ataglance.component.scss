@@ -18,7 +18,7 @@
     h3 {
       margin: 0;
       font-weight: bold !important;
-      font-size: 18px;
+      // font-size: 18px;
       color: #696466;
     }
 
@@ -28,7 +28,7 @@
       max-width: 140px;
       color: #696466 !important;
     /* opacity: 50%; */
-    font-weight: normal;
+    font-weight: normal !important;
     font-size: 16px;
     }
 
@@ -109,4 +109,7 @@ padding: 16px 0;
 }
 .mat-chip {
     border-radius: 6px !important;
+}
+.nav-space {
+  margin-top: 32px;
 }
