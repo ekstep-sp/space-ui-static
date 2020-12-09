@@ -16,7 +16,7 @@ import { MatDialog } from '@angular/material'
 import { InfoDialogComponent } from '../info-dialog/info-dialog.component'
 import { ActivatedRoute } from '@angular/router'
 import { END_DATE, START_DATE } from '@ws/author/src/lib/constants/constant'
-import { switchMap, tap } from 'rxjs/operators'
+import { switchMap } from 'rxjs/operators'
 @Component({
   selector: 'ws-analytics-home',
   templateUrl: './home.component.html',

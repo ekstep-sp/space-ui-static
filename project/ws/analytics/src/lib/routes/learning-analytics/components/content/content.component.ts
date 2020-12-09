@@ -5,7 +5,7 @@ import { MatPaginator } from '@angular/material/paginator'
 import { NsAnalytics } from '../../models/learning-analytics.model'
 import { TFetchStatus, ValueService } from '@ws-widget/utils'
 import { Subscription, of } from 'rxjs'
-import { catchError, switchMap, map, tap } from 'rxjs/operators'
+import { catchError, switchMap, map } from 'rxjs/operators'
 import { AnalyticsResolver } from '../../resolvers/learning-analytics-filters.resolver'
 import { ActivatedRoute } from '@angular/router'
 import { GraphGeneralService, IGraphWidget, ROOT_WIDGET_CONFIG } from '@ws-widget/collection'
@@ -791,11 +791,10 @@ export class ContentComponent implements OnInit, OnDestroy {
       .content(endDate, startDate, contentType, filterArray, searchQuery)
       // tslint:disable-next-line: no-console
       .pipe(
-        tap(d => console.log('recieved data as ', d)),
         switchMap((originalData: any) => {
           if (contentType === 'Resource') {
             // tslint:disable-next-line: max-line-length
-            return this.analyticsSrv.getAndMergeExternalResources(contentType, originalData, { startDate, endDate, searchQuery, dummy: true })
+            return this.analyticsSrv.getAndMergeExternalResources(contentType, originalData, { startDate, endDate, searchQuery })
           }
           return of(originalData)
         })
