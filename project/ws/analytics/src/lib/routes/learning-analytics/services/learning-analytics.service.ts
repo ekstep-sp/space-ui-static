@@ -20,6 +20,7 @@ const LA_API_END_POINTS = {
     USER_INSIGHTS: `${PROTECTED_SLAG_V8}/la/userinsights`,
     TOTAL_USER_INSIGHTS: `${PROTECTED_SLAG_V8}/la/totaluserinsights`,
   },
+  USERS_ORG_STATS: `/usersubmission/usersubmission/user/v1/users/department_name/stats`,
 }
 interface IResponse {
   ok: boolean
@@ -97,6 +98,44 @@ export class LearningAnalyticsService {
     return this.http.get<null>(
       // tslint:disable-next-line: max-line-length
       `${LA_API_END_POINTS.CONTENT}?aggsSize=200&endDate=${selectedEndDate}&startDate=${selectedStartDate}&from=0&contentType=${contentType}&search_query=${searchQuery}&filters=${filters}`,
+    )
+  }
+
+  updateOrgInfo(originalData: any, otherData: any) {
+    const url = `${LA_API_END_POINTS.USERS_ORG_STATS}`
+    const params: {startDate: string, endDate: string} | any = {}
+    if (otherData.hasOwnProperty('startDate')) {
+      const sd = new Date(otherData.startDate).toISOString()
+      params.startDate = this.getLocalTime(sd, 'startDate')
+    }
+    if (otherData.hasOwnProperty('endDate')) {
+      const ed = new Date(otherData.endDate).toISOString()
+      params.endDate = this.getLocalTime(ed, 'endDate')
+    }
+    if (otherData.hasOwnProperty('search_query') && otherData.search_query) {
+      params.search_query = otherData.search_query
+    }
+    const orgDataObs$ = this.http.get(url, { params })
+    return orgDataObs$.pipe(
+      catchError(_error => {
+        originalData.department = []
+        return of(originalData)
+      }),
+      map(userData => {
+        if (Array.isArray(userData) && userData.length) {
+          originalData.department = userData.map(user => {
+            return {
+              doc_count: user.value,
+              key: user.key === 'No Data' ? 'No Organisation' : user.key,
+          }
+        })
+        }
+        return originalData
+      }),
+      catchError(_error => {
+        originalData.department = []
+        return of(originalData)
+      })
     )
   }
 
