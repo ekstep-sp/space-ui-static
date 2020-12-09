@@ -139,424 +139,31 @@ export class LearningAnalyticsService {
     )
   }
 
-  returnDummy() {
-    return {
-      data: {
-        ok: true,
-        status: 200,
-        response: {
-          external_content_access: {
-            doc_count: 12,
-            data: [
-              {
-                key: 'lex_auth_013075129691897856115',
-                name: 'sample_lex_auth_013075129691897856115',
-                total_hits_on_doc: 45,
-                unique_users: [
-                  {
-                    key: 'acbf4053-c126-4e85-a0bf-252a896535ea',
-                    doc_count: 32,
-                  },
-                  {
-                    key: '19bff5d1-3a60-48ce-bbfe-948c5b5fdd20',
-                    doc_count: 7,
-                  },
-                  {
-                    key: '3c53a517-5600-4f36-b445-36210fc7a26f',
-                    doc_count: 2,
-                  },
-                  {
-                    key: '6533771a-43c7-42a9-b775-859d6697f80f',
-                    doc_count: 2,
-                  },
-                  {
-                    key: '8fc26608-8d52-4f41-96f9-8e0ed2fa9e50',
-                    doc_count: 2,
-                  },
-                ],
-                unique_users_count: 5,
-              },
-              {
-                key: 'lex_auth_013080431870525440115',
-                name: 'sample_lex_auth_013080431870525440115',
-                total_hits_on_doc: 35,
-                unique_users: [
-                  {
-                    key: 'acbf4053-c126-4e85-a0bf-252a896535ea',
-                    doc_count: 8,
-                  },
-                  {
-                    key: '1539e8b9-dc57-4dbd-b744-9073f19818f2',
-                    doc_count: 4,
-                  },
-                  {
-                    key: '19bff5d1-3a60-48ce-bbfe-948c5b5fdd20',
-                    doc_count: 4,
-                  },
-                  {
-                    key: '306ee018-d770-46c2-91a6-09934ef42ab3',
-                    doc_count: 4,
-                  },
-                  {
-                    key: '6533771a-43c7-42a9-b775-859d6697f80f',
-                    doc_count: 3,
-                  },
-                  {
-                    key: '8fc26608-8d52-4f41-96f9-8e0ed2fa9e50',
-                    doc_count: 3,
-                  },
-                  {
-                    key: '753160e9-b52c-46fd-acbd-fc94c0dbfbaa',
-                    doc_count: 2,
-                  },
-                  {
-                    key: '3efc18ae-e963-4f0b-99e0-d69b49c8c81a',
-                    doc_count: 1,
-                  },
-                  {
-                    key: '542c98a6-8cbc-454e-84eb-9561f51fbf1b',
-                    doc_count: 1,
-                  },
-                  {
-                    key: '997d85d3-3ad2-4191-8219-b9eca2b130e2',
-                    doc_count: 1,
-                  },
-                  {
-                    key: 'b35d5eb7-7bb5-4d4f-9187-6a52849c3511',
-                    doc_count: 1,
-                  },
-                  {
-                    key: 'd0b8aa36-8c98-4b49-a2b5-b82037ab4078',
-                    doc_count: 1,
-                  },
-                  {
-                    key: 'ed2431c4-5536-4654-ac3b-51b7aa6a9af2',
-                    doc_count: 1,
-                  },
-                  {
-                    key: 'ef394bd3-82a3-4805-bd24-712ecdaf0f7d',
-                    doc_count: 1,
-                  },
-                ],
-                unique_users_count: 14,
-              },
-              {
-                key: 'lex_auth_01309775521286553640',
-                name: 'sample_lex_auth_01309775521286553640',
-                total_hits_on_doc: 28,
-                unique_users: [
-                  {
-                    key: '70cf071f-78d1-4cb1-a2e2-2305da542835',
-                    doc_count: 9,
-                  },
-                  {
-                    key: '9b5f2127-2333-4e3d-9413-726ca60dc811',
-                    doc_count: 3,
-                  },
-                  {
-                    key: '41fe5f8d-a930-40e3-8501-7d730a63740b',
-                    doc_count: 2,
-                  },
-                  {
-                    key: '60643f7c-f207-40cc-a8bd-2653406e68a4',
-                    doc_count: 2,
-                  },
-                  {
-                    key: '8df0cd4c-2c8a-4bcf-87e8-950cbb8de2d5',
-                    doc_count: 2,
-                  },
-                  {
-                    key: 'c68a8680-e146-4889-9f14-be809cb22c93',
-                    doc_count: 2,
-                  },
-                  {
-                    key: '443a3214-5660-4e20-88c2-a88549e09f6c',
-                    doc_count: 1,
-                  },
-                  {
-                    key: '50197bd6-f0d2-40e8-b51b-e030d0c9dbb0',
-                    doc_count: 1,
-                  },
-                  {
-                    key: '542c98a6-8cbc-454e-84eb-9561f51fbf1b',
-                    doc_count: 1,
-                  },
-                  {
-                    key: '6533771a-43c7-42a9-b775-859d6697f80f',
-                    doc_count: 1,
-                  },
-                  {
-                    key: '823cb9ef-0016-4e81-ae29-8bf1f53655bd',
-                    doc_count: 1,
-                  },
-                  {
-                    key: '8ec11eef-8613-4129-9fe4-822847d0a73e',
-                    doc_count: 1,
-                  },
-                  {
-                    key: 'ab57c539-9386-4c79-9554-cf4ca1572651',
-                    doc_count: 1,
-                  },
-                  {
-                    key: 'acbf4053-c126-4e85-a0bf-252a896535ea',
-                    doc_count: 1,
-                  },
-                ],
-                unique_users_count: 14,
-              },
-              {
-                key: 'lex_auth_01309782809389465643',
-                name: 'sample_lex_auth_01309782809389465643',
-                total_hits_on_doc: 26,
-                unique_users: [
-                  {
-                    key: '70cf071f-78d1-4cb1-a2e2-2305da542835',
-                    doc_count: 9,
-                  },
-                  {
-                    key: 'acbf4053-c126-4e85-a0bf-252a896535ea',
-                    doc_count: 5,
-                  },
-                  {
-                    key: '41fe5f8d-a930-40e3-8501-7d730a63740b',
-                    doc_count: 3,
-                  },
-                  {
-                    key: '443a3214-5660-4e20-88c2-a88549e09f6c',
-                    doc_count: 3,
-                  },
-                  {
-                    key: '542c98a6-8cbc-454e-84eb-9561f51fbf1b',
-                    doc_count: 2,
-                  },
-                  {
-                    key: '2e7b51c3-7af7-4f45-b540-90ada1c4267e',
-                    doc_count: 1,
-                  },
-                  {
-                    key: '8ec11eef-8613-4129-9fe4-822847d0a73e',
-                    doc_count: 1,
-                  },
-                  {
-                    key: 'b2f7b08e-7570-45d7-b30f-b85d56ff52fa',
-                    doc_count: 1,
-                  },
-                  {
-                    key: 'c68a8680-e146-4889-9f14-be809cb22c93',
-                    doc_count: 1,
-                  },
-                ],
-                unique_users_count: 9,
-              },
-              {
-                key: 'lex_auth_013059480081899520175',
-                name: 'sample_lex_auth_013059480081899520175',
-                total_hits_on_doc: 20,
-                unique_users: [
-                  {
-                    key: '542c98a6-8cbc-454e-84eb-9561f51fbf1b',
-                    doc_count: 7,
-                  },
-                  {
-                    key: '6533771a-43c7-42a9-b775-859d6697f80f',
-                    doc_count: 6,
-                  },
-                  {
-                    key: 'ab57c539-9386-4c79-9554-cf4ca1572651',
-                    doc_count: 5,
-                  },
-                  {
-                    key: '19bff5d1-3a60-48ce-bbfe-948c5b5fdd20',
-                    doc_count: 1,
-                  },
-                  {
-                    key: '67535bb9-5140-4fa5-8cc3-e3b715d92d01',
-                    doc_count: 1,
-                  },
-                ],
-                unique_users_count: 5,
-              },
-              {
-                key: 'lex_auth_01307466414289715256',
-                name: 'sample_lex_auth_01307466414289715256',
-                total_hits_on_doc: 19,
-                unique_users: [
-                  {
-                    key: 'acbf4053-c126-4e85-a0bf-252a896535ea',
-                    doc_count: 11,
-                  },
-                  {
-                    key: '0e419282-16aa-4b03-8d81-a1f93175f7f7',
-                    doc_count: 2,
-                  },
-                  {
-                    key: '6533771a-43c7-42a9-b775-859d6697f80f',
-                    doc_count: 2,
-                  },
-                  {
-                    key: '5289a794-8d21-4869-b1ae-9a972ec785ca',
-                    doc_count: 1,
-                  },
-                  {
-                    key: '8ec11eef-8613-4129-9fe4-822847d0a73e',
-                    doc_count: 1,
-                  },
-                  {
-                    key: '9090735d-c76e-4b7a-9f48-9e02a4c9fa7b',
-                    doc_count: 1,
-                  },
-                  {
-                    key: 'c7e3179f-6497-4b39-a923-e949459d53e3',
-                    doc_count: 1,
-                  },
-                ],
-                unique_users_count: 7,
-              },
-              {
-                key: 'lex_auth_01307480873059942471',
-                name: 'sample_lex_auth_01307480873059942471',
-                total_hits_on_doc: 15,
-                unique_users: [
-                  {
-                    key: 'acbf4053-c126-4e85-a0bf-252a896535ea',
-                    doc_count: 11,
-                  },
-                  {
-                    key: '2a18603f-f51e-434c-a3ce-852db6c3f496',
-                    doc_count: 2,
-                  },
-                  {
-                    key: '6533771a-43c7-42a9-b775-859d6697f80f',
-                    doc_count: 1,
-                  },
-                  {
-                    key: '9504cf8c-7329-4dcf-9c71-f85e4eab5344',
-                    doc_count: 1,
-                  },
-                ],
-                unique_users_count: 4,
-              },
-              {
-                key: 'lex_auth_013075128273592320112',
-                name: 'sample_lex_auth_013075128273592320112',
-                total_hits_on_doc: 15,
-                unique_users: [
-                  {
-                    key: 'acbf4053-c126-4e85-a0bf-252a896535ea',
-                    doc_count: 14,
-                  },
-                  {
-                    key: '6533771a-43c7-42a9-b775-859d6697f80f',
-                    doc_count: 1,
-                  },
-                ],
-                unique_users_count: 2,
-              },
-              {
-                key: 'lex_auth_013059716135231488270',
-                name: 'sample_lex_auth_013059716135231488270',
-                total_hits_on_doc: 14,
-                unique_users: [
-                  {
-                    key: 'acbf4053-c126-4e85-a0bf-252a896535ea',
-                    doc_count: 7,
-                  },
-                  {
-                    key: '542c98a6-8cbc-454e-84eb-9561f51fbf1b',
-                    doc_count: 4,
-                  },
-                  {
-                    key: '6533771a-43c7-42a9-b775-859d6697f80f',
-                    doc_count: 2,
-                  },
-                  {
-                    key: 'ab57c539-9386-4c79-9554-cf4ca1572651',
-                    doc_count: 1,
-                  },
-                ],
-                unique_users_count: 4,
-              },
-              {
-                key: 'lex_auth_013081569874386944145',
-                name: 'sample_lex_auth_013081569874386944145',
-                total_hits_on_doc: 14,
-                unique_users: [
-                  {
-                    key: '6533771a-43c7-42a9-b775-859d6697f80f',
-                    doc_count: 5,
-                  },
-                  {
-                    key: 'ab57c539-9386-4c79-9554-cf4ca1572651',
-                    doc_count: 3,
-                  },
-                  {
-                    key: '65caaf60-46c1-435c-bc25-20bf8c109afc',
-                    doc_count: 2,
-                  },
-                  {
-                    key: '10af49b7-3874-41ca-9d4c-02cfbe5a9ba8',
-                    doc_count: 1,
-                  },
-                  {
-                    key: '1539e8b9-dc57-4dbd-b744-9073f19818f2',
-                    doc_count: 1,
-                  },
-                  {
-                    key: '9504cf8c-7329-4dcf-9c71-f85e4eab5344',
-                    doc_count: 1,
-                  },
-                  {
-                    key: 'fb109391-98fb-44b0-8be0-48590bc0e8e1',
-                    doc_count: 1,
-                  },
-                ],
-                unique_users_count: 7,
-              },
-              {
-                key: 'lex_auth_013080470556721152119',
-                name: 'sample_lex_auth_013080470556721152119',
-                total_hits_on_doc: 1,
-                unique_users: [
-                  {
-                    key: '6533771a-43c7-42a9-b775-859d6697f80f',
-                    doc_count: 1,
-                  },
-                ],
-                unique_users_count: 1,
-              },
-              {
-                key: 'lex_auth_013080484028153856121',
-                name: 'sample_lex_auth_013080484028153856121',
-                total_hits_on_doc: 1,
-                unique_users: [
-                  {
-                    key: '6533771a-43c7-42a9-b775-859d6697f80f',
-                    doc_count: 1,
-                  },
-                ],
-                unique_users_count: 1,
-              },
-            ],
-          },
-        },
-      },
-    }
-  }
-
   getAndMergeExternalResources(contentType: string, originalData: any, otherData: any) {
     // get the external resources
-    const obs = this.http.get(`${LA_API_END_POINTS.TIME_SPENT}/resource/external`, { params: otherData })
+    const params: {startDate: string, endDate: string, search_query: string} | any = {}
+    if (otherData.hasOwnProperty('startDate')) {
+      const sd = new Date(otherData.startDate).toISOString()
+      params.startDate = this.getLocalTime(sd, 'startDate')
+    }
+    if (otherData.hasOwnProperty('endDate')) {
+      const ed = new Date(otherData.endDate).toISOString()
+      params.endDate = this.getLocalTime(ed, 'endDate')
+    }
+    if (otherData.hasOwnProperty('searchQuery') && otherData.searchQuery) {
+      params.search_query = otherData.searchQuery
+    }
+    const obs = this.http.get(`${LA_API_END_POINTS.TIME_SPENT}/resource/external`, { params })
     return obs.pipe(
       catchError(_e => {
-        // debugger
-        // console.log('network error detected --> ', e)
-        if (otherData.dummy) {
-          return of(this.returnDummy())
-        }
+        // tslint:disable-next-line: no-console
+        console.error('network error detected --> ', _e)
         return of(originalData)
       }),
       // tap(s => console.log('sample recieved is ', s)),
-      map((data: any) => data.data.response),
+      map((data: any) => {
+        return data.response
+      }),
       // tap(s => console.log('sample recieved is 2', s)),
       map((data: any) => {
         // debugger
@@ -616,7 +223,8 @@ export class LearningAnalyticsService {
         }
       }),
       catchError(_e => {
-        // console.log('captured error while fetching external resources, ', e)
+        // tslint:disable-next-line: no-console
+        console.error('captured error while fetching external resources, ', _e)
         return of(originalData)
       }),
       )
@@ -624,7 +232,6 @@ export class LearningAnalyticsService {
 
   getSocialAnalysisUsingIDS(blogIdData: any[], type: 'blogs' | 'qna') {
     // store the names in set and then recover the names from set
-    // tslint:disable: no-debugger
     this.nameMap = new Map()
     const ids = blogIdData.map(data => {
       this.nameMap.set(data.id, data.title)
@@ -636,8 +243,8 @@ export class LearningAnalyticsService {
     const sub$ = this.http.get(LA_API_END_POINTS.SOCIAL_FORUM_ANALYSIS(type), { headers })
     return sub$.pipe(
       catchError(e => {
-         // tslint:disable-next-line: no-console
-        console.log('some error occured here ', e)
+        // tslint:disable-next-line: no-console
+        console.error('some error occured here ', e)
         return of({ result: { data: [] } })
       }),
       map((values: any) => {

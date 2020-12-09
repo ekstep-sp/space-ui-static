@@ -791,11 +791,10 @@ export class ContentComponent implements OnInit, OnDestroy {
       .content(endDate, startDate, contentType, filterArray, searchQuery)
       // tslint:disable-next-line: no-console
       .pipe(
-        tap(d => console.log('recieved data as ', d)),
         switchMap((originalData: any) => {
           if (contentType === 'Resource') {
             // tslint:disable-next-line: max-line-length
-            return this.analyticsSrv.getAndMergeExternalResources(contentType, originalData, { startDate, endDate, searchQuery, dummy: true })
+            return this.analyticsSrv.getAndMergeExternalResources(contentType, originalData, { startDate, endDate, searchQuery })
           }
           return of(originalData)
         })
