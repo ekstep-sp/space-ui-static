@@ -1,10 +1,17 @@
+.rating-icon-overview {
+  // transform: scale(1.5);
+  line-height: 21px !important;
+}
 .rating-icon {
   transform: scale(1.5);
 }
-
 .rating-button {
   margin-right: 3px;
 }
 .star-icon {
   margin: 5px 5px 0 0 !important;
+}
+.count-style {
+  margin: 0 !important;
+  // font-weight: bolder;
 }

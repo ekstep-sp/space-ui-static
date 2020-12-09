@@ -1,40 +1,25 @@
-<ng-container *ngIf="parentElem !== 'viewer' && enableFeature && contentId">
+<ng-container *ngIf="parentElem !== 'viewer' && parentElem !== 'toc' && enableFeature && contentId">
   <mat-card>
     <h2 class="font-montserrat body-font-size-primary" *ngIf="!isDisabled" i18n>Rate the content</h2>
     <div class="flex">
-      <button
-        i18n-aria-label
-        aria-label="Rating"
-        name="user-content-rating-star-{{ i + 1 }}"
-        class="rating-button"
-        mat-icon-button
-        *ngFor="let _ of [1, 2, 3, 4, 5]; let i = index"
-        (click)="addRating(i)"
-        style="color: #865ba0;"
-      >
+      <button i18n-aria-label aria-label="Rating" name="user-content-rating-star-{{ i + 1 }}" class="rating-button"
+        mat-icon-button *ngFor="let _ of [1, 2, 3, 4, 5]; let i = index" (click)="addRating(i)" style="color: #865ba0;">
         <mat-icon class="rating-icon">
-          {{ (userRating || -1) > i ? 'star' : 'star_border' }}</mat-icon
-        >
+          {{ (userRating || -1) > i ? 'star' : 'star_border' }}</mat-icon>
       </button>
     </div>
   </mat-card>
 </ng-container>
-<ng-container *ngIf="parentElem === 'viewer' && enableFeature && contentId">
-      <div class="flex">
-        <h2 class="font-montserrat star-icon" *ngIf="!isDisabled" i18n>How would you like to rate us</h2>
-        <button
-          i18n-aria-label
-          aria-label="Rating"
-          name="user-content-rating-star-{{ i + 1 }}"
-          class="rating-button"
-          mat-icon-button
-          *ngFor="let _ of [1, 2, 3, 4, 5]; let i = index"
-          (click)="addRating(i)"
-          style="color: #865ba0;"
-        >
-          <mat-icon class="rating-icon">
-            {{ (userRating || -1) > i ? 'star' : 'star_border' }}</mat-icon
-          >
-        </button>
-      </div>
-  </ng-container>
+<ng-container *ngIf="parentElem === 'viewer' || parentElem === 'toc' && enableFeature && contentId">
+  <div class="flex">
+    <h2 class="font-montserrat star-icon" *ngIf="parentElem === 'viewer' && !isDisabled" i18n>How would you like to rate
+      us</h2>
+    <h3 class="pr-2 pt-2 count-style text-white" *ngIf="parentElem === 'toc'"
+      [ngStyle]="{ 'color': mobileView ? 'black' : 'white'}">{{ratingCount | number: '1.1-1'}}</h3>
+    <button i18n-aria-label aria-label="Rating" name="user-content-rating-star-{{ i + 1 }}" class="rating-button"
+      mat-icon-button *ngFor="let _ of [1, 2, 3, 4, 5]; let i = index" (click)="addRating(i)" style="color: yellow;">
+      <mat-icon class="rating-icon-overview">
+        {{ (userRating || -1) > i ? 'star' : 'star_border' }}</mat-icon>
+    </button>
+  </div>
+</ng-container>
