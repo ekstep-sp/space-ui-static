@@ -371,22 +371,22 @@
       </mat-card-content>
     </mat-card>
     <!-- Authors on small screen -->
-    <div class="block sm:hidden margin-bottom-m" *ngIf="content?.creatorDetails?.length">
+    <!-- <div class="block sm:hidden margin-bottom-m" *ngIf="content?.creatorDetails?.length">
       <ng-container [ngTemplateOutlet]="creators" [ngTemplateOutletContext]="{
           authors: content?.creatorDetails,
           title: 'AUTHOR'
         }">
       </ng-container>
-    </div>
+    </div> -->
     <!-- Contacts on small screen -->
-    <div class="block sm:hidden margin-bottom-m" *ngIf="content?.creatorContacts?.length">
+    <!-- <div class="block sm:hidden margin-bottom-m" *ngIf="content?.creatorContacts?.length">
       <ng-container [ngTemplateOutlet]="creators" [ngTemplateOutletContext]="{
           authors: content?.creatorContacts,
           title: 'CONTACT'
         }">
       </ng-container>
     </div>
-  </div>
+  </div> -->
   <!-- At a glance section -->
   <!-- <div class="info-section">
     <ws-widget-player-brief [content]="content" [hasTocStructure]="hasTocStructure" [tocStructure]="tocStructure">
