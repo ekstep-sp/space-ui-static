@@ -84,6 +84,7 @@ export class ContentCardComponent implements OnInit {
     }
 
     graphData(pieData: any) {
+      debugger
     this.labels = ['0-25%', '25-50%', '50-75%', '75-100%']
     pieData.forEach((cur: any) => {
       this.graphData1.push(cur.y)

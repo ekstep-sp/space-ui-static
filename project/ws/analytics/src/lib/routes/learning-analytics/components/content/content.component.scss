@@ -1,5 +1,17 @@
 @import 'ws-mixins';
 
+.info {
+  margin-bottom: 10px;
+  margin-left: 5px;
+}
+.responsive-wrap {
+  figure {
+    flex-wrap: wrap;
+    p {
+      margin-bottom: 0;
+    }
+  }
+}
 table {
   width: 100%;
 }

@@ -16,6 +16,7 @@ import { MatDialog } from '@angular/material'
 import { InfoDialogComponent } from '../info-dialog/info-dialog.component'
 import { ActivatedRoute } from '@angular/router'
 import { END_DATE, START_DATE } from '@ws/author/src/lib/constants/constant'
+import { switchMap, tap } from 'rxjs/operators'
 @Component({
   selector: 'ws-analytics-home',
   templateUrl: './home.component.html',
@@ -753,6 +754,7 @@ export class HomeComponent implements OnInit, OnDestroy {
     this.fetchStatus = 'fetching'
     this.analyticsSrv
       .timeSpent(endDate, startDate, contentType, filterArray, searchQuery)
+      .pipe(switchMap(originalData => this.analyticsSrv.updateOrgInfo(originalData, { startDate, endDate, contentType, searchQuery })))
       .subscribe(
         (timeSpentData: any) => {
           this.contentData = timeSpentData

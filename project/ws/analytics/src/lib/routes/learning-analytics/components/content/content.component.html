@@ -532,7 +532,14 @@
                        <p class="text-outside-grid">Average Time (mins)</p>
                      </mat-grid-tile> -->
                      <mat-grid-tile class="font-semibold text-xs md:text-sm xl:text-sm" i18n>
-                      <p class="text-outside-grid">Progress</p>
+                      <p>
+                        Progress
+                      </p>
+                      <mat-icon class="mat-icon notranslate material-icons mat-icon-no-color ws-mat-primary-text info" 
+                          role="img" 
+                          aria-hidden="true" 
+                          i18n-matTooltip matTooltip="Progress marked as Not Available is for external resources only"
+                          >info</mat-icon>
                     </mat-grid-tile>
                     <mat-grid-tile class="font-semibold text-xs md:text-sm xl:text-sm responsive-title" i18n>
                       <p class="text-outside-grid">View UserList
@@ -577,8 +584,14 @@
                     <!-- <mat-grid-tile class="font-semibold text-xs md:text-sm xl:text-sm" i18n>
                       <p class="text-outside-grid">Average Time (mins)</p>
                     </mat-grid-tile> -->
-                    <mat-grid-tile class="responsive-grid-tile font-semibold text-xs md:text-sm xl:text-sm" i18n>
-                      <p class="text-outside-grid">Progress</p>
+                    <mat-grid-tile class="responsive-grid-tile flex-wrap font-semibold text-xs md:text-sm xl:text-sm" i18n>
+                      <p>Progress</p>
+                      <mat-icon class="mat-icon notranslate material-icons mat-icon-no-color ws-mat-primary-text info responsive" 
+                          role="img" 
+                          aria-hidden="true" 
+                          i18n-matTooltip matTooltip="Progress marked as Not Available is for external resources only"
+                          (click)="openProgressInfoNotification()"
+                          >info</mat-icon>
                     </mat-grid-tile>
                     <mat-grid-tile class="responsive-grid-tile font-semibold text-xs md:text-sm xl:text-sm responsive-title" i18n>
                       <p class="text-outside-grid">View UserList
