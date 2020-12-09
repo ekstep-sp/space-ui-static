@@ -89,7 +89,7 @@ const routes: Routes = [
       {
         path: '',
         pathMatch: 'full',
-        redirectTo: 'common',
+        redirectTo: 'custom',
       },
       {
         path: 'common',
