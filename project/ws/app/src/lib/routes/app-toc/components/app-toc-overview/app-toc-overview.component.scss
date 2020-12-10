@@ -72,7 +72,11 @@
   }
 }
 .nav-space {
-  margin-top: 32px;
+  padding: 32px 64px !important;
+  margin-top: 0 !important;
+  @include breakpoint-xs {
+    padding: 32px 34px !important;
+  }
 }
 .ov-clr {
   color: #696466 !important;

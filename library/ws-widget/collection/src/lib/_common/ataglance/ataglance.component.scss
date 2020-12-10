@@ -75,17 +75,17 @@
   }
 }
 
-@media only screen and (max-width: 1366px) {
-  h3 {
-    font-size: 14px !important;
-  }
-}
+// @media only screen and (max-width: 1366px) {
+//   h3 {
+//     font-size: 14px !important;
+//   }
+// }
 .break-word{
   word-wrap: break-word;
   hyphens: auto;
 }
-.style-card {
-padding: 16px 0;
+.card-style {
+padding: 32px 64px;
 }
 .viewer-style {
     display: flex !important; 
@@ -98,8 +98,10 @@ padding: 16px 0;
     flex-wrap: wrap;
     flex: auto;
     display: flex !important;
+    margin: 40px 96px;
     @include breakpoint-xs {
         display: block !important;
+        margin: 0;
     }
 }
 .flex-keyword {

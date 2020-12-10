@@ -9,13 +9,15 @@
 }
 .toc-body {
   @extend %container-padding;
-  margin-top: 15px !important;
+ padding-bottom: 15px !important;
   .toc-links {
-    position: sticky;
     top: 0px;
     width: 100%;
     z-index: 1;
-    background: transparent;
+    background: #ffffff;
+@include breakpoint-xs {
+  position: sticky;
+}
     .link-active {
       font-weight: bold;
       border-bottom: 1px solid purple;

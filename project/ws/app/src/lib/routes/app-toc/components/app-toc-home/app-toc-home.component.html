@@ -16,7 +16,8 @@
   [analytics]="analytics" [resumeData]="resumeData">
 </ws-app-toc-banner>
 <ng-container>
-  <div role="main" class="toc-body" *ngIf="!errorCode; else tocError">
+  <div role="main" *ngIf="!errorCode; else tocError">
+    <div class="toc-body">
     <nav mat-tab-nav-bar class="toc-links mat-app-background">
       <div class="excep-style flex">
           <a 
@@ -68,6 +69,7 @@
   >
    </div>
     </nav>
+  </div>
     <router-outlet></router-outlet>
 
     <!-- <ng-container>

@@ -86,7 +86,12 @@ $border-color: #d8d8d8;
 //   font-weight: 100;
 // }
 .nav-space {
-  margin-top: 32px;
+  padding-top: 0;
+  padding: 32px 64px !important;
+  margin-top: 0;
+  @include breakpoint-xs {
+padding: 32px 23px !important;
+  }
 }
 .content-card:before {
   content: "";

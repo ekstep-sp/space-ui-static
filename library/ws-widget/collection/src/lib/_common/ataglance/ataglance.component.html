@@ -235,7 +235,7 @@
 
 
 
-<div class="style-card" *ngIf="!overview">
+<div *ngIf="!overview" class="card-style">
         <!-- <ws-widget-mark-as-complete [content]="content"></ws-widget-mark-as-complete> -->
         <ng-container *ngIf="showDownloadMobile && content && isDownloadable && !showDownloadGuest">
       
@@ -246,7 +246,7 @@
             </button>
           </mat-card>
         </ng-container>
-        <mat-card class="viewer-style nav-space font-montserrat ws-mat-primary-lite-background-on-day info-container break-word">
+        <mat-card class="viewer-style font-montserrat ws-mat-primary-lite-background-on-day info-container break-word">
           <!-- <h2 class="font-montserrat heading-font-size-secondary inline" i18n>At a glance</h2> -->
           <button class="font-montserrat float-right" *ngIf="this.configSvc?.isGuestUser && !content" mat-button (click)="showMoreGlance = !showMoreGlance">
             <mat-icon>arrow_drop_down</mat-icon>
