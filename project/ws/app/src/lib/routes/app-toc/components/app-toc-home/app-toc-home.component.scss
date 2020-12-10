@@ -65,7 +65,7 @@
   margin: auto;
   display: flex;
 }
-.clr {
+.al-clr {
   color: white !important;
   border-radius: 0;
   width: 150px;
@@ -73,7 +73,7 @@
   line-height: 44px;
 }
 ::ng-deep {
-  .clr span {
+  .al-clr span {
   font-size: 18px !important;
   font-weight: bold !important;
   }
@@ -96,8 +96,11 @@
   .theme-muave.night-mode .link-active {
     border-bottom: 1px solid #c6bcb8 !important;
   } 
-   .theme-muave.night-mode .clr {
+   .theme-muave.night-mode .al-clr {
     background-color: #925eb0 !important;
     color: white !important
+  }
+  .theme-muave.night-mode .toc-links {
+  background-color: #303030 !important;
   }
 }
