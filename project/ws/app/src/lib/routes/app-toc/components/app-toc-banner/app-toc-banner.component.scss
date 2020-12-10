@@ -13,11 +13,9 @@
   color: #FFFFFF  !important;
   border-radius: 0;
   font-weight: 500 !important;
-}
-.common_sub_text {
-font-style: normal !important;;
-font-weight: normal !important;;
-font-size: 18px !important;
+  width: 150px;
+  height: 50px;
+  line-height: 44px;
 }
 
 .banner-container {
@@ -53,6 +51,9 @@ font-size: 18px !important;
       text-overflow: ellipsis !important;
       white-space: nowrap !important;
     }
+    @include breakpoint-xs {
+      margin-bottom: 15px !important;
+    }
   }
 
   .header-meta-banner {
@@ -69,6 +70,11 @@ font-size: 18px !important;
     margin-top: 16px;
 
     .action-btns {
+      display: flex !important;
+      @include breakpoint-xs {
+        display: block !important;
+        margin-bottom: 1rem;
+      }
       // margin-left: auto;
       // order: 2;
     }
@@ -150,8 +156,9 @@ font-size: 18px !important;
 }
 ::ng-deep {
   .theme-muave.night-mode .banner-clr-night-mode {
-    background: #c6bcb8;
+    background: #42428B !important;
     color: black;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
   }
   .theme-muave.day-mode .banner-clr {
     background: #42428B !important;
@@ -160,8 +167,8 @@ font-size: 18px !important;
 }
 .prf-icon {
   // height: fit-content;
-  width: 30px;
-  height: 30px;
+  width: 32px;
+  height: 32px;
 }
 .content-desc {
   // width: 80%;
@@ -185,12 +192,21 @@ font-weight: 460 !important;
 font-size: 32px !important;
 }
 .display_type {
-font-style: normal !important;;
-font-weight: normal !important;;
-font-size: 24px !important;
 color: #FFFFFF !important;
 }
 .curator {
-  font-weight: 500 !important;
+  font-weight: bold !important;
   margin-bottom: 34px !important;
+  @include breakpoint-xs {
+    margin-bottom: 20px !important;
+  }
+}
+.feature {
+  display: flex !important;
+  @include breakpoint-xs {
+    display: block !important;
+  }
+}
+.category {
+  margin-bottom: 0;
 }

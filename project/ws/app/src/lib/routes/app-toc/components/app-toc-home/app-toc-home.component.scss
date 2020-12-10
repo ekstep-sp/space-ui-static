@@ -15,6 +15,7 @@
     top: 0px;
     width: 100%;
     z-index: 1;
+    background: transparent;
     .link-active {
       font-weight: bold;
       border-bottom: 1px solid purple;
@@ -66,14 +67,37 @@
 }
 .clr {
   color: white !important;
+  border-radius: 0;
+  width: 150px;
+  height: 50px;
+  line-height: 44px;
+}
+::ng-deep {
+  .clr span {
+  font-size: 18px !important;
+  font-weight: bold !important;
+  }
 }
 .excep-style {
   width: 100%;
-  background: white;
+  // background: white;
 }
 .text-style {
     font-size: 24px;
     padding-bottom: 20px;
     margin: 0px 10px;
     color: #696466 !important;
+    height: 64px;
+}
+::ng-deep {
+  .theme-muave.night-mode .text-style {
+    color: #c6bcb8 !important;
+  }
+  .theme-muave.night-mode .link-active {
+    border-bottom: 1px solid #c6bcb8 !important;
+  } 
+   .theme-muave.night-mode .clr {
+    background-color: #925eb0 !important;
+    color: white !important
+  }
 }

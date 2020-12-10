@@ -268,7 +268,7 @@
           <!-- <mat-divider *ngIf="content?.displayContentType"></mat-divider> -->
           <div class="info-item" *ngIf="content?.complexityLevel">
             <h3 class="item-heading ws-mat-primary-text font-montserrat" i18n>Level</h3>
-            <h3 class="font-montserrat pt-4 font-weight-bold text-black width-expand">
+            <h3 class="font-montserrat pt-4 font-weight-bold text-black width-expand btn-text-font">
               {{ content?.complexityLevel }}
             </h3>
           </div>
@@ -309,64 +309,64 @@
           <div class="info-item" *ngIf="hasTocStructure && content?.children?.length">
             <h3 class="item-heading ws-mat-primary-text font-montserrat" i18n>Structure</h3>
             <div class="font-montserrat font-weight-bold text-black width-expand pt-4">
-              <h3 class="font-montserrat" *ngIf="tocStructure?.course > 0">
+              <h3 class="font-montserrat btn-text-font" *ngIf="tocStructure?.course > 0">
                 <ng-container>{{ tocStructure?.course }}</ng-container>
                 <ng-container *ngIf="tocStructure?.course === 1" i18n> Collection</ng-container>
                 <ng-container *ngIf="tocStructure?.course > 1" i18n> Collections</ng-container>
               </h3>
-              <h3 class="font-montserrat" *ngIf="tocStructure?.learningModule > 0">
+              <h3 class="font-montserrat btn-text-font" *ngIf="tocStructure?.learningModule > 0">
                 <ng-container>{{ tocStructure?.learningModule }}</ng-container>
                 <ng-container *ngIf="tocStructure?.learningModule === 1" i18n> Asset</ng-container>
                 <ng-container *ngIf="tocStructure?.learningModule > 1" i18n> Assets</ng-container>
               </h3>
-              <h3 class="font-montserrat" *ngIf="tocStructure?.video > 0">
+              <h3 class="font-montserrat btn-text-font" *ngIf="tocStructure?.video > 0">
                 <ng-container>{{ tocStructure?.video }}</ng-container>
                 <ng-container *ngIf="tocStructure?.video === 1" i18n> Video</ng-container>
                 <ng-container *ngIf="tocStructure?.video > 1" i18n> Videos</ng-container>
               </h3>
-              <h3 class="font-montserrat" *ngIf="tocStructure?.interactiveVideo > 0">
+              <h3 class="font-montserrat btn-text-font" *ngIf="tocStructure?.interactiveVideo > 0">
                 <ng-container>{{ tocStructure?.interactiveVideo }}</ng-container>
                 <ng-container *ngIf="tocStructure?.interactiveVideo === 1" i18n>
                   Interactive Video</ng-container>
                 <ng-container *ngIf="tocStructure?.interactiveVideo > 1" i18n>
                   Interactive Videos</ng-container>
               </h3>
-              <h3 class="font-montserrat" *ngIf="tocStructure?.youtube > 0">
+              <h3 class="font-montserrat btn-text-font" *ngIf="tocStructure?.youtube > 0">
                 <ng-container>{{ tocStructure?.youtube }}</ng-container>
                 <ng-container *ngIf="tocStructure?.youtube === 1" i18n> Youtube Video</ng-container>
                 <ng-container *ngIf="tocStructure?.youtube > 1" i18n> Youtube Videos</ng-container>
               </h3>
-              <h3 class="font-montserrat" *ngIf="tocStructure?.pdf > 0">
+              <h3 class="font-montserrat btn-text-font" *ngIf="tocStructure?.pdf > 0">
                 <ng-container>{{ tocStructure?.pdf }}</ng-container>
                 <ng-container *ngIf="tocStructure?.pdf === 1" i18n> PDF</ng-container>
                 <ng-container *ngIf="tocStructure?.pdf > 1" i18n> PDFs</ng-container>
               </h3>
-              <h3 class="font-montserrat" *ngIf="tocStructure?.podcast > 0">
+              <h3 class="font-montserrat btn-text-font" *ngIf="tocStructure?.podcast > 0">
                 <ng-container>{{ tocStructure?.podcast }}</ng-container>
                 <ng-container *ngIf="tocStructure?.podcast === 1" i18n> Podcast</ng-container>
                 <ng-container *ngIf="tocStructure?.podcast > 1" i18n> Podcasts</ng-container>
               </h3>
-              <h3 class="font-montserrat" *ngIf="tocStructure?.webModule > 0">
+              <h3 class="font-montserrat btn-text-font" *ngIf="tocStructure?.webModule > 0">
                 <ng-container>{{ tocStructure?.webModule }}</ng-container>
                 <ng-container *ngIf="tocStructure?.webModule === 1" i18n> Web Asset</ng-container>
                 <ng-container *ngIf="tocStructure?.webModule > 1" i18n> Web Assets</ng-container>
               </h3>
-              <h3 class="font-montserrat" *ngIf="tocStructure?.webPage > 0">
+              <h3 class="font-montserrat btn-text-font" *ngIf="tocStructure?.webPage > 0">
                 <ng-container>{{ tocStructure?.webPage }}</ng-container>
                 <ng-container *ngIf="tocStructure?.webPage === 1" i18n> Web Page</ng-container>
                 <ng-container *ngIf="tocStructure?.webPage > 1" i18n> Web Pages</ng-container>
               </h3>
-              <h3 class="font-montserrat" *ngIf="tocStructure?.quiz > 0">
+              <h3 class="font-montserrat btn-text-font" *ngIf="tocStructure?.quiz > 0">
                 <ng-container>{{ tocStructure?.quiz }}</ng-container>
                 <ng-container *ngIf="tocStructure?.quiz === 1" i18n> Quiz</ng-container>
                 <ng-container *ngIf="tocStructure?.quiz > 1" i18n> Quizzes</ng-container>
               </h3>
-              <h3 class="font-montserrat" *ngIf="tocStructure?.assessment > 0">
+              <h3 class="font-montserrat btn-text-font" *ngIf="tocStructure?.assessment > 0">
                 <ng-container>{{ tocStructure?.assessment }}</ng-container>
                 <ng-container *ngIf="tocStructure?.assessment === 1" i18n> Assessment</ng-container>
                 <ng-container *ngIf="tocStructure?.assessment > 1" i18n> Assessments</ng-container>
               </h3>
-              <h3 class="font-montserrat" *ngIf="tocStructure?.other > 0">
+              <h3 class="font-montserrat btn-text-font" *ngIf="tocStructure?.other > 0">
                 <ng-container>{{ tocStructure?.other }}</ng-container>
                 <ng-container *ngIf="tocStructure?.other === 1" i18n> Other Item</ng-container>
                 <ng-container *ngIf="tocStructure?.other > 1" i18n> Other Items</ng-container>
@@ -385,7 +385,7 @@
       
           <div class="info-item" *ngIf="content?.assetType">
             <h3 class="item-heading ws-mat-primary-text font-montserrat" i18n>Type</h3>
-            <h3 class="font-montserrat font-weight-bold text-black width-expand pt-4">
+            <h3 class="font-montserrat font-weight-bold text-black width-expand btn-text-font pt-4">
               {{ content?.assetType  }}
             </h3>
           </div>
@@ -394,7 +394,7 @@
           <!-- <mat-divider *ngIf="hasTocStructure && content?.children?.length"></mat-divider> -->
           <div class="info-item" *ngIf="content?.categoryType && content?.assetType=='Knowledge'">
             <h3 class="item-heading ws-mat-primary-text font-montserrat" i18n>Format</h3>
-            <h3 class="font-montserrat font-weight-bold text-black width-expand pt-4">
+            <h3 class="font-montserrat font-weight-bold text-black width-expand btn-text-font pt-4">
               {{ content?.categoryType  }}
             </h3>
       
@@ -427,7 +427,7 @@
           <!-- <mat-divider *ngIf="hasTocStructure && content?.children?.length"></mat-divider> -->
           <div class="info-item" *ngIf="content?.spaceLicense?.length">
             <h3 class="item-heading ws-mat-primary-text font-montserrat" i18n>Licence</h3>
-            <h3 class="font-montserrat font-weight-bold text-black width-expand pt-4">
+            <h3 class="font-montserrat font-weight-bold text-black width-expand btn-text-font pt-4">
               {{ content?.spaceLicense  }}
             </h3>
           </div>
@@ -436,7 +436,7 @@
           <!-- <mat-divider *ngIf="hasTocStructure && content?.children?.length"></mat-divider> -->
           <div class="info-item" *ngIf="content?.spaceLicenseAttribution?.length">
             <h3 class="item-heading ws-mat-primary-text font-montserrat" i18n>Attributions</h3>
-            <h3 class="font-montserrat font-weight-bold text-black width-expand pt-4">
+            <h3 class="font-montserrat font-weight-bold text-black width-expand btn-text-font pt-4">
               {{ content?.spaceLicenseAttribution  }}
             </h3>
           </div>
@@ -445,7 +445,7 @@
           <!-- <mat-divider *ngIf="hasTocStructure && content?.children?.length"></mat-divider> -->
           <div class="info-item" *ngIf="content?. spaceLicenseCopyright?.length">
             <h3 class="item-heading ws-mat-primary-text font-montserrat" i18n>Copyright</h3>
-            <h3 class="font-montserrat font-weight-bold text-black width-expand pt-4">
+            <h3 class="font-montserrat font-weight-bold text-black width-expand btn-text-font pt-4">
               {{ content?.spaceLicenseCopyright  }}
             </h3>
           </div>
@@ -454,7 +454,7 @@
           <!-- <mat-divider *ngIf="hasTocStructure && content?.children?.length"></mat-divider> -->
           <div class="info-item" *ngIf="content?. spaceAreaOfExpertise?.length">
             <h3 class="item-heading ws-mat-primary-text font-montserrat" i18n>Areas of Expertise</h3>
-            <h3 class="font-montserrat font-weight-bold text-black width-expand pt-4">
+            <h3 class="font-montserrat font-weight-bold text-black width-expand btn-text-font pt-4">
               {{ content?.spaceAreaOfExpertise}}
             </h3>
           </div>
@@ -465,7 +465,7 @@
           <!-- <mat-divider *ngIf="hasTocStructure && content?.children?.length"></mat-divider> -->
           <div class="info-item" *ngIf="content?.sourceName?.length">
             <h3 class="item-heading ws-mat-primary-text font-montserrat" i18n>Created By</h3>
-            <h3 class="font-montserrat font-weight-bold text-black width-expand pt-4">
+            <h3 class="font-montserrat font-weight-bold text-black width-expand btn-text-font pt-4">
               {{ content?.sourceName  }} <span *ngIf="content?.sourceName === 'Other'">( {{content?.otherSourceName}} )</span>
             </h3>
           </div>
@@ -497,7 +497,7 @@
             <!-- <mat-divider *ngIf="hasTocStructure && content?.children?.length"></mat-divider> -->
             <div class="info-item" *ngIf="content?.theme?.length">
               <h3 class="item-heading ws-mat-primary-text font-montserrat" i18n>SDG</h3>
-              <h3 class="font-montserrat font-weight-bold text-black width-expand pt-4">
+              <h3 class="font-montserrat font-weight-bold text-black width-expand btn-text-font pt-4">
                 {{ content?.theme  }}
               </h3>
             </div>
@@ -505,7 +505,7 @@
             <!-- <mat-divider *ngIf="content?.learningMode"></mat-divider> -->
             <div class="info-item" *ngIf="content?.region?.length">
               <h3 class="item-heading ws-mat-primary-text font-montserrat" i18n>Region</h3>
-              <h3 class="font-montserrat font-weight-bold text-black width-expand pt-4">
+              <h3 class="font-montserrat font-weight-bold text-black width-expand btn-text-font pt-4">
                 {{ content?.region }}
               </h3>
             </div>
@@ -519,7 +519,7 @@
             <!-- <mat-divider *ngIf="content?.locale"></mat-divider> -->
             <div class="info-item" *ngIf="content?.hasTranslations?.length || content?.isTranslationOf?.length">
               <h3 class="item-heading ws-mat-primary-text font-montserrat" i18n>Available in</h3>
-              <h3 class="font-montserrat font-weight-bold text-black width-expand pt-4">
+              <h3 class="font-montserrat font-weight-bold text-black width-expand btn-text-font pt-4">
                 <span class="cursor-pointer" (click)="goToContent(trans?.identifier)"
                   *ngFor="let trans of content?.hasTranslations || content?.isTranslationOf">{{trans.locale | uppercase}}
                 </span>
@@ -532,7 +532,7 @@
                 <h3 class="item-heading ws-mat-primary-text font-montserrat" i18n>Curated in KB</h3>
                 <mat-chip-list>
                   <mat-chip>
-                    <h3 class="font-montserrat font-weight-bold text-black width-expand pt-4">
+                    <h3 class="font-montserrat font-weight-bold text-black width-expand btn-text-font pt-4">
                       <ng-container *ngIf="item.contentType === 'Knowledge Board' && item.status === 'Live'">
                         <a [href]="'/app/toc/'+item.identifier+'/overview'"> {{item.name}} </a>
                       </ng-container>
@@ -591,7 +591,7 @@
         </div> -->
       </div>
       
-      <div class="hidden sm:block margin-bottom-m font-montserrat" *ngIf="overview && content?.creatorContacts?.length">
+      <div class="margin-bottom-m font-montserrat" *ngIf="overview && content?.creatorContacts?.length">
           <ng-container [ngTemplateOutlet]="creators" [ngTemplateOutletContext]="{
                 authors: content?.creatorContacts,
                 title: 'CONTACT'

@@ -1,42 +1,56 @@
-    <ng-container *ngIf="isCollection">
-    <ul class="timeline">
-    <h3 class="parent_node" style="color:darkblue" *ngIf="!hasChild">{{content?.name}}</h3>
-    <ng-container *ngFor="let child of content?.children; trackBy: contentTrackBy">
-            <ws-app-app-toc-content-details-tree [forPreview]="forPreview" [expandAll]="expandAll" [rootId]="rootId"
-            [rootContentType]="rootContentType" [content]="child" [hasChild]="true"></ws-app-app-toc-content-details-tree>
-    </ng-container>
+<ng-container>
+    <ul class="timeline" *ngIf="isCollection && !hasChild">
+        <h3 class="parent_node" style="color:darkblue">{{content?.name}}</h3>
+        <ng-container *ngIf="content?.children.length">
+            <ng-container *ngFor="let child of content?.children; trackBy: contentTrackBy">
+                <ws-app-app-toc-content-details-tree [forPreview]="forPreview" [expandAll]="expandAll" [rootId]="rootId"
+                    [rootContentType]="rootContentType" [content]="child" [hasChild]="true">
+                </ws-app-app-toc-content-details-tree>
+            </ng-container>
+        </ng-container>
     </ul>
-    </ng-container>
-    <li class="event" *ngIf="isResource">
-            <div class="flex">
-               <div class="resource-container mr-3 contentType">
-                   <ws-widget-display-content-type-icon class="flex contentType_icon" [displayContentType]="content?.displayContentType"
-                       [displayResourceType]="content?.mimeType">
-                   </ws-widget-display-content-type-icon>
-               </div>
-               <a [routerLink]="resourceLink.url" [queryParams]="resourceLink.queryParams">
-               <h4 class="child_node">{{content?.name}}</h4>
-               </a>
-               <ng-container *ngIf="content?.duration">
-               <div class="hidden-block-xs">
+</ng-container>
+<ng-container *ngIf="isResource">
+    <li class="event" *ngIf="hasChild">
+        <div class="flex">
+            <div class="resource-container mr-3 contentType">
+                <ws-widget-display-content-type-icon class="flex contentType_icon"
+                    [displayContentType]="content?.displayContentType" [displayResourceType]="content?.mimeType">
+                </ws-widget-display-content-type-icon>
+            </div>
+            <a [routerLink]="resourceLink.url" [queryParams]="resourceLink.queryParams">
+                <h4 class="child_node">{{content?.name}}</h4>
+            </a>
+            <ng-container *ngIf="content?.duration">
+                <div class="hidden-block-xs">
                     <ng-container [ngTemplateOutlet]="timer"></ng-container>
-                  </div>
-                  <button mat-icon-button class="visible-block-xs ml-6 flex" [matMenuTriggerFor]="timerMenu">
-                    <mat-icon class="timer_icon platform_gray">query_builder</mat-icon>
-                  </button>
-                </ng-container>
-           </div>
-           </li>
-
-           <mat-menu #timerMenu="matMenu">
-                <div mat-menu-item>
-                        <mat-icon class="timer_icon platform_gray"> query_builder</mat-icon>
-                        <span class="mat-body-strong platform_gray timer">{{ content?.duration | pipeDurationTransform: 'hms' }}</span>
                 </div>
-            </mat-menu>
-            <ng-template #timer>
-                    <div class="ml-3 flex">
-                            <mat-icon class="timer_icon platform_gray"> query_builder</mat-icon>
-                            <span class="mat-body-strong platform_gray timer">{{ content?.duration | pipeDurationTransform: 'hms' }}</span>
-                        </div>
-            </ng-template>
+                <div class="visible-block-xs ml-6">
+                        <ng-container [ngTemplateOutlet]="timerMenu"></ng-container>
+                 </div>
+            </ng-container>
+        </div>
+    </li>
+     <ul class="event1" *ngIf="!hasChild">
+        <div class="flex">
+            <div class="resource-container mr-3 contentType mt-1">
+                <ws-widget-display-content-type-icon class="flex contentType_icon"
+                    [displayContentType]="content?.displayContentType" [displayResourceType]="content?.mimeType">
+                </ws-widget-display-content-type-icon>
+            </div>
+            <h3 class="child_node" style="color:darkblue">{{content?.name}}</h3>
+        </div>
+    </ul>
+</ng-container>
+<ng-template #timerMenu>
+    <div>
+        <mat-icon class="timer_icon platform_gray"> query_builder</mat-icon>
+        <span class="mat-body-strong platform_gray timer">{{ content?.duration | pipeDurationTransform: 'hms' }}</span>
+    </div>
+</ng-template>
+<ng-template #timer>
+    <div class="ml-3 flex">
+        <mat-icon class="timer_icon platform_gray"> query_builder</mat-icon>
+        <span class="mat-body-strong platform_gray timer">{{ content?.duration | pipeDurationTransform: 'hms' }}</span>
+    </div>
+</ng-template>

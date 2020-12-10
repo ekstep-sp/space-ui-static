@@ -19,6 +19,7 @@ export class AppTocContentDetailsTreeComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
+    // console.log(this.content)
   }
   get isResource(): boolean {
     if (this.content) {
@@ -28,6 +29,7 @@ export class AppTocContentDetailsTreeComponent implements OnInit {
     }
     return false
   }
+
   get resourceLink(): { url: string; queryParams: { [key: string]: any } } {
     if (this.content) {
       return viewerRouteGenerator(

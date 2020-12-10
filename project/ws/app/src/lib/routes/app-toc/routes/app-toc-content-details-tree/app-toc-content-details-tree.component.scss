@@ -15,6 +15,8 @@
     list-style: none;
     text-align: left;
     font-weight: 100;
+    margin-top: 0;
+    margin-bottom: 16.48px;
     @include breakpoint-xs {
         padding-left: 13px !important;
     }
@@ -35,8 +37,12 @@
         background:#F2ECF6;
         /* color: currentColor; */
         border: 2px solid #42428b;
+        z-index: 99;
 }
 }
+// ul.timeline:last-child {
+//     margin-bottom: -10px;
+// }
 .event {
     border-bottom: 1px dashed fade(#42428b, 10%);
     /* padding-bottom: 25px; */
@@ -67,13 +73,46 @@
     // }
 
     &:after {
-        left: -47px;
+        left: -46px;
         background: #42428b;
         border-radius: 50%;
         height: 12px;
         width: 12px;
         content: "";
         top: 6px;
+        z-index: 99;
+        @include breakpoint-xs {
+            left: -19px !important;
+            top: 12px !important;
+        }
+    }
+  }
+  .event1 {
+    border-bottom: 1px dashed fade(#42428b, 10%);
+    /* padding-bottom: 25px; */
+    /* margin-bottom: 50px; */
+    position: relative;
+
+    &:last-of-type { 
+      padding-bottom: 0;
+      margin-bottom: 0; 
+      border: none;      
+    }
+
+    &:before, &:after {
+      position: absolute;
+      display: block;
+      top: 0;
+    }
+    &:after {
+        left: -6px;
+        background: #42428b;
+        border-radius: 50%;
+        height: 12px;
+        width: 12px;
+        content: "";
+        top: 6px;
+        z-index: 99;
         @include breakpoint-xs {
             left: -19px !important;
             top: 12px !important;
@@ -86,13 +125,18 @@ h5 {
 .timer {
     // opacity: 50%;
     line-height: 29px !important;
+    font-size: 14px;
+    margin-left: 7.5px;
     @include breakpoint-xs {
         line-height: unset !important;
+        margin-left: unset !important;
     }
 }
 .timer_icon {
-    line-height: 29px;
+    line-height: 31px;
     font-size: 20px;
+    height: 15px;
+    width: 15px;
     @include breakpoint-xs {
         line-height: unset !important;
     }
@@ -103,6 +147,8 @@ h5 {
 }
 .child_node {
     color: darkslateblue !important;
+    font-size: 16px !important;
+    font-weight: normal !important;
     // opacity: 78%;
 }
 .contentType_icon {
@@ -131,3 +177,14 @@ h5 {
       display: block !important;
     }
   }
+  ::ng-deep {
+    .theme-muave.night-mode .parent_node {
+        color: #c6bcb8 !important;
+    }
+    .theme-muave.night-mode .child_node {
+        color: #c6bcb8 !important;
+    }
+    .theme-muave.night-mode .contentType_icon {
+        color: #c6bcb8 !important;
+    }
+}

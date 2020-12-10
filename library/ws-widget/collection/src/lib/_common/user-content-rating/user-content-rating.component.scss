@@ -6,7 +6,9 @@
   transform: scale(1.5);
 }
 .rating-button {
-  margin-right: 3px;
+  margin-right: 8px;
+  width: auto !important;
+  line-height: 44px;
 }
 .star-icon {
   margin: 5px 5px 0 0 !important;

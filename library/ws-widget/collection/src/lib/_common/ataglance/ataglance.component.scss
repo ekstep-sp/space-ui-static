@@ -13,12 +13,12 @@
     padding: $size-xs 0;
     box-sizing: border-box;
     // width: 9%;
-    flex: 0 1 30%;
+    flex: 0 1 26%;
 
     h3 {
       margin: 0;
-      font-weight: bold !important;
-      // font-size: 18px;
+      // font-weight: bold !important;
+      font-size: 16px;
       color: #696466;
     }
 
@@ -28,8 +28,6 @@
       max-width: 140px;
       color: #696466 !important;
     /* opacity: 50%; */
-    font-weight: normal !important;
-    font-size: 16px;
     }
 
     .item-icon {
@@ -56,6 +54,12 @@
 }
 
 ::ng-deep {
+  .theme-muave.night-mode .info-container {
+    background: rgba(146, 94, 176, 0.12) !important;
+    }
+    .theme-muave.night-mode .info-container .info-item h3 {
+    color: #c6bcb8 !important
+    }
   @media only screen and (max-width: 1366px) {
     .hidedownload {
       display: none !important;
@@ -99,17 +103,20 @@ padding: 16px 0;
     }
 }
 .flex-keyword {
-    flex: 1 1 0% !important;
+    flex: 1 1 26% !important;
 }
 .keyword {
     color: #FFFFFF !important;
-    font-weight: 500 !important;
-    font-size: 14px;
-    line-height: 22px;
+    font-weight: bold !important;
+    font-size: 14px !important;
+    line-height: 22px !important;
 }
 .mat-chip {
     border-radius: 6px !important;
 }
 .nav-space {
   margin-top: 32px;
+}
+.text-black {
+  color: #696466 !important;
 }
