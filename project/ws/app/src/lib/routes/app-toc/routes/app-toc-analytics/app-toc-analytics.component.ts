@@ -316,11 +316,6 @@ export class AppTocAnalyticsComponent implements OnInit, OnDestroy {
   }
 
   setVisibilityRoles(data: Data) {
-<<<<<<< HEAD
-    // tslint:disable-next-line: max-line-length
-=======
-    // tslint:disable-next-line:max-line-length
->>>>>>> merged code with kamalee's overview-ui
     this.usersAnalyticsVisible = this.tocSharedSvc.isVisibileAccToRoles(data.rolesAllowed.usersAnalytics, data.rolesNotAllowed.usersAnalytics)
     this.orgAnalyticsVisible = this.tocSharedSvc.isVisibileAccToRoles(data.rolesAllowed.orgAnalytics, data.rolesNotAllowed.orgAnalytics)
   }
