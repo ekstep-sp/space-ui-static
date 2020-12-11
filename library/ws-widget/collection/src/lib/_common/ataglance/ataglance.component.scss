@@ -17,6 +17,9 @@
     @include breakpoint-xs {
       padding: 8px 8px !important;
     }
+    @include breakpoint-s {
+      flex: 0 1 40% !important;
+    }
 
     h3 {
       margin: 0;
