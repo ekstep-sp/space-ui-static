@@ -5,8 +5,8 @@ import { NsWidgetResolver } from '@ws-widget/resolver'
 import { ConfigurationsService, UtilityService, ValueService } from '@ws-widget/utils'
 import { Subscription } from 'rxjs'
 import { RootService } from '../../../../../src/app/component/root/root.service'
-import { TStatus, ViewerDataService } from './viewer-data.service'
 import { AppTocService } from '@ws/app/src/lib/routes/app-toc/services/app-toc.service'
+import { TStatus, SharedViewerDataService } from '@ws/author/src/lib/modules/shared/services/shared-viewer-data.service'
 
 export enum ErrorType {
   accessForbidden = 'accessForbidden',
@@ -51,7 +51,7 @@ export class ViewerComponent implements OnInit, OnDestroy, AfterViewInit, AfterV
     private activatedRoute: ActivatedRoute,
     private router: Router,
     private valueSvc: ValueService,
-    private dataSvc: ViewerDataService,
+    private dataSvc: SharedViewerDataService,
     private rootSvc: RootService,
     private utilitySvc: UtilityService,
     private changeDetector: ChangeDetectorRef,

@@ -5,9 +5,10 @@ import { Observable, of } from 'rxjs'
 import { AccessControlService } from '@ws/author'
 import { WidgetContentService, NsContent, VIEWER_ROUTE_FROM_MIME } from '@ws-widget/collection'
 import { IResolveResponse, AuthMicrosoftService, ConfigurationsService } from '@ws-widget/utils'
-import { ViewerDataService } from './viewer-data.service'
+// import { ViewerDataService } from './viewer-data.service'
 import { MobileAppsService } from '../../../../../src/app/services/mobile-apps.service'
 import { Platform } from '@angular/cdk/platform'
+import { SharedViewerDataService } from '@ws/author/src/lib/modules/shared/services/shared-viewer-data.service'
 
 const ADDITIONAL_FIELDS_IN_CONTENT = ['creatorContacts', 'source', 'exclusiveContent']
 @Injectable()
@@ -18,7 +19,7 @@ export class ViewerResolve
     > {
   constructor(
     private contentSvc: WidgetContentService,
-    private viewerDataSvc: ViewerDataService,
+    private viewerDataSvc: SharedViewerDataService,
     private mobileAppsSvc: MobileAppsService,
     private router: Router,
     private accessControlSvc: AccessControlService,

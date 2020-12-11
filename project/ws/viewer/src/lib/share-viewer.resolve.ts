@@ -6,8 +6,9 @@ import { IResolveResponse, ConfigurationsService } from '@ws-widget/utils'
 import { HttpHeaders, HttpClient } from '@angular/common/http'
 import { AccessControlService, ApiService } from '@ws/author'
 import { CONTENT_READ } from '@ws/author/src/lib/constants/apiEndpoints'
-import { ViewerDataService } from './viewer-data.service'
+// import { ViewerDataService } from './viewer-data.service'
 import { WidgetResolverService } from '@ws-widget/resolver/src/public-api'
+import { SharedViewerDataService } from '@ws/author/src/lib/modules/shared/services/shared-viewer-data.service'
 
 @Injectable()
 export class ShareViewerResolve
@@ -21,7 +22,7 @@ export class ShareViewerResolve
     private router: Router,
     private readonly apiService: ApiService,
     private readonly accessService: AccessControlService,
-    private viewerDataSvc: ViewerDataService,
+    private viewerDataSvc: SharedViewerDataService,
     private readonly widgetResolver: WidgetResolverService
   ) {}
 

@@ -3,7 +3,8 @@ import { NsContent, NsDiscussionForum } from '@ws-widget/collection'
 import { NsWidgetResolver } from '@ws-widget/resolver'
 import { ActivatedRoute } from '@angular/router'
 import { ConfigurationsService } from '../../../../../../../library/ws-widget/utils/src/public-api'
-import { ViewerDataService } from '../../viewer-data.service'
+import { SharedViewerDataService } from '@ws/author/src/lib/modules/shared/services/shared-viewer-data.service'
+// import { ViewerDataService } from '../../viewer-data.service'
 
 @Component({
   selector: 'viewer-pdf-container',
@@ -35,7 +36,7 @@ export class PdfComponent implements OnInit {
   constructor(
     private activatedRoute: ActivatedRoute,
     private configSvc: ConfigurationsService,
-    private viewerService: ViewerDataService
+    private viewerService: SharedViewerDataService
 ) { }
 
   ngOnInit() {

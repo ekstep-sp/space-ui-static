@@ -2,8 +2,9 @@ import { Component, EventEmitter, Input, OnDestroy, OnInit, Output } from '@angu
 import { DomSanitizer, SafeUrl } from '@angular/platform-browser'
 import { ActivatedRoute } from '@angular/router'
 import { ConfigurationsService, EInstance, NsPage } from '@ws-widget/utils'
+import { SharedViewerDataService } from '@ws/author/src/lib/modules/shared/services/shared-viewer-data.service'
 import { Subscription } from 'rxjs'
-import { ViewerDataService } from '../../viewer-data.service'
+// import { ViewerDataService } from '../../viewer-data.service'
 
 @Component({
   selector: 'viewer-viewer-top-bar',
@@ -34,7 +35,7 @@ export class ViewerTopBarComponent implements OnInit, OnDestroy {
     private domSanitizer: DomSanitizer,
     // private logger: LoggerService,
     private configSvc: ConfigurationsService,
-    private viewerDataSvc: ViewerDataService,
+    private viewerDataSvc: SharedViewerDataService,
   ) { }
 
   ngOnInit() {

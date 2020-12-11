@@ -17,8 +17,9 @@ import {
 } from '@ws-widget/utils'
 import { of, Subscription } from 'rxjs'
 import { delay } from 'rxjs/operators'
-import { ViewerDataService } from '../../viewer-data.service'
+// import { ViewerDataService } from '../../viewer-data.service'
 import { ViewerUtilService } from '../../viewer-util.service'
+import {SharedViewerDataService } from './../../../../../author/src/lib/modules/shared/services/shared-viewer-data.service'
 interface IViewerTocCard {
   assetType: string | null
   identifier: string
@@ -60,7 +61,7 @@ export class ViewerTocComponent implements OnInit, OnDestroy {
     // private logger: LoggerService,
     private contentSvc: WidgetContentService,
     private utilitySvc: UtilityService,
-    private viewerDataSvc: ViewerDataService,
+    private viewerDataSvc: SharedViewerDataService,
     private viewSvc: ViewerUtilService,
     private configSvc: ConfigurationsService,
     private contentProgressSvc: ContentProgressService,

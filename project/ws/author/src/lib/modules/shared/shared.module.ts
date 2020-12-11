@@ -59,6 +59,7 @@ import { DraftDialogComponent } from './components/draft-dialog/draft-dialog.com
 import { ShowHideToolTipDirective } from './directives/show-hide-tool-tip.directive'
 import { StatusTrackComponent } from './components/status-track/status-track.component'
 import { FeedbackFormComponent } from './components/feedback-form/feedback-form.component'
+import { SharedViewerDataService } from './services/shared-viewer-data.service'
 
 @NgModule({
   declarations: [
@@ -171,6 +172,7 @@ import { FeedbackFormComponent } from './components/feedback-form/feedback-form.
     FeedbackFormComponent,
   ],
   providers: [
+    SharedViewerDataService,
     ApiService,
     AccessControlService,
     ConditionCheckService,
