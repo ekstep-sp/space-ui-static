@@ -28,16 +28,14 @@
       }
     &:after {
         left: -10px !important;
-        border-radius: 50%;
-        height: 15px;
-        width: 15px;
-        content: "";
-        top: 5px;
-        /* color: rgba(146, 94, 176, 0.15) !important; */
-        background:#F2ECF6;
-        /* color: currentColor; */
-        border: 2px solid #42428b;
-        z-index: 99;
+    border-radius: 50%;
+    height: 15px;
+    width: 15px;
+    content: "";
+    top: 7px;
+    background: #F2ECF6;
+    border: 2px solid #42428b;
+    z-index: 99;
 }
 }
 // ul.timeline:last-child {
@@ -105,13 +103,13 @@
       top: 0;
     }
     &:after {
-        left: -6px;
+        left: -7px;
         background: #42428b;
         border-radius: 50%;
-        height: 12px;
-        width: 12px;
+        height: 14px;
+        width: 14px;
         content: "";
-        top: 6px;
+        top: 5px;
         z-index: 99;
         @include breakpoint-xs {
             left: -19px !important;

@@ -38,7 +38,9 @@
                     [displayContentType]="content?.displayContentType" [displayResourceType]="content?.mimeType">
                 </ws-widget-display-content-type-icon>
             </div>
+            <a [routerLink]="resourceLink.url" [queryParams]="resourceLink.queryParams">
             <h3 class="child_node" style="color:darkblue">{{content?.name}}</h3>
+            </a>
         </div>
     </ul>
 </ng-container>
