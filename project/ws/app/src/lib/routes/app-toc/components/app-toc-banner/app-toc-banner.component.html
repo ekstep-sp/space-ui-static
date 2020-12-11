@@ -311,7 +311,7 @@
   <h3 class="display_type curator sub-heading-font">Curators</h3>
     <div class="flex" *ngFor="let curatorName of content?.creatorContacts">
         <img src= "/assets/instances/space/common/overview_account.png" class="pr-2 prf-icon">
-        <h3 class="display_type btn-text-font">{{curatorName.name}}</h3>
+        <h3 class="display_type btn-text-font common-width">{{curatorName.name}}</h3>
         <ws-widget-btn-mail-user
                   *ngIf="askAuthorEnabled"
                   [widgetData]="{ content: content, emails: [{email: curatorName.email, name: curatorName.name}] }">

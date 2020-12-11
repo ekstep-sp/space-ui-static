@@ -14,6 +14,9 @@
     box-sizing: border-box;
     // width: 9%;
     flex: 0 1 26%;
+    @include breakpoint-xs {
+      padding: 8px 8px !important;
+    }
 
     h3 {
       margin: 0;
@@ -85,10 +88,11 @@
   hyphens: auto;
 }
 .card-style {
-padding: 32px 0;
+  padding-top: 40px !important;
+  padding: 0 0;
 }
 .viewer-style {
-    display: flex !important; 
+  padding: 0 0 ;
     @include breakpoint-xs {
         display: block !important;
     }
@@ -98,7 +102,7 @@ padding: 32px 0;
     flex-wrap: wrap;
     flex: auto;
     display: flex !important;
-    margin: 40px 64px;
+    margin: 0px 64px;
     @include breakpoint-xs {
         display: block !important;
         margin: 0;
@@ -121,4 +125,9 @@ padding: 32px 0;
 }
 .text-black {
   color: #696466 !important;
+}
+.txt-clr {
+   color: #696466 !important;
+    font-weight: bold !important;
+    padding: 15px 64px;
 }

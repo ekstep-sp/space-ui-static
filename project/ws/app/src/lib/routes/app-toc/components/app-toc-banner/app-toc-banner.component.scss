@@ -75,6 +75,9 @@
         display: block !important;
         margin-bottom: 1rem;
       }
+      @include breakpoint-s {
+        display: block !important;
+      }
       // margin-left: auto;
       // order: 2;
     }
@@ -209,4 +212,7 @@ color: #FFFFFF !important;
 }
 .category {
   margin-bottom: 0;
+}
+.common-width {
+  min-width: 117px !important;
 }

@@ -87,7 +87,7 @@ $border-color: #d8d8d8;
 // }
 .nav-space {
   padding-top: 0;
-  padding: 32px 64px !important;
+  padding: 52px 64px !important;
   margin-top: 0;
   @include breakpoint-xs {
 padding: 32px 23px !important;
@@ -102,4 +102,9 @@ padding: 32px 23px !important;
     left: -1px;
     z-index: 9;
     margin-bottom: 0;
+}
+.text-clr {
+  color: #696466 !important;
+    font-weight: bold !important;
+    // padding: 15px 64px;
 }

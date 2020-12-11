@@ -234,10 +234,11 @@
 </div>-->
 
 
-
-<div *ngIf="!overview" class="card-style">
+<div id="ataglance" #ataglance>
+<div class="card-style">
+  <ng-container *ngIf="!overview">
         <!-- <ws-widget-mark-as-complete [content]="content"></ws-widget-mark-as-complete> -->
-        <ng-container *ngIf="showDownloadMobile && content && isDownloadable && !showDownloadGuest">
+        <!-- <ng-container *ngIf="showDownloadMobile && content && isDownloadable && !showDownloadGuest">
       
           <mat-card class="mb-4">
             <button mat-button color="primary" (click)="download()">
@@ -245,9 +246,9 @@
               <span i18n class="px-2">Download</span>
             </button>
           </mat-card>
-        </ng-container>
+        </ng-container> -->
         <mat-card class="viewer-style font-montserrat ws-mat-primary-lite-background-on-day info-container break-word">
-          <!-- <h2 class="font-montserrat heading-font-size-secondary inline" i18n>At a glance</h2> -->
+            <h2 class="btn-text-font txt-clr" i18n>At a glance</h2>
           <button class="font-montserrat float-right" *ngIf="this.configSvc?.isGuestUser && !content" mat-button (click)="showMoreGlance = !showMoreGlance">
             <mat-icon>arrow_drop_down</mat-icon>
             <ng-container i18n>Show Details</ng-container>
@@ -589,8 +590,9 @@
               }">
           </ng-container>
         </div> -->
-      </div>
-      
+      </ng-container>
+    </div>
+  </div>
       <div class="margin-bottom-m font-montserrat" *ngIf="overview && content?.creatorContacts?.length">
           <ng-container [ngTemplateOutlet]="creators" [ngTemplateOutletContext]="{
                 authors: content?.creatorContacts,

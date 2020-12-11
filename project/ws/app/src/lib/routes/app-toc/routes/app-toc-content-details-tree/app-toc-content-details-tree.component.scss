@@ -111,10 +111,10 @@
         content: "";
         top: 5px;
         z-index: 99;
-        @include breakpoint-xs {
-            left: -19px !important;
-            top: 12px !important;
-        }
+        // @include breakpoint-xs {
+        //     left: -19px !important;
+        //     top: 12px !important;
+        // }
     }
   }
 h5 {
