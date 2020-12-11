@@ -105,6 +105,9 @@ table {
         left: 75% !important;
       }
     }
+    .responsive-progress{
+      margin-bottom: 0;
+    }
   }
 }
 @media screen and (max-width:768px){
@@ -112,4 +115,5 @@ table {
      line-height:13px;
      padding-left:5px;
   }
+ 
 }

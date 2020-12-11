@@ -734,6 +734,13 @@ h3.shepherd-title {
 //     width: 75px !important;
 //   }
 // }
+.responsive-grid-tile{ 
+  .mat-figure {
+    .info{
+      margin-bottom: 0;
+    }
+   }
+}
 @media screen and (max-width:768px) {
 .mat-tab-body-content{
 overflow: hidden !important;
@@ -762,5 +769,13 @@ overflow: hidden !important;
   }
   .search-border{
     margin-left: 1rem;
+  }
+}
+
+@media screen and (max-width: 720px){
+.responsive-grid-tile{ 
+     .mat-figure {
+    flex-direction: column;
+      }
   }
 }
