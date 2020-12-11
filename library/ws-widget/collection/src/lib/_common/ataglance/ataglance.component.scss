@@ -85,7 +85,7 @@
   hyphens: auto;
 }
 .card-style {
-padding: 32px 64px;
+padding: 32px 0;
 }
 .viewer-style {
     display: flex !important; 
@@ -98,7 +98,7 @@ padding: 32px 64px;
     flex-wrap: wrap;
     flex: auto;
     display: flex !important;
-    margin: 40px 96px;
+    margin: 40px 64px;
     @include breakpoint-xs {
         display: block !important;
         margin: 0;
