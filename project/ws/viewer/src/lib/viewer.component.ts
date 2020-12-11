@@ -67,6 +67,7 @@ export class ViewerComponent implements OnInit, OnDestroy, AfterViewInit, AfterV
     if (!sentDirectly) {
       if (!this.configService.isGuestUser && e.hasOwnProperty('activatedRoute')) {
         e.activatedRoute.data.subscribe((data: { content: { data: NsContent.IContent } }) => {
+          debugger
           if (data.content && data.content.data) {
             this.content = data.content.data
             this.tocSharedSvc.fetchEmails(this.content ? this.content.creatorContacts : []).then((newIDS: any) => {
@@ -105,6 +106,7 @@ export class ViewerComponent implements OnInit, OnDestroy, AfterViewInit, AfterV
       this.mode = isSmall ? 'over' : 'side'
     })
     this.resourceChangeSubscription = this.dataSvc.changedSubject.subscribe(_ => {
+      debugger
       this.status = this.dataSvc.status
       this.error = this.dataSvc.error
       if (this.error && this.error.status) {

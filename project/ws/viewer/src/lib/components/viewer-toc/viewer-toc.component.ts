@@ -29,6 +29,7 @@ interface IViewerTocCard {
   type: string
   complexity: string
   children: null | IViewerTocCard[]
+  iconType?: string
 }
 
 export type TCollectionCardType = 'content' | 'playlist' | 'goals'
@@ -70,7 +71,7 @@ export class ViewerTocComponent implements OnInit, OnDestroy {
   resourceId: string | null = null
   collection: IViewerTocCard | null = null
   queue: IViewerTocCard[] = []
-  tocMode: 'FLAT' | 'TREE' = 'FLAT'
+  tocMode: 'FLAT' | 'TREE' = 'TREE'
   nestedTreeControl: NestedTreeControl<IViewerTocCard>
   nestedDataSource: MatTreeNestedDataSource<IViewerTocCard>
   defaultThumbnail: SafeUrl | null = null
@@ -167,8 +168,16 @@ export class ViewerTocComponent implements OnInit, OnDestroy {
       this.viewerDataSvc.updateNextPrevResource(Boolean(this.collection), prev, next)
       this.processCollectionForTree()
       this.expandThePath()
+      this.expandAll(this.nestedTreeControl)
+      // this.nestedTreeControl.expandAll()
       this.getContentProgressHash()
     }
+  }
+
+  expandAll(source: any) {
+    debugger
+    console.log('source is ', source)
+    this.nestedTreeControl.expand(source)
   }
   private async getCollection(
     collectionId: string,
@@ -278,6 +287,7 @@ export class ViewerTocComponent implements OnInit, OnDestroy {
       duration: content.duration,
       type: content.resourceType ? content.resourceType : content.contentType,
       complexity: content.complexityLevel,
+      iconType: content.mimeType,
       children:
         Array.isArray(content.children) && content.children.length
           ? content.children.map(child => this.convertContentToIViewerTocCard(child))
@@ -359,13 +369,15 @@ export class ViewerTocComponent implements OnInit, OnDestroy {
         of(true)
           .pipe(delay(2000))
           .subscribe(() => {
-            this.expandThePath()
+            // this.expandThePath()
+            this.nestedTreeControl.expandAll()
           })
       }
     }
   }
 
   expandThePath() {
+    debugger
     if (this.collection && this.resourceId) {
       const path = this.utilitySvc.getPath(this.collection, this.resourceId)
       this.pathSet = new Set(path.map((u: { identifier: any }) => u.identifier))
