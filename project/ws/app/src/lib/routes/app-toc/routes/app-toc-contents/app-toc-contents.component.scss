@@ -30,7 +30,7 @@ $border-color: #d8d8d8;
     @include breakpoint-lt-m {
       width: 100%;
       padding-right: 0;
-      margin-bottom: $size-xl;
+      // margin-bottom: $size-xl;
     }
   }
   .side-container {

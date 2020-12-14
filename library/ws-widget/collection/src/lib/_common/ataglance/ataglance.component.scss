@@ -133,7 +133,8 @@
 .txt-clr {
    color: #696466 !important;
     font-weight: bold !important;
-    padding: 15px 64px;
+    padding: 32px 64px 40px 64px;
+    margin: 0;
     @include breakpoint-xs {
       text-align: center !important;
     }
