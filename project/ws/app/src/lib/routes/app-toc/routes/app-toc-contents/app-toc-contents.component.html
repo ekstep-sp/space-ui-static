@@ -1,4 +1,5 @@
-<div class="contents-container nav-space" #contents id="contents">
+<div #contents id="contents">
+<div class="contents-container nav-space" #contents id="contents" *ngIf="content?.children?.length">
     <h2 class="btn-text-font text-clr">Contents</h2>
   <div class="main-container">
     <ng-container *ngIf="content?.children?.length; else noChildren">
@@ -89,4 +90,5 @@
       </ws-utils-horizontal-scroller>
     </div> -->
   <!-- </div> -->
+</div>
 </div>
