@@ -14,6 +14,11 @@ export class TocBodyCommonRoutingComponent implements OnInit {
     this.router.routeReuseStrategy.shouldReuseRoute = function () {
       return false
     }
+    // if (this.route && this.route.parent) {
+    //   this.routeSubscription = this.route.parent.data.subscribe((data: Data) => {
+    //     this.initData(data)
+    //   })
+    // }
     this.scroll()
   }
   scroll() {

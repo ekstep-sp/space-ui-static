@@ -14,6 +14,9 @@ export class AppTocContentDetailsTreeComponent implements OnInit {
   @Input() forPreview = false
   @Input() index: any
   @Input() hasChild = false
+  @Input() lastEemFromParent = false
+  @Input() lastEemFromChild = false
+
   isLinear = false
 
   constructor() { }

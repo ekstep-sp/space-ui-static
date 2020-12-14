@@ -93,16 +93,16 @@ $border-color: #d8d8d8;
 padding: 32px 23px !important;
   }
 }
-.content-card:before {
-  content: "";
-    border: 1px solid purple;
-    position: absolute;
-    height: calc(100% - 65px);
-    top: 24px;
-    left: -1px;
-    z-index: 9;
-    margin-bottom: 0;
-}
+// .content-card:before {
+//   content: "";
+//     border: 1px solid purple;
+//     position: absolute;
+//     height: calc(100% - 69px);
+//     top: 24px;
+//     left: -1px;
+//     z-index: 9;
+//     margin-bottom: 0;
+// }
 .text-clr {
   color: #696466 !important;
     font-weight: bold !important;

@@ -10,9 +10,11 @@
       </div> -->
     <ng-container  *ngFor="let card of content?.children;index as i; trackBy: contentTrackBy">
       <div class="body-font-size-secondary font-montserrat border content-card"
-       >
+      >
         <ws-app-app-toc-content-details-tree [forPreview]="forPreview" [index]="i" [expandAll]="expandAll" [rootId]="contextId"
-          [rootContentType]="contextPath" [content]="card"></ws-app-app-toc-content-details-tree>
+          [rootContentType]="contextPath" [content]="card"  *ngIf="content.children.length-1 !== i"></ws-app-app-toc-content-details-tree>
+          <ws-app-app-toc-content-details-tree [forPreview]="forPreview" [index]="i" [expandAll]="expandAll" [rootId]="contextId"
+          [rootContentType]="contextPath" [content]="card" [lastEemFromParent]="true"  *ngIf="content.children.length-1 === i"></ws-app-app-toc-content-details-tree>
       </div>
     </ng-container>
     </ng-container>
