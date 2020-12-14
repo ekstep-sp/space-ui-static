@@ -133,4 +133,7 @@
    color: #696466 !important;
     font-weight: bold !important;
     padding: 15px 64px;
+    @include breakpoint-xs {
+      text-align: center !important;
+    }
 }
