@@ -19,14 +19,14 @@
 </ng-container>
 <ng-container *ngIf="isResource">
     <li class="event" *ngIf="hasChild" [ngClass]="{'last': lastEemFromChild}">
-        <div class="flex">
+        <div class="flex items-center">
             <div class="resource-container mr-3 contentType">
                 <ws-widget-display-content-type-icon class="flex contentType_icon"
                     [displayContentType]="content?.displayContentType" [displayResourceType]="content?.mimeType">
                 </ws-widget-display-content-type-icon>
             </div>
             <a [routerLink]="resourceLink.url" [queryParams]="resourceLink.queryParams">
-                <h4 class="child_node">{{content?.name}}</h4>
+                <h4 class="child_node m-0">{{content?.name}}</h4>
             </a>
             <ng-container *ngIf="content?.duration">
                 <div class="hidden-block-xs">
@@ -60,6 +60,6 @@
 <ng-template #timer>
     <div class="ml-3 flex">
         <mat-icon class="timer_icon platform_gray"> query_builder</mat-icon>
-        <span class="mat-body-strong platform_gray timer">{{ content?.duration | pipeDurationTransform: 'hms' }}</span>
+        <span class="platform_gray timer">{{ content?.duration | pipeDurationTransform: 'hms' }}</span>
     </div>
 </ng-template>
