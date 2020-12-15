@@ -193,7 +193,7 @@
   font-style: normal !important;;
 font-weight: 460 !important;
 font-size: 32px !important;
-line-height: 36px;
+line-height: 36px !important;
 }
 .display_type {
 color: #FFFFFF !important;
@@ -216,7 +216,7 @@ color: #FFFFFF !important;
 }
 .common-width {
   min-width: 117px !important;
-  margin: 0;
+  margin: 0 !important;
 }
 .curator-align {
   align-items: center;
