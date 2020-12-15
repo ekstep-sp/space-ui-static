@@ -24,7 +24,7 @@
     h3 {
       margin: 0;
       // font-weight: bold !important;
-      font-size: 16px;
+      font-size: 1.125rem;
       color: #696466;
     }
 
@@ -33,6 +33,7 @@
       min-width: 80px;
       max-width: 140px;
       color: #696466 !important;
+      font-size: 1rem;
     /* opacity: 50%; */
     }
 
@@ -96,7 +97,7 @@
   padding: 0 0;
 }
 .viewer-style {
-  padding: 0 0 ;
+  // padding: 0 0 ;
     @include breakpoint-xs {
         display: block !important;
     }
@@ -131,10 +132,11 @@
   color: #696466 !important;
 }
 .txt-clr {
-   color: #696466 !important;
+    color: #696466 !important;
     font-weight: bold !important;
     padding: 32px 64px 40px 64px;
-    margin: 0;
+    margin: 0 !important;
+    font-size: 1.125rem;
     @include breakpoint-xs {
       text-align: center !important;
     }

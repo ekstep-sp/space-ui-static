@@ -1,6 +1,6 @@
 <ng-container>
     <ul class="timeline" *ngIf="isCollection && !hasChild" [ngClass]="{'lastParent': lastEemFromParent}">
-        <h3 class="parent_node" style="color:darkblue">{{content?.name}}</h3>
+        <h3 class="parent_node">{{content?.name}}</h3>
 
         <ng-container *ngIf="content?.children.length">
             <ng-container *ngFor="let child of content?.children;index as i; trackBy: contentTrackBy">

@@ -102,7 +102,7 @@ export class AppTocOverviewComponent implements OnInit, OnDestroy {
       this.contentParents = {}
       this.resetAndFetchTocStructure()
       this.getTrainingCount()
-      this.getContentParent()
+      // this.getContentParent()
     })
     .catch(_e => {
       // console.log('some error occured')

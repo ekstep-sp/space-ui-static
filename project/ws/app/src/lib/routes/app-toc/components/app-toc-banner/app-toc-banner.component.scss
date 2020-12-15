@@ -192,7 +192,7 @@
 .heading {
   font-style: normal !important;;
 font-weight: 460 !important;
-font-size: 32px !important;
+font-size: 2rem !important;
 line-height: 36px !important;
 }
 .display_type {
@@ -201,6 +201,7 @@ color: #FFFFFF !important;
 .curator {
   font-weight: bold !important;
   margin-bottom: 34px !important;
+  font-size: 1.5rem;
   @include breakpoint-xs {
     margin-bottom: 20px !important;
   }
@@ -213,10 +214,13 @@ color: #FFFFFF !important;
 }
 .category {
   margin-bottom: 0;
+  font-size: 1.5rem;
+  line-height: 29px !important;
 }
 .common-width {
   min-width: 117px !important;
   margin: 0 !important;
+  font-size: 1.125rem;
 }
 .curator-align {
   align-items: center;
