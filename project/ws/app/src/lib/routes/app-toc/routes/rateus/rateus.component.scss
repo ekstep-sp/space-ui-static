@@ -36,4 +36,8 @@
   }
   .custom-padding {
     margin: 0 0 88px 64px !important;
+    @include breakpoint-xs {
+      margin: 0 !important;
+      justify-content: center;
+    }
   }

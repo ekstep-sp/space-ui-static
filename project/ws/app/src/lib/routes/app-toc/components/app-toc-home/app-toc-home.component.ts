@@ -58,6 +58,8 @@ export class AppTocHomeComponent implements OnInit, OnDestroy {
     if (activeAnalytic) {
       this.isActive = true
     // console.log(activeAnalytic)
+    } else {
+      this.isActive = false
     }
     try {
       this.isInIframe = window.self !== window.top
