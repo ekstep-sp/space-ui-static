@@ -309,7 +309,7 @@
   <!--curator details-->
 <div>
   <h3 class="display_type curator sub-heading-font">Curators</h3>
-    <div class="flex" *ngFor="let curatorName of content?.creatorContacts">
+    <div class="flex curator-align" *ngFor="let curatorName of content?.creatorContacts">
         <img src= "/assets/instances/space/common/overview_account.png" class="pr-2 prf-icon">
         <h3 class="display_type btn-text-font common-width">{{curatorName.name}}</h3>
         <ws-widget-btn-mail-user
