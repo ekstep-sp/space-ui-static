@@ -98,7 +98,7 @@ h5 {
     margin-top: -4px;
 }
 .timer {
-    line-height: 29px !important;
+    /* line-height: 29px !important; */
     font-size: 14px;
     margin-left: 7.5px;
     @include breakpoint-xs {
@@ -107,7 +107,7 @@ h5 {
     }
 }
 .timer_icon {
-    line-height: 31px;
+    /* line-height: 31px; */
     font-size: 20px;
     height: 15px;
     width: 15px;
@@ -171,4 +171,13 @@ h5 {
 }
 .lastParent {
     padding-bottom: 0 !important;
+}
+
+.timer {
+    font-weight: bold;
+    
+}
+
+.m-0 {
+    margin: 0 !important;
 }
