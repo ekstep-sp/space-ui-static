@@ -91,9 +91,11 @@
 .text-style {
     font-size: 24px;
     padding-bottom: 20px;
-    margin: 0px 10px;
+    // margin: 0px 10px;
+    padding: 30px 30px;
     color: #696466 !important;
     height: 64px;
+    opacity:0.99;
 }
 ::ng-deep {
   .theme-muave.night-mode .text-style {
