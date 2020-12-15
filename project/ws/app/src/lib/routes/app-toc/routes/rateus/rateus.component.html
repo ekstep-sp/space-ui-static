@@ -1,0 +1,23 @@
+<div id="rateUs" #rateUs>
+<ng-container *ngIf="enableFeature && contentId">
+        <mat-card class="card">
+            <h2 class="btn-text-font txt-clr" i18n>Rate Us</h2>
+          <div class="flex custom-padding">
+            <button
+              i18n-aria-label
+              aria-label="Rating"
+              name="user-content-rating-star-{{ i + 1 }}"
+              class="rating-button"
+              mat-icon-button
+              *ngFor="let _ of [1, 2, 3, 4, 5]; let i = index"
+              (click)="addRating(i)"
+              style="color: #865ba0;"
+            >
+              <mat-icon class="rating-icon">
+                {{ (userRating || -1) > i ? 'star' : 'star_border' }}</mat-icon
+              >
+            </button>
+          </div>
+        </mat-card>
+      </ng-container>
+</div>

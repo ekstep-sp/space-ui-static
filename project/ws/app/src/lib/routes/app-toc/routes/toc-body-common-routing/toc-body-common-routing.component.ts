@@ -27,9 +27,11 @@ export class TocBodyCommonRoutingComponent implements OnInit, OnDestroy {
     this.scroll()
   }
   scroll() {
-    const overview = document.getElementById('overview') as HTMLElement
+    // const overview = document.getElementById('overview') as HTMLElement
     const ataglance = document.getElementById('ataglance') as HTMLElement
     const contents = document.getElementById('contents') as HTMLElement
+    const rateUs = document.getElementById('rateUs') as HTMLElement
+
     // if (window.location.href.includes('overview') && overview) {
     //   setTimeout(() => {
     //     overview.scrollIntoView({
@@ -52,6 +54,14 @@ export class TocBodyCommonRoutingComponent implements OnInit, OnDestroy {
              behavior: 'smooth',
               block: 'start',
                })
+      },         500)
+    }
+    if (window.location.href.includes('rateUs') && rateUs) {
+      setTimeout(() => {
+        rateUs.scrollIntoView({
+            behavior: 'smooth',
+            block: 'start',
+            })
       },         500)
     }
   }

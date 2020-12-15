@@ -8,11 +8,13 @@ $border-color: #d8d8d8;
   justify-content: space-between;
   flex-wrap: wrap;
   margin: $size-m 0 $size-l 0;
+  margin-bottom: 90px;
   .main-container {
     width: 100%;
     padding-right: 2 * $size-l;
     box-sizing: border-box;
     position: relative;
+    padding-left: 6px;
     @include breakpoint-xs {
       margin-bottom: 60px;
     }

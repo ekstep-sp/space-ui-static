@@ -248,7 +248,7 @@
           </mat-card>
         </ng-container> -->
         <mat-card class="viewer-style font-montserrat ws-mat-primary-lite-background-on-day info-container break-word">
-            <h2 class="btn-text-font txt-clr" i18n>At a glance</h2>
+            <h2 class="btn-text-font txt-clr" i18n>At A Glance</h2>
           <button class="font-montserrat float-right" *ngIf="this.configSvc?.isGuestUser && !content" mat-button (click)="showMoreGlance = !showMoreGlance">
             <mat-icon>arrow_drop_down</mat-icon>
             <ng-container i18n>Show Details</ng-container>
@@ -270,7 +270,7 @@
           <div class="info-item" *ngIf="content?.complexityLevel">
             <h3 class="item-heading ws-mat-primary-text font-montserrat" i18n>Level</h3>
             <h3 class="font-montserrat pt-4 font-weight-bold text-black width-expand btn-text-font">
-              {{ content?.complexityLevel }}
+              {{ content?.complexityLevel | lowercase }}
             </h3>
           </div>
           <!-- <mat-divider *ngIf="content?.complexityLevel"></mat-divider>
@@ -387,7 +387,7 @@
           <div class="info-item" *ngIf="content?.assetType">
             <h3 class="item-heading ws-mat-primary-text font-montserrat" i18n>Type</h3>
             <h3 class="font-montserrat font-weight-bold text-black width-expand btn-text-font pt-4">
-              {{ content?.assetType  }}
+              {{ content?.assetType  | lowercase}}
             </h3>
           </div>
           <!-- <mat-divider></mat-divider> -->
@@ -396,7 +396,7 @@
           <div class="info-item" *ngIf="content?.categoryType && content?.assetType=='Knowledge'">
             <h3 class="item-heading ws-mat-primary-text font-montserrat" i18n>Format</h3>
             <h3 class="font-montserrat font-weight-bold text-black width-expand btn-text-font pt-4">
-              {{ content?.categoryType  }}
+              {{ content?.categoryType  | lowercase}}
             </h3>
       
           </div>
@@ -429,7 +429,7 @@
           <div class="info-item" *ngIf="content?.spaceLicense?.length">
             <h3 class="item-heading ws-mat-primary-text font-montserrat" i18n>Licence</h3>
             <h3 class="font-montserrat font-weight-bold text-black width-expand btn-text-font pt-4">
-              {{ content?.spaceLicense  }}
+              {{ content?.spaceLicense  | lowercase}}
             </h3>
           </div>
           <!-- <mat-divider></mat-divider> -->
@@ -438,7 +438,7 @@
           <div class="info-item" *ngIf="content?.spaceLicenseAttribution?.length">
             <h3 class="item-heading ws-mat-primary-text font-montserrat" i18n>Attributions</h3>
             <h3 class="font-montserrat font-weight-bold text-black width-expand btn-text-font pt-4">
-              {{ content?.spaceLicenseAttribution  }}
+              {{ content?.spaceLicenseAttribution  | lowercase}}
             </h3>
           </div>
           <!-- <mat-divider></mat-divider> -->
@@ -447,7 +447,7 @@
           <div class="info-item" *ngIf="content?. spaceLicenseCopyright?.length">
             <h3 class="item-heading ws-mat-primary-text font-montserrat" i18n>Copyright</h3>
             <h3 class="font-montserrat font-weight-bold text-black width-expand btn-text-font pt-4">
-              {{ content?.spaceLicenseCopyright  }}
+              {{ content?.spaceLicenseCopyright  | lowercase}}
             </h3>
           </div>
           <!-- <mat-divider></mat-divider> -->
@@ -456,7 +456,7 @@
           <div class="info-item" *ngIf="content?. spaceAreaOfExpertise?.length">
             <h3 class="item-heading ws-mat-primary-text font-montserrat" i18n>Areas of Expertise</h3>
             <h3 class="font-montserrat font-weight-bold text-black width-expand btn-text-font pt-4">
-              {{ content?.spaceAreaOfExpertise}}
+              {{ content?.spaceAreaOfExpertise} | lowercase}
             </h3>
           </div>
           <!-- <mat-divider></mat-divider> -->
@@ -467,7 +467,7 @@
           <div class="info-item" *ngIf="content?.sourceName?.length">
             <h3 class="item-heading ws-mat-primary-text font-montserrat" i18n>Created By</h3>
             <h3 class="font-montserrat font-weight-bold text-black width-expand btn-text-font pt-4">
-              {{ content?.sourceName  }} <span *ngIf="content?.sourceName === 'Other'">( {{content?.otherSourceName}} )</span>
+              {{ content?.sourceName | lowercase }} <span *ngIf="content?.sourceName === 'Other'">( {{content?.otherSourceName | lowercase}} )</span>
             </h3>
           </div>
           <!-- <mat-divider></mat-divider> -->
@@ -499,7 +499,7 @@
             <div class="info-item" *ngIf="content?.theme?.length">
               <h3 class="item-heading ws-mat-primary-text font-montserrat" i18n>SDG</h3>
               <h3 class="font-montserrat font-weight-bold text-black width-expand btn-text-font pt-4">
-                {{ content?.theme  }}
+                {{ content?.theme  | lowercase}}
               </h3>
             </div>
       
@@ -507,7 +507,7 @@
             <div class="info-item" *ngIf="content?.region?.length">
               <h3 class="item-heading ws-mat-primary-text font-montserrat" i18n>Region</h3>
               <h3 class="font-montserrat font-weight-bold text-black width-expand btn-text-font pt-4">
-                {{ content?.region }}
+                {{ content?.region | lowercase}}
               </h3>
             </div>
             <!-- <mat-divider *ngIf="content?.region?.length"></mat-divider>

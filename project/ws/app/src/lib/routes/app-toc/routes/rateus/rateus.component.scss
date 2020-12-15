@@ -1,0 +1,39 @@
+@import 'ws-vars';
+@import 'ws-mixins';
+.card {
+    background: rgba(146, 94, 176, 0.12) !important;
+}
+.txt-clr {
+    color: #696466 !important;
+     font-weight: bold !important;
+     padding: 32px 64px 40px 64px;
+     margin: 0;
+     @include breakpoint-xs {
+       text-align: center !important;
+     }
+ }
+ .rating-icon-overview {
+    // transform: scale(1.5);
+    line-height: 24px !important;
+  }
+  .rating-icon {
+    // transform: scale(1.5);
+    font-size: 3rem;
+    height: 48px;
+    width: 48px;
+  }
+  .rating-button {
+    margin-right: 8px;
+    width: auto !important;
+    line-height: 44px;
+  }
+  .star-icon {
+    margin: 5px 5px 0 0 !important;
+  }
+  .count-style {
+    margin: 0 !important;
+    // font-weight: bolder;
+  }
+  .custom-padding {
+    margin: 0 0 88px 64px !important;
+  }

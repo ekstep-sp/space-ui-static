@@ -1,6 +1,8 @@
 .rating-icon-overview {
   // transform: scale(1.5);
-  line-height: 21px !important;
+  pointer-events: none;
+  cursor: default;
+  line-height: 24px !important;
 }
 .rating-icon {
   transform: scale(1.5);

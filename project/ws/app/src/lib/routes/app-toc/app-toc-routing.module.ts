@@ -56,6 +56,10 @@ const routes: Routes = [
         component: TocBodyCommonRoutingComponent,
       },
       {
+        path: 'rateUs',
+        component: TocBodyCommonRoutingComponent,
+      },
+      {
         path: 'discussion',
         component: AppTocDiscussionComponent,
       },

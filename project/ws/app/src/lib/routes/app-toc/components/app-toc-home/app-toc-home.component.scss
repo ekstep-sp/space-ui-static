@@ -74,6 +74,10 @@
   height: 50px;
   line-height: 44px;
 }
+.active {
+  border: 2px solid #C6BCB8;
+  box-sizing: border-box;
+}
 ::ng-deep {
   .al-clr span {
   font-size: 18px !important;

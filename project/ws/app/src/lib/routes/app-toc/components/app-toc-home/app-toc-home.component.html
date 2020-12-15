@@ -55,9 +55,18 @@
           i18n
           >Contents</a
         >
+        <a
+        class="text-style"
+        mat-tab-link
+        [routerLink]="'./rateUs'"
+        routerLinkActive="link-active"
+        i18n
+        >Rate Us</a
+      >
       </div>
    <div>
       <button
+    [ngClass]="{ 'active' : isActive }" 
     *ngIf="enableAnalytics"
     [disabled]="forPreview"
     [routerLink]="'./analytics'"
