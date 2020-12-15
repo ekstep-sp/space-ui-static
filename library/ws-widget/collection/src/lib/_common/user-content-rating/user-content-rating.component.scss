@@ -1,7 +1,5 @@
 .rating-icon-overview {
   // transform: scale(1.5);
-  pointer-events: none;
-  cursor: default;
   line-height: 24px !important;
 }
 .rating-icon {
@@ -11,6 +9,8 @@
   margin-right: 8px;
   width: auto !important;
   line-height: 44px;
+  pointer-events: none;
+  cursor: default;
 }
 .star-icon {
   margin: 5px 5px 0 0 !important;
