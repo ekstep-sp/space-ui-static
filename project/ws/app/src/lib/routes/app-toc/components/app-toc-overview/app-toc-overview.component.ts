@@ -87,11 +87,11 @@ export class AppTocOverviewComponent implements OnInit, OnDestroy {
     const initData = this.tocSharedSvc.initData(data)
     this.content = initData.content
     this.tocSharedSvc.fetchEmails(this.content ? this.content.creatorContacts : []).then(newIDS => {
-      if (this.content) {
-        this.content.creatorContacts = [
-          ...newIDS,
-        ]
-      }
+      // if (this.content) {
+      //   this.content.creatorContacts = [
+      //     ...newIDS,
+      //   ]
+      // }
       this.body = this.domSanitizer.bypassSecurityTrustHtml(
         this.content && this.content.body
           ? this.forPreview

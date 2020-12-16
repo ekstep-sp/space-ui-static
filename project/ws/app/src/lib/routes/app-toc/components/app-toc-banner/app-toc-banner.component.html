@@ -307,7 +307,7 @@
     </p>
   </div>
   <!--curator details-->
-<div>
+<div *ngIf="content?.creatorContacts.length">
   <h3 class="display_type curator sub-heading-font">Curators</h3>
     <div class="flex curator-align" *ngFor="let curatorName of content?.creatorContacts">
         <img src= "/assets/instances/space/common/overview_account.png" class="pr-2 prf-icon">

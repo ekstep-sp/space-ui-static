@@ -73,8 +73,10 @@ export class AppTocHomeComponent implements OnInit, OnDestroy {
         this.tocSvc.showDescription = data.pageData.data.showDescription || false
         this.tocConfig = data.pageData.data
         this.initData(data)
+        console.log(data)
       })
     }
+    console.log(this.route, this.content)
   }
 
   ngOnDestroy() {
