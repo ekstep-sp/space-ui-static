@@ -4,6 +4,9 @@
     background: rgba(146, 94, 176, 0.12) !important;
     height: 214px;
     margin-top: 113px;
+    @include breakpoint-xs {
+      margin-top: 60px !important;
+    }
 }
 .txt-clr {
     color: #696466 !important;

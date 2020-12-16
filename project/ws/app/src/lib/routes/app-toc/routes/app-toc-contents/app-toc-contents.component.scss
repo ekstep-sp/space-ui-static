@@ -92,10 +92,10 @@ $border-color: #d8d8d8;
 // }
 .nav-space {
   // padding-top: 0;
-  padding: 65px 82px 113px 82px !important;
+  padding: 65px 82px 0 82px !important;
   // margin-top: 0;
   @include breakpoint-xs {
-    padding: 32px 23px 60px 23px !important;
+    padding: 32px 23px 0 23px !important;
   }
 }
 // .content-card:before {
