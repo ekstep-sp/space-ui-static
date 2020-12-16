@@ -410,20 +410,6 @@
             </h3>
           </div> -->
       
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
           <!-- added licence policy details -->
           <!-- <mat-divider *ngIf="hasTocStructure && content?.children?.length"></mat-divider> -->
           <div class="info-item" *ngIf="content?.spaceLicense?.length">
@@ -444,7 +430,7 @@
           <!-- <mat-divider></mat-divider> -->
       
           <!-- <mat-divider *ngIf="hasTocStructure && content?.children?.length"></mat-divider> -->
-          <div class="info-item" *ngIf="content?. spaceLicenseCopyright?.length">
+          <div class="info-item" *ngIf="content?.spaceLicenseCopyright?.length">
             <h3 class="item-heading ws-mat-primary-text font-montserrat" i18n>Copyright</h3>
             <h3 class="font-montserrat font-weight-bold text-black width-expand btn-text-font pt-4">
               {{ content?.spaceLicenseCopyright  | lowercase}}
@@ -453,10 +439,10 @@
           <!-- <mat-divider></mat-divider> -->
       
           <!-- <mat-divider *ngIf="hasTocStructure && content?.children?.length"></mat-divider> -->
-          <div class="info-item" *ngIf="content?. spaceAreaOfExpertise?.length">
+          <div class="info-item" *ngIf="content?.spaceAreaOfExpertise?.length">
             <h3 class="item-heading ws-mat-primary-text font-montserrat" i18n>Areas of Expertise</h3>
             <h3 class="font-montserrat font-weight-bold text-black width-expand btn-text-font pt-4">
-              {{ content?.spaceAreaOfExpertise} | lowercase}
+              {{ "content?.spaceAreaOfExpertise | lowercase}
             </h3>
           </div>
           <!-- <mat-divider></mat-divider> -->
@@ -497,19 +483,23 @@
       
             <!-- <mat-divider *ngIf="hasTocStructure && content?.children?.length"></mat-divider> -->
             <div class="info-item" *ngIf="content?.theme?.length">
-              <h3 class="item-heading ws-mat-primary-text font-montserrat" i18n>SDG</h3>
-              <h3 class="font-montserrat font-weight-bold text-black width-expand btn-text-font pt-4">
-                {{ content?.theme}}
-              </h3>
-            </div>
-      
-            <!-- <mat-divider *ngIf="content?.learningMode"></mat-divider> -->
-            <div class="info-item" *ngIf="content?.region?.length">
-              <h3 class="item-heading ws-mat-primary-text font-montserrat" i18n>Region</h3>
-              <h3 class="font-montserrat font-weight-bold text-black width-expand btn-text-font pt-4">
-                {{ content?.region  | lowercase}}}
-              </h3>
-            </div>
+                <h3 class="item-heading ws-mat-primary-text font-montserrat" i18n>SDG</h3>
+                <ng-container *ngFor="let theme of content?.theme">
+                <h3 class="font-montserrat font-weight-bold text-black width-expand btn-text-font pt-4">
+                  {{ theme | lowercase}}
+                </h3>
+              </ng-container>
+              </div>
+        
+              <!-- <mat-divider *ngIf="content?.learningMode"></mat-divider> -->
+              <div class="info-item" *ngIf="content?.region?.length">
+                <h3 class="item-heading ws-mat-primary-text font-montserrat" i18n>Region</h3>
+                 <ng-container *ngFor="let region of content?.region">
+                    <h3 class="font-montserrat font-weight-bold text-black width-expand btn-text-font pt-4">
+                        {{ region | lowercase  }}
+                      </h3>
+                 </ng-container>
+              </div>
             <!-- <mat-divider *ngIf="content?.region?.length"></mat-divider>
             <div class="info-item" *ngIf="content?.locale">
               <h3 class="item-heading ws-mat-primary-text" i18n>Language</h3>
