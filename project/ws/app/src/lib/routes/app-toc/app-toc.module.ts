@@ -97,8 +97,8 @@ import { ProfileImageModule } from '../../../../../../../library/ws-widget/colle
 import { EditorService } from '../../../../../author/src/lib/routing/modules/editor/services/editor.service'
 import { ApiService, AccessControlService } from '../../../../../author/src/public-api'
 import { AtaglanceModule } from '@ws-widget/collection/src/lib/_common/ataglance/ataglance.module'
-import { AppTocContentDetailsTreeComponent } from './routes/app-toc-content-details-tree/app-toc-content-details-tree.component';
-import { TocBodyCommonRoutingComponent } from './routes/toc-body-common-routing/toc-body-common-routing.component';
+import { AppTocContentDetailsTreeComponent } from './routes/app-toc-content-details-tree/app-toc-content-details-tree.component'
+import { TocBodyCommonRoutingComponent } from './routes/toc-body-common-routing/toc-body-common-routing.component'
 import { RateusComponent } from './routes/rateus/rateus.component'
 @NgModule({
   declarations: [
