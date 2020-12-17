@@ -86,7 +86,7 @@ export class AppTocOverviewComponent implements OnInit, OnDestroy {
   private initData(data: Data) {
     const initData = this.tocSharedSvc.initData(data)
     this.content = initData.content
-    this.tocSharedSvc.fetchEmails(this.content ? this.content.creatorContacts : []).then(newIDS => {
+    this.tocSharedSvc.fetchEmails(this.content ? this.content.creatorContacts : []).then(() => {
       // if (this.content) {
       //   this.content.creatorContacts = [
       //     ...newIDS,
