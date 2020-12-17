@@ -32,6 +32,7 @@ export class UserDashboardComponent implements OnInit {
   ) {
 
     const instanceConfig = this.configSvc.userProfile
+    console.log('config is ', this.configSvc)
     if (instanceConfig) {
       this.widLoggedinUser = instanceConfig.userId
     }
@@ -47,6 +48,7 @@ export class UserDashboardComponent implements OnInit {
   widLoggedinUser: string | any
   getRootOrg: string | any
   getOrg: string | any
+  renderedDataAfterSortFilter: Array<any> = []
   userListArray: NsUserDashboard.IUserListDataFromUserTable[] = []
   // @ViewChild(MatPaginator, { static: false }) paginator: MatPaginator | any
   @ViewChild(MatSort, { static: false }) sort!: MatSort
@@ -77,7 +79,6 @@ export class UserDashboardComponent implements OnInit {
   ngOnInit() {
     this.userDashboardDataFromConfig = this.activateRoute.data.subscribe(data => {
       this.userDashboardData = data.pageData.data
-
       this.userDashboardDataForDailog = data.pageData.data.dailog_data,
         this.userdefaultRoles.roles = data.pageData.data.rolesAllowedForDefault
       this.errorMessage = data.pageData.data.user_list.errorMessage
@@ -170,6 +171,10 @@ export class UserDashboardComponent implements OnInit {
       const date = new Date(userData.time_inserted)
       userData.time_inserted = date.toLocaleString(locales , {  timeZone })
     })
+  }
+
+  get showDownload() {
+    return this.userDashboardSvc.allowVisibility
   }
 
   sortUserWithDate(userList: NsUserDashboard.IUserListDataFromUserTable[]) {
@@ -389,16 +394,17 @@ export class UserDashboardComponent implements OnInit {
       })
     }
   }
-  // returnEmail(failedResponseEmail: any) {
-  //   // tslint:disable-next-line: prefer-template
-  //   // tslint:disable-next-line: prefer-template
-  // const data = failedResponseEmail.reduce((acc: any, current: any) => acc + ',' + current.ErrorResponseData)
-  // return data
-
-  //   // console.log('dta', data)
-  //   // return data
-  // }
   removeSelectedFromCheckbox() {
     this.selection.clear()
+  }
+
+  export(type: string) {
+    let filterdResults = this.dataSource.filteredData || this.userListArray
+    const data = this.userDashboardSvc.mapDataForExport(filterdResults)
+    if (type === 'csv') {
+      this.userDashboardSvc.exportDashboardUsers(data, 'csv', 'user-dashboard-details')
+    } else if (type === 'xlsx') {
+      this.userDashboardSvc.exportDashboardUsers(data, 'xlsx', 'user-dashboard-details', 'users')
+    }
   }
 }

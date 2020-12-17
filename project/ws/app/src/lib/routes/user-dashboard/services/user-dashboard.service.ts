@@ -4,8 +4,9 @@ import { NsUserDashboard } from '../models/user-dashboard.model'
 import { Observable, of, forkJoin } from 'rxjs'
 import { switchMap, map, catchError, filter } from 'rxjs/operators'
 import { UserAutocompleteService } from '@ws-widget/collection'
-import { ConfigurationsService } from '../../../../../../../../library/ws-widget/utils/src/public-api'
-
+import { ConfigurationsService, UtilityService } from '../../../../../../../../library/ws-widget/utils/src/public-api'
+import * as XLSX from 'xlsx'
+import { saveAs } from 'file-saver'
 interface IResponse {
   ok: boolean
   error?: string | null,
@@ -43,7 +44,9 @@ export class UserDashboardService {
 
   constructor(public http: HttpClient,
               private configSvc: ConfigurationsService,
-              private userAutoComplete: UserAutocompleteService) { }
+              private userAutoComplete: UserAutocompleteService,
+              private readonly utilitySvc: UtilityService,
+              ) { }
 
   setUserDashboardConfig(userDataFromConfig: NsUserDashboard.IUserData) {
     this.userData = userDataFromConfig
@@ -205,37 +208,7 @@ export class UserDashboardService {
       })
     }
   }
-  // changeRoleForUser(responseBody: NsUserDashboard.IChangeRole, headers: NsUserDashboard.IHeaders): Observable<IResponse> {
-  //   // tslint:disable-next-line: prefer-template
-  //   const responseBodyAsJSON = {
-  //     wid: responseBody.wid,
-  //     roles: responseBody.roles,
-  //     email: responseBody.email,
-  //     name: responseBody.name,
-  //   }
-  //   const httpOptions = {
-  //     headers: new HttpHeaders({
-  //       rootorg: headers.rootOrg,
-  //       wid_orgadmin: headers.wid_OrgAdmin,
-  //       org: headers.org,
-  //     }),
-  //   }
 
-  //   // const url = '/usersubmission/user/v1/changerole';
-  //   // try {
-  //   // tslint:disable-next-line: max-line-length
-  //   return this.http.put<IResponse>(this.userData.API_END_POINT + this.userData.change_roles.url, responseBodyAsJSON, httpOptions)
-  //     .pipe(
-  //       tap((data: any) => {
-  //         // tslint:disable-next-line: no-console
-  //         console.log('data', data)
-  //       }),
-  //       catchError(err => {
-  //         // tslint:disable-next-line: prefer-template
-  //         throw new Error('Error in source. Details: ' + err) // Use console.log(err) for detail
-  //       })
-  //     )
-  // }
   generateDetailsRequests(originalData: object[]) {
     if (originalData.length) {
       return originalData.map((user: any) => {
@@ -343,5 +316,74 @@ export class UserDashboardService {
     }
     // console.log(finalAcceptance)
     return finalAcceptance
+  }
+
+  exportDashboardUsers(userDataToExport: Array<any>, _exportType='xlsx', _fileName='user-dasboard-details', _sheetName='users') {
+    if (_exportType === 'xlsx') {
+      this.exportToExcel(userDataToExport, _fileName, _sheetName)
+    } else if (_exportType === 'csv') {
+      this.exportToCSV(userDataToExport, _fileName)
+    }
+  }
+
+  exportToExcel(data: Array<any>, filename: string, sheetName: string) {
+    try {
+      const ws: XLSX.WorkSheet=XLSX.utils.json_to_sheet(data)
+      const wb: XLSX.WorkBook = XLSX.utils.book_new()
+      XLSX.utils.book_append_sheet(wb, ws, sheetName)
+      /* save to file */
+      XLSX.writeFile(wb, `${filename}.xlsx`);
+    } catch (e) {
+      console.error('Error occured while parsing user dashboard data for export (xlsx)', e.toString());
+    }
+  }
+
+  exportToCSV(data: Array<any>, fileName: string) {
+    try {
+      const ws: XLSX.WorkSheet=XLSX.utils.json_to_sheet(data)
+      const csv: any = XLSX.utils.sheet_to_csv(ws)
+      const blob = new Blob([csv], {type: 'text/plain;charset=UTF-8'});
+      saveAs(blob, `${fileName}.csv`);
+    } catch (e) {
+      console.error('Error occured while parsing user dashboard data for export (csv)', e.toString());
+    }
+  }
+
+  mapDataForExport(dataToProcess: any, _format?: string) {
+    return dataToProcess.map((o: any, i: number) => {
+      const newObj = {} as any
+      newObj['Sl No.'] = i+1
+      newObj['Name'] = o.first_name + ' ' + o.last_name
+      newObj['Organisation'] = o.department_name
+      newObj['Email'] = o.email
+      newObj['Registered On'] = o.time_inserted
+      return newObj
+    })
+  }
+
+  get allowVisibility() {
+    if(!this.userData.exportOption) {
+      return true
+    }
+    // if it is web
+    if (!this.utilitySvc.isMobile) {
+      if(!this.userData.exportOption.hasOwnProperty('web')) {
+        return true
+      }
+      if (this.userData.exportOption.web) {
+        return true
+      }
+      return false
+    }
+    if (this.utilitySvc.isMobile) {
+      if(!this.userData.exportOption.hasOwnProperty('mobile')) {
+        return true
+      }
+      if (this.userData.exportOption.mobile) {
+        return true
+      }
+      return false
+    }
+    return true
   }
 }

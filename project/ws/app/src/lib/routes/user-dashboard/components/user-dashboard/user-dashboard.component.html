@@ -21,10 +21,15 @@
         <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Search by name or email" />
       </mat-form-field>
     </div>
-    <div>
+    <div class="button-container">
       <button mat-raised-button [disabled]="!selection.selected?.length" color="primary" (click)="bulkChangeRole()"
         class="mat-button mat-button-base mat-primary">
         Bulk Change Role
+      </button>
+      <button mat-raised-button color="primary" *ngIf="userListArray?.length > 0 && showDownload" [matMenuTriggerFor]="downloadMenu"
+        class="mat-button mat-button-base mat-primary button-with-icon">
+        <mat-icon>file_download_off</mat-icon>
+        Download
       </button>
     </div>
   </div>
@@ -114,3 +119,8 @@
     <!-- <mat-paginator [pageSizeOptions]="[100,200,300,400,500,600,700,800,900,1000]" showFirstLastButtons></mat-paginator> -->
 
   </div>
+
+  <mat-menu #downloadMenu>
+    <button mat-menu-item (click)="export('xlsx')"><span><mat-icon>explicit</mat-icon></span>As Excel</button>
+    <button mat-menu-item (click)="export('csv')"><span><mat-icon>list_alt</mat-icon></span>As CSV</button>
+  </mat-menu>

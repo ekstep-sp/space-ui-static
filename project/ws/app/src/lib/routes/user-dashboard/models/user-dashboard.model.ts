@@ -28,6 +28,10 @@ export namespace NsUserDashboard {
     API_FOR_USER_DETAILS: string,
     rolesAllowedForDefault: string
     timeZoneFormat: ITimeZone,
+    exportOption: {
+      mobile?: boolean,
+      web?: boolean
+    }
   }
   export interface IUserListDataFromUserTable {
     wid: UUID
