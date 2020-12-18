@@ -32,7 +32,6 @@ export class UserDashboardComponent implements OnInit {
   ) {
 
     const instanceConfig = this.configSvc.userProfile
-    console.log('config is ', this.configSvc)
     if (instanceConfig) {
       this.widLoggedinUser = instanceConfig.userId
     }
@@ -48,7 +47,6 @@ export class UserDashboardComponent implements OnInit {
   widLoggedinUser: string | any
   getRootOrg: string | any
   getOrg: string | any
-  renderedDataAfterSortFilter: Array<any> = []
   userListArray: NsUserDashboard.IUserListDataFromUserTable[] = []
   // @ViewChild(MatPaginator, { static: false }) paginator: MatPaginator | any
   @ViewChild(MatSort, { static: false }) sort!: MatSort
@@ -399,7 +397,7 @@ export class UserDashboardComponent implements OnInit {
   }
 
   export(type: string) {
-    let filterdResults = this.dataSource.filteredData || this.userListArray
+    const filterdResults = this.dataSource.filteredData || this.userListArray
     const data = this.userDashboardSvc.mapDataForExport(filterdResults)
     if (type === 'csv') {
       this.userDashboardSvc.exportDashboardUsers(data, 'csv', 'user-dashboard-details')

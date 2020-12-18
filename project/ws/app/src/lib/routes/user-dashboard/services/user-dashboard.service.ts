@@ -318,7 +318,7 @@ export class UserDashboardService {
     return finalAcceptance
   }
 
-  exportDashboardUsers(userDataToExport: Array<any>, _exportType='xlsx', _fileName='user-dasboard-details', _sheetName='users') {
+  exportDashboardUsers(userDataToExport: any, _exportType = 'xlsx', _fileName = 'user-dasboard-details', _sheetName = 'users') {
     if (_exportType === 'xlsx') {
       this.exportToExcel(userDataToExport, _fileName, _sheetName)
     } else if (_exportType === 'csv') {
@@ -326,34 +326,34 @@ export class UserDashboardService {
     }
   }
 
-  exportToExcel(data: Array<any>, filename: string, sheetName: string) {
+  exportToExcel(data: any, filename: string, sheetName: string) {
     try {
-      const ws: XLSX.WorkSheet=XLSX.utils.json_to_sheet(data)
+      const ws: XLSX.WorkSheet = XLSX.utils.json_to_sheet(data)
       const wb: XLSX.WorkBook = XLSX.utils.book_new()
       XLSX.utils.book_append_sheet(wb, ws, sheetName)
       /* save to file */
-      XLSX.writeFile(wb, `${filename}.xlsx`);
+      XLSX.writeFile(wb, `${filename}.xlsx`)
     } catch (e) {
-      console.error('Error occured while parsing user dashboard data for export (xlsx)', e.toString());
+      // console.error('Error occured while parsing user dashboard data for export (xlsx)', e.toString());
     }
   }
 
-  exportToCSV(data: Array<any>, fileName: string) {
+  exportToCSV(data: any, fileName: string) {
     try {
-      const ws: XLSX.WorkSheet=XLSX.utils.json_to_sheet(data)
+      const ws: XLSX.WorkSheet = XLSX.utils.json_to_sheet(data)
       const csv: any = XLSX.utils.sheet_to_csv(ws)
-      const blob = new Blob([csv], {type: 'text/plain;charset=UTF-8'});
-      saveAs(blob, `${fileName}.csv`);
+      const blob = new Blob([csv], { type: 'text/plain;charset=UTF-8' })
+      saveAs(blob, `${fileName}.csv`)
     } catch (e) {
-      console.error('Error occured while parsing user dashboard data for export (csv)', e.toString());
+      // console.error('Error occured while parsing user dashboard data for export (csv)', e.toString());
     }
   }
 
   mapDataForExport(dataToProcess: any, _format?: string) {
     return dataToProcess.map((o: any, i: number) => {
       const newObj = {} as any
-      newObj['Sl No.'] = i+1
-      newObj['Name'] = o.first_name + ' ' + o.last_name
+      newObj['Sl No.'] = i + 1
+      newObj['Name'] = `${o.first_name} ${o.last_name}`
       newObj['Organisation'] = o.department_name
       newObj['Email'] = o.email
       newObj['Registered On'] = o.time_inserted
@@ -362,12 +362,12 @@ export class UserDashboardService {
   }
 
   get allowVisibility() {
-    if(!this.userData.exportOption) {
+    if (!this.userData.exportOption) {
       return true
     }
     // if it is web
     if (!this.utilitySvc.isMobile) {
-      if(!this.userData.exportOption.hasOwnProperty('web')) {
+      if (!this.userData.exportOption.hasOwnProperty('web')) {
         return true
       }
       if (this.userData.exportOption.web) {
@@ -376,7 +376,7 @@ export class UserDashboardService {
       return false
     }
     if (this.utilitySvc.isMobile) {
-      if(!this.userData.exportOption.hasOwnProperty('mobile')) {
+      if (!this.userData.exportOption.hasOwnProperty('mobile')) {
         return true
       }
       if (this.userData.exportOption.mobile) {
