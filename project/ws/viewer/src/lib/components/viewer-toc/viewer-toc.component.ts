@@ -169,14 +169,13 @@ export class ViewerTocComponent implements OnInit, OnDestroy {
       this.viewerDataSvc.updateNextPrevResource(Boolean(this.collection), prev, next)
       this.processCollectionForTree()
       this.expandThePath()
-      this.expandAll(this.nestedTreeControl)
+      // this.expandAll(this.nestedTreeControl)
       // this.nestedTreeControl.expandAll()
       this.getContentProgressHash()
     }
   }
 
   expandAll(source: any) {
-    console.log('source is ', source)
     this.nestedTreeControl.expand(source)
   }
   private async getCollection(
