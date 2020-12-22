@@ -176,7 +176,6 @@ export class ViewerTocComponent implements OnInit, OnDestroy {
   }
 
   expandAll(source: any) {
-    debugger
     console.log('source is ', source)
     this.nestedTreeControl.expand(source)
   }
@@ -378,7 +377,6 @@ export class ViewerTocComponent implements OnInit, OnDestroy {
   }
 
   expandThePath() {
-    debugger
     if (this.collection && this.resourceId) {
       const path = this.utilitySvc.getPath(this.collection, this.resourceId)
       this.pathSet = new Set(path.map((u: { identifier: any }) => u.identifier))

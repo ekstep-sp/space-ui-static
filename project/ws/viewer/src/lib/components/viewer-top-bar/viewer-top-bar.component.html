@@ -1,7 +1,7 @@
-<!-- <mat-toolbar
+<mat-toolbar
   [color]="pageNavbar.color"
   [ngStyle]="pageNavbar?.styles"
-  class="mat-primary mat-elevation-z3"
+  class="mat-primary mat-elevation-z3 px-8"
 >
   <ws-widget-btn-page-back
     *ngIf="!forChannel"
@@ -16,6 +16,9 @@
   <mat-icon style="cursor: pointer; color: white;" (click)="back()" *ngIf="forChannel"
     >arrow_back</mat-icon
   >
+  <span class="width-expand text-left text-truncate text-white font-size-navbar-heading font-montserrat" [matTooltip]="resourceName">
+    {{ resourceName }}
+  </span>
   <a
     mat-icon-button
     class="width-auto"
@@ -29,9 +32,6 @@
   >
     <mat-icon style="color: white;">skip_previous</mat-icon>
   </a>
-  <span class="width-expand text-center text-truncate text-white font-size-navbar-heading font-montserrat" [matTooltip]="resourceName">
-    {{ resourceName }}
-  </span>
   <a
     mat-icon-button
     class="width-auto"
@@ -52,11 +52,11 @@
       [widgetData]="{ fsContainer: frameReference }"
     ></ws-widget-btn-fullscreen>
   </a>
-  <a mat-icon-button class="width-auto clr" (click)="toggleSideBar()" accesskey="M">
+  <!-- <a mat-icon-button class="width-auto clr" (click)="toggleSideBar()" accesskey="M">
     <mat-icon>menu</mat-icon>
-  </a>
-</mat-toolbar> -->
-<div class="toolbar flex">
+  </a> -->
+</mat-toolbar>
+<!-- <div class="toolbar flex">
 <div class="flex">
     <ws-widget-btn-page-back
     class="ml-4"
@@ -80,4 +80,4 @@
         <mat-icon>menu</mat-icon>
       </a>
   </div>
-</div>
+</div> -->

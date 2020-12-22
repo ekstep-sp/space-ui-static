@@ -246,6 +246,28 @@ color: #696466 !important;
   font-family: $font-family-mono;
 }
 
+.no-visible-scroll {
+  -webkit-overflow-scrolling: touch;
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
+    &::-webkit-scrollbar-track {
+      display: none;
+    }
+  &::-webkit-scrollbar-track {
+    display: none;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    display: none;
+  }
+
+  &::-webkit-scrollbar-thumb:hover {
+    display: none;
+  }
+}
+
 .custom-scroll {
   -webkit-overflow-scrolling: touch;
 

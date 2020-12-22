@@ -1,6 +1,6 @@
 import { AfterViewChecked, AfterViewInit, ChangeDetectorRef, Component, OnDestroy, OnInit } from '@angular/core'
 import { ActivatedRoute, Router } from '@angular/router'
-import { NsContent } from '@ws-widget/collection'
+import { NsContent, NsDiscussionForum } from '@ws-widget/collection'
 import { NsWidgetResolver } from '@ws-widget/resolver'
 import { ConfigurationsService, UtilityService, ValueService } from '@ws-widget/utils'
 import { Subscription } from 'rxjs'
@@ -38,6 +38,8 @@ export class ViewerComponent implements OnInit, OnDestroy, AfterViewInit, AfterV
   error: any | null = null
   isNotEmbed = true
   renderingPDF = false
+  isRatingsDisabled = false
+  discussionForumWidget = {}
   errorWidgetData: NsWidgetResolver.IRenderConfigWithTypedData<any> = {
     widgetType: 'errorResolver',
     widgetSubType: 'errorResolver',
@@ -67,9 +69,9 @@ export class ViewerComponent implements OnInit, OnDestroy, AfterViewInit, AfterV
     if (!sentDirectly) {
       if (!this.configService.isGuestUser && e.hasOwnProperty('activatedRoute')) {
         e.activatedRoute.data.subscribe((data: { content: { data: NsContent.IContent } }) => {
-          debugger
           if (data.content && data.content.data) {
             this.content = data.content.data
+            this.formDiscussionForumWidget(this.content)
             this.tocSharedSvc.fetchEmails(this.content ? this.content.creatorContacts : []).then((newIDS: any) => {
               if (this.content) {
                 this.content.creatorContacts = [
@@ -85,6 +87,8 @@ export class ViewerComponent implements OnInit, OnDestroy, AfterViewInit, AfterV
       window.setTimeout(() => {
         // this.utilitySvc.emitCurrentContentForBriefPlayer(e)
         this.content = e
+        this.formDiscussionForumWidget(this.content as any)
+        this.isRatingsDisabled = true
       })
     }
     if (this.content && this.content.mimeType.includes('pdf')) {
@@ -106,7 +110,6 @@ export class ViewerComponent implements OnInit, OnDestroy, AfterViewInit, AfterV
       this.mode = isSmall ? 'over' : 'side'
     })
     this.resourceChangeSubscription = this.dataSvc.changedSubject.subscribe(_ => {
-      debugger
       this.status = this.dataSvc.status
       this.error = this.dataSvc.error
       if (this.error && this.error.status) {
@@ -179,6 +182,22 @@ export class ViewerComponent implements OnInit, OnDestroy, AfterViewInit, AfterV
   minimizeBar() {
     if (this.utilitySvc.isMobile) {
       this.sideNavBarOpened = false
+    }
+  }
+
+  formDiscussionForumWidget(content: NsContent.IContent) {
+    this.discussionForumWidget = {
+      widgetData: {
+        description: content.description,
+        id: content.identifier,
+        name: NsDiscussionForum.EDiscussionType.LEARNING,
+        title: content.name,
+        initialPostCount: 2,
+        isDisabled: this.forPreview,
+        contentData: this.content,
+      },
+      widgetSubType: 'discussionForum',
+      widgetType: 'discussionForum',
     }
   }
 }

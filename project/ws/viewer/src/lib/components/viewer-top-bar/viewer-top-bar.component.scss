@@ -39,3 +39,12 @@
 .prf-icon {
   height: fit-content;
 }
+
+mat-toolbar {
+  box-shadow: none !important;
+}
+
+.px-8 {
+  padding-left: 2rem !important;
+  padding-right: 2rem !important;
+}

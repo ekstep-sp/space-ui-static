@@ -63,7 +63,7 @@
     </mat-card-content>
   </mat-card> -->
 
-  <mat-divider *ngIf="collection" class="margin-bottom-xs"></mat-divider>
+  <!-- <mat-divider *ngIf="collection" class="margin-bottom-xs"></mat-divider> -->
   <!--
     <div *ngIf="collection" class="flex flex-middle">
     <div i18n class="padding-left-m" *ngIf="tocMode === 'TREE'">Structure</div>
@@ -78,7 +78,7 @@
     </div>
   </div> 
   -->
-  <mat-divider class="margin-top-xs"></mat-divider>
+  <!-- <mat-divider class="margin-top-xs"></mat-divider> -->
   <section *ngIf="!collection">
     <div *ngIf="errorWidgetData?.widgetData?.errorType" [wsResolverWidget]="errorWidgetData"></div>
   </section>
@@ -104,105 +104,79 @@
   </mat-list>
   <!-- Tree -->
   <ul [hidden]="tocMode !== 'TREE'" class="toc-tree">
-    <mat-card *ngIf="collection && collectionCard">
-      <mat-card-content>
-        <span class="width-expand flex flex-middle">
-          <span class="width-1-1 margin-left-m flex flex-wrapped align-self-start">
-            <div class="width-1-1 flex flex-between">
-              <div class="mat-body-2 text-truncate flex">
-                <!-- <a [routerLink]="collectionCard?.redirectUrl" queryParamsHandling="preserve">
-                  {{ collectionCard?.title | pipeLimitTo: 20 }}
-                </a> -->
-                <p>{{ collectionCard?.title | pipeLimitTo: 20 }}</p>
-                <mat-icon
-                  *ngIf="
-                    contentProgressHash &&
-                    contentProgressHash[collectionCard?.id] &&
-                    contentProgressHash[collectionCard?.id] > 0.99
-                  "
-                  i18n-matTooltip
-                  matTooltip="Completed"
-                  class="completed-icon margin-left-xs align-self-start"
-                >
-                  check_circle_outline</mat-icon
-                >
-              </div>
-            </div>
-            <div *ngIf="collectionCard?.type === 'content'" class="width-1-1">
-              <ws-widget-btn-content-like
-                [widgetData]="{ identifier: collectionCard?.id }"
-              ></ws-widget-btn-content-like>
-              <ws-widget-btn-content-share [forPreview]="forPreview"></ws-widget-btn-content-share>
-              <ws-widget-btn-goals [forPreview]="forPreview"></ws-widget-btn-goals>
-              <ws-widget-btn-playlist [forPreview]="forPreview"></ws-widget-btn-playlist>
-              <ws-widget-btn-content-feedback
-                [forPreview]="forPreview"
-              ></ws-widget-btn-content-feedback>
-            </div>
-          </span>
-          <span>
-          </span>
-        </span>
-        <mat-tree [dataSource]="nestedDataSource" [treeControl]="nestedTreeControl">
-          <mat-tree-node *matTreeNodeDef="let node" matTreeNodeToggle matTreeNodePadding [matTreeNodePaddingIndent]="'0'">
-            <li class="mat-tree-node leaf-node">
-              <ng-container
-                *ngTemplateOutlet="TocContentList; context: { $implicit: node }"
-              ></ng-container>
-              <!-- <ng-container
-                *ngTemplateOutlet="TocContentCard; context: { $implicit: node }"
-              ></ng-container> -->
-            </li>
-          </mat-tree-node>
-    
-          <mat-nested-tree-node *matTreeNodeDef="let node; when: hasNestedChild">
-            <li class="mt-10">
-              <div class="mat-tree-node mb-3" [ngClass]="{ 'mat-toolbar': pathSet.has(node.identifier) }">
-                <ws-widget-display-content-type-icon class="flex" [displayContentType]="node?.type" [customTooltip]="node?.type" [customIcon]="'filter_none'">
-                </ws-widget-display-content-type-icon>
-                <span
-                  role="button"
-                  matRipple
-                  matTreeNodeToggle
-                  class="flat-list-content-title width-expand margin-left-xs"
-                >
-                  <h3 class="text-truncate margin-remove">{{ node.title }}</h3>
-                  <mat-icon
-                    *ngIf="
-                      contentProgressHash &&
-                      contentProgressHash[node.identifier] &&
-                      contentProgressHash[node.identifier] > 0.99
-                    "
-                    i18n-matTooltip
-                    matTooltip="Completed"
-                    class="completed-icon margin-left-xs"
-                    >check_circle</mat-icon
+    <ng-container *ngIf="collection && collectionCard">
+      <div class="mat-body-2 text-truncate flex pl-4 main-title text-white">
+        <p>{{ collectionCard?.title | pipeLimitTo: 40 }}</p>
+        <mat-icon
+          *ngIf="
+            contentProgressHash &&
+            contentProgressHash[collectionCard?.id] &&
+            contentProgressHash[collectionCard?.id] > 0.99
+          "
+          i18n-matTooltip
+          matTooltip="Completed"
+          class="completed-icon margin-left-xs align-self-start">
+          check_circle_outline
+          </mat-icon>
+      </div>
+      <mat-card class="no-card-style">
+        <mat-card-content>
+          <mat-tree [dataSource]="nestedDataSource" [treeControl]="nestedTreeControl">
+            <mat-tree-node *matTreeNodeDef="let node" matTreeNodeToggle matTreeNodePadding [matTreeNodePaddingIndent]="'0'">
+              <li class="mat-tree-node leaf-node">
+                <ng-container
+                  *ngTemplateOutlet="TocContentList; context: { $implicit: node }"
+                ></ng-container>
+              </li>
+            </mat-tree-node>
+      
+            <mat-nested-tree-node *matTreeNodeDef="let node; when: hasNestedChild">
+              <li class="parent-item">
+                <div class="mat-tree-node" [ngClass]="{ 'mat-toolbar': pathSet.has(node.identifier) }">
+                  <span
+                    role="button"
+                    matRipple
+                    matTreeNodeToggle
+                    class="flat-list-content-title width-expand ml-4"
                   >
-                </span>
-                <button
-                  class="width-auto"
-                  mat-icon-button
-                  matTreeNodeToggle
-                  [attr.aria-label]="'toggle ' + node.name"
-                >
-                  <mat-icon class="mat-icon-rtl-mirror">
-                    {{ nestedTreeControl.isExpanded(node) ? 'arrow_drop_up' : 'arrow_drop_down' }}
-                  </mat-icon>
-                </button>
-                <!-- <div class="content-duration flex flex-center">
-                  <h3 class="mat-caption margin-remove width-max-content">
-                    {{ node.duration | pipeDurationTransform: 'hms' }}
-                  </h3>
-                </div> -->
-              </div>
-              <ul [hidden]="!nestedTreeControl.isExpanded(node)" class="padding-none">
-                <ng-container matTreeNodeOutlet></ng-container>
-              </ul>
-            </li>
-          </mat-nested-tree-node>
-        </mat-tree>
-      </mat-card-content>
-    </mat-card>
+                    <h3 class="text-truncate margin-remove">{{ node.title }}</h3>
+                    <mat-icon
+                      *ngIf="
+                        contentProgressHash &&
+                        contentProgressHash[node.identifier] &&
+                        contentProgressHash[node.identifier] > 0.99
+                      "
+                      i18n-matTooltip
+                      matTooltip="Completed"
+                      class="completed-icon margin-left-xs"
+                      >check_circle</mat-icon
+                    >
+                  </span>
+                  <button
+                    class="width-auto"
+                    mat-icon-button
+                    matTreeNodeToggle
+                    [attr.aria-label]="'toggle ' + node.name"
+                  >
+                    <mat-icon class="mat-icon-rtl-mirror">
+                      {{ nestedTreeControl.isExpanded(node) ? 'arrow_drop_up' : 'arrow_drop_down' }}
+                    </mat-icon>
+                  </button>
+                  <!-- <div class="content-duration flex flex-center">
+                    <h3 class="mat-caption margin-remove width-max-content">
+                      {{ node.duration | pipeDurationTransform: 'hms' }}
+                    </h3>
+                  </div> -->
+                </div>
+                <ul [hidden]="!nestedTreeControl.isExpanded(node)" class="padding-none cusotm-bg">
+                  <ng-container matTreeNodeOutlet></ng-container>
+                </ul>
+              </li>
+            </mat-nested-tree-node>
+          </mat-tree>
+        </mat-card-content>
+      </mat-card>
+    </ng-container>
   </ul>
 </ng-container>
 
@@ -263,20 +237,6 @@
         ><span class="mat-body-1 margin-left-xxs" *ngIf="content?.complexity"
           ><span>| {{ content?.complexity | pipeLimitTo: 300 }}</span>
         </span>
-        <!-- <div class="width-1-1">
-              <btn-content-download></btn-content-download>
-              <btn-content-like></btn-content-like>
-              <btn-content-share></btn-content-share>
-              <btn-goals></btn-goals>
-              <btn-playlists></btn-playlists>
-              <button mat-icon-button matTooltip="Watch List" i18n-matTooltip>
-                <mat-icon>watch_later</mat-icon>
-              </button>
-              <btn-content-feedback></btn-content-feedback>
-              <ws-widget-btn-content-feedback-v2
-                [widgetData]="content | pipePartialContent: ['identifier', 'name']"
-              ></ws-widget-btn-content-feedback-v2>
-            </div> -->
       </span>
       <span>
         <div class="mat-body-1 content-duration mat-caption width-max-content">
@@ -290,55 +250,58 @@
 <ng-template let-content #TocContentList>
   <!-- <div class="resource-container margin-left-xl"> -->
   <div class="resource-container">
-    <ws-widget-display-content-type-icon
-      class="flex"
-      [displayResourceType]="content?.iconType ? content?.iconType : content?.type"
-    >
-    </ws-widget-display-content-type-icon>
     <div class="resource-meta width-expand">
       <a
         [ngClass]="{ 'content-active': pathSet.has(content.identifier) }"
         [routerLink]="content.viewerUrl"
         queryParamsHandling="preserve"
       >
-        <h3
-          *ngIf="content?.type !== enumContentTypes.ASSESSMENT"
-          class="margin-remove text-truncate flex"
-        >
-          {{ content?.title | pipeLimitTo: 30 }}
-          <mat-icon
-            *ngIf="
-              contentProgressHash &&
-              contentProgressHash[content.identifier] &&
-              contentProgressHash[content.identifier] > 0.99
-            "
-            i18n-matTooltip
-            matTooltip="Completed"
-            class="completed-icon margin-left-xs align-self-center"
+      <span class="width-expand flex flex-middle">
+        <img
+          i18n-alt
+          alt="thumbnail"
+          class="viewer-toc-thumbnail align-self-start margin-auto mat-app-background rounded-lg"
+          [src]="content.thumbnailUrl"
+          [wsUtilsDefaultThumbnail]="defaultThumbnail"
+        />
+        <span class="width-1-1 margin-left-m flex flex-wrapped align-self-start">
+          <div
+            class="width-1-1 flex flex-between"
+            [ngClass]="{ 'content-active': pathSet.has(content.identifier) }"
           >
-            check_circle_outline</mat-icon
-          >
-        </h3>
-        <h1
-          *ngIf="content?.type === enumContentTypes.ASSESSMENT"
-          class="margin-remove text-truncate flex"
-        >
-          {{ content?.title | pipeLimitTo: 30 }}
-          <mat-icon
-            *ngIf="
-              contentProgressHash &&
-              contentProgressHash[content.identifier] &&
-              contentProgressHash[content.identifier] > 0.99
-            "
-            i18n-matTooltip
-            matTooltip="Completed"
-            class="completed-icon margin-left-xs align-self-center"
-          >
-            check_circle_outline</mat-icon
-          >
-        </h1>
+            <div class="mat-body-2 text-truncate flex">
+              <span>
+                {{ content.title | pipeLimitTo: 20 }}
+              </span>
+              <mat-icon
+                *ngIf="
+                  contentProgressHash &&
+                  contentProgressHash[content.identifier] &&
+                  contentProgressHash[content.identifier] > 0.99
+                "
+                i18n-matTooltip
+                matTooltip="Completed"
+                class="completed-icon margin-left-xs align-self-start"
+              >
+                check_circle_outline</mat-icon
+              >
+            </div>
+          </div>
+          <span class="mat-body-1 flex">
+            <span>{{ (content.assetType === 'Connection' ? 'Connection' : content.type) | pipeLimitTo: 300 }}</span> 
+            <div class="mat-body-1 content-duration mat-caption width-max-content inline-block ml-3">
+              <span *ngIf="content?.duration" class="flex align-timer">
+                <mat-icon class="mr-1">schedule</mat-icon>
+                {{ content.duration | pipeDurationTransform: 'hms' }}
+              </span>
+            </div>
+            </span
+          ><span class="mat-body-1 margin-left-xxs" *ngIf="content?.complexity"
+            ><span>| {{ content?.complexity | pipeLimitTo: 300 }}</span>
+          </span>
+        </span>
+      </span>
       </a>
-      <!-- <span class="margin-left-xs">{{ content?.duration | pipeDurationTransform: 'hms' }}</span> -->
     </div>
   </div>
 </ng-template>

@@ -15,7 +15,7 @@
         </mat-card>
       </div>
       <div class="mt-5 padding-m">
-          <mat-card class="viewer-style">
+          <!-- <mat-card class="viewer-style">
               <div class="flex justify-end mt-3">
                   <ng-container *ngIf="!hideRatings">
                       <ws-widget-user-content-rating class="block flex-auto" [parentElem]="parentNode"
@@ -42,7 +42,7 @@
                 </ws-widget-btn-content-download>
                 <!-- <ws-widget-btn-content-like
                                 [widgetData]="htmlData | pipePartialContent: ['identifier']"
-                              ></ws-widget-btn-content-like> -->
+                              ></ws-widget-btn-content-like>
                 <ws-widget-btn-content-like *ngIf="!configSvc?.isGuestUser" [forPreview]="forPreview" [widgetData]="{
                     identifier: htmlData.identifier,
                     isDisabled: isPreviewMode
@@ -66,7 +66,7 @@
                     isDisabled: isPreviewMode
                   }">
                 </ws-widget-btn-playlist>
-                <!-- <ws-widget-btn-content-feedback></ws-widget-btn-content-feedback> -->
+                <!-- <ws-widget-btn-content-feedback></ws-widget-btn-content-feedback>
                 <ws-widget-btn-content-feedback-v2 *ngIf="allowedToDiscussionForum && !configSvc?.isGuestUser"
                   [forPreview]="forPreview" [widgetData]="{
                     identifier: htmlData.identifier,
@@ -75,15 +75,13 @@
                   }">
                 </ws-widget-btn-content-feedback-v2>
               </div>
-          </mat-card>
+          </mat-card> -->
       </div>
     </div>
   </div>
-  <!-- At a glance tab -->
-  <div>
+  <!-- <div>
       <ws-widget-player-brief [forPreview]="forPreview" [content]="content"></ws-widget-player-brief>
   </div>
-  <!--End-->
   <div class="padding-m"
     *ngIf="discussionForumWidget && isRestricted && htmlData?.assetType !== 'Connection' && allowedToDiscussionForum">
     <div class="video-discussion-forum-in">
@@ -93,7 +91,7 @@
       </mat-card>
     </div>
   </div>
-</div>
+</div> -->
 <div class="full-height-width-iframe" *ngIf="!isNotEmbed">
   <viewer-plugin-html [htmlContent]="htmlData"></viewer-plugin-html>
 </div>

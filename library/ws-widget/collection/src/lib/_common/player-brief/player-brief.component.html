@@ -239,7 +239,7 @@
   <!-- <ws-widget-mark-as-complete [content]="content"></ws-widget-mark-as-complete> -->
   <ng-container *ngIf="showDownloadMobile && content && isDownloadable && !showDownloadGuest">
 
-    <mat-card class="mb-4">
+    <mat-card class="mb-4 flex justify-between">
       <button mat-button color="primary" (click)="download()">
         <mat-icon>cloud_download</mat-icon>
         <span i18n class="px-2">Download</span>
@@ -555,12 +555,12 @@
       </button>
     </div>
   </mat-card>
-  <ng-container *ngIf="!hideRatings">
+  <!-- <ng-container *ngIf="!hideRatings">
     <ws-widget-user-content-rating class="mb-4 block"
     *ngIf="!this.configSvc?.isGuestUser && content?.identifier && content?.assetType !== 'Connection'" [contentId]="content?.identifier"
     [isDisabled]="isRatingsDisabled">
   </ws-widget-user-content-rating>
-  </ng-container>
+  </ng-container> -->
   <!-- <div class="hidden sm:block margin-bottom-m" *ngIf="content?.creatorDetails?.length">
     <ng-container [ngTemplateOutlet]="creators" [ngTemplateOutletContext]="{
           authors: content?.creatorDetails,

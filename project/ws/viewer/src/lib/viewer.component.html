@@ -1,80 +1,98 @@
-<section *ngIf="isNotEmbed">
-  <viewer-viewer-top-bar *ngIf="fullScreenContainer" [forPreview]="forPreview" [frameReference]="fullScreenContainer"
-    (toggle)="toggleSideBar()">
-  </viewer-viewer-top-bar>
-  <viewer-viewer-top-bar *ngIf="!fullScreenContainer" [showFullScreenButton]="!renderingPDF" [forPreview]="forPreview" [frameReference]="fullScreenContainer"
-    (toggle)="toggleSideBar()">
-  </viewer-viewer-top-bar>
-  <mat-sidenav-container autosize class="viewer-sidenav-container">
-
-    <mat-sidenav [ngClass]="isTypeOfCollection?'viewer-sidenav':'viewer-sidenav-standalone'" position="end"
-      [opened]="sideNavBarOpened" [mode]="mode">
-      <mat-tab-group>
-        <mat-tab *ngIf="isTypeOfCollection" i18n-label label="Contents">
-          <viewer-viewer-toc [forPreview]="forPreview" (hidenav)="minimizeBar()">
-          </viewer-viewer-toc>
-        </mat-tab>
-        <mat-tab i18n-label label="Details">
-          <ws-widget-player-brief [forPreview]="forPreview" [content]="content"></ws-widget-player-brief>
-        </mat-tab>
-      </mat-tab-group>
-    </mat-sidenav>
-
-    <mat-sidenav-content class="sidenavContent" #scrollableContent>
-      <section *ngIf="status === 'error'">
-        <div *ngIf="errorWidgetData?.widgetData?.errorType" [wsResolverWidget]="errorWidgetData"></div>
-        <div *ngIf="error.errorType === errorType.mimeTypeMismatch">
-          <mat-card>
-            <mat-card-title i18n>Looks like we are having some issues in our content.</mat-card-title>
-            <mat-card-content>
-              <div class="mat-caption">
-                <ng-container i18n>
-                  Debug Message: This content is of a different mimeType (
-                </ng-container>
-                <ng-container>
-                  {{ error?.mimeType }}
-                </ng-container>
-                <ng-container i18n>
-                  )
-                </ng-container>
-              </div>
-              <div>
-                <strong i18n>Possible Link: </strong>
-                <a [routerLink]="error.probableUrl">
-                  {{ error.probableUrl }}
-                </a>
-              </div>
-              <div class="margin-top-m text-center">
-                <a class="ws-mat-primary-text" [routerLink]="'/feedback/bug'" i18n>Report to us</a>
-                <span i18n> and we will make it work</span>
-              </div>
-            </mat-card-content>
-          </mat-card>
-        </div>
-        <div *ngIf="error.errorType === errorType.previewUnAuthorised">
-          <mat-card class="margin-m">
-            <mat-card-title i18n>Looks like you are not authorized to preview this content.</mat-card-title>
-            <mat-card-content>
-              <div>
-                <a class="ws-mat-primary-text" [routerLink]="'/feedback/bug'" i18n>Report to us</a>
-                <span i18n> and we will make it work</span>
-              </div>
-            </mat-card-content>
-          </mat-card>
-        </div>
-      </section>
-      <section *ngIf="status === 'pending'">
-        <mat-spinner></mat-spinner>
-      </section>
-      <ng-container *ngIf="!configService?.isGuestUser; else guestTemplateContainer">
-        <ng-container *ngTemplateOutlet="routerLogic"></ng-container>
+<div class="pt-0">
+  <section *ngIf="isNotEmbed">
+    <viewer-viewer-top-bar *ngIf="fullScreenContainer" [forPreview]="forPreview" [frameReference]="fullScreenContainer"
+      (toggle)="toggleSideBar()">
+    </viewer-viewer-top-bar>
+    <viewer-viewer-top-bar *ngIf="!fullScreenContainer" [showFullScreenButton]="false" [forPreview]="forPreview" [frameReference]="fullScreenContainer"
+      (toggle)="toggleSideBar()">
+    </viewer-viewer-top-bar>
+    <section class="px-8">
+      <ng-container *ngIf="isTypeOfCollection; else mainContentTemplate">
+        <mat-sidenav-container autosize class="viewer-sidenav-container">
+            <mat-sidenav #snav [ngClass]="isTypeOfCollection ? 'viewer-sidenav':'viewer-sidenav-standalone'"
+            [opened]="sideNavBarOpened" [mode]="mode" class="sidenav-effect">
+            <viewer-viewer-toc [forPreview]="forPreview" (hidenav)="minimizeBar()">
+            </viewer-viewer-toc>
+          </mat-sidenav>
+          <mat-sidenav-content class="sidenavContent" #scrollableContent>
+            <button mat-icon-button aria-label="Navbar Toggle button" class="toggleBtn" (click)="snav?.toggle()">
+              <mat-icon>{{ !snav?.opened ? 'arrow_forward' : 'arrow_back'}}</mat-icon>
+            </button>
+            <ng-container *ngTemplateOutlet="mainContentTemplate"></ng-container>
+          </mat-sidenav-content>
+        </mat-sidenav-container>
       </ng-container>
-    </mat-sidenav-content>
-  </mat-sidenav-container>
-</section>
-<div class="full-height-width-iframe" *ngIf="!isNotEmbed">
-  <router-outlet></router-outlet>
+      <ng-container *ngIf="!configService?.isGuestUser">
+        <div class="padding-s">
+          <ws-widget-user-content-rating class="mb-4 block"
+          *ngIf="!configService?.isGuestUser && content?.identifier && content?.assetType !== 'Connection'" [contentId]="content?.identifier"
+          [isDisabled]="isRatingsDisabled" [parentElem]="'viewer'">
+        </ws-widget-user-content-rating>
+        </div>
+      </ng-container>
+      <ws-widget-player-brief [askAuthorEnabled]="!configService?.isGuestUser" [forPreview]="forPreview || configService?.isGuestUser" [content]="content"></ws-widget-player-brief>
+      <div *ngIf="!configService?.isGuestUser" class="video-discussion-forum-in margin-top-m margin-bottom-m padding-s">
+        <h2 class="mat-toolbar discussion-head font-montserrat body-font-size-primary space">Discussion Forum</h2>
+        <ng-container [wsResolverWidget]="discussionForumWidget"></ng-container>
+      </div>
+    </section>
+  </section>
+  <div class="full-height-width-iframe" *ngIf="!isNotEmbed">
+    <router-outlet></router-outlet>
+  </div>
 </div>
+
+<!--Template logics-->
+<ng-template #mainContentTemplate>
+  <section *ngIf="status === 'error'">
+    <div *ngIf="errorWidgetData?.widgetData?.errorType" [wsResolverWidget]="errorWidgetData"></div>
+    <div *ngIf="error.errorType === errorType.mimeTypeMismatch">
+      <mat-card>
+        <mat-card-title i18n>Looks like we are having some issues in our content.</mat-card-title>
+        <mat-card-content>
+          <div class="mat-caption">
+            <ng-container i18n>
+              Debug Message: This content is of a different mimeType (
+            </ng-container>
+            <ng-container>
+              {{ error?.mimeType }}
+            </ng-container>
+            <ng-container i18n>
+              )
+            </ng-container>
+          </div>
+          <div>
+            <strong i18n>Possible Link: </strong>
+            <a [routerLink]="error.probableUrl">
+              {{ error.probableUrl }}
+            </a>
+          </div>
+          <div class="margin-top-m text-center">
+            <a class="ws-mat-primary-text" [routerLink]="'/feedback/bug'" i18n>Report to us</a>
+            <span i18n> and we will make it work</span>
+          </div>
+        </mat-card-content>
+      </mat-card>
+    </div>
+    <div *ngIf="error.errorType === errorType.previewUnAuthorised">
+      <mat-card class="margin-m">
+        <mat-card-title i18n>Looks like you are not authorized to preview this content.</mat-card-title>
+        <mat-card-content>
+          <div>
+            <a class="ws-mat-primary-text" [routerLink]="'/feedback/bug'" i18n>Report to us</a>
+            <span i18n> and we will make it work</span>
+          </div>
+        </mat-card-content>
+      </mat-card>
+    </div>
+  </section>
+  <section *ngIf="status === 'pending'">
+    <mat-spinner></mat-spinner>
+  </section>
+  <ng-container *ngIf="!configService?.isGuestUser; else guestTemplateContainer">
+    <ng-container *ngTemplateOutlet="routerLogic"></ng-container>
+  </ng-container>
+</ng-template>
 
 <ng-template #routerLogic>
   <router-outlet (activate)="getContentData($event)"></router-outlet>
