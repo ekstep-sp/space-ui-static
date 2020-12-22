@@ -128,7 +128,7 @@ app-content-icon {
 }
 
 .main-title {
-  background-color: darkorchid;
+  background-color: #925EB0;
   height: 25px;
   align-items: center;
   p {
@@ -137,7 +137,8 @@ app-content-icon {
 }
 
 .parent-item {
-  background-color: #ddd5d8;
+  background-color: rgba(198, 188, 184, 0.48);
+  ;
   margin-top: 4px;
   .mat-tree-node.mat-toolbar {
     height: 40px;
@@ -158,4 +159,9 @@ app-content-icon {
 .cusotm-bg {
   background-color: #42428B;
   color: white;
+}
+
+.newColor {
+  color: #42428B !important;
+  font-weight: 500 !important;
 }
