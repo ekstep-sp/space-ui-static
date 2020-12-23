@@ -2,18 +2,20 @@
 @import 'ws-mixins';
 
 .discussion-header {
-  padding: $size-s;
+  // padding: $size-s;
   .question-container {
     display: flex;
     justify-content: space-between;
     .user-image {
-      $size: 55px;
+      $size: 40px;
       width: $size;
       height: $size;
       margin-right: $size-m;
     }
     .editor {
-      min-height: 50px;
+      min-height: 48px;
+      border-radius: 8px;
+      height: 48px;
       @include breakpoint-xs{
         min-height: 80px;
       }
@@ -27,7 +29,7 @@
 }
 
 .discussion-body {
-  margin-top: $size-m;
+  margin-top: 40px;
   .no-conversation {
     font-size: 1.2em;
     padding: $size-s;
@@ -39,7 +41,37 @@
   background: darkgray !important;
 }
 .theme-muave.day-mode .btn-style {
-  background: white !important;
-  color: rgba(0, 0, 0, 0.87) !important;
+  background: transparent !important;
+  color: #925EB0 !important;
 }
+}
+.df-container {
+  padding: 43px 51px 64px 66px;
+  margin-bottom: 23px;
+  @include breakpoint-xs {
+    padding: 43px 51px 64px 10px;
+  }
+}
+.send-icon {
+  transform: rotate(-25deg);
+  width: 24px;
+  height: 24px;
+  color: #925EB0;
+}
+.custom-wrap {
+  min-height: 40px;
+  // border-radius: 20px;
+  max-height: 150px;
+  border: 1px solid #925EB0;
+  box-sizing: border-box;
+  border-radius: 8px;
+}
+.btn-send {
+background: transparent !important;
+// margin-top: .5rem;
+text-align: center;
+}
+.disabled {
+  color: gray !important;
+  pointer-events: none;
 }

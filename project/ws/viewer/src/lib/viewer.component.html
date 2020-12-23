@@ -31,8 +31,8 @@
         </div>
       </ng-container>
       <ws-widget-player-brief [askAuthorEnabled]="!configService?.isGuestUser" [forPreview]="forPreview || configService?.isGuestUser" [content]="content"></ws-widget-player-brief>
-      <div *ngIf="!configService?.isGuestUser" class="video-discussion-forum-in margin-top-m margin-bottom-m padding-s">
-        <h2 class="mat-toolbar discussion-head font-montserrat body-font-size-primary space">Discussion Forum</h2>
+      <div *ngIf="!configService?.isGuestUser" class="mat-card df-card video-discussion-forum-in margin-top-m margin-bottom-m padding-s">
+        <h2 class="discussion-head font-montserrat body-font-size-primary space">Let's Discuss</h2>
         <ng-container [wsResolverWidget]="discussionForumWidget"></ng-container>
       </div>
     </section>

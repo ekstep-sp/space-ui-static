@@ -53,3 +53,23 @@
 .sidenav-effect {
   background: #f2ecf6 !important;
 }
+.df-card {
+  // background: rgba(146, 94, 176, 0.24) !important;
+  border-radius: 10px;
+}
+.discussion-head {
+  padding: 33px 0 0 66px;
+  font-weight: 600 !important;
+  font-size: 1.125rem;
+  line-height: 22px;
+  color: #925EB0;
+}
+.mat-card {
+  margin: 0 !important;
+  padding: 0 !important;
+}
+::ng-deep {
+  .theme-muave.day-mode .df-card {
+    background: rgba(146, 94, 176, 0.24) !important;
+  }
+}

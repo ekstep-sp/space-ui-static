@@ -16,6 +16,8 @@ export class BtnSocialVoteComponent implements OnInit {
   @Input() iconType: 'thumbs' | 'triangle' = 'thumbs'
   @Input() postId = ''
   @Input() postCreatorId = ''
+  @Input() isDf = false
+  @Input() dfVote = false
   @Input() activity: NsDiscussionForum.IPostActivity = {} as NsDiscussionForum.IPostActivity
   @Input() isDisabled = false
   @ViewChild('invalidUser', { static: true }) invalidUser!: ElementRef<

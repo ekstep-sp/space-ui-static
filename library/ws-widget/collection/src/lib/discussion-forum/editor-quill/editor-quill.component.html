@@ -1,4 +1,4 @@
-<ng-container *ngIf="!reset">
+<ng-container *ngIf="!isDf && !reset">
   <quill-editor
    *ngIf="!showMention"
     name="discussion-forum-input-field"
@@ -23,3 +23,28 @@
     <ng-container i18n> characters are required </ng-container>
   </p>
 </ng-container>
+<ng-container *ngIf="isDf && !reset">
+    <quill-editor
+     *ngIf="!showMention"
+      name="discussion-forum-input-field"
+      class="df-quill-editor"
+      [ngModel]="htmlText"
+      (onContentChanged)="onContentChanged($event)"
+      [required]="true"
+      [minLength]="minLength"
+      #editor="ngModel"
+      [ngClass]="{'postpg': isDfPost}"
+    >
+    </quill-editor>
+    <quill-editor  *ngIf = "showMention" name="discussion-forum-input-field" [ngClass]="{'customClass' : placeholdercss ,'postpg': isDfPost}" class="df-quill-editor" [ngModel]="htmlText"
+      (onContentChanged)="onContentChanged($event)" [required]="true" [minLength]="minLength" #editor="ngModel"
+      [modules]="quillConfig" placeholder="" >
+    </quill-editor>
+    <!-- <div id="editor1"></div> -->
+    <p *ngIf="editor? (editor.dirty || editor.touched) && editor.invalid && isValidInput : false"
+      class="error-text mat-caption">
+      <ng-container i18n> Minimum </ng-container>
+      {{ minLength }}
+      <ng-container i18n> characters are required </ng-container>
+    </p>
+  </ng-container>
