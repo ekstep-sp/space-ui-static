@@ -18,7 +18,7 @@ import { Subscription } from 'rxjs'
 
 const videoJsOptions: videoJs.PlayerOptions = {
   controls: true,
-  autoplay: false,
+  autoplay: true,
   preload: 'auto',
   fluid: false,
   techOrder: ['html5'],
@@ -229,7 +229,7 @@ export class PlayerVideoComponent extends WidgetBaseComponent
       {
         ...videoJsOptions,
         poster: this.widgetData.posterImage,
-        autoplay: this.widgetData.autoplay || false,
+        autoplay: this.widgetData.autoplay || true,
       },
       dispatcher,
       saveCLearning,

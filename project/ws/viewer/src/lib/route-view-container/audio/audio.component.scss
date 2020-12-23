@@ -45,8 +45,8 @@
 
 .video-player {
   width: 100%;
-  height: 75vh;
-  @include breakpoint-lt-xl {
+  height: 85vh;
+  /* @include breakpoint-lt-xl {
     height: 70vh;
   }
   @include breakpoint-lt-l {
@@ -60,7 +60,7 @@
   }
   @include breakpoint-xs {
     display: none;
-  }
+  } */
 }
 
 .video-player-m {

@@ -368,8 +368,8 @@ export class ViewerTocComponent implements OnInit, OnDestroy {
         of(true)
           .pipe(delay(2000))
           .subscribe(() => {
-            // this.expandThePath()
-            this.nestedTreeControl.expandAll()
+            this.expandThePath()
+            // this.nestedTreeControl.expandAll()
           })
       }
     }

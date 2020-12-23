@@ -100,7 +100,6 @@ export class HtmlComponent implements OnInit, OnDestroy {
       )
       .subscribe(
         async data => {
-          debugger
           let tempHtmlData = data.hasOwnProperty('content') && data.content.hasOwnProperty('data') ? data.content.data : null
           if (!tempHtmlData && this.configSvc.isGuestUser) {
             tempHtmlData = this.activatedRoute.snapshot.children[0].data.content

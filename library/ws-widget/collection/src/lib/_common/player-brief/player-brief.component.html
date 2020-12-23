@@ -1,4 +1,4 @@
-<div class="md:px-2">
+<div class="md:px-2" *ngIf="!newUI; else newUITemplate">
     <!-- <ws-widget-mark-as-complete [content]="content"></ws-widget-mark-as-complete> -->
     <!-- <ng-container *ngIf="showDownloadMobile && content && isDownloadable && !showDownloadGuest">
   
@@ -362,3 +362,17 @@
       </div>
     </mat-card>
   </ng-template>
+
+<ng-template #newUITemplate>
+  <ws-widget-ataglance
+      [overview]="false"
+      [content]="content"
+      [hasTocStructure]="hasTocStructure"
+      [tocStructure]="tocStructure"
+      [isPreviewMode]="isPreviewMode"
+      [forPreview]="forPreview"
+      [askAuthorEnabled]="askAuthorEnabled"
+      [creatorContacts]="content?.creatorContacts"
+      [viewer]="true"
+    ></ws-widget-ataglance>
+</ng-template>

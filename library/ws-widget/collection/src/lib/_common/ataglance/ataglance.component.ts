@@ -16,6 +16,7 @@ import { AppTocService } from '@ws/app/src/lib/routes/app-toc/services/app-toc.s
 export class AtaglanceComponent implements OnInit, OnDestroy {
   isDownloadMobile: any
   content$: Subscription | null = null
+  @Input() viewer = false
   @Input()
   overview = false
   @Input()

@@ -96,7 +96,7 @@
   // padding-bottom: 30px !important;
   padding: 0 0;
 }
-.viewer-style {
+.viewer-style2 {
   // padding: 0 0 ;
     padding-top: 0;
     padding-bottom: 30px;
@@ -124,9 +124,10 @@
     font-size: 14px !important;
     line-height: 22px !important;
 }
-.mat-chip {
+mat-chip {
     border-radius: 6px !important;
 }
+
 .nav-space {
   margin-top: 32px;
 }
@@ -142,4 +143,64 @@
     @include breakpoint-xs {
       text-align: center !important;
     }
+}
+
+.viewer-version {
+  border-radius: 10px;
+  .custom-flex {
+    flex-direction: row;
+    flex-wrap: wrap;
+    flex: auto;
+    display: flex !important;
+    margin: 0px 40px;
+    .customRow {
+      display: inherit;
+    }
+}
+.txt-clr2 {
+  font-weight: bold !important;
+  padding: 30px 0 40px 40px;
+  margin: 0 !important;
+  font-size: 1.125rem;
+}
+.viewer-flex-column {
+  flex: 1;
+}
+.m-0 {
+  margin: 0px !important;
+}
+.mw-140 {
+  max-width: 140px !important;
+}
+.viewer-column-mb {
+  margin-bottom: 40px;
+}
+@include breakpoint-xs {
+    display: block !important;
+    margin: 0;
+}
+}
+
+@media only screen and (max-width: 1050px) {
+  .viewer-version {
+    .txt-clr2 {
+      padding: 30px 15px;
+
+    }
+    .custom-flex {
+      margin: 0 15px;
+    }
+  }
+}
+
+@media only screen and (max-width:900px) {
+  .custom-flex {
+    display: block !important;
+  }
+}
+
+@media only screen and (max-width:350px) {
+  .customRow {
+    display: block !important;
+  }
 }

@@ -24,18 +24,16 @@
       </ng-container>
     </section>
     <section class="px-8 py-4">
-      <!-- <ng-container *ngIf="!configService?.isGuestUser">
-        <div class="padding-s">
-          <ws-widget-user-content-rating class="mb-4 block"
-          *ngIf="!configService?.isGuestUser && content?.identifier && content?.assetType !== 'Connection'" [contentId]="content?.identifier"
-          [isDisabled]="isRatingsDisabled" [parentElem]="'viewer'">
-        </ws-widget-user-content-rating>
+      <div class="wrapper flex-none md:flex md:flex-row-reverse">
+        <div class="w-full md:w-2/6 section-right">
+          <ws-widget-player-brief [newUI]="true" [askAuthorEnabled]="!configService?.isGuestUser" [forPreview]="forPreview || configService?.isGuestUser" [content]="content"></ws-widget-player-brief>
         </div>
-      </ng-container> -->
-      <ws-widget-player-brief [askAuthorEnabled]="!configService?.isGuestUser" [forPreview]="forPreview || configService?.isGuestUser" [content]="content"></ws-widget-player-brief>
-      <div *ngIf="!configService?.isGuestUser" class="video-discussion-forum-in margin-top-m margin-bottom-m padding-s">
-        <h2 class="mat-toolbar discussion-head font-montserrat body-font-size-primary space">Discussion Forum</h2>
-        <ng-container [wsResolverWidget]="discussionForumWidget"></ng-container>
+        <div class="w-full md:w-4/6 section-left">
+          <div *ngIf="!configService?.isGuestUser" class="video-discussion-forum-in margin-top-m margin-bottom-m padding-s">
+            <h2 class="mat-toolbar discussion-head font-montserrat body-font-size-primary space">Discussion Forum</h2>
+            <ng-container [wsResolverWidget]="discussionForumWidget"></ng-container>
+          </div>
+        </div>
       </div>
     </section>
   </section>

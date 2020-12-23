@@ -1,84 +1,4 @@
 <ng-container *ngIf="!isFetching; else Loading">
-  <!-- <mat-card *ngIf="collection && collectionCard">
-    <mat-card-content>
-      <span class="width-expand flex flex-middle">
-        <a
-          class="viewer-toc-header-thumbnail align-self-start margin-auto"
-          [routerLink]="collectionCard?.redirectUrl"
-          queryParamsHandling="preserve"
-        >
-          <img
-            i18n-alt
-            alt="thumbnail"
-            class="viewer-toc-header-thumbnail align-self-start margin-auto mat-app-background"
-            [src]="collectionCard?.thumbnail"
-            [wsUtilsDefaultThumbnail]="defaultThumbnail"
-          />
-        </a>
-        <span class="width-1-1 margin-left-m flex flex-wrapped align-self-start">
-          <div class="width-1-1 flex flex-between">
-            <div class="mat-body-2 text-truncate flex">
-              <a [routerLink]="collectionCard?.redirectUrl" queryParamsHandling="preserve">
-                {{ collectionCard?.title | pipeLimitTo: 20 }}
-              </a>
-              <mat-icon
-                *ngIf="
-                  contentProgressHash &&
-                  contentProgressHash[collectionCard?.id] &&
-                  contentProgressHash[collectionCard?.id] > 0.99
-                "
-                i18n-matTooltip
-                matTooltip="Completed"
-                class="completed-icon margin-left-xs align-self-start"
-              >
-                check_circle_outline</mat-icon
-              >
-            </div>
-          </div>
-          <span class="mat-body-1">
-            <span>{{ collectionCard?.subText1 | pipeLimitTo: 300 }}</span
-            ><span *ngIf="collectionCard?.subText2"> |</span>
-          </span>
-          <span *ngIf="collectionCard?.subText2" class="mat-body-1 margin-left-xxs"
-            ><span> {{ collectionCard?.subText2 | pipeLimitTo: 300 }}</span>
-          </span>
-          <div *ngIf="collectionCard?.type === 'content'" class="width-1-1">
-            <ws-widget-btn-content-like
-              [widgetData]="{ identifier: collectionCard?.id }"
-            ></ws-widget-btn-content-like>
-            <ws-widget-btn-content-share [forPreview]="forPreview"></ws-widget-btn-content-share>
-            <ws-widget-btn-goals [forPreview]="forPreview"></ws-widget-btn-goals>
-            <ws-widget-btn-playlist [forPreview]="forPreview"></ws-widget-btn-playlist>
-            <ws-widget-btn-content-feedback
-              [forPreview]="forPreview"
-            ></ws-widget-btn-content-feedback>
-          </div>
-        </span>
-        <span>
-          <div class="mat-body-1 content-duration mat-caption width-max-content">
-            {{ collectionCard?.duration | pipeDurationTransform: 'hms' }}
-          </div>
-        </span>
-      </span>
-    </mat-card-content>
-  </mat-card> -->
-
-  <!-- <mat-divider *ngIf="collection" class="margin-bottom-xs"></mat-divider> -->
-  <!--
-    <div *ngIf="collection" class="flex flex-middle">
-    <div i18n class="padding-left-m" *ngIf="tocMode === 'TREE'">Structure</div>
-    <div i18n class="padding-left-m" *ngIf="tocMode === 'FLAT'">Queue</div>
-    <span class="spacer"></span>
-    <div class="margin-right-m">
-      <mat-slide-toggle [checked]="tocMode === 'FLAT'" (change)="changeTocMode()"
-        ><span i18n accesskey="T">
-          <mat-icon>view_list</mat-icon>
-        </span></mat-slide-toggle
-      >
-    </div>
-  </div> 
-  -->
-  <!-- <mat-divider class="margin-top-xs"></mat-divider> -->
   <section *ngIf="!collection">
     <div *ngIf="errorWidgetData?.widgetData?.errorType" [wsResolverWidget]="errorWidgetData"></div>
   </section>
@@ -123,7 +43,7 @@
         <mat-card-content>
           <mat-tree [dataSource]="nestedDataSource" [treeControl]="nestedTreeControl">
             <mat-tree-node *matTreeNodeDef="let node" matTreeNodeToggle matTreeNodePadding [matTreeNodePaddingIndent]="'0'">
-              <li class="mat-tree-node leaf-node">
+              <li class="mat-tree-node leaf-node cusotm-bg">
                 <ng-container
                   *ngTemplateOutlet="TocContentList; context: { $implicit: node }"
                 ></ng-container>
@@ -168,7 +88,7 @@
                     </h3>
                   </div> -->
                 </div>
-                <ul [hidden]="!nestedTreeControl.isExpanded(node)" class="padding-none cusotm-bg">
+                <ul [hidden]="!nestedTreeControl.isExpanded(node)" class="padding-none">
                   <ng-container matTreeNodeOutlet></ng-container>
                 </ul>
               </li>

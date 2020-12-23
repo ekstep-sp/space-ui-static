@@ -17,7 +17,7 @@ import { distinctUntilChanged } from 'rxjs/operators'
 export class PlayerBriefComponent implements OnInit, OnDestroy {
   isDownloadMobile: any
   content$: Subscription | null = null
-
+  @Input() newUI = false
   @Input()
   content: NsContent.IContent | null = null
   @Input()

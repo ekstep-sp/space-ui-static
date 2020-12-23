@@ -9,6 +9,7 @@ import { BtnMailUserModule } from '../../btn-mail-user/btn-mail-user.module'
 import { MarkAsCompleteModule } from '../mark-as-complete/mark-as-complete.module'
 import { MatDividerModule, MatChipsModule, MatIconModule, MatCardModule, MatButtonModule } from '@angular/material'
 import { UserContentRatingComponent } from '../user-content-rating/user-content-rating.component'
+import { AtaglanceModule } from '../ataglance/ataglance.module'
 
 @NgModule({
   declarations: [PlayerBriefComponent],
@@ -26,6 +27,7 @@ import { UserContentRatingComponent } from '../user-content-rating/user-content-
     BtnMailUserModule,
     MatButtonModule,
     MarkAsCompleteModule,
+    AtaglanceModule,
   ],
   exports: [PlayerBriefComponent, UserContentRatingComponent],
 })

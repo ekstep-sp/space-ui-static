@@ -27,7 +27,7 @@
             identifier: pdfData.identifier,
             isDisabled: isPreviewMode
           }"></ws-widget-btn-content-like>
-        <ws-widget-btn-content-share [forPreview]="forPreview" [widgetData]="pdfData"
+        <ws-widget-btn-content-share [forPreview]="forPreview" [overview]="true" [widgetData]="pdfData"
          *ngIf="allowedToPdf && !configSvc?.isGuestUser" [isDisabled]="isPreviewMode">
         </ws-widget-btn-content-share>
         <ws-widget-btn-goals [forPreview]="forPreview"></ws-widget-btn-goals>
