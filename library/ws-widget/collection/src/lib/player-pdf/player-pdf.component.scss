@@ -11,6 +11,8 @@
   min-height: 56px;
   overflow: hidden;
   font: inherit;
+  justify-content: flex-end;
+  background-color: #6A7078 !important;
 }
 .pdf-page-container {
   width: calc(100%-80px);
@@ -18,7 +20,23 @@
   overflow: auto;
 }
 .pdf-page-num {
-  margin: 0 5px;
+    color: black !important;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    background: white;
+    border: none;
+    width: 100% !important;
+    text-align: center;
+}
+.counter-container {
+  color: white;
+  display: inline-block;
+  height: 40px;
+  align-self: flex-start;
+  padding: 0;
+  margin: 0;
+  min-width: 60px;
 }
 .pdf-container {
   height: 100%;
@@ -46,9 +64,6 @@ input::-webkit-inner-spin-button {
 input[type=number] {
     -moz-appearance:textfield;
 }
-  .pdf-page-num {
-    max-width: 3rem !important ;
-  }
 
   .hidden-xs {
   @include breakpoint-xs {
@@ -81,24 +96,7 @@ input[type=number] {
 
 }
 
-
-
-// @media only screen and (max-width: 823px) {
-// .hidedownload{
-//   display: none !important;
-// }
-// .hidedownloads{
-//   display: none !important;
-
-// }
-
-// // .mat-menu-content .matclasses{
-// //   padding-bottom: 0 !important;
-// //     margin-bottom: -35px !important;
-// // }
-// }
-// @media only screen and (max-width: 1366px){
-//   .hidedownload{
-//     display: none !important;
-//   }
-// }
+.customColor {
+  background-color: #C6BCB8 !important; 
+  border-radius: 0px !important;
+}

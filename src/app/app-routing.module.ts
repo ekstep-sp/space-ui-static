@@ -595,7 +595,6 @@ const routes: Routes = [
   {
     path: 'viewer',
     data: {
-      topBar: ETopBar.NONE,
       pageType: 'feature',
       pageKey: 'disscussionForum',
     },

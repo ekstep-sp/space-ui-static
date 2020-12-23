@@ -1,20 +1,25 @@
 <section #fullScreenContainer class="pdf-container">
   <!-- <mat-toolbar class="pdf-nav-bar" color="primary" *ngIf="widgetData?.hideControls"> -->
-  <mat-toolbar class="pdf-nav-bar" color="primary" *ngIf="widgetData?.hideControls">
-    <button mat-icon-button [disabled]="currentPage.value < 2" (click)="loadPageNum(currentPage.value - 1)"
-      aria-label="previous" i18n-aria-label>
-      <mat-icon>chevron_left</mat-icon>
-    </button>
-    <mat-form-field class="auto-mat-form-field-input-infix">
-      <span matPrefix i18n *ngIf="!isSmallViewPort">Page</span>
-      <input label="PageNumber" aria-label="Page Number" i18n-aria-label class="pdf-page-num" type="number" min="1"
+  <div [ngClass]="{ 'custom-scroll-small': !isInFullScreen }" class="pdf-page-container">
+    <div [ngClass]="{ 'custom-scroll-small': !isInFullScreen }" class="container" #pdfContainer></div>
+  </div>
+  <mat-toolbar class="pdf-nav-bar" *ngIf="widgetData?.hideControls">
+    <div class="page-counter">
+      <span i18n class="mr-2"*ngIf="!isSmallViewPort">Page </span>
+      <button mat-icon-button class="customColor" [disabled]="currentPage.value < 2" (click)="loadPageNum(currentPage.value - 1)"
+        aria-label="previous" i18n-aria-label>
+        <mat-icon>chevron_left</mat-icon>
+      </button>
+      <div class="counter-container" style="color: white;">
+        <input label="PageNumber" aria-label="Page Number" i18n-aria-label class="pdf-page-num" type="number" min="1"
         [max]="totalPages" [formControl]="currentPage" matInput style="color: white;" (keyleft)="onKeyleft($event)" />
-      <span class="text-white" matSuffix>of {{ totalPages }}</span>
-    </mat-form-field>
-    <button mat-icon-button [disabled]="currentPage.value >= totalPages" (click)="loadPageNum(currentPage.value + 1)"
-      aria-label="next" i18n-aria-label>
-      <mat-icon>chevron_right</mat-icon>
-    </button>
+      </div>
+      <button mat-icon-button class="customColor" [disabled]="currentPage.value >= totalPages" (click)="loadPageNum(currentPage.value + 1)"
+        aria-label="next" i18n-aria-label>
+        <mat-icon>chevron_right</mat-icon>
+      </button>
+      <span class="text-white ml-2"> Of {{ totalPages }}</span>
+    </div>
     <button mat-icon-button [disabled]="zoom.value <= MIN_SCALE" (click)="changeScale('zoomout')" aria-label="zoom out"
       i18n-aria-label>
       <mat-icon>zoom_out</mat-icon>
@@ -53,24 +58,22 @@
       <mat-icon>more_vert</mat-icon>
     </button>
   </mat-toolbar>
-  <mat-menu class="matclasses" #pdfMenu="matMenu">
-    <button mat-menu-item class="menu-btn menu-btn-galaxy" (click)="refresh()" aria-label="refresh" i18n-aria-label>
-      <mat-icon>refresh</mat-icon>
-    </button>
-    <ws-widget-btn-fullscreen (fsState)="fullScreenState($event)" (click)="refresh()"
-      [widgetData]="{ fsContainer: fullScreenContainer }">
-    </ws-widget-btn-fullscreen>
-
-    <ng-container
-      *ngIf="!showDownloadPublicGuest && showDownloadMobile && widgetData.pdfUrl && isDownloadable && !showDownloadGuest">
-
-      <button mat-menu-item class="menu-btn menu-btn-galaxy">
-        <mat-icon (click)="download()">cloud_download</mat-icon>
-      </button>
-    </ng-container>
-
-  </mat-menu>
-  <div [ngClass]="{ 'custom-scroll-small': !isInFullScreen }" class="pdf-page-container">
-    <div [ngClass]="{ 'custom-scroll-small': !isInFullScreen }" class="container" #pdfContainer></div>
-  </div>
 </section>
+
+<mat-menu class="matclasses" #pdfMenu="matMenu">
+  <button mat-menu-item class="menu-btn menu-btn-galaxy" (click)="refresh()" aria-label="refresh" i18n-aria-label>
+    <mat-icon>refresh</mat-icon>
+  </button>
+  <ws-widget-btn-fullscreen (fsState)="fullScreenState($event)" (click)="refresh()"
+    [widgetData]="{ fsContainer: fullScreenContainer }">
+  </ws-widget-btn-fullscreen>
+
+  <ng-container
+    *ngIf="!showDownloadPublicGuest && showDownloadMobile && widgetData.pdfUrl && isDownloadable && !showDownloadGuest">
+
+    <button mat-menu-item class="menu-btn menu-btn-galaxy">
+      <mat-icon (click)="download()">cloud_download</mat-icon>
+    </button>
+  </ng-container>
+
+</mat-menu>

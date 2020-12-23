@@ -5,7 +5,6 @@ import { NsWidgetResolver } from '@ws-widget/resolver'
 import { ConfigurationsService, UtilityService, ValueService } from '@ws-widget/utils'
 import { Subscription } from 'rxjs'
 import { RootService } from '../../../../../src/app/component/root/root.service'
-import { AppTocService } from '@ws/app/src/lib/routes/app-toc/services/app-toc.service'
 import { TStatus, SharedViewerDataService } from '@ws/author/src/lib/modules/shared/services/shared-viewer-data.service'
 
 export enum ErrorType {
@@ -57,7 +56,6 @@ export class ViewerComponent implements OnInit, OnDestroy, AfterViewInit, AfterV
     private rootSvc: RootService,
     private utilitySvc: UtilityService,
     private changeDetector: ChangeDetectorRef,
-    private tocSharedSvc: AppTocService,
     private readonly configService: ConfigurationsService,
     private readonly cdr: ChangeDetectorRef,
   ) {
@@ -72,13 +70,13 @@ export class ViewerComponent implements OnInit, OnDestroy, AfterViewInit, AfterV
           if (data.content && data.content.data) {
             this.content = data.content.data
             this.formDiscussionForumWidget(this.content)
-            this.tocSharedSvc.fetchEmails(this.content ? this.content.creatorContacts : []).then((newIDS: any) => {
+            /* this.tocSharedSvc.fetchEmails(this.content ? this.content.creatorContacts : []).then((newIDS: any) => {
               if (this.content) {
                 this.content.creatorContacts = [
                   ...newIDS,
                 ]
               }
-            })
+            }) */
           }
         })
       }

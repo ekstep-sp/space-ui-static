@@ -19,6 +19,10 @@
   }
 }
 
+.pl-0 {
+  padding-left: 0px !important;
+}
+
 .video-player-container {
   height: auto;
   width: 100%;
@@ -142,4 +146,8 @@
   .theme-muave.day-mode .viewer-style {
   background-color: #C4C4C4 !important;
 }
+}
+
+.customH {
+  height: 50vh;
 }

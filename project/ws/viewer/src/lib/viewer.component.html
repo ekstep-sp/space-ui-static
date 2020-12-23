@@ -1,12 +1,12 @@
 <div class="pt-0">
   <section *ngIf="isNotEmbed">
-    <viewer-viewer-top-bar *ngIf="fullScreenContainer" [forPreview]="forPreview" [frameReference]="fullScreenContainer"
+    <viewer-viewer-top-bar *ngIf="fullScreenContainer" [forPreview]="forPreview" [showFullScreenButton]="false" [frameReference]="fullScreenContainer"
       (toggle)="toggleSideBar()">
     </viewer-viewer-top-bar>
     <viewer-viewer-top-bar *ngIf="!fullScreenContainer" [showFullScreenButton]="false" [forPreview]="forPreview" [frameReference]="fullScreenContainer"
       (toggle)="toggleSideBar()">
     </viewer-viewer-top-bar>
-    <section class="px-8">
+    <section class="px-8 pb-4">
       <ng-container *ngIf="isTypeOfCollection; else mainContentTemplate">
         <mat-sidenav-container autosize class="viewer-sidenav-container">
             <mat-sidenav #snav [ngClass]="isTypeOfCollection ? 'viewer-sidenav':'viewer-sidenav-standalone'"
@@ -22,14 +22,16 @@
           </mat-sidenav-content>
         </mat-sidenav-container>
       </ng-container>
-      <ng-container *ngIf="!configService?.isGuestUser">
+    </section>
+    <section class="px-8 py-4">
+      <!-- <ng-container *ngIf="!configService?.isGuestUser">
         <div class="padding-s">
           <ws-widget-user-content-rating class="mb-4 block"
           *ngIf="!configService?.isGuestUser && content?.identifier && content?.assetType !== 'Connection'" [contentId]="content?.identifier"
           [isDisabled]="isRatingsDisabled" [parentElem]="'viewer'">
         </ws-widget-user-content-rating>
         </div>
-      </ng-container>
+      </ng-container> -->
       <ws-widget-player-brief [askAuthorEnabled]="!configService?.isGuestUser" [forPreview]="forPreview || configService?.isGuestUser" [content]="content"></ws-widget-player-brief>
       <div *ngIf="!configService?.isGuestUser" class="video-discussion-forum-in margin-top-m margin-bottom-m padding-s">
         <h2 class="mat-toolbar discussion-head font-montserrat body-font-size-primary space">Discussion Forum</h2>

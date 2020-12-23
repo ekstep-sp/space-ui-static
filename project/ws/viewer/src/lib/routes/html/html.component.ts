@@ -9,9 +9,10 @@ import {
   SubapplicationRespondService,
   WsEvents,
 } from '@ws-widget/utils'
-import { fromEvent, Subscription } from 'rxjs'
-import { filter } from 'rxjs/operators'
+import { fromEvent, of, Subscription } from 'rxjs'
+import { filter, map, mergeMap } from 'rxjs/operators'
 import { ViewerUtilService } from '../../viewer-util.service'
+import { AppTocService } from '@ws/app/src/lib/routes/app-toc/services/app-toc.service'
 @Component({
   selector: 'viewer-html',
   templateUrl: './html.component.html',
@@ -51,6 +52,7 @@ export class HtmlComponent implements OnInit, OnDestroy {
     private configSvc: ConfigurationsService,
     private eventSvc: EventService,
     private accessControlSvc: AccessControlService,
+    private readonly appTocService: AppTocService,
   ) {}
 
   ngOnInit() {
@@ -84,8 +86,21 @@ export class HtmlComponent implements OnInit, OnDestroy {
           }
         })
     } else {
-      this.routeDataSubscription = this.activatedRoute.data.subscribe(
+      this.routeDataSubscription = this.activatedRoute.data.pipe(
+        mergeMap((originalContent: any) => {
+          if (!this.configSvc.isGuestUser) {
+            return this.appTocService.attachEmailIDS(originalContent.content.data)
+            .pipe(map((updatedData: any) => {
+              (originalContent as any).content.data = updatedData
+              return originalContent
+            }))
+          }
+          return of(originalContent)
+        })
+      )
+      .subscribe(
         async data => {
+          debugger
           let tempHtmlData = data.hasOwnProperty('content') && data.content.hasOwnProperty('data') ? data.content.data : null
           if (!tempHtmlData && this.configSvc.isGuestUser) {
             tempHtmlData = this.activatedRoute.snapshot.children[0].data.content

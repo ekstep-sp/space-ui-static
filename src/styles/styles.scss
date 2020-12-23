@@ -42,6 +42,11 @@ body {
   font-family: $font-family-montserrat;
 }
 
+.customColorToolbar {
+  background-color: #8684A2;
+  min-height: 90px;
+}
+
 .custom-padding .mat-dialog-container {
           padding: 0;
           box-shadow: none !important;

@@ -1,20 +1,20 @@
-<mat-card class="ws-mat-primary-lite-background-on-day margin-top-s"
+<ng-container
   *ngIf="showIframeSupportWarning || isIntranetUrl || htmlContent?.isInIntranet">
-  <mat-card-content>
+  <div class="px-2 flex items-center flex-col max-w-screen-sm m-auto text-left">
     <h2 class="mat-h2" *ngIf="
-        isIntranetUrl || htmlContent?.isInIntranet || htmlContent?.isIframeSupported === 'Maybe'
-      ">
-      <ng-container *ngIf="
-          ((isIntranetUrl && htmlContent?.isIframeSupported === 'Maybe') ||
-            (htmlContent?.isInIntranet && htmlContent?.isIframeSupported === 'Maybe')) &&
-          !isUserInIntranet
-        " i18n>
-        This content can only be viewed in Intranet.
-      </ng-container>
-      <ng-container *ngIf="htmlContent?.isIframeSupported === 'Maybe'" i18n>
-        Content may be required to be opened in a new window. If you are unable to view it, Please
-        click on the Open in New Window Button else Dismiss
-      </ng-container>
+    isIntranetUrl || htmlContent?.isInIntranet || htmlContent?.isIframeSupported === 'Maybe'
+  ">
+  <ng-container *ngIf="
+      ((isIntranetUrl && htmlContent?.isIframeSupported === 'Maybe') ||
+        (htmlContent?.isInIntranet && htmlContent?.isIframeSupported === 'Maybe')) &&
+      !isUserInIntranet
+    " i18n>
+    This content can only be viewed in Intranet.
+  </ng-container>
+  <ng-container *ngIf="htmlContent?.isIframeSupported === 'Maybe'" i18n>
+    Content may be required to be opened in a new window. If you are unable to view it, Please
+    click on the Open in New Window Button else Dismiss
+  </ng-container>
     </h2>
     <h2 class="mat-h2" *ngIf="
         isIntranetUrl ||
@@ -32,8 +32,8 @@
         This content can only be viewed in Intranet.<br />
       </ng-container>
       <ng-container *ngIf="htmlContent?.isIframeSupported === 'No' || !htmlContent?.isIframeSupported">
-        <span class="font-montserrat body-font-size-primary" i18n>Content will open in a new window. If you are unable to view it, click on the button
-          below.</span>
+        <h2 class="ws-mat-primary-text text-left mb-5">{{htmlContent?.name}}</h2>
+        <span class="font-montserrat body-font-size-primary" i18n>For Better User Experience, we are taking you to the new tab. <br>In case it does not open, click on the button below.</span>
         <!-- <a *ngIf="!configSvc?.isGuestUser" [routerLink]="'/app/info/faq'" [queryParams]="{ tab: 'popup' }">
           <mat-icon matTooltip="How to Disable Pop-ups" class="align-text-top ws-mat-primary-text mat-icon">help
           </mat-icon>
@@ -46,7 +46,6 @@
       " i18n>
       This content can only be viewed in Intranet.
     </h2>
-    <mat-divider></mat-divider>
     <mat-progress-bar
       mode="determinate"
       *ngIf="progress > 0 && htmlContent?.isIframeSupported?.toLowerCase() === 'no'"
@@ -69,23 +68,22 @@
         Dismiss
       </button>
     </div>
-  </mat-card-content>
-</mat-card>
+    <h2 class="text-center mat-primary-text margin-top-m load" *ngIf="showIsLoadingMessage" i18n>
+      Please wait! Content requested is loading
+    </h2>
 
-<h2 class="text-center mat-primary-text margin-top-m load" *ngIf="showIsLoadingMessage" i18n>
-  Please wait! Content requested is loading
-</h2>
-
-<div class="margin-top-m text-center" *ngIf="pageFetchStatus !== 'done'">
-  <h2 *ngIf="pageFetchStatus === 'error'" i18n>
-    Error loading page. Please try refreshing page.
-  </h2>
-  <h2 *ngIf="pageFetchStatus === 'artifactUrlMissing'" i18n>
-    There is nothing to play.
-    <a class="cursor-pointer ws-mat-primary-text" (click)="backToDetailsPage()">Click here</a>
-    to go to details page.
-  </h2>
-</div>
+    <div class="margin-top-m text-center" *ngIf="pageFetchStatus !== 'done'">
+      <h2 *ngIf="pageFetchStatus === 'error'" i18n>
+        Error loading page. Please try refreshing page.
+      </h2>
+      <h2 *ngIf="pageFetchStatus === 'artifactUrlMissing'" i18n>
+        There is nothing to play.
+        <a class="cursor-pointer ws-mat-primary-text" (click)="backToDetailsPage()">Click here</a>
+        to go to details page.
+      </h2>
+    </div>
+  </div>
+</ng-container>
 
 <iframe #iframeElem [hidden]="this.pageFetchStatus !== 'done'" *ngIf="
     htmlContent?.isIframeSupported !== 'No' &&
