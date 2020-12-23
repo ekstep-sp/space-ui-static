@@ -229,7 +229,16 @@ color: #696466 !important;
     width: 12.5% !important;
   }
 }
-
+.btn-text-font {
+  font-size: 1.125rem;
+  font-weight: bold !important;
+  font-family: Montserrat !important; 
+}
+.sub-heading-font {
+  font-size: 1.5rem;
+  font-weight: 400 !important;
+  font-family: Montserrat !important;
+}
 .font-sans {
   font-family: $font-family-sans;
 }

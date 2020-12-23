@@ -1,3 +1,5 @@
+@import 'ws-vars';
+@import 'ws-mixins';
 .liked-num {
   margin-top: 0.35rem;
 }
@@ -9,4 +11,7 @@
 }
 .color {
   color: #FFFFFF !important;
+  // @include breakpoint-xs {
+  //   color: rgba(0, 0, 0, 0.54) !important;
+  // }
 }

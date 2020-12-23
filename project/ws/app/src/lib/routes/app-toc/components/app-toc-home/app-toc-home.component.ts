@@ -26,6 +26,7 @@ export class AppTocHomeComponent implements OnInit, OnDestroy {
   pageNavbar: Partial<NsPage.INavBackground> = this.configSvc.pageNavBar
   isCohortsRestricted = false
   isInIframe = false
+  isActive = false
   forPreview = window.location.href.includes('/author/')
   analytics = this.route.snapshot.data.pageData.data.analytics
   errorWidgetData: NsWidgetResolver.IRenderConfigWithTypedData<any> = {
@@ -53,6 +54,13 @@ export class AppTocHomeComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
+    const activeAnalytic = window.location.href.includes('/analytics')
+    if (activeAnalytic) {
+      this.isActive = true
+    // console.log(activeAnalytic)
+    } else {
+      this.isActive = false
+    }
     try {
       this.isInIframe = window.self !== window.top
     } catch (_ex) {

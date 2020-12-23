@@ -30,6 +30,8 @@ export class AtaglanceComponent implements OnInit, OnDestroy {
   forPreview = false
   @Input()
   askAuthorEnabled = true
+  @Input()
+  creatorContacts: any
   tocConfig: any = null
   enableRatings = false
   mailIcon = false

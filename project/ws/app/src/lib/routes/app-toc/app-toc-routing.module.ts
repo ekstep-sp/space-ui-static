@@ -9,10 +9,11 @@ import { AppTocResolverService } from './resolvers/app-toc-resolver.service'
 import { AppTocAnalyticsComponent } from './routes/app-toc-analytics/app-toc-analytics.component'
 import { CertificationMetaResolver } from './routes/app-toc-certification/resolvers/certification-meta.resolver'
 import { ContentCertificationResolver } from './routes/app-toc-certification/resolvers/content-certification.resolver'
-import { AppTocContentsComponent } from './routes/app-toc-contents/app-toc-contents.component'
+// import { AppTocContentsComponent } from './routes/app-toc-contents/app-toc-contents.component'
 import { AppTocHomeComponent } from './routes/app-toc-home/app-toc-home.component'
-import { AppTocOverviewComponent as AppTocOverviewRootComponent } from './routes/app-toc-overview/app-toc-overview.component'
-import { AtaglanceComponent } from '@ws-widget/collection/src/lib/_common/ataglance/ataglance.component'
+// import { AppTocOverviewComponent as AppTocOverviewRootComponent } from './routes/app-toc-overview/app-toc-overview.component'
+// import { AtaglanceComponent } from '@ws-widget/collection/src/lib/_common/ataglance/ataglance.component'
+import { TocBodyCommonRoutingComponent } from './routes/toc-body-common-routing/toc-body-common-routing.component'
 
 const routes: Routes = [
   {
@@ -44,15 +45,19 @@ const routes: Routes = [
       },
       {
         path: 'contents',
-        component: AppTocContentsComponent,
+        component: TocBodyCommonRoutingComponent,
       },
       {
         path: 'overview',
-        component: AppTocOverviewRootComponent,
+        component: TocBodyCommonRoutingComponent,
       },
       {
         path: 'ataglance',
-        component: AtaglanceComponent,
+        component: TocBodyCommonRoutingComponent,
+      },
+      {
+        path: 'rateUs',
+        component: TocBodyCommonRoutingComponent,
       },
       {
         path: 'discussion',
@@ -91,7 +96,9 @@ const routes: Routes = [
 ]
 
 @NgModule({
-  imports: [RouterModule.forChild(routes)],
+  imports: [
+    RouterModule.forChild(routes),
+  ],
   exports: [RouterModule],
 })
 export class AppTocRoutingModule { }

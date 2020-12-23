@@ -16,7 +16,8 @@
   [analytics]="analytics" [resumeData]="resumeData">
 </ws-app-toc-banner>
 <ng-container>
-  <div role="main" class="toc-body" *ngIf="!errorCode; else tocError">
+  <div role="main" *ngIf="!errorCode; else tocError">
+    <div class="toc-body">
     <nav mat-tab-nav-bar class="toc-links mat-app-background">
       <div class="excep-style flex">
           <a 
@@ -54,20 +55,30 @@
           i18n
           >Contents</a
         >
+        <a
+        class="text-style"
+        mat-tab-link
+        [routerLink]="'./rateUs'"
+        routerLinkActive="link-active"
+        i18n
+        >Rate Us</a
+      >
       </div>
    <div>
       <button
+    [ngClass]="{ 'active' : isActive }" 
     *ngIf="enableAnalytics"
     [disabled]="forPreview"
     [routerLink]="'./analytics'"
     mat-flat-button
     [color]="'primary'"
     i18n
-    class="clr"
+    class="al-clr btn-text-font"
     >Analytics</button
   >
    </div>
     </nav>
+  </div>
     <router-outlet></router-outlet>
 
     <!-- <ng-container>

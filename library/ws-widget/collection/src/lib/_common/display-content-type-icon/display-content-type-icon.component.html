@@ -7,94 +7,91 @@
 
 <ng-container *ngIf="!customIcon">
 <ng-container [ngSwitch]="displayResourceType">
-  <mat-icon *ngSwitchCase="displayContentMimeEnum.M4A" i18n-matTooltip matTooltip="Video"
+  <mat-icon  class="material-icons-outlined innerSpan material-icons mat-icon-no-color" *ngSwitchCase="displayContentMimeEnum.M4A" i18n-matTooltip matTooltip="Video"
     >play_circle_outline
   </mat-icon>
-  <mat-icon *ngSwitchCase="displayContentMimeEnum.MP4" i18n-matTooltip matTooltip="Video"
+  <mat-icon  class="material-icons-outlined innerSpan material-icons mat-icon-no-color" *ngSwitchCase="displayContentMimeEnum.MP4" i18n-matTooltip matTooltip="Video"
     >play_circle_outline
   </mat-icon>
-  <mat-icon *ngSwitchCase="displayContentMimeEnum.M3U8" i18n-matTooltip matTooltip="Video"
+  <mat-icon  class="material-icons-outlined innerSpan material-icons mat-icon-no-color" *ngSwitchCase="displayContentMimeEnum.M3U8" i18n-matTooltip matTooltip="Video"
     >play_circle_outline
   </mat-icon>
-  <mat-icon *ngSwitchCase="displayContentMimeEnum.MP3" i18n-matTooltip matTooltip="Audio"
+  <mat-icon  class="material-icons-outlined innerSpan material-icons mat-icon-no-color" *ngSwitchCase="displayContentMimeEnum.MP3" i18n-matTooltip matTooltip="Audio"
     >music_video</mat-icon
   >
-  <mat-icon *ngSwitchCase="displayContentMimeEnum.PDF" i18n-matTooltip matTooltip="PDF"
+  <mat-icon  class="material-icons-outlined innerSpan material-icons mat-icon-no-color" *ngSwitchCase="displayContentMimeEnum.PDF" i18n-matTooltip matTooltip="PDF"
     >picture_as_pdf</mat-icon
   >
-  <mat-icon *ngSwitchCase="displayContentMimeEnum.HTML" i18n-matTooltip matTooltip="Web Page"
+  <mat-icon  class="material-icons-outlined innerSpan material-icons mat-icon-no-color" *ngSwitchCase="displayContentMimeEnum.HTML" i18n-matTooltip matTooltip="Web Page"
     >description</mat-icon
   >
-  <mat-icon *ngSwitchCase="displayContentTypeEnum.QUIZ" i18n-matTooltip matTooltip="Quiz"
+  <mat-icon  class="material-icons-outlined innerSpan material-icons mat-icon-no-color" *ngSwitchCase="displayContentTypeEnum.QUIZ" i18n-matTooltip matTooltip="Quiz"
     >help_outline</mat-icon
   >
-  <mat-icon
+  <mat-icon  class="material-icons-outlined innerSpan material-icons mat-icon-no-color"
     *ngSwitchCase="displayContentTypeEnum.ASSESSMENT"
     i18n-matTooltip
     matTooltip="Assessment"
     >help</mat-icon
   >
-  <mat-icon *ngSwitchCase="displayContentTypeEnum.YOUTUBE" i18n-matTooltip matTooltip="youtube"
+  <mat-icon  class="material-icons-outlined innerSpan material-icons mat-icon-no-color" *ngSwitchCase="displayContentTypeEnum.YOUTUBE" i18n-matTooltip matTooltip="youtube"
     >play_circle_outline
   </mat-icon>
-  <mat-icon
+  <mat-icon  class="material-icons-outlined innerSpan material-icons mat-icon-no-color"
     *ngSwitchCase="displayContentTypeEnum.INTERACTIVE_VIDEO"
     i18n-matTooltip
     matTooltip="Interactive Video"
   >
     featured_video</mat-icon
   >
-  <mat-icon
+  <mat-icon  class="material-icons-outlined innerSpan material-icons mat-icon-no-color"
     *ngSwitchCase="displayContentTypeEnum.WEB_MODULE"
     i18n-matTooltip
     matTooltip="Web Module"
     >book</mat-icon
   >
-  <mat-icon *ngSwitchCase="displayContentTypeEnum.HANDS_ON" i18n-matTooltip matTooltip="Hands-On"
+  <mat-icon  class="material-icons-outlined innerSpan material-icons mat-icon-no-color" *ngSwitchCase="displayContentTypeEnum.HANDS_ON" i18n-matTooltip matTooltip="Hands-On"
     >code</mat-icon
   >
-  <mat-icon *ngSwitchCase="displayContentTypeEnum.IAP" i18n-matTooltip matTooltip="Hands-On"
+  <mat-icon  class="material-icons-outlined innerSpan material-icons mat-icon-no-color" *ngSwitchCase="displayContentTypeEnum.IAP" i18n-matTooltip matTooltip="Hands-On"
     >code</mat-icon
   >
-  <mat-icon
+  <mat-icon  class="material-icons-outlined innerSpan material-icons mat-icon-no-color"
     *ngSwitchCase="displayContentTypeEnum.INSTRUCTOR_LED"
     i18n-matTooltip
     matTooltip="instructor-led"
     >class
   </mat-icon>
-  <mat-icon
+  <mat-icon  class="material-icons-outlined innerSpan material-icons mat-icon-no-color"
     *ngSwitchCase="displayContentTypeEnum.CERTIFICATION"
     i18n-matTooltip
     matTooltip="Certification"
     >school
   </mat-icon>
-  <mat-icon *ngSwitchCase="displayContentTypeEnum.MODULE" i18n-matTooltip matTooltip="Module"
+  <mat-icon  class="material-icons-outlined innerSpan material-icons mat-icon-no-color" *ngSwitchCase="displayContentTypeEnum.MODULE" i18n-matTooltip matTooltip="Module"
     >folder</mat-icon
   >
-  <mat-icon *ngSwitchCase="displayContentTypeEnum.ASSET" i18n-matTooltip matTooltip="Asset"
-    >filter_none</mat-icon
-  >
-  <mat-icon *ngSwitchCase="displayContentTypeEnum.COURSE" i18n-matTooltip matTooltip="Course"
+  <mat-icon  class="material-icons-outlined innerSpan material-icons mat-icon-no-color" *ngSwitchCase="displayContentTypeEnum.COURSE" i18n-matTooltip matTooltip="Course"
     >folder</mat-icon
   >
-  <mat-icon *ngSwitchCase="displayContentTypeEnum.PROGRAM" i18n-matTooltip matTooltip="Program"
+  <mat-icon  class="material-icons-outlined innerSpan material-icons mat-icon-no-color" *ngSwitchCase="displayContentTypeEnum.PROGRAM" i18n-matTooltip matTooltip="Program"
     >folder</mat-icon
   >
-  <mat-icon
+  <mat-icon  class="material-icons-outlined innerSpan material-icons mat-icon-no-color"
     *ngSwitchCase="displayContentTypeEnum.CLASS_DIAGRAM"
     i18n-matTooltip
     matTooltip="class-diagram"
     >folder
   </mat-icon>
-  <mat-icon
+  <mat-icon  class="material-icons-outlined innerSpan material-icons mat-icon-no-color"
     *ngSwitchCase="displayContentTypeEnum.EXTERNAL_CERTIFICATION"
     i18n-matTooltip
     matTooltip="External Certification"
     >school</mat-icon
   >
-  <mat-icon *ngSwitchCase="displayContentTypeEnum.WEB_PAGE" i18n-matTooltip matTooltip="web-page"
+  <mat-icon  class="material-icons-outlined innerSpan material-icons mat-icon-no-color" *ngSwitchCase="displayContentTypeEnum.WEB_PAGE" i18n-matTooltip matTooltip="web-page"
     >web</mat-icon
   >
-  <mat-icon *ngSwitchDefault i18n-matTooltip matTooltip="Resource">web_asset</mat-icon>
+  <mat-icon  class="material-icons-outlined innerSpan material-icons mat-icon-no-color" *ngSwitchDefault i18n-matTooltip matTooltip="Resource">web_asset</mat-icon>
 </ng-container>
 </ng-container>

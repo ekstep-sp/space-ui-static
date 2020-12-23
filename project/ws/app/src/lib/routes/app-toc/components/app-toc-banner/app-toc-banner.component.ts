@@ -36,6 +36,8 @@ export class AppTocBannerComponent implements OnInit, OnChanges, OnDestroy {
   @Input() resumeData?: NsContent.IContinueLearningData
   @Input() analytics: NsAnalytics.IAnalytics | null = null
   @Input() forPreview = false
+  @Input()
+  askAuthorEnabled = true
   contentProgress = 0
   bannerUrl: SafeStyle | null = null
   routePath = 'overview'

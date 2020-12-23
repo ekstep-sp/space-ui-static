@@ -2,46 +2,49 @@
 @import 'ws-mixins';
 /*timeline*/
 .timeline {
-    // border-left: 1px solid black;
-    /* border-bottom-right-radius: 4px; */
-    /* border-top-right-radius: 4px; */
     background: fade(#42428b, 3%);
     color: fade(white, 80%);
-    /* margin: 50px auto; */
     position: relative;
     line-height: 1.4em;
     font-size: 1.03em;
-    /* padding: 50px; */
     list-style: none;
     text-align: left;
     font-weight: 100;
+    margin-top: -5px;
+    padding-bottom: 18px;
     @include breakpoint-xs {
         padding-left: 13px !important;
     }
-    //  max-width: 30%;
     &:before, &:after {
-        position: absolute;
-        display: block;
-        top: 0;
+    position: absolute;
+    display: block;
+    top: 16px;
       }
     &:after {
         left: -10px !important;
-        border-radius: 50%;
-        height: 15px;
-        width: 15px;
-        content: "";
-        top: 5px;
-        /* color: rgba(146, 94, 176, 0.15) !important; */
-        background:#F2ECF6;
-        /* color: currentColor; */
-        border: 2px solid #42428b;
+    border-radius: 50%;
+    height: 15px;
+    width: 15px;
+    content: "";
+    top: 7px;
+    background: #F2ECF6;
+    border: 2px solid #42428b;
+    z-index: 99;
 }
+}
+ul::before {
+    content: "";
+    border: 1px solid purple;
+    position: absolute;
+    height: 100%;
+    left: -1px;
+    z-index: 9;
+    margin-bottom: 0;
 }
 .event {
-    border-bottom: 1px dashed fade(#42428b, 10%);
-    /* padding-bottom: 25px; */
-    /* margin-bottom: 50px; */
     position: relative;
+    margin-bottom: 16px !important;
+
 
     &:last-of-type { 
       padding-bottom: 0;
@@ -55,44 +58,59 @@
       top: 0;
     }
 
-    // &:before {
-    //   left: (((@date * 0.6) + 50px + 4px + 120px + (4px * 2)) * 1.5) * -1;    
-    //   color: fade(#42428b, 40%);    
-    //   content: attr(data-date);
-    //   text-align: right;
-    //   font-weight: 100;    
-    //   font-size: 0.9em;
-    //   min-width: @date;
-    //   font-family: @font-title;
-    // }
-
     &:after {
-        left: -47px;
+        left: -46px;
         background: #42428b;
         border-radius: 50%;
         height: 12px;
         width: 12px;
         content: "";
         top: 6px;
+        z-index: 99;
         @include breakpoint-xs {
             left: -19px !important;
             top: 12px !important;
         }
     }
   }
+  .event1 {
+    margin-bottom: 12px;
+    position: relative;
+    margin-top: 12px;
+
+    &:before, &:after {
+        position: absolute;
+        display: block;
+        top: 18px;
+    }
+    &:after {
+        left: -7px;
+        background: #42428b;
+        border-radius: 50%;
+        height: 14px;
+        width: 14px;
+        content: "";
+        top: 8px;
+        z-index: 99;
+    }
+  }
 h5 {
     margin-top: -4px;
 }
 .timer {
-    // opacity: 50%;
-    line-height: 29px !important;
+    /* line-height: 29px !important; */
+    font-size: 14px;
+    margin-left: 7.5px;
     @include breakpoint-xs {
         line-height: unset !important;
+        margin-left: unset !important;
     }
 }
 .timer_icon {
-    line-height: 29px;
+    /* line-height: 31px; */
     font-size: 20px;
+    height: 15px;
+    width: 15px;
     @include breakpoint-xs {
         line-height: unset !important;
     }
@@ -100,10 +118,14 @@ h5 {
 .parent_node {
     color: #42428b;
     font-weight: bold !important;
+    margin: 0 0 22px !important;
+    font-size: 1.125rem;
+    line-height: 32px !important;
 }
 .child_node {
     color: darkslateblue !important;
-    // opacity: 78%;
+    font-size: 1rem;
+    font-weight: normal !important;
 }
 .contentType_icon {
     color: #42428b;
@@ -131,3 +153,33 @@ h5 {
       display: block !important;
     }
   }
+  ::ng-deep {
+    .theme-muave.night-mode .parent_node {
+        color: #c6bcb8 !important;
+    }
+    .theme-muave.night-mode .child_node {
+        color: #c6bcb8 !important;
+    }
+    .theme-muave.night-mode .contentType_icon {
+        color: #c6bcb8 !important;
+    }
+}
+.last {
+    margin: 0;
+    height: 0;
+}
+.large-typography .mat-typography h4 { 
+    margin: 0;
+}
+.lastParent {
+    padding-bottom: 0 !important;
+}
+
+.timer {
+    font-weight: bold;
+    
+}
+
+.m-0 {
+    margin: 0 !important;
+}

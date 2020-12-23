@@ -267,14 +267,15 @@
 </div> -->
 
 
-
+<div #overview id="overview">
 <div class="flex flex-wrapped nav-space flex-center">
   <div class="meta-section">
+
     <!-- Description : Conditional : If not shown here, will be shown over banner -->
     <!-- <mat-card *ngIf="showDescription && content?.description" class="unit-meta-item"> -->
-      <!-- <h2 class="font-16px" i18n>Description</h2> -->
+      <!-- <h2 class="font-16px" i18n>Overview</h2> -->
       <!-- <mat-card-content> -->
-        <div class="mat-subheading-1" [innerHTML]="content?.description"></div>
+        <div class="mat-subheading-1 ov-clr" [innerHTML]="content?.description"></div>
       <!-- </mat-card-content> -->
     <!-- </mat-card> -->
 
@@ -393,8 +394,8 @@
     </ws-widget-player-brief>
   </div> -->
 </div>
-
-
+</div>
+</div>
 
 <ng-template #creators let-authors="authors" let-title="title">
   <mat-card>
