@@ -88,7 +88,7 @@ export class BtnFeatureComponent extends WidgetBaseComponent
     ) {
       this.widgetData.actionBtn = this.configurationsSvc.appsConfig.features[this.widgetData.actionBtnId]
       if (this.widgetData.actionBtn && this.widgetData.actionBtn.badgeEndpoint) {
-        this.navigationSubs = this.router.events.pipe(throttle(() => interval(500))).subscribe((e: Event) => {
+        this.navigationSubs = this.router.events.pipe(throttle(() => interval(500))).subscribe((_e: Event) => {
           // if (e instanceof NavigationEnd) {
           // this.updateBadge()
           // // setInterval(() => {

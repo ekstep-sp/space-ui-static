@@ -16,7 +16,7 @@
           </mat-sidenav>
           <mat-sidenav-content class="sidenavContent" #scrollableContent>
             <button mat-icon-button aria-label="Navbar Toggle button" color="primary" [ngClass]="{ 'rounded-none': !snav?.opened }" class="toggleBtn" (click)="snav?.toggle()">
-              <mat-icon [ngClass]="{'reverse': snav?.opened }">{{ !snav?.opened ? 'dehaze' : 'double_arrow'}}</mat-icon>
+              <mat-icon class="dehaze-icon"[ngClass]="{'reverse': snav?.opened }">{{ !snav?.opened ? 'dehaze' : 'double_arrow'}}</mat-icon>
             </button>
             <ng-container *ngTemplateOutlet="mainContentTemplate"></ng-container>
           </mat-sidenav-content>
@@ -25,12 +25,12 @@
     </section>
     <section class="px-8 py-4">
       <div class="wrapper flex-none md:flex md:flex-row-reverse" [ngClass]="{'guest-view': configService.isGuestUser === true}">
-        <div class="w-full section-right" [ngClass]="{'md:w-1/4': !configService.isGuestUser}">
+        <div class="w-full section-right pb-4 md:pb-0 custom-padding" [ngClass]="{'md:w-1/4': !configService.isGuestUser}">
           <ws-widget-player-brief [newUI]="true" [askAuthorEnabled]="!configService?.isGuestUser" [forPreview]="forPreview || configService?.isGuestUser" [content]="content"></ws-widget-player-brief>
         </div>
         <div class="w-full md:w-3/4 section-left" *ngIf="!configService.isGuestUser">
-          <div *ngIf="!configService?.isGuestUser" class="video-discussion-forum-in margin-top-m margin-bottom-m padding-s">
-            <h2 class="mat-toolbar discussion-head font-montserrat body-font-size-primary space">Discussion Forum</h2>
+          <div *ngIf="!configService?.isGuestUser" class="mat-card df-card video-discussion-forum-in margin-top-m margin-bottom-m padding-s">
+              <h2 class="discussion-head font-montserrat body-font-size-primary space">Let's Discuss</h2>
             <ng-container [wsResolverWidget]="discussionForumWidget"></ng-container>
           </div>
         </div>

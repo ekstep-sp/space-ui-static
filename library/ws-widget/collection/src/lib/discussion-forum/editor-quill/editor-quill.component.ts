@@ -31,6 +31,8 @@ export class EditorQuillComponent implements OnInit, OnDestroy {
   @Input() showMention = false
   @Input() placeholder = ''
   @Input() placeholdercss = false
+  @Input() isDf = false
+  @Input() isDfPost = false
 
   text = ''
 

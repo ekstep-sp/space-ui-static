@@ -32,7 +32,7 @@
         This content can only be viewed in Intranet.<br />
       </ng-container>
       <ng-container *ngIf="htmlContent?.isIframeSupported === 'No' || !htmlContent?.isIframeSupported">
-        <h2 class="ws-mat-primary-text text-left mb-5">{{htmlContent?.name}}</h2>
+        <h2 class="ws-mat-primary-text text-left mb-5 title-heading">{{htmlContent?.name}}</h2>
         <span class="font-montserrat body-font-size-primary" i18n>For Better User Experience, we are taking you to the new tab. <br>In case it does not open, click on the button below.</span>
         <!-- <a *ngIf="!configSvc?.isGuestUser" [routerLink]="'/app/info/faq'" [queryParams]="{ tab: 'popup' }">
           <mat-icon matTooltip="How to Disable Pop-ups" class="align-text-top ws-mat-primary-text mat-icon">help
