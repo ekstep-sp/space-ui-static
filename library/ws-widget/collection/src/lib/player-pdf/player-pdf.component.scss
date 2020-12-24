@@ -20,7 +20,7 @@
   overflow: auto;
 }
 .pdf-page-num {
-    color: black !important;
+    color: #42428B !important;
     height: 100%;
     margin: 0;
     padding: 0;
@@ -28,6 +28,7 @@
     border: none;
     width: 100% !important;
     text-align: center;
+    font-size: 12px
 }
 .counter-container {
   color: white;
@@ -92,6 +93,9 @@ input[type=number] {
   padding: 0px 8px !important;
   
   }
+  .pdf-container {
+   padding-top: 32px;
+  }
 }
 
 }
@@ -99,4 +103,15 @@ input[type=number] {
 .customColor {
   background-color: #C6BCB8 !important; 
   border-radius: 0px !important;
+ 
+  .icon-color{
+    color: #696466;
+  }
+}
+.page-counter{
+  font-size:12px;
+  color:#FFFFFF !important
+}
+.totalpages{
+  padding-right:px;
 }
