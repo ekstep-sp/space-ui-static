@@ -1,7 +1,7 @@
 <div
   [ngClass]="{'padding-remove-left': isScormContent && isLtMedium, 'padding-remove-right': isScormContent && isLtMedium}"
   class="padding-dynamic pl-0" *ngIf="htmlData && isNotEmbed">
-  <div class="flex flex-around">
+  <div class="flex flex-around relative">
     <div class="w-full flex items-center justify-center customH">
       <div id="fullScreenContainer"
               [ngClass]="{ 'video-player': htmlData?.isIframeSupported?.toLowerCase() != 'no' }">

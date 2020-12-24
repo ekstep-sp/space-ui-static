@@ -5,9 +5,9 @@
         <div id="fullScreenContainer" class="video-player">
           <ng-container *ngIf="isFetchingDataComplete" [wsResolverWidget]="widgetResolverPdfData"></ng-container>
         </div>
-        <div class="flex justify-between items-center flex-wrap customColorToolbar" *ngIf="!configSvc?.isGuestUser">
+        <div class="flex justify-between items-center flex-wrap customColorToolbar">
           <div class="inline ml-3">
-            <ws-author-viewer-curator-list class="text-white" [askAuthorEnabled]="true" [fixLineIssue]="true" [content]="pdfData"></ws-author-viewer-curator-list>
+            <ws-author-viewer-curator-list class="text-white" [askAuthorEnabled]="!configSvc?.isGuestUser" [fixLineIssue]="true" [content]="pdfData"></ws-author-viewer-curator-list>
           </div>
           <div class="mr-5 mt-4 text-white sm:mt-0">
             <ws-widget-btn-content-download [forPreview]="forPreview" [widgetData]="
@@ -23,7 +23,9 @@
             'artifactUrl'
                   ]
           "></ws-widget-btn-content-download>
-        <ws-widget-btn-content-like [forPreview]="forPreview" [widgetData]="{
+        <ws-widget-btn-content-like [forPreview]="forPreview"
+        *ngIf="!configSvc?.isGuestUser"
+        [widgetData]="{
             identifier: pdfData.identifier,
             isDisabled: isPreviewMode
           }"></ws-widget-btn-content-like>
