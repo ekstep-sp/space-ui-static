@@ -101,6 +101,7 @@ app-content-icon {
     align-items: center;
     a{
       padding:16px;
+      width:100%
     }
   }
 }
@@ -184,14 +185,3 @@ app-content-icon {
 .active { 
    background-color: rgb(66, 66, 139);
   }
-
-  // @media only screen and (max-width: 768px) {
-  //   .main-title {
-  //     p{
-  //       width: 90%;
-  //       overflow: hidden;
-  //       text-overflow: ellipsis;
-  //     }
-  //   }
-
-  // }
