@@ -138,7 +138,11 @@ export class DiscussionForumComponent extends WidgetBaseComponent
       this.fetchDiscussion()
     }
     this.activatedRoute.data.subscribe((response: Data) => {
-      this.contentCreatorId = response.content.data.creator || this.widgetData.contentData.creator
+      if (!response.content) {
+        this.contentCreatorId = this.widgetData.contentData.creator
+      } else {
+      this.contentCreatorId = response.content.data.creator
+      }
       if (response.pageData.data.allowMentionUsers) {
         this.allowMention = response.pageData.data.allowMentionUsers
       }
