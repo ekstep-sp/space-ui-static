@@ -66,8 +66,18 @@ mat-toolbar {
     .breadcrumbs_child{
       display: flex;
       .icon-display{
-        padding-top:5px;
+        padding-top: 5px;
       }
     }
   }
+}
+.text-style-parent-child{
+  font-size: 14px;
+  font-style: normal;
+  font-weight: normal;
+}
+.text-style-leaf-node{
+  font-style: normal;
+  font-size: 16px;
+  font-weight: 500;
 }

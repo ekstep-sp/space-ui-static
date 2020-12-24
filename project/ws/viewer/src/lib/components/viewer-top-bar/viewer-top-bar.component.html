@@ -21,7 +21,7 @@
 <ng-container *ngIf = "heirarchyTitle && heirarchyTitle.length">
     <ul class = "breadcrumbs">
       <div class = "main-div">
-      <div *ngFor = "let data of heirarchyTitle; let i = index">
+      <div *ngFor = "let data of heirarchyTitle; let i = index" [ngClass]= "(heirarchyTitle.length-1 === i) ? 'text-style-leaf-node' : 'text-style-parent-child'">
         <li class = "breadcrumbs_child">
         <div class = "text-truncate"><span class = "data-title"> {{data.title}}</span></div>
        <div><mat-icon  *ngIf="heirarchyTitle.length-1 > i" class="icon-display">navigate_next</mat-icon></div>
