@@ -598,6 +598,9 @@ const routes: Routes = [
       pageType: 'feature',
       pageKey: 'disscussionForum',
     },
+    resolve: {
+      pageData: PageResolve,
+    },
     loadChildren: () => import('./routes/route-viewer.module').then(u => u.RouteViewerModule),
     canActivate: [GeneralGuard],
   },

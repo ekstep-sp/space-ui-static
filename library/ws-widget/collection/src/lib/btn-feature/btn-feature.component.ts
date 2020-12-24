@@ -1,5 +1,5 @@
 import { Component, Input, OnDestroy, OnInit } from '@angular/core'
-import { Event, NavigationEnd, Router } from '@angular/router'
+import { Event, Router } from '@angular/router'
 import { NsWidgetResolver, WidgetBaseComponent } from '@ws-widget/resolver'
 import { ConfigurationsService, EventService, NsPage } from '@ws-widget/utils'
 import { Subscription, interval } from 'rxjs'
