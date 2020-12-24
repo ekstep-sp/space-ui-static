@@ -65,9 +65,12 @@
                     !content?.artifactUrl?.length
                   ) &&
                   !(content?.contentType === 'Resource' && !content?.artifactUrl)
-                ">
-                <ng-container *ngIf="toResume === false">
-                  <a [color]="'primary'" *ngIf="showStart.show && !isPostAssessment"
+                "
+              >
+                <ng-container *ngIf="toResume === false && contentMissing === false">
+                  <a
+                    [color]="'primary'"
+                    *ngIf="showStart.show && !isPostAssessment"
                     [routerLink]="resumeData ? resumeDataLink?.url : firstResourceLink?.url"
                     [queryParams]="resumeData ? generateQuery('RESUME') : generateQuery('START')"
                     class="margin-right-m common_sub_text" id="clr" mat-flat-button>
@@ -78,8 +81,10 @@
                     <span class="btn-text-font" *ngIf="!isLoad" i18n>Play</span>
                   </a>
                 </ng-container>
-                <ng-container *ngIf="toResume === true">
-                  <a [color]="'primary'" *ngIf="showStart.show && !isPostAssessment"
+                <ng-container *ngIf="toResume === true && contentMissing === false">
+                  <a
+                    [color]="'primary'"
+                    *ngIf="showStart.show && !isPostAssessment"
                     [routerLink]="resumeData ? resumeDataLink?.url : firstResourceLink?.url"
                     [queryParams]="resumeData ? generateQuery('RESUME') : generateQuery('START')"
                     class="margin-right-m common_sub_text " id="clr" mat-flat-button>
@@ -87,6 +92,17 @@
                     >View</ng-container
                   > -->
                     <span class="btn-text-font">Resume</span>
+                  </a>
+                </ng-container>
+                <ng-container *ngIf="contentMissing">
+                  <a
+                    [color]="'primary'"
+                    class="margin-right-m common_sub_text "
+                    id="disabled-content-button"
+                    mat-flat-button
+                    (click)="showMissingMessage = !showMissingMessage"
+                  >
+                  <mat-icon class="display_type">info</mat-icon>
                   </a>
                 </ng-container>
                 <!-- <a
@@ -167,24 +183,28 @@
           The content is in review.
         </h3> -->
       </div>
-      <div *ngIf="content?.averageRating" class="flex items-center my-1 mb-3">
-        <mat-icon color="accent" class="mr-2" *ngFor="let rating of [1, 2, 3, 4, 5]">
-          {{ getRatingIcon(rating) }}</mat-icon>
-        <span class="ml-2 font-medium text-xl">{{ content?.averageRating }}&nbsp;</span>
-        (
-        <span i18n>from</span>
-        <span *ngIf="content?.totalRating">&nbsp;{{ content?.totalRating | pipeCountTransform }}&nbsp;</span>
-        <span>
-          <ng-container i18n *ngIf="(content?.totalRating || 0) > 1">
-            votes
-          </ng-container>
-          <ng-container i18n *ngIf="(content?.totalRating || 0) <= 1">
-            vote
-          </ng-container>
-        </span>)
-      </div>
-      <div [ngSwitch]="routePath" class="header-meta" [ngClass]="{ 'header-meta-banner': bannerUrl }">
-        <!-- Overview Section -->
+      <h4 *ngIf="showMissingMessage" style = "color: yellow;" [innerHTML]="contentMissingMessage"></h4>     
+    <div *ngIf="content?.averageRating" class="flex items-center my-1 mb-3">
+      <mat-icon color="accent" class="mr-2" *ngFor="let rating of [1, 2, 3, 4, 5]">
+        {{ getRatingIcon(rating) }}</mat-icon
+      >
+      <span class="ml-2 font-medium text-xl">{{ content?.averageRating }}&nbsp;</span>
+      (
+      <span i18n>from</span>
+      <span *ngIf="content?.totalRating"
+        >&nbsp;{{ content?.totalRating | pipeCountTransform }}&nbsp;</span
+      >
+      <span>
+        <ng-container i18n *ngIf="(content?.totalRating || 0) > 1">
+          votes
+        </ng-container>
+        <ng-container i18n *ngIf="(content?.totalRating || 0) <= 1">
+          vote
+        </ng-container> </span
+      >)
+    </div>
+    <div [ngSwitch]="routePath" class="header-meta" [ngClass]="{ 'header-meta-banner': bannerUrl }">
+      <!-- Overview Section -->
 
         <div class="banner-overview-container" [hidden]="!content?.subTitle && showSubtitleOnBanner"
           *ngSwitchCase="'overview'">

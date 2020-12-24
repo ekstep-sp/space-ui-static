@@ -1,6 +1,6 @@
 <div
   [ngClass]="{'padding-remove-left': isScormContent && isLtMedium, 'padding-remove-right': isScormContent && isLtMedium}"
-  class="padding-dynamic pl-0" *ngIf="htmlData && isNotEmbed">
+  class="pl-0 pb-0 padding-dynamic" *ngIf="htmlData && isNotEmbed">
   <div class="flex flex-around relative">
     <div class="w-full flex items-center justify-center customH">
       <div id="fullScreenContainer"
@@ -9,12 +9,12 @@
               </viewer-plugin-html>
             </div>
       </div>
-      <div class="flex justify-between absolute bottom-0 w-full items-center flex-wrap customColorToolbar" *ngIf="!configSvc?.isGuestUser">
+      <div class="flex justify-between absolute bottom-0 w-full items-center flex-wrap customColorToolbar">
         <div class="inline ml-3">
-          <ws-author-viewer-curator-list class="text-white" [askAuthorEnabled]="true" [fixLineIssue]="true" [content]="htmlData"></ws-author-viewer-curator-list>
+          <ws-author-viewer-curator-list class="text-white" [askAuthorEnabled]="!configSvc.isGuestUser" [fixLineIssue]="true" [content]="htmlData"></ws-author-viewer-curator-list>
         </div>
-        <div class="mr-5 mt-4 text-white sm:mt-0">
-          <ws-widget-btn-content-like *ngIf="!configSvc?.isGuestUser" [forPreview]="forPreview" [widgetData]="{
+        <div class="mr-5 mt-4 text-white sm:mt-0" *ngIf="!configSvc?.isGuestUser">
+          <ws-widget-btn-content-like [forPreview]="forPreview" [widgetData]="{
             identifier: htmlData.identifier,
             isDisabled: isPreviewMode
           }">

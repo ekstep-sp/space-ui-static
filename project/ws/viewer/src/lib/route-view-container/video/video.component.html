@@ -1,15 +1,15 @@
 <div *ngIf="videoData && isNotEmbed">
   <div class="flex flex-around flex-wrapped">
-    <div class="w-full">
+    <div class="w-full" [ngClass]="{'relative': configSvc?.isGuestUser }">
       <div>
         <div id="fullScreenContainer" class="video-player">
           <ng-container *ngIf="isFetchingDataComplete" [wsResolverWidget]="widgetResolverVideoData"></ng-container>
         </div>
-        <div class="flex justify-between absolute bottom-0 w-full items-center flex-wrap customColorToolbar" *ngIf="!configSvc?.isGuestUser">
+        <div class="flex justify-between absolute bottom-0 w-full items-center flex-wrap customColorToolbar">
           <div class="inline ml-3">
-            <ws-author-viewer-curator-list class="text-white" [askAuthorEnabled]="true" [fixLineIssue]="true" [content]="videoData"></ws-author-viewer-curator-list>
+            <ws-author-viewer-curator-list class="text-white" [askAuthorEnabled]="!configSvc?.isGuestUser" [fixLineIssue]="true" [content]="videoData"></ws-author-viewer-curator-list>
           </div>
-          <div class="mr-5 mt-4 text-white sm:mt-0" *ngIf="!isShared">
+          <div class="mr-5 mt-4 text-white sm:mt-0" *ngIf="!isShared && !configSvc?.isGuestUser">
             <ws-widget-btn-content-download [forPreview]="forPreview" [widgetData]="
                 videoData
                   | pipePartialContent

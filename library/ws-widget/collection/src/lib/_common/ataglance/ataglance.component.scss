@@ -147,6 +147,8 @@ mat-chip {
 
 .viewer-version {
   border-radius: 10px;
+  max-height: 1000px;
+  overflow-y: scroll;
   .custom-flex {
     flex-direction: row;
     flex-wrap: wrap;
@@ -173,7 +175,7 @@ mat-chip {
   max-width: 140px !important;
 }
 .viewer-column-mb {
-  margin-bottom: 40px;
+  margin-bottom: 24px;
 }
 @include breakpoint-xs {
     display: block !important;

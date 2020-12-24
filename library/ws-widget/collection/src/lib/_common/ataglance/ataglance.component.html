@@ -1,7 +1,7 @@
-<ng-container *ngIf="!viewer">
+<ng-container >
   <div id="ataglance" #ataglance>
-    <div class="card-style">
-      <ng-container *ngIf="!overview">
+    <div class="card-style" *ngIf="!overview && !viewer">
+      <ng-container>
         <mat-card
           class="viewer-style2 font-montserrat ws-mat-primary-lite-background-on-day info-container break-word">
           <h2 class="btn-text-font txt-clr" i18n>At A Glance</h2>
@@ -553,7 +553,7 @@
         </div>
       </ng-container>
     </ng-container>
-    <div class="flex customRow w-full viewer-column-mb info-item flex-keyword" *ngIf="content?.keywords?.length">
+    <div class="flex customRow w-full viewer-column-mb flex-keyword" *ngIf="content?.keywords?.length">
       <h3 class="viewer-flex-column mw-140 m-0 p-0 item-heading text-black font-montserrat" i18n>Keywords</h3>
       <div class="viewer-flex-column m-0 p-0">
         <mat-chip-list>

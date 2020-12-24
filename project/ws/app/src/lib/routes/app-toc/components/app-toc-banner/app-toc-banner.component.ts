@@ -31,6 +31,9 @@ export class AppTocBannerComponent implements OnInit, OnChanges, OnDestroy {
   feedbackicon = false
   shareicon = false
   data: any
+  contentMissing = false
+  showMissingMessage = false
+  contentMissingMessage = 'The content cannot be resumed at the moment, try starting from some other point'
   @Input() banners: NsAppToc.ITocBanner | null = null
   @Input() content: NsContent.IContent | null = null
   @Input() resumeData?: NsContent.IContinueLearningData
@@ -475,14 +478,33 @@ export class AppTocBannerComponent implements OnInit, OnChanges, OnDestroy {
       return true
     }
   }
+
+  updateMissingMessage(name: string) {
+    let newName = name.split(" ")
+    let smallerName = name
+    if (newName.length > 10) {
+      smallerName = newName.splice(0,11).join(" ") + '...'
+    }
+    this.contentMissingMessage = `Content <b>${smallerName}</b> is not available at the moment.</br>Try again later ot start from the next content.`
+  }
   getContentHistory() {
     this.contentService.fetchContentHistory(this.route.snapshot.params.id).subscribe(data => {
       if (data) {
         this.isLoad = false
-        this.toResume = true
+        if (data.hasOwnProperty('status') && data.status === 'Live') {
+          this.toResume = true
+          this.contentMissing = false
+        } else {
+          this.toResume = false
+          this.contentMissing = true
+          if (data.name) {
+            this.updateMissingMessage(data.name)
+          }
+        }
       } else {
         this.isLoad = false
         this.toResume = false
+        this.contentMissing = false
       }
     })
   }
