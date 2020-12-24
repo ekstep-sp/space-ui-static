@@ -34,6 +34,7 @@ export class SharedViewerDataService {
   status: TStatus = 'none'
   resourceChangedSubject = new Subject<string>()
   changedSubject = new ReplaySubject(1)
+  updateHierarchyTitleSubject = new Subject()
   tocChangeSubject = new ReplaySubject<IViewerTocChangeEvent>(1)
   navSupportForResource = new ReplaySubject<IViewerResourceOptions>(1)
   constructor(private configSvc: ConfigurationsService) { }
@@ -69,6 +70,9 @@ export class SharedViewerDataService {
       },
     )
   }
+  updateHeirarchyTitleInToolbar(path: any){
+    this.updateHierarchyTitleSubject.next(path);
+   }
   isVisibileAccToRoles(allowedRoles: [string], notAllowedRoles: [string]) {
     let finalAcceptance = true
     if (this.configSvc.userRoles && this.configSvc.userRoles.size) {

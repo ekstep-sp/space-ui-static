@@ -382,6 +382,7 @@ export class ViewerTocComponent implements OnInit, OnDestroy {
       path.forEach((node: IViewerTocCard) => {
         this.nestedTreeControl.expand(node)
       })
+      this.viewerDataSvc.updateHeirarchyTitleInToolbar(path);
     }
   }
 

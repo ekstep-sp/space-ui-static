@@ -13,7 +13,8 @@
 }
 
 .text-truncate {
-  overflow: inherit !important;
+  // overflow: inherit !important;
+  width: 250px;
 }
 
 .width-expand {
@@ -51,4 +52,22 @@ mat-toolbar {
 
 .reverse {
   transform: rotate(180deg);
+}
+
+.color-viewer-top{
+  background: #42428B !important;
+}
+
+.breadcrumbs{
+  padding-inline-start: unset !important;
+  margin-bottom: 9px;
+  .main-div{
+    display: flex;
+    .breadcrumbs_child{
+      display: flex;
+      .icon-display{
+        padding-top:5px;
+      }
+    }
+  }
 }

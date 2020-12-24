@@ -19,6 +19,7 @@ export class ViewerTopBarComponent implements OnInit, OnDestroy {
   private viewerDataServiceSubscription: Subscription | null = null
   private paramSubscription: Subscription | null = null
   private viewerDataServiceResourceSubscription: Subscription | null = null
+  private viewDataUpdateHeirarchyTitleSubscription: Subscription | null = null
   appIcon: SafeUrl | null = null
   isTypeOfCollection = false
   collectionType: string | null = null
@@ -30,6 +31,7 @@ export class ViewerTopBarComponent implements OnInit, OnDestroy {
   collectionId = ''
   logo = true
   forChannel = false
+  heirarchyTitle: any = []
   constructor(
     private activatedRoute: ActivatedRoute,
     private domSanitizer: DomSanitizer,
@@ -66,9 +68,16 @@ export class ViewerTopBarComponent implements OnInit, OnDestroy {
     this.viewerDataServiceResourceSubscription = this.viewerDataSvc.changedSubject.subscribe(
       _data => {
         this.resourceId = this.viewerDataSvc.resourceId as string
+        console.log("resoucename", this.resourceName);
+        
         this.resourceName = this.viewerDataSvc.resource ? this.viewerDataSvc.resource.name : ''
       },
     )
+    this.viewDataUpdateHeirarchyTitleSubscription = this.viewerDataSvc.updateHierarchyTitleSubject.subscribe(data=>{
+      if(data) {
+        this.heirarchyTitle = data;
+      }
+    })
   }
 
   ngOnDestroy() {
@@ -80,6 +89,9 @@ export class ViewerTopBarComponent implements OnInit, OnDestroy {
     }
     if (this.viewerDataServiceResourceSubscription) {
       this.viewerDataServiceResourceSubscription.unsubscribe()
+    }
+    if(this.viewDataUpdateHeirarchyTitleSubscription){
+      this.viewDataUpdateHeirarchyTitleSubscription.unsubscribe()
     }
   }
 
