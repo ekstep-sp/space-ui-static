@@ -147,7 +147,7 @@ mat-chip {
 
 .viewer-version {
   border-radius: 10px;
-  height: 1000px;
+  max-height: 1000px;
   overflow-y: scroll;
   .custom-flex {
     flex-direction: row;
