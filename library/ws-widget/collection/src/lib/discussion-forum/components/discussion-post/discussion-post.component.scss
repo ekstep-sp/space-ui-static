@@ -97,6 +97,7 @@
   margin: 25px 0 0 80px;
   @include breakpoint-xs {
     margin: 25px 0 0 20px;
+    flex-direction: column;
   }
 }
 .mat-caption {
@@ -111,6 +112,13 @@
   background-color: inherit !important;
   font-size: 16px;
   color: #925eb0 !important;
+}
+.cancel-btn-2 {
+  border: none;
+  background-color: inherit !important;
+  font-size: 16px;
+  color: #925eb0 !important;
+  margin-top: .5rem;
 }
 .send-icon {
   transform: rotate(-25deg);
@@ -141,4 +149,21 @@
   }
   .extra-btn {
     margin-right: 2.5rem;
+  }
+  ::ng-deep {
+    .theme-muave.night-mode .write-reply-placeholder {
+      color: #C6BCB8 !important;
+    }
+    .theme-muave.night-mode .btn-styles {
+      background: transparent !important;
+      color: #925EB0 !important;
+    }
+    .theme-muave.night-mode .disabled {
+      color: gray !important;
+      pointer-events: none;
+    }
+    .theme-muave.night-mode .cancel-btn-2 {
+      background: transparent !important;
+      color: #925EB0 !important;
+    }
   }

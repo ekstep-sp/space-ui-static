@@ -1,7 +1,7 @@
 <mat-card class="margin-top-s card-bg">
   <div class="flex postSection">
     <div class="flex flex-middle">
-      <ws-widget-user-image class="main-post-user-image" [userId]="userId" [userName]="post.postCreator.name"
+      <ws-widget-user-image class="main-post-user-image mt-1" [userId]="userId" [userName]="post.postCreator.name"
         [imageType]="'name-initial'" [email]="post.postCreator.emailId"></ws-widget-user-image>
       <span *ngIf="post.postCreator.name"
         class="text-base leading-normal font-medium margin-left-s">{{ post.postCreator.name }}</span>
@@ -10,12 +10,12 @@
       </span>
     </div>
     <div class="padding-left-s flex flex-end datePost">
-      <div class="mat-caption" *ngIf="!post?.lastEdited?.dtLastEdited?.length">
+      <div class="mat-caption date-color" *ngIf="!post?.lastEdited?.dtLastEdited?.length">
         {{ post?.dtLastModified | date }}
         <ng-container i18n> at </ng-container>
         <ng-container>{{ post?.dtLastModified | date: 'shortTime' }}</ng-container>
       </div>
-      <div class="mat-caption" *ngIf="post?.lastEdited?.dtLastEdited?.length">
+      <div class="mat-caption date-color" *ngIf="post?.lastEdited?.dtLastEdited?.length">
         {{ post?.lastEdited.dtLastEdited | date }}
         <ng-container i18n> at </ng-container>
         <ng-container>{{ post?.lastEdited.dtLastEdited | date: 'shortTime' }}</ng-container>
@@ -30,7 +30,7 @@
   </div>
   <div class="flex margin-top-s1">
     <div>
-    <div *ngIf="!editMode && post.postContent.title.length" class="break-word"
+    <div *ngIf="!editMode && post.postContent.title.length" class="break-word text-color"
       [innerHTML]="post.postContent.title"></div>
     </div>
     <!-- <mat-chip-list>
@@ -42,7 +42,7 @@
   <div *ngIf="post.activity && post.status === 'Active'" class="flex">
       <ws-widget-btn-social-vote [postId]="post.id" [activity]="post.activity" [voteType]="'upVote'"
         [postCreatorId]="post?.postCreator?.postCreatorId" [isDf]="true"></ws-widget-btn-social-vote>
-        <div class="write-reply-container mat-app-background flex flex-middle">
+        <div class="write-reply-container flex flex-middle">
             <!-- <ws-widget-user-image class="write-reply-user-image" [userName]="userName" [imageType]="'name-initial'"
               [email]="userEmail" [userId]="userId"></ws-widget-user-image> -->
             <div class="padding-left-m width-expand">
@@ -55,10 +55,11 @@
   </div>
   <div [hidden]="!replyPlaceholderToggler" class="flex reply-post-sec">
       <!-- [minLength]="'10'" -->
-      <ws-widget-user-image class="write-reply-user-image mr-5" [userName]="userName" [imageType]="'name-initial'"
+      <div class="flex flex-1">
+      <ws-widget-user-image class="write-reply-user-image mr-5 mt-1" [userName]="userName" [imageType]="'name-initial'"
       [email]="userEmail" [userId]="userId"></ws-widget-user-image>
-      <div class="custom-wrap flex-1 flex">
-      <ws-widget-editor-quill class="write-reply-editor flex-1" 
+      <div class="custom-wrap width-expand flex">
+      <ws-widget-editor-quill class="write-reply-editor width-expand" 
       [showMention]="allowMention"
       (mentionsData)="replyCommentMentions = $event"
       (textData)="onReplyTextChange($event)"
@@ -69,10 +70,11 @@
       <!-- <div class="text-right padding-top-s mat-app-background"> -->
         <a name="discussion-post-reply-button" class="btn-send" [disableRipple]="true"
           (click)="publishReply(editFailMsg.value)" style="background: transparent !important;" type="button cancel-btn" mat-flat-button  i18n>
-          <mat-icon [ngClass]="{'disabled': !isValidReply || isPostingReply}" class="send-icon line matdark material-icons-outlined">send</mat-icon>
+          <mat-icon [ngClass]="{'disabled': !isValidReply || isPostingReply}" class="send-icon mt-3 line matdark material-icons-outlined">send</mat-icon>
         </a>
       </div>
-        <a name="discussion-post-cancel-reply-button" type="button" class="margin-left-xs cancel-btn" mat-flat-button
+    </div>
+        <a name="discussion-post-cancel-reply-button" type="button" class="margin-left-xs cancel-btn-2" mat-flat-button
         (click)="replyPlaceholderToggler = !replyPlaceholderToggler" i18n>
         Cancel
       </a>

@@ -1,18 +1,18 @@
 <div class="reply-container margin-left-l">
   <div class="flex postSection">
     <div class="flex flex-middle">
-      <ws-widget-user-image class="user-image" [userId]="userId" [userName]="reply.postCreator.name"
+      <ws-widget-user-image class="user-image mt-1" [userId]="userId" [userName]="reply.postCreator.name"
         [imageType]="'name-initial'" [email]="reply.postCreator.emailId"></ws-widget-user-image>
       <span class="text-base leading-normal font-medium">{{ reply.postCreator.name }}
       </span>
     </div>
     <div class="flex flex-end datePost">
-      <div class="mat-caption" *ngIf="!reply?.lastEdited?.dtLastEdited?.length">
+      <div class="mat-caption date-color" *ngIf="!reply?.lastEdited?.dtLastEdited?.length">
         {{ reply.dtLastModified | date }}
         <ng-container i18n> at </ng-container>
         <ng-container>{{ reply.dtLastModified | date: 'shortTime' }}</ng-container>
       </div>
-      <div class="mat-caption" *ngIf="reply?.lastEdited?.dtLastEdited?.length">
+      <div class="mat-caption date-color" *ngIf="reply?.lastEdited?.dtLastEdited?.length">
         {{ reply.lastEdited?.dtLastEdited | date }}
         <ng-container i18n> at </ng-container>
         <ng-container>{{ reply.lastEdited?.dtLastEdited | date: 'shortTime' }}</ng-container>
@@ -27,9 +27,9 @@
   </div>
 
   <div class="flex margin-top-s">
-    <div *ngIf="!editMode" class="margin-left-s margin-auto line-space" [innerHTML]="reply.postContent.body"></div>
+    <div *ngIf="!editMode" class="margin-left-s margin-auto line-space text-color" [innerHTML]="reply.postContent.body"></div>
   </div>
-  <div *ngIf="editMode" class="margin-top-s padding-s mat-primary-border flex">
+  <div *ngIf="editMode" class="margin-top-s padding-s mat-primary-border flex align-editor">
     <!-- [minLength]="'10'" -->
     <div class="flex align-properly custom-wrap flex-1">
       <ws-widget-editor-quill [showMention]="allowMention" (mentionsData)="replyEditMentions = $event"
@@ -39,12 +39,12 @@
       <a name="discussion-reply-update-button" [disableRipple]="true" type="button" mat-flat-button
         class="margin-top-s update-btn full-width-fold btn-send" i18n
         (click)="editReply(editFailMsg.value)" style="background: transparent !important;">
-        <mat-icon [ngClass]="{'disabled': !replyPostEnabled }" class="send-icon line matdark material-icons-outlined">send</mat-icon>
+        <mat-icon [ngClass]="{'disabled': !replyPostEnabled }" class="send-icon line matdark material-icons-outlined mt-3">send</mat-icon>
       </a>
     </div>
-    <div class="text-right -mt-3">
+    <div class="text-right -mt-1">
       <a name="discussion-reply-cancel-update-button" type="button"
-        class="margin-top-s update-btn margin-left-s full-width-fold" mat-flat-button [disableRipple]="true" i18n
+        class="margin-top-s update-btn-2 margin-left-s full-width-fold" mat-flat-button [disableRipple]="true" i18n
         (click)="editMode = false">
         Cancel
       </a>

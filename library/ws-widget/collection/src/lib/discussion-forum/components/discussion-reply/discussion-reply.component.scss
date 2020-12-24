@@ -39,6 +39,11 @@
 .align-properly {
     flex-direction: row;
   }
+.align-editor {
+  @include breakpoint-xs {
+    flex-direction: column;
+  }
+}
 @media only screen and (max-width:469px){
   .datePost{
     justify-content: space-between;
@@ -89,7 +94,7 @@
   transform: rotate(-25deg);
   width: 24px;
   height: 24px;
-  color: #925EB0;
+  color: #925EB0 !important;
 }
 .custom-wrap {
   min-height: 40px;
@@ -108,3 +113,13 @@
     color: gray !important;
     pointer-events: none;
   }
+  ::ng-deep {
+  .theme-muave.night-mode  .send-icon {
+    background: transparent !important;
+    color: #925EB0 !important;
+  }
+  .theme-muave.night-mode .disabled {
+    color: gray !important;
+    pointer-events: none;
+  }
+}

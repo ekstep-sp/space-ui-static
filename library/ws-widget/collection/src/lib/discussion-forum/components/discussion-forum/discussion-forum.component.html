@@ -3,7 +3,7 @@
         <!-- <p class="ws-mat-primary-text font-medium text-xl body-font-size-secondary" i18n>Start a new thread</p> -->
         <div class="question-container">
           <ws-widget-user-image
-            class="user-image"
+            class="user-image mt-1"
             [userId]="userId"
             [email]="userEmail"
             [userName]="userName"
@@ -31,7 +31,7 @@
             style="background: transparent !important;"
             [title]="widgetData?.isDisabled ? postDisabled.value : postEnabled.value"
           >
-          <mat-icon [ngClass]="{'disabled':!isValidPost || isPostingDiscussion || widgetData?.isDisabled}" class="send-icon line matdark material-icons-outlined">send</mat-icon>
+          <mat-icon [ngClass]="{'disabled':!isValidPost || isPostingDiscussion || widgetData?.isDisabled}" class="send-icon mt-3 line matdark material-icons-outlined">send</mat-icon>
           </a>
           </div>
         </div>

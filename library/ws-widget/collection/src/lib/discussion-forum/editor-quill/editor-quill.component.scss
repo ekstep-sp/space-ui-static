@@ -50,6 +50,12 @@
 ::ng-deep {
   .df-quill-editor .ql-editor {
    min-height: 40px;
-   padding: 1px 0 11px 10px !important;
+   padding: 8px 0 11px 10px !important;
   }
+.theme-muave.night-mode .postpg {
+  color: #fff !important;
+}
+.theme-muave.night-mode .df-quill-editor {
+  color: #fff !important;
+}
 }
