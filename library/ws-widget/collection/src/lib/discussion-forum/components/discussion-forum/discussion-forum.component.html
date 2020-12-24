@@ -30,6 +30,7 @@
             class="btn-send"
             style="background: transparent !important;"
             [title]="widgetData?.isDisabled ? postDisabled.value : postEnabled.value"
+            [ngClass]="{'disabled':!isValidPost || isPostingDiscussion || widgetData?.isDisabled}"
           >
           <mat-icon [ngClass]="{'disabled':!isValidPost || isPostingDiscussion || widgetData?.isDisabled}" class="send-icon mt-3 line matdark material-icons-outlined">send</mat-icon>
           </a>

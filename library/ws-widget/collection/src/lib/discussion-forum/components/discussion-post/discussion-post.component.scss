@@ -92,6 +92,7 @@
 }
 .active-reply {
   color: #925EB0 !important;
+  pointer-events: none;
 }
 .reply-post-sec {
   margin: 25px 0 0 80px;
@@ -143,6 +144,11 @@
     color: gray !important;
     pointer-events: none;
   }
+  // .send-btn-disable[disabled] {
+  //   color: gray !important;
+  //   pointer-events: none;
+  //   background: transparent !important;
+  // }
   .btn-styles {
     background: transparent !important;
     color: #925EB0 !important;
@@ -162,6 +168,16 @@
       color: gray !important;
       pointer-events: none;
     }
+    // .theme-muave.day-mode .send-btn-disable[disabled] {
+    //   color: gray !important;
+    //   pointer-events: none;
+    //   background: transparent !important;
+    // }
+    // .theme-muave.night-mode .send-btn-disable[disabled] {
+    //   color: gray !important;
+    //   pointer-events: none;
+    //   background: transparent !important;
+    // }
     .theme-muave.night-mode .cancel-btn-2 {
       background: transparent !important;
       color: #925EB0 !important;

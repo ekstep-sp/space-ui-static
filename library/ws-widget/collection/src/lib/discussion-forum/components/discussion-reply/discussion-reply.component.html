@@ -36,7 +36,7 @@
         class="margin-left-s margin-auto line-space width-expand" [htmlText]="reply.postContent.body"
         (textData)="onReplyTextChange($event)" [isDfPost]="true" [isDf]="true">
       </ws-widget-editor-quill>
-      <a name="discussion-reply-update-button" [disableRipple]="true" type="button" mat-flat-button
+      <a name="discussion-reply-update-button" [ngClass]="{'disabled': !replyPostEnabled }" [disableRipple]="true" type="button" mat-flat-button
         class="margin-top-s update-btn full-width-fold btn-send" i18n
         (click)="editReply(editFailMsg.value)" style="background: transparent !important;">
         <mat-icon [ngClass]="{'disabled': !replyPostEnabled }" class="send-icon line matdark material-icons-outlined mt-3">send</mat-icon>

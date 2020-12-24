@@ -68,7 +68,7 @@
       [isDfPost]="true"
       #discussionReplyEditor></ws-widget-editor-quill>
       <!-- <div class="text-right padding-top-s mat-app-background"> -->
-        <a name="discussion-post-reply-button" class="btn-send" [disableRipple]="true"
+        <a name="discussion-post-reply-button" class="btn-send"  [ngClass]="{'disabled': !isValidReply || isPostingReply}" [disableRipple]="true"
           (click)="publishReply(editFailMsg.value)" style="background: transparent !important;" type="button cancel-btn" mat-flat-button  i18n>
           <mat-icon [ngClass]="{'disabled': !isValidReply || isPostingReply}" class="send-icon mt-3 line matdark material-icons-outlined">send</mat-icon>
         </a>
@@ -95,10 +95,10 @@
     (mentionsData)="replyEditMentions = $event"
      [htmlText]="post.postContent.title" (textData)="onTextChange($event)">
     </ws-widget-editor-quill>
-    <button type="button" name="discussion-post-update-button" class="margin-top-s btn-styles"
-    mat-flat-button i18n (click)="editPost(editFailMsg.value)">
-    <mat-icon [ngClass]="{'disabled': !postPublishEnabled }" class="send-icon line matdark material-icons-outlined">send</mat-icon>
-    </button>
+    <a type="button" name="discussion-post-update-button" class="btn-styles"
+    mat-flat-button i18n (click)="editPost(editFailMsg.value)" [ngClass]="{'disabled': !postPublishEnabled}">
+    <mat-icon  class="send-icon line matdark material-icons-outlined" [ngClass]="{'disabled': !postPublishEnabled}">send</mat-icon>
+  </a>
     </div>
     <div class="text-right">
       <button type="button" name="discussion-post-cancel-button" class="margin-top-s btn-styles margin-left-s" mat-flat-button
