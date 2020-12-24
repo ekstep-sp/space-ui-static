@@ -1,7 +1,7 @@
-<ng-container *ngIf="!viewer">
+<ng-container >
   <div id="ataglance" #ataglance>
-    <div class="card-style">
-      <ng-container *ngIf="!overview">
+    <div class="card-style" *ngIf="!overview && !viewer">
+      <ng-container>
         <mat-card
           class="viewer-style2 font-montserrat ws-mat-primary-lite-background-on-day info-container break-word">
           <h2 class="btn-text-font txt-clr" i18n>At A Glance</h2>
