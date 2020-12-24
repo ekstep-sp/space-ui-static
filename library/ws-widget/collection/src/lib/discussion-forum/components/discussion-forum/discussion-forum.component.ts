@@ -141,7 +141,7 @@ export class DiscussionForumComponent extends WidgetBaseComponent
       if (!response.content) {
         this.contentCreatorId = this.widgetData.contentData.creator
       } else {
-      this.contentCreatorId = response.content.data.creator
+        this.contentCreatorId = response.content.data.creator
       }
       if (response.pageData.data.allowMentionUsers) {
         this.allowMention = response.pageData.data.allowMentionUsers

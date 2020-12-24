@@ -77,7 +77,7 @@ export class AtaglanceComponent implements OnInit, OnDestroy {
       if (this.activatedRoute && this.activatedRoute.parent) {
         const parentRoute = this.activatedRoute.parent
         this.routeParentSubscription = parentRoute.data.subscribe((data: Data) => {
-          this.content = data.content.data
+          this.content = (data.content && data.content.data) ? data.content.data : null
         })
       }
     }
@@ -264,32 +264,4 @@ export class AtaglanceComponent implements OnInit, OnDestroy {
       this.mailIcon$.unsubscribe()
     }
   }
-
-  /* triggerDummyEvent() {
-    this.showMoreGlance = true
-    // tslint:disable-next-line: no-console
-    console.log('content data to send is ', this.content)
-    const dummyEl = document.createElement('p')
-    const dummyEvent = document.createEvent('Event')
-    dummyEvent.initEvent('dummy', true, true)
-    dummyEl.addEventListener('dummy', (e) => {
-      // e.target matches elem
-    }, false)
-    dummyEl.dispatchEvent(dummyEvent)
-
-    return true
-  } */
 }
-
-/* else if (e.hasOwnProperty('route')) {
-  // this will occur for sharable routes
-  e.route.data.subscribe((_data: { content: NsContent.IContent }) => {
-    try {
-      // this.content = data.content
-      throw new Error('A random error to make default login work unintrupted')
-    } catch (err) {
-      alert('in error block')
-      console.log(e)
-    }
-  })
-} */
