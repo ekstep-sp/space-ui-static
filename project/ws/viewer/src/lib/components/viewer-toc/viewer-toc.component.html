@@ -42,7 +42,7 @@
       <mat-card class="no-card-style">
         <mat-card-content>
           <mat-tree [dataSource]="nestedDataSource" [treeControl]="nestedTreeControl">
-            <mat-tree-node *matTreeNodeDef="let node" matTreeNodeToggle matTreeNodePadding [matTreeNodePaddingIndent]="'0'">
+            <mat-tree-node class="tree-node" *matTreeNodeDef="let node" matTreeNodeToggle matTreeNodePadding [matTreeNodePaddingIndent]="'0'">
               <li class="mat-tree-node leaf-node cusotm-bg">
                 <ng-container
                   *ngTemplateOutlet="TocContentList; context: { $implicit: node }"
@@ -59,7 +59,7 @@
                     matTreeNodeToggle
                     class="flat-list-content-title width-expand ml-4 newColor"
                   >
-                    <h3 class="text-truncate margin-remove">{{ node.title }}</h3>
+                    <h3 class="text-truncate margin-remove title-heading">{{ node.title }}</h3>
                     <mat-icon
                       *ngIf="
                         contentProgressHash &&
@@ -78,7 +78,7 @@
                     matTreeNodeToggle
                     [attr.aria-label]="'toggle ' + node.name"
                   >
-                    <mat-icon class="mat-icon-rtl-mirror">
+                    <mat-icon class="mat-icon-rtl-mirror arrow-icon">
                       {{ nestedTreeControl.isExpanded(node) ? 'arrow_drop_up' : 'arrow_drop_down' }}
                     </mat-icon>
                   </button>
@@ -173,7 +173,7 @@
     <div class="resource-meta width-expand">
       <a
         [ngClass]="{ 'content-active': pathSet.has(content.identifier), 'text-white': !pathSet.has(content.identifier) }"
-        [routerLink]="content.viewerUrl"
+        [routerLink]="content.viewerUrl"  routerLinkActive="active"
         queryParamsHandling="preserve"
       >
       <span class="width-expand flex flex-middle">
@@ -189,7 +189,7 @@
             class="width-1-1 flex flex-between"
             [ngClass]="{ 'content-active': pathSet.has(content.identifier) }"
           >
-            <div class="mat-body-1 text-truncate flex">
+            <div class="mat-body-1 text-truncate flex title-subheading">
               <span>
                 {{ content.title | pipeLimitTo: 25 }}
               </span>
