@@ -23,9 +23,11 @@
 <ng-container *ngIf = "heirarchyTitle && heirarchyTitle.length">
     <ul class = "breadcrumbs">
       <div class = "main-div">
-      <div *ngFor = "let data of heirarchyTitle; let i = index" [ngClass]= "(heirarchyTitle.length-1 === i) ? 'text-style-leaf-node' : 'text-style-parent-child'">
+      <div *ngFor = "let data of heirarchyTitle; let i = index">
         <li class = "breadcrumbs_child">
-        <div class = "text-truncate"  [ngClass]= "(heirarchyTitle.length-1 === i) ? 'text-style-leaf' : 'text-style-parent'">{{data.title}}</div>
+        <div style="overflow: hidden !important;
+        text-overflow: ellipsis !important;
+        white-space: nowrap !important;"  [ngClass]= "(heirarchyTitle.length-1 === i) ? 'text-style-leaf': 'text-style-parent'">{{data.title}}</div>
        <div><mat-icon  *ngIf="heirarchyTitle.length-1 > i" class="icon-display">navigate_next</mat-icon></div>
       </li>
   </div>
@@ -33,6 +35,11 @@
     </ul>
   </ng-container>
   </span>
+  <!-- <span style="overflow: hidden !important;
+  text-overflow: ellipsis !important;
+  white-space: nowrap !important;">
+hvjkabcjakjchakchakjhcnkjdahckjdahckjdahckdjahvkdajhcnkahjckda
+  </span> -->
   <a
     mat-icon-button
     class="width-auto"
