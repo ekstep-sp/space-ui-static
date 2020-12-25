@@ -17,13 +17,15 @@
     >arrow_back</mat-icon
   >
   <span class="width-expand text-left text-truncate text-white body-font-size-secondary font-montserrat" [matTooltip]="resourceName">
-   <ng-container *ngIf="!heirarchyTitle || !heirarchyTitle.length"> {{ resourceName }} </ng-container>
+   <ng-container *ngIf="!heirarchyTitle || !heirarchyTitle.length"> 
+    {{ resourceName }}
+   </ng-container>
 <ng-container *ngIf = "heirarchyTitle && heirarchyTitle.length">
     <ul class = "breadcrumbs">
       <div class = "main-div">
       <div *ngFor = "let data of heirarchyTitle; let i = index" [ngClass]= "(heirarchyTitle.length-1 === i) ? 'text-style-leaf-node' : 'text-style-parent-child'">
         <li class = "breadcrumbs_child">
-        <div class = "text-truncate"><span class = "data-title"> {{data.title}}</span></div>
+        <div class = "text-truncate"  [ngClass]= "(heirarchyTitle.length-1 === i) ? 'text-style-leaf' : 'text-style-parent'">{{data.title}}</div>
        <div><mat-icon  *ngIf="heirarchyTitle.length-1 > i" class="icon-display">navigate_next</mat-icon></div>
       </li>
   </div>

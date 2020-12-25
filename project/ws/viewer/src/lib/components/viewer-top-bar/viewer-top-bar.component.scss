@@ -57,32 +57,41 @@ mat-toolbar {
 .color-viewer-top{
   background: #42428B !important;
 }
-
 .breadcrumbs{
   padding-inline-start: unset !important;
   margin-bottom: 9px;
   .main-div{
     display: flex;
-    .breadcrumbs_child{
-      display: flex;
-      .icon-display{
-        padding-top: 6px;
-        font-style: normal;
-        font-weight: 500;
-        font-size: 16px;
-        line-height: 20px;
-        color: #FFFFFF;
-      }
+
+    .text-style-parent-child{
+      font-size: 14px;
+      font-style: normal;
+      font-weight: normal;
+    }
+    .text-style-leaf-node{
+      font-style: normal;
+      font-size: 16px;
+      font-weight: 500;
     }
   }
 }
-.text-style-parent-child{
-  font-size: 14px;
-  font-style: normal;
-  font-weight: normal;
-}
-.text-style-leaf-node{
-  font-style: normal;
-  font-size: 16px;
-  font-weight: 500;
-}
+    .breadcrumbs_child{
+      display: flex;
+    }
+    .icon-display{
+      padding-top: 6px;
+      font-style: normal;
+      font-weight: 500;
+      font-size: 16px;
+      line-height: 20px;
+      color: #FFFFFF;
+      width: unset !important;
+    }
+    .text-style-leaf{
+      width: 100%;
+      }
+      .text-style-parent{
+        min-width: 100px;
+        max-width: 250px;
+        width: unset !important;
+      }
