@@ -76,12 +76,15 @@ mat-toolbar {
       color: #FFFFFF;
       width: unset !important;
     }
-    .text-style-leaf{
+    .text-style-last-child{
       max-width: 100%;
       width: unset !important;
       font-style: normal;
       font-size: 16px;
       font-weight: 500;
+      overflow: hidden !important;
+        text-overflow: ellipsis !important;
+        white-space: nowrap !important;
      @include breakpoint-lt-mm{
       min-width: 15px !important;
       max-width: 100%;
@@ -102,6 +105,9 @@ mat-toolbar {
         font-size: 14px;
         font-style: normal;
         font-weight: normal;
+        overflow: hidden !important;
+        text-overflow: ellipsis !important;
+        white-space: nowrap !important;
         @include breakpoint-lt-mm{
           min-width: 34px !important;
           max-width: 100px !important;
