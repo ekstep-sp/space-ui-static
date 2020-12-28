@@ -4,7 +4,7 @@
 <div *ngIf="audioData && isNotEmbed">
   <div class="flex flex-around flex-wrapped">
     <div class="w-full">
-      <div>
+      <div class="pos">
         <div id="fullScreenContainer" class="video-player">
           <ng-container *ngIf="isFetchingDataComplete" [wsResolverWidget]="widgetResolverAudioData"></ng-container>
         </div>
