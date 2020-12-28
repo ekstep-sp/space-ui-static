@@ -516,16 +516,18 @@
     <ng-container *ngIf="showMoreGlance">
       <div class="flex customRow w-full viewer-column-mb" *ngIf="content?.theme?.length">
         <h3 class="viewer-flex-column mw-140 m-0 p-0 item-heading text-black font-montserrat" i18n>SDG</h3>
-        <ng-container *ngFor="let theme of content?.theme">
-          <h3 class="viewer-flex-column m-0 font-montserrat font-weight-bold text-black btn-text-font">
-            {{ theme | lowercase}}
-          </h3>
-        </ng-container>
+        <div class="viewer-flex-column m-0 p-0">
+          <ng-container *ngFor="let theme of content?.theme">
+            <h3 class="font-montserrat font-weight-bold text-black btn-text-font">
+              {{ theme | lowercase}}
+            </h3>
+          </ng-container>
+        </div>
       </div>
       <div class="flex customRow w-full viewer-column-mb" *ngIf="content?.region?.length">
         <h3 class="viewer-flex-column mw-140 m-0 p-0 item-heading text-black font-montserrat" i18n>Region</h3>
         <ng-container *ngFor="let region of content?.region">
-          <h3 class="viewer-flex-column m-0 font-montserrat font-weight-bold text-black btn-text-font pt-4">
+          <h3 class="viewer-flex-column m-0 font-montserrat font-weight-bold text-black btn-text-font">
             {{ region | lowercase  }}
           </h3>
         </ng-container>
