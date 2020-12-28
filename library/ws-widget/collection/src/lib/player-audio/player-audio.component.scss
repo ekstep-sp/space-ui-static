@@ -3,16 +3,12 @@
   .video-js {
     height: 85.5%;
     width: 100%;
-    @include breakpoint-lt-m{
-      height: 75%;
-      top: 2%;
-    }
-    @include breakpoint-xs{
-      height: calc(100vh - 50%);
-    }
-    @include breakpoint-s{
-      height: calc(100vh - 40%);
-      top: 2%;
+  }
+}
+@media screen and (max-width:1140px){
+  :host.video-full {
+    .video-js {
+      height: calc(100% - 30%);
     }
   }
 }
