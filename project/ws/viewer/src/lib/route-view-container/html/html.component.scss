@@ -171,13 +171,18 @@ margin-top:30px
 }
 .customColorToolbar{
   position: inherit;
-  padding-bottom: 17px
+  padding-bottom: 17px;
 }
 .buttons{
   display: flex;
     justify-content: flex-end;
     width: 100%;
 }
+}
+@media only screen and (max-width: 1366px){
+    .bottom-0 {
+      bottom: -32px;
+    }
 }
 
 
