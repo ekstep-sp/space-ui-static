@@ -45,7 +45,7 @@
 
 .video-player {
   width: 100%;
-  height: 85vh;
+  // height: 85vh;
   /* @include breakpoint-lt-xl {
     height: 79.5vh;
   } */
@@ -145,11 +145,11 @@
   justify-content: flex-end;
 }
 
-@media screen and (max-width: 750px) {
-  .video-player {
-    height: 78.6vh;
-  }
-}
-.pos{
-  position: relative;
-}
+// @media screen and (max-width: 750px) {
+//   .video-player {
+//     height: 78.6vh;
+//   }
+// }
+// .pos{
+//   // position: relative;
+// }
