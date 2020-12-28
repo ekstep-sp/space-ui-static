@@ -1,7 +1,11 @@
-<mat-toolbar
+<!-- <mat-toolbar
   [color]="pageNavbar.color"
   [ngStyle]="pageNavbar?.styles"
   class="color-viewer-top mat-elevation-z3 px-8"
+> -->
+<mat-toolbar
+[ngStyle]="pageNavbar?.styles"
+class="color-viewer-top mat-elevation-z3 px-8"
 >
   <ws-widget-btn-page-back
     *ngIf="!forChannel"
