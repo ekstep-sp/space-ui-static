@@ -1,7 +1,7 @@
 <div *ngIf="videoData && isNotEmbed">
   <div class="flex flex-around flex-wrapped">
     <div class="w-full" [ngClass]="{'relative': configSvc?.isGuestUser }">
-      <div>
+      <div class="pos">
         <div id="fullScreenContainer" class="video-player">
           <ng-container *ngIf="isFetchingDataComplete" [wsResolverWidget]="widgetResolverVideoData"></ng-container>
         </div>
