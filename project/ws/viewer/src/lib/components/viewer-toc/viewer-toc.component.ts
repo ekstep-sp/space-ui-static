@@ -22,6 +22,7 @@ import { ViewerUtilService } from '../../viewer-util.service'
 import {SharedViewerDataService } from './../../../../../author/src/lib/modules/shared/services/shared-viewer-data.service'
 interface IViewerTocCard {
   assetType: string | null
+  contentUrls?: [any] | null
   identifier: string
   viewerUrl: string
   thumbnailUrl: string
@@ -273,7 +274,7 @@ export class ViewerTocComponent implements OnInit, OnDestroy {
     //   children: Array.isArray(content.children) && content.children.length ?
     //     content.children.map(child => this.convertContentToIViewerTocCard(child)) : null,
     // }
-    return {
+    const newFormat = {
       assetType: content.assetType || null ,
       identifier: content.identifier,
       viewerUrl: `${this.forPreview ? '/author' : ''}/viewer/${VIEWER_ROUTE_FROM_MIME(
@@ -291,6 +292,40 @@ export class ViewerTocComponent implements OnInit, OnDestroy {
         Array.isArray(content.children) && content.children.length
           ? content.children.map(child => this.convertContentToIViewerTocCard(child))
           : null,
+    }
+    if (newFormat.assetType === 'Technology') {
+      this.restructureTechnicalResource(newFormat, content)
+    }
+    return newFormat
+  }
+
+  private restructureTechnicalResource(oldFormat: any, technicalContent: any) {
+    if (technicalContent.hasOwnProperty('documentation') || technicalContent.hasOwnProperty('interface_api') || technicalContent.hasOwnProperty('sandbox')) {
+      oldFormat.technicalContents = []
+      if (technicalContent.hasOwnProperty('codebase') && technicalContent.codebase) {
+        oldFormat.technicalContents.push({
+          title: 'Codebase Link',
+          url: technicalContent.codebase,
+        })
+      }
+      if (technicalContent.hasOwnProperty('documentation') && technicalContent.documentation) {
+        oldFormat.technicalContents.push({
+          title: 'Documentation Link',
+          url: technicalContent.documentation,
+        })
+      }
+      if (technicalContent.hasOwnProperty('interface_api') && technicalContent.interface_api) {
+        oldFormat.technicalContents.push({
+          title: 'Interface API Link',
+          url: technicalContent.interface_api,
+        })
+      }
+      if (technicalContent.hasOwnProperty('sandbox') && technicalContent.sandbox) {
+        oldFormat.technicalContents.push({
+          title: 'Sandbox Link',
+          url: technicalContent.sandbox,
+        })
+      }
     }
   }
 
@@ -362,6 +397,7 @@ export class ViewerTocComponent implements OnInit, OnDestroy {
   private processCollectionForTree() {
     if (this.collection && this.collection.children) {
       this.nestedDataSource.data = this.collection.children
+      console.log(this.nestedDataSource)
       this.pathSet = new Set()
       // if (this.resourceId && this.tocMode === 'TREE') {
       if (this.resourceId) {
