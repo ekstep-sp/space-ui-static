@@ -1,9 +1,9 @@
 <div
   [ngClass]="{'padding-remove-left': isScormContent && isLtMedium, 'padding-remove-right': isScormContent && isLtMedium}"
   class="pl-0 pb-0 padding-dynamic" *ngIf="htmlData && isNotEmbed">
-  <div class="flex flex-around relative">
+  <div class="flex flex-around relative content-landscape">
     <div class="w-full flex items-center justify-center customH">
-      <div id="fullScreenContainer"
+      <div id="fullScreenContainer" class ="content-section"
               [ngClass]="{ 'video-player': htmlData?.isIframeSupported?.toLowerCase() != 'no' }">
               <viewer-plugin-html [htmlContent]="htmlData">
               </viewer-plugin-html>
@@ -13,7 +13,7 @@
         <div class="inline ml-3">
           <ws-author-viewer-curator-list class="text-white" [askAuthorEnabled]="!configSvc.isGuestUser" [fixLineIssue]="true" [content]="htmlData"></ws-author-viewer-curator-list>
         </div>
-        <div class="mr-5 mt-4 text-white sm:mt-0" *ngIf="!configSvc?.isGuestUser">
+        <div class="mr-5 mt-4 text-white sm:mt-0 buttons" *ngIf="!configSvc?.isGuestUser">
           <ws-widget-btn-content-like [forPreview]="forPreview" [widgetData]="{
             identifier: htmlData.identifier,
             isDisabled: isPreviewMode

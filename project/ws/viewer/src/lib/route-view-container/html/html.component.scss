@@ -159,3 +159,30 @@
 .pb-0 {
   padding-bottom: 0 !important;
 }
+@media only screen and (max-width: 992px){
+.content-section{
+margin-top:30px
+}
+.content-landscape{
+  display: block !important;
+}
+.customH{
+  height: auto
+}
+.customColorToolbar{
+  position: inherit;
+  padding-bottom: 17px;
+}
+.buttons{
+  display: flex;
+    justify-content: flex-end;
+    width: 100%;
+}
+}
+@media only screen and (max-width: 1366px){
+    .bottom-0 {
+      bottom: -32px;
+    }
+}
+
+
