@@ -86,7 +86,7 @@ export class HtmlComponent implements OnInit, OnChanges {
 
   ngOnChanges(changes: SimpleChanges) {
     for (const prop in changes) {
-      if (prop === 'htmlData') {
+      if (prop === 'htmlData' && this.htmlData) {
         if (this.htmlData && this.htmlData.artifactUrl.startsWith('https://scorm.')) {
           this.isScormContent = true
         } else {
