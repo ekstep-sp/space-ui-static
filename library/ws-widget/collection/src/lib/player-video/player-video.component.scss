@@ -1,6 +1,6 @@
 :host.video-full {
   .video-js {
-    height: 85.5%;
+    // height: 85.5%;
     width: 100%;
   }
 }
@@ -20,3 +20,18 @@
 // video::-webkit-media-controls-panel {
 //   width: calc(100% + 30px); /* Adjust as needed */
 // }
+@media screen and (min-width:1023px){
+  :host.video-full {
+    .video-js {
+      height: 60em;
+    }
+  }
+}
+ 
+@media screen and (max-width: 1023px){
+  :host.video-full {
+    .video-js {
+      height: 40em;
+    }
+  }
+}
