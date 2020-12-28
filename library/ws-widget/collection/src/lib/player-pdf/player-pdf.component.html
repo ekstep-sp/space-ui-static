@@ -23,14 +23,14 @@
         </button>
         <span class="text-white ml-2"> Of {{ totalPages }}</span>
       </div>
-      <button mat-icon-button [disabled]="zoom.value <= MIN_SCALE" (click)="changeScale('zoomout')" aria-label="zoom out"
+      <!-- <button mat-icon-button [disabled]="zoom.value <= MIN_SCALE" (click)="changeScale('zoomout')" aria-label="zoom out"
         i18n-aria-label>
         <mat-icon>zoom_out</mat-icon>
       </button>
       <button mat-icon-button [disabled]="zoom.value >= MAX_SCALE" (click)="changeScale('zoomin')" aria-label="zoom in"
         i18n-aria-label>
         <mat-icon>zoom_in</mat-icon>
-      </button>
+      </button> -->
     
       <!-- <button mat-icon-button [matMenuTriggerFor]="zoomMenu" *ngIf="isSmallViewPort">
         <mat-icon>zoom_in</mat-icon>
@@ -43,6 +43,14 @@
       </mat-menu>
       <mat-slider *ngIf="!isSmallViewPort" thumbLabel min="0.2" max="3" step="0.05" [formControl]="zoom"></mat-slider> -->
       <div class="hidden-xs">
+        <button mat-icon-button [disabled]="zoom.value <= MIN_SCALE" (click)="changeScale('zoomout')" aria-label="zoom out"
+        i18n-aria-label>
+        <mat-icon>zoom_out</mat-icon>
+      </button>
+      <button mat-icon-button [disabled]="zoom.value >= MAX_SCALE" (click)="changeScale('zoomin')" aria-label="zoom in"
+        i18n-aria-label>
+        <mat-icon>zoom_in</mat-icon>
+      </button>
         <button mat-icon-button (click)="refresh()" aria-label="refresh" i18n-aria-label>
           <mat-icon>refresh</mat-icon>
         </button>
@@ -65,6 +73,14 @@
 </section>
 
 <mat-menu class="matclasses" #pdfMenu="matMenu">
+  <button mat-menu-item class="menu-btn menu-btn-galaxy" [disabled]="zoom.value <= MIN_SCALE" (click)="changeScale('zoomout')" aria-label="zoom out"
+        i18n-aria-label>
+        <mat-icon>zoom_out</mat-icon>
+      </button>
+      <button mat-menu-item class="menu-btn menu-btn-galaxy" [disabled]="zoom.value >= MAX_SCALE" (click)="changeScale('zoomin')" aria-label="zoom in"
+        i18n-aria-label>
+        <mat-icon>zoom_in</mat-icon>
+      </button>
   <button mat-menu-item class="menu-btn menu-btn-galaxy" (click)="refresh()" aria-label="refresh" i18n-aria-label>
     <mat-icon>refresh</mat-icon>
   </button>
@@ -80,4 +96,5 @@
     </button>
   </ng-container>
 
+  
 </mat-menu>

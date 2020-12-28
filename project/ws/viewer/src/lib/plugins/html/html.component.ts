@@ -50,7 +50,10 @@ export class HtmlComponent implements OnInit, OnChanges {
     this.intranetUrlPatterns = this.configSvc.instanceConfig
       ? this.configSvc.instanceConfig.intranetIframeUrls
       : []
-
+    if (this.htmlContent && !this.htmlContent.hasOwnProperty('isIframeSupported')) {
+      // for technology assetType, this key is not coming, so setting it as default to No for code to work, originally, the key should be there in the content itself
+      this.htmlContent['isIframeSupported'] = 'No'
+    }
     let iframeSupport: boolean | string | null =
       this.htmlContent && this.htmlContent.isIframeSupported
     if (this.htmlContent && this.htmlContent.artifactUrl) {
@@ -58,7 +61,7 @@ export class HtmlComponent implements OnInit, OnChanges {
         this.htmlContent.isIframeSupported = 'No'
       }
       if (typeof iframeSupport !== 'boolean') {
-        iframeSupport = this.htmlContent.isIframeSupported.toLowerCase()
+        iframeSupport = (this.htmlContent && this.htmlContent.isIframeSupported) ? this.htmlContent.isIframeSupported.toLowerCase() : 'no'
         if (iframeSupport === 'no') {
           this.showIframeSupportWarning = true
           this.loaderIntervalTimeout = setTimeout(() => this.openInNewTab(), 3000)
