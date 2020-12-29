@@ -34,3 +34,9 @@
   -webkit-box-orient: vertical;
 }
 }
+@media only screen and (min-width: 375px) and (max-width: 1024px) {
+  .mat-h2{
+    padding-top: 5em;
+    margin-bottom: 5em;
+  }
+}
