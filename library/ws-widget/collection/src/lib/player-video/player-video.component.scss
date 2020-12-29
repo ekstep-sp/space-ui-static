@@ -23,43 +23,20 @@
 @media screen and (min-width:768px){
   :host.video-full {
     .video-js {
-      height: calc(94.5vh - 112px) !important;
-  
+      height: calc(100vh - 112px) !important
     }
   }
 }
-@media screen and (min-width:960px){
-  :host.video-full {
-    .video-js {
-      height: calc(96vh - 112px) !important;
-  
-    }
-  }
-}
+
 @media screen and (min-width:1169px){
   :host.video-full {
     .video-js {
-      height: calc(93vh - 90px) !important;
+      height: calc(100vh - 90px) !important;
   
     }
   }
 }
-@media screen and (min-width:1280px){
-  :host.video-full {
-    .video-js {
-      height: calc(94.3vh - 90px) !important;
-   
-    }
-  }
-}
-@media screen and (min-width:1366px){
-  :host.video-full {
-    .video-js {
-      height: calc(95vh - 90px) !important;
-    
-    }
-  }
-}
+
  
 @media screen and (max-width: 1023px){
   :host.video-full {

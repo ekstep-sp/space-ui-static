@@ -150,9 +150,9 @@
 //     height: 78.6vh;
 //   }
 // }
-// .pos{
-//   // position: relative;
-// }
+.pos{
+  position: relative;
+}
 
 @media screen and (max-width:992px){
   .buttons{
@@ -162,25 +162,9 @@
   }
   }
   @media screen and (min-width:768px){
-    .video-player{
-      height:94.5vh;
-    }
     .customColorToolbar{
-      position: absolute;
+      // position: absolute;
     }
   }
-  @media screen and (min-width:960px){
-    .video-player{
-      height:95vh;
-    }
-  }
-  @media screen and (min-width:1280px){
-    .video-player{
-      height:94.3vh;
-    }
-  }
-  @media screen and (min-width:1366px){
-    .video-player{
-      height:95vh;
-    }
-  }
+  
+  
