@@ -4,6 +4,8 @@ import { HttpClient } from '@angular/common/http'
 import { Observable, of } from 'rxjs'
 import { NsDiscussionForum } from './ws-discussion-forum.model'
 import { NsUserDashboard } from '../../../../../../project/ws/app/src/lib/routes/user-dashboard/models/user-dashboard.model'
+import { ConfigurationsService } from '@ws-widget/utils/src/public-api'
+import { catchError } from 'rxjs/operators'
 
 const PROTECTED_SLAG_V8 = '/apis/protected/v8'
 
@@ -36,7 +38,7 @@ interface IResponse {
   providedIn: 'root',
 })
 export class WsDiscussionForumService {
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, private readonly configSrvc: ConfigurationsService) { }
 
   // added userdata and setuser method to set data from config
   userData: NsUserDashboard.IUserData | any | null
@@ -174,5 +176,9 @@ export class WsDiscussionForumService {
     } catch (ex) {
       return []
     }
+  }
+
+  getDFConfig() {
+    return this.http.get(`${this.configSrvc.sitePath}/feature/disscussionForum.json`).pipe(catchError((_error: any) => of (null))).toPromise()
   }
 }
