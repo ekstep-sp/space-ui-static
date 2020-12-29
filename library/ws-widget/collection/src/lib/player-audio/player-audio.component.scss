@@ -63,6 +63,14 @@
     }
   }
 }
+@media screen and (max-width:1366px) and (min-width: 1024px) and (orientation: portrait) {
+  :host.video-full {
+    .video-js {
+      height: 122em;
+    }
+  }
+}
+
 .video-js {
   height: 100%;
   width: 100%;
