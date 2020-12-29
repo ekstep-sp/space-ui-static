@@ -7,7 +7,7 @@
       (toggle)="toggleSideBar()">
     </viewer-viewer-top-bar>
     <section class="px-8 pb-4">
-      <ng-container *ngIf="isTypeOfCollection; else mainContentTemplate">
+      <ng-container *ngIf="isTypeOfCollection || technicalResource; else mainContentTemplate">
         <mat-sidenav-container autosize class="viewer-sidenav-container">
             <mat-sidenav #snav [ngClass]="isTypeOfCollection ? 'viewer-sidenav':'viewer-sidenav-standalone'"
             [opened]="sideNavBarOpened" [mode]="mode" class="sidenav-effect">

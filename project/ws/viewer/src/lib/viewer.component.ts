@@ -32,6 +32,7 @@ export class ViewerComponent implements OnInit, OnDestroy, AfterViewInit, AfterV
   mode: 'over' | 'side' = 'side'
   forPreview = window.location.href.includes('/author/')
   isTypeOfCollection = true
+  technicalResource: any = null
   collectionId = this.activatedRoute.snapshot.queryParamMap.get('collectionId')
   status: TStatus = 'none'
   error: any | null = null
@@ -69,7 +70,8 @@ export class ViewerComponent implements OnInit, OnDestroy, AfterViewInit, AfterV
         e.activatedRoute.data.subscribe((data: { content: { data: NsContent.IContent } }) => {
           if (data.content && data.content.data) {
             this.content = data.content.data
-            this.formDiscussionForumWidget(this.content)
+           this.technicalResource = this.content && this.content.assetType === "Technology"? this.content : null
+             this.formDiscussionForumWidget(this.content)
             /* this.tocSharedSvc.fetchEmails(this.content ? this.content.creatorContacts : []).then((newIDS: any) => {
               if (this.content) {
                 this.content.creatorContacts = [
@@ -85,6 +87,7 @@ export class ViewerComponent implements OnInit, OnDestroy, AfterViewInit, AfterV
       window.setTimeout(() => {
         // this.utilitySvc.emitCurrentContentForBriefPlayer(e)
         this.content = e
+        this.technicalResource = this.content && this.content.assetType === "Technology"? this.content : null
         this.formDiscussionForumWidget(this.content as any)
         this.isRatingsDisabled = true
       })
