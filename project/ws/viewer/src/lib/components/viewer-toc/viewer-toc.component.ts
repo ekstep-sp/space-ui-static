@@ -111,14 +111,15 @@ export class ViewerTocComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
-
-
     if (this.configSvc.instanceConfig) {
       this.defaultThumbnail = this.domSanitizer.bypassSecurityTrustResourceUrl(
         this.configSvc.instanceConfig.logos.defaultContent,
       )
     }
-  
+    if(this.technicalResource){
+      this.getDataForTechnicalResource()
+    }
+    else{
     this.paramSubscription = this.activatedRoute.queryParamMap.subscribe(async params => {
       const collectionId = params.get('collectionId')
       const collectionType = params.get('collectionType')
@@ -152,7 +153,12 @@ export class ViewerTocComponent implements OnInit, OnDestroy {
       }
     })
   }
+  }
 
+  async getDataForTechnicalResource(){
+    const collectionId = this.technicalResource && this.technicalResource.identifier? this.technicalResource.identifier: ""
+    this.collection = await this.getCollection(collectionId, "")
+  }
   private getContentProgressHash() {
     this.contentProgressSvc.getProgressHash().subscribe(progressHash => {
       this.contentProgressHash = progressHash

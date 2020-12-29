@@ -2,7 +2,7 @@
   <section *ngIf="!collection">
     <div *ngIf="errorWidgetData?.widgetData?.errorType" [wsResolverWidget]="errorWidgetData"></div>
   </section>
-  <mat-card *ngIf="collection && pathSet && !pathSet.has(resourceId)">
+  <mat-card *ngIf="collection && pathSet && !pathSet.has(resourceId) && !technicalResource">
     <mat-card-content>
       <span class="width-expand flex flex-middle mat-error" i18n>
         The Resource is not part of the collection
@@ -41,6 +41,7 @@
       </div>
       <mat-card class="no-card-style">
         <mat-card-content>
+          <ng-container *ngIf = "nestedDataSource.data.length">
           <mat-tree [dataSource]="nestedDataSource" [treeControl]="nestedTreeControl">
             <mat-tree-node class="tree-node" *matTreeNodeDef="let node" matTreeNodeToggle matTreeNodePadding [matTreeNodePaddingIndent]="'0'">
               <li class="mat-tree-node leaf-node cusotm-bg">
@@ -94,6 +95,17 @@
               </li>
             </mat-nested-tree-node>
           </mat-tree>
+        </ng-container>
+        <ng-container *ngIf = "!nestedDataSource.data.length && collection?.technicalContents " >
+          <ng-container *ngFor="let techContent of collection?.technicalContents">
+            <div 
+            class="tech-resource-text-style cursor-pointer active"
+            (click)="openSubResource(techContent, content)"
+            [attr.id]="techContent?.title">
+              {{techContent?.title}}
+            </div>
+          </ng-container>
+        </ng-container>
         </mat-card-content>
       </mat-card>
     </ng-container>
