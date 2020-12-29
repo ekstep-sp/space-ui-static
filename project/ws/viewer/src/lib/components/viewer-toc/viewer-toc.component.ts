@@ -72,8 +72,6 @@ export class ViewerTocComponent implements OnInit, OnDestroy {
   ) {
     this.nestedTreeControl = new NestedTreeControl<IViewerTocCard>(this._getChildren)
     this.nestedDataSource = new MatTreeNestedDataSource()
-    this.nestedDataSourceForTechResource = new MatTreeNestedDataSource()
-    this.nestedTreeControlForTechResource = new NestedTreeControl<any>(this._getTechContents)
   }
   resourceId: string | null = null
   collection: IViewerTocCard | null = null
@@ -81,8 +79,6 @@ export class ViewerTocComponent implements OnInit, OnDestroy {
   tocMode: 'FLAT' | 'TREE' = 'TREE'
   nestedTreeControl: NestedTreeControl<IViewerTocCard>
   nestedDataSource: MatTreeNestedDataSource<IViewerTocCard>
-  nestedDataSourceForTechResource: MatTreeNestedDataSource<any>
-  nestedTreeControlForTechResource: NestedTreeControl<any>
   defaultThumbnail: SafeUrl | null = null
   isFetching = true
   pathSet = new Set()
@@ -105,9 +101,6 @@ export class ViewerTocComponent implements OnInit, OnDestroy {
     nodeData && nodeData.technicalContents && nodeData.technicalContents.length
   private _getChildren = (node: IViewerTocCard) => {
     return node && node.children ? node.children : []
-  }
-  private _getTechContents = (node: IViewerTocCard) => {
-    return node && node.technicalContents ? node.technicalContents : []
   }
 
   ngOnInit() {
@@ -199,7 +192,6 @@ export class ViewerTocComponent implements OnInit, OnDestroy {
 
   expandAll(source: any) {
     this.nestedTreeControl.expand(source)
-    this.nestedTreeControlForTechResource.expand(source)
   }
   private async getCollection(
     collectionId: string,
@@ -419,23 +411,6 @@ export class ViewerTocComponent implements OnInit, OnDestroy {
   private processCollectionForTree() {
     if (this.collection && this.collection.children) {
       this.nestedDataSource.data = this.collection.children
-      // this.nestedDataSourceForTechResource.data = [
-      //   {
-      //     title: "Codebase Link",
-      //     url: "https://github.com/google",
-      //   },
-      //   {
-      //     title: "Codebase Link",
-      //     url: "https://github.com/google",
-      //   }
-      // ]
-      // if(this.collection.children.hasOwnProperty('technicalContents')){
-
-        console.log("childern",   this.nestedDataSourceForTechResource);
-      // }
-  
-      console.log("childern",   this.collection.children);
-      console.log(this.nestedDataSource)
       this.pathSet = new Set()
       // if (this.resourceId && this.tocMode === 'TREE') {
       if (this.resourceId) {
@@ -455,7 +430,6 @@ export class ViewerTocComponent implements OnInit, OnDestroy {
       this.pathSet = new Set(path.map((u: { identifier: any }) => u.identifier))
       path.forEach((node: IViewerTocCard) => {
         this.nestedTreeControl.expand(node)
-        this.nestedTreeControlForTechResource.expand(node)
       })
       this.viewerDataSvc.updateHeirarchyTitleInToolbar(path);
     }
