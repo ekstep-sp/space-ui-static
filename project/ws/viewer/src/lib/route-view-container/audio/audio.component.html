@@ -11,7 +11,7 @@
             <div class="inline ml-3">
               <ws-author-viewer-curator-list class="text-white" [askAuthorEnabled]="!configSvc?.isGuestUser" [fixLineIssue]="true" [content]="audioData"></ws-author-viewer-curator-list>
             </div>
-            <div class="mr-5 mt-4 text-white sm:mt-0" *ngIf="!isShared && !configSvc?.isGuestUser">
+            <div class="mr-5 mt-4 text-white sm:mt-0 buttons" *ngIf="!isShared && !configSvc?.isGuestUser">
               <ws-widget-btn-content-download [forPreview]="forPreview" [widgetData]="
                   audioData
                     | pipePartialContent

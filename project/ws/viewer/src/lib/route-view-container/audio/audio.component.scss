@@ -139,3 +139,10 @@
 // .pos{
 //   position: relative;
 // }
+@media screen and (max-width:992px){
+  .buttons{
+    display: flex;
+      justify-content: flex-end;
+      width: 100%;
+  }
+  }

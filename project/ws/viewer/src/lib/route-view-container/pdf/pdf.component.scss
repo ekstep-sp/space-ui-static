@@ -98,3 +98,10 @@
 .space{
   padding-left:20px;
 }
+@media screen and (max-width:992px){
+.buttons{
+  display: flex;
+    justify-content: flex-end;
+    width: 100%;
+}
+}
