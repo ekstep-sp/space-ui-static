@@ -57,6 +57,7 @@ export class ViewerTocComponent implements OnInit, OnDestroy {
   @Output() hidenav = new EventEmitter<boolean>()
   @Input() forPreview = false
   @Output() techResourceChange = new EventEmitter<any>();
+  @Input() technicalResource: any = null
 
   constructor(
     private activatedRoute: ActivatedRoute,
@@ -106,16 +107,18 @@ export class ViewerTocComponent implements OnInit, OnDestroy {
     return node && node.children ? node.children : []
   }
   private _getTechContents = (node: IViewerTocCard) => {
-    console.log("technicalcontents", node.technicalContents);
     return node && node.technicalContents ? node.technicalContents : []
   }
 
   ngOnInit() {
+
+
     if (this.configSvc.instanceConfig) {
       this.defaultThumbnail = this.domSanitizer.bypassSecurityTrustResourceUrl(
         this.configSvc.instanceConfig.logos.defaultContent,
       )
     }
+  
     this.paramSubscription = this.activatedRoute.queryParamMap.subscribe(async params => {
       const collectionId = params.get('collectionId')
       const collectionType = params.get('collectionType')
