@@ -195,13 +195,38 @@ app-content-icon {
 
 .h-auto {
   height: auto !important;
+  .mat-expansion-panel-content {
+    ::ng-deep {
+      .mat-expansion-panel-body {
+      padding: 0px !important;
+    }
+  }
+  }
 }
 ::ng-deep{
   .new-icon {
-
     .mat-expansion-indicator {
       position: absolute;
       right: 25px;
     }
   }
+  .mat-expansion-panel, .mat-expansion-panel-content, .mat-expansion-panel-body {
+    background-color: inherit !important;
+  }
+}
+
+.tech-resource {
+  padding: 20px;
+  padding-left: 0;
+}
+
+::ng-deep .mat-expansion-panel-body{
+  padding: 0;
+  padding-left: 70px;
+}
+
+::ng-deep .mat-expansion-panel {
+  box-shadow: none !important;
+  background-color: inherit !important;
+
 }

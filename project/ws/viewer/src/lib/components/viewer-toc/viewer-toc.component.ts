@@ -314,12 +314,12 @@ export class ViewerTocComponent implements OnInit, OnDestroy {
   private restructureTechnicalResource(oldFormat: any, technicalContent: any) {
     if (technicalContent.hasOwnProperty('documentation') || technicalContent.hasOwnProperty('interface_api') || technicalContent.hasOwnProperty('sandbox')) {
       oldFormat.technicalContents = []
-      if (technicalContent.hasOwnProperty('codebase') && technicalContent.codebase) {
+      /* if (technicalContent.hasOwnProperty('codebase') && technicalContent.codebase) {
         oldFormat.technicalContents.push({
           title: 'Codebase Link',
           url: technicalContent.codebase,
         })
-      }
+      } */
       if (technicalContent.hasOwnProperty('documentation') && technicalContent.documentation) {
         oldFormat.technicalContents.push({
           title: 'Documentation Link',
