@@ -23,7 +23,7 @@
 @media screen and (min-width:768px){
   :host.video-full {
     .video-js {
-      height: calc(100vh - 112px) !important
+      height: calc(100vh - 168px) !important
     }
   }
 }
@@ -31,8 +31,7 @@
 @media screen and (min-width:1169px){
   :host.video-full {
     .video-js {
-      height: calc(100vh - 90px) !important;
-  
+      height: calc(100vh - 146px) !important;
     }
   }
 }
@@ -42,6 +41,20 @@
   :host.video-full {
     .video-js {
       height: 40em;
+    }
+  }
+}
+@media screen and (max-width: 767px){
+  :host.video-full {
+    .video-js {
+      height: calc(100vh - 184px) !important;
+    }
+  }
+}
+@media screen and (max-width: 516px){
+  :host.video-full {
+    .video-js {
+      height: calc(100vh - 216px) !important;
     }
   }
 }
