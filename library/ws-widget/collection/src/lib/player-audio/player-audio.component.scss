@@ -52,14 +52,14 @@
 @media screen and (max-width: 1023px){
   :host.video-full {
     .video-js {
-      height: 58em;
+      height: 92%;
     }
   }
 }
 @media screen and (max-width:320px){
   :host.video-full {
     .video-js {
-      height: 62em;
+      height: 92%;
     }
   }
 }
