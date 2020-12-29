@@ -171,6 +171,10 @@ app-content-icon {
   background-color: rgba(66, 66, 139, 0.64);
   color: white;
 }
+.cusotm-bg:hover{
+  background-color: rgba(66, 66, 139, 0.64);
+  color: white;
+}
 
 .newColor {
   color: #42428B !important;
@@ -185,3 +189,19 @@ app-content-icon {
 .active { 
    background-color: rgb(66, 66, 139);
   }
+.p-0 {
+  padding: 0px !important;
+}
+
+.h-auto {
+  height: auto !important;
+}
+::ng-deep{
+  .new-icon {
+
+    .mat-expansion-indicator {
+      position: absolute;
+      right: 25px;
+    }
+  }
+}
