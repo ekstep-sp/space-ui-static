@@ -173,7 +173,7 @@
     <div class="resource-meta width-expand" [ngClass]="{'content-active active': pathSet.has(content.identifier), 'cusotm-bg': !pathSet.has(content.identifier)}">
       <mat-accordion *ngIf="content?.technicalContents">
         <mat-expansion-panel class="toc-expansion-panel" [expanded]="true">
-          <mat-expansion-panel-header class="p-0 h-auto new-icon" [ngClass]="{'content-active active': pathSet.has(content.identifier), 'cusotm-bg': !pathSet.has(content.identifier)}">
+          <mat-expansion-panel-header class="p-0 h-auto new-icon remove-background" [ngClass]="{'content-active active': pathSet.has(content.identifier), 'cusotm-bg': !pathSet.has(content.identifier)}">
             <a [routerLink]="content.viewerUrl" routerLinkActive="active" queryParamsHandling="preserve">
               <span class="width-expand flex flex-middle">
                 <img i18n-alt alt="thumbnail"

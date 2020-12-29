@@ -175,7 +175,10 @@ app-content-icon {
   background-color: rgba(66, 66, 139, 0.64);
   color: white;
 }
-
+.remove-background{
+  background: unset !important;
+  color: white !important;
+}
 .newColor {
   color: #42428B !important;
   font-weight: 500 !important;
