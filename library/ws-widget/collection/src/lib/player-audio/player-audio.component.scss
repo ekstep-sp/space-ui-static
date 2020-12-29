@@ -1,78 +1,61 @@
-@import 'ws-mixins';
 :host.video-full {
   .video-js {
-    // height: 46em;
-   
+    // height: 85.5%;
     width: 100%;
-    // @include breakpoint-lt-m{
-    //   height: 75%;
-    //   top: 2%;
-    // }
-    // @include breakpoint-xs{
-    //   height: calc(100% - 25%);
-    // }
-    // @include breakpoint-s{
-    //   // height: calc(100vh - 40%);
-    //   height: 34em;
-    //   top: 2%;
-    // }
-    //  @include breakpoint-s{
-    //   // height: calc(100vh - 40%);
-    //   height: 34em;
-    //   top: 2%;
-    // }
-   
-     
-   
   }
 }
-
-// @media screen and (min-width:1023px) and (max-width: 1030px){
-//   :host.video-full {
-//     .video-js {
-//       min-height: 75.5em;
-//     }
-//   }
-// }
-
-// @media screen and (min-width:1031px) and (max-width:1090){
-//   :host.video-full {
-//     .video-js {
-//       min-height: 65.5em;
-//     }
-//   }
-// }
-// @media screen and (min-width:1366px){
-//   :host.video-full {
-//     .video-js {
-//       min-height: 88.5em;
-//     }
-//   }
-// }
-@media screen and (max-width: 1023px){
-  :host.video-full {
-    .video-js {
-      height: 92%;
-    }
-  }
-}
-@media screen and (max-width:320px){
-  :host.video-full {
-    .video-js {
-      height: 92%;
-    }
-  }
-}
-@media screen and (max-width:1366px) and (min-width: 1024px) and (orientation: portrait) {
-  :host.video-full {
-    .video-js {
-      height: 122em;
-    }
-  }
-}
-
 .video-js {
   height: 100%;
   width: 100%;
   min-height: 200px;
 }
+// video::-internal-media-controls-download-button {
+//   display:none;
+// }
+
+// video::-webkit-media-controls-enclosure {
+//   overflow:hidden;
+// }
+
+// video::-webkit-media-controls-panel {
+//   width: calc(100% + 30px); /* Adjust as needed */
+// }
+@media screen and (min-width:768px){
+  :host.video-full {
+    .video-js {
+      height: calc(103.5vh - 168px) !important
+    }
+  }
+}
+
+@media screen and (min-width:1169px){
+  :host.video-full {
+    .video-js {
+      height: calc(100vh - 146px) !important;
+    }
+  }
+}
+
+ 
+@media screen and (max-width: 1023px){
+  :host.video-full {
+    .video-js {
+      height: 40em;
+    }
+  }
+}
+@media screen and (max-width: 767px){
+  :host.video-full {
+    .video-js {
+      height: calc(100vh - 184px) !important;
+    }
+  }
+}
+@media screen and (max-width: 516px){
+  :host.video-full {
+    .video-js {
+      height: calc(100vh - 216px) !important;
+    }
+  }
+}
+
