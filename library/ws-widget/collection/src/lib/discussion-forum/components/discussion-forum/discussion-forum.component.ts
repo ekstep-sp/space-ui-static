@@ -147,7 +147,6 @@ export class DiscussionForumComponent extends WidgetBaseComponent
         this.allowMention = response.pageData.data.allowMentionUsers
       } else {
         this.allowMention = await this.getDiscussionForumConfig()
-        debugger
       }
     })
     // console.log(this.widgetData, this.discussionRequest)

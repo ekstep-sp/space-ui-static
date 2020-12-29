@@ -213,23 +213,20 @@ app-content-icon {
       }
     }
   }
-  .mat-expansion-panel, .mat-expansion-panel-content, .mat-expansion-panel-body {
+  .toc-expansion-panel.mat-expansion-panel {
+    background-color: inherit !important;
+    box-shadow: none !important;
+    .mat-expansion-panel-content, .mat-expansion-panel-body {
     background-color: inherit !important;
   }
+  .mat-expansion-panel-body {
+    padding: 0;
+    padding-left: 70px;
+  }
+}
 }
 
 .tech-resource {
   padding: 20px;
   padding-left: 0;
-}
-
-::ng-deep .mat-expansion-panel-body{
-  padding: 0;
-  padding-left: 70px;
-}
-
-::ng-deep .mat-expansion-panel {
-  box-shadow: none !important;
-  background-color: inherit !important;
-
 }
