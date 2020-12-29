@@ -185,3 +185,9 @@ app-content-icon {
 .active { 
    background-color: rgb(66, 66, 139);
   }
+  ::ng-deep{
+  .theme-muave.night-mode .cusotm-bg{
+    background-color: rgba(66, 66, 139, 0.64) !important;
+    color: white !important;
+  }
+  }
