@@ -172,7 +172,7 @@
   <div class="resource-container">
     <div class="resource-meta width-expand" [ngClass]="{'content-active active': pathSet.has(content.identifier), 'cusotm-bg': !pathSet.has(content.identifier)}">
       <mat-accordion *ngIf="content?.technicalContents">
-        <mat-expansion-panel hideToggle [expanded]="true">
+        <mat-expansion-panel [expanded]="true">
           <mat-expansion-panel-header class="p-0 h-auto new-icon" [ngClass]="{'content-active active': pathSet.has(content.identifier), 'cusotm-bg': !pathSet.has(content.identifier)}">
             <a [routerLink]="content.viewerUrl" routerLinkActive="active" queryParamsHandling="preserve">
               <span class="width-expand flex flex-middle">
@@ -209,7 +209,10 @@
             </a>
           </mat-expansion-panel-header>
            <ng-container *ngFor="let techContent of content?.technicalContents">
-             <div class="tech-resource cursor-pointer"  [ngClass]="{ 'content-active active': pathSet.has(content.identifier), 'text-white': !pathSet.has(content.identifier) }"
+             <div 
+             class="tech-resource cursor-pointer"
+             (click)="openSubResource(techContent, content)"
+             [ngClass]="{ 'content-active active': pathSet.has(content.identifier), 'text-white': !pathSet.has(content.identifier) }"
              [attr.id]="techContent?.title">
                {{techContent?.title}}
              </div>

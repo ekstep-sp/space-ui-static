@@ -56,6 +56,7 @@ interface ICollectionCard {
 export class ViewerTocComponent implements OnInit, OnDestroy {
   @Output() hidenav = new EventEmitter<boolean>()
   @Input() forPreview = false
+  @Output() techResourceChange = new EventEmitter<any>();
 
   constructor(
     private activatedRoute: ActivatedRoute,
@@ -453,5 +454,9 @@ export class ViewerTocComponent implements OnInit, OnDestroy {
 
   minimizenav() {
     this.hidenav.emit(false)
+  }
+
+  openSubResource(techSubContent: any) {
+    this.viewerDataSvc.updateTechResource(techSubContent)
   }
 }

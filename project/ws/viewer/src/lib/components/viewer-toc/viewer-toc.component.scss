@@ -208,6 +208,9 @@ app-content-icon {
     .mat-expansion-indicator {
       position: absolute;
       right: 25px;
+      &:after {
+        color: inherit !important;
+      }
     }
   }
   .mat-expansion-panel, .mat-expansion-panel-content, .mat-expansion-panel-body {

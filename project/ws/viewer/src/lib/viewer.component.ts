@@ -198,4 +198,8 @@ export class ViewerComponent implements OnInit, OnDestroy, AfterViewInit, AfterV
       widgetType: 'discussionForum',
     }
   }
+
+  updateViewURL(event: any) {
+    console.log(event)
+  }
 }
