@@ -26,10 +26,26 @@
    
   }
 }
-@media screen and (min-width:1023px){
+
+@media screen and (min-width:1023px) and (max-width: 1030px){
   :host.video-full {
     .video-js {
-      height: 60em;
+      min-height: 75.5em;
+    }
+  }
+}
+
+@media screen and (min-width:1031px) {
+  :host.video-full {
+    .video-js {
+      min-height: 65.5em;
+    }
+  }
+}
+@media screen and (min-width:1366px){
+  :host.video-full {
+    .video-js {
+      min-height: 88.5em;
     }
   }
 }
@@ -51,8 +67,4 @@
   height: 100%;
   width: 100%;
   min-height: 200px;
-}
-.customColorToolbar {
-  background-color: #8684A2;
-  min-height: 15%!important;
 }
