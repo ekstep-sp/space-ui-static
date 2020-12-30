@@ -23,6 +23,14 @@
 @media screen and (min-width:768px){
   :host.video-full {
     .video-js {
+      height: calc(100vh - 168px) !important
+    }
+  }
+}
+
+@media screen and (min-width:1024px){
+  :host.video-full {
+    .video-js {
       height: calc(103.5vh - 168px) !important
     }
   }

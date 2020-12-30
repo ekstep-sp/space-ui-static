@@ -16,9 +16,9 @@ export class TocBodyCommonRoutingComponent implements OnInit, OnDestroy {
   constructor(private router: Router, private route: ActivatedRoute) { }
 
   ngOnInit() {
-    this.router.routeReuseStrategy.shouldReuseRoute = function () {
-      return false
-    }
+    // this.router.routeReuseStrategy.shouldReuseRoute = function () {
+    //   return false
+    // }
     if (this.route && this.route.parent) {
       this.routeSubscription = this.route.parent.data.subscribe((data: Data) => {
         this.content = data.content.data
