@@ -341,6 +341,9 @@ export class ViewerTocComponent implements OnInit, OnDestroy {
         })
       }
     }
+    if (oldFormat.technicalContents.length > 0) {
+      oldFormat.techExpanded = false
+    }
   }
 
   private createCollectionCard(
@@ -443,9 +446,19 @@ export class ViewerTocComponent implements OnInit, OnDestroy {
     this.viewerDataSvc.updateTechResource(techSubContent)
   }
 
-  togglePanel(pannel: any) {
-    if (pannel) {
-      pannel.toggle()
+  /* togglePanel(content: any) {
+    if (content && content.hasOwnProperty('techExpanded')) {
+      content.techExpanded = !content.techExpanded
     }
+  } */
+
+  togglePane1(panel: any) {
+    panel.toggle()
+  }
+
+  shouldExpand(content: any) {
+    // console.log('should expand --> ' + id, this.pathSet.has(id))
+    // return this.pathSet.has(content.identifier) || (content.hasOwnProperty('techExpanded') ? content.techExpanded : false)
+    return this.pathSet.has(content.identifier)
   }
 }

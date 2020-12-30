@@ -197,8 +197,8 @@
   <div class="resource-container">
     <div class="resource-meta width-expand" [ngClass]="{'content-active active': pathSet.has(content.identifier), 'cusotm-bg': !pathSet.has(content.identifier)}">
       <mat-accordion *ngIf="content?.technicalContents">
-        <mat-expansion-panel #pannel class="toc-expansion-panel" hideToggle [expanded]="pathSet.has(content.identifier)">
-          <mat-expansion-panel-header (click)="togglePanel(pannel)" class="p-0 h-auto new-icon remove-background" [ngClass]="{'content-active active': pathSet.has(content.identifier), 'cusotm-bg': !pathSet.has(content.identifier)}">
+        <mat-expansion-panel #panel [hideToggle]="shouldExpand(content)" class="toc-expansion-panel" [expanded]="shouldExpand(content)">
+          <mat-expansion-panel-header (click)="togglePane1(panel)" class="p-0 h-auto new-icon remove-background" [ngClass]="{'content-active active': pathSet.has(content.identifier), 'cusotm-bg': !pathSet.has(content.identifier)}">
             <a [routerLink]="content.viewerUrl" routerLinkActive="active" queryParamsHandling="preserve">
               <span class="width-expand flex flex-middle">
                 <img i18n-alt alt="thumbnail"
