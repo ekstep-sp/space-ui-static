@@ -15,8 +15,11 @@
             </viewer-viewer-toc>
           </mat-sidenav>
           <mat-sidenav-content class="sidenavContent" #scrollableContent>
-            <button mat-icon-button aria-label="Navbar Toggle button" color="primary" [ngClass]="{ 'rounded-none': !snav?.opened }" class="toggleBtn" (click)="snav?.toggle()">
-              <mat-icon class="dehaze-icon"[ngClass]="{'reverse': snav?.opened }">{{ !snav?.opened ? 'dehaze' : 'double_arrow'}}</mat-icon>
+            <button *ngIf="snav?.opened" mat-icon-button aria-label="Navbar Toggle button" color="primary" class="toggleBtn side-nav-button-opened" (click)="snav?.toggle()">
+              <mat-icon class="dehaze-icon reverse" >double_arrow</mat-icon>
+            </button>
+            <button *ngIf="!snav?.opened" mat-icon-button aria-label="Navbar Toggle button" color="primary" class="toggleBtn side-nav-button-closed" (click)="snav?.toggle()">
+              <mat-icon class="dehaze-icon">double_arrow</mat-icon>
             </button>
             <ng-container *ngTemplateOutlet="mainContentTemplate"></ng-container>
           </mat-sidenav-content>
