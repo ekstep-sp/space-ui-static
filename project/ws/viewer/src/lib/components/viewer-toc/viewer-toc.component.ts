@@ -19,7 +19,7 @@ import { of, Subscription } from 'rxjs'
 import { delay } from 'rxjs/operators'
 // import { ViewerDataService } from '../../viewer-data.service'
 import { ViewerUtilService } from '../../viewer-util.service'
-import {SharedViewerDataService } from './../../../../../author/src/lib/modules/shared/services/shared-viewer-data.service'
+import { SharedViewerDataService } from './../../../../../author/src/lib/modules/shared/services/shared-viewer-data.service'
 interface IViewerTocCard {
   assetType: string | null
   contentUrls?: [any] | null
@@ -32,7 +32,7 @@ interface IViewerTocCard {
   complexity: string
   children: null | IViewerTocCard[]
   iconType?: string,
-  technicalContents? : null | IViewerTocCard[]
+  technicalContents?: null | IViewerTocCard[]
 }
 
 export type TCollectionCardType = 'content' | 'playlist' | 'goals'
@@ -56,7 +56,7 @@ interface ICollectionCard {
 export class ViewerTocComponent implements OnInit, OnDestroy {
   @Output() hidenav = new EventEmitter<boolean>()
   @Input() forPreview = false
-  @Output() techResourceChange = new EventEmitter<any>();
+  @Output() techResourceChange = new EventEmitter<any>()
   @Input() technicalResource: any = null
 
   constructor(
@@ -102,17 +102,15 @@ export class ViewerTocComponent implements OnInit, OnDestroy {
   private _getChildren = (node: IViewerTocCard) => {
     return node && node.children ? node.children : []
   }
-  panelOpenState: boolean = false;
   ngOnInit() {
     if (this.configSvc.instanceConfig) {
       this.defaultThumbnail = this.domSanitizer.bypassSecurityTrustResourceUrl(
         this.configSvc.instanceConfig.logos.defaultContent,
       )
     }
-    if(this.technicalResource){
+    if (this.technicalResource) {
       this.getDataForTechnicalResource()
-    }
-    else{
+    } else {
     this.paramSubscription = this.activatedRoute.queryParamMap.subscribe(async params => {
       const collectionId = params.get('collectionId')
       const collectionType = params.get('collectionType')
@@ -148,9 +146,9 @@ export class ViewerTocComponent implements OnInit, OnDestroy {
   }
   }
 
-  async getDataForTechnicalResource(){
-    const collectionId = this.technicalResource && this.technicalResource.identifier? this.technicalResource.identifier: ""
-    this.collection = await this.getCollection(collectionId, "")
+  async getDataForTechnicalResource() {
+    const collectionId = this.technicalResource && this.technicalResource.identifier ? this.technicalResource.identifier : ''
+    this.collection = await this.getCollection(collectionId, '')
   }
   private getContentProgressHash() {
     this.contentProgressSvc.getProgressHash().subscribe(progressHash => {
@@ -314,7 +312,8 @@ export class ViewerTocComponent implements OnInit, OnDestroy {
   }
 
   private restructureTechnicalResource(oldFormat: any, technicalContent: any) {
-    if (technicalContent.hasOwnProperty('documentation') || technicalContent.hasOwnProperty('interface_api') || technicalContent.hasOwnProperty('sandbox')) {
+    if (technicalContent.hasOwnProperty('documentation') || technicalContent.hasOwnProperty('interface_api') ||
+         technicalContent.hasOwnProperty('sandbox')) {
       oldFormat.technicalContents = []
       /* if (technicalContent.hasOwnProperty('codebase') && technicalContent.codebase) {
         oldFormat.technicalContents.push({
@@ -434,7 +433,7 @@ export class ViewerTocComponent implements OnInit, OnDestroy {
       path.forEach((node: IViewerTocCard) => {
         this.nestedTreeControl.expand(node)
       })
-      this.viewerDataSvc.updateHeirarchyTitleInToolbar(path);
+      this.viewerDataSvc.updateHeirarchyTitleInToolbar(path)
     }
   }
 

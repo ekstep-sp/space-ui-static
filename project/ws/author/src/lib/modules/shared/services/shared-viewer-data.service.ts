@@ -25,7 +25,7 @@ export interface IViewerResourceOptions {
 export type TStatus = 'pending' | 'done' | 'error' | 'none'
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class SharedViewerDataService {
   resourceId: string | null = null
@@ -76,8 +76,8 @@ export class SharedViewerDataService {
       },
     )
   }
-  updateHeirarchyTitleInToolbar(path: any){
-    this.updateHierarchyTitleSubject.next(path);
+  updateHeirarchyTitleInToolbar(path: any) {
+    this.updateHierarchyTitleSubject.next(path)
    }
   isVisibileAccToRoles(allowedRoles: [string], notAllowedRoles: [string]) {
     let finalAcceptance = true
@@ -102,7 +102,6 @@ export class SharedViewerDataService {
         finalAcceptance = true
       }
     }
-    // console.log(finalAcceptance)
     return finalAcceptance
   }
 }
