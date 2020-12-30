@@ -232,7 +232,7 @@
               <span class="width-1-1 margin-left-m flex flex-wrapped align-self-start">
                 <div
                   class="width-1-1 flex flex-between"
-                  [ngClass]="{ 'content-active': pathSet.has(content.identifier) }"
+                  [ngClass]="{ 'content-active active': pathSet.has(content.identifier), 'text-white': !pathSet.has(content.identifier)}"
                 >
                   <div class="mat-body-1 text-truncate flex title-subheading">
                     <span>
@@ -253,7 +253,7 @@
         </mat-expansion-panel>
       </mat-accordion>
       <a *ngIf="!content?.technicalContents"
-        [ngClass]="{ 'content-active': pathSet.has(content.identifier), 'text-white': !pathSet.has(content.identifier) }"
+        [ngClass]="{ 'content-active active': pathSet.has(content.identifier), 'text-white': !pathSet.has(content.identifier) }"
         [routerLink]="content.viewerUrl"  routerLinkActive="active"
         queryParamsHandling="preserve"
       >

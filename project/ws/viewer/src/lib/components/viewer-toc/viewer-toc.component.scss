@@ -191,6 +191,7 @@ app-content-icon {
 }
 .active { 
    background-color: rgb(66, 66, 139);
+   transition: 0.5s;
   }
 .p-0 {
   padding: 0px !important;
