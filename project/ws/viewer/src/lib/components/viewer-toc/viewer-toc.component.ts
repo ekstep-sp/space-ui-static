@@ -102,7 +102,7 @@ export class ViewerTocComponent implements OnInit, OnDestroy {
   private _getChildren = (node: IViewerTocCard) => {
     return node && node.children ? node.children : []
   }
-
+  panelOpenState: boolean = false;
   ngOnInit() {
     if (this.configSvc.instanceConfig) {
       this.defaultThumbnail = this.domSanitizer.bypassSecurityTrustResourceUrl(
@@ -442,4 +442,8 @@ export class ViewerTocComponent implements OnInit, OnDestroy {
   openSubResource(techSubContent: any) {
     this.viewerDataSvc.updateTechResource(techSubContent)
   }
+  // isExpanded(){
+  //   console.log("this.panelOpenState", this.panelOpenState)
+  //   this.panelOpenState = !this.panelOpenState
+  //   }
 }
