@@ -14,6 +14,7 @@ import {
   MatProgressSpinnerModule,
   MatSnackBarModule,
   MatTabsModule,
+  MatExpansionModule,
 } from '@angular/material'
 
 import { ViewerRoutingModule } from './viewer-routing.module'
@@ -64,6 +65,7 @@ import { AtaglanceModule } from '@ws-widget/collection/src/lib/_common/ataglance
     MatTreeModule,
     MatProgressSpinnerModule,
     MatSnackBarModule,
+    MatExpansionModule,
     ViewerRoutingModule,
     ErrorResolverModule,
     PipeDurationTransformModule,

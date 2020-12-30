@@ -1,5 +1,5 @@
 import { Component, OnInit, OnDestroy } from '@angular/core'
-import { Router, ActivatedRoute, Data } from '@angular/router'
+import { ActivatedRoute, Data } from '@angular/router'
 import { Subscription } from 'rxjs'
 import { NsContent } from '@ws-widget/collection/src/public-api'
 
@@ -13,7 +13,7 @@ export class TocBodyCommonRoutingComponent implements OnInit, OnDestroy {
   private routeSubscription: Subscription | null = null
   content: NsContent.IContent | null = null
 
-  constructor(private router: Router, private route: ActivatedRoute) { }
+  constructor(private route: ActivatedRoute) { }
 
   ngOnInit() {
     // this.router.routeReuseStrategy.shouldReuseRoute = function () {

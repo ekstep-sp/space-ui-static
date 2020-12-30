@@ -149,14 +149,13 @@ app-content-icon {
 
 .parent-item {
   background-color: rgba(198, 188, 184, 0.48);
-  ;
   margin-top: 4px;
   .mat-tree-node.mat-toolbar {
     height: 40px;
   }
-  .leaf-node {
+  /* .leaf-node {
     max-height: 65px;
-  }
+  } */
 }
 
 .align-timer {
@@ -171,7 +170,14 @@ app-content-icon {
   background-color: rgba(66, 66, 139, 0.64);
   color: white;
 }
-
+.cusotm-bg:hover{
+  background-color: rgba(66, 66, 139, 0.64);
+  color: white;
+}
+.remove-background{
+  background: unset !important;
+  color: white !important;
+}
 .newColor {
   color: #42428B !important;
   font-weight: 500 !important;
@@ -184,10 +190,65 @@ app-content-icon {
 }
 .active { 
    background-color: rgb(66, 66, 139);
+   transition: 0.5s;
+  }
+.p-0 {
+  padding: 0px !important;
+}
+
+.h-auto {
+  height: auto !important;
+  .mat-expansion-panel-content {
+    ::ng-deep {
+      .mat-expansion-panel-body {
+      padding: 0px !important;
+    }
+  }
+  }
+}
+::ng-deep{
+  .new-icon {
+    .mat-expansion-indicator {
+      position: absolute;
+      right: 25px;
+      &:after {
+        color: inherit !important;
+      }
+    }
+  }
+  .toc-expansion-panel.mat-expansion-panel {
+    background-color: inherit !important;
+    box-shadow: none !important;
+    .mat-expansion-panel-content, .mat-expansion-panel-body {
+    background-color: inherit !important;
+  }
+  .mat-expansion-panel-body {
+    padding: 0;
+    padding-left: 16px !important;
+  }
+  .tech-span {
+    padding-bottom: 25px;
+  }
+}
+}
+
+.tech-resource {
+  padding: 20px;
+  padding-left: 0;
+}
+.tech-resource-text-style{
+  padding: 20px;
+  color:white;
+}
+
+.resource-meta.width-expand {
+  mat-accordion {
+    width: 100% !important;
   }
   ::ng-deep{
     .theme-muave.night-mode .cusotm-bg{
       background-color: rgba(66, 66, 139, 0.64) !important;
       color: white !important;
     }
-    }
+  }
+}

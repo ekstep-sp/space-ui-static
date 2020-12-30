@@ -7,16 +7,19 @@
       (toggle)="toggleSideBar()">
     </viewer-viewer-top-bar>
     <section class="px-8 pb-4">
-      <ng-container *ngIf="isTypeOfCollection; else mainContentTemplate">
+      <ng-container *ngIf="isTypeOfCollection || technicalResource; else mainContentTemplate">
         <mat-sidenav-container autosize class="viewer-sidenav-container">
             <mat-sidenav #snav [ngClass]="isTypeOfCollection ? 'viewer-sidenav':'viewer-sidenav-standalone'"
             [opened]="sideNavBarOpened" [mode]="mode" class="sidenav-effect">
-            <viewer-viewer-toc [forPreview]="forPreview" (hidenav)="minimizeBar()">
+            <viewer-viewer-toc [forPreview]="forPreview" (hidenav)="minimizeBar()" [technicalResource]="technicalResource" (techResourceChange)="updateViewURL($event)">
             </viewer-viewer-toc>
           </mat-sidenav>
           <mat-sidenav-content class="sidenavContent" #scrollableContent>
-            <button mat-icon-button aria-label="Navbar Toggle button" color="primary" [ngClass]="{ 'rounded-none': !snav?.opened }" class="toggleBtn" (click)="snav?.toggle()">
-              <mat-icon class="dehaze-icon"[ngClass]="{'reverse': snav?.opened }">{{ !snav?.opened ? 'dehaze' : 'double_arrow'}}</mat-icon>
+            <button *ngIf="snav?.opened" mat-icon-button aria-label="Navbar Toggle button" color="primary" class="toggleBtn side-nav-button-opened" (click)="snav?.toggle()">
+              <mat-icon class="dehaze-icon reverse" >double_arrow</mat-icon>
+            </button>
+            <button *ngIf="!snav?.opened" mat-icon-button aria-label="Navbar Toggle button" color="primary" class="toggleBtn side-nav-button-closed" (click)="snav?.toggle()">
+              <mat-icon class="dehaze-icon">double_arrow</mat-icon>
             </button>
             <ng-container *ngTemplateOutlet="mainContentTemplate"></ng-container>
           </mat-sidenav-content>

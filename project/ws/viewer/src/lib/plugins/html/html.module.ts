@@ -14,6 +14,7 @@ import {
 
 import { HtmlComponent } from './html.component'
 import { RouterModule } from '@angular/router'
+import { SharedModule } from '@ws/author/src/lib/modules/shared/shared.module'
 
 @NgModule({
   declarations: [HtmlComponent],
@@ -28,6 +29,7 @@ import { RouterModule } from '@angular/router'
     MatIconModule,
     RouterModule,
     MatTooltipModule,
+    SharedModule,
   ],
   exports: [
     HtmlComponent,

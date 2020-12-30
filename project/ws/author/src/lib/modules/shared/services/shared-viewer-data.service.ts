@@ -37,6 +37,7 @@ export class SharedViewerDataService {
   updateHierarchyTitleSubject = new Subject()
   tocChangeSubject = new ReplaySubject<IViewerTocChangeEvent>(1)
   navSupportForResource = new ReplaySubject<IViewerResourceOptions>(1)
+  techUrlChangeSubject$ = new Subject<string | null>()
   constructor(private configSvc: ConfigurationsService) { }
 
   reset(resourceId: string | null = null, status: TStatus = 'none') {
@@ -45,6 +46,11 @@ export class SharedViewerDataService {
     this.error = null
     this.status = status
     this.changedSubject.next()
+  }
+
+  updateTechResource(techContent: any) {
+    this.updateResource(this.resource)
+    this.techUrlChangeSubject$.next(techContent.url)
   }
   updateResource(resource: NsContent.IContent | null = null, error: any | null = null) {
     if (resource) {

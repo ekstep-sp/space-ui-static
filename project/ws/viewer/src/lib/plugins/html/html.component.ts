@@ -5,6 +5,8 @@ import { Router } from '@angular/router'
 import { NsContent } from '@ws-widget/collection'
 import { ConfigurationsService } from '@ws-widget/utils'
 import { TFetchStatus } from '@ws-widget/utils/src/public-api'
+import { SharedViewerDataService } from '@ws/author/src/lib/modules/shared/services/shared-viewer-data.service'
+import { Subscription } from 'rxjs'
 import { MobileAppsService } from '../../../../../../../src/app/services/mobile-apps.service'
 
 @Component({
@@ -18,6 +20,7 @@ export class HtmlComponent implements OnInit, OnChanges {
 
   @ViewChild('mobileOpenInNewTab', { read: ElementRef, static: false }) mobileOpenInNewTab !: ElementRef<HTMLAnchorElement>
   @Input() htmlContent: NsContent.IContent | null = null
+  @Input() customUrl: string | null = null
   iframeUrl: SafeResourceUrl | null = null
 
   showIframeSupportWarning = false
@@ -29,6 +32,7 @@ export class HtmlComponent implements OnInit, OnChanges {
   isIntranetUrl = false
   progress = 100
   loaderIntervalTimeout: any
+  techResourceSub: Subscription | null = null
   constructor(
     private domSanitizer: DomSanitizer,
     public mobAppSvc: MobileAppsService,
@@ -36,6 +40,7 @@ export class HtmlComponent implements OnInit, OnChanges {
     private router: Router,
     private configSvc: ConfigurationsService,
     private snackBar: MatSnackBar,
+    private readonly sharedViewSrvc: SharedViewerDataService,
   ) { }
 
   ngOnInit() {
@@ -43,6 +48,13 @@ export class HtmlComponent implements OnInit, OnChanges {
   }
 
   ngOnChanges() {
+    if (this.techResourceSub) {
+      this.techResourceSub.unsubscribe()
+    }
+    this.techResourceSub = this.sharedViewSrvc.techUrlChangeSubject$.subscribe(newUrl => {
+      this.openInNewTab(false, newUrl)
+    })
+
     this.isIntranetUrl = false
     this.progress = 100
     this.pageFetchStatus = 'fetching'
@@ -115,12 +127,12 @@ export class HtmlComponent implements OnInit, OnChanges {
     ])
   }
 
-  openInNewTab(triggeredManually = false) {
+  openInNewTab(triggeredManually = false, customUrl?:null | string) {
     if (triggeredManually) {
       window.clearTimeout(this.loaderIntervalTimeout)
       this.progress = -1
     }
-    const redirecturl = this.prepare()
+    const redirecturl = this.prepare(customUrl)
     if (this.htmlContent) {
       if (this.mobAppSvc && this.mobAppSvc.isMobile) {
         // window.open(this.htmlContent.artifactUrl)
@@ -133,20 +145,7 @@ export class HtmlComponent implements OnInit, OnChanges {
       } else {
         const width = window.outerWidth
         const height = window.outerHeight
-        const isWindowOpen = window.open(
-          redirecturl,
-          '_blank',
-          `toolbar=yes,
-             scrollbars=yes,
-             resizable=yes,
-             menubar=no,
-             location=no,
-             addressbar=no,
-             top=${(15 * height) / 100},
-             left=${(2 * width) / 100},
-             width=${(65 * width) / 100},
-             height=${(70 * height) / 100}`,
-        )
+        const isWindowOpen = this.openWindow(width, height, redirecturl as string)
         if (isWindowOpen === null) {
           const msg = 'The pop up window has been blocked by your browser, please unblock to continue.'
           this.snackBar.open(msg)
@@ -154,6 +153,24 @@ export class HtmlComponent implements OnInit, OnChanges {
       }
     }
   }
+
+  openWindow(width: any, height: any, redirecturl: string) {
+    return window.open(
+      redirecturl,
+      '_blank',
+      `toolbar=yes,
+         scrollbars=yes,
+         resizable=yes,
+         menubar=no,
+         location=no,
+         addressbar=no,
+         top=${(15 * height) / 100},
+         left=${(2 * width) / 100},
+         width=${(65 * width) / 100},
+         height=${(70 * height) / 100}`,
+    )
+  }
+
   dismiss() {
     this.showIframeSupportWarning = false
     this.isIntranetUrl = false
@@ -176,7 +193,10 @@ export class HtmlComponent implements OnInit, OnChanges {
     }
   }
 
-  prepare() {
+  prepare(customLink?: null | string) {
+    if (customLink) {
+      return customLink
+    }
     let link = ''
     if (this.htmlContent) {
       if (this.htmlContent.assetType === 'Knowledge') {
@@ -192,6 +212,13 @@ export class HtmlComponent implements OnInit, OnChanges {
       }
     }
     return link
+  }
+
+  ngOnDestroy() {
+    if (this.techResourceSub){
+      console.log('unsubscribe called')
+      this.techResourceSub.unsubscribe()
+    }
   }
 
 }

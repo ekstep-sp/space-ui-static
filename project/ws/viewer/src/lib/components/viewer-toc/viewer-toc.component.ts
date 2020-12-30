@@ -22,6 +22,7 @@ import { ViewerUtilService } from '../../viewer-util.service'
 import {SharedViewerDataService } from './../../../../../author/src/lib/modules/shared/services/shared-viewer-data.service'
 interface IViewerTocCard {
   assetType: string | null
+  contentUrls?: [any] | null
   identifier: string
   viewerUrl: string
   thumbnailUrl: string
@@ -30,7 +31,8 @@ interface IViewerTocCard {
   type: string
   complexity: string
   children: null | IViewerTocCard[]
-  iconType?: string
+  iconType?: string,
+  technicalContents? : null | IViewerTocCard[]
 }
 
 export type TCollectionCardType = 'content' | 'playlist' | 'goals'
@@ -54,6 +56,8 @@ interface ICollectionCard {
 export class ViewerTocComponent implements OnInit, OnDestroy {
   @Output() hidenav = new EventEmitter<boolean>()
   @Input() forPreview = false
+  @Output() techResourceChange = new EventEmitter<any>();
+  @Input() technicalResource: any = null
 
   constructor(
     private activatedRoute: ActivatedRoute,
@@ -93,16 +97,22 @@ export class ViewerTocComponent implements OnInit, OnDestroy {
   private viewerDataServiceSubscription: Subscription | null = null
   hasNestedChild = (_: number, nodeData: IViewerTocCard) =>
     nodeData && nodeData.children && nodeData.children.length
+  hasTechResource = (_: number, nodeData: IViewerTocCard) =>
+    nodeData && nodeData.technicalContents && nodeData.technicalContents.length
   private _getChildren = (node: IViewerTocCard) => {
     return node && node.children ? node.children : []
   }
-
+  panelOpenState: boolean = false;
   ngOnInit() {
     if (this.configSvc.instanceConfig) {
       this.defaultThumbnail = this.domSanitizer.bypassSecurityTrustResourceUrl(
         this.configSvc.instanceConfig.logos.defaultContent,
       )
     }
+    if(this.technicalResource){
+      this.getDataForTechnicalResource()
+    }
+    else{
     this.paramSubscription = this.activatedRoute.queryParamMap.subscribe(async params => {
       const collectionId = params.get('collectionId')
       const collectionType = params.get('collectionType')
@@ -136,7 +146,12 @@ export class ViewerTocComponent implements OnInit, OnDestroy {
       }
     })
   }
+  }
 
+  async getDataForTechnicalResource(){
+    const collectionId = this.technicalResource && this.technicalResource.identifier? this.technicalResource.identifier: ""
+    this.collection = await this.getCollection(collectionId, "")
+  }
   private getContentProgressHash() {
     this.contentProgressSvc.getProgressHash().subscribe(progressHash => {
       this.contentProgressHash = progressHash
@@ -273,7 +288,7 @@ export class ViewerTocComponent implements OnInit, OnDestroy {
     //   children: Array.isArray(content.children) && content.children.length ?
     //     content.children.map(child => this.convertContentToIViewerTocCard(child)) : null,
     // }
-    return {
+    const newFormat = {
       assetType: content.assetType || null ,
       identifier: content.identifier,
       viewerUrl: `${this.forPreview ? '/author' : ''}/viewer/${VIEWER_ROUTE_FROM_MIME(
@@ -291,6 +306,40 @@ export class ViewerTocComponent implements OnInit, OnDestroy {
         Array.isArray(content.children) && content.children.length
           ? content.children.map(child => this.convertContentToIViewerTocCard(child))
           : null,
+    }
+    if (newFormat.assetType === 'Technology') {
+      this.restructureTechnicalResource(newFormat, content)
+    }
+    return newFormat
+  }
+
+  private restructureTechnicalResource(oldFormat: any, technicalContent: any) {
+    if (technicalContent.hasOwnProperty('documentation') || technicalContent.hasOwnProperty('interface_api') || technicalContent.hasOwnProperty('sandbox')) {
+      oldFormat.technicalContents = []
+      /* if (technicalContent.hasOwnProperty('codebase') && technicalContent.codebase) {
+        oldFormat.technicalContents.push({
+          title: 'Codebase Link',
+          url: technicalContent.codebase,
+        })
+      } */
+      if (technicalContent.hasOwnProperty('documentation') && technicalContent.documentation) {
+        oldFormat.technicalContents.push({
+          title: 'Documentation Link',
+          url: technicalContent.documentation,
+        })
+      }
+      if (technicalContent.hasOwnProperty('interface_api') && technicalContent.interface_api) {
+        oldFormat.technicalContents.push({
+          title: 'Interface API Link',
+          url: technicalContent.interface_api,
+        })
+      }
+      if (technicalContent.hasOwnProperty('sandbox') && technicalContent.sandbox) {
+        oldFormat.technicalContents.push({
+          title: 'Sandbox Link',
+          url: technicalContent.sandbox,
+        })
+      }
     }
   }
 
@@ -388,5 +437,15 @@ export class ViewerTocComponent implements OnInit, OnDestroy {
 
   minimizenav() {
     this.hidenav.emit(false)
+  }
+
+  openSubResource(techSubContent: any) {
+    this.viewerDataSvc.updateTechResource(techSubContent)
+  }
+
+  togglePanel(pannel: any) {
+    if (pannel) {
+      pannel.toggle()
+    }
   }
 }

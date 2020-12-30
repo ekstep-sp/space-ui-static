@@ -6,6 +6,7 @@ import { SafeHtml, DomSanitizer } from '@angular/platform-browser'
 import { PipeLimitToPipe } from '@ws-widget/utils/src/lib/pipes/pipe-limit-to/pipe-limit-to.pipe'
 import { ValueService, ConfigurationsService } from '@ws-widget/utils'
 import { SharedViewerDataService } from '@ws/author/src/lib/modules/shared/services/shared-viewer-data.service'
+// import { distinctUntilChanged } from 'rxjs/operators'
 // import { ViewerDataService } from '../../viewer-data.service'
 @Component({
   selector: 'viewer-html-container',
