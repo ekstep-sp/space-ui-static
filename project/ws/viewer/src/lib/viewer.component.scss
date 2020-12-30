@@ -45,16 +45,20 @@
 .toggleBtn {
   margin-left: 2px;
     margin-top: 3px;
-    width: 27px;
+    width: 25px;
     height: 25px;
-    line-height: 25px;
+    line-height: 27px;
     position: absolute;
     z-index: 3;
-    .dehaze-icon{
+    .dehaze-icon {
+      line-height: 28px !important;
+      font-size: 20px !important;
+    }
+    /* .dehaze-icon{
     // height: 20px;
     // width: 20px;
     vertical-align: -0.125em;
-    }
+    } */
 }
 
 .padding-md {
