@@ -221,7 +221,7 @@
             </a>
           </mat-expansion-panel-header>
            <ng-container *ngFor="let techContent of content?.technicalContents">
-            <span class="width-expand flex flex-middle tech-span cursor-pointer" (click)="openSubResource($event)">
+            <span class="width-expand flex flex-middle tech-span cursor-pointer" (click)="openSubResource(techContent)">
               <img
                 i18n-alt
                 alt="thumbnail"
