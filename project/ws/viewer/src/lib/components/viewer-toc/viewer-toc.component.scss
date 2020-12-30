@@ -149,14 +149,13 @@ app-content-icon {
 
 .parent-item {
   background-color: rgba(198, 188, 184, 0.48);
-  ;
   margin-top: 4px;
   .mat-tree-node.mat-toolbar {
     height: 40px;
   }
-  .leaf-node {
+  /* .leaf-node {
     max-height: 65px;
-  }
+  } */
 }
 
 .align-timer {
