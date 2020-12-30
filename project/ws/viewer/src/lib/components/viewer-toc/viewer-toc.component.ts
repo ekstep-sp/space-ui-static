@@ -442,8 +442,10 @@ export class ViewerTocComponent implements OnInit, OnDestroy {
   openSubResource(techSubContent: any) {
     this.viewerDataSvc.updateTechResource(techSubContent)
   }
-  // isExpanded(){
-  //   console.log("this.panelOpenState", this.panelOpenState)
-  //   this.panelOpenState = !this.panelOpenState
-  //   }
+
+  togglePanel(pannel: any) {
+    if (pannel) {
+      pannel.toggle()
+    }
+  }
 }
