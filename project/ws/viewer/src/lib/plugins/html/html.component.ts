@@ -1,4 +1,4 @@
-import { Component, ElementRef, Input, OnInit, ViewChild, OnChanges } from '@angular/core'
+import { Component, ElementRef, Input, OnInit, ViewChild, OnChanges, OnDestroy } from '@angular/core'
 import { MatSnackBar } from '@angular/material/snack-bar'
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser'
 import { Router } from '@angular/router'
@@ -14,7 +14,7 @@ import { MobileAppsService } from '../../../../../../../src/app/services/mobile-
   templateUrl: './html.component.html',
   styleUrls: ['./html.component.scss'],
 })
-export class HtmlComponent implements OnInit, OnChanges {
+export class HtmlComponent implements OnInit, OnChanges, OnDestroy {
 
   // private mobileOpenInNewTab!: any
 
@@ -63,7 +63,8 @@ export class HtmlComponent implements OnInit, OnChanges {
       ? this.configSvc.instanceConfig.intranetIframeUrls
       : []
     if (this.htmlContent && !this.htmlContent.hasOwnProperty('isIframeSupported')) {
-      // for technology assetType, this key is not coming, so setting it as default to No for code to work, originally, the key should be there in the content itself
+      // for technology assetType, this key is not coming, so setting it as default to No for code to work,
+      // originally, the key should be there in the content itself
       this.htmlContent['isIframeSupported'] = 'No'
     }
     let iframeSupport: boolean | string | null =
@@ -127,7 +128,7 @@ export class HtmlComponent implements OnInit, OnChanges {
     ])
   }
 
-  openInNewTab(triggeredManually = false, customUrl?:null | string) {
+  openInNewTab(triggeredManually = false, customUrl?: null | string) {
     if (triggeredManually) {
       window.clearTimeout(this.loaderIntervalTimeout)
       this.progress = -1
@@ -215,8 +216,7 @@ export class HtmlComponent implements OnInit, OnChanges {
   }
 
   ngOnDestroy() {
-    if (this.techResourceSub){
-      console.log('unsubscribe called')
+    if (this.techResourceSub) {
       this.techResourceSub.unsubscribe()
     }
   }

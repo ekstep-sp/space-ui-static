@@ -480,12 +480,15 @@ export class AppTocBannerComponent implements OnInit, OnChanges, OnDestroy {
   }
 
   updateMissingMessage(name: string) {
-    let newName = name.split(" ")
+    const newName = name.split(' ')
     let smallerName = name
     if (newName.length > 10) {
-      smallerName = newName.splice(0,11).join(" ") + '...'
+      smallerName = `${newName.splice(0, 11).join(' ')}...`
     }
-    this.contentMissingMessage = `Content <b>${smallerName}</b> is not available at the moment.</br>Try again later ot start from the next content.`
+    this.contentMissingMessage = `
+    Content <b>${smallerName}</b> is not available at the moment.</br>
+    Try again later ot start from the next content.
+    `
   }
   getContentHistory() {
     this.contentService.fetchContentHistory(this.route.snapshot.params.id).subscribe(data => {

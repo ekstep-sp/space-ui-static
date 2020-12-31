@@ -1,25 +1,25 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { async, ComponentFixture, TestBed } from '@angular/core/testing'
 
-import { ViewerCuratorListComponent } from './viewer-curator-list.component';
+import { ViewerCuratorListComponent } from './viewer-curator-list.component'
 
 describe('ViewerCuratorListComponent', () => {
-  let component: ViewerCuratorListComponent;
-  let fixture: ComponentFixture<ViewerCuratorListComponent>;
+  let component: ViewerCuratorListComponent
+  let fixture: ComponentFixture<ViewerCuratorListComponent>
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ ViewerCuratorListComponent ]
+      declarations: [ViewerCuratorListComponent],
     })
-    .compileComponents();
-  }));
+    .compileComponents()
+  }))
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(ViewerCuratorListComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
-  });
+    fixture = TestBed.createComponent(ViewerCuratorListComponent)
+    component = fixture.componentInstance
+    fixture.detectChanges()
+  })
 
   it('should create', () => {
-    expect(component).toBeTruthy();
-  });
-});
+    expect(component).toBeTruthy()
+  })
+})

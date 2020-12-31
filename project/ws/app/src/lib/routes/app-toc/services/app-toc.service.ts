@@ -102,17 +102,18 @@ export class AppTocService {
     if (users.length) {
       return from(this.fetchEmails(users)).pipe(map((newIDS: any) => {
         const newData = {
-          ...originalContent
+          ...originalContent,
         }
         newData.creatorContacts = [
           ...newIDS,
         ]
         return newData
+      // tslint:disable-next-line: align
       }), catchError(_e => {
         return of(originalContent)
       }))
     }
-    return of (originalContent)
+    return of(originalContent)
   }
 
   async fetchEmails(users: any[]) {

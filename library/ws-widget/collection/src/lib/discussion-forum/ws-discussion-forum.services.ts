@@ -134,6 +134,7 @@ export class WsDiscussionForumService {
   }
 
   getDFConfig() {
-    return this.http.get(`${this.configSrvc.sitePath}/feature/disscussionForum.json`).pipe(catchError((_error: any) => of (null))).toPromise()
+    // tslint:disable-next-line: max-line-length
+    return this.http.get(`${this.configSrvc.sitePath}/feature/disscussionForum.json`).pipe(catchError((_error: any) => of(null))).toPromise()
   }
 }
