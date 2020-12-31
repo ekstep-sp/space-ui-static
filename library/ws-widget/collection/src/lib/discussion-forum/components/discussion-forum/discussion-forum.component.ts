@@ -154,8 +154,8 @@ export class DiscussionForumComponent extends WidgetBaseComponent
 
   async getDiscussionForumConfig() {
     try {
-      const DFConfig = await this.discussionSvc.getDFConfig() as any
-      return DFConfig.allowMentionUsers
+      const dfConfig = await this.discussionSvc.getDFConfig() as any
+      return dfConfig.allowMentionUsers
     } catch (e) {
       return null
     }

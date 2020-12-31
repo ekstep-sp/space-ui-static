@@ -3,7 +3,7 @@ import { Component, Input, OnInit } from '@angular/core';
 @Component({
   selector: 'ws-author-viewer-curator-list',
   templateUrl: './viewer-curator-list.component.html',
-  styleUrls: ['./viewer-curator-list.component.scss']
+  styleUrls: ['./viewer-curator-list.component.scss'],
 })
 export class ViewerCuratorListComponent implements OnInit {
 
@@ -14,7 +14,6 @@ export class ViewerCuratorListComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
-    console.log('final content for curator list is', this.content)
   }
 
 }

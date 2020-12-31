@@ -70,7 +70,7 @@ export class ViewerComponent implements OnInit, OnDestroy, AfterViewInit, AfterV
         e.activatedRoute.data.subscribe((data: { content: { data: NsContent.IContent } }) => {
           if (data.content && data.content.data) {
             this.content = data.content.data
-           this.technicalResource = this.content && this.content.assetType === "Technology"? this.content : null
+           this.technicalResource = this.content && this.content.assetType === 'Technology' ? this.content : null
              this.formDiscussionForumWidget(this.content)
             /* this.tocSharedSvc.fetchEmails(this.content ? this.content.creatorContacts : []).then((newIDS: any) => {
               if (this.content) {
@@ -87,7 +87,7 @@ export class ViewerComponent implements OnInit, OnDestroy, AfterViewInit, AfterV
       window.setTimeout(() => {
         // this.utilitySvc.emitCurrentContentForBriefPlayer(e)
         this.content = e
-        this.technicalResource = this.content && this.content.assetType === "Technology"? this.content : null
+        this.technicalResource = this.content && this.content.assetType === 'Technology' ? this.content : null
         this.formDiscussionForumWidget(this.content as any)
         this.isRatingsDisabled = true
       })
@@ -202,7 +202,7 @@ export class ViewerComponent implements OnInit, OnDestroy, AfterViewInit, AfterV
     }
   }
 
-  updateViewURL(event: any) {
-    console.log(event)
+  updateViewURL(_event: any) {
+    // console.log(event)
   }
 }

@@ -59,7 +59,7 @@ import { DraftDialogComponent } from './components/draft-dialog/draft-dialog.com
 import { ShowHideToolTipDirective } from './directives/show-hide-tool-tip.directive'
 import { StatusTrackComponent } from './components/status-track/status-track.component'
 import { FeedbackFormComponent } from './components/feedback-form/feedback-form.component'
-import { SharedViewerDataService } from './services/shared-viewer-data.service';
+import { SharedViewerDataService } from './services/shared-viewer-data.service'
 import { ViewerCuratorListComponent } from './components/viewer-curator-list/viewer-curator-list.component'
 
 @NgModule({
