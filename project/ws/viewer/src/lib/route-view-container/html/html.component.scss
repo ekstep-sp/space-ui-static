@@ -151,6 +151,65 @@
 .customH {
   height: 92.4vh;
 }
+@media screen and (min-width:768px){
+  .customH {
+      height: calc(51vh - 168px) !important
+    
+  }
+}
+
+@media screen and (min-width:1024px){
+  .customH {
+      height: calc(108.5vh - 168px) !important
+    
+  }
+}
+
+@media screen and (min-width:1169px){
+  .customH {
+      height: calc(106vh - 146px) !important;
+    
+  }
+}
+
+@media screen and (min-width:1366px){
+  .customH {
+      height: calc(109vh - 146px) !important;
+    
+  }
+}
+
+@media screen and (min-width:1920px){
+  .customH {
+      height: calc(104vh - 146px) !important;
+    
+  }
+}
+ 
+@media screen and (max-width: 1023px){
+  .customH {
+      height: 40em;
+    
+  }
+}
+@media screen and (max-width: 767px){
+  .customH {
+      height: calc(77vh - 184px) !important;
+    
+  }
+}
+@media screen and (max-width: 800px){
+  .customH {
+      height: calc(62vh - 184px) !important;
+    
+  }
+}
+@media screen and (max-width: 516px){
+  .customH{
+      height: calc(103vh - 216px) !important;
+    
+  }
+}
 
 .pl-0 {
   padding-left: 0 !important;
