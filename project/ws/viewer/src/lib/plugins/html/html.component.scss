@@ -46,7 +46,12 @@
     margin-bottom: 1.5em !important;
   }
 }
-
+@media only screen and (max-width: 653px) and (orientation:landscape){
+  .mat-h2{
+    padding-top: 8em !important;
+    margin-bottom: 1.5em !important;
+  }
+}
 @media screen and (max-width:320px){
   .content-title{
     margin-bottom: 0px !important;
