@@ -148,69 +148,6 @@
 }
 }
 
-.customH {
-  height: 92.4vh;
-}
-@media screen and (min-width:768px){
-  .customH {
-      height: calc(51vh - 168px) !important
-    
-  }
-}
-
-@media screen and (min-width:1024px){
-  .customH {
-      height: calc(109.8vh - 168px) !important
-    
-  }
-}
-
-@media screen and (min-width:1169px){
-  .customH {
-      height: calc(109.3vh - 146px) !important;
-    
-  }
-}
-
-@media screen and (min-width:1366px){
-  .customH {
-      height: calc(110.3vh - 146px) !important;
-    
-  }
-}
-
-@media screen and (min-width:1920px){
-  .customH {
-      height: calc(104vh - 146px) !important;
-    
-  }
-}
- 
-@media screen and (max-width: 1023px){
-  .customH {
-      height: 40em;
-    
-  }
-}
-@media screen and (max-width: 767px){
-  .customH {
-      height: calc(77vh - 184px) !important;
-    
-  }
-}
-@media screen and (max-width: 800px){
-  .customH {
-      height: calc(62vh - 184px) !important;
-    
-  }
-}
-@media screen and (max-width: 516px){
-  .customH{
-      height: calc(103vh - 216px) !important;
-    
-  }
-}
-
 .pl-0 {
   padding-left: 0 !important;
 }
@@ -238,11 +175,14 @@ margin-top:30px
     width: 100%;
 }
 }
-@media only screen and (max-width: 1366px){
-    .bottom-0 {
-      bottom: -32px;
-    }
+.h-100{
+  height: 100%;
 }
+// @media only screen and (max-width: 1366px){
+//     .bottom-0 {
+//       bottom: -32px;
+//     }
+// }
 
 @media only screen and (min-width: 481px) and (max-width: 1024px){
   .customColorToolbar{
@@ -253,4 +193,36 @@ margin-top:30px
   .customColorToolbar{
   margin-top:36em;
   }
+}
+// @media screen and (min-width:768px){
+  
+//     .customH {
+//       height: calc(100vh - 168px) !important
+//     }
+  
+// }
+
+@media screen and (min-width:1024px){
+  
+    .customH {
+      height: calc(103.5vh - 168px) !important
+    }
+  
+}
+
+@media screen and (min-width:1169px){
+  
+    .customH {
+      height: calc(100vh - 146px) !important;
+    }
+  
+}
+
+ 
+@media screen and (max-width: 1023px){
+  
+    .customH {
+      height: 40em;
+    }
+  
 }
