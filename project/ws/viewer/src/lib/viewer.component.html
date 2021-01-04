@@ -28,7 +28,7 @@
     </section>
     <section class="px-8 py-4 maincard">
       <div class="wrapper flex-none md:flex md:flex-row-reverse discussionforum" [ngClass]="{'guest-view': configService.isGuestUser === true}">
-        <div class="w-full section-right pb-4 md:pb-0 atglancecard" [ngClass]="{'md:w-1/4 custom-padding': !configService.isGuestUser }">
+        <div class="w-full section-right pb-4 md:pb-0 atglancecard" [ngClass]="{'md\:w-1\/3 custom-padding': !configService.isGuestUser }">
           <ws-widget-player-brief [newUI]="true" [askAuthorEnabled]="!configService?.isGuestUser" [forPreview]="forPreview || configService?.isGuestUser" [content]="content"></ws-widget-player-brief>
         </div>
         <div class="w-full md:w-3/4 section-left dfcard" *ngIf="!configService.isGuestUser">
