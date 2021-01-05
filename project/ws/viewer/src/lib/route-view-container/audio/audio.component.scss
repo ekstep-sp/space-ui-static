@@ -114,7 +114,11 @@
     width: 100%;
   }
 }
-
+.buttons{
+  white-space: nowrap;
+  margin-left: auto;
+  text-align: right;
+ }
 .author {
   padding: $size-s 0;
   display: flex;
@@ -156,6 +160,10 @@
     display: flex;
       justify-content: flex-end;
       width: 100%;
+  }
+  .customColorToolbar{
+    position: inherit;
+    flex-wrap: wrap;
   }
   }
 

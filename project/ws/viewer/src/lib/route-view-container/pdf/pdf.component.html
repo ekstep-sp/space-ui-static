@@ -5,7 +5,7 @@
         <div id="fullScreenContainer" class="video-player">
           <ng-container *ngIf="isFetchingDataComplete" [wsResolverWidget]="widgetResolverPdfData"></ng-container>
         </div>
-        <div class="flex justify-between items-center flex-wrap customColorToolbar">
+        <div class="flex items-center customColorToolbar">
           <div class="inline ml-3">
             <ws-author-viewer-curator-list class="text-white" [askAuthorEnabled]="!configSvc?.isGuestUser" [fixLineIssue]="true" [content]="pdfData"></ws-author-viewer-curator-list>
           </div>

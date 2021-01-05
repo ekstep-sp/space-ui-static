@@ -48,12 +48,17 @@
     width: 100%;
   }
 }
-
+.buttons{
+  white-space: nowrap;
+  margin-left: auto;
+  text-align: right;
+ }
 .video-player {
   width: 100%;
   overflow: auto;
   // max-height: 84.5vh;
 }
+
 @media screen and (min-width:768px){
   .video-player {
       height: calc(100vh - 168px) !important
@@ -143,4 +148,13 @@
     justify-content: flex-end;
     width: 100%;
 }
+.customColorToolbar{
+  position: inherit;
+  flex-wrap: wrap;
 }
+}
+// @media screen and (max-width:320px){
+//   .mr-2{
+//     margin-right:0.3em;
+//   }
+// }

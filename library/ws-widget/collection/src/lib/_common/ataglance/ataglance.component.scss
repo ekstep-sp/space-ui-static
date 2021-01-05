@@ -108,7 +108,7 @@ font-size: 18px
     }
 }
 .custom-flex {
-  margin-top: -19px !important;
+   margin-top: 40px !important;
     flex-direction: row;
     flex-wrap: wrap;
     flex: auto;
@@ -144,6 +144,7 @@ mat-chip {
     padding: 32px 64px 40px 64px;
     margin: 0 !important;
     font-size: 1.125rem;
+    padding-bottom:0;
     @include breakpoint-xs {
       text-align: center !important;
     }

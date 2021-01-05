@@ -14,7 +14,7 @@ $border-color: #d8d8d8;
     padding-right: 2 * $size-l;
     box-sizing: border-box;
     position: relative;
-    margin-top: -19px !important;
+    margin-top: 42px !important;
     padding-left: 6px;
     @include breakpoint-xs {
       margin-bottom: 60px;
@@ -113,6 +113,6 @@ $border-color: #d8d8d8;
   color: #696466 !important;
     font-weight: bold !important;
     // padding: 15px 64px;
-    margin-bottom: 51px !important;
+    margin-bottom: 0;
     font-size: 1.125em;
 }
