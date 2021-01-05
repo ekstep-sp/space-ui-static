@@ -34,6 +34,7 @@
       max-width: 140px;
       color: #696466 !important;
       font-size: 1rem;
+      font-weight: 400;
     /* opacity: 50%; */
     }
 
@@ -46,7 +47,9 @@
     }
   }
 }
-
+.btn-text-font{
+font-size: 18px
+}
 .author {
     padding: 0;
 //   padding: $size-s 0;
@@ -105,6 +108,7 @@
     }
 }
 .custom-flex {
+  margin-top: -19px !important;
     flex-direction: row;
     flex-wrap: wrap;
     flex: auto;
