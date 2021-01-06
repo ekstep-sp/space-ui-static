@@ -105,13 +105,14 @@ export class ViewerTocComponent implements OnInit, OnDestroy {
     return node && node.children ? node.children : []
   }
   ngOnInit() {
+
     if (this.configSvc.instanceConfig) {
       this.defaultThumbnail = this.domSanitizer.bypassSecurityTrustResourceUrl(
         this.configSvc.instanceConfig.logos.defaultContent,
       )
     }
     if (this.technicalResource) {
-      this.getDataForTechnicalResource()
+      this.getDataForTechResourceAndLoadDefaultLink()
     } else {
     this.paramSubscription = this.activatedRoute.queryParamMap.subscribe(async params => {
       const collectionId = params.get('collectionId')
@@ -148,9 +149,12 @@ export class ViewerTocComponent implements OnInit, OnDestroy {
   }
   }
 
-  async getDataForTechnicalResource() {
+  async getDataForTechResourceAndLoadDefaultLink() {
     const collectionId = this.technicalResource && this.technicalResource.identifier ? this.technicalResource.identifier : ''
     this.collection = await this.getCollection(collectionId, '')
+    if(this.collection){
+      this.openSubResource(this.collection.viewerUrl)
+    }
   }
   private getContentProgressHash() {
     this.contentProgressSvc.getProgressHash().subscribe(progressHash => {
@@ -440,6 +444,7 @@ export class ViewerTocComponent implements OnInit, OnDestroy {
       const path = this.utilitySvc.getPath(this.collection, this.resourceId)
       this.pathSet = new Set(path.map((u: { identifier: any }) => u.identifier))
       path.forEach((node: IViewerTocCard) => {
+        console.log("node",node)
         this.nestedTreeControl.expand(node)
       })
       this.viewerDataSvc.updateHeirarchyTitleInToolbar(path)
@@ -454,19 +459,11 @@ export class ViewerTocComponent implements OnInit, OnDestroy {
   }
 
   navigateToTechResource(viewerUrl: any, techSubContent = {title:'Codebase Link'}){
-    // if(techSubContent && viewerUrl.includes('html')) {
       this.router.navigate([`/${viewerUrl}`], { queryParams: {techResourceType: techSubContent.title}});
-    // }
-    // this.router.navigate([`${url}`], {queryParams: {techResourceType: 'CodeBase'}});
-
   }
-  openSubResource(techSubContent: any, viewerUrl: string) {
+  openSubResource( viewerUrl: string, techSubContent: any = {title:'Codebase Link'}){
     this.viewerDataSvc.updateTechResource(techSubContent)
-    this.navigateToTechResource(viewerUrl, techSubContent)
-
-    // else{
-    //   this.router.navigate([`/${viewerUrl}`]);
-    // }
+    this.navigateToTechResource(viewerUrl, techSubContent )
   }
 
   /* togglePanel(content: any) {
@@ -484,7 +481,10 @@ export class ViewerTocComponent implements OnInit, OnDestroy {
      });
 
   }
-
+  isActiveSubLinks(identifier: any, techContentTitle: string) {
+    const title = this.activatedRoute.snapshot.queryParamMap.get('techResourceType');
+    return (this.pathSet.has(identifier) || (title === techContentTitle))
+  }
   shouldExpand(content: any) {
     // console.log('should expand --> ' + id, this.pathSet.has(id))
     // return this.pathSet.has(content.identifier) || (content.hasOwnProperty('techExpanded') ? content.techExpanded : false)
