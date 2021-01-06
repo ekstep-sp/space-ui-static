@@ -114,6 +114,8 @@
 }
 
 .sticky {
-	position: sticky;
-	top: 24px;
+  position: sticky;
+  top: 24px;
+  z-index: 999;
+  background: white;
 }
