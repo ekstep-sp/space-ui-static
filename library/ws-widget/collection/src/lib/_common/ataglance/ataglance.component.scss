@@ -10,7 +10,7 @@
   .info-item {
     // display: flex;
     align-items: center;
-    padding: $size-xs 0;
+    // padding: $size-xs 0;
     box-sizing: border-box;
     // width: 9%;
     flex: 0 1 26%;
@@ -112,7 +112,7 @@ font-size: 18px
     }
 }
 .custom-flex {
-   margin-top: 40px !important;
+   margin-top: 38px !important;
     flex-direction: row;
     flex-wrap: wrap;
     flex: auto;
