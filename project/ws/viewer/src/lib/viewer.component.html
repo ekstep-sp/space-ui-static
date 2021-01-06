@@ -18,11 +18,12 @@
         </div>
         <mat-sidenav-container autosize class="viewer-sidenav-container">
             <mat-sidenav #snav [ngClass]="isTypeOfCollection ? 'viewer-sidenav':'viewer-sidenav-standalone'"
-            [opened]="sideNavBarOpened" [mode]="mode" class="sidenav-effect">
+            [opened]="sideNavBarOpened" [mode]="mode" class="sidenav-effect"
+            >
             <viewer-viewer-toc [forPreview]="forPreview" (hidenav)="minimizeBar()" [technicalResource]="technicalResource" (techResourceChange)="updateViewURL($event)">
             </viewer-viewer-toc>
           </mat-sidenav>
-          <mat-sidenav-content class="sidenavContent" #scrollableContent>
+          <mat-sidenav-content class="sidenavContent" #scrollableContent  [ngClass]="{'sideNavOpend':snav?.opened}">
             <button *ngIf="snav?.opened" mat-icon-button aria-label="Navbar Toggle button" color="primary" class="toggleBtn side-nav-button-opened" (click)="snav?.toggle()">
               <mat-icon class="dehaze-icon reverse" >double_arrow</mat-icon>
             </button>
