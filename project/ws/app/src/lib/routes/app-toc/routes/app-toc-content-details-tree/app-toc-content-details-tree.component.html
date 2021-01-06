@@ -1,6 +1,6 @@
 <ng-container>
-    <ul class="timeline" *ngIf="isCollection && !hasChild" [ngClass]="{'lastParent': lastEemFromParent}">
-        <h3 class="parent_node">{{content?.name}}</h3>
+    <ul class="timeline m-0 pb-68" *ngIf="isCollection && !hasChild" [ngClass]="{'lastParent': lastEemFromParent}">
+        <h3 class="parent_node m-0 pb-32">{{content?.name}}</h3>
 
         <ng-container *ngIf="content?.children.length">
             <ng-container *ngFor="let child of content?.children;index as i; trackBy: contentTrackBy">
@@ -18,8 +18,8 @@
     </ul>
 </ng-container>
 <ng-container *ngIf="isResource">
-    <li class="event" *ngIf="hasChild" [ngClass]="{'last': lastEemFromChild}">
-        <div class="flex items-center">
+    <li class="event m-0 pb-32" *ngIf="hasChild" [ngClass]="{'last': lastEemFromChild}">
+        <div class="flex items-center pb-33">
             <div class="resource-container mr-3 contentType">
                 <ws-widget-display-content-type-icon class="flex contentType_icon"
                     [displayContentType]="content?.displayContentType" [displayResourceType]="content?.mimeType">

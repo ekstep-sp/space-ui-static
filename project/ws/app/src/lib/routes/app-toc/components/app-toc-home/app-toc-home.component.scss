@@ -9,7 +9,7 @@
 }
 .toc-body {
   @extend %container-padding;
- padding-bottom: 15px !important;
+ padding-bottom: 0px !important;
   .toc-links {
     top: 0px;
     width: 100%;
@@ -114,6 +114,8 @@
 }
 
 .sticky {
-	position: sticky;
-	top: 24px;
+  position: sticky;
+  top: 35px;
+  z-index: 999;
+  background: white;
 }

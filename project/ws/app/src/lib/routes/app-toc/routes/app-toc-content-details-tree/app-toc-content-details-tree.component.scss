@@ -34,7 +34,7 @@
 }
 ul::before {
     content: "";
-    border: 1px solid purple;
+    border:1px solid #925EB0;
     position: absolute;
     height: 100%;
     left: -1px;
@@ -183,4 +183,10 @@ h5 {
 }
 .pb-32{
     padding-bottom: 32px;
+}
+.pb-33{
+    padding-bottom: 33px;  
+}
+.pb-68{
+    padding-bottom: 68px
 }
