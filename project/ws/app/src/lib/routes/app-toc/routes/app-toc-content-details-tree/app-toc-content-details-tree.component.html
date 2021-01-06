@@ -38,15 +38,15 @@
             </ng-container>
         </div>
     </li>
-     <ul class="event1" *ngIf="!hasChild" [ngClass]="{'last': lastEemFromParent}">
-        <div class="flex">
+     <ul class="event1 m-0" *ngIf="!hasChild" [ngClass]="{'last': lastEemFromParent}">
+        <div class="flex pb-32">
             <div class="resource-container mr-3 contentType mt-1">
                 <ws-widget-display-content-type-icon class="flex contentType_icon"
                     [displayContentType]="content?.displayContentType" [displayResourceType]="content?.mimeType">
                 </ws-widget-display-content-type-icon>
             </div>
             <a [routerLink]="resourceLink.url" [queryParams]="resourceLink.queryParams">
-            <h3 class="child_node" style="color:darkblue">{{content?.name}}</h3>
+            <h3 class="child_node m-0" style="color:darkblue">{{content?.name}}</h3>
             </a>
         </div>
     </ul>

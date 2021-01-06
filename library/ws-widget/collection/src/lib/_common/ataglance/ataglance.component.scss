@@ -34,6 +34,7 @@
       max-width: 140px;
       color: #696466 !important;
       font-size: 1rem;
+      font-weight: 400;
     /* opacity: 50%; */
     }
 
@@ -46,7 +47,9 @@
     }
   }
 }
-
+.btn-text-font{
+font-size: 18px
+}
 .author {
     padding: 0;
 //   padding: $size-s 0;
@@ -58,6 +61,10 @@
     height: $size;
     width: $size;
   }
+}
+.sub-heading{
+  padding-bottom: 0;
+  margin-top: 24px;
 }
 
 ::ng-deep {
@@ -105,6 +112,7 @@
     }
 }
 .custom-flex {
+   margin-top: 40px !important;
     flex-direction: row;
     flex-wrap: wrap;
     flex: auto;
@@ -140,6 +148,7 @@ mat-chip {
     padding: 32px 64px 40px 64px;
     margin: 0 !important;
     font-size: 1.125rem;
+    padding-bottom:0;
     @include breakpoint-xs {
       text-align: center !important;
     }

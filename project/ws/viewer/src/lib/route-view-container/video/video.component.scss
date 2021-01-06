@@ -144,7 +144,11 @@
 .video-content{
   justify-content: flex-end;
 }
-
+.buttons{
+  white-space: nowrap;
+  margin-left: auto;
+  text-align: right;
+ }
 // @media screen and (max-width: 750px) {
 //   .video-player {
 //     height: 78.6vh;
@@ -159,6 +163,10 @@
     display: flex;
       justify-content: flex-end;
       width: 100%;
+  }
+  .customColorToolbar{
+    position: inherit;
+    flex-wrap: wrap;
   }
   }
 

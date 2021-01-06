@@ -7,7 +7,7 @@
       <div class="pos">
         <div id="fullScreenContainer" class="video-player">
           <ng-container *ngIf="isFetchingDataComplete" [wsResolverWidget]="widgetResolverAudioData"></ng-container>
-          <div class="space flex justify-between bottom-0 w-full items-center flex-wrap customColorToolbar">
+          <div class="space flex bottom-0 w-full items-center customColorToolbar">
             <div class="inline ml-3">
               <ws-author-viewer-curator-list class="text-white" [askAuthorEnabled]="!configSvc?.isGuestUser" [fixLineIssue]="true" [content]="audioData"></ws-author-viewer-curator-list>
             </div>

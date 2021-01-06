@@ -74,9 +74,7 @@ ul::before {
     }
   }
   .event1 {
-    margin-bottom: 12px;
     position: relative;
-    margin-top: 12px;
 
     &:before, &:after {
         position: absolute;
@@ -182,4 +180,7 @@ h5 {
 
 .m-0 {
     margin: 0 !important;
+}
+.pb-32{
+    padding-bottom: 32px;
 }

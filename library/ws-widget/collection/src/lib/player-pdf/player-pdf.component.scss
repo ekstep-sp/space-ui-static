@@ -95,6 +95,7 @@ input[type=number] {
   width: 30px !important;
     }
   }
+
 @media only screen and (max-width: 599px){
   
   .menu-btn{
@@ -106,6 +107,11 @@ input[type=number] {
   }
 }
 
+}
+@media only screen and (max-width: 320px){
+  .counter-container {
+    width: 41px;
+  }
 }
 
 .customColor {
