@@ -97,10 +97,10 @@ input[type=number] {
   }
 
 @media only screen and (max-width: 599px){
-  
+
   .menu-btn{
   padding: 0px 8px !important;
-  
+
   }
   .pdf-container {
    padding-top: 32px;
@@ -115,9 +115,9 @@ input[type=number] {
 }
 
 .customColor {
-  background-color: #C6BCB8 !important; 
+  background-color: #C6BCB8 !important;
   border-radius: 0px !important;
- 
+
   .icon-color{
     color: #696466;
   }
@@ -130,3 +130,9 @@ input[type=number] {
 .mat-input-element{
   vertical-align: inherit!important;
 }
+
+@media screen and (min-width: 1950px) {
+  .pdf-page-container:not(:root:root){
+    height:92vh;
+  }
+  }
