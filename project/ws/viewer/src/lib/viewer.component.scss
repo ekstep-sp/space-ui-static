@@ -75,6 +75,14 @@
       }
     }
 }
+@media screen and (min-width: 1700px) {
+  .sideNavOpend {
+    margin-left: 600px !important;
+}
+.viewer-sidenav {
+  width: 100% !important;
+}
+}
 
 .padding-md {
   padding: 16px;
@@ -85,9 +93,9 @@
   box-shadow: none !important;
 }
 .sideNavOpend {
-  margin-left: 400px !important;
+  margin-left: 400px;
   @media screen and (max-width:690px) {
-    margin-left: 282px !important;
+    margin-left: 282px;
   }
 }
 .df-card {
