@@ -66,7 +66,7 @@
   
             <div class="info-item" *ngIf="hasTocStructure && content?.children?.length">
               <h3 class="item-heading ws-mat-primary-text font-montserrat" i18n>Structure</h3>
-              <div class="font-montserrat font-weight-bold text-black width-expand pt-4">
+              <div class="font-montserrat font-weight-bold text-black width-expand sub-heading">
                 <h3 class="font-montserrat btn-text-font" *ngIf="tocStructure?.course > 0">
                   <ng-container>{{ tocStructure?.course }}</ng-container>
                   <ng-container *ngIf="tocStructure?.course === 1" i18n> Collection</ng-container>
@@ -304,7 +304,7 @@
             <div class="info-item flex-keyword" *ngIf="content?.keywords?.length">
               <h3 class="item-heading ws-mat-primary-text font-montserrat pb-4" i18n>Keywords</h3>
               <mat-chip-list>
-                <mat-chip style="background: #865ba0; color: white;" selected *ngFor="let keyword of content?.keywords">
+                <mat-chip style="background: #865ba0; color: white; margin:0 8px 10px 0px" selected *ngFor="let keyword of content?.keywords">
                   <h3 class="font-montserrat font-weight-bold width-expand keyword">
                     {{ keyword }}
                   </h3>

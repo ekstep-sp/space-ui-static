@@ -62,6 +62,10 @@ font-size: 18px
     width: $size;
   }
 }
+.sub-heading{
+  padding-bottom: 0;
+  margin-top: 24px;
+}
 
 ::ng-deep {
   .theme-muave.night-mode .info-container {
