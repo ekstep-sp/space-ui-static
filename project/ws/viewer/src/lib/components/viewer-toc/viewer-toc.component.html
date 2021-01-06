@@ -98,7 +98,8 @@
         </ng-container>
         <ng-container *ngIf = "!nestedDataSource.data.length && collection?.technicalContents " >
           <ng-container *ngFor="let techContent of collection?.technicalContents">
-            <span class="width-expand flex flex-middle tech-span tech-resource-text-style active" (click)="openSubResource(techContent)">
+            
+            <span class="width-expand flex flex-middle tech-span tech-resource-text-style active" (click)="openSubResource(techContent, collection.viewerUrl)">
               <img
                 i18n-alt
                 alt="thumbnail"
@@ -199,7 +200,9 @@
       <mat-accordion *ngIf="content?.technicalContents">
         <mat-expansion-panel #panel [hideToggle]="shouldExpand(content)" class="toc-expansion-panel" [expanded]="shouldExpand(content)">
           <mat-expansion-panel-header (click)="togglePane1(panel)" class="p-0 h-auto new-icon remove-background" [ngClass]="{'content-active active': pathSet.has(content.identifier), 'cusotm-bg': !pathSet.has(content.identifier)}">
-            <a [routerLink]="content.viewerUrl" routerLinkActive="active" queryParamsHandling="preserve">
+            <!-- <a [routerLink]="content.viewerUrl" routerLinkActive="active" queryParamsHandling="preserve"> -->
+              <a (click)="navigateToTechResource(content.viewerUrl )" queryParamsHandling="preserve">
+
               <span class="width-expand flex flex-middle">
                 <img i18n-alt alt="thumbnail"
                   class="viewer-toc-thumbnail align-self-start margin-auto mat-app-background rounded-lg"
@@ -233,8 +236,8 @@
               </span>
             </a>
           </mat-expansion-panel-header>
-           <ng-container *ngFor="let techContent of content?.technicalContents">
-            <span class="width-expand flex flex-middle tech-span cursor-pointer" (click)="openSubResource(techContent)">
+           <ng-container *ngFor="let techContent of showTechResourceWithFilteredDefaultLink(content?.technicalContents)">
+            <span class="width-expand flex flex-middle tech-span cursor-pointer" (click)="openSubResource(techContent, content.viewerUrl)">
               <img
                 i18n-alt
                 alt="thumbnail"
@@ -255,21 +258,19 @@
                 </div>
               </span>
             </span>
-             <!-- <div 
-             class="tech-resource cursor-pointer"
-             (click)="openSubResource(techContent, content)"
-             [ngClass]="{ 'content-active active': pathSet.has(content.identifier), 'text-white': !pathSet.has(content.identifier) }"
-             [attr.id]="techContent?.title">
-               {{techContent?.title}}
-             </div> -->
            </ng-container>
         </mat-expansion-panel>
       </mat-accordion>
-      <a *ngIf="!content?.technicalContents"
+      <!-- <a *ngIf="!content?.technicalContents"
         [ngClass]="{ 'content-active active': pathSet.has(content.identifier), 'text-white': !pathSet.has(content.identifier) }"
-        [routerLink]="content.viewerUrl"  routerLinkActive="active"
+        [routerLink]="content.viewerUrl"   routerLinkActive="active"
         queryParamsHandling="preserve"
-      >
+      > -->
+      <a *ngIf="!content?.technicalContents"
+      [ngClass]="{ 'content-active active': pathSet.has(content.identifier), 'text-white': !pathSet.has(content.identifier) }"
+      (click)= "navigateToNonTechResource(content.viewerUrl)"
+      queryParamsHandling="preserve"
+    >
       <span class="width-expand flex flex-middle">
         <img
           i18n-alt

@@ -1,7 +1,7 @@
 import { Component, ElementRef, Input, OnInit, ViewChild, OnChanges, OnDestroy } from '@angular/core'
 import { MatSnackBar } from '@angular/material/snack-bar'
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser'
-import { Router } from '@angular/router'
+import { Router, ActivatedRoute } from '@angular/router'
 import { NsContent } from '@ws-widget/collection'
 import { ConfigurationsService } from '@ws-widget/utils'
 import { TFetchStatus } from '@ws-widget/utils/src/public-api'
@@ -40,7 +40,7 @@ export class HtmlComponent implements OnInit, OnChanges, OnDestroy {
     private router: Router,
     private configSvc: ConfigurationsService,
     private snackBar: MatSnackBar,
-    private readonly sharedViewSrvc: SharedViewerDataService,
+    private route: ActivatedRoute
   ) { }
 
   ngOnInit() {
@@ -51,9 +51,9 @@ export class HtmlComponent implements OnInit, OnChanges, OnDestroy {
     if (this.techResourceSub) {
       this.techResourceSub.unsubscribe()
     }
-    this.techResourceSub = this.sharedViewSrvc.techUrlChangeSubject$.subscribe(newUrl => {
-      this.openInNewTab(false, newUrl)
-    })
+    // this.techResourceSub = this.sharedViewSrvc.techUrlChangeSubject$.subscribe(newUrl => {
+    //   this.openInNewTab(false, newUrl)
+    // })
 
     this.isIntranetUrl = false
     this.progress = 100
@@ -133,6 +133,7 @@ export class HtmlComponent implements OnInit, OnChanges, OnDestroy {
       window.clearTimeout(this.loaderIntervalTimeout)
       this.progress = -1
     }
+
     const redirecturl = this.prepare(customUrl)
     if (this.htmlContent) {
       if (this.mobAppSvc && this.mobAppSvc.isMobile) {
@@ -204,7 +205,8 @@ export class HtmlComponent implements OnInit, OnChanges, OnDestroy {
         link = this.htmlContent.artifactUrl
 
       } else if (this.htmlContent.assetType === 'Technology') {
-        link = this.htmlContent.codebase
+        link =  this.getLinkFromTechnicalResource()
+        // link = this.htmlContent.codebase
 
       } else if (this.htmlContent.assetType === 'Connection') {
         link = this.htmlContent.profile_link
@@ -214,7 +216,24 @@ export class HtmlComponent implements OnInit, OnChanges, OnDestroy {
     }
     return link
   }
-
+  getLinkFromTechnicalResource(){
+    const techResource = this.route.snapshot.queryParamMap.get('techResourceType')
+      if( this.htmlContent && techResource){
+        this.htmlContent.name = techResource
+        if(techResource === 'Interface API Link'){
+          return (this.htmlContent && this.htmlContent.interface_api) ? this.htmlContent.interface_api: ''
+        }
+        else if(techResource === 'Documentation Link'){
+          return (this.htmlContent && this.htmlContent.documentation) ? this.htmlContent.documentation: ''
+        }
+        else if(techResource === 'Sandbox Link'){
+          return (this.htmlContent && this.htmlContent.sandbox) ? this.htmlContent.sandbox: ''
+        }
+        else if(techResource === 'Codebase Link'){
+          return (this.htmlContent && this.htmlContent.codebase) ? this.htmlContent.codebase: ''
+        }
+      }
+  }
   ngOnDestroy() {
     if (this.techResourceSub) {
       this.techResourceSub.unsubscribe()

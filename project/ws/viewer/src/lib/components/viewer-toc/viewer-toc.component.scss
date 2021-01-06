@@ -178,19 +178,23 @@ app-content-icon {
   background: unset !important;
   color: white !important;
 }
-.newColor {
-  color: #42428B !important;
-  font-weight: 500 !important;
-}
+// .newColor {
+//   color: #42428B !important;
+//   font-weight: 500 !important;
+// }
 .title-heading{
   font-size:12px;
 }
 .title-subheading{
   font-size:14px;
 }
-.active { 
-   background-color: rgb(66, 66, 139);
-   transition: 0.5s;
+// .active { 
+//    background-color: rgb(66, 66, 139);
+//    transition: 0.5s;
+//   }
+  .active{
+    background-color: rgba(66, 66, 139, 0.64) ;
+    transition: 0.5s;
   }
 .p-0 {
   padding: 0px !important;
@@ -239,6 +243,7 @@ app-content-icon {
 .tech-resource-text-style{
   padding: 20px;
   color:white;
+  cursor: pointer;
 }
 
 .resource-meta.width-expand {

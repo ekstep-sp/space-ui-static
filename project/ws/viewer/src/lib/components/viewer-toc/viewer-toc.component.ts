@@ -2,7 +2,7 @@ import { NestedTreeControl } from '@angular/cdk/tree'
 import { Component, EventEmitter, OnDestroy, OnInit, Output, Input } from '@angular/core'
 import { MatTreeNestedDataSource } from '@angular/material'
 import { DomSanitizer, SafeUrl } from '@angular/platform-browser'
-import { ActivatedRoute } from '@angular/router'
+import { ActivatedRoute, Route, Router } from '@angular/router'
 import {
   ContentProgressService,
   NsContent,
@@ -58,6 +58,7 @@ export class ViewerTocComponent implements OnInit, OnDestroy {
   @Input() forPreview = false
   @Output() techResourceChange = new EventEmitter<any>()
   @Input() technicalResource: any = null
+  isExpand = false;
 
   constructor(
     private activatedRoute: ActivatedRoute,
@@ -69,6 +70,7 @@ export class ViewerTocComponent implements OnInit, OnDestroy {
     private viewSvc: ViewerUtilService,
     private configSvc: ConfigurationsService,
     private contentProgressSvc: ContentProgressService,
+    private router: Router,
   ) {
     this.nestedTreeControl = new NestedTreeControl<IViewerTocCard>(this._getChildren)
     this.nestedDataSource = new MatTreeNestedDataSource()
@@ -313,7 +315,7 @@ export class ViewerTocComponent implements OnInit, OnDestroy {
 
   private restructureTechnicalResource(oldFormat: any, technicalContent: any) {
     if (technicalContent.hasOwnProperty('documentation') || technicalContent.hasOwnProperty('interface_api') ||
-         technicalContent.hasOwnProperty('sandbox')) {
+         technicalContent.hasOwnProperty('sandbox') || technicalContent.hasOwnProperty('codebase')) {
       oldFormat.technicalContents = []
       /* if (technicalContent.hasOwnProperty('codebase') && technicalContent.codebase) {
         oldFormat.technicalContents.push({
@@ -321,6 +323,12 @@ export class ViewerTocComponent implements OnInit, OnDestroy {
           url: technicalContent.codebase,
         })
       } */
+      if (technicalContent.hasOwnProperty('codebase') && technicalContent.codebase) {
+        oldFormat.technicalContents.push({
+          title: 'Codebase Link',
+          url: technicalContent.codebase,
+        })
+      }
       if (technicalContent.hasOwnProperty('documentation') && technicalContent.documentation) {
         oldFormat.technicalContents.push({
           title: 'Documentation Link',
@@ -339,6 +347,7 @@ export class ViewerTocComponent implements OnInit, OnDestroy {
           url: technicalContent.sandbox,
         })
       }
+
     }
     if (oldFormat.technicalContents.length > 0) {
       oldFormat.techExpanded = false
@@ -440,9 +449,24 @@ export class ViewerTocComponent implements OnInit, OnDestroy {
   minimizenav() {
     this.hidenav.emit(false)
   }
+  navigateToNonTechResource(url : any){
+   this.router.navigate([`${url}`]);
+  }
 
-  openSubResource(techSubContent: any) {
+  navigateToTechResource(viewerUrl: any, techSubContent = {title:'Codebase Link'}){
+    // if(techSubContent && viewerUrl.includes('html')) {
+      this.router.navigate([`/${viewerUrl}`], { queryParams: {techResourceType: techSubContent.title}});
+    // }
+    // this.router.navigate([`${url}`], {queryParams: {techResourceType: 'CodeBase'}});
+
+  }
+  openSubResource(techSubContent: any, viewerUrl: string) {
     this.viewerDataSvc.updateTechResource(techSubContent)
+    this.navigateToTechResource(viewerUrl, techSubContent)
+
+    // else{
+    //   this.router.navigate([`/${viewerUrl}`]);
+    // }
   }
 
   /* togglePanel(content: any) {
@@ -453,6 +477,12 @@ export class ViewerTocComponent implements OnInit, OnDestroy {
 
   togglePane1(panel: any) {
     panel.toggle()
+  }
+  showTechResourceWithFilteredDefaultLink(technicalContent: any){
+  return  technicalContent.filter( (techResource: { title: string })=>{
+     return  (techResource.title != 'Codebase Link')
+     });
+
   }
 
   shouldExpand(content: any) {
