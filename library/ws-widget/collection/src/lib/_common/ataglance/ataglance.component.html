@@ -63,7 +63,7 @@
             </div>
             <mat-divider *ngIf="content?.sourceShortName"></mat-divider> -->
             <!-- Structure -->
-  
+
             <div class="info-item" *ngIf="hasTocStructure && content?.children?.length">
               <h3 class="item-heading ws-mat-primary-text font-montserrat" i18n>Structure</h3>
               <div class="font-montserrat font-weight-bold text-black width-expand sub-heading">
@@ -138,9 +138,9 @@
                 {{ content?.lastUpdatedOn | date }}
               </h3>
             </div> -->
-  
+
             <!-- <mat-divider *ngIf="hasTocStructure && content?.children?.length"></mat-divider> -->
-  
+
             <div class="info-item" *ngIf="content?.assetType">
               <h3 class="item-heading ws-mat-primary-text font-montserrat" i18n>Type</h3>
               <h3 class="font-montserrat font-weight-bold text-black width-expand btn-text-font pt-4">
@@ -148,25 +148,25 @@
               </h3>
             </div>
             <!-- <mat-divider></mat-divider> -->
-  
+
             <!-- <mat-divider *ngIf="hasTocStructure && content?.children?.length"></mat-divider> -->
             <div class="info-item" *ngIf="content?.categoryType && content?.assetType=='Knowledge'">
               <h3 class="item-heading ws-mat-primary-text font-montserrat" i18n>Format</h3>
               <h3 class="font-montserrat font-weight-bold text-black width-expand btn-text-font pt-4">
                 {{ content?.categoryType  | lowercase}}
               </h3>
-  
+
             </div>
             <!-- <mat-divider></mat-divider> -->
             <!-- <mat-divider *ngIf="hasTocStructure && content?.children?.length"></mat-divider> -->
-  
+
             <!-- <div class="info-item" *ngIf="content?.codebase && content?.assetType=='Technology'">
               <h3 class="item-heading ws-mat-primary-text" i18n>Codebase</h3>
               <h3 class="ws-mat-accent-text width-expand">
                 {{ content?.codebase  }}
               </h3>
             </div> -->
-  
+
             <!-- added licence policy details -->
             <!-- <mat-divider *ngIf="hasTocStructure && content?.children?.length"></mat-divider> -->
             <div class="info-item" *ngIf="content?.spaceLicense?.length">
@@ -176,7 +176,7 @@
               </h3>
             </div>
             <!-- <mat-divider></mat-divider> -->
-  
+
             <!-- <mat-divider *ngIf="hasTocStructure && content?.children?.length"></mat-divider> -->
             <div class="info-item" *ngIf="content?.spaceLicenseAttribution?.length">
               <h3 class="item-heading ws-mat-primary-text font-montserrat" i18n>Attributions</h3>
@@ -185,7 +185,7 @@
               </h3>
             </div>
             <!-- <mat-divider></mat-divider> -->
-  
+
             <!-- <mat-divider *ngIf="hasTocStructure && content?.children?.length"></mat-divider> -->
             <div class="info-item" *ngIf="content?.spaceLicenseCopyright?.length">
               <h3 class="item-heading ws-mat-primary-text font-montserrat" i18n>Copyright</h3>
@@ -194,7 +194,7 @@
               </h3>
             </div>
             <!-- <mat-divider></mat-divider> -->
-  
+
             <!-- <mat-divider *ngIf="hasTocStructure && content?.children?.length"></mat-divider> -->
             <div class="info-item" *ngIf="content?.spaceAreaOfExpertise?.length">
               <h3 class="item-heading ws-mat-primary-text font-montserrat" i18n>Areas of Expertise</h3>
@@ -204,11 +204,11 @@
             </div>
             <!-- <mat-divider></mat-divider> -->
             <!-- till here -->
-  
-  
+
+
             <!-- <mat-divider *ngIf="hasTocStructure && content?.children?.length"></mat-divider> -->
             <div class="info-item" *ngIf="content?.sourceName?.length">
-              <h3 class="item-heading ws-mat-primary-text font-montserrat" i18n>Created By</h3>
+              <h3 class="item-heading ws-mat-primary-text font-montserrat pb-3" i18n>Created By</h3>
               <h3 class="font-montserrat font-weight-bold text-black width-expand btn-text-font pt-4">
                 {{ content?.sourceName | lowercase }} <span *ngIf="content?.sourceName === 'Other'">(
                   {{content?.otherSourceName | lowercase}} )</span>
@@ -238,7 +238,7 @@
                   {{ content?.rootOrg }}
                 </h3>
               </div> -->
-  
+
                 <!-- <mat-divider *ngIf="hasTocStructure && content?.children?.length"></mat-divider> -->
                 <div class="info-item" *ngIf="content?.theme?.length">
                   <h3 class="item-heading ws-mat-primary-text font-montserrat" i18n>SDG</h3>
@@ -248,7 +248,7 @@
                     </h3>
                   </ng-container>
                 </div>
-  
+
                 <!-- <mat-divider *ngIf="content?.learningMode"></mat-divider> -->
                 <div class="info-item" *ngIf="content?.region?.length">
                   <h3 class="item-heading ws-mat-primary-text font-montserrat" i18n>Region</h3>
@@ -304,7 +304,7 @@
             <div class="info-item flex-keyword" *ngIf="content?.keywords?.length">
               <h3 class="item-heading ws-mat-primary-text font-montserrat pb-4" i18n>Keywords</h3>
               <mat-chip-list>
-                <mat-chip style="background: #865ba0; color: white; margin:0 8px 10px 0px" selected *ngFor="let keyword of content?.keywords">
+                <mat-chip style="background:#925EB0; color: white; margin:0 8px 10px 0px" selected *ngFor="let keyword of content?.keywords">
                   <h3 class="font-montserrat font-weight-bold width-expand keyword">
                     {{ keyword }}
                   </h3>
@@ -326,7 +326,7 @@
                 }">
             </ng-container>
           </div> -->
-  
+
         <!-- <div class="hidden sm:block margin-bottom-m font-montserrat" *ngIf="content?.creatorContacts?.length">
             <ng-container [ngTemplateOutlet]="creators" [ngTemplateOutletContext]="{
                   authors: content?.creatorContacts,
@@ -560,7 +560,7 @@
       <div class="viewer-flex-column m-0 p-0">
         <mat-chip-list>
           <ng-container *ngFor="let keyword of content?.keywords">
-            <mat-chip color="primary" class="font-montserrat font-weight-bold font-size-14" selected>{{ keyword }}</mat-chip>
+            <mat-chip color="primary" class="font-montserrat font-weight-bold font-size-14 matchip-margin" selected>{{ keyword }}</mat-chip>
           </ng-container>
         </mat-chip-list>
       </div>

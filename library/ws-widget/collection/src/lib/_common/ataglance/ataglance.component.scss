@@ -170,9 +170,15 @@ mat-chip {
 }
 .txt-clr2 {
   font-weight: bold !important;
-  padding: 30px 0 40px 40px;
+  padding: 30px 0 0px 40px;
   margin: 0 !important;
   font-size: 1.125rem;
+}
+.matchip-margin{
+  margin: 0px 8px 8px 0;
+}
+.pb-3{
+  padding-bottom: 3px;
 }
 .viewer-flex-column {
   flex: 1;
@@ -191,7 +197,10 @@ mat-chip {
     margin: 0;
 }
 }
-
+[color|=primary] {
+  background: #925EB0 !important;
+  color: white !important;
+}
 @media only screen and (max-width: 1050px) {
   .viewer-version {
     .txt-clr2 {
