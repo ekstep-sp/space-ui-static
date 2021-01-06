@@ -18,6 +18,9 @@
     min-width: 400px;
     max-width: 600px;
   }
+  // @include breakpoint-xs {
+  //   width: 80%;
+  // }
 }
 
 .viewer-sidenav-standalone {
@@ -102,6 +105,17 @@
 }
 .reverse {
   transform: rotate(180deg);
+}
+
+.btn-reverse {
+  margin-left: -28px;
+}
+
+.isMobile {
+display: none;
+@include breakpoint-xs {
+  display: block;
+}
 }
 
 .custom-padding {
