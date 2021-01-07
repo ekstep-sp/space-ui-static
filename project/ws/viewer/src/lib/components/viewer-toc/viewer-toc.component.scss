@@ -278,6 +278,19 @@ background-color: rgba(66, 66, 139) !important;
 color: white !important;
 }
 
+.theme-muave.night-mode .title-heading{
+  color: white !important;
+  }
+.theme-muave.night-mode .arrow-icon {
+      color: white !important;
+}
+// .theme-muave.night-mode .dark-bg-color{
+//   background: #424242;
+// }
+.theme-muave.night-mode .active{
+  background: #424242 !important;
+  transition: 0.5s;
+}
   // .theme-muave.night-mode .toc-expansion-panel .mat-expansion-panel-content, .mat-expansion-panel-body .active-sublink{
   // background:rgb(73, 73, 129) !important;
   // transition: 0.5s;
