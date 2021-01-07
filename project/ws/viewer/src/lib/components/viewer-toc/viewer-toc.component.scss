@@ -194,11 +194,12 @@ font-size:14px;
 // }
 .active{
 // background-color:rgb(91 91 149 / 64%);
-background-color: rgb(120 120 192 / 64%) !important;
+background-color: rgba(66, 66, 139, 0.64) !important;
 transition: 0.5s;
 }
 .active-sublink{
-  background-color:rgb(120 120 192 / 64%) !important;
+  // background-color:rgb(120 120 192 / 64%) !important;
+  background-color:rgba(66, 66, 139, 0.40) !important;
 transition: 0.5s;
 }
 .p-0 {
@@ -233,25 +234,22 @@ box-shadow: none !important;
 background-color: inherit !important;
 }
 
-.mat-expansion-panel-body {
-padding: 0;
-padding-left: 16px !important;
+// .mat-expansion-panel-body {
+// padding: 0;
+// padding-left: 16px !important;
+// }
+.mat-expansion-panel-body{
+  padding: 0 !important;
 }
 .tech-span {
-padding-bottom: 25px;
+padding: 20px;
 }
 }
 
 .toc-expansion-panel .mat-expansion-panel-content, .mat-expansion-panel-body .active-sublink{
-  padding-left: 0px !important;
-  padding-right: 0px !important;
-  background: red !important;
+  background: rgba(66, 66, 139, 0.40) !important;
   transition: 0.5s;
   }
-  .mat-expansion-panel-body {
-    padding: 0;
-    padding-left: 0px !important;
-    }
 }
 
 
@@ -270,10 +268,18 @@ background: rgb(66, 66, 139);
 mat-accordion {
 width: 100% !important;
 }
+}
 ::ng-deep{
+
 .theme-muave.night-mode .cusotm-bg{
-background-color: rgba(66, 66, 139, 0.64) !important;
+// background-color: rgba(66, 66, 139, 0.64) !important;
+background-color: rgba(66, 66, 139) !important;
+
 color: white !important;
 }
-}
+
+  // .theme-muave.night-mode .toc-expansion-panel .mat-expansion-panel-content, .mat-expansion-panel-body .active-sublink{
+  // background:rgb(73, 73, 129) !important;
+  // transition: 0.5s;
+  // }
 }

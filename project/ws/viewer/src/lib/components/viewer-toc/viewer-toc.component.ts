@@ -2,7 +2,7 @@ import { NestedTreeControl } from '@angular/cdk/tree'
 import { Component, EventEmitter, OnDestroy, OnInit, Output, Input } from '@angular/core'
 import { MatTreeNestedDataSource } from '@angular/material'
 import { DomSanitizer, SafeUrl } from '@angular/platform-browser'
-import { ActivatedRoute, Route, Router } from '@angular/router'
+import { ActivatedRoute, Router } from '@angular/router'
 import {
   ContentProgressService,
   NsContent,
@@ -444,7 +444,6 @@ export class ViewerTocComponent implements OnInit, OnDestroy {
       const path = this.utilitySvc.getPath(this.collection, this.resourceId)
       this.pathSet = new Set(path.map((u: { identifier: any }) => u.identifier))
       path.forEach((node: IViewerTocCard) => {
-        console.log("node",node)
         this.nestedTreeControl.expand(node)
       })
       this.viewerDataSvc.updateHeirarchyTitleInToolbar(path)
@@ -459,6 +458,7 @@ export class ViewerTocComponent implements OnInit, OnDestroy {
   }
 
   navigateToTechResource(viewerUrl: any, techSubContent = {title:'Codebase Link'}){
+
       this.router.navigate([`/${viewerUrl}`], { queryParams: {techResourceType: techSubContent.title}});
   }
   openSubResource( viewerUrl: string, techSubContent: any = {title:'Codebase Link'}){
@@ -481,9 +481,14 @@ export class ViewerTocComponent implements OnInit, OnDestroy {
      });
 
   }
-  isActiveSubLinks(identifier: any, techContentTitle: string) {
+  isActiveSubLinks(identifier: any, techContentTitle: string, isStandaloneResource= false) {
     const title = this.activatedRoute.snapshot.queryParamMap.get('techResourceType');
-    return (this.pathSet.has(identifier) || (title === techContentTitle))
+    if(isStandaloneResource){
+      return (title === techContentTitle)
+    }
+    else{
+      return (this.pathSet.has(identifier) && (title === techContentTitle))
+    }
   }
   shouldExpand(content: any) {
     // console.log('should expand --> ' + id, this.pathSet.has(id))
