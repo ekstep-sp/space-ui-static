@@ -1,7 +1,7 @@
 <!-- <div class="video-player-m" *ngIf="isScreenSizeSmall && audioData && isNotEmbed">
   <ng-container *ngIf="isFetchingDataComplete" [wsResolverWidget]="widgetResolverAudioData"></ng-container>
 </div> -->
-<div *ngIf="audioData && isNotEmbed">
+<div *ngIf="audioData && isNotEmbed" class="mr-3">
   <div class="flex flex-around flex-wrapped">
     <div class="w-full">
       <div class="pos">
@@ -28,7 +28,7 @@
               <ws-widget-btn-content-like [forPreview]="forPreview"
                 [widgetData]="audioData | pipePartialContent: ['identifier']">
               </ws-widget-btn-content-like>
-  
+
               <ws-widget-btn-content-share [overview]="true" [forPreview]="forPreview" [widgetData]="{
                 identifier: audioData?.identifier,
                 name: audioData?.name,
@@ -45,7 +45,7 @@
                 mode: 'dialog',
                 isDisabled: isPreviewMode
               }"></ws-widget-btn-playlist>
-             
+
               <ws-widget-btn-content-feedback-v2 [forPreview]="forPreview"
                 [widgetData]="audioData | pipePartialContent: ['identifier', 'name']">
               </ws-widget-btn-content-feedback-v2>
@@ -90,7 +90,7 @@
               mode: 'dialog',
               isDisabled: isPreviewMode
             }"></ws-widget-btn-playlist>
-           
+
             <ws-widget-btn-content-feedback-v2 [forPreview]="forPreview"
               [widgetData]="audioData | pipePartialContent: ['identifier', 'name']">
             </ws-widget-btn-content-feedback-v2>
