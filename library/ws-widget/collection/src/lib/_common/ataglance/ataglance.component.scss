@@ -74,6 +74,12 @@ font-size: 18px
     .theme-muave.night-mode .info-container .info-item h3 {
     color: #c6bcb8 !important
     }
+     .theme-muave.night-mode .darktheme-color{
+      color: #c6bcb8 !important
+    }
+      .theme-muave.night-mode .item-heading{
+      font-weight: bolder !important;
+    }
   @media only screen and (max-width: 1366px) {
     .hidedownload {
       display: none !important;
