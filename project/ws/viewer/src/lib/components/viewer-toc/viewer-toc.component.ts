@@ -76,6 +76,9 @@ export class ViewerTocComponent implements OnInit, OnDestroy {
     this.nestedDataSource = new MatTreeNestedDataSource()
   }
   resourceId: string | null = null
+  collectionId: string | null = null
+  collectionType: string | null = null
+  viewMode: string | null = null
   collection: IViewerTocCard | null = null
   queue: IViewerTocCard[] = []
   tocMode: 'FLAT' | 'TREE' = 'TREE'
@@ -115,20 +118,21 @@ export class ViewerTocComponent implements OnInit, OnDestroy {
       this.getDataForTechResourceAndLoadDefaultLink()
     } else {
     this.paramSubscription = this.activatedRoute.queryParamMap.subscribe(async params => {
-      const collectionId = params.get('collectionId')
-      const collectionType = params.get('collectionType')
-      if (collectionId && collectionType) {
+      this.collectionId = params.get('collectionId')
+       this.collectionType = params.get('collectionType')
+       this.viewMode = params.get('viewMode')
+      if (this.collectionId && this.collectionType) {
         if (
-          collectionType.toLowerCase() ===
+          this.collectionType.toLowerCase() ===
           NsContent.EMiscPlayerSupportedCollectionTypes.PLAYLIST.toLowerCase()
         ) {
-          this.collection = await this.getPlaylistContent(collectionId, collectionType)
+          this.collection = await this.getPlaylistContent(this.collectionId, this.collectionType)
         } else if (
-          collectionType.toLowerCase() === NsContent.EContentTypes.MODULE.toLowerCase() ||
-          collectionType.toLowerCase() === NsContent.EContentTypes.COURSE.toLowerCase() ||
-          collectionType.toLowerCase() === NsContent.EContentTypes.PROGRAM.toLowerCase()
+          this.collectionType.toLowerCase() === NsContent.EContentTypes.MODULE.toLowerCase() ||
+          this.collectionType.toLowerCase() === NsContent.EContentTypes.COURSE.toLowerCase() ||
+          this.collectionType.toLowerCase() === NsContent.EContentTypes.PROGRAM.toLowerCase()
         ) {
-          this.collection = await this.getCollection(collectionId, collectionType)
+          this.collection = await this.getCollection(this.collectionId, this.collectionType)
         } else {
           this.isErrorOccurred = true
         }
@@ -448,11 +452,20 @@ export class ViewerTocComponent implements OnInit, OnDestroy {
     this.hidenav.emit(false)
   }
   navigateToNonTechResource(url: any) {
-   this.router.navigate([`${url}`])
+   this.router.navigate([`${url}`], { queryParams: {
+    collectionId: this.collectionId,
+    collectionType: this.collectionType,
+    viewMode: this.viewMode,
+   },
+  })
   }
 
   navigateToTechResource(viewerUrl: any, techSubContent = { title: 'Codebase Link' }) {
-      this.router.navigate([`/${viewerUrl}`], { queryParams: { techResourceType: techSubContent.title },
+      this.router.navigate([`/${viewerUrl}`], { queryParams: {
+        collectionId: this.collectionId,
+        collectionType: this.collectionType,
+        viewMode: this.viewMode,
+        techResourceType: techSubContent.title },
     })
   }
   openSubResource(viewerUrl: string, techSubContent: any = { title: 'Codebase Link' }) {
