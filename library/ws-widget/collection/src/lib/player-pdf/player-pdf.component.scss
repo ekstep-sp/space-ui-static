@@ -20,8 +20,12 @@
   width: calc(100%-80px);
   text-align: center;
   overflow: auto;
+
+  @include breakpoint-xll {
+    height: 100%;
+  }
 }
-@media screen and (max-width: 1920px) {
+@media screen and (orientation:landscape) {
   .pdf-page-container{
     height:155vh;
   }
