@@ -5,7 +5,7 @@ import { Router, ActivatedRoute } from '@angular/router'
 import { NsContent } from '@ws-widget/collection'
 import { ConfigurationsService } from '@ws-widget/utils'
 import { TFetchStatus } from '@ws-widget/utils/src/public-api'
-import { SharedViewerDataService } from '@ws/author/src/lib/modules/shared/services/shared-viewer-data.service'
+// import { SharedViewerDataService } from '@ws/author/src/lib/modules/shared/services/shared-viewer-data.service'
 import { Subscription } from 'rxjs'
 import { MobileAppsService } from '../../../../../../../src/app/services/mobile-apps.service'
 
@@ -217,9 +217,10 @@ export class HtmlComponent implements OnInit, OnChanges, OnDestroy {
     return link
   }
   getLinkFromTechnicalResource(){
+    if( this.htmlContent){
     const techResource = this.route.snapshot.queryParamMap.get('techResourceType')
-      if( this.htmlContent && techResource){
-        this.htmlContent.name = techResource
+     if(techResource){
+      this.htmlContent.name = techResource
         if(techResource === 'Interface API Link'){
           return (this.htmlContent && this.htmlContent.interface_api) ? this.htmlContent.interface_api: ''
         }
@@ -233,6 +234,7 @@ export class HtmlComponent implements OnInit, OnChanges, OnDestroy {
           return (this.htmlContent && this.htmlContent.codebase) ? this.htmlContent.codebase: ''
         }
       }
+    }
   }
   ngOnDestroy() {
     if (this.techResourceSub) {

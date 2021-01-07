@@ -321,12 +321,6 @@ export class ViewerTocComponent implements OnInit, OnDestroy {
     if (technicalContent.hasOwnProperty('documentation') || technicalContent.hasOwnProperty('interface_api') ||
          technicalContent.hasOwnProperty('sandbox') || technicalContent.hasOwnProperty('codebase')) {
       oldFormat.technicalContents = []
-      /* if (technicalContent.hasOwnProperty('codebase') && technicalContent.codebase) {
-        oldFormat.technicalContents.push({
-          title: 'Codebase Link',
-          url: technicalContent.codebase,
-        })
-      } */
       if (technicalContent.hasOwnProperty('codebase') && technicalContent.codebase) {
         oldFormat.technicalContents.push({
           title: 'Codebase Link',
@@ -458,7 +452,6 @@ export class ViewerTocComponent implements OnInit, OnDestroy {
   }
 
   navigateToTechResource(viewerUrl: any, techSubContent = {title:'Codebase Link'}){
-
       this.router.navigate([`/${viewerUrl}`], { queryParams: {techResourceType: techSubContent.title}});
   }
   openSubResource( viewerUrl: string, techSubContent: any = {title:'Codebase Link'}){
@@ -475,12 +468,12 @@ export class ViewerTocComponent implements OnInit, OnDestroy {
   togglePane1(panel: any) {
     panel.toggle()
   }
-  showTechResourceWithFilteredDefaultLink(technicalContent: any){
-  return  technicalContent.filter( (techResource: { title: string })=>{
-     return  (techResource.title != 'Codebase Link')
-     });
+  // showTechResourceWithFilteredDefaultLink(technicalContent: any){
+  // return  technicalContent.filter( (techResource: { title: string })=>{
+  //    return  (techResource.title != 'Codebase Link')
+  //    });
 
-  }
+  // }
   isActiveSubLinks(identifier: any, techContentTitle: string, isStandaloneResource= false) {
     const title = this.activatedRoute.snapshot.queryParamMap.get('techResourceType');
     if(isStandaloneResource){
