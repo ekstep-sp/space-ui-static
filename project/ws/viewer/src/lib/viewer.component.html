@@ -16,7 +16,7 @@
             <mat-icon class="dehaze-icon">double_arrow</mat-icon>
           </button> -->
         </div>
-        <mat-sidenav-container autosize class="viewer-sidenav-container">
+        <mat-sidenav-container autosize class="viewer-sidenav-container mat-drawer-container">
             <mat-sidenav #snav [ngClass]="isTypeOfCollection ? 'viewer-sidenav':'viewer-sidenav-standalone'"
             [opened]="sideNavBarOpened" [mode]="mode" class="sidenav-effect"
             >

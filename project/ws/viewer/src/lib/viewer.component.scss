@@ -181,3 +181,10 @@ display: none;
 .maincard{
   padding-bottom: 23px
 }
+
+
+::ng-deep{
+  .mat-drawer-container{
+    overflow: unset!important;
+  }
+}
