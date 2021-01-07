@@ -136,3 +136,12 @@ input[type=number] {
     height:92vh;
   }
   }
+  ::ng-deep {
+.theme-muave.night-mode .customColor {
+   background-color: #C6BCB8 !important;
+   .icon-color{
+    color:#FFFFFF !important;
+    font-weight: bold !important;
+  }
+}
+}
