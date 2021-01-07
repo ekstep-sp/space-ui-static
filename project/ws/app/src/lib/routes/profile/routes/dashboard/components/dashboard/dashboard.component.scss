@@ -264,3 +264,9 @@ height:auto;
    min-width: 68px !important;
  }
 }
+
+::ng-deep{
+  .mat-drawer-container{
+    overflow: unset!important;
+  }
+}
