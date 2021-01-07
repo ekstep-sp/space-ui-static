@@ -44,7 +44,8 @@
           <ng-container *ngIf = "nestedDataSource.data.length">
           <mat-tree [dataSource]="nestedDataSource" [treeControl]="nestedTreeControl">
             <mat-tree-node class="tree-node" *matTreeNodeDef="let node" matTreeNodeToggle matTreeNodePadding [matTreeNodePaddingIndent]="'0'">
-              <li class="mat-tree-node leaf-node cusotm-bg">
+              <!--removed cusotm-bg class and added to template-->
+              <li class="mat-tree-node leaf-node">
                 <ng-container
                   *ngTemplateOutlet="TocContentList; context: { $implicit: node }"
                 ></ng-container>
@@ -96,10 +97,9 @@
             </mat-nested-tree-node>
           </mat-tree>
         </ng-container>
-        <ng-container *ngIf = "!nestedDataSource.data.length && collection?.technicalContents " >
+        <ng-container *ngIf = "!nestedDataSource.data.length && collection?.technicalContents" >
           <ng-container *ngFor="let techContent of collection?.technicalContents">
-            
-            <span class="width-expand flex flex-middle tech-span tech-resource-text-style active" (click)="openSubResource(techContent, collection.viewerUrl)">
+            <span class="width-expand flex flex-middle tech-span tech-resource-text-style" [ngClass]="{'active': isActiveSubLinks(collection.identifier, techContent?.title, true) }"(click)="openSubResource( collection.viewerUrl, techContent)">
               <img
                 i18n-alt
                 alt="thumbnail"
@@ -107,10 +107,10 @@
                 [src]="collection.thumbnailUrl"
                 [wsUtilsDefaultThumbnail]="defaultThumbnail"
               />
-              <span class="width-1-1 margin-left-m flex flex-wrapped ">
+              <span class="width-1-1 margin-left-m flex flex-wrapped">
                 <div
                   class="width-1-1 flex flex-between">
-                  <div class="mat-body-1 text-truncate flex title-subheading active">
+                  <div class="mat-body-1 text-truncate flex title-subheading">
                     <span>
                       {{ techContent?.title | pipeLimitTo: 25 }}
                     </span>
@@ -195,8 +195,8 @@
 
 <ng-template let-content #TocContentList>
   <!-- <div class="tainer margin-left-xl"> -->
-  <div class="resource-container">
-    <div class="resource-meta width-expand" [ngClass]="{'content-active active': pathSet.has(content.identifier), 'cusotm-bg': !pathSet.has(content.identifier)}">
+  <div class="resource-container" [ngClass]="{'content-active active': pathSet.has(content.identifier), 'cusotm-bg': !pathSet.has(content.identifier)}">
+    <div class="resource-meta width-expand" >
       <mat-accordion *ngIf="content?.technicalContents">
         <mat-expansion-panel #panel [hideToggle]="shouldExpand(content)" class="toc-expansion-panel" [expanded]="shouldExpand(content)">
           <mat-expansion-panel-header (click)="togglePane1(panel)" class="p-0 h-auto new-icon remove-background" [ngClass]="{'content-active active': pathSet.has(content.identifier), 'cusotm-bg': !pathSet.has(content.identifier)}">
@@ -236,8 +236,11 @@
               </span>
             </a>
           </mat-expansion-panel-header>
-           <ng-container *ngFor="let techContent of showTechResourceWithFilteredDefaultLink(content?.technicalContents)">
-            <span class="width-expand flex flex-middle tech-span cursor-pointer" (click)="openSubResource(techContent, content.viewerUrl)">
+     
+           <!-- <ng-container *ngFor="let techContent of showTechResourceWithFilteredDefaultLink(content?.technicalContents)"> -->
+            <ng-container *ngFor="let techContent of content?.technicalContents">
+            <span class="width-expand flex flex-middle tech-span cursor-pointer " [ngClass]="{ 'active-sublink': isActiveSubLinks(content.identifier, techContent?.title), 'cusotm-bg': !isActiveSubLinks(content.identifier, techContent?.title)}"
+            (click)="openSubResource(content.viewerUrl, techContent)">
               <img
                 i18n-alt
                 alt="thumbnail"
@@ -248,7 +251,7 @@
               <span class="width-1-1 margin-left-m flex flex-wrapped align-self-start">
                 <div
                   class="width-1-1 flex flex-between"
-                  [ngClass]="{ 'content-active active': pathSet.has(content.identifier), 'text-white': !pathSet.has(content.identifier)}"
+                  [ngClass]="{ 'content-active': pathSet.has(content.identifier), 'text-white': !pathSet.has(content.identifier)}"
                 >
                   <div class="mat-body-1 text-truncate flex title-subheading">
                     <span>

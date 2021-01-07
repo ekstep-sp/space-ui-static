@@ -58,7 +58,7 @@ export class ViewerTocComponent implements OnInit, OnDestroy {
   @Input() forPreview = false
   @Output() techResourceChange = new EventEmitter<any>()
   @Input() technicalResource: any = null
-  isExpand = false;
+  isExpand = false
 
   constructor(
     private activatedRoute: ActivatedRoute,
@@ -105,13 +105,14 @@ export class ViewerTocComponent implements OnInit, OnDestroy {
     return node && node.children ? node.children : []
   }
   ngOnInit() {
+
     if (this.configSvc.instanceConfig) {
       this.defaultThumbnail = this.domSanitizer.bypassSecurityTrustResourceUrl(
         this.configSvc.instanceConfig.logos.defaultContent,
       )
     }
     if (this.technicalResource) {
-      this.getDataForTechnicalResource()
+      this.getDataForTechResourceAndLoadDefaultLink()
     } else {
     this.paramSubscription = this.activatedRoute.queryParamMap.subscribe(async params => {
       const collectionId = params.get('collectionId')
@@ -148,9 +149,12 @@ export class ViewerTocComponent implements OnInit, OnDestroy {
   }
   }
 
-  async getDataForTechnicalResource() {
+  async getDataForTechResourceAndLoadDefaultLink() {
     const collectionId = this.technicalResource && this.technicalResource.identifier ? this.technicalResource.identifier : ''
     this.collection = await this.getCollection(collectionId, '')
+    if (this.collection) {
+      this.openSubResource(this.collection.viewerUrl)
+    }
   }
   private getContentProgressHash() {
     this.contentProgressSvc.getProgressHash().subscribe(progressHash => {
@@ -317,12 +321,6 @@ export class ViewerTocComponent implements OnInit, OnDestroy {
     if (technicalContent.hasOwnProperty('documentation') || technicalContent.hasOwnProperty('interface_api') ||
          technicalContent.hasOwnProperty('sandbox') || technicalContent.hasOwnProperty('codebase')) {
       oldFormat.technicalContents = []
-      /* if (technicalContent.hasOwnProperty('codebase') && technicalContent.codebase) {
-        oldFormat.technicalContents.push({
-          title: 'Codebase Link',
-          url: technicalContent.codebase,
-        })
-      } */
       if (technicalContent.hasOwnProperty('codebase') && technicalContent.codebase) {
         oldFormat.technicalContents.push({
           title: 'Codebase Link',
@@ -449,24 +447,17 @@ export class ViewerTocComponent implements OnInit, OnDestroy {
   minimizenav() {
     this.hidenav.emit(false)
   }
-  navigateToNonTechResource(url : any){
-   this.router.navigate([`${url}`]);
+  navigateToNonTechResource(url: any) {
+   this.router.navigate([`${url}`])
   }
 
-  navigateToTechResource(viewerUrl: any, techSubContent = {title:'Codebase Link'}){
-    // if(techSubContent && viewerUrl.includes('html')) {
-      this.router.navigate([`/${viewerUrl}`], { queryParams: {techResourceType: techSubContent.title}});
-    // }
-    // this.router.navigate([`${url}`], {queryParams: {techResourceType: 'CodeBase'}});
-
+  navigateToTechResource(viewerUrl: any, techSubContent = { title: 'Codebase Link' }) {
+      this.router.navigate([`/${viewerUrl}`], { queryParams: { techResourceType: techSubContent.title },
+    })
   }
-  openSubResource(techSubContent: any, viewerUrl: string) {
+  openSubResource(viewerUrl: string, techSubContent: any = { title: 'Codebase Link' }) {
     this.viewerDataSvc.updateTechResource(techSubContent)
     this.navigateToTechResource(viewerUrl, techSubContent)
-
-    // else{
-    //   this.router.navigate([`/${viewerUrl}`]);
-    // }
   }
 
   /* togglePanel(content: any) {
@@ -478,13 +469,21 @@ export class ViewerTocComponent implements OnInit, OnDestroy {
   togglePane1(panel: any) {
     panel.toggle()
   }
-  showTechResourceWithFilteredDefaultLink(technicalContent: any){
-  return  technicalContent.filter( (techResource: { title: string })=>{
-     return  (techResource.title != 'Codebase Link')
-     });
+  // showTechResourceWithFilteredDefaultLink(technicalContent: any){
+  // return  technicalContent.filter( (techResource: { title: string })=>{
+  //    return  (techResource.title != 'Codebase Link')
+  //    });
 
+  // }
+  isActiveSubLinks(identifier: any, techContentTitle: string, isStandaloneResource= false) {
+    const title = this.activatedRoute.snapshot.queryParamMap.get('techResourceType')
+    if (isStandaloneResource) {
+      return (title === techContentTitle)
+    }
+    // if (!isStandaloneResource) {
+      return (this.pathSet.has(identifier) && (title === techContentTitle))
+    // }
   }
-
   shouldExpand(content: any) {
     // console.log('should expand --> ' + id, this.pathSet.has(id))
     // return this.pathSet.has(content.identifier) || (content.hasOwnProperty('techExpanded') ? content.techExpanded : false)
