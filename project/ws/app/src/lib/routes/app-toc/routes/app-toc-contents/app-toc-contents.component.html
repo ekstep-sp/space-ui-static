@@ -1,5 +1,7 @@
 <div #contents id="contents">
-  <div class="contents-container nav-space" #contents id="contents" *ngIf="content?.children?.length">
+  <!-- <div class="contents-container nav-space" #contents id="contents" *ngIf="content?.children?.length"> -->
+      <div class="contents-container nav-space" #contents *ngIf="content?.children?.length">
+
       <h2 class="btn-text-font text-clr">Contents</h2>
     <div class="main-container">
       <ng-container *ngIf="content?.children?.length; else noChildren">
@@ -26,7 +28,7 @@
         </div>
         <ng-container *ngIf="isPlayable" [wsResolverWidget]="contentPlayWidgetConfig"></ng-container>
       </ng-template>
-    
+
     </div>
     <!-- <div class="side-container">
       Part Of

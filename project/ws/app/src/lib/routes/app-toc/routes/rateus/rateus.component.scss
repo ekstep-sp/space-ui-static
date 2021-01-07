@@ -3,6 +3,7 @@
 .card {
     background: rgba(146, 94, 176, 0.12) !important;
     height: 214px;
+    padding: 32px 64px;
     // margin-top: 113px;
     @include breakpoint-xs {
       margin-top: 60px !important;
@@ -11,7 +12,7 @@
 .txt-clr {
     color: #696466 !important;
      font-weight: bold !important;
-     padding: 32px 64px 40px 64px;
+     padding: 32px 0px 40px 0px;
      margin: 0;
      @include breakpoint-xs {
        text-align: center !important;
@@ -41,7 +42,7 @@
     // font-weight: bolder;
   }
   .custom-padding {
-    margin: 0 0 88px 64px !important;
+    //margin: 0 0 88px 64px !important;
     @include breakpoint-xs {
       margin: 0 !important;
       justify-content: center;

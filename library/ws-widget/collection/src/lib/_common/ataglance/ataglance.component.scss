@@ -2,7 +2,7 @@
 @import "ws-mixins";
 
 .info-container {
-  padding: $size-s $size-m;
+  padding: 32px 64px !important;
   // margin-bottom: $size-m;
   border-radius: 0;
   background: rgba(146, 94, 176, 0.12) !important;
@@ -124,7 +124,7 @@ font-size: 18px
     flex-wrap: wrap;
     flex: auto;
     display: flex !important;
-    margin: 0px 64px;
+    //margin: 0px 64px;
     @include breakpoint-xs {
         display: block !important;
         margin: 0;
@@ -152,7 +152,7 @@ mat-chip {
 .txt-clr {
     color: #696466 !important;
     font-weight: bold !important;
-    padding: 32px 64px 40px 64px;
+    padding: 32px 0px 40px 0px;
     margin: 0 !important;
     font-size: 1.125rem;
     padding-bottom:0;
