@@ -113,12 +113,11 @@
   }
 }
 .sticky {
-  width: 91%;
   position: -webkit-sticky; /*safari*/
   position: sticky!important;
   top: 35px;
   z-index: 999;
- background: white;
+//  background: white;
   overflow: unset!important;
 
   @include breakpoint-xs{
@@ -141,13 +140,14 @@
   }
 }
 
-// ::ng-deep {
+
+::ng-deep {
  
-//   .theme-muave.night-mode .info-container .sticky {
-//     background:white !important;
-//     }
-//     .sticky .theme-muave.night-mode .info-container .info-item h3 {
-//     color: black !important
-//     }
-//   }
+  .theme-muave.night-mode .sticky {
+    background:#303030 !important;
+    }
+    .theme-muave.day-mode .sticky {
+    background: white !important
+    }
+  }
   
