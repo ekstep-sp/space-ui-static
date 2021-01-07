@@ -58,7 +58,7 @@ export class ViewerTocComponent implements OnInit, OnDestroy {
   @Input() forPreview = false
   @Output() techResourceChange = new EventEmitter<any>()
   @Input() technicalResource: any = null
-  isExpand = false;
+  isExpand = false
 
   constructor(
     private activatedRoute: ActivatedRoute,
@@ -76,6 +76,9 @@ export class ViewerTocComponent implements OnInit, OnDestroy {
     this.nestedDataSource = new MatTreeNestedDataSource()
   }
   resourceId: string | null = null
+  collectionId: string | null = null
+  collectionType: string | null = null
+  viewMode: string | null = null
   collection: IViewerTocCard | null = null
   queue: IViewerTocCard[] = []
   tocMode: 'FLAT' | 'TREE' = 'TREE'
@@ -115,20 +118,21 @@ export class ViewerTocComponent implements OnInit, OnDestroy {
       this.getDataForTechResourceAndLoadDefaultLink()
     } else {
     this.paramSubscription = this.activatedRoute.queryParamMap.subscribe(async params => {
-      const collectionId = params.get('collectionId')
-      const collectionType = params.get('collectionType')
-      if (collectionId && collectionType) {
+      this.collectionId = params.get('collectionId')
+       this.collectionType = params.get('collectionType')
+       this.viewMode = params.get('viewMode')
+      if (this.collectionId && this.collectionType) {
         if (
-          collectionType.toLowerCase() ===
+          this.collectionType.toLowerCase() ===
           NsContent.EMiscPlayerSupportedCollectionTypes.PLAYLIST.toLowerCase()
         ) {
-          this.collection = await this.getPlaylistContent(collectionId, collectionType)
+          this.collection = await this.getPlaylistContent(this.collectionId, this.collectionType)
         } else if (
-          collectionType.toLowerCase() === NsContent.EContentTypes.MODULE.toLowerCase() ||
-          collectionType.toLowerCase() === NsContent.EContentTypes.COURSE.toLowerCase() ||
-          collectionType.toLowerCase() === NsContent.EContentTypes.PROGRAM.toLowerCase()
+          this.collectionType.toLowerCase() === NsContent.EContentTypes.MODULE.toLowerCase() ||
+          this.collectionType.toLowerCase() === NsContent.EContentTypes.COURSE.toLowerCase() ||
+          this.collectionType.toLowerCase() === NsContent.EContentTypes.PROGRAM.toLowerCase()
         ) {
-          this.collection = await this.getCollection(collectionId, collectionType)
+          this.collection = await this.getCollection(this.collectionId, this.collectionType)
         } else {
           this.isErrorOccurred = true
         }
@@ -152,7 +156,7 @@ export class ViewerTocComponent implements OnInit, OnDestroy {
   async getDataForTechResourceAndLoadDefaultLink() {
     const collectionId = this.technicalResource && this.technicalResource.identifier ? this.technicalResource.identifier : ''
     this.collection = await this.getCollection(collectionId, '')
-    if(this.collection){
+    if (this.collection) {
       this.openSubResource(this.collection.viewerUrl)
     }
   }
@@ -447,16 +451,26 @@ export class ViewerTocComponent implements OnInit, OnDestroy {
   minimizenav() {
     this.hidenav.emit(false)
   }
-  navigateToNonTechResource(url : any){
-   this.router.navigate([`${url}`]);
+  navigateToNonTechResource(url: any) {
+   this.router.navigate([`${url}`], { queryParams: {
+    collectionId: this.collectionId,
+    collectionType: this.collectionType,
+    viewMode: this.viewMode,
+   },
+  })
   }
 
-  navigateToTechResource(viewerUrl: any, techSubContent = {title:'Codebase Link'}){
-      this.router.navigate([`/${viewerUrl}`], { queryParams: {techResourceType: techSubContent.title}});
+  navigateToTechResource(viewerUrl: any, techSubContent = { title: 'Codebase Link' }) {
+      this.router.navigate([`/${viewerUrl}`], { queryParams: {
+        collectionId: this.collectionId,
+        collectionType: this.collectionType,
+        viewMode: this.viewMode,
+        techResourceType: techSubContent.title },
+    })
   }
-  openSubResource( viewerUrl: string, techSubContent: any = {title:'Codebase Link'}){
+  openSubResource(viewerUrl: string, techSubContent: any = { title: 'Codebase Link' }) {
     this.viewerDataSvc.updateTechResource(techSubContent)
-    this.navigateToTechResource(viewerUrl, techSubContent )
+    this.navigateToTechResource(viewerUrl, techSubContent)
   }
 
   /* togglePanel(content: any) {
@@ -475,13 +489,13 @@ export class ViewerTocComponent implements OnInit, OnDestroy {
 
   // }
   isActiveSubLinks(identifier: any, techContentTitle: string, isStandaloneResource= false) {
-    const title = this.activatedRoute.snapshot.queryParamMap.get('techResourceType');
-    if(isStandaloneResource){
+    const title = this.activatedRoute.snapshot.queryParamMap.get('techResourceType')
+    if (isStandaloneResource) {
       return (title === techContentTitle)
     }
-    else{
+    // if (!isStandaloneResource) {
       return (this.pathSet.has(identifier) && (title === techContentTitle))
-    }
+    // }
   }
   shouldExpand(content: any) {
     // console.log('should expand --> ' + id, this.pathSet.has(id))

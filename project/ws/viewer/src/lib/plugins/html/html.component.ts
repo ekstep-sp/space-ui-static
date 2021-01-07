@@ -8,6 +8,7 @@ import { TFetchStatus } from '@ws-widget/utils/src/public-api'
 // import { SharedViewerDataService } from '@ws/author/src/lib/modules/shared/services/shared-viewer-data.service'
 import { Subscription } from 'rxjs'
 import { MobileAppsService } from '../../../../../../../src/app/services/mobile-apps.service'
+import { SharedViewerDataService } from '@ws/author/src/lib/modules/shared/services/shared-viewer-data.service'
 
 @Component({
   selector: 'viewer-plugin-html',
@@ -40,7 +41,8 @@ export class HtmlComponent implements OnInit, OnChanges, OnDestroy {
     private router: Router,
     private configSvc: ConfigurationsService,
     private snackBar: MatSnackBar,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private sharedViewSrvc: SharedViewerDataService
   ) { }
 
   ngOnInit() {
@@ -51,9 +53,10 @@ export class HtmlComponent implements OnInit, OnChanges, OnDestroy {
     if (this.techResourceSub) {
       this.techResourceSub.unsubscribe()
     }
-    // this.techResourceSub = this.sharedViewSrvc.techUrlChangeSubject$.subscribe(newUrl => {
-    //   this.openInNewTab(false, newUrl)
-    // })
+    this.techResourceSub = this.sharedViewSrvc.techUrlChangeSubject$.subscribe(() => {
+      this.progress = 100
+      this.openInNewTabForTechResource(false)
+    })
 
     this.isIntranetUrl = false
     this.progress = 100
@@ -105,8 +108,8 @@ export class HtmlComponent implements OnInit, OnChanges, OnDestroy {
           3000,
         )
       }
-        const maybeYTUrl = this.parseForYoutube(this.htmlContent.artifactUrl) // it will convert a faulty youtube url into an embeddable url
-       this.iframeUrl = this.domSanitizer.bypassSecurityTrustResourceUrl(
+      const maybeYTUrl = this.parseForYoutube(this.htmlContent.artifactUrl) // it will convert a faulty youtube url into an embeddable url
+      this.iframeUrl = this.domSanitizer.bypassSecurityTrustResourceUrl(
         maybeYTUrl,
       )
     } else if (this.htmlContent && this.htmlContent.artifactUrl === '') {
@@ -127,7 +130,43 @@ export class HtmlComponent implements OnInit, OnChanges, OnDestroy {
       `/app/toc/${this.htmlContent ? this.htmlContent.identifier : ''}/overview`,
     ])
   }
+  openInNewTabForTechResource(triggeredManually = false, customUrl?: null | string) {
+    if (triggeredManually) {
+      window.clearTimeout(this.loaderIntervalTimeout)
+      this.progress = -1
+    }
 
+    const redirecturl = this.prepare(customUrl)
+    if (this.htmlContent && !this.route.snapshot.queryParamMap.has('techResourceType')) {
+      if (this.mobAppSvc && this.mobAppSvc.isMobile) {
+        // window.open(this.htmlContent.artifactUrl)
+        setTimeout(
+          () => {
+            this.mobileOpenInNewTab.nativeElement.click()
+          },
+          0,
+        )
+      } else {
+        const width = window.outerWidth
+        const height = window.outerHeight
+        const isWindowOpen = this.openWindow(width, height, redirecturl as string)
+        if (isWindowOpen === null) {
+          const msg = 'The pop up window has been blocked by your browser, please unblock to continue.'
+          this.snackBar.open(msg)
+        }
+      }
+    } else {
+      setTimeout(() => {
+        const width = window.outerWidth
+        const height = window.outerHeight
+        const isWindowOpen = this.openWindow(width, height, redirecturl as string)
+        if (isWindowOpen === null) {
+          const msg = 'The pop up window has been blocked by your browser, please unblock to continue.'
+          this.snackBar.open(msg)
+        }
+      },         3500)
+    }
+  }
   openInNewTab(triggeredManually = false, customUrl?: null | string) {
     if (triggeredManually) {
       window.clearTimeout(this.loaderIntervalTimeout)
@@ -161,15 +200,15 @@ export class HtmlComponent implements OnInit, OnChanges, OnDestroy {
       redirecturl,
       '_blank',
       `toolbar=yes,
-         scrollbars=yes,
-         resizable=yes,
-         menubar=no,
-         location=no,
-         addressbar=no,
-         top=${(15 * height) / 100},
-         left=${(2 * width) / 100},
-         width=${(65 * width) / 100},
-         height=${(70 * height) / 100}`,
+scrollbars=yes,
+resizable=yes,
+menubar=no,
+location=no,
+addressbar=no,
+top=${(15 * height) / 100},
+left=${(2 * width) / 100},
+width=${(65 * width) / 100},
+height=${(70 * height) / 100}`,
     )
   }
 
@@ -205,7 +244,7 @@ export class HtmlComponent implements OnInit, OnChanges, OnDestroy {
         link = this.htmlContent.artifactUrl
 
       } else if (this.htmlContent.assetType === 'Technology') {
-        link =  this.getLinkFromTechnicalResource()
+        link = this.getLinkFromTechnicalResource()
         // link = this.htmlContent.codebase
 
       } else if (this.htmlContent.assetType === 'Connection') {
@@ -216,22 +255,22 @@ export class HtmlComponent implements OnInit, OnChanges, OnDestroy {
     }
     return link
   }
-  getLinkFromTechnicalResource(){
-    if( this.htmlContent){
-    const techResource = this.route.snapshot.queryParamMap.get('techResourceType')
-     if(techResource){
-      this.htmlContent.name = techResource
-        if(techResource === 'Interface API Link'){
-          return (this.htmlContent && this.htmlContent.interface_api) ? this.htmlContent.interface_api: ''
+  getLinkFromTechnicalResource() {
+    if (this.htmlContent) {
+      const techResource = this.route.snapshot.queryParamMap.get('techResourceType')
+      if (techResource) {
+        this.htmlContent.name = techResource
+        if (techResource === 'Interface API Link') {
+          return (this.htmlContent && this.htmlContent.interface_api) ? this.htmlContent.interface_api : ''
         }
-        else if(techResource === 'Documentation Link'){
-          return (this.htmlContent && this.htmlContent.documentation) ? this.htmlContent.documentation: ''
+         if (techResource === 'Documentation Link') {
+          return (this.htmlContent && this.htmlContent.documentation) ? this.htmlContent.documentation : ''
         }
-        else if(techResource === 'Sandbox Link'){
-          return (this.htmlContent && this.htmlContent.sandbox) ? this.htmlContent.sandbox: ''
+         if (techResource === 'Sandbox Link') {
+          return (this.htmlContent && this.htmlContent.sandbox) ? this.htmlContent.sandbox : ''
         }
-        else if(techResource === 'Codebase Link'){
-          return (this.htmlContent && this.htmlContent.codebase) ? this.htmlContent.codebase: ''
+         if (techResource === 'Codebase Link') {
+          return (this.htmlContent && this.htmlContent.codebase) ? this.htmlContent.codebase : ''
         }
       }
     }
@@ -241,5 +280,4 @@ export class HtmlComponent implements OnInit, OnChanges, OnDestroy {
       this.techResourceSub.unsubscribe()
     }
   }
-
 }
