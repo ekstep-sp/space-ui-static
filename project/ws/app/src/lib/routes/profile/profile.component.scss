@@ -212,3 +212,8 @@ height: 70px !important;
     height:50px !important;
   }
 }
+::ng-deep{
+  .mat-drawer-inner-container{
+    overflow:unset;
+  }
+}
