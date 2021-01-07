@@ -2,7 +2,7 @@ import { NestedTreeControl } from '@angular/cdk/tree'
 import { Component, EventEmitter, OnDestroy, OnInit, Output, Input } from '@angular/core'
 import { MatTreeNestedDataSource } from '@angular/material'
 import { DomSanitizer, SafeUrl } from '@angular/platform-browser'
-import { ActivatedRoute } from '@angular/router'
+import { ActivatedRoute, Router } from '@angular/router'
 import {
   ContentProgressService,
   NsContent,
@@ -58,6 +58,7 @@ export class ViewerTocComponent implements OnInit, OnDestroy {
   @Input() forPreview = false
   @Output() techResourceChange = new EventEmitter<any>()
   @Input() technicalResource: any = null
+  isExpand = false
 
   constructor(
     private activatedRoute: ActivatedRoute,
@@ -69,11 +70,15 @@ export class ViewerTocComponent implements OnInit, OnDestroy {
     private viewSvc: ViewerUtilService,
     private configSvc: ConfigurationsService,
     private contentProgressSvc: ContentProgressService,
+    private router: Router,
   ) {
     this.nestedTreeControl = new NestedTreeControl<IViewerTocCard>(this._getChildren)
     this.nestedDataSource = new MatTreeNestedDataSource()
   }
   resourceId: string | null = null
+  collectionId: string | null = null
+  collectionType: string | null = null
+  viewMode: string | null = null
   collection: IViewerTocCard | null = null
   queue: IViewerTocCard[] = []
   tocMode: 'FLAT' | 'TREE' = 'TREE'
@@ -103,29 +108,31 @@ export class ViewerTocComponent implements OnInit, OnDestroy {
     return node && node.children ? node.children : []
   }
   ngOnInit() {
+
     if (this.configSvc.instanceConfig) {
       this.defaultThumbnail = this.domSanitizer.bypassSecurityTrustResourceUrl(
         this.configSvc.instanceConfig.logos.defaultContent,
       )
     }
     if (this.technicalResource) {
-      this.getDataForTechnicalResource()
+      this.getDataForTechResourceAndLoadDefaultLink()
     } else {
     this.paramSubscription = this.activatedRoute.queryParamMap.subscribe(async params => {
-      const collectionId = params.get('collectionId')
-      const collectionType = params.get('collectionType')
-      if (collectionId && collectionType) {
+      this.collectionId = params.get('collectionId')
+       this.collectionType = params.get('collectionType')
+       this.viewMode = params.get('viewMode')
+      if (this.collectionId && this.collectionType) {
         if (
-          collectionType.toLowerCase() ===
+          this.collectionType.toLowerCase() ===
           NsContent.EMiscPlayerSupportedCollectionTypes.PLAYLIST.toLowerCase()
         ) {
-          this.collection = await this.getPlaylistContent(collectionId, collectionType)
+          this.collection = await this.getPlaylistContent(this.collectionId, this.collectionType)
         } else if (
-          collectionType.toLowerCase() === NsContent.EContentTypes.MODULE.toLowerCase() ||
-          collectionType.toLowerCase() === NsContent.EContentTypes.COURSE.toLowerCase() ||
-          collectionType.toLowerCase() === NsContent.EContentTypes.PROGRAM.toLowerCase()
+          this.collectionType.toLowerCase() === NsContent.EContentTypes.MODULE.toLowerCase() ||
+          this.collectionType.toLowerCase() === NsContent.EContentTypes.COURSE.toLowerCase() ||
+          this.collectionType.toLowerCase() === NsContent.EContentTypes.PROGRAM.toLowerCase()
         ) {
-          this.collection = await this.getCollection(collectionId, collectionType)
+          this.collection = await this.getCollection(this.collectionId, this.collectionType)
         } else {
           this.isErrorOccurred = true
         }
@@ -146,9 +153,12 @@ export class ViewerTocComponent implements OnInit, OnDestroy {
   }
   }
 
-  async getDataForTechnicalResource() {
+  async getDataForTechResourceAndLoadDefaultLink() {
     const collectionId = this.technicalResource && this.technicalResource.identifier ? this.technicalResource.identifier : ''
     this.collection = await this.getCollection(collectionId, '')
+    if (this.collection) {
+      this.openSubResource(this.collection.viewerUrl)
+    }
   }
   private getContentProgressHash() {
     this.contentProgressSvc.getProgressHash().subscribe(progressHash => {
@@ -313,14 +323,14 @@ export class ViewerTocComponent implements OnInit, OnDestroy {
 
   private restructureTechnicalResource(oldFormat: any, technicalContent: any) {
     if (technicalContent.hasOwnProperty('documentation') || technicalContent.hasOwnProperty('interface_api') ||
-         technicalContent.hasOwnProperty('sandbox')) {
+         technicalContent.hasOwnProperty('sandbox') || technicalContent.hasOwnProperty('codebase')) {
       oldFormat.technicalContents = []
-      /* if (technicalContent.hasOwnProperty('codebase') && technicalContent.codebase) {
+      if (technicalContent.hasOwnProperty('codebase') && technicalContent.codebase) {
         oldFormat.technicalContents.push({
           title: 'Codebase Link',
           url: technicalContent.codebase,
         })
-      } */
+      }
       if (technicalContent.hasOwnProperty('documentation') && technicalContent.documentation) {
         oldFormat.technicalContents.push({
           title: 'Documentation Link',
@@ -339,6 +349,7 @@ export class ViewerTocComponent implements OnInit, OnDestroy {
           url: technicalContent.sandbox,
         })
       }
+
     }
     if (oldFormat.technicalContents.length > 0) {
       oldFormat.techExpanded = false
@@ -440,9 +451,26 @@ export class ViewerTocComponent implements OnInit, OnDestroy {
   minimizenav() {
     this.hidenav.emit(false)
   }
+  navigateToNonTechResource(url: any) {
+   this.router.navigate([`${url}`], { queryParams: {
+    collectionId: this.collectionId,
+    collectionType: this.collectionType,
+    viewMode: this.viewMode,
+   },
+  })
+  }
 
-  openSubResource(techSubContent: any) {
+  navigateToTechResource(viewerUrl: any, techSubContent = { title: 'Codebase Link' }) {
+      this.router.navigate([`/${viewerUrl}`], { queryParams: {
+        collectionId: this.collectionId,
+        collectionType: this.collectionType,
+        viewMode: this.viewMode,
+        techResourceType: techSubContent.title },
+    })
+  }
+  openSubResource(viewerUrl: string, techSubContent: any = { title: 'Codebase Link' }) {
     this.viewerDataSvc.updateTechResource(techSubContent)
+    this.navigateToTechResource(viewerUrl, techSubContent)
   }
 
   /* togglePanel(content: any) {
@@ -454,7 +482,21 @@ export class ViewerTocComponent implements OnInit, OnDestroy {
   togglePane1(panel: any) {
     panel.toggle()
   }
+  // showTechResourceWithFilteredDefaultLink(technicalContent: any){
+  // return  technicalContent.filter( (techResource: { title: string })=>{
+  //    return  (techResource.title != 'Codebase Link')
+  //    });
 
+  // }
+  isActiveSubLinks(identifier: any, techContentTitle: string, isStandaloneResource= false) {
+    const title = this.activatedRoute.snapshot.queryParamMap.get('techResourceType')
+    if (isStandaloneResource) {
+      return (title === techContentTitle)
+    }
+    // if (!isStandaloneResource) {
+      return (this.pathSet.has(identifier) && (title === techContentTitle))
+    // }
+  }
   shouldExpand(content: any) {
     // console.log('should expand --> ' + id, this.pathSet.has(id))
     // return this.pathSet.has(content.identifier) || (content.hasOwnProperty('techExpanded') ? content.techExpanded : false)
