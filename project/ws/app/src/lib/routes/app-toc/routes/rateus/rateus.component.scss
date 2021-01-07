@@ -10,9 +10,10 @@
     }
 }
 .txt-clr {
+   line-height: 22px;
     color: #696466 !important;
      font-weight: bold !important;
-     padding: 32px 0px 40px 0px;
+     padding: 0px 0px 56px 0px;
      margin: 0;
      @include breakpoint-xs {
        text-align: center !important;

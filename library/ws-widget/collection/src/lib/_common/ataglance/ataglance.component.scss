@@ -35,6 +35,7 @@
       color: #696466 !important;
       font-size: 1rem;
       font-weight: 400;
+      line-height: 22px;
     /* opacity: 50%; */
     }
 
@@ -105,10 +106,9 @@ font-size: 18px
   hyphens: auto;
 }
 .card-style {
-  padding-top: 40px !important;
-  // padding-bottom: 30px !important;
-  padding: 0 0;
-  padding-bottom: 65px !important;
+   padding-top: 40px !important;
+    padding: 0 0;
+    padding-bottom: 72px !important;
 }
 .viewer-style2 {
   // padding: 0 0 ;
@@ -153,6 +153,7 @@ mat-chip {
     color: #696466 !important;
     font-weight: bold !important;
     padding: 32px 0px 40px 0px;
+    line-height: 22px;
     margin: 0 !important;
     font-size: 1.125rem;
     padding-bottom:0;

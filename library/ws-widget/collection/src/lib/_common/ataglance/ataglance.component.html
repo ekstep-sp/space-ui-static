@@ -209,7 +209,7 @@
             <!-- <mat-divider *ngIf="hasTocStructure && content?.children?.length"></mat-divider> -->
             <div class="info-item" *ngIf="content?.sourceName?.length">
               <h3 class="item-heading ws-mat-primary-text font-montserrat pb-3" i18n>Created By</h3>
-              <h3 class="font-montserrat font-weight-bold text-black width-expand btn-text-font pt-4">
+              <h3 class="font-montserrat font-weight-bold text-black width-expand btn-text-font">
                 {{ content?.sourceName | lowercase }} <span *ngIf="content?.sourceName === 'Other'">(
                   {{content?.otherSourceName | lowercase}} )</span>
               </h3>
