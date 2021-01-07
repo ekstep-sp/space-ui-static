@@ -296,3 +296,10 @@ color: white !important;
   // transition: 0.5s;
   // }
 }
+
+::ng-deep{
+  .mat-drawer-container{
+    overflow-y: unset!important;
+    overflow-x: auto!important;
+  }
+}
