@@ -300,6 +300,6 @@ color: white !important;
 ::ng-deep{
   .mat-drawer-container{
     overflow-y: unset!important;
-    overflow-x: auto!important;
+    overflow-x: visible!important;
   }
 }
