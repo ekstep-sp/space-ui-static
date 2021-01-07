@@ -121,5 +121,12 @@
   background: white;
   overflow: unset!important;
 }
-
+::ng-deep {
+  .theme-muave.night-mode .info-container {
+    background: rgba(146, 94, 176, 0.12) !important;
+    }
+    .theme-muave.night-mode .info-container .info-item h3 {
+    color: #c6bcb8 !important
+    }
+  }
   

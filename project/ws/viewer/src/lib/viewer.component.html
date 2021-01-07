@@ -6,7 +6,7 @@
     <viewer-viewer-top-bar *ngIf="!fullScreenContainer" [showFullScreenButton]="false" [forPreview]="forPreview" [frameReference]="fullScreenContainer"
       (toggle)="toggleSideBar()">
     </viewer-viewer-top-bar>
-    <section class="px-8 pb-4">
+    <section class="px-8 pb-4 stickprop">
       <ng-container *ngIf="isTypeOfCollection || technicalResource; else mainContentTemplate">
         <div class="isMobile">
            <button *ngIf="snav?.opened" mat-icon-button aria-label="Navbar Toggle button" color="primary" class="toggleBtn side-nav-button-opened btn-reverse" (click)="snav?.toggle()">
@@ -16,7 +16,7 @@
             <mat-icon class="dehaze-icon">double_arrow</mat-icon>
           </button> -->
         </div>
-        <mat-sidenav-container autosize class="viewer-sidenav-container mat-drawer-container">
+        <mat-sidenav-container autosize class="viewer-sidenav-container ">
             <mat-sidenav #snav [ngClass]="isTypeOfCollection ? 'viewer-sidenav':'viewer-sidenav-standalone'"
             [opened]="sideNavBarOpened" [mode]="mode" class="sidenav-effect"
             >
