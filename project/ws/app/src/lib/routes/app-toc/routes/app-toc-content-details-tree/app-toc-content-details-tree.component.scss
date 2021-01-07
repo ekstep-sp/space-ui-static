@@ -46,10 +46,10 @@ ul::before {
     margin-bottom: 16px !important;
 
 
-    &:last-of-type { 
+    &:last-of-type {
       padding-bottom: 0;
-      margin-bottom: 0; 
-      border: none;      
+      margin-bottom: 0;
+      border: none;
     }
 
     &:before, &:after {
@@ -138,15 +138,15 @@ h5 {
 }
 .hidden-block-xs {
     display: block !important;
-  
+
     @include breakpoint-xs {
       display: none !important;
     }
   }
-  
+
   .visible-block-xs {
     display: none !important;
-  
+
     @include breakpoint-xs {
       display: block !important;
     }
@@ -166,7 +166,7 @@ h5 {
     margin: 0;
     height: 0;
 }
-.large-typography .mat-typography h4 { 
+.large-typography .mat-typography h4 {
     margin: 0;
 }
 .lastParent {
@@ -175,7 +175,7 @@ h5 {
 
 .timer {
     font-weight: bold;
-    
+
 }
 
 .m-0 {
@@ -185,8 +185,8 @@ h5 {
     padding-bottom: 32px;
 }
 .pb-33{
-    padding-bottom: 33px;  
+    padding-bottom: 33px;
 }
-.pb-68{
-    padding-bottom: 68px
+.pb-35{
+    padding-bottom: 35px
 }
