@@ -73,12 +73,20 @@
   }
 }
 
+@media screen and (min-width:1024px) and (orientation:landscape){
+  .video-player {
+      height: calc(106.3vh - 194px) !important
+
+  }
+}
+
 @media screen and (min-width:1169px){
   .video-player{
       height: calc(100vh - 146px) !important;
 
   }
 }
+
 
 
 @media screen and (max-width: 1023px){
