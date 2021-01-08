@@ -10,6 +10,7 @@
 .toc-body {
   @extend %container-padding;
  padding-bottom: 0px !important;
+ padding-top: 47px !important;
   .toc-links {
     top: 0px;
     width: 100%;
@@ -20,6 +21,7 @@
 }
     .link-active {
       font-weight: bold;
+      padding-bottom: 39px !important;
       border-bottom: 1px solid purple;
     }
   }
