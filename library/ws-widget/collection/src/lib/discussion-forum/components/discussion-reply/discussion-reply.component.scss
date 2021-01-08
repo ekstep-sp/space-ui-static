@@ -6,13 +6,13 @@
   // display: flex;
   // margin-top: $size-xs / 2;
   // padding: $size-s;
-  margin: 25px 0 0 80px !important;
+  margin: 25px 0 0 95px !important;
   @include breakpoint-xs {
     margin: 25px 0 0 20px !important;
   }
 }
 .reply-container-2 {
-  margin: 0 0 0 80px !important;
+  margin: 0 0 0 95px !important;
 }
 .datePost{
   margin: auto 0;
@@ -137,4 +137,8 @@
   font-size: 0.75rem;
   line-height: 22px;
   color: #696466;
+}
+
+.margin-left-s {
+   margin-left: 0px !important; 
 }

@@ -101,6 +101,13 @@
 
   }
 }
+
+@media screen and (max-width: 767px) and (orientation:landscape){
+  .video-player{
+      height: calc(100vh - 184px) !important;
+
+  }
+}
 @media screen and (max-width: 516px){
   .video-player {
       height: calc(100vh - 216px) !important;

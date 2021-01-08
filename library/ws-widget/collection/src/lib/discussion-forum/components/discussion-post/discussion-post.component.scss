@@ -8,7 +8,7 @@
   margin-right: 16px;
 }
 .datePost{
-  margin: auto 0 auto 16px;
+  margin: auto 0 auto 4px;
   align-items: center;
 }
 .write-reply-container {
@@ -24,7 +24,7 @@
     font-size: 0.75rem;
     line-height: 22px;
     color: #696466;
-    padding-left: $size-s;
+    padding-left: 8px;
     cursor: pointer;
   }
   .write-reply-editor {
@@ -96,7 +96,7 @@
   pointer-events: none;
 }
 .reply-post-sec {
-  margin: 25px 0 0 80px;
+  margin: 25px 0 0 95px;
   @include breakpoint-xs {
     margin: 25px 0 0 20px;
     flex-direction: column;
