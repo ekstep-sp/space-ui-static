@@ -208,7 +208,7 @@
 
             <!-- <mat-divider *ngIf="hasTocStructure && content?.children?.length"></mat-divider> -->
             <div class="info-item" *ngIf="content?.sourceName?.length">
-              <h3 class="item-heading ws-mat-primary-text font-montserrat pb-3" i18n>Created By</h3>
+              <h3 class="item-heading ws-mat-primary-text font-montserrat" i18n>Created By</h3>
               <h3 class="font-montserrat font-weight-bold text-black width-expand btn-text-font">
                 {{ content?.sourceName | lowercase }} <span *ngIf="content?.sourceName === 'Other'">(
                   {{content?.otherSourceName | lowercase}} )</span>
@@ -302,7 +302,7 @@
             </div> -->
             <!-- </div> -->
             <div class="info-item flex-keyword" *ngIf="content?.keywords?.length">
-              <h3 class="item-heading ws-mat-primary-text font-montserrat pb-4" i18n>Keywords</h3>
+              <h3 class="item-heading ws-mat-primary-text font-montserrat pb-4 customKeyword" i18n>Keywords</h3>
               <mat-chip-list>
                 <mat-chip style="background:#925EB0; color: white; margin:0 8px 10px 0px" selected *ngFor="let keyword of content?.keywords">
                   <h3 class="font-montserrat font-weight-bold width-expand keyword">
@@ -557,7 +557,7 @@
     </ng-container>
     <div class="flex customRow w-full viewer-column-mb flex-keyword" *ngIf="content?.keywords?.length">
       <h3 class="viewer-flex-column mw-140 m-0 p-0 item-heading text-black font-montserrat" i18n>Keywords</h3>
-      <div class="viewer-flex-column m-0 p-0">
+      <div class="viewer-flex-column m-0 p-0 pt-3">
         <mat-chip-list>
           <ng-container *ngFor="let keyword of content?.keywords">
             <mat-chip color="primary" class="font-montserrat font-weight-bold font-size-14 matchip-margin" selected>{{ keyword }}</mat-chip>

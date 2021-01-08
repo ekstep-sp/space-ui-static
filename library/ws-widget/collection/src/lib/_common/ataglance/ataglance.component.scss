@@ -125,7 +125,7 @@ font-size: 18px
     }
 }
 .custom-flex {
-    margin-top: 14px !important;
+
     flex-direction: row;
     flex-wrap: wrap;
     flex: auto;
@@ -173,6 +173,7 @@ mat-chip {
   max-height: 1000px;
   overflow-y: scroll;
   .custom-flex {
+     margin-top: 40px !important;
     flex-direction: row;
     flex-wrap: wrap;
     flex: auto;
@@ -217,6 +218,10 @@ mat-chip {
 }
 .keyword {
 margin-top: 0 !important;
+}
+.customKeyword{
+  padding-bottom: 0px !important;
+  margin-bottom: 24px !important;
 }
 
 @media only screen and (max-width : 540px){
