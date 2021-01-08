@@ -197,3 +197,10 @@
       color: #925EB0 !important;
     }
   }
+  ::ng-deep
+  { 
+     .mat-button-wrapper {
+    font-size: 14px!important;
+    font-weight: bolder;
+}
+}
