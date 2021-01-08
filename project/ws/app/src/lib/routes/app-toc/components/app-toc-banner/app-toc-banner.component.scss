@@ -34,6 +34,7 @@
 .header-synopsis {
   height: 100%;
   // padding-bottom: 5px !important;
+  padding-top: 50px !important;
   @extend %container-padding;
   box-sizing: border-box;
  @include breakpoint-xs {
@@ -200,7 +201,7 @@ color: #FFFFFF !important;
 }
 .curator {
   font-weight: bold !important;
-  margin-bottom: 34px !important;
+  margin-bottom: 37px !important;
   font-size: 1.5rem;
   @include breakpoint-xs {
     margin-bottom: 20px !important;

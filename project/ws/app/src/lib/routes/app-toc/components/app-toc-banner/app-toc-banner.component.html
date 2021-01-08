@@ -34,7 +34,7 @@
                     'Collection': content?.category === 'Collection' ? 'Asset' : content?.category }}</h4>
           </div>
           <span *ngIf="!this.configSvc?.isGuestUser && content?.identifier && content?.assetType !== 'Connection'"
-            class="hr-line ml-3 text-white mt-1 hidden-block-xs"></span>
+            class="hr-line ml-4 text-white mt-1 hidden-block-xs"></span>
         </ng-container>
         <ng-container *ngIf="!hideRatings">
           <div class="hidden-block-xs">
@@ -258,7 +258,7 @@
     <div *ngIf="content?.creatorContacts.length">
       <h3 class="display_type curator sub-heading-font">Curators</h3>
       <div class="flex curator-align" *ngFor="let curatorName of content?.creatorContacts">
-        <img src="/assets/instances/space/common/overview_account.png" class="pr-2 prf-icon">
+        <img src="/assets/instances/space/common/overview_account.png" class="pr-3 prf-icon">
         <h3 class="display_type btn-text-font common-width">{{curatorName.name}}</h3>
         <ws-widget-btn-mail-user *ngIf="askAuthorEnabled"
           [widgetData]="{ content: content, emails: [{email: curatorName.email, name: curatorName.name}] }">
@@ -276,7 +276,7 @@
   </ws-widget-user-content-rating>
 </ng-template>
 <ng-template #star>
-  <ws-widget-user-content-rating class="block -mt-2 ml-3"
+  <ws-widget-user-content-rating class="block -mt-2 ml-4"
     *ngIf="!this.configSvc?.isGuestUser && content?.identifier && content?.assetType !== 'Connection'"
     [contentId]="content?.identifier" [isDisabled]="isRatingsDisabled" [parentElem]="parentElem">
   </ws-widget-user-content-rating>
