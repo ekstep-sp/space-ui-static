@@ -173,6 +173,7 @@ mat-chip {
   max-height: 1000px;
   overflow-y: scroll;
   .custom-flex {
+    margin-top: 40px !important;
     flex-direction: row;
     flex-wrap: wrap;
     flex: auto;

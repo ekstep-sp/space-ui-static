@@ -76,6 +76,7 @@ export class ViewerTocComponent implements OnInit, OnDestroy {
     this.nestedDataSource = new MatTreeNestedDataSource()
   }
   resourceId: string | null = null
+  newResourceId: string | null = null
   collectionId: string | null = null
   collectionType: string | null = null
   viewMode: string | null = null
@@ -114,13 +115,28 @@ export class ViewerTocComponent implements OnInit, OnDestroy {
         this.configSvc.instanceConfig.logos.defaultContent,
       )
     }
-    if (this.technicalResource) {
-      this.getDataForTechResourceAndLoadDefaultLink()
-    } else {
+   const currentURL = window.location.href
+   const splitUrl = currentURL.split('?')
+   const newResourceId = (splitUrl[0].split('/'))
+   this.newResourceId = newResourceId[newResourceId.length - 1]
+   console.log(this.newResourceId)
+
     this.paramSubscription = this.activatedRoute.queryParamMap.subscribe(async params => {
       this.collectionId = params.get('collectionId')
        this.collectionType = params.get('collectionType')
        this.viewMode = params.get('viewMode')
+      //  if (!this.technicalResource) {
+      //  } else
+      if (this.newResourceId) {
+        const resourceData = await this.getCollection(this.newResourceId, '')
+        if (resourceData && resourceData.assetType === 'Technology') {
+          this.technicalResource = resourceData
+          if (this.technicalResource) {
+            this.getDataForTechResourceAndLoadDefaultLink()
+          }
+          console.log (resourceData.assetType)
+        }
+      }
       if (this.collectionId && this.collectionType) {
         if (
           this.collectionType.toLowerCase() ===
@@ -139,11 +155,9 @@ export class ViewerTocComponent implements OnInit, OnDestroy {
         if (this.collection) {
           this.queue = this.utilitySvc.getLeafNodes(this.collection, [])
         }
-      }
       if (this.resourceId) {
         this.processCurrentResourceChange()
       }
-    })
     this.viewerDataServiceSubscription = this.viewerDataSvc.changedSubject.subscribe(_data => {
       if (this.resourceId !== this.viewerDataSvc.resourceId) {
         this.resourceId = this.viewerDataSvc.resourceId
@@ -151,6 +165,7 @@ export class ViewerTocComponent implements OnInit, OnDestroy {
       }
     })
   }
+})
   }
 
   async getDataForTechResourceAndLoadDefaultLink() {
