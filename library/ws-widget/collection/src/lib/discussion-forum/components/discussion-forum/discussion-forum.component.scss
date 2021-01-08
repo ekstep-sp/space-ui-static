@@ -63,8 +63,8 @@
 }
 }
 .df-container {
-  padding: 24px 49px 64px 66px;
-  margin-bottom: 23px;
+  padding: 24px 49px 0px 66px;
+  margin-bottom: 0px;
   @include breakpoint-xs {
     padding: 43px 51px 64px 10px;
   }
