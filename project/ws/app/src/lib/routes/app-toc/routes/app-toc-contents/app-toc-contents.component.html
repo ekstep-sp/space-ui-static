@@ -1,6 +1,6 @@
-<div #contents id="contents">
+<div #contents id="contents" *ngIf="content?.children?.length">
   <!-- <div class="contents-container nav-space" #contents id="contents" *ngIf="content?.children?.length"> -->
-      <div class="contents-container nav-space" #contents *ngIf="content?.children?.length">
+      <div class="contents-container nav-space" #contents >
 
       <h2 class="btn-text-font text-clr">Contents</h2>
     <div class="main-container">

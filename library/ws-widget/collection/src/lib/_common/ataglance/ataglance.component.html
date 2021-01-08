@@ -26,7 +26,7 @@
             <!-- <mat-divider *ngIf="content?.displayContentType"></mat-divider> -->
             <div class="info-item" *ngIf="content?.complexityLevel">
               <h3 class="item-heading ws-mat-primary-text font-montserrat" i18n>Level</h3>
-              <h3 class="font-montserrat pt-4 font-weight-bold text-black width-expand btn-text-font">
+              <h3 class="font-montserrat  font-weight-bold text-black width-expand btn-text-font">
                 {{ content?.complexityLevel | lowercase }}
               </h3>
             </div>
@@ -46,7 +46,7 @@
             <!-- <mat-divider></mat-divider> -->
             <div class="info-item" *ngIf="content?.viewCount">
               <h3 class="item-heading ws-mat-primary-text" i18n>Views</h3>
-              <h3 class="font-montserrat font-weight-bold text-black pt-4 width-expand">
+              <h3 class="font-montserrat font-weight-bold text-black  width-expand">
                 {{ content?.viewCount | pipeCountTransform }}
                 <ng-container *ngIf="content?.uniqueLearners">
                   ({{ content?.uniqueLearners | pipeCountTransform }}
@@ -143,7 +143,7 @@
 
             <div class="info-item" *ngIf="content?.assetType">
               <h3 class="item-heading ws-mat-primary-text font-montserrat" i18n>Type</h3>
-              <h3 class="font-montserrat font-weight-bold text-black width-expand btn-text-font pt-4">
+              <h3 class="font-montserrat font-weight-bold text-black width-expand btn-text-font ">
                 {{ content?.assetType  | lowercase}}
               </h3>
             </div>
@@ -152,7 +152,7 @@
             <!-- <mat-divider *ngIf="hasTocStructure && content?.children?.length"></mat-divider> -->
             <div class="info-item" *ngIf="content?.categoryType && content?.assetType=='Knowledge'">
               <h3 class="item-heading ws-mat-primary-text font-montserrat" i18n>Format</h3>
-              <h3 class="font-montserrat font-weight-bold text-black width-expand btn-text-font pt-4">
+              <h3 class="font-montserrat font-weight-bold text-black width-expand btn-text-font ">
                 {{ content?.categoryType  | lowercase}}
               </h3>
 
@@ -171,7 +171,7 @@
             <!-- <mat-divider *ngIf="hasTocStructure && content?.children?.length"></mat-divider> -->
             <div class="info-item" *ngIf="content?.spaceLicense?.length">
               <h3 class="item-heading ws-mat-primary-text font-montserrat" i18n>Licence</h3>
-              <h3 class="font-montserrat font-weight-bold text-black width-expand btn-text-font pt-4">
+              <h3 class="font-montserrat font-weight-bold text-black width-expand btn-text-font ">
                 {{ content?.spaceLicense  | lowercase}}
               </h3>
             </div>
@@ -180,7 +180,7 @@
             <!-- <mat-divider *ngIf="hasTocStructure && content?.children?.length"></mat-divider> -->
             <div class="info-item" *ngIf="content?.spaceLicenseAttribution?.length">
               <h3 class="item-heading ws-mat-primary-text font-montserrat" i18n>Attributions</h3>
-              <h3 class="font-montserrat font-weight-bold text-black width-expand btn-text-font pt-4">
+              <h3 class="font-montserrat font-weight-bold text-black width-expand btn-text-font ">
                 {{ content?.spaceLicenseAttribution  | lowercase}}
               </h3>
             </div>
@@ -189,7 +189,7 @@
             <!-- <mat-divider *ngIf="hasTocStructure && content?.children?.length"></mat-divider> -->
             <div class="info-item" *ngIf="content?.spaceLicenseCopyright?.length">
               <h3 class="item-heading ws-mat-primary-text font-montserrat" i18n>Copyright</h3>
-              <h3 class="font-montserrat font-weight-bold text-black width-expand btn-text-font pt-4">
+              <h3 class="font-montserrat font-weight-bold text-black width-expand btn-text-font ">
                 {{ content?.spaceLicenseCopyright  | lowercase}}
               </h3>
             </div>
@@ -198,7 +198,7 @@
             <!-- <mat-divider *ngIf="hasTocStructure && content?.children?.length"></mat-divider> -->
             <div class="info-item" *ngIf="content?.spaceAreaOfExpertise?.length">
               <h3 class="item-heading ws-mat-primary-text font-montserrat" i18n>Areas of Expertise</h3>
-              <h3 class="font-montserrat font-weight-bold text-black width-expand btn-text-font pt-4">
+              <h3 class="font-montserrat font-weight-bold text-black width-expand btn-text-font ">
                 {{ content?.spaceAreaOfExpertise | lowercase }}
               </h3>
             </div>
@@ -243,7 +243,7 @@
                 <div class="info-item" *ngIf="content?.theme?.length">
                   <h3 class="item-heading ws-mat-primary-text font-montserrat" i18n>SDG</h3>
                   <ng-container *ngFor="let theme of content?.theme">
-                    <h3 class="font-montserrat font-weight-bold text-black width-expand btn-text-font pt-4">
+                    <h3 class="font-montserrat font-weight-bold text-black width-expand btn-text-font ">
                       {{ theme | lowercase}}
                     </h3>
                   </ng-container>
@@ -253,7 +253,7 @@
                 <div class="info-item" *ngIf="content?.region?.length">
                   <h3 class="item-heading ws-mat-primary-text font-montserrat" i18n>Region</h3>
                   <ng-container *ngFor="let region of content?.region">
-                    <h3 class="font-montserrat font-weight-bold text-black width-expand btn-text-font pt-4">
+                    <h3 class="font-montserrat font-weight-bold text-black width-expand btn-text-font ">
                       {{ region | lowercase  }}
                     </h3>
                   </ng-container>
@@ -268,7 +268,7 @@
                 <!-- <mat-divider *ngIf="content?.locale"></mat-divider> -->
                 <div class="info-item" *ngIf="content?.hasTranslations?.length || content?.isTranslationOf?.length">
                   <h3 class="item-heading ws-mat-primary-text font-montserrat" i18n>Available in</h3>
-                  <h3 class="font-montserrat font-weight-bold text-black width-expand btn-text-font pt-4">
+                  <h3 class="font-montserrat font-weight-bold text-black width-expand btn-text-font ">
                     <span class="cursor-pointer" (click)="goToContent(trans?.identifier)"
                       *ngFor="let trans of content?.hasTranslations || content?.isTranslationOf">{{trans.locale | uppercase}}
                     </span>
@@ -281,7 +281,7 @@
                     <h3 class="item-heading ws-mat-primary-text font-montserrat" i18n>Curated in KB</h3>
                     <mat-chip-list>
                       <mat-chip>
-                        <h3 class="font-montserrat font-weight-bold text-black width-expand btn-text-font pt-4">
+                        <h3 class="font-montserrat font-weight-bold text-black width-expand btn-text-font ">
                           <ng-container *ngIf="item.contentType === 'Knowledge Board' && item.status === 'Live'">
                             <a [href]="'/app/toc/'+item.identifier+'/overview'"> {{item.name}} </a>
                           </ng-container>
@@ -388,13 +388,13 @@
     </div>
     <div class="flex customRow w-full viewer-column-mb" *ngIf="content?.complexityLevel">
       <h3 class="viewer-flex-column mw-140 m-0 p-0 item-heading ws-mat-primary-text font-montserrat" i18n>Level</h3>
-      <h3 class="viewer-flex-column m-0 p-0 font-montserrat pt-4 font-weight-bold text-black btn-text-font">
+      <h3 class="viewer-flex-column m-0 p-0 font-montserrat  font-weight-bold text-black btn-text-font">
         {{ content?.complexityLevel | lowercase }}
       </h3>
     </div>
     <div class="flex customRow w-full viewer-column-mb" *ngIf="content?.viewCount">
       <h3 class="item-heading ws-mat-primary-text" i18n>Views</h3>
-      <h3 class="font-montserrat font-weight-bold text-black pt-4 width-expand">
+      <h3 class="font-montserrat font-weight-bold text-black  width-expand">
         {{ content?.viewCount | pipeCountTransform }}
         <ng-container *ngIf="content?.uniqueLearners">
           ({{ content?.uniqueLearners | pipeCountTransform }}
