@@ -220,7 +220,7 @@
                         check_circle_outline</mat-icon>
                     </div>
                   </div>
-                  <span class="mat-body-1 flex">
+                  <span class="mat-body-1 flex font-size-12">
                     <span>{{ (content.assetType === 'Connection' ? 'Connection' : content.type) | pipeLimitTo: 300 }}</span>
                     <div class="mat-body-1 content-duration mat-caption width-max-content inline-block ml-3">
                       <span *ngIf="content?.duration" class="flex align-timer">
@@ -304,7 +304,7 @@
               >
             </div>
           </div>
-          <span class="mat-body-1 flex">
+          <span class="mat-body-1 flex font-size-12">
             <span>{{ (content.assetType === 'Connection' ? 'Connection' : content.type) | pipeLimitTo: 300 }}</span> 
             <div class="mat-body-1 content-duration mat-caption width-max-content inline-block ml-3">
               <span *ngIf="content?.duration" class="flex align-timer">

@@ -14,7 +14,7 @@
           <mat-icon class="icon-color">chevron_left</mat-icon>
         </button>
         <div class="counter-container" style="color: white;">
-          <input label="PageNumber" aria-label="Page Number" i18n-aria-label class="pdf-page-num" type="number" min="1"
+          <input label="PageNumber" aria-label="Page Number" i18n-aria-label class="pdf-page-num font-size-12" type="number" min="1"
           [max]="totalPages" [formControl]="currentPage" matInput style="color: white;" (keyleft)="onKeyleft($event)" />
         </div>
         <button mat-icon-button class="customColor" [disabled]="currentPage.value >= totalPages" (click)="loadPageNum(currentPage.value + 1)"
