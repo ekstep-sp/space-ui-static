@@ -25,6 +25,9 @@
     height: 100%;
   }
 }
+.pdf-page-container:not(:root:root){
+  height:94vh;
+}
 @media screen and (orientation:landscape) {
   .pdf-page-container{
     height:155vh;
@@ -128,7 +131,9 @@ input[type=number] {
 }
 .page-counter{
   font-size:12px;
-  color:#FFFFFF !important
+  color:#FFFFFF !important;
+  display:flex;
+  align-items: center;
 }
 
 .mat-input-element{
@@ -137,7 +142,7 @@ input[type=number] {
 
 @media screen and (min-width: 1950px) {
   .pdf-page-container:not(:root:root){
-    height:92vh;
+    height:94vh;
   }
   }
   ::ng-deep {

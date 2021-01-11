@@ -61,14 +61,14 @@
 
 @media screen and (min-width:768px){
   .video-player {
-      height: calc(102.9vh - 168px) !important
+      height: calc(100vh - 168px) !important
 
   }
 }
 
 @media screen and (min-width:1024px){
   .video-player {
-      height: calc(104.5vh - 194px) !important
+      height: calc(102.5vh - 194px) !important
 
   }
 }
@@ -82,7 +82,7 @@
 
 @media screen and (min-width:1169px){
   .video-player{
-      height: calc(100vh - 146px) !important;
+      height: calc(100vh - 147px) !important;
 
   }
 }
