@@ -35,12 +35,15 @@
     }
   }
 }
-@media screen and (min-width:1024px) and (orientation:landscape){
-  .video-player {
-      height: calc(103.5vh - 160px) !important
 
+@media screen and (min-width:1024px) and (orientation:landscape){
+  :host.video-full {
+    .video-js {
+      height: calc(109.5vh - 194px) !important
+    }
   }
 }
+
 
 @media screen and (min-width:1169px){
   :host.video-full {
