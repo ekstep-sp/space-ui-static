@@ -7,7 +7,7 @@
       (toggle)="toggleSideBar()">
     </viewer-viewer-top-bar>
     <section class="px-8 pb-4 stickprop">
-      <ng-container *ngIf="isTypeOfCollection || technicalResource; else mainContentTemplate">
+      <ng-container *ngIf="isTypeOfCollection || technicalResource">
         <div class="isMobile">
            <button *ngIf="snav?.opened" mat-icon-button aria-label="Navbar Toggle button" color="primary" class="toggleBtn side-nav-button-opened btn-reverse" (click)="snav?.toggle()">
             <mat-icon class="dehaze-icon reverse" >double_arrow</mat-icon>
@@ -33,6 +33,9 @@
             <ng-container *ngTemplateOutlet="mainContentTemplate"></ng-container>
           </mat-sidenav-content>
         </mat-sidenav-container>
+      </ng-container>
+      <ng-container *ngIf="!isTypeOfCollection && !technicalResource">
+        <ng-container *ngTemplateOutlet="mainContentTemplate"></ng-container>
       </ng-container>
     </section>
     <section class="px-8 py-6">
@@ -101,14 +104,10 @@
   <section *ngIf="status === 'pending'">
     <mat-spinner></mat-spinner>
   </section>
-  <ng-container *ngIf="!configService?.isGuestUser; else guestTemplateContainer">
-    <ng-container *ngTemplateOutlet="routerLogic"></ng-container>
+  <ng-container *ngIf="!configService?.isGuestUser">
+    <router-outlet (activate)="getContentData($event)"></router-outlet>
   </ng-container>
-</ng-template>
-
-<ng-template #routerLogic>
-  <router-outlet (activate)="getContentData($event)"></router-outlet>
-</ng-template>
-<ng-template #guestTemplateContainer>
-  <ws-public-share-view (guestData)="getContentData($event, true)"></ws-public-share-view>
+  <ng-container *ngIf="configService?.isGuestUser">
+    <ws-public-share-view (guestData)="getContentData($event, true)"></ws-public-share-view>
+  </ng-container>
 </ng-template>

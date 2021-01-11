@@ -34,6 +34,7 @@ export class HtmlComponent implements OnInit, OnChanges, OnDestroy {
   progress = 100
   loaderIntervalTimeout: any
   techResourceSub: Subscription | null = null
+  timeoutSet = new Set()
   constructor(
     private domSanitizer: DomSanitizer,
     public mobAppSvc: MobileAppsService,
@@ -47,17 +48,26 @@ export class HtmlComponent implements OnInit, OnChanges, OnDestroy {
 
   ngOnInit() {
     // this.mobAppSvc.simulateMobile()
-  }
-
-  ngOnChanges() {
     if (this.techResourceSub) {
       this.techResourceSub.unsubscribe()
     }
     this.techResourceSub = this.sharedViewSrvc.techUrlChangeSubject$.subscribe(() => {
+      this.clearTimeouts()
       this.progress = 100
       this.openInNewTabForTechResource(false)
     })
+  }
 
+  clearTimeouts() {
+    if (this.timeoutSet.size > 0) {
+      [...this.timeoutSet.keys()].forEach((_interval: any) => {
+        window.clearTimeout(_interval)
+      })
+    }
+    this.progress = -1
+  }
+
+  ngOnChanges() {
     this.isIntranetUrl = false
     this.progress = 100
     this.pageFetchStatus = 'fetching'
@@ -80,8 +90,12 @@ export class HtmlComponent implements OnInit, OnChanges, OnDestroy {
         iframeSupport = (this.htmlContent && this.htmlContent.isIframeSupported) ? this.htmlContent.isIframeSupported.toLowerCase() : 'no'
         if (iframeSupport === 'no') {
           this.showIframeSupportWarning = true
-          this.loaderIntervalTimeout = setTimeout(() => this.openInNewTab(), 3000)
-          setInterval(() => this.progress -= 1, 30)
+          if (!this.configSvc.isGuestUser) {
+            this.progress = 100
+            this.openInNewTabForTechResource(false)
+/* this.loaderIntervalTimeout = setTimeout(() => this.openInNewTab(), 3000)
+          setInterval(() => this.progress -= 1, 30) */
+          }
         } else if (iframeSupport === 'maybe') {
           this.showIframeSupportWarning = true
         } else {
@@ -99,7 +113,7 @@ export class HtmlComponent implements OnInit, OnChanges, OnDestroy {
       }
       this.showIsLoadingMessage = false
       if (this.htmlContent.isIframeSupported !== 'No') {
-        setTimeout(
+        const webTimeOut = setTimeout(
           () => {
             if (this.pageFetchStatus === 'fetching') {
               this.showIsLoadingMessage = true
@@ -107,6 +121,8 @@ export class HtmlComponent implements OnInit, OnChanges, OnDestroy {
           },
           3000,
         )
+        this.setProgressBarLogic()
+        this.timeoutSet.add(webTimeOut)
       }
       const maybeYTUrl = this.parseForYoutube(this.htmlContent.artifactUrl) // it will convert a faulty youtube url into an embeddable url
       this.iframeUrl = this.domSanitizer.bypassSecurityTrustResourceUrl(
@@ -132,40 +148,44 @@ export class HtmlComponent implements OnInit, OnChanges, OnDestroy {
   }
   openInNewTabForTechResource(triggeredManually = false, customUrl?: null | string) {
     if (triggeredManually) {
-      window.clearTimeout(this.loaderIntervalTimeout)
-      this.progress = -1
+      this.clearTimeouts()
     }
-
-    const redirecturl = this.prepare(customUrl)
-    if (this.htmlContent && !this.route.snapshot.queryParamMap.has('techResourceType')) {
-      if (this.mobAppSvc && this.mobAppSvc.isMobile) {
-        // window.open(this.htmlContent.artifactUrl)
-        setTimeout(
-          () => {
-            this.mobileOpenInNewTab.nativeElement.click()
-          },
-          0,
-        )
+    window.setTimeout(() => {
+      const redirecturl = this.prepare(customUrl)
+      if (this.htmlContent && !this.route.snapshot.queryParamMap.has('techResourceType')) {
+        if (this.mobAppSvc && this.mobAppSvc.isMobile) {
+          // window.open(this.htmlContent.artifactUrl)
+          const mobileTimeout = setTimeout(
+            () => {
+              this.mobileOpenInNewTab.nativeElement.click()
+            },
+            0,
+          )
+          this.timeoutSet.add(mobileTimeout)
+        } else {
+          const width = window.outerWidth
+          const height = window.outerHeight
+          const isWindowOpen = this.openWindow(width, height, redirecturl as string)
+          if (isWindowOpen === null) {
+            const msg = 'The pop up window has been blocked by your browser, please unblock to continue.'
+            this.snackBar.open(msg)
+          }
+        }
       } else {
-        const width = window.outerWidth
-        const height = window.outerHeight
-        const isWindowOpen = this.openWindow(width, height, redirecturl as string)
-        if (isWindowOpen === null) {
-          const msg = 'The pop up window has been blocked by your browser, please unblock to continue.'
-          this.snackBar.open(msg)
-        }
+        const webTimeout = setTimeout(() => {
+          const width = window.outerWidth
+          const height = window.outerHeight
+          const isWindowOpen = this.openWindow(width, height, redirecturl as string)
+          if (isWindowOpen === null) {
+            const msg = 'The pop up window has been blocked by your browser, please unblock to continue.'
+            this.snackBar.open(msg)
+          }
+        },         3500)
+        this.progress = 100
+        this.setProgressBarLogic()
+        this.timeoutSet.add(webTimeout)
       }
-    } else {
-      setTimeout(() => {
-        const width = window.outerWidth
-        const height = window.outerHeight
-        const isWindowOpen = this.openWindow(width, height, redirecturl as string)
-        if (isWindowOpen === null) {
-          const msg = 'The pop up window has been blocked by your browser, please unblock to continue.'
-          this.snackBar.open(msg)
-        }
-      },         3500)
-    }
+    }, 0)
   }
   openInNewTab(triggeredManually = false, customUrl?: null | string) {
     if (triggeredManually) {
@@ -177,12 +197,13 @@ export class HtmlComponent implements OnInit, OnChanges, OnDestroy {
     if (this.htmlContent) {
       if (this.mobAppSvc && this.mobAppSvc.isMobile) {
         // window.open(this.htmlContent.artifactUrl)
-        setTimeout(
+        const mobileTimeout = setTimeout(
           () => {
             this.mobileOpenInNewTab.nativeElement.click()
           },
           0,
         )
+        this.timeoutSet.add(mobileTimeout)
       } else {
         const width = window.outerWidth
         const height = window.outerHeight
@@ -195,20 +216,22 @@ export class HtmlComponent implements OnInit, OnChanges, OnDestroy {
     }
   }
 
+  setProgressBarLogic() {
+    const _interval = setInterval(() => {
+      this.progress -= 1
+      if (this.progress <= 0) {
+        window.clearInterval(_interval)
+      }
+    }, 30)
+  }
+
   openWindow(width: any, height: any, redirecturl: string) {
+    this.setProgressBarLogic()
     return window.open(
       redirecturl,
       '_blank',
-      `toolbar=yes,
-scrollbars=yes,
-resizable=yes,
-menubar=no,
-location=no,
-addressbar=no,
-top=${(15 * height) / 100},
-left=${(2 * width) / 100},
-width=${(65 * width) / 100},
-height=${(70 * height) / 100}`,
+      // tslint:disable-next-line: max-line-length
+      `toolbar=yes,scrollbars=yes,resizable=yes,menubar=no,location=no,addressbar=no,top=${(15 * height) / 100},left=${(2 * width) / 100},width=${(65 * width) / 100},height=${(70 * height) / 100}`,
     )
   }
 

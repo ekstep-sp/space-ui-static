@@ -10,7 +10,7 @@ import {
   WsEvents,
 } from '@ws-widget/utils'
 import { fromEvent, of, Subscription } from 'rxjs'
-import { filter, map, mergeMap } from 'rxjs/operators'
+import { distinctUntilChanged, filter, map, mergeMap } from 'rxjs/operators'
 import { ViewerUtilService } from '../../viewer-util.service'
 import { AppTocService } from '@ws/app/src/lib/routes/app-toc/services/app-toc.service'
 @Component({
@@ -96,7 +96,8 @@ export class HtmlComponent implements OnInit, OnDestroy {
             }))
           }
           return of(originalContent)
-        })
+        }),
+        distinctUntilChanged()
       )
       .subscribe(
         async data => {
