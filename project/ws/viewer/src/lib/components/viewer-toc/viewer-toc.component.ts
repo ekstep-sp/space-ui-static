@@ -20,6 +20,7 @@ import { delay } from 'rxjs/operators'
 // import { ViewerDataService } from '../../viewer-data.service'
 import { ViewerUtilService } from '../../viewer-util.service'
 import { SharedViewerDataService } from './../../../../../author/src/lib/modules/shared/services/shared-viewer-data.service'
+import { ThrowStmt } from '@angular/compiler'
 interface IViewerTocCard {
   assetType: string | null
   contentUrls?: [any] | null
@@ -76,6 +77,7 @@ export class ViewerTocComponent implements OnInit, OnDestroy {
     this.nestedDataSource = new MatTreeNestedDataSource()
   }
   resourceId: string | null = null
+  newResourceId: string | null = null
   collectionId: string | null = null
   collectionType: string | null = null
   viewMode: string | null = null
@@ -87,6 +89,7 @@ export class ViewerTocComponent implements OnInit, OnDestroy {
   defaultThumbnail: SafeUrl | null = null
   isFetching = true
   pathSet = new Set()
+  path: any = null
   contentProgressHash: { [id: string]: number } | null = null
   errorWidgetData: NsWidgetResolver.IRenderConfigWithTypedData<any> = {
     widgetType: 'errorResolver',
@@ -114,6 +117,7 @@ export class ViewerTocComponent implements OnInit, OnDestroy {
         this.configSvc.instanceConfig.logos.defaultContent,
       )
     }
+    // the below code is for standalone tech resource
     if (this.technicalResource) {
       this.getDataForTechResourceAndLoadDefaultLink()
     } else {
@@ -139,11 +143,13 @@ export class ViewerTocComponent implements OnInit, OnDestroy {
         if (this.collection) {
           this.queue = this.utilitySvc.getLeafNodes(this.collection, [])
         }
-      }
-      if (this.resourceId) {
-        this.processCurrentResourceChange()
-      }
-    })
+        // the below code was commented as this.processCurrentResourceChange() was called repeatedly on activating sublink,
+        // todo: need to test
+
+      // if (this.resourceId) {
+      //   this.processCurrentResourceChange()
+      // }
+
     this.viewerDataServiceSubscription = this.viewerDataSvc.changedSubject.subscribe(_data => {
       if (this.resourceId !== this.viewerDataSvc.resourceId) {
         this.resourceId = this.viewerDataSvc.resourceId
@@ -151,8 +157,11 @@ export class ViewerTocComponent implements OnInit, OnDestroy {
       }
     })
   }
+})
   }
-
+}
+// tslint:disable-next-line:max-line-length
+// the below code is for getting the collection format and appending the router url with default link(codebase),which makes the sublink active and loads the pop up window.
   async getDataForTechResourceAndLoadDefaultLink() {
     const collectionId = this.technicalResource && this.technicalResource.identifier ? this.technicalResource.identifier : ''
     this.collection = await this.getCollection(collectionId, '')
@@ -192,6 +201,10 @@ export class ViewerTocComponent implements OnInit, OnDestroy {
       this.viewerDataSvc.updateNextPrevResource(Boolean(this.collection), prev, next)
       this.processCollectionForTree()
       this.expandThePath()
+      // the below code is for making the sublink active in a collection, works on initialization and on when different sublink selected
+      if (this.path[this.path.length - 1].assetType === 'Technology') {
+        this.navigateToTechResource(this.path[this.path.length - 1].viewerUrl)
+      }
       // this.expandAll(this.nestedTreeControl)
       // this.nestedTreeControl.expandAll()
       this.getContentProgressHash()
@@ -439,12 +452,13 @@ export class ViewerTocComponent implements OnInit, OnDestroy {
 
   expandThePath() {
     if (this.collection && this.resourceId) {
-      const path = this.utilitySvc.getPath(this.collection, this.resourceId)
-      this.pathSet = new Set(path.map((u: { identifier: any }) => u.identifier))
-      path.forEach((node: IViewerTocCard) => {
+  this.path = this.utilitySvc.getPath(this.collection, this.resourceId)
+      this.pathSet = new Set(this.path.map((u: { identifier: any }) => u.identifier))
+      this.path.forEach((node: IViewerTocCard) => {
         this.nestedTreeControl.expand(node)
       })
-      this.viewerDataSvc.updateHeirarchyTitleInToolbar(path)
+      // the below code is for adding breadcrumbs in viewer.
+      this.viewerDataSvc.updateHeirarchyTitleInToolbar(this.path)
     }
   }
 
@@ -485,14 +499,15 @@ export class ViewerTocComponent implements OnInit, OnDestroy {
     panel.toggle()
   }
 
+  // }
+
+// makes the sublink active by checking the router query params
   isActiveSubLinks(identifier: any, techContentTitle: string, isStandaloneResource= false) {
     const title = this.activatedRoute.snapshot.queryParamMap.get('techResourceType')
     if (isStandaloneResource) {
       return (title === techContentTitle)
     }
-    // if (!isStandaloneResource) {
       return (this.pathSet.has(identifier) && (title === techContentTitle))
-    // }
   }
   shouldExpand(content: any) {
     return this.pathSet.has(content.identifier)
