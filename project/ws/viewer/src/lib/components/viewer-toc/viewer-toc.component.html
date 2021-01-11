@@ -51,7 +51,7 @@
                 ></ng-container>
               </li>
             </mat-tree-node>
-      
+
             <mat-nested-tree-node *matTreeNodeDef="let node; when: hasNestedChild">
               <li class="parent-item">
                 <div class="mat-tree-node" [ngClass]="{ 'mat-toolbar': pathSet.has(node.identifier) }">
@@ -196,13 +196,13 @@
 <ng-template let-content #TocContentList>
   <!-- <div class="tainer margin-left-xl"> -->
   <div class="resource-container" [ngClass]="{'content-active active': pathSet.has(content.identifier), 'cusotm-bg': !pathSet.has(content.identifier)}">
-    <div class="resource-meta width-expand" >
+    <div class="resource-meta width-expand content-resource" >
       <mat-accordion *ngIf="content?.technicalContents">
         <mat-expansion-panel #panel [hideToggle]="shouldExpand(content)" class="toc-expansion-panel" [expanded]="shouldExpand(content)">
           <mat-expansion-panel-header (click)="togglePane1(panel)" class="p-0 h-auto new-icon remove-background" [ngClass]="{'content-active active': pathSet.has(content.identifier), 'cusotm-bg': !pathSet.has(content.identifier)}">
-           
+
             <a [routerLink]="content.viewerUrl" routerLinkActive="active"  queryParamsHandling="preserve">
-            
+
               <!--  the below link is  make the sublink active,but this works onclick of header only, need to write logic to make sublink active on init.
                 <a (click)="navigateToTechResource(content.viewerUrl)"> -->
               <span class="width-expand flex flex-middle">
@@ -238,7 +238,7 @@
               </span>
             </a>
           </mat-expansion-panel-header>
-     
+
            <!-- <ng-container *ngFor="let techContent of showTechResourceWithFilteredDefaultLink(content?.technicalContents)"> -->
             <ng-container *ngFor="let techContent of content?.technicalContents">
             <span class="width-expand flex flex-middle tech-span cursor-pointer " [ngClass]="{ 'active-sublink': isActiveSubLinks(content.identifier, techContent?.title), 'cusotm-bg': !isActiveSubLinks(content.identifier, techContent?.title)}"
@@ -308,7 +308,7 @@
             </div>
           </div>
           <span class="mat-body-1 flex font-size-12">
-            <span>{{ (content.assetType === 'Connection' ? 'Connection' : content.type) | pipeLimitTo: 300 }}</span> 
+            <span>{{ (content.assetType === 'Connection' ? 'Connection' : content.type) | pipeLimitTo: 300 }}</span>
             <div class="mat-body-1 content-duration mat-caption width-max-content inline-block ml-3">
               <span *ngIf="content?.duration" class="flex align-timer">
                 <mat-icon class="mr-1">schedule</mat-icon>
