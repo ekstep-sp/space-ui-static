@@ -20,11 +20,16 @@
     max-width: 600px;
   }
 }
-@media screen and (max-width: 690px) {
-  .viewer-sidenav {
-  min-width: 280px !important;
+.stickprop {
+  @include breakpoint-xs {
+    padding-right: 0.5rem !important;
+  }
 }
-}
+// @media screen and (max-width: 690px) {
+//   .viewer-sidenav {
+//   min-width: 280px !important;
+// }
+// }
 
 .viewer-sidenav-standalone {
   width: 100%;

@@ -36,6 +36,14 @@
   }
 }
 
+@media screen and (min-width:1024px) and (orientation:landscape){
+  :host.video-full {
+    .video-js {
+      height: calc(109.5vh - 194px) !important
+    }
+  }
+}
+
 @media screen and (min-width:1169px){
   :host.video-full {
     .video-js {
@@ -44,7 +52,7 @@
   }
 }
 
- 
+
 @media screen and (max-width: 1023px){
   :host.video-full {
     .video-js {
