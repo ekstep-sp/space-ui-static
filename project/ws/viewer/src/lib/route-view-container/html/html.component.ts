@@ -50,10 +50,16 @@ export class HtmlComponent implements OnInit, OnChanges {
 
   ngOnInit() {
     this.activatedRoute.data.subscribe(_data => {
-      this.content = _data.content.data
       this.tocConfig = _data.pageData.data.viewerConfig
+      if (_data.content && _data.content.data) {
+        this.content = _data.content.data
       // tslint:disable-next-line: max-line-length
-      this.enableRatings = this.widgetContentSvc.isVisibileAccToRoles(this.tocConfig.rolesAllowed.rateContent, this.tocConfig.rolesNotAllowed.rateContent)
+      } else if (this.activatedRoute.snapshot.children[0] && this.activatedRoute.snapshot.children[0].data && this.activatedRoute.snapshot.children[0].data.content) {
+        // this check is exclusively for public access logic
+        this.content = this.activatedRoute.snapshot.children[0].data.content.data
+      }
+      // tslint:disable-next-line: max-line-length
+      this.enableRatings = this.configSvc.isGuestUser ? false : this.widgetContentSvc.isVisibileAccToRoles(this.tocConfig.rolesAllowed.rateContent, this.tocConfig.rolesNotAllowed.rateContent)
       // console.log(_data)
       // tslint:disable-next-line: max-line-length
       if (!this.configSvc.isGuestUser && this.viewerService.isVisibileAccToRoles(_data.pageData.data.enableDisscussionForum.rolesAllowed.disscussionForum, _data.pageData.data.enableDisscussionForum.rolesNotAllowed.disscussionForum)) {
