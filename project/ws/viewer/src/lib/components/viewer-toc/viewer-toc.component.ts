@@ -461,33 +461,30 @@ export class ViewerTocComponent implements OnInit, OnDestroy {
   }
 
   navigateToTechResource(viewerUrl: any, techSubContent = { title: 'Codebase Link' }) {
-      this.router.navigate([`/${viewerUrl}`], { queryParams: {
-        collectionId: this.collectionId,
-        collectionType: this.collectionType,
-        viewMode: this.viewMode,
-        techResourceType: techSubContent.title },
-    })
+    const params = {
+      collectionId: this.collectionId,
+      collectionType: this.collectionType,
+      viewMode: this.viewMode,
+      techResourceType: techSubContent.title,
+     }
+     if (window.location.href.includes('public/sharecontent/')) {
+      // this is currently a public access route, just attach the query params on it, don't change the route
+      this.router.navigate([`${window.location.pathname}`], {
+        queryParams: params,
+      })
+    } else {
+      this.router.navigate([`/${viewerUrl}`], { queryParams: params })
+    }
   }
   openSubResource(viewerUrl: string, techSubContent: any = { title: 'Codebase Link' }) {
     this.viewerDataSvc.updateTechResource(techSubContent)
     this.navigateToTechResource(viewerUrl, techSubContent)
   }
 
-  /* togglePanel(content: any) {
-    if (content && content.hasOwnProperty('techExpanded')) {
-      content.techExpanded = !content.techExpanded
-    }
-  } */
-
   togglePane1(panel: any) {
     panel.toggle()
   }
-  // showTechResourceWithFilteredDefaultLink(technicalContent: any){
-  // return  technicalContent.filter( (techResource: { title: string })=>{
-  //    return  (techResource.title != 'Codebase Link')
-  //    });
 
-  // }
   isActiveSubLinks(identifier: any, techContentTitle: string, isStandaloneResource= false) {
     const title = this.activatedRoute.snapshot.queryParamMap.get('techResourceType')
     if (isStandaloneResource) {
@@ -498,8 +495,6 @@ export class ViewerTocComponent implements OnInit, OnDestroy {
     // }
   }
   shouldExpand(content: any) {
-    // console.log('should expand --> ' + id, this.pathSet.has(id))
-    // return this.pathSet.has(content.identifier) || (content.hasOwnProperty('techExpanded') ? content.techExpanded : false)
     return this.pathSet.has(content.identifier)
   }
 }

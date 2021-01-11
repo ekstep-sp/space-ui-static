@@ -23,7 +23,13 @@ export class PublicShareViewComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     try {
-      const guestDataToSend = this.route.snapshot.children[0].data
+      let guestDataToSend = null
+      // tslint:disable-next-line: max-line-length
+      if (this.route.snapshot.hasOwnProperty('data') && this.route.snapshot.data.hasOwnProperty('content') && this.route.snapshot.data.content) {
+        guestDataToSend = this.route.snapshot.data
+      } else {
+        guestDataToSend = this.route.snapshot.children[0].data
+      }
       this.guestData.emit(guestDataToSend.content)
       this.initContentView(guestDataToSend.content)
     } catch (_e) {
