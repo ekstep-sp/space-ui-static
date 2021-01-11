@@ -58,7 +58,7 @@
         <ng-container
           *ngIf="!showDownloadPublicGuest && showDownloadMobile && widgetData.pdfUrl && isDownloadable && !showDownloadGuest">
           <button mat-button>
-            <mat-icon style="color: white;" (click)="download()">cloud_download</mat-icon>
+            <mat-icon style="color: white;" class="material-icons-outlined mat-icon notranslate innerSpan material-icons mat-icon-no-color" (click)="download()">cloud_download</mat-icon>
           </button>
         </ng-container>
         <ws-widget-btn-fullscreen class="menu-btn" (fsState)="fullScreenState($event)" (click)="refresh()"
