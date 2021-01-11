@@ -1,5 +1,5 @@
 <button name="content-feedback-button" mat-icon-button type="button" i18n-aria-label aria-label="Open Content Feedback Dialog" i18n-matTooltip
   matTooltip="Content Feedback" *ngIf="isFeedbackEnabled && widgetData?.identifier?.length"
   (click)="openFeedbackDialog()" [disabled]="widgetData?.isDisabled">
-  <mat-icon [ngClass]="{'material-icons-outlined mat-icon notranslate innerSpan material-icons mat-icon-no-color': overview}">feedback</mat-icon>
+  <mat-icon class="material-icons-outlined mat-icon notranslate innerSpan material-icons mat-icon-no-color">feedback</mat-icon>
 </button>
