@@ -93,6 +93,9 @@ input[type=number] {
     display: none;
   }
 }
+.hidden-xs{
+ padding-right: 20px;
+}
 ::ng-deep{
 @media only screen and (max-width: 310px){
   .menu-btn-galaxy{
@@ -140,6 +143,7 @@ input[type=number] {
   color:#FFFFFF !important;
   display:flex;
   align-items: center;
+  padding-right: 20px;
 }
 
 .mat-input-element{
