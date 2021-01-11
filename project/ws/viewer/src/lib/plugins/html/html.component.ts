@@ -302,5 +302,6 @@ export class HtmlComponent implements OnInit, OnChanges, OnDestroy {
     if (this.techResourceSub) {
       this.techResourceSub.unsubscribe()
     }
+    this.clearTimeouts()
   }
 }
