@@ -15,7 +15,7 @@ import { Subscription } from 'rxjs'
   styleUrls: ['./html.component.scss'],
 })
 export class HtmlComponent implements OnInit, OnChanges, OnDestroy {
-  routerSub$: Subscription | null = null;
+  routerSub$: Subscription | null = null
   @Input() isNotEmbed = true
   @Input() isFetchingDataComplete = false
   @Input() htmlData: NsContent.IContent | null = null
@@ -126,7 +126,6 @@ export class HtmlComponent implements OnInit, OnChanges, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    console.log('destroyed')
     if (this.routerSub$) {
       this.routerSub$.unsubscribe()
     }

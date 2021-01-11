@@ -180,12 +180,12 @@ export class HtmlComponent implements OnInit, OnChanges, OnDestroy {
             const msg = 'The pop up window has been blocked by your browser, please unblock to continue.'
             this.snackBar.open(msg)
           }
-        },         3500)
+        },                            3500)
         this.progress = 100
         this.setProgressBarLogic()
         this.timeoutSet.add(webTimeout)
       }
-    }, 0)
+    },                0)
   }
   openInNewTab(triggeredManually = false, customUrl?: null | string) {
     if (triggeredManually) {
@@ -222,7 +222,7 @@ export class HtmlComponent implements OnInit, OnChanges, OnDestroy {
       if (this.progress <= 0) {
         window.clearInterval(_interval)
       }
-    }, 30)
+    },                            30)
   }
 
   openWindow(width: any, height: any, redirecturl: string) {
