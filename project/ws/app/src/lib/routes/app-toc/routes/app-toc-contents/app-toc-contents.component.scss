@@ -2,8 +2,8 @@
 @import 'ws-mixins';
 
 // $border-color: #c7c7c7;
-#contents{
-  padding:32px 64px !important
+.contents-container{
+  padding:32px 64px 113px 64px !important
 }
 $border-color: #d8d8d8;
 .contents-container {
@@ -94,14 +94,14 @@ $border-color: #d8d8d8;
 //   text-align: left;
 //   font-weight: 100;
 // }
-.nav-space {
-  // padding-top: 0;
-  padding: 0px 0px 113px 0px !important;
-  // margin-top: 0;
-  @include breakpoint-xs {
-   // padding: 32px 23px 0 23px !important;
-  }
-}
+// .nav-space {
+//   // padding-top: 0;
+//   padding: 0px 0px 113px 0px !important;
+//   // margin-top: 0;
+//   @include breakpoint-xs {
+//    // padding: 32px 23px 0 23px !important;
+//   }
+// }
 // .content-card:before {
 //   content: "";
 //     border: 1px solid purple;
