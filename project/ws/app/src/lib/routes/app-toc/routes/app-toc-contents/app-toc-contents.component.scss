@@ -123,3 +123,43 @@ $border-color: #d8d8d8;
     margin-bottom: 0;
     font-size: 1.125em;
 }
+.anchor-container {
+  position: relative;
+  .anchor {
+  position: absolute;
+  // top: -25%;
+
+  @include breakpoint-xs {
+    @media only screen and (max-width: 599px) {
+      top: -1.2%;
+    }
+  }
+  @include breakpoint-s {
+    @media only screen and (min-width: 600px) and (max-width: 959px) {
+      top: -3%
+    }
+  }
+    @include breakpoint-m {
+      @media only screen and (min-width: 960px) and (max-width: 1279px) {
+        top: -4%;
+      }
+    }
+    @include breakpoint-l {
+      @media only screen and (min-width: 1280px) and (max-width: 1919px) {
+        top: -4%;
+      }
+    }
+    @include breakpoint-xl {
+      @media only screen and (min-width: 1920px) and (max-width: 5000px) {
+        top: -4%;
+      }
+    }
+    @include breakpoint-xxs {
+      @media only screen and (max-width: 310px) {
+        top: -1%;
+      }
+    }
+  }
+
+
+}
