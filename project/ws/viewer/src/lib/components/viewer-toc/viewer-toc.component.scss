@@ -73,7 +73,7 @@ width: 130px !important;
 
 .width-expand {
 flex: 1;
-min-width: 1px;
+min-width: 1px
 }
 
 .align-self-start {
@@ -104,7 +104,7 @@ a {
 padding:16px;
 width:100%;
 @include breakpoint-xs {
-  padding-left: 4px !important;
+  padding-left: 20px !important;
 }
 }
 }
@@ -310,3 +310,4 @@ color: white !important;
 //     overflow-x: visible!important;
 //   }
 // }
+

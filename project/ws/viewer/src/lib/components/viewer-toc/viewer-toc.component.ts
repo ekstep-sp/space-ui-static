@@ -20,7 +20,6 @@ import { delay } from 'rxjs/operators'
 // import { ViewerDataService } from '../../viewer-data.service'
 import { ViewerUtilService } from '../../viewer-util.service'
 import { SharedViewerDataService } from './../../../../../author/src/lib/modules/shared/services/shared-viewer-data.service'
-import { ThrowStmt } from '@angular/compiler'
 interface IViewerTocCard {
   assetType: string | null
   contentUrls?: [any] | null

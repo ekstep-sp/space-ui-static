@@ -24,6 +24,7 @@ export enum ErrorType {
 })
 export class ViewerComponent implements OnInit, OnDestroy, AfterViewInit, AfterViewChecked {
   fullScreenContainer: HTMLElement | null = null
+  alreadyCalled = false
   guestUser = false
   content: NsContent.IContent | null = null
   errorType = ErrorType

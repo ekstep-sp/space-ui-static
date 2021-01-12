@@ -5,8 +5,10 @@
     <div class="w-full flex items-center justify-center customH">
       <div id="fullScreenContainer" class ="content-section"
               [ngClass]="{ 'video-player': htmlData?.isIframeSupported?.toLowerCase() != 'no' }">
-              <viewer-plugin-html [htmlContent]="htmlData">
-              </viewer-plugin-html>
+              <ng-container *ngIf="htmlData">
+                <viewer-plugin-html [htmlContent]="htmlData">
+                </viewer-plugin-html>
+              </ng-container>
             </div>
       </div>
       <div class="flex absolute bottom-0 w-full items-center customColorToolbar">

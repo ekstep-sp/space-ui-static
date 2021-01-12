@@ -3,7 +3,10 @@
 
 // $border-color: #c7c7c7;
 .contents-container{
-  padding:32px 64px 113px 64px !important
+  padding:32px 64px 113px 64px !important;
+    @include breakpoint-xs {
+     padding-bottom: 30px !important;
+    }
 }
 $border-color: #d8d8d8;
 .contents-container {

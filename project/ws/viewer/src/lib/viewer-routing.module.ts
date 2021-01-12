@@ -192,6 +192,7 @@ const routes: Routes = [
   },
   {
     path: ':sharableToken',
+    pathMatch: 'full',
     component: PublicShareViewComponent,
     resolve: {
       content: ShareViewerResolve,

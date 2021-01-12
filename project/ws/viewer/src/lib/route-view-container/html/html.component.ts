@@ -1,4 +1,4 @@
-import { Component, Input, OnInit, OnChanges, SimpleChanges } from '@angular/core'
+import { Component, Input, OnInit, OnChanges, SimpleChanges, OnDestroy } from '@angular/core'
 import { NsContent, NsDiscussionForum, WidgetContentService, NsGoal } from '@ws-widget/collection'
 import { NsWidgetResolver } from '@ws-widget/resolver'
 import { ActivatedRoute } from '@angular/router'
@@ -6,6 +6,7 @@ import { SafeHtml, DomSanitizer } from '@angular/platform-browser'
 import { PipeLimitToPipe } from '@ws-widget/utils/src/lib/pipes/pipe-limit-to/pipe-limit-to.pipe'
 import { ValueService, ConfigurationsService } from '@ws-widget/utils'
 import { SharedViewerDataService } from '@ws/author/src/lib/modules/shared/services/shared-viewer-data.service'
+import { Subscription } from 'rxjs'
 // import { distinctUntilChanged } from 'rxjs/operators'
 // import { ViewerDataService } from '../../viewer-data.service'
 @Component({
@@ -13,7 +14,8 @@ import { SharedViewerDataService } from '@ws/author/src/lib/modules/shared/servi
   templateUrl: './html.component.html',
   styleUrls: ['./html.component.scss'],
 })
-export class HtmlComponent implements OnInit, OnChanges {
+export class HtmlComponent implements OnInit, OnChanges, OnDestroy {
+  routerSub$: Subscription | null = null
   @Input() isNotEmbed = true
   @Input() isFetchingDataComplete = false
   @Input() htmlData: NsContent.IContent | null = null
@@ -49,11 +51,17 @@ export class HtmlComponent implements OnInit, OnChanges {
   ) { }
 
   ngOnInit() {
-    this.activatedRoute.data.subscribe(_data => {
-      this.content = _data.content.data
+    this.routerSub$ = this.activatedRoute.data.subscribe(_data => {
       this.tocConfig = _data.pageData.data.viewerConfig
+      if (_data.content && _data.content.data) {
+        this.content = _data.content.data
       // tslint:disable-next-line: max-line-length
-      this.enableRatings = this.widgetContentSvc.isVisibileAccToRoles(this.tocConfig.rolesAllowed.rateContent, this.tocConfig.rolesNotAllowed.rateContent)
+      } else if (this.activatedRoute.snapshot.children[0] && this.activatedRoute.snapshot.children[0].data && this.activatedRoute.snapshot.children[0].data.content) {
+        // this check is exclusively for public access logic
+        this.content = this.activatedRoute.snapshot.children[0].data.content.data
+      }
+      // tslint:disable-next-line: max-line-length
+      this.enableRatings = this.configSvc.isGuestUser ? false : this.widgetContentSvc.isVisibileAccToRoles(this.tocConfig.rolesAllowed.rateContent, this.tocConfig.rolesNotAllowed.rateContent)
       // console.log(_data)
       // tslint:disable-next-line: max-line-length
       if (!this.configSvc.isGuestUser && this.viewerService.isVisibileAccToRoles(_data.pageData.data.enableDisscussionForum.rolesAllowed.disscussionForum, _data.pageData.data.enableDisscussionForum.rolesNotAllowed.disscussionForum)) {
@@ -115,5 +123,11 @@ export class HtmlComponent implements OnInit, OnChanges {
     this.hideRatings = true
     this.enableRatings = false
     this.mailIcon = false
+  }
+
+  ngOnDestroy(): void {
+    if (this.routerSub$) {
+      this.routerSub$.unsubscribe()
+    }
   }
 }
