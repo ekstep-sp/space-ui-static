@@ -222,7 +222,7 @@ export class HtmlComponent implements OnInit, OnChanges, OnDestroy {
       if (this.progress <= 0) {
         window.clearInterval(_interval)
       }
-    },30)
+    },                            30) as any
   }
 
   openWindow(width: any, height: any, redirecturl: string) {
