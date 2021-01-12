@@ -49,3 +49,9 @@
       justify-content: center;
     }
   }
+
+  ::ng-deep {
+  .theme-muave.night-mode .txt-clr{
+    color: #c6bcb8 !important;
+  }
+}
