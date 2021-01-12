@@ -86,3 +86,12 @@
   color: #696466 !important;
   margin: 0;
 }
+
+// .theme-muave.night-mode .ov-clr {
+//     color: #c6bcb8 !important;
+// }
+::ng-deep {
+  .theme-muave.night-mode .ov-clr {
+    color: #c6bcb8 !important;
+  }
+}
