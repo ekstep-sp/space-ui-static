@@ -384,7 +384,6 @@ export class ViewerTocComponent implements OnInit, OnDestroy {
     //   duration: collection.duration,
     //   redirectUrl: this.getCollectionTypeRedirectUrl(collection.displayContentType, collection.identifier),
     // }
-    debugger
     return {
       contentType: collection.contentType,
       type: this.getCollectionTypeCard(collection.displayContentType),
@@ -518,7 +517,7 @@ export class ViewerTocComponent implements OnInit, OnDestroy {
   }
 
   hasInPath(resourceid: string) {
-    console.log(this.pathSet)
-    return this.pathSet.has(resourceid) || this.pathSet.has(`${resourceid}.img`)
+    const correctResourceID = resourceid.split('.')
+    return this.pathSet.has(correctResourceID[0])
   }
 }
