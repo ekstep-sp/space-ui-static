@@ -83,8 +83,15 @@
 @media screen and (min-width:1169px){
   .video-player{
       height: calc(100vh - 147px) !important;
-      overflow-y: unset;
+      overflow-y: scroll;
   }
+  .video-player::-webkit-scrollbar {
+    display: none;
+}
+.video-player {
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;  /* Firefox */
+}
 }
 
 
