@@ -56,7 +56,7 @@ export class UtilityService {
       return false
     }
     pathArr.push(node)
-    if (node.identifier === id) {
+    if (node.identifier === id || `${node.identifier}.img` === id) {
       return true
     }
     const children = node.children || []

@@ -195,7 +195,7 @@ export class HtmlComponent implements OnInit, OnChanges, OnDestroy {
 
     const redirecturl = this.prepare(customUrl)
     if (this.htmlContent) {
-      if (this.mobAppSvc && this.mobAppSvc.isMobile) {
+      /* if (this.mobAppSvc && this.mobAppSvc.isMobile) {
         // window.open(this.htmlContent.artifactUrl)
         const mobileTimeout = setTimeout(
           () => {
@@ -204,7 +204,7 @@ export class HtmlComponent implements OnInit, OnChanges, OnDestroy {
           0,
         )
         this.timeoutSet.add(mobileTimeout)
-      } else {
+      } else { } */
         const width = window.outerWidth
         const height = window.outerHeight
         const isWindowOpen = this.openWindow(width, height, redirecturl as string)
@@ -212,7 +212,6 @@ export class HtmlComponent implements OnInit, OnChanges, OnDestroy {
           const msg = 'The pop up window has been blocked by your browser, please unblock to continue.'
           this.snackBar.open(msg)
         }
-      }
     }
   }
 
@@ -225,13 +224,11 @@ export class HtmlComponent implements OnInit, OnChanges, OnDestroy {
     },                            30) as any
   }
 
-  openWindow(width: any, height: any, redirecturl: string) {
+  openWindow(_width: any, _height: any, redirecturl: string) {
     this.setProgressBarLogic()
     return window.open(
       redirecturl,
-      '_blank',
-      // tslint:disable-next-line: max-line-length
-      `toolbar=yes,scrollbars=yes,resizable=yes,menubar=no,location=no,addressbar=no,top=${(15 * height) / 100},left=${(2 * width) / 100},width=${(65 * width) / 100},height=${(70 * height) / 100}`,
+      '_blank'
     )
   }
 
