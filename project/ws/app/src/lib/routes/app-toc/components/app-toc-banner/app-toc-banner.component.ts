@@ -490,9 +490,19 @@ export class AppTocBannerComponent implements OnInit, OnChanges, OnDestroy {
     Try again later ot start from the next content.
     `
   }
+
+  hasContentAsChild(id: string, content: NsContent.IContent): boolean {
+    if (content.identifier === id) {
+      return true
+    }
+    if (!content.children || !content.children.length) {
+      return false
+    }
+    return content.children.some(child => this.hasContentAsChild(id, child))
+  }
   getContentHistory() {
     this.contentService.fetchContentHistory(this.route.snapshot.params.id).subscribe(data => {
-      if (data) {
+      if (data && this.hasContentAsChild(data.identifier, this.content as NsContent.IContent)) {
         this.isLoad = false
         if (data.hasOwnProperty('status') && data.status === 'Live') {
           this.toResume = true
