@@ -517,7 +517,10 @@ export class ViewerTocComponent implements OnInit, OnDestroy {
   }
 
   hasInPath(resourceid: string) {
+    if (resourceid) {
     const correctResourceID = resourceid.split('.')
     return this.pathSet.has(correctResourceID[0])
+    }
+    return false
   }
 }
