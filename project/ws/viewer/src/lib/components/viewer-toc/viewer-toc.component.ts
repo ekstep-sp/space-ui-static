@@ -193,7 +193,9 @@ export class ViewerTocComponent implements OnInit, OnDestroy {
 
   private processCurrentResourceChange() {
     if (this.collection && this.resourceId) {
-      const currentIndex = this.queue.findIndex(c => c.identifier === this.resourceId)
+      // critical change to allow users to view even the draft content, this was needed to be done because the hierarchy has non img node
+      // whereas the viewer page has img node, if it exists. Similar change has been done for getPath function
+      const currentIndex = this.queue.findIndex(c => c.identifier === this.resourceId || `${c.identifier}.img` === this.resourceId)
       const next =
         currentIndex + 1 < this.queue.length ? this.queue[currentIndex + 1].viewerUrl : null
       const prev = currentIndex - 1 >= 0 ? this.queue[currentIndex - 1].viewerUrl : null
@@ -510,5 +512,10 @@ export class ViewerTocComponent implements OnInit, OnDestroy {
   }
   shouldExpand(content: any) {
     return this.pathSet.has(content.identifier)
+  }
+
+  hasInPath(resourceid: string) {
+    console.log(this.pathSet)
+    return this.pathSet.has(resourceid) || this.pathSet.has(`${resourceid}.img`)
   }
 }
