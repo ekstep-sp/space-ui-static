@@ -46,6 +46,7 @@ interface ICollectionCard {
   subText2: string
   duration: number
   redirectUrl: string | null
+  contentType: string | null
 }
 
 @Component({
@@ -383,7 +384,9 @@ export class ViewerTocComponent implements OnInit, OnDestroy {
     //   duration: collection.duration,
     //   redirectUrl: this.getCollectionTypeRedirectUrl(collection.displayContentType, collection.identifier),
     // }
+    debugger
     return {
+      contentType: collection.contentType,
       type: this.getCollectionTypeCard(collection.displayContentType),
       id: collection.identifier,
       title: collection.name,

@@ -26,7 +26,8 @@
   <ul [hidden]="tocMode !== 'TREE'" class="toc-tree">
     <ng-container *ngIf="collection && collectionCard">
       <div class="mat-body-2 text-truncate flex pl-4 main-title text-white">
-        <p>{{ collectionCard?.title | pipeLimitTo: 40 }}</p>
+        <p *ngIf="collectionCard?.contentType === 'Course'"> Table of Assets</p>
+        <p *ngIf="collectionCard?.contentType !== 'Course'"> Table of Resources</p>
         <mat-icon
           *ngIf="
             contentProgressHash &&
