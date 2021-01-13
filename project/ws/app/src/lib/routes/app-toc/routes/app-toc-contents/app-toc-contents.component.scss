@@ -147,7 +147,7 @@ $border-color: #d8d8d8;
     }
     @include breakpoint-l {
       @media only screen and (min-width: 1280px) and (max-width: 1919px) {
-        top: -25%;
+        top: -30%;
       }
     }
     @include breakpoint-xl {
