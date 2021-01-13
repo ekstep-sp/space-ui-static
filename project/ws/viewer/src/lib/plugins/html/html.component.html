@@ -53,12 +53,12 @@
     ></mat-progress-bar>
 
     <div class="flex flex-between padding-top-s">
-      <a type="button" [ngClass]="mobAppSvc?.isMobile ? 'block' : 'hidden'" mat-button [href]="prepare()"
-        target="_blank" #mobileOpenInNewTab>Open in New Tab</a>
+      <!-- <a type="button" [ngClass]="mobAppSvc?.isMobile ? 'block' : 'hidden'" mat-button [href]="prepare()"
+        target="_blank" #mobileOpenInNewTab>Open in New Tab</a> -->
 
-      <button [ngClass]="!mobAppSvc?.isMobile ? 'block' : 'hidden'" class="btn-clr" mat-raised-button color="primary"
+      <button class="btn-clr block" mat-raised-button color="primary"
         type="button" i18n mat-button (click)="openInNewTab(true)">
-        <span class="font-montserrat">Open in New Window</span>
+        <span class="font-montserrat">Open in New Tab</span>
       </button>
       <button type="button" *ngIf="
           htmlContent?.isIframeSupported === 'Maybe' ||
