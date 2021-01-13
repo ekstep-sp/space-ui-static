@@ -125,8 +125,13 @@ input[type=number] {
 }
 @media screen and (min-width:1024px){
    .pdf-page-container{
-    height:89vh;
+    height:72vh;
   }
+}
+@media screen and (min-width:800px){
+  .pdf-page-container{
+   height:86vh;
+ }
 }
 
 

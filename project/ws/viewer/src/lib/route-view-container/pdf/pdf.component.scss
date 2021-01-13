@@ -83,7 +83,7 @@
 @media screen and (min-width:1169px){
   .video-player{
       height: calc(100vh - 147px) !important;
-
+      overflow-y: hidden;
   }
 }
 
