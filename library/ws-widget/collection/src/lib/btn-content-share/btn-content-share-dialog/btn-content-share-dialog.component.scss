@@ -36,3 +36,18 @@
     margin-left: 10px;
   }
 }
+@media only screen and (max-width: 599px) {
+    .public-share {
+      p {
+      word-wrap: break-word;
+    overflow-wrap: break-word;
+    hyphens: auto
+      }
+    }
+    .public-url-wrapper {
+     button {
+    padding-left: 1px
+        }
+    }
+
+}
