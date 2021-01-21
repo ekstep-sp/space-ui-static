@@ -10,7 +10,7 @@
 }
 
 .padding-dynamic {
-  padding: $size-s;
+  padding: $size-xs;
   padding-top: $size-m;
   @include breakpoint-xs {
     padding: $size-xs;
@@ -45,33 +45,32 @@
 
 .video-player {
   width: 100%;
-  height: 75vh;
-  @include breakpoint-lt-xl {
-    height: 70vh;
-  }
-  @include breakpoint-lt-l {
-    height: 65vh;
+  // height: 85vh;
+  /* @include breakpoint-lt-xl {
+    height: 79.5vh;
+  } */
+  /* @include breakpoint-lt-l {
+    height: 74.5vh;
   }
   @include breakpoint-lt-m {
-    height: 60vh;
+    height: 82.5vh;
   }
   @include breakpoint-lt-s {
-    height: 55vh;
-  }
+    height: 64.5vh;
+  } */
   @include breakpoint-xs {
-    display: none;
+    top: 0;
+    left: 0px;
+    /* height: 29.5vh; */
+    width: 100%;
+    z-index: 1000;
+    background: black;
   }
 }
 
-.video-player-m {
-  top: 0;
-  left: 0px;
-  height: 40vh;
-  width: 100%;
-  z-index: 1000;
-  background: black;
-  @include breakpoint-gt-xs {
-    display: none;
+.video-player-mobile {
+  @include breakpoint-xs {
+    padding: 0;
   }
 }
 
@@ -80,7 +79,9 @@
 }
 
 .video-discussion-forum-in {
-  width: 100%;
+  // width: 100%;
+  display: block;
+  overflow: hidden;
 }
 
 .info-section {
@@ -113,7 +114,11 @@
     width: 100%;
   }
 }
-
+.buttons{
+  white-space: nowrap;
+  margin-left: auto;
+  text-align: right;
+ }
 .author {
   padding: $size-s 0;
   display: flex;
@@ -132,7 +137,35 @@
   margin-bottom: $size-m;
 }
 
-.audio-player-embed {
+.video-player-embed {
   height: 100vh;
   width: 100vw;
 }
+
+.video-content{
+  justify-content: flex-end;
+}
+
+// @media screen and (max-width: 750px) {
+//   .video-player {
+//     height: 78.6vh;
+//   }
+// }
+.pos{
+  position: relative;
+}
+
+@media screen and (max-width:992px){
+  .buttons{
+    display: flex;
+      justify-content: flex-end;
+      width: 100%;
+  }
+  .customColorToolbar{
+    position: inherit;
+    flex-wrap: wrap;
+  }
+  }
+
+  
+  

@@ -1,23 +1,27 @@
-import { Component, ElementRef, Input, OnInit, ViewChild, OnChanges } from '@angular/core'
+import { Component, ElementRef, Input, OnInit, ViewChild, OnChanges, OnDestroy } from '@angular/core'
 import { MatSnackBar } from '@angular/material/snack-bar'
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser'
-import { Router } from '@angular/router'
+import { Router, ActivatedRoute } from '@angular/router'
 import { NsContent } from '@ws-widget/collection'
 import { ConfigurationsService } from '@ws-widget/utils'
 import { TFetchStatus } from '@ws-widget/utils/src/public-api'
+// import { SharedViewerDataService } from '@ws/author/src/lib/modules/shared/services/shared-viewer-data.service'
+import { Subscription } from 'rxjs'
 import { MobileAppsService } from '../../../../../../../src/app/services/mobile-apps.service'
+import { SharedViewerDataService } from '@ws/author/src/lib/modules/shared/services/shared-viewer-data.service'
 
 @Component({
   selector: 'viewer-plugin-html',
   templateUrl: './html.component.html',
   styleUrls: ['./html.component.scss'],
 })
-export class HtmlComponent implements OnInit, OnChanges {
+export class HtmlComponent implements OnInit, OnChanges, OnDestroy {
 
   // private mobileOpenInNewTab!: any
 
   @ViewChild('mobileOpenInNewTab', { read: ElementRef, static: false }) mobileOpenInNewTab !: ElementRef<HTMLAnchorElement>
   @Input() htmlContent: NsContent.IContent | null = null
+  @Input() customUrl: string | null = null
   iframeUrl: SafeResourceUrl | null = null
 
   showIframeSupportWarning = false
@@ -29,6 +33,8 @@ export class HtmlComponent implements OnInit, OnChanges {
   isIntranetUrl = false
   progress = 100
   loaderIntervalTimeout: any
+  techResourceSub: Subscription | null = null
+  timeoutSet = new Set()
   constructor(
     private domSanitizer: DomSanitizer,
     public mobAppSvc: MobileAppsService,
@@ -36,10 +42,29 @@ export class HtmlComponent implements OnInit, OnChanges {
     private router: Router,
     private configSvc: ConfigurationsService,
     private snackBar: MatSnackBar,
+    private route: ActivatedRoute,
+    private sharedViewSrvc: SharedViewerDataService
   ) { }
 
   ngOnInit() {
     // this.mobAppSvc.simulateMobile()
+    if (this.techResourceSub) {
+      this.techResourceSub.unsubscribe()
+    }
+    this.techResourceSub = this.sharedViewSrvc.techUrlChangeSubject$.subscribe(() => {
+      this.clearTimeouts()
+      this.progress = 100
+      this.openInNewTabForTechResource(false)
+    })
+  }
+
+  clearTimeouts() {
+    if (this.timeoutSet.size > 0) {
+      [...this.timeoutSet.keys()].forEach((_interval: any) => {
+        window.clearTimeout(_interval)
+      })
+    }
+    this.progress = -1
   }
 
   ngOnChanges() {
@@ -50,7 +75,11 @@ export class HtmlComponent implements OnInit, OnChanges {
     this.intranetUrlPatterns = this.configSvc.instanceConfig
       ? this.configSvc.instanceConfig.intranetIframeUrls
       : []
-
+    if (this.htmlContent && !this.htmlContent.hasOwnProperty('isIframeSupported')) {
+      // for technology assetType, this key is not coming, so setting it as default to No for code to work,
+      // originally, the key should be there in the content itself
+      this.htmlContent['isIframeSupported'] = 'No'
+    }
     let iframeSupport: boolean | string | null =
       this.htmlContent && this.htmlContent.isIframeSupported
     if (this.htmlContent && this.htmlContent.artifactUrl) {
@@ -58,11 +87,15 @@ export class HtmlComponent implements OnInit, OnChanges {
         this.htmlContent.isIframeSupported = 'No'
       }
       if (typeof iframeSupport !== 'boolean') {
-        iframeSupport = this.htmlContent.isIframeSupported.toLowerCase()
+        iframeSupport = (this.htmlContent && this.htmlContent.isIframeSupported) ? this.htmlContent.isIframeSupported.toLowerCase() : 'no'
         if (iframeSupport === 'no') {
           this.showIframeSupportWarning = true
-          this.loaderIntervalTimeout = setTimeout(() => this.openInNewTab(), 3000)
-          setInterval(() => this.progress -= 1, 30)
+          if (!this.configSvc.isGuestUser) {
+            this.progress = 100
+            this.openInNewTabForTechResource(false)
+/* this.loaderIntervalTimeout = setTimeout(() => this.openInNewTab(), 3000)
+          setInterval(() => this.progress -= 1, 30) */
+          }
         } else if (iframeSupport === 'maybe') {
           this.showIframeSupportWarning = true
         } else {
@@ -80,7 +113,7 @@ export class HtmlComponent implements OnInit, OnChanges {
       }
       this.showIsLoadingMessage = false
       if (this.htmlContent.isIframeSupported !== 'No') {
-        setTimeout(
+        const webTimeOut = setTimeout(
           () => {
             if (this.pageFetchStatus === 'fetching') {
               this.showIsLoadingMessage = true
@@ -88,9 +121,11 @@ export class HtmlComponent implements OnInit, OnChanges {
           },
           3000,
         )
+        this.setProgressBarLogic()
+        this.timeoutSet.add(webTimeOut)
       }
-        const maybeYTUrl = this.parseForYoutube(this.htmlContent.artifactUrl) // it will convert a faulty youtube url into an embeddable url
-       this.iframeUrl = this.domSanitizer.bypassSecurityTrustResourceUrl(
+      const maybeYTUrl = this.parseForYoutube(this.htmlContent.artifactUrl) // it will convert a faulty youtube url into an embeddable url
+      this.iframeUrl = this.domSanitizer.bypassSecurityTrustResourceUrl(
         maybeYTUrl,
       )
     } else if (this.htmlContent && this.htmlContent.artifactUrl === '') {
@@ -111,46 +146,92 @@ export class HtmlComponent implements OnInit, OnChanges {
       `/app/toc/${this.htmlContent ? this.htmlContent.identifier : ''}/overview`,
     ])
   }
-
-  openInNewTab(triggeredManually = false) {
+  openInNewTabForTechResource(triggeredManually = false, customUrl?: null | string) {
+    if (triggeredManually) {
+      this.clearTimeouts()
+    }
+    window.setTimeout(() => {
+      const redirecturl = this.prepare(customUrl)
+      if (this.htmlContent && !this.route.snapshot.queryParamMap.has('techResourceType')) {
+        if (this.mobAppSvc && this.mobAppSvc.isMobile) {
+          // window.open(this.htmlContent.artifactUrl)
+          const mobileTimeout = setTimeout(
+            () => {
+              this.mobileOpenInNewTab.nativeElement.click()
+            },
+            0,
+          )
+          this.timeoutSet.add(mobileTimeout)
+        } else {
+          const width = window.outerWidth
+          const height = window.outerHeight
+          const isWindowOpen = this.openWindow(width, height, redirecturl as string)
+          if (isWindowOpen === null) {
+            const msg = 'The pop up window has been blocked by your browser, please unblock to continue.'
+            this.snackBar.open(msg)
+          }
+        }
+      } else {
+        const webTimeout = setTimeout(() => {
+          const width = window.outerWidth
+          const height = window.outerHeight
+          const isWindowOpen = this.openWindow(width, height, redirecturl as string)
+          if (isWindowOpen === null) {
+            const msg = 'The pop up window has been blocked by your browser, please unblock to continue.'
+            this.snackBar.open(msg)
+          }
+        },                            3500)
+        this.progress = 100
+        this.setProgressBarLogic()
+        this.timeoutSet.add(webTimeout)
+      }
+    },                0)
+  }
+  openInNewTab(triggeredManually = false, customUrl?: null | string) {
     if (triggeredManually) {
       window.clearTimeout(this.loaderIntervalTimeout)
       this.progress = -1
     }
-    const redirecturl = this.prepare()
+
+    const redirecturl = this.prepare(customUrl)
     if (this.htmlContent) {
-      if (this.mobAppSvc && this.mobAppSvc.isMobile) {
+      /* if (this.mobAppSvc && this.mobAppSvc.isMobile) {
         // window.open(this.htmlContent.artifactUrl)
-        setTimeout(
+        const mobileTimeout = setTimeout(
           () => {
             this.mobileOpenInNewTab.nativeElement.click()
           },
           0,
         )
-      } else {
+        this.timeoutSet.add(mobileTimeout)
+      } else { } */
         const width = window.outerWidth
         const height = window.outerHeight
-        const isWindowOpen = window.open(
-          redirecturl,
-          '_blank',
-          `toolbar=yes,
-             scrollbars=yes,
-             resizable=yes,
-             menubar=no,
-             location=no,
-             addressbar=no,
-             top=${(15 * height) / 100},
-             left=${(2 * width) / 100},
-             width=${(65 * width) / 100},
-             height=${(70 * height) / 100}`,
-        )
+        const isWindowOpen = this.openWindow(width, height, redirecturl as string)
         if (isWindowOpen === null) {
           const msg = 'The pop up window has been blocked by your browser, please unblock to continue.'
           this.snackBar.open(msg)
         }
-      }
     }
   }
+
+  setProgressBarLogic() {
+    const _interval = setInterval(() => {
+      this.progress -= 1
+      if (this.progress <= 0) {
+        window.clearInterval(_interval)
+      }
+    },                            30) as any
+  }
+
+  openWindow(_width: any, _height: any, redirecturl: string) {
+    this.setProgressBarLogic()
+    return window.open(
+      redirecturl,
+      '_blank'
+    )
+  }
+
   dismiss() {
     this.showIframeSupportWarning = false
     this.isIntranetUrl = false
@@ -173,14 +254,18 @@ export class HtmlComponent implements OnInit, OnChanges {
     }
   }
 
-  prepare() {
+  prepare(customLink?: null | string) {
+    if (customLink) {
+      return customLink
+    }
     let link = ''
     if (this.htmlContent) {
       if (this.htmlContent.assetType === 'Knowledge') {
         link = this.htmlContent.artifactUrl
 
       } else if (this.htmlContent.assetType === 'Technology') {
-        link = this.htmlContent.codebase
+        link = this.getLinkFromTechnicalResource()
+        // link = this.htmlContent.codebase
 
       } else if (this.htmlContent.assetType === 'Connection') {
         link = this.htmlContent.profile_link
@@ -190,5 +275,30 @@ export class HtmlComponent implements OnInit, OnChanges {
     }
     return link
   }
-
+  getLinkFromTechnicalResource() {
+    if (this.htmlContent) {
+      const techResource = this.route.snapshot.queryParamMap.get('techResourceType')
+      if (techResource) {
+        this.htmlContent.name = techResource
+        if (techResource === 'Interface API Link') {
+          return (this.htmlContent && this.htmlContent.interface_api) ? this.htmlContent.interface_api : ''
+        }
+         if (techResource === 'Documentation Link') {
+          return (this.htmlContent && this.htmlContent.documentation) ? this.htmlContent.documentation : ''
+        }
+         if (techResource === 'Sandbox Link') {
+          return (this.htmlContent && this.htmlContent.sandbox) ? this.htmlContent.sandbox : ''
+        }
+         if (techResource === 'Codebase Link') {
+          return (this.htmlContent && this.htmlContent.codebase) ? this.htmlContent.codebase : ''
+        }
+      }
+    }
+  }
+  ngOnDestroy() {
+    if (this.techResourceSub) {
+      this.techResourceSub.unsubscribe()
+    }
+    this.clearTimeouts()
+  }
 }

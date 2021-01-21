@@ -119,3 +119,9 @@ ws-app-search-input .feature-group {
 height:17px;
 padding-bottom:8px;
 }
+
+@media screen and (max-width:639px) {
+.theme-muave.day-mode .mat-input-element::-webkit-input-placeholder {
+  color: white !important;
+}
+}

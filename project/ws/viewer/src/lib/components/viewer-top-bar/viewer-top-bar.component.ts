@@ -2,8 +2,9 @@ import { Component, EventEmitter, Input, OnDestroy, OnInit, Output } from '@angu
 import { DomSanitizer, SafeUrl } from '@angular/platform-browser'
 import { ActivatedRoute } from '@angular/router'
 import { ConfigurationsService, EInstance, NsPage } from '@ws-widget/utils'
+import { SharedViewerDataService } from '@ws/author/src/lib/modules/shared/services/shared-viewer-data.service'
 import { Subscription } from 'rxjs'
-import { ViewerDataService } from '../../viewer-data.service'
+// import { ViewerDataService } from '../../viewer-data.service'
 
 @Component({
   selector: 'viewer-viewer-top-bar',
@@ -18,6 +19,7 @@ export class ViewerTopBarComponent implements OnInit, OnDestroy {
   private viewerDataServiceSubscription: Subscription | null = null
   private paramSubscription: Subscription | null = null
   private viewerDataServiceResourceSubscription: Subscription | null = null
+  private viewDataUpdateHeirarchyTitleSubscription: Subscription | null = null
   appIcon: SafeUrl | null = null
   isTypeOfCollection = false
   collectionType: string | null = null
@@ -29,12 +31,13 @@ export class ViewerTopBarComponent implements OnInit, OnDestroy {
   collectionId = ''
   logo = true
   forChannel = false
+  heirarchyTitle: any = []
   constructor(
     private activatedRoute: ActivatedRoute,
     private domSanitizer: DomSanitizer,
     // private logger: LoggerService,
     private configSvc: ConfigurationsService,
-    private viewerDataSvc: ViewerDataService,
+    private viewerDataSvc: SharedViewerDataService,
   ) { }
 
   ngOnInit() {
@@ -64,10 +67,15 @@ export class ViewerTopBarComponent implements OnInit, OnDestroy {
     })
     this.viewerDataServiceResourceSubscription = this.viewerDataSvc.changedSubject.subscribe(
       _data => {
-        this.resourceId = this.viewerDataSvc.resourceId as string
+        this.resourceId = this.viewerDataSvc.resourceId as string,
         this.resourceName = this.viewerDataSvc.resource ? this.viewerDataSvc.resource.name : ''
       },
     )
+    this.viewDataUpdateHeirarchyTitleSubscription = this.viewerDataSvc.updateHierarchyTitleSubject.subscribe(data => {
+      if (data) {
+        this.heirarchyTitle = data
+      }
+    })
   }
 
   ngOnDestroy() {
@@ -79,6 +87,9 @@ export class ViewerTopBarComponent implements OnInit, OnDestroy {
     }
     if (this.viewerDataServiceResourceSubscription) {
       this.viewerDataServiceResourceSubscription.unsubscribe()
+    }
+    if (this.viewDataUpdateHeirarchyTitleSubscription) {
+      this.viewDataUpdateHeirarchyTitleSubscription.unsubscribe()
     }
   }
 

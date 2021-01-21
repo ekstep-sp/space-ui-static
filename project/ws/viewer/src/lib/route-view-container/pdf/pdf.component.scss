@@ -48,17 +48,84 @@
     width: 100%;
   }
 }
-
+.buttons{
+  white-space: nowrap;
+  margin-left: auto;
+  text-align: right;
+ }
 .video-player {
   width: 100%;
   overflow: auto;
+  // max-height: 84.5vh;
 }
 
+@media screen and (min-width:768px){
+  .video-player {
+      height: calc(100vh - 168px) !important
+
+  }
+}
+
+@media screen and (min-width:1024px){
+  .video-player {
+      height: calc(103.5vh - 194px) !important
+
+  }
+}
+
+@media screen and (min-width:1024px) and (orientation:landscape){
+  .video-player {
+      height: calc(109.3vh - 194px) !important
+
+  }
+}
+
+@media screen and (min-width:1169px){
+  .video-player{
+      height: calc(100vh - 147px) !important;
+      overflow-y: scroll;
+  }
+  .video-player::-webkit-scrollbar {
+    display: none;
+}
+.video-player {
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;  /* Firefox */
+}
+}
+
+
+
+@media screen and (max-width: 1023px){
+  .video-player{
+      height: 40em;
+
+  }
+}
+@media screen and (max-width: 767px){
+  .video-player{
+      height: calc(100vh - 184px) !important;
+
+  }
+}
+
+@media screen and (max-width: 767px) and (orientation:landscape){
+  .video-player{
+      height: calc(100vh - 184px) !important;
+
+  }
+}
+@media screen and (max-width: 516px){
+  .video-player {
+      height: calc(100vh - 216px) !important;
+
+  }
+}
 .video-player-m {
   position: fixed;
   top: 55px;
   left: 0px;
-  height: 40vh;
+  // height: 40vh;
   width: 100%;
   z-index: 1000;
   background: black;
@@ -97,3 +164,19 @@
 .space{
   padding-left:20px;
 }
+@media screen and (max-width:992px){
+.buttons{
+  display: flex;
+    justify-content: flex-end;
+    width: 100%;
+}
+.customColorToolbar{
+  position: inherit;
+  flex-wrap: wrap;
+}
+}
+// @media screen and (max-width:320px){
+//   .mr-2{
+//     margin-right:0.3em;
+//   }
+// }

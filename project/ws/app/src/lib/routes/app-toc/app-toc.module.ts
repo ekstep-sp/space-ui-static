@@ -22,6 +22,7 @@ import {
   MatCheckboxModule,
   MatFormFieldModule,
   MatInputModule,
+  MatStepperModule,
 
 } from '@angular/material'
 
@@ -95,6 +96,10 @@ import { KnowledgeArtifactDetailsComponent } from './components/knowledge-artifa
 import { ProfileImageModule } from '../../../../../../../library/ws-widget/collection/src/lib/_common/profile-image/profile-image.module'
 import { EditorService } from '../../../../../author/src/lib/routing/modules/editor/services/editor.service'
 import { ApiService, AccessControlService } from '../../../../../author/src/public-api'
+import { AtaglanceModule } from '@ws-widget/collection/src/lib/_common/ataglance/ataglance.module'
+import { AppTocContentDetailsTreeComponent } from './routes/app-toc-content-details-tree/app-toc-content-details-tree.component'
+import { TocBodyCommonRoutingComponent } from './routes/toc-body-common-routing/toc-body-common-routing.component'
+import { RateusComponent } from './routes/rateus/rateus.component'
 @NgModule({
   declarations: [
     AppTocAnalyticsComponent,
@@ -114,6 +119,9 @@ import { ApiService, AccessControlService } from '../../../../../author/src/publ
     AppTocCohortsRootComponent,
     KnowledgeArtifactDetailsComponent,
     AppTocAnalyticsTilesComponent,
+    AppTocContentDetailsTreeComponent,
+    TocBodyCommonRoutingComponent,
+    RateusComponent,
   ],
   imports: [
     CommonModule,
@@ -172,6 +180,8 @@ import { ApiService, AccessControlService } from '../../../../../author/src/publ
     BtnContentShareModule,
     UserAutocompleteModule,
     ProfileImageModule,
+    AtaglanceModule,
+    MatStepperModule,
   ],
   providers: [
     AppTocResolverService,

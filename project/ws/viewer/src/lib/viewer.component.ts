@@ -1,12 +1,11 @@
 import { AfterViewChecked, AfterViewInit, ChangeDetectorRef, Component, OnDestroy, OnInit } from '@angular/core'
 import { ActivatedRoute, Router } from '@angular/router'
-import { NsContent } from '@ws-widget/collection'
+import { NsContent, NsDiscussionForum } from '@ws-widget/collection'
 import { NsWidgetResolver } from '@ws-widget/resolver'
 import { ConfigurationsService, UtilityService, ValueService } from '@ws-widget/utils'
 import { Subscription } from 'rxjs'
 import { RootService } from '../../../../../src/app/component/root/root.service'
-import { TStatus, ViewerDataService } from './viewer-data.service'
-import { AppTocService } from '@ws/app/src/lib/routes/app-toc/services/app-toc.service'
+import { TStatus, SharedViewerDataService } from '@ws/author/src/lib/modules/shared/services/shared-viewer-data.service'
 
 export enum ErrorType {
   accessForbidden = 'accessForbidden',
@@ -25,6 +24,7 @@ export enum ErrorType {
 })
 export class ViewerComponent implements OnInit, OnDestroy, AfterViewInit, AfterViewChecked {
   fullScreenContainer: HTMLElement | null = null
+  alreadyCalled = false
   guestUser = false
   content: NsContent.IContent | null = null
   errorType = ErrorType
@@ -33,11 +33,14 @@ export class ViewerComponent implements OnInit, OnDestroy, AfterViewInit, AfterV
   mode: 'over' | 'side' = 'side'
   forPreview = window.location.href.includes('/author/')
   isTypeOfCollection = true
+  technicalResource: any = null
   collectionId = this.activatedRoute.snapshot.queryParamMap.get('collectionId')
   status: TStatus = 'none'
   error: any | null = null
   isNotEmbed = true
   renderingPDF = false
+  isRatingsDisabled = false
+  discussionForumWidget = {}
   errorWidgetData: NsWidgetResolver.IRenderConfigWithTypedData<any> = {
     widgetType: 'errorResolver',
     widgetSubType: 'errorResolver',
@@ -51,15 +54,14 @@ export class ViewerComponent implements OnInit, OnDestroy, AfterViewInit, AfterV
     private activatedRoute: ActivatedRoute,
     private router: Router,
     private valueSvc: ValueService,
-    private dataSvc: ViewerDataService,
+    private dataSvc: SharedViewerDataService,
     private rootSvc: RootService,
     private utilitySvc: UtilityService,
     private changeDetector: ChangeDetectorRef,
-    private tocSharedSvc: AppTocService,
     private readonly configService: ConfigurationsService,
     private readonly cdr: ChangeDetectorRef,
   ) {
-    this.rootSvc.showNavbarDisplay$.next(false)
+    this.rootSvc.showNavbarDisplay$.next(true)
     this.rootSvc.showBottomNav$.next(true)
   }
 
@@ -69,13 +71,15 @@ export class ViewerComponent implements OnInit, OnDestroy, AfterViewInit, AfterV
         e.activatedRoute.data.subscribe((data: { content: { data: NsContent.IContent } }) => {
           if (data.content && data.content.data) {
             this.content = data.content.data
-            this.tocSharedSvc.fetchEmails(this.content ? this.content.creatorContacts : []).then((newIDS: any) => {
+           this.technicalResource = this.content && this.content.assetType === 'Technology' ? this.content : null
+             this.formDiscussionForumWidget(this.content)
+            /* this.tocSharedSvc.fetchEmails(this.content ? this.content.creatorContacts : []).then((newIDS: any) => {
               if (this.content) {
                 this.content.creatorContacts = [
                   ...newIDS,
                 ]
               }
-            })
+            }) */
           }
         })
       }
@@ -84,6 +88,9 @@ export class ViewerComponent implements OnInit, OnDestroy, AfterViewInit, AfterV
       window.setTimeout(() => {
         // this.utilitySvc.emitCurrentContentForBriefPlayer(e)
         this.content = e
+        this.technicalResource = this.content && this.content.assetType === 'Technology' ? this.content : null
+        this.formDiscussionForumWidget(this.content as any)
+        this.isRatingsDisabled = true
       })
     }
     if (this.content && this.content.mimeType.includes('pdf')) {
@@ -178,5 +185,25 @@ export class ViewerComponent implements OnInit, OnDestroy, AfterViewInit, AfterV
     if (this.utilitySvc.isMobile) {
       this.sideNavBarOpened = false
     }
+  }
+
+  formDiscussionForumWidget(content: NsContent.IContent) {
+    this.discussionForumWidget = {
+      widgetData: {
+        description: content.description,
+        id: content.identifier,
+        name: NsDiscussionForum.EDiscussionType.LEARNING,
+        title: content.name,
+        initialPostCount: 2,
+        isDisabled: this.forPreview,
+        contentData: this.content,
+      },
+      widgetSubType: 'discussionForum',
+      widgetType: 'discussionForum',
+    }
+  }
+
+  updateViewURL(_event: any) {
+    // console.log(event)
   }
 }

@@ -68,3 +68,8 @@
   word-wrap: break-word;
   hyphens: auto;
 }
+::ng-deep {
+  .theme-muave.day-mode .viewer-style {
+  background-color: #C4C4C4 !important;
+}
+}

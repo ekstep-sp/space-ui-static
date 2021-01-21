@@ -9,6 +9,7 @@ export interface IBtnMailUser {
   content: NsContent.IContent
   emails: string[]
   labelled?: boolean
+  fixLine?: boolean
 }
 
 @Component({

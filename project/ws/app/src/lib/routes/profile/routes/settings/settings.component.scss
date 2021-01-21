@@ -192,3 +192,9 @@
     }
     
   }
+
+  ::ng-deep{
+    .mat-drawer-container{
+      overflow: unset!important;
+    }
+  }

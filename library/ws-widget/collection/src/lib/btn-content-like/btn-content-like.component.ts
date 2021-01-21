@@ -22,6 +22,7 @@ export class BtnContentLikeComponent extends WidgetBaseComponent
   @Input() likesCount = 0
   @Input() color: 'primary' | 'accent' | 'default' = 'default'
   @Input() forPreview = false
+  @Input() overview = false
 
   status: 'LIKED' | 'NOT_LIKED' | 'PENDING' = 'PENDING'
   isRestricted = false

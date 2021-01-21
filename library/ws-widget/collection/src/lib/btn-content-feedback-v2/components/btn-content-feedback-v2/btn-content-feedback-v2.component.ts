@@ -14,6 +14,8 @@ export class BtnContentFeedbackV2Component extends WidgetBaseComponent
   implements OnInit, NsWidgetResolver.IWidgetData<IWidgetBtnContentFeedbackV2> {
   @Input() widgetData!: IWidgetBtnContentFeedbackV2
   @Input() forPreview = false
+  @Input() overview = false
+
   isFeedbackEnabled = false
   constructor(private dialog: MatDialog, private configSvc: ConfigurationsService) {
     super()

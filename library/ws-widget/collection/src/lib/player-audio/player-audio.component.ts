@@ -25,7 +25,7 @@ import { ActivatedRoute } from '@angular/router'
 
 const videoJsOptions: videoJs.PlayerOptions = {
   controls: true,
-  autoplay: false,
+  autoplay: true,
   preload: 'auto',
   fluid: false,
   techOrder: ['html5'],

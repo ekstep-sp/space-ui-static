@@ -42,6 +42,11 @@ body {
   font-family: $font-family-montserrat;
 }
 
+.customColorToolbar {
+  background-color: #8684A2;
+  min-height: 90px;
+}
+
 .custom-padding .mat-dialog-container {
           padding: 0;
           box-shadow: none !important;
@@ -195,7 +200,7 @@ mat-toolbar span {
   color: white !important;
   background: #918b96 !important;
 }
-.mat-standard-chip { 
+.mat-standard-chip {
   height: unset !important;
 }
 .header-btn-style {
@@ -229,7 +234,16 @@ color: #696466 !important;
     width: 12.5% !important;
   }
 }
-
+.btn-text-font {
+  font-size: 1.125rem;
+  font-weight: bold !important;
+  font-family: Montserrat !important;
+}
+.sub-heading-font {
+  font-size: 1.5rem;
+  font-weight: 400 !important;
+  font-family: Montserrat !important;
+}
 .font-sans {
   font-family: $font-family-sans;
 }
@@ -244,6 +258,28 @@ color: #696466 !important;
 }
 .font-mono {
   font-family: $font-family-mono;
+}
+
+.no-visible-scroll {
+  -webkit-overflow-scrolling: touch;
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
+    &::-webkit-scrollbar-track {
+      display: none;
+    }
+  &::-webkit-scrollbar-track {
+    display: none;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    display: none;
+  }
+
+  &::-webkit-scrollbar-thumb:hover {
+    display: none;
+  }
 }
 
 .custom-scroll {
@@ -779,3 +815,11 @@ overflow: hidden !important;
       }
   }
 }
+ @media only screen and (max-width: 768px) {
+   .content-resource{
+    .mat-content {
+         flex: none !important;
+         width: 100% !important;
+    }
+  }
+ }

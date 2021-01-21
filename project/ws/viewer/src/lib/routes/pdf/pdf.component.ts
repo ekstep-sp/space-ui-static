@@ -6,6 +6,8 @@ import { WsEvents, EventService, ConfigurationsService } from '@ws-widget/utils'
 import { NsWidgetResolver } from '@ws-widget/resolver'
 import { ActivatedRoute } from '@angular/router'
 import { ViewerUtilService } from '../../viewer-util.service'
+import { map, mergeMap } from 'rxjs/operators'
+import { AppTocService } from '@ws/app/src/lib/routes/app-toc/services/app-toc.service'
 
 @Component({
   selector: 'viewer-pdf',
@@ -43,6 +45,7 @@ export class PdfComponent implements OnInit, OnDestroy {
     private eventSvc: EventService,
     private accessControlSvc: AccessControlService,
     private readonly config: ConfigurationsService,
+    private readonly appTocService: AppTocService,
   ) {}
 
   ngOnInit() {
@@ -70,7 +73,16 @@ export class PdfComponent implements OnInit, OnDestroy {
     } else if (this.config.isGuestUser) {
         this.prepareContent(this.sharedContent)
       } else {
-        this.dataSubscription = this.activatedRoute.data.subscribe(
+        this.dataSubscription = this.activatedRoute.data.pipe(
+          mergeMap((originalContent: any) => {
+            return this.appTocService.attachEmailIDS(originalContent.content.data)
+            .pipe(map((updatedData: any) => {
+              (originalContent as any).content.data = updatedData
+              return originalContent
+            }))
+          })
+        )
+        .subscribe(
           async data => {
             this.prepareContent(data.content.data)
           },

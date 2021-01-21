@@ -1,7 +1,7 @@
 import { WorkFlowService } from './../../services/work-flow.service'
 import { NotificationService } from './../../services/notification.service'
 import { ConditionCheckService } from './services/condition-check.service'
-import { PipeContentRouteModule } from '@ws-widget/collection'
+import { BtnMailUserModule, PipeContentRouteModule } from '@ws-widget/collection'
 import { CommonModule } from '@angular/common'
 import { NgModule } from '@angular/core'
 import { FormsModule, ReactiveFormsModule } from '@angular/forms'
@@ -59,6 +59,8 @@ import { DraftDialogComponent } from './components/draft-dialog/draft-dialog.com
 import { ShowHideToolTipDirective } from './directives/show-hide-tool-tip.directive'
 import { StatusTrackComponent } from './components/status-track/status-track.component'
 import { FeedbackFormComponent } from './components/feedback-form/feedback-form.component'
+import { SharedViewerDataService } from './services/shared-viewer-data.service'
+import { ViewerCuratorListComponent } from './components/viewer-curator-list/viewer-curator-list.component'
 
 @NgModule({
   declarations: [
@@ -81,6 +83,7 @@ import { FeedbackFormComponent } from './components/feedback-form/feedback-form.
     ShowHideToolTipDirective,
     StatusTrackComponent,
     FeedbackFormComponent,
+    ViewerCuratorListComponent,
   ],
   imports: [
     CommonModule,
@@ -117,6 +120,7 @@ import { FeedbackFormComponent } from './components/feedback-form/feedback-form.
     MatProgressBarModule,
     ImageCropModule,
     PipeContentRouteModule,
+    BtnMailUserModule,
   ],
   exports: [
     MatIconModule,
@@ -169,8 +173,10 @@ import { FeedbackFormComponent } from './components/feedback-form/feedback-form.
     ShowHideToolTipDirective,
     StatusTrackComponent,
     FeedbackFormComponent,
+    ViewerCuratorListComponent,
   ],
   providers: [
+    SharedViewerDataService,
     ApiService,
     AccessControlService,
     ConditionCheckService,

@@ -10,6 +10,7 @@ export namespace NsContent {
     artifactUrl: string
     assetType: string
     codebase: string
+    category: string
     profile_link: string
     averageRating?: any
     body?: string
@@ -305,6 +306,7 @@ export namespace NsContent {
     CHANNEL = 'Channel',
     CLASS_DIAGRAM = 'CLASS_DIAGRAM',
     COURSE = 'COURSE',
+    ASSET= 'MODULE',
     DEFAULT = 'DEFAULT',
     DRAG_DROP = 'DRAG_DROP',
     EXTERNAL_CERTIFICATION = 'EXTERNAL_CERTIFICATION',

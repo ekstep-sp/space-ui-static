@@ -4,6 +4,8 @@ import { HttpClient } from '@angular/common/http'
 import { Observable, of } from 'rxjs'
 import { NsDiscussionForum } from './ws-discussion-forum.model'
 import { NsUserDashboard } from '../../../../../../project/ws/app/src/lib/routes/user-dashboard/models/user-dashboard.model'
+import { ConfigurationsService } from '@ws-widget/utils/src/public-api'
+import { catchError } from 'rxjs/operators'
 
 const PROTECTED_SLAG_V8 = '/apis/protected/v8'
 
@@ -36,7 +38,7 @@ interface IResponse {
   providedIn: 'root',
 })
 export class WsDiscussionForumService {
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, private readonly configSrvc: ConfigurationsService) { }
 
   // added userdata and setuser method to set data from config
   userData: NsUserDashboard.IUserData | any | null
@@ -80,36 +82,6 @@ export class WsDiscussionForumService {
     return this.http.post<NsDiscussionForum.IPostResultV2>(API_END_POINTS.SOCIAL_VIEW_CONVERSATION_V2, request)
   }
 
-  // // added get all users to retrieve  all user details
-  // async getAllUsers(headers: NsUserDashboard.IHeaders): Promise<IResponse> {
-  //   const httpOptions = {
-  //     headers: new HttpHeaders({
-  //       rootorg: headers.rootOrg,
-  //       wid_orgadmin: headers.wid_OrgAdmin,
-  //       org: headers.org,
-  //     }),
-  //   }
-  //   try {
-  //     // tslint:disable-next-line: prefer-template
-  //     // tslint:disable-next-line: max-line-length
-  //     const userList = await this.http.get<IResponse>(this.userData.api + this.userData.user_list.url, httpOptions).toPromise()
-  //     if (userList && userList.STATUS === 'OK') {
-  //       return Promise.resolve({
-  //         ok: true,
-  //         DATA: userList.DATA,
-  //       })
-  //     }
-  //     return { ok: false, error: userList.MESSAGE, MESSAGE: userList.MESSAGE }
-  //   } catch (ex) {
-  //     if (ex) {
-  //       return Promise.resolve({
-  //         ok: false, error: ex,
-  //       })
-  //     }
-  //     return Promise.resolve({ ok: false, error: null, MESSAGE: this.userData.user_list_userTable.errorMessage })
-  //   }
-  // }
-
   getAllUsersList(): Observable<any> {
     try {
       return this.http.get<IResponse>(this.userData.api + this.userData.userList.url)
@@ -148,21 +120,6 @@ export class WsDiscussionForumService {
     return finalName.join(' ')
   }
 
-  // getFullName(userObj: any) {
-  //   console.log("userobe", userObj)
-  //   const finalName = []
-  //   if (userObj.first_name) {
-  //     finalName.push(userObj.first_name)
-  //   }
-  //   if (userObj.middle_name) {
-  //     finalName.push(userObj.middle_name)
-  //   }
-  //   if (userObj.last_name) {
-  //     finalName.push(userObj.last_name)
-  //   }
-  //   return finalName.join(' ')
-  // }
-  // get all the data from  api
   getUsersByIDs(widUser: any) {
     try {
       // tslint:disable-next-line: prefer-template
@@ -174,5 +131,10 @@ export class WsDiscussionForumService {
     } catch (ex) {
       return []
     }
+  }
+
+  getDFConfig() {
+    // tslint:disable-next-line: max-line-length
+    return this.http.get(`${this.configSrvc.sitePath}/feature/disscussionForum.json`).pipe(catchError((_error: any) => of(null))).toPromise()
   }
 }

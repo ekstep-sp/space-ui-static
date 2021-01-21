@@ -1,6 +1,9 @@
 @import 'ws-vars';
 @import 'ws-mixins';
 
+#overview{
+   padding: 32px 64px !important;
+}
 .meta-section {
   flex: 1;
   min-width: 1px;
@@ -36,6 +39,7 @@
     margin-left: 0;
   }
 }
+
 .info-section2{
   width: 28%;
   min-width: 250px;
@@ -69,5 +73,25 @@
     $size: 44px;
     height: $size;
     width: $size;
+  }
+}
+.nav-space {
+  //padding: 32px 80px !important;
+  margin-top: 0 !important;
+  @include breakpoint-xs {
+   // padding: 32px 34px !important;
+  }
+}
+.ov-clr {
+  color: #696466 !important;
+  margin: 0;
+}
+
+// .theme-muave.night-mode .ov-clr {
+//     color: #c6bcb8 !important;
+// }
+::ng-deep {
+  .theme-muave.night-mode .ov-clr {
+    color: #c6bcb8 !important;
   }
 }

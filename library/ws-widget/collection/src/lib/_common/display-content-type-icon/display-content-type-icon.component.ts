@@ -9,6 +9,8 @@ import { NsContent } from '../../_services/widget-content.model'
 export class DisplayContentTypeIconComponent implements OnInit, OnChanges {
 
   @Input() displayContentType: NsContent.EDisplayContentTypes = NsContent.EDisplayContentTypes.DEFAULT
+  @Input() customIcon = ''
+  @Input() customTooltip = ''
   @Input() displayResourceType: NsContent.EMimeTypes = NsContent.EMimeTypes.UNKNOWN
   displayContentTypeEnum = NsContent.EDisplayContentTypes
   displayContentMimeEnum = NsContent.EMimeTypes

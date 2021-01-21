@@ -123,6 +123,7 @@ export namespace NsDiscussionForum {
     description?: string
     isLoggedInUserRestricted?: boolean
     isDisabled?: boolean
+    contentData?: any
   }
   export interface ITimelinePostSource {
     id: string

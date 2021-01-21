@@ -1,16 +1,17 @@
-<div class="video-player-m" *ngIf="isScreenSizeSmall && audioData && isNotEmbed">
+<!-- <div class="video-player-m" *ngIf="isScreenSizeSmall && audioData && isNotEmbed">
   <ng-container *ngIf="isFetchingDataComplete" [wsResolverWidget]="widgetResolverAudioData"></ng-container>
-</div>
-<div class="padding-dynamic" *ngIf="audioData && isNotEmbed">
+</div> -->
+<div *ngIf="audioData && isNotEmbed" class="mr-3">
   <div class="flex flex-around flex-wrapped">
     <div class="w-full">
-      <div *ngIf="!isScreenSizeSmall">
-        <mat-card>
-          <mat-card-content>
-            <div id="fullScreenContainer" class="video-player">
-              <ng-container *ngIf="isFetchingDataComplete" [wsResolverWidget]="widgetResolverAudioData"></ng-container>
+      <div class="pos">
+        <div id="fullScreenContainer" class="video-player">
+          <ng-container *ngIf="isFetchingDataComplete" [wsResolverWidget]="widgetResolverAudioData"></ng-container>
+          <div class="space flex bottom-0 w-full items-center customColorToolbar">
+            <div class="inline ml-3">
+              <ws-author-viewer-curator-list class="text-white" [askAuthorEnabled]="!configSvc?.isGuestUser" [fixLineIssue]="true" [content]="audioData"></ws-author-viewer-curator-list>
             </div>
-            <div class="flex justify-end mt-3" *ngIf="!isShared">
+            <div class="mr-5 mt-4 text-white sm:mt-0 buttons" *ngIf="!isShared && !configSvc?.isGuestUser">
               <ws-widget-btn-content-download [forPreview]="forPreview" [widgetData]="
                   audioData
                     | pipePartialContent
@@ -28,7 +29,7 @@
                 [widgetData]="audioData | pipePartialContent: ['identifier']">
               </ws-widget-btn-content-like>
 
-              <ws-widget-btn-content-share [forPreview]="forPreview" [widgetData]="{
+              <ws-widget-btn-content-share [overview]="true" [forPreview]="forPreview" [widgetData]="{
                 identifier: audioData?.identifier,
                 name: audioData?.name,
                 contentType: 'Resource',
@@ -44,15 +45,59 @@
                 mode: 'dialog',
                 isDisabled: isPreviewMode
               }"></ws-widget-btn-playlist>
-              <!-- <ws-widget-btn-content-feedback></ws-widget-btn-content-feedback> -->
+
               <ws-widget-btn-content-feedback-v2 [forPreview]="forPreview"
                 [widgetData]="audioData | pipePartialContent: ['identifier', 'name']">
               </ws-widget-btn-content-feedback-v2>
             </div>
-          </mat-card-content>
-        </mat-card>
+          </div>
+        </div>
+        <!-- <div class="flex justify-between absolute bottom-0 w-full items-center flex-wrap customColorToolbar">
+          <div class="inline ml-3">
+            <ws-author-viewer-curator-list class="text-white" [askAuthorEnabled]="!configSvc?.isGuestUser" [fixLineIssue]="true" [content]="audioData"></ws-author-viewer-curator-list>
+          </div>
+          <div class="mr-5 mt-4 text-white sm:mt-0" *ngIf="!isShared && !configSvc?.isGuestUser">
+            <ws-widget-btn-content-download [forPreview]="forPreview" [widgetData]="
+                audioData
+                  | pipePartialContent
+                    : [
+                        'identifier',
+                        'contentType',
+                        'resourceType',
+                        'mimeType',
+                        'downloadUrl',
+                        'isExternal',
+                'artifactUrl'
+                      ]
+              "></ws-widget-btn-content-download>
+            <ws-widget-btn-content-like [forPreview]="forPreview"
+              [widgetData]="audioData | pipePartialContent: ['identifier']">
+            </ws-widget-btn-content-like>
+
+            <ws-widget-btn-content-share [overview]="true" [forPreview]="forPreview" [widgetData]="{
+              identifier: audioData?.identifier,
+              name: audioData?.name,
+              contentType: 'Resource',
+              mode: 'dialog',
+              isDisabled: isPreviewMode
+            }" [isDisabled]="isPreviewMode">
+            </ws-widget-btn-content-share>
+            <ws-widget-btn-goals [forPreview]="forPreview"></ws-widget-btn-goals>
+            <ws-widget-btn-playlist [forPreview]="forPreview" [widgetData]="{
+              contentId: audioData?.identifier,
+              contentName: audioData?.name,
+              contentType: 'Resource',
+              mode: 'dialog',
+              isDisabled: isPreviewMode
+            }"></ws-widget-btn-playlist>
+
+            <ws-widget-btn-content-feedback-v2 [forPreview]="forPreview"
+              [widgetData]="audioData | pipePartialContent: ['identifier', 'name']">
+            </ws-widget-btn-content-feedback-v2>
+          </div>
+        </div> -->
       </div>
-      <div class="vidoe-title margin-top-m" *ngIf="audioData && !isShared">
+      <!-- <div class="vidoe-title margin-top-m" *ngIf="audioData && !isShared">
         <mat-card *ngIf="isScreenSizeSmall" class="unit-meta-item">
           <div class="flex">
             <ws-widget-btn-content-download [widgetData]="
@@ -90,15 +135,15 @@
               [widgetData]="audioData | pipePartialContent: ['identifier', 'name']"></ws-widget-btn-content-feedback>
           </div>
         </mat-card>
-      </div>
+      </div> -->
     </div>
   </div>
-  <div class="padding-m" *ngIf="discussionForumWidget && isRestricted && audioData?.assetType !== 'Connection'">
+  <!-- <div class="padding-m" *ngIf="discussionForumWidget && isRestricted && audioData?.assetType !== 'Connection'">
     <div class="video-discussion-forum-in margin-bottom-m">
       <h2 class="mat-toolbar discussion-head">Discussion Forum</h2>
       <ng-container [wsResolverWidget]="discussionForumWidget"></ng-container>
     </div>
-  </div>
+  </div> -->
 </div>
 
 <!-- templates -->

@@ -2,7 +2,7 @@ import { NestedTreeControl } from '@angular/cdk/tree'
 import { Component, EventEmitter, OnDestroy, OnInit, Output, Input } from '@angular/core'
 import { MatTreeNestedDataSource } from '@angular/material'
 import { DomSanitizer, SafeUrl } from '@angular/platform-browser'
-import { ActivatedRoute } from '@angular/router'
+import { ActivatedRoute, Router } from '@angular/router'
 import {
   ContentProgressService,
   NsContent,
@@ -17,10 +17,12 @@ import {
 } from '@ws-widget/utils'
 import { of, Subscription } from 'rxjs'
 import { delay } from 'rxjs/operators'
-import { ViewerDataService } from '../../viewer-data.service'
+// import { ViewerDataService } from '../../viewer-data.service'
 import { ViewerUtilService } from '../../viewer-util.service'
+import { SharedViewerDataService } from './../../../../../author/src/lib/modules/shared/services/shared-viewer-data.service'
 interface IViewerTocCard {
   assetType: string | null
+  contentUrls?: [any] | null
   identifier: string
   viewerUrl: string
   thumbnailUrl: string
@@ -29,6 +31,8 @@ interface IViewerTocCard {
   type: string
   complexity: string
   children: null | IViewerTocCard[]
+  iconType?: string,
+  technicalContents?: null | IViewerTocCard[]
 }
 
 export type TCollectionCardType = 'content' | 'playlist' | 'goals'
@@ -42,6 +46,7 @@ interface ICollectionCard {
   subText2: string
   duration: number
   redirectUrl: string | null
+  contentType: string | null
 }
 
 @Component({
@@ -52,6 +57,9 @@ interface ICollectionCard {
 export class ViewerTocComponent implements OnInit, OnDestroy {
   @Output() hidenav = new EventEmitter<boolean>()
   @Input() forPreview = false
+  @Output() techResourceChange = new EventEmitter<any>()
+  @Input() technicalResource: any = null
+  isExpand = false
 
   constructor(
     private activatedRoute: ActivatedRoute,
@@ -59,23 +67,29 @@ export class ViewerTocComponent implements OnInit, OnDestroy {
     // private logger: LoggerService,
     private contentSvc: WidgetContentService,
     private utilitySvc: UtilityService,
-    private viewerDataSvc: ViewerDataService,
+    private viewerDataSvc: SharedViewerDataService,
     private viewSvc: ViewerUtilService,
     private configSvc: ConfigurationsService,
     private contentProgressSvc: ContentProgressService,
+    private router: Router,
   ) {
     this.nestedTreeControl = new NestedTreeControl<IViewerTocCard>(this._getChildren)
     this.nestedDataSource = new MatTreeNestedDataSource()
   }
   resourceId: string | null = null
+  newResourceId: string | null = null
+  collectionId: string | null = null
+  collectionType: string | null = null
+  viewMode: string | null = null
   collection: IViewerTocCard | null = null
   queue: IViewerTocCard[] = []
-  tocMode: 'FLAT' | 'TREE' = 'FLAT'
+  tocMode: 'FLAT' | 'TREE' = 'TREE'
   nestedTreeControl: NestedTreeControl<IViewerTocCard>
   nestedDataSource: MatTreeNestedDataSource<IViewerTocCard>
   defaultThumbnail: SafeUrl | null = null
   isFetching = true
   pathSet = new Set()
+  path: any = null
   contentProgressHash: { [id: string]: number } | null = null
   errorWidgetData: NsWidgetResolver.IRenderConfigWithTypedData<any> = {
     widgetType: 'errorResolver',
@@ -91,42 +105,51 @@ export class ViewerTocComponent implements OnInit, OnDestroy {
   private viewerDataServiceSubscription: Subscription | null = null
   hasNestedChild = (_: number, nodeData: IViewerTocCard) =>
     nodeData && nodeData.children && nodeData.children.length
+  hasTechResource = (_: number, nodeData: IViewerTocCard) =>
+    nodeData && nodeData.technicalContents && nodeData.technicalContents.length
   private _getChildren = (node: IViewerTocCard) => {
     return node && node.children ? node.children : []
   }
-
   ngOnInit() {
+
     if (this.configSvc.instanceConfig) {
       this.defaultThumbnail = this.domSanitizer.bypassSecurityTrustResourceUrl(
         this.configSvc.instanceConfig.logos.defaultContent,
       )
     }
+    // the below code is for standalone tech resource
+    if (this.technicalResource) {
+      this.getDataForTechResourceAndLoadDefaultLink()
+    } else {
     this.paramSubscription = this.activatedRoute.queryParamMap.subscribe(async params => {
-      const collectionId = params.get('collectionId')
-      const collectionType = params.get('collectionType')
-      if (collectionId && collectionType) {
+      this.collectionId = params.get('collectionId')
+       this.collectionType = params.get('collectionType')
+       this.viewMode = params.get('viewMode')
+      if (this.collectionId && this.collectionType) {
         if (
-          collectionType.toLowerCase() ===
+          this.collectionType.toLowerCase() ===
           NsContent.EMiscPlayerSupportedCollectionTypes.PLAYLIST.toLowerCase()
         ) {
-          this.collection = await this.getPlaylistContent(collectionId, collectionType)
+          this.collection = await this.getPlaylistContent(this.collectionId, this.collectionType)
         } else if (
-          collectionType.toLowerCase() === NsContent.EContentTypes.MODULE.toLowerCase() ||
-          collectionType.toLowerCase() === NsContent.EContentTypes.COURSE.toLowerCase() ||
-          collectionType.toLowerCase() === NsContent.EContentTypes.PROGRAM.toLowerCase()
+          this.collectionType.toLowerCase() === NsContent.EContentTypes.MODULE.toLowerCase() ||
+          this.collectionType.toLowerCase() === NsContent.EContentTypes.COURSE.toLowerCase() ||
+          this.collectionType.toLowerCase() === NsContent.EContentTypes.PROGRAM.toLowerCase()
         ) {
-          this.collection = await this.getCollection(collectionId, collectionType)
+          this.collection = await this.getCollection(this.collectionId, this.collectionType)
         } else {
           this.isErrorOccurred = true
         }
         if (this.collection) {
           this.queue = this.utilitySvc.getLeafNodes(this.collection, [])
         }
-      }
-      if (this.resourceId) {
-        this.processCurrentResourceChange()
-      }
-    })
+        // the below code was commented as this.processCurrentResourceChange() was called repeatedly on activating sublink,
+        // todo: need to test
+
+      // if (this.resourceId) {
+      //   this.processCurrentResourceChange()
+      // }
+
     this.viewerDataServiceSubscription = this.viewerDataSvc.changedSubject.subscribe(_data => {
       if (this.resourceId !== this.viewerDataSvc.resourceId) {
         this.resourceId = this.viewerDataSvc.resourceId
@@ -134,7 +157,18 @@ export class ViewerTocComponent implements OnInit, OnDestroy {
       }
     })
   }
-
+})
+  }
+}
+// tslint:disable-next-line:max-line-length
+// the below code is for getting the collection format and appending the router url with default link(codebase),which makes the sublink active and loads the pop up window.
+  async getDataForTechResourceAndLoadDefaultLink() {
+    const collectionId = this.technicalResource && this.technicalResource.identifier ? this.technicalResource.identifier : ''
+    this.collection = await this.getCollection(collectionId, '')
+    if (this.collection) {
+      this.openSubResource(this.collection.viewerUrl)
+    }
+  }
   private getContentProgressHash() {
     this.contentProgressSvc.getProgressHash().subscribe(progressHash => {
       this.contentProgressHash = progressHash
@@ -160,15 +194,27 @@ export class ViewerTocComponent implements OnInit, OnDestroy {
 
   private processCurrentResourceChange() {
     if (this.collection && this.resourceId) {
-      const currentIndex = this.queue.findIndex(c => c.identifier === this.resourceId)
+      // critical change to allow users to view even the draft content, this was needed to be done because the hierarchy has non img node
+      // whereas the viewer page has img node, if it exists. Similar change has been done for getPath function
+      const currentIndex = this.queue.findIndex(c => c.identifier === this.resourceId || `${c.identifier}.img` === this.resourceId)
       const next =
         currentIndex + 1 < this.queue.length ? this.queue[currentIndex + 1].viewerUrl : null
       const prev = currentIndex - 1 >= 0 ? this.queue[currentIndex - 1].viewerUrl : null
       this.viewerDataSvc.updateNextPrevResource(Boolean(this.collection), prev, next)
       this.processCollectionForTree()
       this.expandThePath()
+      // the below code is for making the sublink active in a collection, works on initialization and on when different sublink selected
+      if (this.path[this.path.length - 1].assetType === 'Technology') {
+        this.navigateToTechResource(this.path[this.path.length - 1].viewerUrl)
+      }
+      // this.expandAll(this.nestedTreeControl)
+      // this.nestedTreeControl.expandAll()
       this.getContentProgressHash()
     }
+  }
+
+  expandAll(source: any) {
+    this.nestedTreeControl.expand(source)
   }
   private async getCollection(
     collectionId: string,
@@ -265,7 +311,7 @@ export class ViewerTocComponent implements OnInit, OnDestroy {
     //   children: Array.isArray(content.children) && content.children.length ?
     //     content.children.map(child => this.convertContentToIViewerTocCard(child)) : null,
     // }
-    return {
+    const newFormat = {
       assetType: content.assetType || null ,
       identifier: content.identifier,
       viewerUrl: `${this.forPreview ? '/author' : ''}/viewer/${VIEWER_ROUTE_FROM_MIME(
@@ -278,10 +324,50 @@ export class ViewerTocComponent implements OnInit, OnDestroy {
       duration: content.duration,
       type: content.resourceType ? content.resourceType : content.contentType,
       complexity: content.complexityLevel,
+      iconType: content.mimeType,
       children:
         Array.isArray(content.children) && content.children.length
           ? content.children.map(child => this.convertContentToIViewerTocCard(child))
           : null,
+    }
+    if (newFormat.assetType === 'Technology') {
+      this.restructureTechnicalResource(newFormat, content)
+    }
+    return newFormat
+  }
+
+  private restructureTechnicalResource(oldFormat: any, technicalContent: any) {
+    if (technicalContent.hasOwnProperty('documentation') || technicalContent.hasOwnProperty('interface_api') ||
+         technicalContent.hasOwnProperty('sandbox') || technicalContent.hasOwnProperty('codebase')) {
+      oldFormat.technicalContents = []
+      if (technicalContent.hasOwnProperty('codebase') && technicalContent.codebase) {
+        oldFormat.technicalContents.push({
+          title: 'Codebase Link',
+          url: technicalContent.codebase,
+        })
+      }
+      if (technicalContent.hasOwnProperty('documentation') && technicalContent.documentation) {
+        oldFormat.technicalContents.push({
+          title: 'Documentation Link',
+          url: technicalContent.documentation,
+        })
+      }
+      if (technicalContent.hasOwnProperty('interface_api') && technicalContent.interface_api) {
+        oldFormat.technicalContents.push({
+          title: 'Interface API Link',
+          url: technicalContent.interface_api,
+        })
+      }
+      if (technicalContent.hasOwnProperty('sandbox') && technicalContent.sandbox) {
+        oldFormat.technicalContents.push({
+          title: 'Sandbox Link',
+          url: technicalContent.sandbox,
+        })
+      }
+
+    }
+    if (oldFormat.technicalContents.length > 0) {
+      oldFormat.techExpanded = false
     }
   }
 
@@ -299,6 +385,7 @@ export class ViewerTocComponent implements OnInit, OnDestroy {
     //   redirectUrl: this.getCollectionTypeRedirectUrl(collection.displayContentType, collection.identifier),
     // }
     return {
+      contentType: collection.contentType,
       type: this.getCollectionTypeCard(collection.displayContentType),
       id: collection.identifier,
       title: collection.name,
@@ -360,6 +447,7 @@ export class ViewerTocComponent implements OnInit, OnDestroy {
           .pipe(delay(2000))
           .subscribe(() => {
             this.expandThePath()
+            // this.nestedTreeControl.expandAll()
           })
       }
     }
@@ -367,15 +455,72 @@ export class ViewerTocComponent implements OnInit, OnDestroy {
 
   expandThePath() {
     if (this.collection && this.resourceId) {
-      const path = this.utilitySvc.getPath(this.collection, this.resourceId)
-      this.pathSet = new Set(path.map((u: { identifier: any }) => u.identifier))
-      path.forEach((node: IViewerTocCard) => {
+  this.path = this.utilitySvc.getPath(this.collection, this.resourceId)
+      this.pathSet = new Set(this.path.map((u: { identifier: any }) => u.identifier))
+      this.path.forEach((node: IViewerTocCard) => {
         this.nestedTreeControl.expand(node)
       })
+      // the below code is for adding breadcrumbs in viewer.
+      this.viewerDataSvc.updateHeirarchyTitleInToolbar(this.path)
     }
   }
 
   minimizenav() {
     this.hidenav.emit(false)
+  }
+  navigateToNonTechResource(url: any) {
+   this.router.navigate([`${url}`], { queryParams: {
+    collectionId: this.collectionId,
+    collectionType: this.collectionType,
+    viewMode: this.viewMode,
+   },
+  })
+  }
+
+  navigateToTechResource(viewerUrl: any, techSubContent = { title: 'Codebase Link' }) {
+    const params = {
+      collectionId: this.collectionId,
+      collectionType: this.collectionType,
+      viewMode: this.viewMode,
+      techResourceType: techSubContent.title,
+     }
+     if (window.location.href.includes('public/sharecontent/')) {
+      // this is currently a public access route, just attach the query params on it, don't change the route
+      this.router.navigate([`${window.location.pathname}`], {
+        queryParams: params,
+      })
+    } else {
+      this.router.navigate([`/${viewerUrl}`], { queryParams: params })
+    }
+  }
+  openSubResource(viewerUrl: string, techSubContent: any = { title: 'Codebase Link' }) {
+    this.viewerDataSvc.updateTechResource(techSubContent)
+    this.navigateToTechResource(viewerUrl, techSubContent)
+  }
+
+  togglePane1(panel: any) {
+    panel.toggle()
+  }
+
+  // }
+
+// makes the sublink active by checking the router query params
+  isActiveSubLinks(identifier: any, techContentTitle: string, isStandaloneResource= false) {
+    const title = this.activatedRoute.snapshot.queryParamMap.get('techResourceType')
+    if (isStandaloneResource) {
+      return (title === techContentTitle)
+    }
+      return (this.pathSet.has(identifier) && (title === techContentTitle))
+  }
+  shouldExpand(content: any) {
+    return this.pathSet.has(content.identifier)
+  }
+
+  hasInPath(resourceid: string) {
+    if (resourceid) {
+    const correctResourceID = resourceid.split('.')
+    return this.pathSet.has(correctResourceID[0])
+    }
+    return false
   }
 }

@@ -45,23 +45,23 @@
 
 .video-player {
   width: 100%;
-  height: 75vh;
-  @include breakpoint-lt-xl {
-    height: 70vh;
-  }
-  @include breakpoint-lt-l {
-    height: 65vh;
+  // height: 85vh;
+  /* @include breakpoint-lt-xl {
+    height: 79.5vh;
+  } */
+  /* @include breakpoint-lt-l {
+    height: 74.5vh;
   }
   @include breakpoint-lt-m {
-    height: 60vh;
+    height: 82.5vh;
   }
   @include breakpoint-lt-s {
-    height: 55vh;
-  }
+    height: 64.5vh;
+  } */
   @include breakpoint-xs {
     top: 0;
     left: 0px;
-    height: 40vh;
+    /* height: 29.5vh; */
     width: 100%;
     z-index: 1000;
     background: black;
@@ -144,3 +144,31 @@
 .video-content{
   justify-content: flex-end;
 }
+.buttons{
+  white-space: nowrap;
+  margin-left: auto;
+  text-align: right;
+ }
+// @media screen and (max-width: 750px) {
+//   .video-player {
+//     height: 78.6vh;
+//   }
+// }
+.pos{
+  position: relative;
+}
+
+@media screen and (max-width:992px){
+  .buttons{
+    display: flex;
+      justify-content: flex-end;
+      width: 100%;
+  }
+  .customColorToolbar{
+    position: inherit;
+    flex-wrap: wrap;
+  }
+  }
+
+  
+  

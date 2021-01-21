@@ -104,3 +104,10 @@ mat-toolbar mat-form-field {
 
 }
 }
+
+::ng-deep{
+  .mat-drawer-container{
+    overflow: unset!important;
+  
+  }
+}

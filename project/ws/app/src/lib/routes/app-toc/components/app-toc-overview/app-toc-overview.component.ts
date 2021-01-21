@@ -86,12 +86,12 @@ export class AppTocOverviewComponent implements OnInit, OnDestroy {
   private initData(data: Data) {
     const initData = this.tocSharedSvc.initData(data)
     this.content = initData.content
-    this.tocSharedSvc.fetchEmails(this.content ? this.content.creatorContacts : []).then(newIDS => {
-      if (this.content) {
-        this.content.creatorContacts = [
-          ...newIDS,
-        ]
-      }
+    this.tocSharedSvc.fetchEmails(this.content ? this.content.creatorContacts : []).then(() => {
+      // if (this.content) {
+      //   this.content.creatorContacts = [
+      //     ...newIDS,
+      //   ]
+      // }
       this.body = this.domSanitizer.bypassSecurityTrustHtml(
         this.content && this.content.body
           ? this.forPreview
@@ -102,7 +102,7 @@ export class AppTocOverviewComponent implements OnInit, OnDestroy {
       this.contentParents = {}
       this.resetAndFetchTocStructure()
       this.getTrainingCount()
-      this.getContentParent()
+      // this.getContentParent()
     })
     .catch(_e => {
       // console.log('some error occured')

@@ -31,11 +31,16 @@ export class AppTocBannerComponent implements OnInit, OnChanges, OnDestroy {
   feedbackicon = false
   shareicon = false
   data: any
+  contentMissing = false
+  showMissingMessage = false
+  contentMissingMessage = 'The content cannot be resumed at the moment, try starting from some other point'
   @Input() banners: NsAppToc.ITocBanner | null = null
   @Input() content: NsContent.IContent | null = null
   @Input() resumeData?: NsContent.IContinueLearningData
   @Input() analytics: NsAnalytics.IAnalytics | null = null
   @Input() forPreview = false
+  @Input()
+  askAuthorEnabled = true
   contentProgress = 0
   bannerUrl: SafeStyle | null = null
   routePath = 'overview'
@@ -69,6 +74,11 @@ export class AppTocBannerComponent implements OnInit, OnChanges, OnDestroy {
   tocConfig: any = null
   toResume = false
   isLoad = true
+  hideRatings = false
+  enableRatings = false
+  mailIcon = false
+  parentElem = 'toc'
+  class = true
 
   constructor(
     private sanitizer: DomSanitizer,
@@ -157,6 +167,8 @@ export class AppTocBannerComponent implements OnInit, OnChanges, OnDestroy {
   }
 
   updateAccessVariables(_configData: any) {
+    // tslint:disable-next-line:max-line-length
+    this.enableRatings = this.forumSvc.isVisibileAccToRoles(this.tocConfig.rolesAllowed.rateContent, this.tocConfig.rolesNotAllowed.rateContent)
     if (_configData.rolesAllowed || _configData.rolesNotAllowed) {
       const response = this.forumSvc.isVisibileAccToRoles(_configData.rolesAllowed.feedback, _configData.rolesNotAllowed.feedback)
       const shareResponse = this.forumSvc.isVisibileAccToRoles(_configData.rolesAllowed.share, _configData.rolesNotAllowed.share)
@@ -466,15 +478,58 @@ export class AppTocBannerComponent implements OnInit, OnChanges, OnDestroy {
       return true
     }
   }
+
+  updateMissingMessage(name: string) {
+    const newName = name.split(' ')
+    let smallerName = name
+    if (newName.length > 10) {
+      smallerName = `${newName.splice(0, 11).join(' ')}...`
+    }
+    this.contentMissingMessage = `
+    Content <b>${smallerName}</b> is not available at the moment.</br>
+    Try again later ot start from the next content.
+    `
+  }
+
+  hasContentAsChild(id: string, content: NsContent.IContent): boolean {
+    if (content.identifier === id) {
+      return true
+    }
+    if (!content.children || !content.children.length) {
+      return false
+    }
+    return content.children.some(child => this.hasContentAsChild(id, child))
+  }
   getContentHistory() {
     this.contentService.fetchContentHistory(this.route.snapshot.params.id).subscribe(data => {
-      if (data) {
+      if (data && this.hasContentAsChild(data.identifier, this.content as NsContent.IContent)) {
         this.isLoad = false
-        this.toResume = true
+        if (data.hasOwnProperty('status') && data.status === 'Live') {
+          this.toResume = true
+          this.contentMissing = false
+        } else {
+          this.toResume = false
+          this.contentMissing = true
+          if (data.name) {
+            this.updateMissingMessage(data.name)
+          }
+        }
       } else {
         this.isLoad = false
         this.toResume = false
+        this.contentMissing = false
       }
     })
+  }
+  get isRatingsDisabled() {
+    if (this.configSvc.isGuestUser) {
+      return true
+    }
+    return  !this.enableRatings
+  }
+  extractFeaturesForGuest() {
+    this.hideRatings = true
+    this.enableRatings = false
+    this.mailIcon = false
   }
 }

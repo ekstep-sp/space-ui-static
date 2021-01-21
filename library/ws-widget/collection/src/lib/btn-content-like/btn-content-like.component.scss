@@ -1,9 +1,17 @@
+@import 'ws-vars';
+@import 'ws-mixins';
 .liked-num {
   margin-top: 0.35rem;
 }
-.like-clr {
-  color: #ffe22a !important;
-}
+// .like-clr {
+//   color:#FFFFFF !important;
+// }
 .highlight {
-  color: #ffe22a !important;
+  color: #ffe22a;
+}
+.color {
+  color: #FFFFFF !important;
+  // @include breakpoint-xs {
+  //   color: rgba(0, 0, 0, 0.54) !important;
+  // }
 }

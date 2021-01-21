@@ -8,6 +8,7 @@
 
 .viewer-sidenav-container {
   height: calc(100vh - 56px);
+  overflow: hidden !important;
 }
 
 .viewer-sidenav {
@@ -19,6 +20,16 @@
     max-width: 600px;
   }
 }
+.stickprop {
+  @include breakpoint-xs {
+    padding-right: 0.5rem !important;
+  }
+}
+// @media screen and (max-width: 690px) {
+//   .viewer-sidenav {
+//   min-width: 280px !important;
+// }
+// }
 
 .viewer-sidenav-standalone {
   width: 100%;
@@ -40,4 +51,146 @@
 }
 .sidenavContent {
   overflow-x: hidden !important;
+}
+.toggleBtn {
+    margin-left: 2px;
+    margin-top: 3px;
+    position: absolute;
+    z-index: 3;
+    &.side-nav-button-opened {
+      width: 25px;
+      height: 25px;
+      line-height: 27px;
+      .dehaze-icon {
+        line-height: 28px;
+        font-size: 20px;
+      }
+    }
+    &.side-nav-button-closed {
+      width: 35px !important;
+      height: 35px !important;
+      font-size: 23px !important;
+      line-height: 1px !important;
+      .mat-button-wrapper {
+        font-size: inherit !important;
+        line-height: inherit !important;
+        mat-icon {
+          line-height: auto !important;
+          font-size: auto !important;
+        }
+      }
+    }
+}
+// @media screen and (min-width: 1700px) {
+//   .sideNavOpend {
+//     margin-left: 600px !important;
+// }
+// .viewer-sidenav {
+//   width: 100% !important;
+// }
+// }
+
+.padding-md {
+  padding: 16px;
+}
+
+.sidenav-effect {
+  background: #f2ecf6 !important;
+  box-shadow: none !important;
+}
+.sideNavOpend {
+  margin-left: 400px;
+  @media screen and (max-width:690px) {
+    margin-left: 282px;
+  }
+}
+.df-card {
+  // background: rgba(146, 94, 176, 0.24) !important;
+  border-radius: 10px;
+  max-height: 1055px;
+  overflow-y: scroll;
+}
+.discussion-head {
+  padding: 31px 0 0 66px;
+  font-weight: 600 !important;
+  font-size: 1.125rem;
+  line-height: 22px;
+  color: #925EB0;
+}
+.mat-card {
+  margin: 0 !important;
+  padding: 0 !important;
+}
+::ng-deep {
+  .theme-muave.day-mode .df-card {
+    background: rgba(146, 94, 176, 0.24) !important;
+  }
+}
+.reverse {
+  transform: rotate(180deg);
+}
+
+.btn-reverse {
+  margin-left: -28px;
+}
+
+.isMobile {
+display: none;
+}
+@media screen and (max-width: 599px) {
+  .isMobile {
+  display: block;
+}
+}
+::ng-deep {
+.viewer-sidenav-container .mat-drawer-backdrop.mat-drawer-shown {
+  visibility: hidden;
+}
+}
+
+.custom-padding {
+  margin-left: 24px;
+  @include breakpoint-xs {
+    margin-left: 0 !important;
+  }
+}
+
+/* .guest-view {
+  display: block !important;
+  .section-right {
+    width: 100%;
+  }
+} */
+// @media screen and (max-width:960px){
+
+//   .atglancecard{
+//     width: 50% !important;
+//   }
+//   .dfcard{
+//     width: 50% !important;
+//   }
+//   }
+@media screen and (max-width:1120px){
+.discussionforum{
+ display: block !important;
+
+}
+.atglancecard{
+  margin-left: 0;
+  width: 100% !important;
+}
+.dfcard{
+  width: 100% !important;
+  margin-top: 24px;
+}
+}
+.maincard{
+  padding-bottom: 23px
+}
+
+
+::ng-deep{
+  .mat-drawer-container{
+    overflow: unset!important;
+  }
 }

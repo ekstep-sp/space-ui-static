@@ -10,10 +10,13 @@ import { WidgetContentService } from '../../_services/widget-content.service'
 export class UserContentRatingComponent implements OnInit {
   @Input() contentId!: string
   @Input() isDisabled = false
+  @Input() parentElem: any = null
+  @Input() mobileView = false
   isRequesting = true
   userRating = 0
   @Input() forPreview = false
   averageRatings = 0
+  ratingCount = 0
 
   constructor(
     private events: EventService,
@@ -29,6 +32,9 @@ export class UserContentRatingComponent implements OnInit {
     } else if (!this.forPreview) {
       this.contentSvc.fetchContentRating(this.contentId).subscribe(
         result => {
+          if (result.rating) {
+            this.ratingCount = result.rating
+          }
           this.isRequesting = false
           this.userRating = result.rating
           this.cdr.detectChanges()

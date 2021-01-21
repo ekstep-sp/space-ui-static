@@ -2,16 +2,30 @@
 @import 'ws-mixins';
 
 // $border-color: #c7c7c7;
+.contents-container{
+  padding:0px 64px 113px 64px !important;
+    @include breakpoint-xs {
+     padding-top: 50px !important;
+     padding-bottom: 30px !important;
+    }
+}
 $border-color: #d8d8d8;
 .contents-container {
   display: flex;
   justify-content: space-between;
   flex-wrap: wrap;
-  margin: $size-m 0 $size-l 0;
+  // margin: $size-m 0 $size-l 0;
+  // margin-bottom: 90px;
   .main-container {
     width: 100%;
     padding-right: 2 * $size-l;
     box-sizing: border-box;
+    position: relative;
+    margin-top: 42px !important;
+    padding-left: 6px;
+    @include breakpoint-xs {
+      margin-bottom: 60px;
+    }
     .toc-section {
       display: flex;
       justify-content: space-between;
@@ -19,13 +33,14 @@ $border-color: #d8d8d8;
       padding-bottom: $size-s;
     }
     .content-card {
-      padding: $size-s 0;
-      border-bottom: 1px solid $border-color;
+      // padding: $size-s 0;
+      padding: 0;
+      // border-bottom: 1px solid $border-color;
     }
     @include breakpoint-lt-m {
       width: 100%;
       padding-right: 0;
-      margin-bottom: $size-xl;
+      // margin-bottom: $size-xl;
     }
   }
   .side-container {
@@ -62,9 +77,95 @@ $border-color: #d8d8d8;
 }
 @media only screen and (max-width: 320px) {
 .explore-collapse-btn{
-  
+
     padding-right: 24px !important;
     padding-left: 12px !important;
     height: 40px !important;
+  }
+}
+// .border {
+//   border-left: 1px solid purple !important;
+//   /* border-bottom-right-radius: 4px; */
+//   /* border-top-right-radius: 4px; */
+//   background: fade(#42428b, 3%);
+//   color: fade(white, 80%);
+//   /* margin: 50px auto; */
+//   position: relative;
+//   line-height: 1.4em;
+//   font-size: 1.03em;
+//   /* padding: 50px; */
+//   list-style: none;
+//   text-align: left;
+//   font-weight: 100;
+// }
+// .nav-space {
+//   // padding-top: 0;
+//   padding: 0px 0px 113px 0px !important;
+//   // margin-top: 0;
+//   @include breakpoint-xs {
+//    // padding: 32px 23px 0 23px !important;
+//   }
+// }
+// .content-card:before {
+//   content: "";
+//     border: 1px solid purple;
+//     position: absolute;
+//     height: calc(100% - 69px);
+//     top: 24px;
+//     left: -1px;
+//     z-index: 9;
+//     margin-bottom: 0;
+// }
+.text-clr {
+  line-height: 22px !important;
+  color: #696466 !important;
+    font-weight: bold !important;
+    // padding: 15px 64px;
+    margin-bottom: 0;
+    font-size: 1.125em;
+}
+.anchor-container {
+  position: relative;
+  .anchor {
+  position: absolute;
+  // top: -25%;
+
+  @include breakpoint-xs {
+    @media only screen and (max-width: 599px) {
+      margin-top: -20%;
+    }
+  }
+  @include breakpoint-s {
+    @media only screen and (min-width: 600px) and (max-width: 959px) {
+      margin-top: -25%
+    }
+  }
+    @include breakpoint-m {
+      @media only screen and (min-width: 960px) and (max-width: 1279px) {
+        margin-top: -20%;
+      }
+    }
+    @include breakpoint-l {
+      @media only screen and (min-width: 1280px) and (max-width: 1919px) {
+       // top: -30%;
+       margin-top: -15%;
+      }
+    }
+    @include breakpoint-xl {
+      @media only screen and (min-width: 1920px) and (max-width: 5000px) {
+        margin-top: -12%;
+      }
+    }
+    @include breakpoint-xxs {
+      @media only screen and (max-width: 310px) {
+        margin-top: -25%;
+      }
+    }
+  }
+
+}
+::ng-deep {
+  .theme-muave.night-mode .text-clr{
+    color: #c6bcb8 !important;
   }
 }

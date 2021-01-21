@@ -196,14 +196,14 @@ mat-expansion-panel {
   //   background: inherit !important;
   //   color: inherit !important;
   // }
-  
-  
+
+
   .theme-muave.night-mode .mat-expansion-panel-body{
   background: #303030;
-  
+
   }
   .theme-muave.night-mode .text-center{
-  color: white; 
+  color: white;
   }
   .theme-muave.day-mode .admin-image-black {
     visibility: visible;
@@ -237,7 +237,7 @@ mat-expansion-panel {
   .mat-expansion-panel-header-title {
     align-items: center;
   }
-  
+
   @media only screen and (max-width: 700px) {
     .mat-content {
       flex: 0.9 !important;

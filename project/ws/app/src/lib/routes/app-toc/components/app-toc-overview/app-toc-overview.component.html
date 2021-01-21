@@ -267,16 +267,17 @@
 </div> -->
 
 
-
-<div class="flex flex-wrapped mt-4 flex-center">
+<div #overview id="overview">
+<div class="flex flex-wrapped nav-space flex-center">
   <div class="meta-section">
+
     <!-- Description : Conditional : If not shown here, will be shown over banner -->
-    <mat-card *ngIf="showDescription && content?.description" class="unit-meta-item">
-      <h2 class="font-16px" i18n>Description</h2>
-      <mat-card-content>
-        <div class="mat-subheading-1" [innerHTML]="content?.description"></div>
-      </mat-card-content>
-    </mat-card>
+    <!-- <mat-card *ngIf="showDescription && content?.description" class="unit-meta-item"> -->
+      <!-- <h2 class="font-16px" i18n>Overview</h2> -->
+      <!-- <mat-card-content> -->
+        <div class="mat-subheading-1 ov-clr" [innerHTML]="content?.description"></div>
+      <!-- </mat-card-content> -->
+    <!-- </mat-card> -->
 
     <!-- Content Body -->
 
@@ -371,30 +372,30 @@
       </mat-card-content>
     </mat-card>
     <!-- Authors on small screen -->
-    <div class="block sm:hidden margin-bottom-m" *ngIf="content?.creatorDetails?.length">
+    <!-- <div class="block sm:hidden margin-bottom-m" *ngIf="content?.creatorDetails?.length">
       <ng-container [ngTemplateOutlet]="creators" [ngTemplateOutletContext]="{
           authors: content?.creatorDetails,
           title: 'AUTHOR'
         }">
       </ng-container>
-    </div>
+    </div> -->
     <!-- Contacts on small screen -->
-    <div class="block sm:hidden margin-bottom-m" *ngIf="content?.creatorContacts?.length">
+    <!-- <div class="block sm:hidden margin-bottom-m" *ngIf="content?.creatorContacts?.length">
       <ng-container [ngTemplateOutlet]="creators" [ngTemplateOutletContext]="{
           authors: content?.creatorContacts,
           title: 'CONTACT'
         }">
       </ng-container>
     </div>
-  </div>
+  </div> -->
   <!-- At a glance section -->
-  <div class="info-section">
+  <!-- <div class="info-section">
     <ws-widget-player-brief [content]="content" [hasTocStructure]="hasTocStructure" [tocStructure]="tocStructure">
     </ws-widget-player-brief>
-  </div>
+  </div> -->
 </div>
-
-
+</div>
+</div>
 
 <ng-template #creators let-authors="authors" let-title="title">
   <mat-card>

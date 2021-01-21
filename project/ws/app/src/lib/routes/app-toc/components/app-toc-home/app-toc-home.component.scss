@@ -9,15 +9,20 @@
 }
 .toc-body {
   @extend %container-padding;
-  padding-top: 0px !important;
+ padding-bottom: 0px !important;
+ padding-top: 47px !important;
   .toc-links {
-    position: sticky;
     top: 0px;
     width: 100%;
     z-index: 1;
+    background: #ffffff;
+@include breakpoint-xs {
+  position: sticky;
+}
     .link-active {
       font-weight: bold;
-      border-bottom: 2px solid;
+      padding-bottom: 39px !important;
+      border-bottom: 1px solid purple;
     }
   }
 }
@@ -64,3 +69,87 @@
   margin: auto;
   display: flex;
 }
+.al-clr {
+  color: white !important;
+  border-radius: 0;
+  width: 150px;
+  height: 50px;
+  line-height: 44px;
+}
+.active {
+  border: 2px solid #C6BCB8;
+  box-sizing: border-box;
+}
+::ng-deep {
+  .al-clr span {
+  font-size: 1.125rem;
+  font-weight: bold !important;
+  }
+}
+.excep-style {
+  width: 100%;
+  // background: white;
+}
+.text-style {
+    font-size: 1.25rem !important;
+    padding-bottom: 20px;
+    // margin: 0px 10px;
+    padding: 30px 30px;
+    color: #696466 !important;
+    height: 64px;
+    opacity:0.99;
+}
+::ng-deep {
+  .theme-muave.night-mode .text-style {
+    color: #c6bcb8 !important;
+  }
+  .theme-muave.night-mode .link-active {
+    border-bottom: 1px solid #c6bcb8 !important;
+  } 
+   .theme-muave.night-mode .al-clr {
+    background-color: #925eb0 !important;
+    color: white !important
+  }
+  .theme-muave.night-mode .toc-links {
+  background-color: #303030 !important;
+  }
+}
+.sticky {
+  position: -webkit-sticky; /*safari*/
+  position: sticky!important;
+  top: 35px;
+  z-index: 999;
+//  background: white;
+  overflow: unset!important;
+
+  @include breakpoint-xs{
+    top:0;
+  }
+
+  @include breakpoint-s{
+    top:0px;
+  }
+}
+@media only screen and (min-width: 1024px) {
+  .sticky{
+    top:40px;
+  }
+}
+
+@media only screen and (min-width: 800px) {
+  .sticky{
+    top:40px;
+  }
+}
+
+
+::ng-deep {
+ 
+  .theme-muave.night-mode .sticky {
+    background:#303030 !important;
+    }
+    .theme-muave.day-mode .sticky {
+    background: white !important
+    }
+  }
+  

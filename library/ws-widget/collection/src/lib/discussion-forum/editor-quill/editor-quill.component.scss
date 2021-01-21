@@ -2,11 +2,10 @@
 
 .quill-editor {
   display: block;
-  height: 100%;
-  // min-height: 50px;
+  height: 40px;
+  min-height: 40px;
   border-radius: 20px;
   max-height: 150px;
-  
 }
 
 .error-text {
@@ -23,13 +22,40 @@
 }
 .customClass .ql-editor {
   @include breakpoint-xs {
-    min-height: 200px !important;
-    max-height: unset !important
+    // min-height: 200px !important;
+    max-height: 150px !important
     }
 }
 }
 .customClass {
   @include breakpoint-xs {
-  min-height: 200px !important;
+  // min-height: 200px !important;
   }
+}
+.df-quill-editor {
+  display: block;
+  font-weight: normal;
+  font-size: 0.75rem;
+  line-height: 22px;
+  color: #696466;
+  // background: rgba(146, 94, 176, 0.24) !important;
+}
+.postpg {
+  background: transparent !important;
+  font-weight: normal;
+  font-size: 0.75rem;
+  line-height: 22px;
+  color: #696466;
+}
+::ng-deep {
+  .df-quill-editor .ql-editor {
+   min-height: 40px;
+   padding: 8px 0 11px 10px !important;
+  }
+.theme-muave.night-mode .postpg {
+  color: #fff !important;
+}
+.theme-muave.night-mode .df-quill-editor {
+  color: #fff !important;
+}
 }

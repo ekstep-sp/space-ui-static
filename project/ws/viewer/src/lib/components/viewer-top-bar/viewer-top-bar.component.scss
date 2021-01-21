@@ -13,7 +13,8 @@
 }
 
 .text-truncate {
-  overflow: inherit !important;
+  // overflow: inherit !important;
+  width: 250px;
 }
 
 .width-expand {
@@ -21,3 +22,105 @@
   overflow-x: hidden !important;
   padding: 10px;
 }
+.toolbar {
+    background-color: #c4c4c4;
+    color: black;
+    margin: 0 24px;
+    transition: box-shadow 280ms cubic-bezier(.4,0,.2,1);
+    display: block;
+    position: relative;
+    padding: 5px;
+    border-radius: 4px;
+    box-shadow: 0px 2px 1px -1px rgba(0, 0, 0, 0.2), 0px 1px 1px 0px rgba(0, 0, 0, 0.14), 0px 1px 3px 0px rgba(0, 0, 0, 0.12);
+}
+.heading-style {
+  margin-top: 6px;
+  margin: 0;
+}
+.prf-icon {
+  height: fit-content;
+}
+
+mat-toolbar {
+  box-shadow: none !important;
+}
+
+.px-8 {
+  padding-left: 2rem !important;
+  padding-right: 2rem !important;
+}
+
+.reverse {
+  transform: rotate(180deg);
+}
+
+.color-viewer-top{
+  background: #42428B !important;
+}
+.breadcrumbs{
+  padding-inline-start: unset !important;
+  margin-bottom: 9px;
+  .main-div-breadcrumbs-item{
+    display: flex;
+  }
+}
+.body-font-size-secondary{
+  font-weight: bold !important;
+}
+    .breadcrumbs_child{
+      display: flex;
+    }
+    .icon-display{
+      padding-top: 6px;
+      font-style: normal;
+      font-weight: 500;
+      font-size: 16px;
+      line-height: 20px;
+      color: #FFFFFF;
+      width: unset !important;
+    }
+    .text-style-last-child{
+      max-width: 100%;
+      width: unset !important;
+      font-style: normal;
+      font-size: 16px;
+      font-weight: bold;
+      overflow: hidden !important;
+        text-overflow: ellipsis !important;
+        white-space: nowrap !important;
+     @include breakpoint-lt-mm{
+      min-width: 15px !important;
+      max-width: 100%;
+     }
+      @include breakpoint-xs{
+        min-width: 15px !important;
+        max-width: 45px !important;
+       }
+       @include breakpoint-xxs{
+        min-width: 10px !important;
+        max-width: 15px !important;
+      }
+      }
+      .text-style-parent{
+        min-width: 100px;
+        max-width: 250px;
+        width: unset !important;
+        font-size: 14px;
+        font-style: normal;
+        font-weight: normal;
+        overflow: hidden !important;
+        text-overflow: ellipsis !important;
+        white-space: nowrap !important;
+        @include breakpoint-lt-mm{
+          min-width: 34px !important;
+          max-width: 100px !important;
+         }
+         @include breakpoint-xs{
+          min-width: 15px !important;
+          max-width: 45px !important;
+         }
+         @include breakpoint-xxs{
+          min-width: 10px !important;
+          max-width: 15px !important;
+        }
+      }

@@ -5,8 +5,9 @@ import { NsContentConstants } from '@ws-widget/collection/src/lib/_constants/wid
 import { NsContent } from '@ws-widget/collection/src/lib/_services/widget-content.model'
 import { UserAutocompleteService } from '@ws-widget/collection/src/lib/_common/user-autocomplete/user-autocomplete.service'
 import { ConfigurationsService, TFetchStatus } from '@ws-widget/utils'
-import { Observable, Subject } from 'rxjs'
+import { from, Observable, of, Subject } from 'rxjs'
 import { NsAppToc, NsCohorts } from '../models/app-toc.model'
+import { catchError, map } from 'rxjs/operators'
 
 // TODO: move this in some common place
 const PROTECTED_SLAG_V8 = '/apis/protected/v8'
@@ -94,6 +95,25 @@ export class AppTocService {
       content,
       errorCode,
     }
+  }
+
+  attachEmailIDS(originalContent: any) {
+    const users = originalContent.hasOwnProperty('creatorContacts') ? originalContent.creatorContacts : []
+    if (users.length) {
+      return from(this.fetchEmails(users)).pipe(map((newIDS: any) => {
+        const newData = {
+          ...originalContent,
+        }
+        newData.creatorContacts = [
+          ...newIDS,
+        ]
+        return newData
+      // tslint:disable-next-line: align
+      }), catchError(_e => {
+        return of(originalContent)
+      }))
+    }
+    return of(originalContent)
   }
 
   async fetchEmails(users: any[]) {

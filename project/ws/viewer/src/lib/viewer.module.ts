@@ -14,6 +14,7 @@ import {
   MatProgressSpinnerModule,
   MatSnackBarModule,
   MatTabsModule,
+  MatExpansionModule,
 } from '@angular/material'
 
 import { ViewerRoutingModule } from './viewer-routing.module'
@@ -47,6 +48,7 @@ import { ViewerTocComponent } from './components/viewer-toc/viewer-toc.component
 import { ViewerTopBarModule } from './components/viewer-top-bar/viewer-top-bar.module'
 import { PublicShareViewComponent } from './components/public-share-view/public-share-view.component'
 import { SharedModule } from '@ws/author/src/lib/modules/shared/shared.module'
+import { AtaglanceModule } from '@ws-widget/collection/src/lib/_common/ataglance/ataglance.module'
 
 @NgModule({
   declarations: [ViewerComponent, ViewerTocComponent, PublicShareViewComponent],
@@ -63,6 +65,7 @@ import { SharedModule } from '@ws/author/src/lib/modules/shared/shared.module'
     MatTreeModule,
     MatProgressSpinnerModule,
     MatSnackBarModule,
+    MatExpansionModule,
     ViewerRoutingModule,
     ErrorResolverModule,
     PipeDurationTransformModule,
@@ -85,6 +88,7 @@ import { SharedModule } from '@ws/author/src/lib/modules/shared/shared.module'
     PlayerBriefModule,
     ViewerTopBarModule,
     SharedModule,
+    AtaglanceModule,
   ],
 })
 export class ViewerModule { }

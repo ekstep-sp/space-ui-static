@@ -1,0 +1,22 @@
+.m-0 {
+    margin: 0px !important;
+}
+
+.prf-icon {
+    // height: fit-content;
+    width: 30px;
+    height: 30px;
+  }
+  .curator-title{
+    font-weight:bolder;
+    -webkit-box-orient: vertical;
+  display: -webkit-box;
+  -webkit-line-clamp: 1;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  word-break: break-word;
+  -webkit-line-clamp: 1;
+  }
+  .author-name{
+      font-size: 18px;
+  }

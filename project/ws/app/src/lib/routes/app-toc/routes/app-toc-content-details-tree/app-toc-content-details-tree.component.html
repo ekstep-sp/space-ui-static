@@ -1,0 +1,65 @@
+<ng-container>
+    <ul class="timeline m-0 pb-35" *ngIf="isCollection && !hasChild" [ngClass]="{'lastParent': lastEemFromParent}">
+        <h3 class="parent_node m-0 pb-32">{{content?.name}}</h3>
+
+        <ng-container *ngIf="content?.children.length">
+            <ng-container *ngFor="let child of content?.children;index as i; trackBy: contentTrackBy">
+                <ws-app-app-toc-content-details-tree [forPreview]="forPreview" [expandAll]="expandAll" [rootId]="rootId"
+                    [rootContentType]="rootContentType" [content]="child" [hasChild]="true" *ngIf="content?.children.length-1 !== i">
+                </ws-app-app-toc-content-details-tree>
+                <ws-app-app-toc-content-details-tree [forPreview]="forPreview" [expandAll]="expandAll" [rootId]="rootId"
+                [rootContentType]="rootContentType" [content]="child" [hasChild]="true" *ngIf="content?.children.length-1 == i && !lastEemFromParent">
+                </ws-app-app-toc-content-details-tree>
+                <ws-app-app-toc-content-details-tree [forPreview]="forPreview" [expandAll]="expandAll" [rootId]="rootId"
+                [rootContentType]="rootContentType" [content]="child" [hasChild]="true" [lastEemFromChild]="true" *ngIf="content?.children.length-1 === i && lastEemFromParent">
+            </ws-app-app-toc-content-details-tree>
+            </ng-container>
+        </ng-container>
+    </ul>
+</ng-container>
+<ng-container *ngIf="isResource">
+    <li class="event m-0 pb-32" *ngIf="hasChild" [ngClass]="{'last': lastEemFromChild}">
+        <div class="flex items-center pb-33">
+            <div class="resource-container mr-3 contentType">
+                <ws-widget-display-content-type-icon class="flex contentType_icon"
+                    [displayContentType]="content?.displayContentType" [displayResourceType]="content?.mimeType">
+                </ws-widget-display-content-type-icon>
+            </div>
+            <a [routerLink]="resourceLink.url" [queryParams]="resourceLink.queryParams">
+                <h4 class="child_node m-0">{{content?.name}}</h4>
+            </a>
+            <ng-container *ngIf="content?.duration">
+                <div class="hidden-block-xs">
+                    <ng-container [ngTemplateOutlet]="timer"></ng-container>
+                </div>
+                <div class="visible-block-xs ml-6">
+                        <ng-container [ngTemplateOutlet]="timerMenu"></ng-container>
+                 </div>
+            </ng-container>
+        </div>
+    </li>
+     <ul class="event1 m-0" *ngIf="!hasChild" [ngClass]="{'last': lastEemFromParent}">
+        <div class="flex pb-32">
+            <div class="resource-container mr-3 contentType mt-1">
+                <ws-widget-display-content-type-icon class="flex contentType_icon"
+                    [displayContentType]="content?.displayContentType" [displayResourceType]="content?.mimeType">
+                </ws-widget-display-content-type-icon>
+            </div>
+            <a [routerLink]="resourceLink.url" [queryParams]="resourceLink.queryParams">
+            <h3 class="child_node m-0" style="color:darkblue">{{content?.name}}</h3>
+            </a>
+        </div>
+    </ul>
+</ng-container>
+<ng-template #timerMenu>
+    <div>
+        <mat-icon class="timer_icon platform_gray"> query_builder</mat-icon>
+        <span class="mat-body-strong platform_gray timer pl-1">{{ content?.duration | pipeDurationTransform: 'hms' }}</span>
+    </div>
+</ng-template>
+<ng-template #timer>
+    <div class="ml-3 flex">
+        <mat-icon class="timer_icon platform_gray"> query_builder</mat-icon>
+        <span class="platform_gray timer">{{ content?.duration | pipeDurationTransform: 'hms' }}</span>
+    </div>
+</ng-template>

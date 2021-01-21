@@ -137,13 +137,28 @@ export class DiscussionForumComponent extends WidgetBaseComponent
       }
       this.fetchDiscussion()
     }
-    this.activatedRoute.data.subscribe((response: Data) => {
-      this.contentCreatorId = response.content.data.creator
-      if (response.pageData.data.allowMentionUsers) {
+    this.activatedRoute.data.subscribe(async (response: Data) => {
+      if (!response.content) {
+        this.contentCreatorId = this.widgetData.contentData.creator
+      } else {
+        this.contentCreatorId = response.content.data.creator
+      }
+      if (response.pageData && response.pageData.data) {
         this.allowMention = response.pageData.data.allowMentionUsers
+      } else {
+        this.allowMention = await this.getDiscussionForumConfig()
       }
     })
     // console.log(this.widgetData, this.discussionRequest)
+  }
+
+  async getDiscussionForumConfig() {
+    try {
+      const dfConfig = await this.discussionSvc.getDFConfig() as any
+      return dfConfig.allowMentionUsers
+    } catch (e) {
+      return null
+    }
   }
   trackByFn(_index: any, reply: any) {
     return reply.id // or item.id

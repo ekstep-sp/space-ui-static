@@ -1,109 +1,313 @@
 @import 'ws-vars';
+@import 'ws-mixins';
 
 .treemode-slider {
-  text-align: right;
-  padding-right: $size-m;
+text-align: right;
+padding-right: $size-m;
 }
 
 .flat-list-content-title {
-  height: 40px;
-  display: flex;
-  align-items: center;
+height: 40px;
+display: flex;
+align-items: center;
 }
 
-.leaf-node {
-  // padding-left: $size-m;
-}
+/* .leaf-node {
+padding-left: $size-m;
+} */
 
 .toc-tree-invisible {
-  display: none;
+display: none;
 }
 
 .toc-tree {
-  padding-inline-start: 0px;
+padding-top: 0;
+margin-block-start: 0;
+padding-left: 0;
 
-  ul,
-  li {
-    margin-top: 0;
-    margin-bottom: 0;
-    list-style-type: none;
-  }
+ul,
+li {
+margin-bottom: 0;
+list-style-type: none;
+}
 }
 
 .content-active {
-  color: orange;
-  font-size: 1.02rem;
+color: #FFFFFF;
+font-size: 1.02rem;
+width:100% !important;
 }
 
 .content-duration {
-  margin: 0 $size-xs;
+margin: 0 $size-xs;
 }
 
 app-content-icon {
-  vertical-align: middle;
-  margin-right: $size-xs;
+vertical-align: middle;
+margin-right: $size-xs;
 }
 
 .completed-icon {
-  color: green;
+color: green;
 }
 
 .height-auto {
-  height: auto !important;
-  margin: auto;
+height: auto !important;
+margin: auto;
 }
 
 .flat-list-content {
-  display: flex;
-  align-items: center;
+display: flex;
+align-items: center;
 }
 
 .viewer-toc-thumbnail {
-  height: 40px !important;
-  width: 70px !important;
+height: 28px !important;
+width: 40px !important;
 }
 
 .viewer-toc-header-thumbnail {
-  height: 73px !important;
-  width: 130px !important;
+height: 73px !important;
+width: 130px !important;
 }
 
 .width-expand {
-  flex: 1;
-  min-width: 1px;
+flex: 1;
+min-width: 1px
 }
 
 .align-self-start {
-  align-self: start;
+align-self: start;
 }
 
 .align-self-center {
-  align-self: center;
+align-self: center;
 }
 
 .resource-container {
-  display: flex !important;
-  align-items: center;
-  justify-content: space-between;
-  margin: $size-s 0;
-  padding: 0 $size-s 0 0;
-  width: 100%;
-  ws-display-content-type-icon {
-    display: flex;
-    align-items: center;
-  }
-  .resource-meta {
-    margin-left: $size-s;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-  }
+display: flex !important;
+align-items: center;
+justify-content: space-between;
+// margin: $size-s $size-s;
+// padding: 0 $size-s 0 0;
+width: 100%;
+ws-display-content-type-icon {
+display: flex;
+align-items: center;
 }
-
+.resource-meta {
+// margin-left: $size-s;
+display: flex;
+justify-content: space-between;
+align-items: center;
+a {
+padding:16px;
+width:100%;
+@include breakpoint-xs {
+  padding-left: 20px !important;
+}
+}
+}
+}
+.tree-node{
+border-bottom: 2px solid white !important
+}
 .width-max-content {
-  width: max-content;
+width: max-content;
 }
 
 .margin-left-xxs {
-  margin-left: 4px;
+margin-left: 4px;
 }
+.arrow-icon{
+color:#42428B;
+}
+
+.padding-none {
+padding: 0;
+}
+
+.mb-3 {
+margin-bottom: 10px !important;
+}
+
+.no-card-style {
+border: transparent !important;
+padding: 0 !important;
+box-shadow: none !important;
+}
+
+.extra-padding {
+padding-left: 12px;
+}
+
+.main-title {
+background-color: #925EB0;
+height: 25px;
+font-size:12px;
+line-height: 15px;
+align-items: center;
+font-weight: bolder !important;
+p {
+margin: 0;
+}
+}
+
+.parent-item {
+background-color: rgba(198, 188, 184, 0.48);
+margin-top: 4px;
+.mat-tree-node.mat-toolbar {
+height: 40px;
+}
+/* .leaf-node {
+max-height: 65px;
+} */
+}
+
+.align-timer {
+line-height: 2;
+mat-icon {
+padding-top: 2px !important;
+font-size: 20px !important;
+}
+}
+
+.cusotm-bg {
+background-color: rgb(66, 66, 139);
+color: white;
+}
+.cusotm-bg:hover{
+background-color: rgb(66, 66, 139);
+color: white;
+}
+.remove-background{
+background: unset !important;
+color: white !important;
+}
+.newColor {
+color: #42428B !important;
+font-weight: 500 !important;
+}
+.title-heading{
+font-size:12px;
+font-weight: bolder !important;
+}
+.title-subheading{
+font-size:14px;
+}
+// .active {
+// background-color: rgb(66, 66, 139);
+// transition: 0.5s;
+// }
+.active{
+// background-color:rgb(91 91 149 / 64%);
+background-color: rgba(66, 66, 139, 0.64) !important;
+transition: 0.5s;
+}
+.active-sublink{
+  // background-color:rgb(120 120 192 / 64%) !important;
+  background-color:rgba(66, 66, 139, 0.40) !important;
+transition: 0.5s;
+}
+.p-0 {
+padding: 0px !important;
+}
+
+.h-auto {
+height: auto !important;
+.mat-expansion-panel-content {
+::ng-deep {
+.mat-expansion-panel-body {
+padding: 0px !important;
+}
+}
+}
+}
+::ng-deep{
+
+.new-icon {
+.mat-expansion-indicator {
+position: absolute;
+right: 25px;
+&:after {
+color: inherit !important;
+}
+}
+}
+.toc-expansion-panel.mat-expansion-panel {
+background-color: inherit !important;
+box-shadow: none !important;
+.mat-expansion-panel-content, .mat-expansion-panel-body {
+background-color: inherit !important;
+}
+
+// .mat-expansion-panel-body {
+// padding: 0;
+// padding-left: 16px !important;
+// }
+.mat-expansion-panel-body{
+  padding: 0 !important;
+}
+.tech-span {
+padding: 20px;
+}
+}
+
+.toc-expansion-panel .mat-expansion-panel-content, .mat-expansion-panel-body .active-sublink{
+  background: rgba(66, 66, 139, 0.40) !important;
+  transition: 0.5s;
+  }
+}
+
+
+.tech-resource {
+padding: 20px;
+padding-left: 0;
+}
+.tech-resource-text-style{
+padding: 20px;
+color:white;
+cursor: pointer;
+background: rgb(66, 66, 139);
+}
+
+.resource-meta.width-expand {
+mat-accordion {
+width: 100% !important;
+}
+}
+::ng-deep{
+
+.theme-muave.night-mode .cusotm-bg{
+// background-color: rgba(66, 66, 139, 0.64) !important;
+background-color: rgba(66, 66, 139) !important;
+
+color: white !important;
+}
+
+.theme-muave.night-mode .title-heading{
+  color: white !important;
+  }
+.theme-muave.night-mode .arrow-icon {
+      color: white !important;
+}
+// .theme-muave.night-mode .dark-bg-color{
+//   background: #424242;
+// }
+.theme-muave.night-mode .active{
+  background: #424242 !important;
+  transition: 0.5s;
+}
+  // .theme-muave.night-mode .toc-expansion-panel .mat-expansion-panel-content, .mat-expansion-panel-body .active-sublink{
+  // background:rgb(73, 73, 129) !important;
+  // transition: 0.5s;
+  // }
+}
+
+// ::ng-deep{
+//   .mat-drawer-container{
+//     overflow-y: unset!important;
+//     overflow-x: visible!important;
+//   }
+// }
+
