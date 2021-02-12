@@ -153,7 +153,7 @@ export class TncComponent implements OnInit, OnDestroy {
         })
       }
       this.isAcceptInProgress = true
-      this.http.post('/apis/protected/v8/user/tnc/accept', { termsAccepted }).subscribe(
+      this.http.post('/apis/protected/v8/user/tnc/accept', { termsAccepted, newUser: this.configSvc.isNewUser }).subscribe(
         () => {
           // TO DO: Telemetry event for success
           if (this.tncData) {
