@@ -26,6 +26,7 @@ import { delay, filter } from 'rxjs/operators'
 import { MobileAppsService } from '../../services/mobile-apps.service'
 import { RootService } from './root.service'
 import { combineLatest } from 'rxjs'
+import { GoogleAnalyticsCoreService } from 'src/app/modules/google-analytics/services/google-analytics-core.service'
 
 @Component({
   selector: 'ws-root',
@@ -59,8 +60,15 @@ export class RootComponent implements OnInit {
     private rootSvc: RootService,
     private btnBackSvc: BtnPageBackService,
     private changeDetector: ChangeDetectorRef,
+    private readonly googleAnalyticsCoreSrvc: GoogleAnalyticsCoreService,
   ) {
     this.mobileAppsSvc.init()
+    // enable google analytics
+    const analyticsObj = this.getGAObjFromConfig()
+    // tslint:disable-next-line: max-line-length
+    if (analyticsObj && analyticsObj.type === 'GA' && analyticsObj.trackingID) {
+      this.googleAnalyticsCoreSrvc.init(analyticsObj.trackingID)
+    }
   }
 
   ngOnInit() {
@@ -124,5 +132,10 @@ export class RootComponent implements OnInit {
       this.showNavbar = display[0]
       this.showBottomNavbar = display[1]
     })
+  }
+
+  getGAObjFromConfig() {
+    // look for analytics key in either site config or host config,
+    return this.configSvc.instanceConfig && this.configSvc.instanceConfig.analytics ? this.configSvc.instanceConfig.analytics : null
   }
 }

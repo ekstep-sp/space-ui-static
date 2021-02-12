@@ -1,6 +1,10 @@
 import { NsWidgetResolver } from '@ws-widget/resolver'
 import { NsPage } from '../resolvers/page.model'
 export namespace NsInstanceConfig {
+  export interface IClientAnalyticsGA {
+    type: string,
+    trackingID: string
+  }
   export interface IConfig {
     authoring: {
       doUniqueCheck: boolean
@@ -20,6 +24,8 @@ export namespace NsInstanceConfig {
       }[]
     }
     appSetup: boolean
+    // analytics object will store information about the type of analytics to perform
+    analytics?: IClientAnalyticsGA | undefined
     chatBotUrl: string
     defaultFontsize: string
     defaultThemeClass: string
