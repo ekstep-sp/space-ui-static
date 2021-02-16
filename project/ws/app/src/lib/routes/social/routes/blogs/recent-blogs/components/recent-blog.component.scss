@@ -1,6 +1,16 @@
 @import 'ws-vars';
 @import 'ws-mixins';
 @import 'ws-common';
+
+input#mat-input-1 {
+  width: 100% !important;
+  margin-left: 0 !important;
+}
+
+.w-full.search {
+  margin-left: 6% !important;
+  display: inline-grid !important;
+}
 .blogs-container {
   max-width: 900px;
   margin: auto;
@@ -70,6 +80,17 @@
 // line-height: 25px;
 // border-radius: 4px;
 // }
+::ng-deep {
+  .autocomplete-form {
+    .mat-form-field-wrapper {
+      padding-bottom: 0 !important;
+    }
+    .mat-form-field-infix{
+      border: none !important;
+      padding: 0 !important;
+    }
+  }
+}
 
 @media screen and (max-width: 768px) {
   .blogs-containers {
@@ -90,22 +111,22 @@
     // margin-right:0px;
     overflow: hidden;
   }
-  .autocomplete-form {
+  /* .autocomplete-form {
     display: initial;
-  }
+  } */
   // .vertcheck {
   // border: thick double red;
   // padding-right: 0px;
   // justify-content: end;
   // }
 }
-@media screen and (min-width: 540px){
+/* @media screen and (min-width: 540px){
   
-  .autocomplete-form {
+  autocomplete-form {
     display: initial;
   }
 
-}
+} */
 @media screen and (max-width:700px) {
   .justify-search{
     max-width: 130px !important;
@@ -125,7 +146,7 @@
   max-width: 310px;
   box-sizing: border-box;
   border-radius: 50px;
-  max-height: 40px;
+  height: 43px;
   margin-right: 0;
   margin: 4px auto;
 }
@@ -155,8 +176,8 @@
 }
 .align-input {
   width: 100%;
-  margin-left: 10%;
-  padding-top: 10px;
+  /* margin-left: 10%;
+  padding-top: 10px; */
 }
 // flex items-center justify-center w-8 sm:w-16 cursor-pointer
 .searchBar{
@@ -295,11 +316,10 @@
 
 .align-input:not(:root:root){
   width: 100%;
-  margin-left: 10%;
-  padding-top: 48px;
+  /* margin-left: 10%; */
 }
 
-@media screen and (max-width:768px){
+/* @media screen and (max-width:768px){
   .align-input-responsive:not(:root:root){
   padding-top: 26px;
 }
@@ -308,4 +328,4 @@
   .align-input-responsive{
   padding-top: 8px;
 }
-}
+} */

@@ -31,7 +31,7 @@ export class RecentBlogComponent implements OnInit {
   showSocialLike = false
   isXSmall$: Observable<boolean>
   queryEntered = ''
-  placeHolder: String = 'Type the blog name you are looking for'
+  placeHolder: String = 'Type blog name to search'
   isEnabledSearch = false
   constructor(
     private discussionSvc: WsDiscussionForumService,

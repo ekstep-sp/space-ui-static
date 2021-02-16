@@ -8,10 +8,10 @@
       <div id="blogsearchbar"
         class="flex items-center border search border-solid search-border text-white justify-search">
         <div class="w-full search">
-          <mat-form-field appearance="none" class="autocomplete-form" color="primary" style="width: 100%;"
+          <mat-form-field appearance="none" class="autocomplete-form custom" color="primary" [ngStyle]="{'width': '100%'}"
             [floatLabel]="'never'">
             <input type="search" (keydown.enter)="triggerSearch()"
-              class="border-2 border-gray-300 align-input bg-white pr-16 rounded-lg text-sm text-white focus:outline-none"
+              class="border-2 border-gray-300 align-input bg-white pr-16 rounded-lg text-sm text-white focus:outline-none ml-0"
               i18n-placeholder="search content" [placeholder]="placeHolder" i18-aria-label aria-label="Query" matInput
               [(ngModel)]="queryEntered" />
           </mat-form-field>
