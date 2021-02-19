@@ -1,0 +1,24 @@
+.usercard{
+display:flex;
+padding-left:24px;
+flex-direction: row;
+flex-wrap: wrap;
+padding-bottom:79px;
+}
+.profile-card {
+height: 214px;
+margin-top:58px;
+width: 100%;
+background: #FFFFFF;
+box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+}
+// .border-image{
+// border:1px solid red;
+// }
+
+.org-color{
+color: rgba(105, 100, 102, 0.8) !important;
+}
+.txt-color{
+color: #696466 !important;
+}
