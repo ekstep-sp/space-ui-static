@@ -1,20 +1,19 @@
-<ng-container
-  *ngIf="showIframeSupportWarning || isIntranetUrl || htmlContent?.isInIntranet">
+<ng-container *ngIf="showIframeSupportWarning || isIntranetUrl || htmlContent?.isInIntranet">
   <div class="px-2 flex items-center flex-col max-w-screen-sm m-auto text-left">
     <h2 class="mat-h2" *ngIf="
     isIntranetUrl || htmlContent?.isInIntranet || htmlContent?.isIframeSupported === 'Maybe'
   ">
-  <ng-container *ngIf="
+      <ng-container *ngIf="
       ((isIntranetUrl && htmlContent?.isIframeSupported === 'Maybe') ||
         (htmlContent?.isInIntranet && htmlContent?.isIframeSupported === 'Maybe')) &&
       !isUserInIntranet
     " i18n>
-    This content can only be viewed in Intranet.
-  </ng-container>
-  <ng-container *ngIf="htmlContent?.isIframeSupported === 'Maybe'" i18n>
-    Content may be required to be opened in a new window. If you are unable to view it, Please
-    click on the Open in New Window Button else Dismiss
-  </ng-container>
+        This content can only be viewed in Intranet.
+      </ng-container>
+      <ng-container *ngIf="htmlContent?.isIframeSupported === 'Maybe'" i18n>
+        Content may be required to be opened in a new window. If you are unable to view it, Please
+        click on the Open in New Window Button else Dismiss
+      </ng-container>
     </h2>
     <h2 class="mat-h2" *ngIf="
         isIntranetUrl ||
@@ -33,7 +32,8 @@
       </ng-container>
       <ng-container *ngIf="htmlContent?.isIframeSupported === 'No' || !htmlContent?.isIframeSupported">
         <h2 class="ws-mat-primary-text text-left mb-5 title-heading content-title">{{htmlContent?.name}}</h2>
-        <span class="font-montserrat body-font-size-primary" i18n>For Better User Experience, we are taking you to the new tab. <br>In case it does not open, click on the button below.</span>
+        <span class="font-montserrat body-font-size-primary" i18n>For Better User Experience, we are taking you to the
+          new tab. <br>In case it does not open, click on the button below.</span>
         <!-- <a *ngIf="!configSvc?.isGuestUser" [routerLink]="'/app/info/faq'" [queryParams]="{ tab: 'popup' }">
           <mat-icon matTooltip="How to Disable Pop-ups" class="align-text-top ws-mat-primary-text mat-icon">help
           </mat-icon>
@@ -46,19 +46,16 @@
       " i18n>
       This content can only be viewed in Intranet.
     </h2>
-    <mat-progress-bar
-      mode="determinate"
-      *ngIf="progress > 0 && htmlContent?.isIframeSupported?.toLowerCase() === 'no'"
-      [value]="progress"
-    ></mat-progress-bar>
+    <mat-progress-bar mode="determinate" *ngIf="progress > 0 && htmlContent?.isIframeSupported?.toLowerCase() === 'no'"
+      [value]="progress"></mat-progress-bar>
 
     <div class="flex flex-between padding-top-s">
       <!-- <a type="button" [ngClass]="mobAppSvc?.isMobile ? 'block' : 'hidden'" mat-button [href]="prepare()"
         target="_blank" #mobileOpenInNewTab>Open in New Tab</a> -->
 
-      <button class="btn-clr block" mat-raised-button color="primary"
-        type="button" i18n mat-button (click)="openInNewTab(true)">
-        <span class="font-montserrat">Open in New Tab</span>
+      <button class="btn-clr block" mat-raised-button color="primary" type="button" i18n mat-button
+        (click)="openInNewTab(true)">
+        <span class="font-montserrat">Open in New Tabssssss</span>
       </button>
       <button type="button" *ngIf="
           htmlContent?.isIframeSupported === 'Maybe' ||
@@ -88,8 +85,7 @@
 <iframe #iframeElem [hidden]="this.pageFetchStatus !== 'done'" *ngIf="
     htmlContent?.isIframeSupported.toLowerCase() !== 'no' &&
     (!htmlContent?.isInIntranet || (htmlContent?.isInIntranet && isUserInIntranet)) &&
-    (!isIntranetUrl || (isIntranetUrl && isUserInIntranet))" 
-    title="HTML Content Viewer" i18n-title [src]="iframeUrl" (load)="onIframeLoadOrError('load', iframeElem, $event)"
-  (error)="onIframeLoadOrError('error')"
+    (!isIntranetUrl || (isIntranetUrl && isUserInIntranet))" title="HTML Content Viewer" i18n-title [src]="iframeUrl"
+  (load)="onIframeLoadOrError('load', iframeElem, $event)" (error)="onIframeLoadOrError('error')"
   allow="fullscreen; accelerometer; autoplay; encrypted-media; gyroscope; microphone; camera;"
   class="html-iframe"></iframe>
