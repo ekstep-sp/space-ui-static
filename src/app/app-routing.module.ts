@@ -280,6 +280,11 @@ const routes: Routes = [
     },
   },
   {
+    path: 'app/users/public',
+    canActivate: [GeneralGuard],
+    loadChildren: () => import('./routes/route-public-user.module').then(u => u.RoutePublicUserModule),
+  },
+  {
     path: 'author',
     data: {
       requiredRoles: [
