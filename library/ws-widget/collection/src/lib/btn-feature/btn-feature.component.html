@@ -21,8 +21,8 @@
     <a *ngSwitchCase="displayType.matFabButton" mat-fab>
       <ng-container [ngTemplateOutlet]="icon" [ngTemplateOutletContext]="widgetData.actionBtn"></ng-container>
     </a>
-    <a *ngSwitchCase="displayType.matFlatButton"  class="btn-margin" [routerLink]="widgetData.actionBtn?.url" [disableRipple]="true"
-      mat-flat-button routerLinkActive="ws-mat-primary-text link-active">
+    <a *ngSwitchCase="displayType.matFlatButton" class="btn-margin" [routerLink]="widgetData.actionBtn?.url"
+      [disableRipple]="true" mat-flat-button routerLinkActive="ws-mat-primary-text link-active">
       <ng-container [ngTemplateOutlet]="buttonContent" [ngTemplateOutletContext]="widgetData"></ng-container>
     </a>
     <a *ngSwitchCase="displayType.matIconButton" [disableRipple]="true" [name]="widgetData.actionBtn?.name"
@@ -46,8 +46,8 @@
 <!-- TEMPLATES -->
 <ng-template #buttonContent let-actionBtn="actionBtn" let-config="config">
   <ng-container [ngTemplateOutlet]="icon" [ngTemplateOutletContext]="actionBtn"></ng-container>
-  <span id="widgetInstanceId" *ngIf="!config.hideTitle"
-    [ngClass]="{ 'ml-2': actionBtn.icon }">{{ actionBtn.name }}</span>
+  <span id="widgetInstanceId" *ngIf="!config.hideTitle" [ngClass]="{ 'ml-2': actionBtn.icon }">{{ actionBtn.name
+    }}</span>
 </ng-template>
 
 <ng-template #buttonExternalLinkTextContent let-actionBtn="actionBtn">
@@ -103,13 +103,15 @@
   </a>
 </ng-template>
 <ng-template #cardMini let-actionBtn="actionBtn" let-config="config">
-  <a *ngIf="!actionBtn?.queryParams" role="button" matRipple routerLink={{actionBtn.url}} active [wsWidgetUrlResolver]="actionBtn.isExternal"
-    routerLinkActive="ws-mat-accent-text" class="flex items-center flex-col px-2 box-sizing-box">
+  <a *ngIf="!actionBtn?.queryParams" role="button" matRipple routerLink={{actionBtn.url}} active
+    [wsWidgetUrlResolver]="actionBtn.isExternal" routerLinkActive="ws-mat-accent-text"
+    class="flex items-center flex-col px-2 box-sizing-box">
     <mat-icon *ngIf="!config.hideIcon">{{ actionBtn.icon }}</mat-icon>
     <span *ngIf="!config.hideTitle" [ngClass]="instanceVal === 'RootOrg' && showFixedLength ? 'title font-sans' :
       'mat-caption'">{{ actionBtn.name }}</span>
   </a>
-  <a *ngIf="actionBtn?.queryParams" role="button" matRipple routerLink={{actionBtn.url}} [queryParams]="actionBtn.queryParams" active [wsWidgetUrlResolver]="actionBtn.isExternal"
+  <a *ngIf="actionBtn?.queryParams" role="button" matRipple routerLink={{actionBtn.url}}
+    [queryParams]="actionBtn.queryParams" active [wsWidgetUrlResolver]="actionBtn.isExternal"
     routerLinkActive="ws-mat-accent-text" class="flex items-center flex-col px-2 box-sizing-box">
     <mat-icon *ngIf="!config.hideIcon">{{ actionBtn.icon }}</mat-icon>
     <span *ngIf="!config.hideTitle" [ngClass]="instanceVal === 'RootOrg' && showFixedLength ? 'title font-sans' :
@@ -158,8 +160,11 @@
 </ng-template>
 <ng-template #icon let-iconType="iconType" let-icon="icon" let-scale="scale" let-color="color">
   <ng-container *ngIf="!badgeCount.length">
-    <mat-icon *ngIf="iconType === 'mat-icon'" aria-hidden="false" [attr.aria-label]="widgetData.actionBtnName"
-      [attr.actionHide]="widgetData.actionBtnId" [color]="color" [ngStyle]="
+    <!-- {{id ===feature_group}} -->
+    <!-- {{widgetData?.actionBtn?.id}} -->
+    <mat-icon *ngIf="iconType === 'mat-icon'"
+      [ngClass]="{'material-icons-outlined':widgetData?.actionBtn?.id ==='feature_group'}" aria-hidden="false"
+      [attr.aria-label]="widgetData.actionBtnName" [attr.actionHide]="widgetData.actionBtnId" [color]="color" [ngStyle]="
         scale
           ? {
               'font-size': scale * defaultIconSize + 'px',
