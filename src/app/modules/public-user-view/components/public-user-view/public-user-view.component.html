@@ -1,8 +1,21 @@
 <!-- <p>public-user-view works!</p> -->
 <mat-toolbar [color]="pageNavbar.color">
     <ws-widget-btn-page-back [widgetData]="{ url: '/page/home' }"></ws-widget-btn-page-back>
-    <span class="margin-left-xs text-truncate">
+    <!-- <div > -->
+    <!-- <div> -->
+    <span class="margin-left-xs text-truncate span-class">
         <span class="visible-xs-inline" i18n>People</span>
     </span>
+    <!-- </div> -->
+    <div class="search-container">
+        <ng-container>
+
+            <label class="expandSearchGroup">
+                <mat-icon matPrefix class="searchIcon">search</mat-icon>
+                <input type="text" placeholder="Search Users" name="search">
+
+            </label>
+        </ng-container>
+    </div>
+    <!-- </div> -->
 </mat-toolbar>
-user -view works

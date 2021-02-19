@@ -6,7 +6,8 @@ import { PublicUserViewComponent } from './components/public-user-view/public-us
 import { MatToolbarModule } from '@angular/material'
 
 import { BtnPageBackModule } from '@ws-widget/collection'
-
+import { MatIconModule } from '@angular/material/icon';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [PublicUserViewComponent],
@@ -14,7 +15,9 @@ import { BtnPageBackModule } from '@ws-widget/collection'
     CommonModule,
     PublicUserViewRoutingModule,
     MatToolbarModule,
-    BtnPageBackModule
+    BtnPageBackModule,
+    MatIconModule,
+    ReactiveFormsModule
   ],
 })
 export class PublicUserViewModule { }
