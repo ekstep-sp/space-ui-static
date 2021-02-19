@@ -13,7 +13,6 @@
       width:200px;
       display:flex;
       caret-color: white;
-    //   padding-left: 2rem;
       padding-right: 32px;
       padding-bottom: 8px;
     }
@@ -21,7 +20,7 @@
       position: absolute;
       top: 0;
     //   right: 0;
-      padding: 6px 8px 0px 0px ;
+      padding: 6px 8px 0px 8px ;
       color: white;
       cursor: pointer;
       user-select: none;
@@ -29,16 +28,18 @@
   }
   .search-container{
     padding-right: 1.5rem;
+    padding-top: 8px;
   }
   ::placeholder {
-    color: white;
-    padding-left: 2rem;
-
+    color: white;   
   }
-
   .span-class{
       flex:2
   }
+  input.forms-control{   
+    width: 100%;
+    padding-left: 55px !important;
+}
 
 .usercard{
 display:flex;
@@ -46,6 +47,7 @@ padding-left:24px;
 flex-direction: row;
 flex-wrap: wrap;
 padding-bottom:79px;
+border: 2px red solid;
 }
 .profile-card {
 height: 214px;
@@ -53,10 +55,9 @@ margin-top:58px;
 width: 100%;
 background: #FFFFFF;
 box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+border: 2px yellow solid;
 }
-// .border-image{
-// border:1px solid red;
-// }
+
 
 .org-color{
 color: rgba(105, 100, 102, 0.8) !important;

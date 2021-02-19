@@ -11,7 +11,7 @@
 
             <label class="expandSearchGroup">
                 <mat-icon matPrefix class="searchIcon">search</mat-icon>
-                <input type="text" placeholder="Search Users" name="search">
+                <input class="forms-control" type="text" placeholder="Search Users" name="search">
 
             </label>
         </ng-container>
@@ -19,20 +19,20 @@
     <!-- </div> -->
 </mat-toolbar>
 <div class="usercard">
-  <div class="max-w-xs ml-16 rounded-sm profile-card" *ngFor="let card of cards">
-    <mat-card>
-      <div class="flex h-24 w-24 mx-auto mt-4 mb-4">
-        <img src="/assets/instances/space/common/profile.png">
-      </div>
-      <div class="text-center md:text-left space-y-4">
-        <div class="font-size-16 pb-2 txt-color">
-          <span>{{card.name}}</span>
-          <mat-icon class="pl-3">mail_outline</mat-icon>
-        </div>
-        <div class="font-size-18 pb-4 org-color">
-          {{card.organisation}}
-        </div>
-      </div>
-    </mat-card>
-  </div>
+    <div class="max-w-xs ml-16 rounded-sm profile-card" *ngFor="let card of cards">
+        <mat-card>
+            <div class="flex h-24 w-24 mx-auto mt-4 mb-4">
+                <img src="/assets/instances/space/common/profile.png">
+            </div>
+            <div class="text-center md:text-left space-y-4">
+                <div class="font-size-16 pb-2 txt-color">
+                    <span>{{card.name}}</span>
+                    <mat-icon class="pl-3">mail_outline</mat-icon>
+                </div>
+                <div class="font-size-18 pb-4 org-color">
+                    {{card.organisation}}
+                </div>
+            </div>
+        </mat-card>
+    </div>
 </div>
