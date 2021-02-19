@@ -1,3 +1,45 @@
+.expandSearchGroup{
+    display: inline-block;
+    position: relative;
+    overflow: hidden;
+    border: transparent;
+    input{
+      border:1px solid #cccccc;
+      background: content-box;
+      text-decoration: none;
+      border-radius: 4px;
+      padding-top: 8px ;
+      outline: none;
+      width:200px;
+      display:flex;
+      caret-color: white;
+    //   padding-left: 2rem;
+      padding-right: 32px;
+      padding-bottom: 8px;
+    }
+    .searchIcon{
+      position: absolute;
+      top: 0;
+    //   right: 0;
+      padding: 6px 8px 0px 0px ;
+      color: white;
+      cursor: pointer;
+      user-select: none;
+    }
+  }
+  .search-container{
+    padding-right: 1.5rem;
+  }
+  ::placeholder {
+    color: white;
+    padding-left: 2rem;
+
+  }
+
+  .span-class{
+      flex:2
+  }
+
 .usercard{
 display:flex;
 padding-left:24px;
