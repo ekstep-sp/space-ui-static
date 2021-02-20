@@ -5,7 +5,7 @@ import { NsPage, ConfigurationsService } from '@ws-widget/utils'
 import { BehaviorSubject, of } from 'rxjs'
 import { catchError, debounceTime, distinctUntilChanged, tap } from 'rxjs/operators'
 import { PublicUsersCoreService } from '../../services/public-users-core.service'
-import { BATCH_SIZE, DEFAULT_OFFSET, DEFAULT_PAGE_NUMBER, DEFAULT_QUERY, INFINITE_SCROLL_CONSTANTS, } from './../../constants'
+import { BATCH_SIZE, DEFAULT_OFFSET, DEFAULT_PAGE_NUMBER, DEFAULT_QUERY, INFINITE_SCROLL_CONSTANTS } from './../../constants'
 import { IPublicUsersResponse, IUpdateDataObj } from './../../models/public-users.interface'
 interface IScrollUIEvent {
   currentScrollPosition: number
