@@ -22,15 +22,17 @@
     [infiniteScrollThrottle]="scrollThrottle"
     (scrolled)="onScroll($event)" 
     class="scroll-infinite w-100 h-100">
-    <ng-container *ngIf="((isApiLoading$ | async) && !(error | async)); else cardTemplate">
-      Loading...
+    <ng-container *ngIf="!(error$ | async)">
+      <ng-container *ngIf="(isApiLoading$ | async); else cardTemplate">
+        Loading...
+      </ng-container>
+    </ng-container>
+    <ng-container *ngIf="(error$ | async)">
+      Error occured while fetching data
     </ng-container>
 </div>
 <div *ngIf="(isDataFinished$ | async)">
     Data has finished
-</div>
-<div *ngIf="(error$ | async)">
-  Error occured while fetching data
 </div>
 
 <ng-template #cardTemplate>
