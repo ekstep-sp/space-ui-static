@@ -30,12 +30,32 @@
   .search-container{
     padding-right: 1.5rem;
   }
+  input.forms-control{
+    width: 100%;
+    padding-left: 55px !important;
+  }
   ::placeholder {
     color: white;
-    padding-left: 2rem;
+    // padding-left: 2rem;
 
   }
 
   .span-class{
       flex:2
+  }
+  @media only screen and (min-width: 360px) and (max-width:510px) {
+    .search-container{
+        padding-right: 0;
+       border: 1px red solid;
+      }
+      .expandSearchGroup input{
+          width: 80%;
+      }
+  }
+  @media only screen and (min-width: 760px) and (max-width:1024px) {
+    .search-container{
+        padding-right: 0;
+       border: 1px red solid;
+      }
+    
   }
