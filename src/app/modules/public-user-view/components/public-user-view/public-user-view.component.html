@@ -20,7 +20,7 @@
     infiniteScroll
     [infiniteScrollDistance]="scrollDistance"
     [infiniteScrollThrottle]="scrollThrottle"
-    (scrolled)="onScroll($event)" 
+    (scrolled)="onScroll($event)"
     class="scroll-infinite w-100 h-100">
     <ng-container *ngIf="!(error$ | async)">
       <ng-container *ngIf="(isApiLoading$ | async); else cardTemplate">
@@ -34,24 +34,8 @@
 <div *ngIf="(isDataFinished$ | async)">
     Data has finished
 </div>
-
 <ng-template #cardTemplate>
   <ng-container *ngFor="let val of (apiData$ | async)">
-    <div class="card-container inline-block width-400">
-      <mat-card class="rounded-sm profile-card">
-        <div class="flex h-24 w-24 mx-auto mt-4 mb-4">
-          <img src="/assets/instances/space/common/profile.png">
-        </div>
-        <div class="text-center md:text-left space-y-4">
-          <div class="font-size-16 pb-2 txt-color">
-            <span>sample name</span>
-            <mat-icon class="pl-3">mail_outline</mat-icon>
-          </div>
-          <div class="font-size-18 pb-4 org-color">
-            sample
-          </div>
-        </div>
-      </mat-card>
-    </div>
+    <ws-userlist></ws-userlist>
   </ng-container>
 </ng-template>
