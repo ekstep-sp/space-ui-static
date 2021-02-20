@@ -18,3 +18,5 @@ export interface IPublicUsers {
     email: string
     time_inserted: string
 }
+
+export interface IUpdateDataObj {query: string, searchSize: number, offset: number}

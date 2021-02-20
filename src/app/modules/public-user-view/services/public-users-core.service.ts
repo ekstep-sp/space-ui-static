@@ -13,11 +13,11 @@ export class PublicUsersCoreService {
   constructor(private readonly http: HttpClient) { }
 
   getApiData(searchQuery: string, offset = DEFAULT_OFFSET, searchSize = BATCH_SIZE) {
-    let requestParams = new HttpParams().set('searchSize', searchSize)
-    requestParams = requestParams.append('offset',offset )
+    let requestParams = new HttpParams().set('searchSize', `${searchSize}`)
+    requestParams = requestParams.append('offset', `${offset}`)
     if (searchQuery && searchQuery.length) {
       requestParams = requestParams.append('search_query', searchQuery)
     }
-    this.http.get<[IPublicUsersResponse]>(ENDPOINT_URL, { params: requestParams })
+    return this.http.get<IPublicUsersResponse>(ENDPOINT_URL, { params: requestParams })
   }
 }

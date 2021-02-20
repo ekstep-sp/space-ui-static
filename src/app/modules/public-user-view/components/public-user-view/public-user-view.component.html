@@ -8,11 +8,9 @@
     <!-- </div> -->
     <div class="search-container">
         <ng-container>
-
             <label class="expandSearchGroup">
                 <mat-icon matPrefix class="searchIcon">search</mat-icon>
-                <input type="text" placeholder="Search Users" name="search">
-
+                <input type="text" placeholder="Search Users" name="search" [formControl]="globalSearch">
             </label>
         </ng-container>
     </div>
@@ -24,25 +22,34 @@
     [infiniteScrollThrottle]="scrollThrottle"
     (scrolled)="onScroll($event)" 
     class="scroll-infinite w-100 h-100">
-    <ng-container *ngFor="let val of (dummyData$ | async)">
-      <div class="card-container inline-block width-400">
-        <mat-card class="rounded-sm profile-card">
-          <div class="flex h-24 w-24 mx-auto mt-4 mb-4">
-            <img src="/assets/instances/space/common/profile.png">
-          </div>
-          <div class="text-center md:text-left space-y-4">
-            <div class="font-size-16 pb-2 txt-color">
-              <span>sample name</span>
-              <mat-icon class="pl-3">mail_outline</mat-icon>
-            </div>
-            <div class="font-size-18 pb-4 org-color">
-              sample
-            </div>
-          </div>
-        </mat-card>
-      </div>
+    <ng-container *ngIf="((isApiLoading$ | async) && !(error | async)); else cardTemplate">
+      Loading...
     </ng-container>
 </div>
 <div *ngIf="(isDataFinished$ | async)">
     Data has finished
 </div>
+<div *ngIf="(error$ | async)">
+  Error occured while fetching data
+</div>
+
+<ng-template #cardTemplate>
+  <ng-container *ngFor="let val of (apiData$ | async)">
+    <div class="card-container inline-block width-400">
+      <mat-card class="rounded-sm profile-card">
+        <div class="flex h-24 w-24 mx-auto mt-4 mb-4">
+          <img src="/assets/instances/space/common/profile.png">
+        </div>
+        <div class="text-center md:text-left space-y-4">
+          <div class="font-size-16 pb-2 txt-color">
+            <span>sample name</span>
+            <mat-icon class="pl-3">mail_outline</mat-icon>
+          </div>
+          <div class="font-size-18 pb-4 org-color">
+            sample
+          </div>
+        </div>
+      </mat-card>
+    </div>
+  </ng-container>
+</ng-template>
