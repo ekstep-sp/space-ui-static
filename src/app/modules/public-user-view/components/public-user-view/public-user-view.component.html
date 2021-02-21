@@ -10,32 +10,31 @@
         <ng-container>
             <label class="expandSearchGroup">
                 <mat-icon matPrefix class="searchIcon">search</mat-icon>
-                <input type="text" placeholder="Search Users" name="search" [formControl]="globalSearch">
+                <input class="forms-control" type="text" placeholder="Search Users" name="search"
+                    [formControl]="globalSearch">
             </label>
         </ng-container>
     </div>
     <!-- </div> -->
 </mat-toolbar>
-<div
-    infiniteScroll
-    [infiniteScrollDistance]="scrollDistance"
-    [infiniteScrollThrottle]="scrollThrottle"
-    (scrolled)="onScroll($event)"
-    class="scroll-infinite w-100 h-100 flex flex-row flex-wrap justify-center relative">
+<div infiniteScroll [infiniteScrollDistance]="scrollDistance" [infiniteScrollThrottle]="scrollThrottle"
+    (scrolled)="onScroll($event)" class="scroll-infinite w-100 h-100 flex flex-row flex-wrap justify-center relative">
     <ng-container *ngIf="!(error$ | async)">
-      <ng-container *ngIf="(isApiLoading$ | async); else cardTemplate">
-        Loading...
-      </ng-container>
+        <ng-container *ngIf="(isApiLoading$ | async); else cardTemplate">
+            Loading...
+        </ng-container>
     </ng-container>
     <ng-container *ngIf="(error$ | async)">
-      Error occured while fetching data
+        Error occured while fetching data
     </ng-container>
 </div>
 <div *ngIf="(isDataFinished$ | async)">
     Data has finished
 </div>
 <ng-template #cardTemplate>
-  <ng-container *ngFor="let val of (apiData$ | async)">
-    <ws-userlist></ws-userlist>
-  </ng-container>
+    <ng-container *ngFor="let val of (apiData$ | async)">
+
+        <ws-userlist></ws-userlist>
+
+    </ng-container>
 </ng-template>

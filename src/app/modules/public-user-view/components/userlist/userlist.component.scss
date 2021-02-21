@@ -9,17 +9,26 @@ background: #FFFFFF;
   margin-left: 4px !important;
 }
 box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+border: 1 px yellow solid;
+position: relative;
+margin-left: 24px;
+
+
+
+
 }
 .profile-card.mat-card{
   padding:0px !important;
 }
 .profile-card:hover{
   position:absolute;
-   width: 340px;
-   z-index: 9999;
-    height: 350px;
-    color: white;
-    background:#42428B;
+  width: 340px;
+  z-index: 9999;
+   height: 350px;
+   color: white;
+   background:#42428B;
+   overflow-y:scroll;
+  
 }
 .org-color{
 color: rgba(105, 100, 102, 0.8) !important;
