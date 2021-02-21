@@ -9,9 +9,9 @@
     <div class="search-container">
         <ng-container>
             <label class="expandSearchGroup">
-                <mat-icon matPrefix class="searchIcon">search</mat-icon>
-                <input class="forms-control" type="text" placeholder="Search Users" name="search"
-                    [formControl]="globalSearch">
+                <mat-icon matPrefix class="searchIcon" (click)="triggerGlobalSearch()">search</mat-icon>
+                <input class="forms-control" (keyup.enter)="triggerGlobalSearch()" type="text"
+                    placeholder="Search Users" name="search" [formControl]="globalSearch">
             </label>
         </ng-container>
     </div>
@@ -33,6 +33,6 @@
 </div>
 <ng-template #cardTemplate>
     <ng-container *ngFor="let val of (apiData$ | async)">
- <ws-userlist [userData]=val></ws-userlist>
- </ng-container>
+        <ws-userlist [userData]=val></ws-userlist>
+    </ng-container>
 </ng-template>

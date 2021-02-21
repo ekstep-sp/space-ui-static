@@ -4,9 +4,11 @@ import { FormControl } from '@angular/forms'
 import { NsPage, ConfigurationsService } from '@ws-widget/utils'
 import { BehaviorSubject, of } from 'rxjs'
 import { catchError, debounceTime, distinctUntilChanged, tap } from 'rxjs/operators'
+import { UserViewSearchPipe } from '../../pipes/user-view-search.pipe'
 import { PublicUsersCoreService } from '../../services/public-users-core.service'
 import { BATCH_SIZE, DEFAULT_OFFSET, DEFAULT_PAGE_NUMBER, DEFAULT_QUERY, INFINITE_SCROLL_CONSTANTS } from './../../constants'
 import { IPublicUsersResponse, IUpdateDataObj } from './../../models/public-users.interface'
+
 interface IScrollUIEvent {
   currentScrollPosition: number
 }
@@ -21,39 +23,40 @@ export class PublicUserViewComponent implements OnInit, OnDestroy {
   globalSearch = new FormControl('')
   hideGlobalSearch = false
   HIT_DUMMY_ENDPOINT = true
+
   scrollDistance = INFINITE_SCROLL_CONSTANTS.DISTANCE
   scrollThrottle = INFINITE_SCROLL_CONSTANTS.THROTTLE
   // apiData$: BehaviorSubject<any[]> = new BehaviorSubject<any[]>([1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13])
-  apiData$: BehaviorSubject<any[]> = new BehaviorSubject<any[]>([ 
+  apiData$: BehaviorSubject<any[]> = new BehaviorSubject<any[]>([
     {
-    "wid": 'acbf4053-c126-4e85-a0bf-252a896535ea',
-    "user_properties": {
-    "type": "json",
-    "value": "{\"bio\":\"this is hritik\",\"profileLink\":\"twitter.com\"}"
-    },
-    "department_name": "space",
-    "last_name": "test1",
-    "source_profile_picture": "http://test.com",
-    "middle_name": null,
-    "first_name": "test1",
-    "email": "hritikm46@gmail.com",
-    "time_inserted": "2020-09-16T06:53:57.000+00:00"
+      "wid": 'acbf4053-c126-4e85-a0bf-252a896535ea',
+      "user_properties": {
+        "type": "json",
+        "value": "{\"bio\":\"this is hritik\",\"profileLink\":\"twitter.com\"}"
+      },
+      "department_name": "space",
+      "last_name": "test1",
+      "source_profile_picture": "http://test.com",
+      "middle_name": null,
+      "first_name": "test1",
+      "email": "hritikm46@gmail.com",
+      "time_inserted": "2020-09-16T06:53:57.000+00:00"
     },
     {
-    "wid": "2dc44121-e36c-405b-812d-f692a60cbfc6",
-    "user_properties": {
-    "type": "json",
-    "value": "{\"profileLink\":\"https:\/\/www.linkedin.com\/in\/sarika-saluja-197038b\/\",\"bio\":\"\"}"
-    },
-    "department_name": "World Toilet Organization",
-    "last_name": "Saluja",
-    "source_profile_picture": "https://lh4.googleusercontent.com/-S5za-D7QIFU/AAAAAAAAAAI/AAAAAAAAAAA/AMZuucmpm5Nwdf4djDYELPa3WqXTDcrn0A/s96-c/photo.jpg",
-    "middle_name": null,
-    "first_name": "Sarika",
-    "email": "sarika@worldtoilet.org",
-    "time_inserted": "2020-09-17T00:27:23.352+00:00"
+      "wid": "2dc44121-e36c-405b-812d-f692a60cbfc6",
+      "user_properties": {
+        "type": "json",
+        "value": "{\"profileLink\":\"https:\/\/www.linkedin.com\/in\/sarika-saluja-197038b\/\",\"bio\":\"\"}"
+      },
+      "department_name": "World Toilet Organization",
+      "last_name": "Saluja",
+      "source_profile_picture": "https://lh4.googleusercontent.com/-S5za-D7QIFU/AAAAAAAAAAI/AAAAAAAAAAA/AMZuucmpm5Nwdf4djDYELPa3WqXTDcrn0A/s96-c/photo.jpg",
+      "middle_name": null,
+      "first_name": "Sarika",
+      "email": "sarika@worldtoilet.org",
+      "time_inserted": "2020-09-17T00:27:23.352+00:00"
     }
-    ])
+  ])
   isDataFinished$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false)
   isApiLoading$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(true)
   counter = 0
@@ -63,8 +66,10 @@ export class PublicUserViewComponent implements OnInit, OnDestroy {
   error$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false)
   constructor(
     private readonly configSvc: ConfigurationsService,
-    private readonly coreSrvc: PublicUsersCoreService
-    ) {
+    private readonly coreSrvc: PublicUsersCoreService,
+    private pipeData: UserViewSearchPipe
+
+  ) {
     this.pageNavbar = this.configSvc.pageNavBar
   }
 
@@ -72,17 +77,17 @@ export class PublicUserViewComponent implements OnInit, OnDestroy {
     // enable search functionality using search bar
     if (!this.hideGlobalSearch) {
       this.globalSearch.valueChanges.pipe(debounceTime(500), distinctUntilChanged())
-      .subscribe((searchTerm: string) => this.searchUsers(searchTerm))
+        .subscribe((searchTerm: string) => this.searchUsers(searchTerm))
     }
     // trigger first time page load
     this.searchUsers()
   }
 
   searchUsers(q = '') {
-      this.query = q
-      this.page = DEFAULT_PAGE_NUMBER
-      this.offset = (this.page - 1) * BATCH_SIZE
-      this.updateData({ query: this.query, searchSize: BATCH_SIZE, offset: this.offset }, this.HIT_DUMMY_ENDPOINT)
+    this.query = q
+    this.page = DEFAULT_PAGE_NUMBER
+    this.offset = (this.page - 1) * BATCH_SIZE
+    this.updateData({ query: this.query, searchSize: BATCH_SIZE, offset: this.offset }, this.HIT_DUMMY_ENDPOINT)
   }
 
   onScroll(_scrollEvent: IScrollUIEvent) {
@@ -95,40 +100,40 @@ export class PublicUserViewComponent implements OnInit, OnDestroy {
     this.error$.next(false)
     if (dummy) {
       // hit dummy logic
-    if (this.counter <= 3) {
-      const currentEntries = this.apiData$.getValue()
-      console.log("dnsdcsd",currentEntries.push(...[1, 2, 3, 4, 5]))
-      this.apiData$.next(currentEntries)
-      console.log("data entry",this.apiData$)
-      this.counter += 1
-      this.page += 1
-    } else {
-      this.isDataFinished$.next(true)
-    }
-    this.isApiLoading$.next(false)
+      if (this.counter <= 3) {
+        const currentEntries = this.apiData$.getValue()
+        console.log("dnsdcsd", currentEntries.push(...[1, 2, 3, 4, 5]))
+        this.apiData$.next(currentEntries)
+        console.log("data entry", this.apiData$)
+        this.counter += 1
+        this.page += 1
+      } else {
+        this.isDataFinished$.next(true)
+      }
+      this.isApiLoading$.next(false)
     } else {
       // hit original api
       this.coreSrvc.getApiData(query, offset, searchSize)
-      .pipe(
-        catchError((_e: any) => of(null)),
-        tap((data: IPublicUsersResponse | null) => {
-          this.isApiLoading$.next(false)
-          if (data) {
-            console.log("data-entry",data)
-            this.error$.next(false)
-            if (data.DATA.length) {
-              // merge with old data
-              const currentData = this.apiData$.getValue()
-              console.log('currentdata',currentData)
-              this.apiData$.next([...currentData, ...data.DATA])
+        .pipe(
+          catchError((_e: any) => of(null)),
+          tap((data: IPublicUsersResponse | null) => {
+            this.isApiLoading$.next(false)
+            if (data) {
+              console.log("data-entry", data)
+              this.error$.next(false)
+              if (data.DATA.length) {
+                // merge with old data
+                const currentData = this.apiData$.getValue()
+                console.log('currentdata', currentData)
+                this.apiData$.next([...currentData, ...data.DATA])
+              } else {
+                // data empty
+                this.isDataFinished$.next(true)
+              }
             } else {
-              // data empty
-              this.isDataFinished$.next(true)
+              this.error$.next(true)
             }
-          } else {
-            this.error$.next(true)
-          }
-        })
+          })
         ).subscribe()
     }
   }
@@ -137,6 +142,28 @@ export class PublicUserViewComponent implements OnInit, OnDestroy {
     this.apiData$.unsubscribe()
     this.isApiLoading$.unsubscribe()
     this.error$.unsubscribe()
+  }
+
+
+
+  triggerGlobalSearch() {
+    const termToSearch = this.globalSearch.value.trim() ? this.globalSearch.value.trim() : ''
+    this.apiData$.next(this.filterdataForSearch(termToSearch, this.apiData$.getValue()))
+
+  }
+
+  filterdataForSearch(searchedValue: string, apiData: any) {
+    if (!!apiData) {
+      if (!!searchedValue) {
+        const fiteredArr = this.pipeData.transform(apiData, searchedValue);
+        console.log('Filered Data : ', fiteredArr);
+
+        return fiteredArr;
+      } else {
+        return (apiData);
+
+      }
+    }
   }
 
 }
