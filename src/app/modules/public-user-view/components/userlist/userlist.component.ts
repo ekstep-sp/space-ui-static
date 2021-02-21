@@ -5,16 +5,23 @@ import { Component, OnInit, Input, OnChanges } from '@angular/core'
   templateUrl: './userlist.component.html',
   styleUrls: ['./userlist.component.scss'],
 })
-export class UserlistComponent implements OnInit, OnChanges {
+export class UserlistComponent implements OnInit{
   
-  @Input() !userData:any = {} 
+  @Input() !userData:any= {};
+  userdata: any;
+  defaultUserImage = '/widget/assets/avatar-icon-5.jpg';
   constructor() { }
 
   ngOnInit() {
 
   }
-  ngOnChanges(){
-   console.log("userdata",this.userData)
-  }
+  // ngOnChanges(){
+  //   if(!!this.userproperties){
+  //  this.userdata = JSON.parse(this.userproperties);
+  //  console.log("userdata",this.userproperties)
 
+  // }
 }
+  
+
+

@@ -18,7 +18,7 @@
     <!-- </div> -->
 </mat-toolbar>
 <div infiniteScroll [infiniteScrollDistance]="scrollDistance" [infiniteScrollThrottle]="scrollThrottle"
-    (scrolled)="onScroll($event)" class="scroll-infinite w-100 h-100 flex flex-row flex-wrap justify-center relative">
+    (scrolled)="onScroll($event)" class="scroll-infinite w-100 h-100 flex flex-row flex-wrap justify-center">
     <ng-container *ngIf="!(error$ | async)">
         <ng-container *ngIf="(isApiLoading$ | async); else cardTemplate">
             Loading...
