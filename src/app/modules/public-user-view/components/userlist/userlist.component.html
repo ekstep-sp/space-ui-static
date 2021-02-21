@@ -1,6 +1,7 @@
 <div class="content mb-12 relative">
   <mat-card class="rounded-sm profile-card text-center overflow-hidden cursor-pointer">
     <div class="h-24 w-24 mx-auto pt-4 image">
+      <!-- <img src="/src/fusion-assets/profileimage.png"> -->
       <img class="img-width" [src]="(!!userData?.source_profile_picture) ? userData.source_profile_picture : defaultUserImage">    </div>
     <div class="text-center">
       <div class="font-size-18 flex justify-center align-center txt-color">
@@ -11,9 +12,12 @@
        {{userData.department_name}}
       </div>
       <div class ="hovercard">
-        <div class="mt-6">
-         {{userData?.user_properties?.value?.profileLink}}
-        </div>
+        <div class="profile-link">
+          <span>{{userData?.user_properties?.value?.profileLink}}</span>
+         </div>
+         <div class="bio-desc">
+          <span>{{userData?.user_properties?.value?.bio}}</span>
+         </div>
       </div>
     </div>
   </mat-card>

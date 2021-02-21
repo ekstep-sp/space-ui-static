@@ -35,7 +35,7 @@ export class PublicUserViewComponent implements OnInit, OnDestroy{
     },
     department_name: 'space',
     last_name: 'test1',
-    source_profile_picture: 'http://test.com',
+    source_profile_picture: '',
     middle_name: null,
     first_name: 'test1',
     email: 'hritikm46@gmail.com',

@@ -9,7 +9,9 @@ export class UserlistComponent implements OnInit{
   
   @Input() !userData:any= {};
   userdata: any;
-  defaultUserImage = '/widget/assets/avatar-icon-5.jpg';
+
+  defaultUserImage='/assets/images/profile/profileimage.jpg';
+
   constructor() { }
 
   ngOnInit() {
