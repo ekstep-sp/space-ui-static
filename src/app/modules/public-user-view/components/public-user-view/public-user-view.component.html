@@ -18,7 +18,7 @@
     <!-- </div> -->
 </mat-toolbar>
 <div infiniteScroll [infiniteScrollDistance]="scrollDistance" [infiniteScrollThrottle]="scrollThrottle"
-    (scrolled)="onScroll($event)" class="scroll-infinite w-100 h-100">
+    (scrolled)="onScroll($event)" class="scroll-infinite w-100 h-100 flex flex-row flex-wrap justify-center relative">
     <ng-container *ngIf="!(error$ | async)">
         <ng-container *ngIf="(isApiLoading$ | async); else cardTemplate">
             Loading...
@@ -33,11 +33,8 @@
 </div>
 <ng-template #cardTemplate>
     <ng-container *ngFor="let val of (apiData$ | async)">
-        <!-- <div style="border: 1px orange solid; display:flex;
-        padding-left:24px;
-        flex-direction: row;
-        flex-wrap: wrap;"> -->
+
         <ws-userlist></ws-userlist>
-        <!-- </div> -->
+
     </ng-container>
 </ng-template>
