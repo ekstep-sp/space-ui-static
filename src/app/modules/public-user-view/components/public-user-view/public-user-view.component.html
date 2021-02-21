@@ -33,8 +33,6 @@
 </div>
 <ng-template #cardTemplate>
     <ng-container *ngFor="let val of (apiData$ | async)">
-
-        <ws-userlist></ws-userlist>
-
-    </ng-container>
+ <ws-userlist [userData]=val></ws-userlist>
+ </ng-container>
 </ng-template>

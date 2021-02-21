@@ -23,7 +23,37 @@ export class PublicUserViewComponent implements OnInit, OnDestroy {
   HIT_DUMMY_ENDPOINT = true
   scrollDistance = INFINITE_SCROLL_CONSTANTS.DISTANCE
   scrollThrottle = INFINITE_SCROLL_CONSTANTS.THROTTLE
-  apiData$: BehaviorSubject<any[]> = new BehaviorSubject<any[]>([1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13])
+  // apiData$: BehaviorSubject<any[]> = new BehaviorSubject<any[]>([1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13])
+  apiData$: BehaviorSubject<any[]> = new BehaviorSubject<any[]>([ 
+    {
+    "wid": 'acbf4053-c126-4e85-a0bf-252a896535ea',
+    "user_properties": {
+    "type": "json",
+    "value": "{\"bio\":\"this is hritik\",\"profileLink\":\"twitter.com\"}"
+    },
+    "department_name": "space",
+    "last_name": "test1",
+    "source_profile_picture": "http://test.com",
+    "middle_name": null,
+    "first_name": "test1",
+    "email": "hritikm46@gmail.com",
+    "time_inserted": "2020-09-16T06:53:57.000+00:00"
+    },
+    {
+    "wid": "2dc44121-e36c-405b-812d-f692a60cbfc6",
+    "user_properties": {
+    "type": "json",
+    "value": "{\"profileLink\":\"https:\/\/www.linkedin.com\/in\/sarika-saluja-197038b\/\",\"bio\":\"\"}"
+    },
+    "department_name": "World Toilet Organization",
+    "last_name": "Saluja",
+    "source_profile_picture": "https://lh4.googleusercontent.com/-S5za-D7QIFU/AAAAAAAAAAI/AAAAAAAAAAA/AMZuucmpm5Nwdf4djDYELPa3WqXTDcrn0A/s96-c/photo.jpg",
+    "middle_name": null,
+    "first_name": "Sarika",
+    "email": "sarika@worldtoilet.org",
+    "time_inserted": "2020-09-17T00:27:23.352+00:00"
+    }
+    ])
   isDataFinished$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false)
   isApiLoading$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(true)
   counter = 0
@@ -67,8 +97,9 @@ export class PublicUserViewComponent implements OnInit, OnDestroy {
       // hit dummy logic
     if (this.counter <= 3) {
       const currentEntries = this.apiData$.getValue()
-      currentEntries.push(...[1, 2, 3, 4, 5])
+      console.log("dnsdcsd",currentEntries.push(...[1, 2, 3, 4, 5]))
       this.apiData$.next(currentEntries)
+      console.log("data entry",this.apiData$)
       this.counter += 1
       this.page += 1
     } else {
@@ -83,10 +114,12 @@ export class PublicUserViewComponent implements OnInit, OnDestroy {
         tap((data: IPublicUsersResponse | null) => {
           this.isApiLoading$.next(false)
           if (data) {
+            console.log("data-entry",data)
             this.error$.next(false)
             if (data.DATA.length) {
               // merge with old data
               const currentData = this.apiData$.getValue()
+              console.log('currentdata',currentData)
               this.apiData$.next([...currentData, ...data.DATA])
             } else {
               // data empty
