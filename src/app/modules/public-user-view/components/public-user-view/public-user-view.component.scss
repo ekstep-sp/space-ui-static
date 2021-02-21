@@ -21,10 +21,13 @@
       position: absolute;
       top: 0;
     //   right: 0;
-      padding: 6px 8px 0px 0px ;
+      padding: 6px 8px 0px 27px ;
       color: white;
-      cursor: pointer;
-      user-select: none;
+    }
+    &:focus{
+      input{
+        padding-left: 50px !important;
+      }
     }
   }
   .search-container{
@@ -32,10 +35,20 @@
   }
   ::placeholder {
     color: white;
-    padding-left: 2rem;
-
+    padding-left: 3rem;
   }
 
   .span-class{
       flex:2
   }
+.scroll-infinite{
+    margin-top: 58px;
+    margin-bottom:31px;
+}
+@media only screen and (min-width: 280px) and (max-width:350px) {
+.expandSearchGroup input{
+          width: 60%;
+      }
+  }
+
+
