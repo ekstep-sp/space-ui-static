@@ -1,11 +1,10 @@
 <mat-toolbar [color]="pageNavbar.color">
     <ws-widget-btn-page-back [widgetData]="{ url: '/page/home' }"></ws-widget-btn-page-back>
-    <!-- <div > -->
-    <!-- <div> -->
+
     <span class="margin-left-xs text-truncate span-class">
         <span class="visible-xs-inline nav-bar-style" i18n>People</span>
     </span>
-    <!-- </div> -->
+
     <div class="search-container">
         <ng-container>
             <label class="expandSearchGroup">
@@ -15,8 +14,47 @@
             </label>
         </ng-container>
     </div>
-    <!-- </div> -->
+
+    <ng-container *ngIf="(isXSmall$ | async) === true">
+        <div class="maticonallign">
+            <button mat-icon-button (click)="showSearchBar()">
+                <mat-icon class="text-color">search</mat-icon>
+            </button>
+        </div>
+    </ng-container>
+
 </mat-toolbar>
+
+<section class="blogs-container">
+    <div *ngIf="(isXSmall$ | async) === true" class="flex">
+        <mat-card class="card-container" *ngIf="isEnabledSearch === true">
+            <div class="flex">
+
+                <div>
+                    <ng-container>
+                        <label class="expandSearchGroupMobile">
+                            <!-- <div class="flex items-center justify-center w-8 sm:w-16 cursor-pointer"> -->
+                            <mat-icon matSufix class="searchIconMobile">search</mat-icon>
+                            <!-- </div> -->
+                            <input class="forms-control-mobile" type="text" placeholder="Search Users" name="search"
+                                [formControl]="globalSearch">
+                        </label>
+                    </ng-container>
+                </div>
+
+                <div class="align-icon">
+                    <button mat-icon-button (click)="disableSearchbar()">
+                        <mat-icon>close</mat-icon>
+                    </button>
+                </div>
+            </div>
+        </mat-card>
+    </div>
+
+</section>
+
+
+
 
 <div infiniteScroll [infiniteScrollDistance]="scrollDistance" [infiniteScrollThrottle]="scrollThrottle"
     (scrolled)="onScroll($event)" class="scroll-infinite w-100 h-100 flex flex-row flex-wrap justify-center">
@@ -25,9 +63,10 @@
             Loading...
         </ng-container>
     </ng-container>
-    <ng-container *ngIf="(error$ | async)">
+    <div class="flat-error-alert" *ngIf="(error$ | async)">
         Error occured while fetching data
-    </ng-container>
+    </div>
+
 </div>
 <div *ngIf="isLoad">
   <mat-spinner class="spinner" color="primary"></mat-spinner>
