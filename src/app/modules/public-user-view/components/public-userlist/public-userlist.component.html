@@ -10,12 +10,12 @@
 <ng-template #mainCardContent>
   <mat-card class="profile-card text-center overflow-hidden cursor-pointer">
     <div class="flex mx-auto pt-4 image align-center justify-center">
-      <img class="img-width rounded-full h-24 w-24" [src]="userData?.source_profile_picture ? userData.source_profile_picture : defaultUserImage">  
-      </div> 
+      <img class="img-width rounded-full h-24 w-24" [src]="userData?.source_profile_picture ? userData.source_profile_picture : defaultUserImage">
+      </div>
     <div class="text-center mt-2">
-      <div class="font-size-18 flex justify-center align-center txt-color">
+      <div class="font-size-18 flex justify-center align-center break-words txt-color">
         <span class="middle-text mr-2">{{userData?.first_name}}</span>
-        <mat-icon class="mailicon">mail_outline</mat-icon>
+        <mat-icon class="mailicon mr-3">mail_outline</mat-icon>
       </div>
       <div class="font-size-18 org-color mt-2">
        {{userData?.department_name}}

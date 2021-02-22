@@ -13,6 +13,11 @@ $card-height: 215px;
   }
    .middle-text {
      line-height: 1.5;
+     word-break: break-word;
+     hyphens: auto;
+      @include breakpoint-xs {
+        padding-left:4px;
+      }
    }
   .txt-color{
     color: #696466 !important;
