@@ -28,7 +28,7 @@ export class PublicUsersCoreService {
       }
       console.log('returning api data as ', result)
       return of(result).pipe(delay(1000))
-      }
+    }
     let requestParams = new HttpParams().set('searchSize', `${searchSize}`)
     requestParams = requestParams.append('offset', `${offset}`)
     if (searchQuery && searchQuery.length) {
