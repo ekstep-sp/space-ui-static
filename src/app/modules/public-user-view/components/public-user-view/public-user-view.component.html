@@ -4,7 +4,7 @@
     <span class="margin-left-xs text-truncate span-class">
         <span class="visible-xs-inline nav-bar-style" i18n>People</span>
     </span>
-
+    <!-- for search bar in  web view -->
     <div class="search-container">
         <ng-container>
             <label class="expandSearchGroup">
@@ -22,25 +22,22 @@
             </button>
         </div>
     </ng-container>
-
 </mat-toolbar>
+
 <!-- for search bar in  mobile view -->
 <section class="blogs-container">
     <div *ngIf="(isXSmall$ | async) === true" class="flex">
         <mat-card class="card-container" *ngIf="isEnabledSearch === true">
             <div class="flex">
-
                 <div>
                     <ng-container>
                         <label class="expandSearchGroupMobile">
-
                             <mat-icon class="searchIconMobile">search</mat-icon>
                             <input class="forms-control-mobile" type="text" placeholder="Search Users" name="search"
                                 [formControl]="globalSearch">
                         </label>
                     </ng-container>
                 </div>
-
                 <div class="align-icon">
                     <button mat-icon-button (click)="disableSearchbar()">
                         <mat-icon>close</mat-icon>
@@ -49,10 +46,7 @@
             </div>
         </mat-card>
     </div>
-
 </section>
-
-
 
 <div class="wrapper">
     <div infiniteScroll [infiniteScrollDistance]="scrollDistance" [infiniteScrollThrottle]="scrollThrottle"

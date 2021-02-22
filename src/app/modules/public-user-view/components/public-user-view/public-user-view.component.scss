@@ -31,15 +31,14 @@
         .searchIcon{
             position: absolute;
             top: 0;
-          //   right: 0;
             padding: 8px 8px 0px 22px ;
             color: white;
           }
-    &:focus{
-    input{
-    padding-left: 50px !important;
-    }
-    }
+        &:focus{
+        input{
+        padding-left: 50px !important;
+            }
+        }
     }
 
 
@@ -104,7 +103,6 @@
       @media only screen and (min-width: 760px) and (max-width:1024px) {
         .search-container{
             padding-right: 0;
-        //    border: 1px red solid;
           }
 
       }
@@ -119,6 +117,9 @@
             input{
             width: 90px !important;
             }
+        }
+        .blogs-container{
+            padding: 16px !important;
         }
     }
 
