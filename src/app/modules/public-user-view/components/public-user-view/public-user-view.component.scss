@@ -66,17 +66,10 @@ line-height: 22px;
     margin: 0 auto 20px auto;
   }
   .spinner {
-  position: fixed;
+  left: 50%;
   z-index: 999;
   height: 2em;
   width: 2em;
-  overflow: visible;
-  margin: auto;
-  top: 0;
-  left: 0;
-  bottom: 0;
-  right: 0;
-
     }
   
   @media only screen and (min-width: 360px) and (max-width:510px) {

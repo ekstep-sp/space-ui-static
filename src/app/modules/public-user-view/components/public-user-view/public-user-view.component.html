@@ -29,7 +29,9 @@
         Error occured while fetching data
     </ng-container>
 </div>
-
+<div *ngIf="isLoad">
+  <mat-spinner class="spinner" color="primary"></mat-spinner>
+    </div>
 <div class="alertmsg">
 <div class="flat-no-data-alert flex flex-row" *ngIf="(isDataFinished$ | async)">
     Data has finished
@@ -37,9 +39,6 @@
 </div>
 <ng-template #cardTemplate>
     <ng-container *ngFor="let card of (apiData$ | async)">
- <ws-userlist [userData]=card></ws-userlist>
+ <ws-public-user-userlist [userData]=card></ws-public-user-userlist>
  </ng-container>
 </ng-template>
-<div *ngIf="isLoad">
-  <mat-spinner class="spinner" color="primary"></mat-spinner>
-    </div>
