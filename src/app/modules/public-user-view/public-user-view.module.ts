@@ -4,7 +4,7 @@ import { InfiniteScrollModule } from 'ngx-infinite-scroll'
 import { PublicUserViewRoutingModule } from './public-user-view-routing.module'
 import { PublicUserViewComponent } from './components/public-user-view/public-user-view.component'
 import { MatCardModule } from '@angular/material/card'
-import { MatToolbarModule } from '@angular/material'
+import { MatToolbarModule, MatProgressSpinnerModule } from '@angular/material'
 
 import { BtnPageBackModule } from '@ws-widget/collection'
 import { MatIconModule } from '@angular/material/icon'
@@ -24,6 +24,7 @@ import { UserlistComponent } from './components/userlist/userlist.component'
     MatToolbarModule,
     BtnPageBackModule,
     ReactiveFormsModule,
+    MatProgressSpinnerModule,
   ],
 })
 export class PublicUserViewModule { }

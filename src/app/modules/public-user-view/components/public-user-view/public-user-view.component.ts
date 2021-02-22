@@ -19,7 +19,8 @@ interface IScrollUIEvent {
 export class PublicUserViewComponent implements OnInit, OnDestroy{
   pageNavbar: Partial<NsPage.INavBackground> = this.configSvc.pageNavBar
   globalSearch = new FormControl('')
-  userproperties: any;
+  isLoad = false
+  userproperties: any
   hideGlobalSearch = false
   HIT_DUMMY_ENDPOINT = true
   scrollDistance = INFINITE_SCROLL_CONSTANTS.DISTANCE
@@ -98,6 +99,7 @@ export class PublicUserViewComponent implements OnInit, OnDestroy{
     this.isApiLoading$.next(true)
     this.error$.next(false)
     if (dummy) {
+      this.isLoad = true
       // hit dummy logic
     if (this.counter <= 3) {
       const currentEntries = this.apiData$.getValue()
@@ -107,10 +109,12 @@ export class PublicUserViewComponent implements OnInit, OnDestroy{
       this.page += 1
     } else {
       this.isDataFinished$.next(true)
+      this.isLoad = false
     }
     this.isApiLoading$.next(false)
     } else {
       // hit original api
+      this.isLoad = true
       this.coreSrvc.getApiData(query, offset, searchSize)
       .pipe(
         catchError((_e: any) => of(null)),
@@ -127,6 +131,7 @@ export class PublicUserViewComponent implements OnInit, OnDestroy{
               // })
               // console.log('currentdata',this.apiData$.getValue())
               this.apiData$.next([...currentData, ...data.DATA])
+              this.isLoad = false
             } else {
               // data empty
               this.isDataFinished$.next(true)

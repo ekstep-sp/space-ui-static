@@ -46,13 +46,39 @@ line-height: 22px;
   ::placeholder {
     color: white;
     // padding-left: 3rem;
-   
 
   }
 
   .span-class{
       flex:2
   }
+  .flat-no-data-alert {
+    padding-left: 40px;
+    z-index: 10;
+    min-height: 65px;
+    border-radius: 4px;
+    align-items: center;
+    box-shadow: 1px 1px 10px 0 #FFD180;
+    background-color: #FFD180;
+  }
+  .alertmsg{
+    width: 89%;
+    margin: 0 auto 20px auto;
+  }
+  .spinner {
+  position: fixed;
+  z-index: 999;
+  height: 2em;
+  width: 2em;
+  overflow: visible;
+  margin: auto;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+
+    }
+  
   @media only screen and (min-width: 360px) and (max-width:510px) {
     .search-container{
         padding-right: 0;
