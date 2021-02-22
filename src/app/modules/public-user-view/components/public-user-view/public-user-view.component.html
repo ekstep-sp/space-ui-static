@@ -56,7 +56,8 @@
 
 
 <div infiniteScroll [infiniteScrollDistance]="scrollDistance" [infiniteScrollThrottle]="scrollThrottle"
-    (scrolled)="onScroll($event)" class="scroll-infinite w-100 h-100 flex flex-row flex-wrap justify-center">
+    (scrolled)="onScroll($event)"
+    class="scroll-infinite w-100 h-100 flex flex-row flex-wrap justify-center parent-card-container">
     <ng-container *ngIf="!(error$ | async)">
         <ng-container *ngIf="(isApiLoading$ | async); else cardTemplate">
             Loading...

@@ -1,7 +1,7 @@
 import { HttpClient, HttpParams } from '@angular/common/http'
 import { Injectable } from '@angular/core'
 import { Observable, of } from 'rxjs'
-import { delay} from 'rxjs/operators'
+import { delay } from 'rxjs/operators'
 import { IFormattedUserProperties, IPublicUsersResponse, IRawUserProperties } from '../models/public-users.interface'
 import { ENDPOINT_URL, BATCH_SIZE, DEFAULT_OFFSET, DUMMY_DATA } from './../constants'
 @Injectable({
@@ -23,7 +23,7 @@ export class PublicUsersCoreService {
         result = { ...DUMMY_DATA, DATA: [] }
       }
       return of(result).pipe(delay(1000))
-      }
+    }
     let requestParams = new HttpParams().set('searchSize', `${searchSize}`)
     requestParams = requestParams.append('offset', `${offset}`)
     if (searchQuery && searchQuery.length) {
