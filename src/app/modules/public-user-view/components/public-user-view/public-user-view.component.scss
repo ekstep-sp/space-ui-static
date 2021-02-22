@@ -34,8 +34,7 @@
               caret-color: white;
               padding-right: 32px;
               padding-bottom: 8px;
-            }
-    
+            }   
             .searchIcon{
                 position: absolute;
                 top: 0;
@@ -48,12 +47,12 @@
                 }
             }
         }
-
       }
 
       input.forms-control{
         width: 100%;
         padding-left: 55px !important;
+        color: white;
       }
       ::placeholder {
         color: white;
@@ -79,7 +78,6 @@
             margin-right: 0px;
             margin-left: auto;
           }
-
         .expandSearchGroupMobile{
             display: inline-block;
             position: relative;
@@ -118,9 +116,7 @@
                 padding: 8px 8px 0px 22px ;
                 color: black !important;
               }
-
           }
-
     }
 
     input.forms-control-mobile{
@@ -184,7 +180,6 @@
 }
 
 .wrapper{
-
     .fix-margin{
         grid-column-gap: 24px;
         grid-row-gap: 38px;
@@ -202,11 +197,9 @@
         width: 80%;
         margin: auto;
       }
-
       .alertmsg{
         width: 89%;
         margin: 0 auto 20px auto;
-
         .flat-no-data-alert {
             padding-left: 40px;
             z-index: 10;
@@ -214,12 +207,9 @@
             border-radius: 4px;
             align-items: center;
             box-shadow: 1px 1px 10px 0 #FFD180;
-            background-color: #FFD180;
-        
+            background-color: #FFD180;       
             }
-
-      }
-          
+      }         
 }
 
   .spinner {
