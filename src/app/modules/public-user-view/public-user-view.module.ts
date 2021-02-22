@@ -10,10 +10,10 @@ import { BtnPageBackModule } from '@ws-widget/collection'
 import { MatIconModule } from '@angular/material/icon'
 import { ReactiveFormsModule } from '@angular/forms'
 import { PublicUsersCoreService } from './services/public-users-core.service'
-import { PublicUserUserlistComponent } from './components/public-user-userlist/public-user-userlist.component'
+import { PublicUserlistComponent } from './components/public-userlist/public-userlist.component'
 
 @NgModule({
-  declarations: [PublicUserViewComponent,PublicUserUserlistComponent],
+  declarations: [PublicUserViewComponent, PublicUserlistComponent],
   providers: [PublicUsersCoreService],
   imports: [
     CommonModule,

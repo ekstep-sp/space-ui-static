@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit} from '@angular/core'
+import { Component, OnDestroy, OnInit } from '@angular/core'
 import { FormControl } from '@angular/forms'
 // import { Router } from '@angular/router';
 import { NsPage, ConfigurationsService } from '@ws-widget/utils'
@@ -16,7 +16,7 @@ interface IScrollUIEvent {
   templateUrl: './public-user-view.component.html',
   styleUrls: ['./public-user-view.component.scss'],
 })
-export class PublicUserViewComponent implements OnInit, OnDestroy{
+export class PublicUserViewComponent implements OnInit, OnDestroy {
   pageNavbar: Partial<NsPage.INavBackground> = this.configSvc.pageNavBar
   globalSearch = new FormControl('')
   isLoad = false
@@ -28,37 +28,37 @@ export class PublicUserViewComponent implements OnInit, OnDestroy{
   // apiData$: BehaviorSubject<any[]> = new BehaviorSubject<any[]>([1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13])
   apiData$: BehaviorSubject<any[]> = new BehaviorSubject<any[]>([
     {
-    wid: 'acbf4053-c126-4e85-a0bf-252a896535ea',
-    user_properties: {
-    type: 'json',
-    value:
-    // tslint:disable-next-line: max-line-length
-    '{"bio":"this is hritik and it s ahuge abijakdawk adkja auabsd awdbjca awda  alwkd afnajnkadbkbg awbfakj afa oadbjaks akbfak akbfaln akba ahbasf rhf askrbg akjbawdkbj asjkbae gjbk as as as jdk asndflkn this is hritik and it s ahuge abijakdawk adkja auabsd awdbjca awda  alwkd afnajnkadbkbg awbfakj afa oadbjaks","profileLink":"twitter.com"}',
-    },
-    department_name: 'space',
-    last_name: 'test1',
-    source_profile_picture: '',
-    middle_name: null,
-    first_name: 'test1',
-    email: 'hritikm46@gmail.com',
-    time_inserted: '2020-09-16T06:53:57.000+00:00',
+      wid: 'acbf4053-c126-4e85-a0bf-252a896535ea',
+      user_properties: {
+        type: 'json',
+        value:
+          // tslint:disable-next-line: max-line-length
+          '{"bio":"this is hritik and it s ahuge abijakdawk adkja auabsd awdbjca awda alwkd afnajnkadbkbg awbfakj afa oadbjaks akbfak akbfaln akba ahbasf rhf askrbg akjbawdkbj asjkbae gjbk as as as jdk asndflkn this is hritik and it s ahuge abijakdawk adkja auabsd awdbjca awda alwkd afnajnkadbkbg awbfakj afa oadbjaks","profileLink":"twitter.com"}',
+      },
+      department_name: 'space',
+      last_name: 'test1',
+      source_profile_picture: '',
+      middle_name: null,
+      first_name: 'test1',
+      email: 'hritikm46@gmail.com',
+      time_inserted: '2020-09-16T06:53:57.000+00:00',
     },
     {
-    wid: '2dc44121-e36c-405b-812d-f692a60cbfc6',
-    user_properties: {
-    type: 'json',
-    value: '{"profileLink":"https:\/\/www.linkedin.com\/in\/sarika-saluja-197038b\/","bio":""}',
+      wid: '2dc44121-e36c-405b-812d-f692a60cbfc6',
+      user_properties: {
+        type: 'json',
+        value: '{"profileLink":"https:\/\/www.linkedin.com\/in\/sarika-saluja-197038b\/","bio":""}',
+      },
+      department_name: 'World Toilet Organization',
+      last_name: 'Saluja',
+      // tslint:disable-next-line:max-line-length
+      source_profile_picture: 'https://lh4.googleusercontent.com/-S5za-D7QIFU/AAAAAAAAAAI/AAAAAAAAAAA/AMZuucmpm5Nwdf4djDYELPa3WqXTDcrn0A/s96-c/photo.jpg',
+      middle_name: null,
+      first_name: 'Sarika',
+      email: 'sarika@worldtoilet.org',
+      time_inserted: '2020-09-17T00:27:23.352+00:00',
     },
-    department_name: 'World Toilet Organization',
-    last_name: 'Saluja',
-    // tslint:disable-next-line:max-line-length
-    source_profile_picture: 'https://lh4.googleusercontent.com/-S5za-D7QIFU/AAAAAAAAAAI/AAAAAAAAAAA/AMZuucmpm5Nwdf4djDYELPa3WqXTDcrn0A/s96-c/photo.jpg',
-    middle_name: null,
-    first_name: 'Sarika',
-    email: 'sarika@worldtoilet.org',
-    time_inserted: '2020-09-17T00:27:23.352+00:00',
-    },
-    ])
+  ])
   isDataFinished$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false)
   isApiLoading$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(true)
   counter = 0
@@ -69,7 +69,7 @@ export class PublicUserViewComponent implements OnInit, OnDestroy{
   constructor(
     private readonly configSvc: ConfigurationsService,
     private readonly coreSrvc: PublicUsersCoreService
-    ) {
+  ) {
     this.pageNavbar = this.configSvc.pageNavBar
   }
 
@@ -77,17 +77,17 @@ export class PublicUserViewComponent implements OnInit, OnDestroy{
     // enable search functionality using search bar
     if (!this.hideGlobalSearch) {
       this.globalSearch.valueChanges.pipe(debounceTime(500), distinctUntilChanged())
-      .subscribe((searchTerm: string) => this.searchUsers(searchTerm))
+        .subscribe((searchTerm: string) => this.searchUsers(searchTerm))
     }
     // trigger first time page load
     this.searchUsers()
     this.userentry()
   }
   searchUsers(q = '') {
-      this.query = q
-      this.page = DEFAULT_PAGE_NUMBER
-      this.offset = (this.page - 1) * BATCH_SIZE
-      this.updateData({ query: this.query, searchSize: BATCH_SIZE, offset: this.offset }, this.HIT_DUMMY_ENDPOINT)
+    this.query = q
+    this.page = DEFAULT_PAGE_NUMBER
+    this.offset = (this.page - 1) * BATCH_SIZE
+    this.updateData({ query: this.query, searchSize: BATCH_SIZE, offset: this.offset }, this.HIT_DUMMY_ENDPOINT)
   }
 
   onScroll(_scrollEvent: IScrollUIEvent) {
@@ -101,45 +101,45 @@ export class PublicUserViewComponent implements OnInit, OnDestroy{
     if (dummy) {
       this.isLoad = true
       // hit dummy logic
-    if (this.counter <= 3) {
-      const currentEntries = this.apiData$.getValue()
-      currentEntries.push(...[1, 2, 3, 4, 5])
-      this.apiData$.next(currentEntries)
-      this.counter += 1
-      this.page += 1
-    } else {
-      this.isDataFinished$.next(true)
-      this.isLoad = false
-    }
-    this.isApiLoading$.next(false)
+      if (this.counter <= 3) {
+        const currentEntries = this.apiData$.getValue()
+        currentEntries.push(...[1, 2, 3, 4, 5])
+        this.apiData$.next(currentEntries)
+        this.counter += 1
+        this.page += 1
+      } else {
+        this.isDataFinished$.next(true)
+        this.isLoad = false
+      }
+      this.isApiLoading$.next(false)
     } else {
       // hit original api
       this.isLoad = true
       this.coreSrvc.getApiData(query, offset, searchSize)
-      .pipe(
-        catchError((_e: any) => of(null)),
-        tap((data: IPublicUsersResponse | null) => {
-          this.isApiLoading$.next(false)
-          if (data) {
-            this.error$.next(false)
-            if (data.DATA.length) {
-              // merge with old data
-              const currentData = this.apiData$.getValue()
-              // tslint:disable-next-line:whitespace
-              // this.apiData$.getValue().forEach(data=>{
-              //   data.user_properties.value= JSON.parse(data.user_properties.value)
-              // })
-              // console.log('currentdata',this.apiData$.getValue())
-              this.apiData$.next([...currentData, ...data.DATA])
-              this.isLoad = false
+        .pipe(
+          catchError((_e: any) => of(null)),
+          tap((data: IPublicUsersResponse | null) => {
+            this.isApiLoading$.next(false)
+            if (data) {
+              this.error$.next(false)
+              if (data.DATA.length) {
+                // merge with old data
+                const currentData = this.apiData$.getValue()
+                // tslint:disable-next-line:whitespace
+                // this.apiData$.getValue().forEach(data=>{
+                // data.user_properties.value= JSON.parse(data.user_properties.value)
+                // })
+                // console.log('currentdata',this.apiData$.getValue())
+                this.apiData$.next([...currentData, ...data.DATA])
+                this.isLoad = false
+              } else {
+                // data empty
+                this.isDataFinished$.next(true)
+              }
             } else {
-              // data empty
-              this.isDataFinished$.next(true)
+              this.error$.next(true)
             }
-          } else {
-            this.error$.next(true)
-          }
-        })
+          })
         ).subscribe()
     }
 
@@ -147,7 +147,7 @@ export class PublicUserViewComponent implements OnInit, OnDestroy{
   userentry() {
     this.apiData$.getValue().forEach(data => {
       if (!!data.user_properties) {
-      data.user_properties.value = JSON.parse(data.user_properties.value)
+        data.user_properties.value = JSON.parse(data.user_properties.value)
       }
     })
     // tslint:disable-next-line:no-console

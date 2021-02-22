@@ -9,9 +9,9 @@
     <div class="search-container">
         <ng-container>
             <label class="expandSearchGroup">
-                <mat-icon matPrefix class="searchIcon">search</mat-icon>
-                <input class="forms-control" type="text" placeholder="Search Users" name="search"
-                    [formControl]="globalSearch">
+                <mat-icon matPrefix class="searchIcon" (click)="triggerGlobalSearch()">search</mat-icon>
+                <input class="forms-control" (keyup.enter)="triggerGlobalSearch()" type="text"
+                    placeholder="Search Users" name="search" [formControl]="globalSearch">
             </label>
         </ng-container>
     </div>
@@ -33,12 +33,12 @@
   <mat-spinner class="spinner" color="primary"></mat-spinner>
     </div>
 <div class="alertmsg">
-<div class="flat-no-data-alert flex flex-row" *ngIf="(isDataFinished$ | async)">
-    Data has finished
-</div>
+    <div class="flat-no-data-alert flex flex-row" *ngIf="(isDataFinished$ | async)">
+        Data has finished
+    </div>
 </div>
 <ng-template #cardTemplate>
     <ng-container *ngFor="let card of (apiData$ | async)">
- <ws-public-user-userlist [userData]=card></ws-public-user-userlist>
+ <ws-public-userlist [userData]=card></ws-public-userlist>
  </ng-container>
 </ng-template>

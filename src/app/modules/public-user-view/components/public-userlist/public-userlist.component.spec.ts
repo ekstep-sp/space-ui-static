@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { PublicUserUserlistComponent } from './public-user-userlist.component';
+import { PublicUserlistComponent } from './public-userlist.component';
 
-describe('PublicUserUserlistComponent', () => {
-  let component: PublicUserUserlistComponent;
-  let fixture: ComponentFixture<PublicUserUserlistComponent>;
+describe('PublicUserlistComponent', () => {
+  let component: PublicUserlistComponent;
+  let fixture: ComponentFixture<PublicUserlistComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ PublicUserUserlistComponent ]
+      declarations: [ PublicUserlistComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(PublicUserUserlistComponent);
+    fixture = TestBed.createComponent(PublicUserlistComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
