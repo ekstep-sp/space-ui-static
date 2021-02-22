@@ -1,8 +1,8 @@
 import { Component, OnDestroy, OnInit } from '@angular/core'
 import { FormControl } from '@angular/forms'
 // import { Router } from '@angular/router';
-import { NsPage, ConfigurationsService } from '@ws-widget/utils'
-import { BehaviorSubject, of } from 'rxjs'
+import { NsPage, ConfigurationsService, ValueService } from '@ws-widget/utils'
+import { BehaviorSubject, Observable, of } from 'rxjs'
 import { catchError, debounceTime, distinctUntilChanged, tap } from 'rxjs/operators'
 import { PublicUsersCoreService } from '../../services/public-users-core.service'
 import { BATCH_SIZE, DEFAULT_OFFSET, DEFAULT_PAGE_NUMBER, DEFAULT_QUERY, INFINITE_SCROLL_CONSTANTS } from './../../constants'
@@ -23,6 +23,10 @@ export class PublicUserViewComponent implements OnInit, OnDestroy {
   userproperties: any
   hideGlobalSearch = false
   HIT_DUMMY_ENDPOINT = true
+  isXSmall$: Observable<boolean>
+  isEnabledSearch = false
+
+
   scrollDistance = INFINITE_SCROLL_CONSTANTS.DISTANCE
   scrollThrottle = INFINITE_SCROLL_CONSTANTS.THROTTLE
   // apiData$: BehaviorSubject<any[]> = new BehaviorSubject<any[]>([1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13])
@@ -68,9 +72,11 @@ export class PublicUserViewComponent implements OnInit, OnDestroy {
   error$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false)
   constructor(
     private readonly configSvc: ConfigurationsService,
-    private readonly coreSrvc: PublicUsersCoreService
+    private readonly coreSrvc: PublicUsersCoreService,
+    private valueSvc: ValueService,
   ) {
     this.pageNavbar = this.configSvc.pageNavBar
+    this.isXSmall$ = this.valueSvc.isXSmall$
   }
 
   ngOnInit() {
@@ -153,6 +159,18 @@ export class PublicUserViewComponent implements OnInit, OnDestroy {
     // tslint:disable-next-line:no-console
     console.log('currentdata', this.apiData$.getValue())
   }
+
+
+  showSearchBar() {
+
+    this.isEnabledSearch = true
+
+  }
+  disableSearchbar() {
+
+    this.isEnabledSearch = false
+  }
+
 
   ngOnDestroy() {
     this.apiData$.unsubscribe()

@@ -1,10 +1,180 @@
-.nav-bar-style{
+@import 'ws-vars';
+@import 'ws-mixins';
+@import 'ws-common';
+
+    .nav-bar-style{
     font-style: normal;
-font-weight: 600;
-font-size: 24px;
-line-height: 22px;
+    font-weight: 600;
+    font-size: 24px;
+    line-height: 22px;
+    }
+    .expandSearchGroup{
+        display: inline-block;
+        position: relative;
+        overflow: hidden;
+        border: transparent;
+        input{
+          border:1px solid #cccccc;
+          background: content-box;
+          text-decoration: none;
+          border-radius: 10px;
+          padding-top: 8px ;
+          outline: none;
+          width:200px;
+          height: 21px;
+          display:flex;
+          caret-color: white;
+          padding-right: 32px;
+          padding-bottom: 8px;
+        }
+    
+        .searchIcon{
+            position: absolute;
+            top: 0;
+          //   right: 0;
+            padding: 8px 8px 0px 22px ;
+            color: white;
+          }
+    &:focus{
+    input{
+    padding-left: 50px !important;
+    }
+    }
+    }
+
+
+
+    .search-container{
+        padding-right: 1.5rem;
+        padding-top: 8px;
+      }
+
+      input.forms-control{
+        width: 100%;
+        padding-left: 55px !important;
+      }
+      ::placeholder {
+        color: white;
+        // padding-left: 3rem;
+       
+    
+      }
+      .span-class{
+          flex:2
+      }
+    
+      .align-icon {
+        margin-right: 0px;
+        margin-left: auto;
+      }
+
+
+      .blogs-container {
+        // max-width: 900px;
+        width: 80%;
+        margin: auto;
+        padding: $size-m $size-s;
+        .blog-content {
+          @include breakpoint-xs {
+            width: 80%;
+          }
+        }
+    }
+      @media only screen and (max-width:510px) {
+        .search-container{
+            display: none;
+       
+          }
+          ::placeholder{
+            color: black !important;
+            // padding-left: 3rem;
+          
+          }
+        
+       
+        
+      }
+    
+      .allign-search-icon{
+          display: flex;
+          justify-content: space-between;
+      }
+      
+      @media only screen and (min-width: 760px) and (max-width:1024px) {
+        .search-container{
+            padding-right: 0;
+        //    border: 1px red solid;
+          }
+        
+      }
+    .scroll-infinite{
+        margin-top: 58px;
+        margin-bottom:31px;
+    }
+    @media only screen and (min-width: 280px) and (max-width:310px) {
+        .expandSearchGroupMobile  {
+            input{
+            width: 90px !important;
+            }
+        }
+    }
+
+    @media screen and (max-width: 768px) {
+    
+        .maticonallign {
+        
+          overflow: hidden;
+        }
+    }
+
+    @media screen and (max-width: 375px) {
+    
+        .maticonallign {
+          // border: thick double yellow;
+          overflow-x: hidden;
+        }
+    }
+
+    .search-container-mobile{
+   
+        padding-right: 1.5rem;
+        padding-top: 8px;
+      
+
 }
-.expandSearchGroup{
+.mat-card.blogs-containers{
+    padding: 16px 0px 16px 0px !important;
+    
+
+}
+
+
+
+.mat-card.card-container{
+    width: 90%;
+    margin: auto;
+    // border: 1px red solid;
+}
+.searchIconMobile{
+    position: absolute;
+    top: 0;
+  //   right: 0;
+    padding: 8px 8px 0px 22px ;
+    color: black !important;
+  }
+
+
+  input.forms-control-mobile{
+    caret-color: black !important;
+    width: 100%;
+    padding-left: 55px !important;
+
+
+}
+
+
+
+.expandSearchGroupMobile{
     display: inline-block;
     position: relative;
     overflow: hidden;
@@ -13,13 +183,13 @@ line-height: 22px;
       border:1px solid #cccccc;
       background: content-box;
       text-decoration: none;
-      border-radius: 4px;
+      border-radius: 10px;
       padding-top: 8px ;
       outline: none;
-      width:200px;
+      width:120px;
+      height: 21px;
       display:flex;
       caret-color: white;
-    //   padding-left: 2rem;
       padding-right: 32px;
       padding-bottom: 8px;
     }
@@ -27,7 +197,7 @@ line-height: 22px;
       position: absolute;
       top: 0;
     //   right: 0;
-      padding: 6px 8px 0px 27px ;
+      padding: 8px 8px 0px 22px ;
       color: white;
     }
     &:focus{
@@ -36,23 +206,15 @@ line-height: 22px;
       }
     }
   }
-  .search-container{
-    padding-right: 1.5rem;
-  }
-  input.forms-control{
-    width: 100%;
-    padding-left: 55px !important;
-  }
-  ::placeholder {
-    color: white;
-    // padding-left: 3rem;
 
-  }
 
-  .span-class{
-      flex:2
-  }
-  .flat-no-data-alert {
+
+
+
+
+
+
+    .flat-no-data-alert {
     padding-left: 40px;
     z-index: 10;
     min-height: 65px;
@@ -60,76 +222,43 @@ line-height: 22px;
     align-items: center;
     box-shadow: 1px 1px 10px 0 #FFD180;
     background-color: #FFD180;
-  }
-  .alertmsg{
+    }
+    .alertmsg{
     width: 89%;
     margin: 0 auto 20px auto;
-  }
-  .spinner {
-  position: fixed;
-  z-index: 999;
-  height: 2em;
-  width: 2em;
-  overflow: visible;
-  margin: auto;
-  top: 0;
-  left: 0;
-  bottom: 0;
-  right: 0;
-
     }
-  
-  @media only screen and (min-width: 360px) and (max-width:510px) {
-    .search-container{
-        padding-right: 0;
-    //    border: 1px red solid;
-      }
-      .expandSearchGroup input{
-          width:75%;
-          padding-right: 0;
-      }
-      input.forms-control {
-        width: 100%;
-        padding-left: 30px !important;
-    }
-    .expandSearchGroup .searchIcon{
-        padding: 6px 8px 0px 6px;
-
-      }
-  }
-  @media only screen and (min-width: 760px) and (max-width:1024px) {
-    .search-container{
-        padding-right: 0;
-    //    border: 1px red solid;
-      }
+    .spinner {
+    position: fixed;
+    z-index: 999;
+    height: 2em;
+    width: 2em;
+    overflow: visible;
+    margin: auto;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
     
-  }
-.scroll-infinite{
+    }
+    
+   
+    @media only screen and (min-width: 760px) and (max-width:1024px) {
+    .search-container{
+    padding-right: 0;
+    // border: 1px red solid;
+    }
+    
+    }
+    .scroll-infinite{
     padding-top: 58px;
     padding-bottom:160px;
-}
-@media only screen and (min-width: 280px) and (max-width:350px) {
-.expandSearchGroup input{
-          width: 95%;
-          padding-right: 0;
-      }
-      .expandSearchGroup .searchIcon{
-        padding: 6px 8px 0px 11px;
-
-      }
-      .search-container{
-        padding-right: 0;
-      
-      }
-      ::placeholder {
-        color: white;
-        padding-left: 3rem;
-      }
-      input.forms-control{
-        width: 100%;
-         padding-left: 0 !important; 
     }
-      
-  }
+  
+
+
+
+
+
+
 
 
