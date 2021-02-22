@@ -64,9 +64,6 @@
     <div class="flat-error-alert" *ngIf="(error$ | async)">
         Error occured while fetching data
     </div>
-    <!-- <div *ngIf="isLoad">
-    <mat-spinner class="spinner" color="primary"></mat-spinner>
-</div> -->
     <div class="alertmsg" *ngIf="(isDataFinished$ | async)">
         <div class="flat-no-data-alert flex flex-row">
             No more Users

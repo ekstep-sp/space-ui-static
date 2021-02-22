@@ -54,8 +54,6 @@ $card-height: 215px;
     height: $card-height;
     width:340px;
     background: inherit !important;
-    // display: flex;
-    // flex-wrap: wrap;
     @include breakpoint-xs {
       width:300px;
     }
