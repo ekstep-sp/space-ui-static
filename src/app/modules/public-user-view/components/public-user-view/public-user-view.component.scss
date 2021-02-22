@@ -13,10 +13,11 @@ line-height: 22px;
       border:1px solid #cccccc;
       background: content-box;
       text-decoration: none;
-      border-radius: 4px;
+      border-radius: 10px;
       padding-top: 8px ;
       outline: none;
       width:200px;
+      height: 21px;
       display:flex;
       caret-color: white;
       padding-right: 32px;
@@ -26,7 +27,7 @@ line-height: 22px;
       position: absolute;
       top: 0;
     //   right: 0;
-      padding: 6px 8px 0px 27px ;
+      padding: 8px 8px 0px 22px ;
       color: white;
     }
     &:focus{
