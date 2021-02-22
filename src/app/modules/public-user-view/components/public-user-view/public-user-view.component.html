@@ -14,7 +14,7 @@
             </label>
         </ng-container>
     </div>
-
+    <!-- for search bar in  mobile view -->
     <ng-container *ngIf="(isXSmall$ | async) === true">
         <div class="maticonallign">
             <button mat-icon-button (click)="showSearchBar()">
@@ -24,7 +24,7 @@
     </ng-container>
 
 </mat-toolbar>
-
+<!-- for search bar in  mobile view -->
 <section class="blogs-container">
     <div *ngIf="(isXSmall$ | async) === true" class="flex">
         <mat-card class="card-container" *ngIf="isEnabledSearch === true">
@@ -33,9 +33,8 @@
                 <div>
                     <ng-container>
                         <label class="expandSearchGroupMobile">
-                            <!-- <div class="flex items-center justify-center w-8 sm:w-16 cursor-pointer"> -->
-                            <mat-icon matSufix class="searchIconMobile">search</mat-icon>
-                            <!-- </div> -->
+
+                            <mat-icon class="searchIconMobile">search</mat-icon>
                             <input class="forms-control-mobile" type="text" placeholder="Search Users" name="search"
                                 [formControl]="globalSearch">
                         </label>
@@ -69,8 +68,8 @@
 
 </div>
 <div *ngIf="isLoad">
-  <mat-spinner class="spinner" color="primary"></mat-spinner>
-    </div>
+    <mat-spinner class="spinner" color="primary"></mat-spinner>
+</div>
 <div class="alertmsg">
     <div class="flat-no-data-alert flex flex-row" *ngIf="(isDataFinished$ | async)">
         Data has finished
@@ -78,6 +77,6 @@
 </div>
 <ng-template #cardTemplate>
     <ng-container *ngFor="let card of (apiData$ | async)">
- <ws-public-userlist [userData]=card></ws-public-userlist>
- </ng-container>
+        <ws-public-userlist [userData]=card></ws-public-userlist>
+    </ng-container>
 </ng-template>
