@@ -4,15 +4,26 @@ export interface IPublicUsersResponse {
     APP_ID: string
     DATA: IPublicUsers[]
 }
+
+interface IBaseUserProperties {
+    type: string
+}
+export interface IFormattedUserProperties extends IBaseUserProperties {
+    value: {
+        profileLink: string
+        bio: string
+    }
+}
+
+export interface IRawUserProperties extends IBaseUserProperties {
+    value: string
+}
 export interface IPublicUsers {
     wid: string
-    user_properties: {
-        value: string
-        type: 'json'
-    }
+    user_properties: IRawUserProperties | IFormattedUserProperties
     department_name: string
     first_name: string
-    middle_name: string
+    middle_name: string | null
     last_name: string
     source_profile_picture: string
     email: string
