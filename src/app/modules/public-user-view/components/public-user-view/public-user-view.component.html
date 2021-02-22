@@ -56,32 +56,33 @@
 
 <div class="wrapper">
     <div infiniteScroll [infiniteScrollDistance]="scrollDistance" [infiniteScrollThrottle]="scrollThrottle"
-    (scrolled)="onScroll($event)" [ngClass]="{'scroll-infinite': (apiData$ | async)?.length }" class="w-100 h-100 flex flex-row flex-wrap justify-center">
-    <ng-container [ngTemplateOutlet]="cardTemplate"></ng-container>
-</div>
-<ng-container *ngIf="!(error$ | async)">
-    <ng-container *ngIf="(isApiLoading$ | async)">
-        <div class="mb-6">
-            <mat-spinner class="spinner" color="primary"></mat-spinner>
-        </div>
+        (scrolled)="onScroll($event)" [ngClass]="{'scroll-infinite': (apiData$ | async)?.length }"
+        class="w-100 h-100 flex flex-row flex-wrap justify-center fix-issue">
+        <ng-container [ngTemplateOutlet]="cardTemplate"></ng-container>
+    </div>
+    <ng-container *ngIf="!(error$ | async)">
+        <ng-container *ngIf="(isApiLoading$ | async)">
+            <div class="mb-6">
+                <mat-spinner class="spinner" color="primary"></mat-spinner>
+            </div>
+        </ng-container>
     </ng-container>
-</ng-container>
-<div class="flat-error-alert" *ngIf="(error$ | async)">
-    Error occured while fetching data
-</div>
-<!-- <div *ngIf="isLoad">
+    <div class="flat-error-alert" *ngIf="(error$ | async)">
+        Error occured while fetching data
+    </div>
+    <!-- <div *ngIf="isLoad">
     <mat-spinner class="spinner" color="primary"></mat-spinner>
 </div> -->
-<div class="alertmsg" *ngIf="(isDataFinished$ | async)">
-    <div class="flat-no-data-alert flex flex-row">
-        No more Users
+    <div class="alertmsg" *ngIf="(isDataFinished$ | async)">
+        <div class="flat-no-data-alert flex flex-row">
+            No more Users
+        </div>
     </div>
-</div>
-<div class="alertmsg" *ngIf="(noDataFound$ | async)">
-    <div class="flat-no-data-alert flex flex-row">
-        No Users Found
+    <div class="alertmsg" *ngIf="(noDataFound$ | async)">
+        <div class="flat-no-data-alert flex flex-row">
+            No Users Found
+        </div>
     </div>
-</div>
 </div>
 <ng-template #cardTemplate>
     <ng-container *ngFor="let card of (apiData$ | async)">
