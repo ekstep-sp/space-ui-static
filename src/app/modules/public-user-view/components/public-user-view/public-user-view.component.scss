@@ -1,3 +1,9 @@
+.nav-bar-style{
+    font-style: normal;
+font-weight: 600;
+font-size: 24px;
+line-height: 22px;
+}
 .expandSearchGroup{
     display: inline-block;
     position: relative;
@@ -20,48 +26,83 @@
       position: absolute;
       top: 0;
     //   right: 0;
-      padding: 6px 8px 0px 8px ;
+      padding: 6px 8px 0px 27px ;
       color: white;
-      cursor: pointer;
-      user-select: none;
+    }
+    &:focus{
+      input{
+        padding-left: 50px !important;
+      }
     }
   }
   .search-container{
     padding-right: 1.5rem;
     padding-top: 8px;
   }
+  input.forms-control{
+    width: 100%;
+    padding-left: 55px !important;
+  }
   ::placeholder {
-    color: white;   
+    color: white;
+    // padding-left: 3rem;
+   
+
   }
   .span-class{
       flex:2
   }
-  input.forms-control{   
-    width: 100%;
-    padding-left: 55px !important;
-}
+  @media only screen and (min-width: 360px) and (max-width:510px) {
+    .search-container{
+        padding-right: 0;
+    //    border: 1px red solid;
+      }
+      .expandSearchGroup input{
+          width:75%;
+          padding-right: 0;
+      }
+      input.forms-control {
+        width: 100%;
+        padding-left: 30px !important;
+    }
+    .expandSearchGroup .searchIcon{
+        padding: 6px 8px 0px 6px;
 
-.usercard{
-display:flex;
-padding-left:24px;
-flex-direction: row;
-flex-wrap: wrap;
-padding-bottom:79px;
-border: 2px red solid;
+      }
+  }
+  @media only screen and (min-width: 760px) and (max-width:1024px) {
+    .search-container{
+        padding-right: 0;
+    //    border: 1px red solid;
+      }
+    
+  }
+.scroll-infinite{
+    margin-top: 58px;
+    margin-bottom:31px;
 }
-.profile-card {
-height: 214px;
-margin-top:58px;
-width: 100%;
-background: #FFFFFF;
-box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-border: 2px yellow solid;
-}
+@media only screen and (min-width: 280px) and (max-width:350px) {
+.expandSearchGroup input{
+          width: 95%;
+          padding-right: 0;
+      }
+      .expandSearchGroup .searchIcon{
+        padding: 6px 8px 0px 11px;
+
+      }
+      .search-container{
+        padding-right: 0;
+      
+      }
+      ::placeholder {
+        color: white;
+        padding-left: 3rem;
+      }
+      input.forms-control{
+        width: 100%;
+         padding-left: 0 !important; 
+    }
+      
+  }
 
 
-.org-color{
-color: rgba(105, 100, 102, 0.8) !important;
-}
-.txt-color{
-color: #696466 !important;
-}

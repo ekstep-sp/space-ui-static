@@ -1,0 +1,24 @@
+<div class="content mb-12 relative">
+  <mat-card class="rounded-sm profile-card text-center overflow-hidden cursor-pointer">
+    <div class="flex h-24 w-24 mx-auto pt-4 image">
+      <img class="img-width" [src]="(!!userData?.source_profile_picture) ? userData.source_profile_picture : defaultUserImage">  
+      </div> 
+    <div class="text-center">
+      <div class="font-size-18 flex justify-center align-center txt-color">
+        <span>{{userData.first_name}}</span>
+        <mat-icon class="mailicon">mail_outline</mat-icon>
+      </div>
+      <div class="font-size-18 org-color">
+       {{userData.department_name}}
+      </div>
+      <div class ="hovercard">
+        <div class="profile-link">
+          <span>{{userData?.user_properties?.value?.profileLink}}</span>
+         </div>
+         <div class="bio-desc">
+          <span>{{userData?.user_properties?.value?.bio}}</span>
+         </div>
+      </div>
+    </div>
+  </mat-card>
+</div> 

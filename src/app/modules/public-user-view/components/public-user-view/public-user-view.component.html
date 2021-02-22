@@ -3,36 +3,36 @@
     <!-- <div > -->
     <!-- <div> -->
     <span class="margin-left-xs text-truncate span-class">
-        <span class="visible-xs-inline" i18n>People</span>
+        <span class="visible-xs-inline nav-bar-style" i18n>People</span>
     </span>
     <!-- </div> -->
     <div class="search-container">
         <ng-container>
-
             <label class="expandSearchGroup">
                 <mat-icon matPrefix class="searchIcon">search</mat-icon>
-                <input class="forms-control" type="text" placeholder="Search Users" name="search">
-
+                <input class="forms-control" type="text" placeholder="Search Users" name="search"
+                    [formControl]="globalSearch">
             </label>
         </ng-container>
     </div>
     <!-- </div> -->
 </mat-toolbar>
-<div class="usercard">
-    <div class="max-w-xs ml-16 rounded-sm profile-card" *ngFor="let card of cards">
-        <mat-card>
-            <div class="flex h-24 w-24 mx-auto mt-4 mb-4">
-                <img src="/assets/instances/space/common/profile.png">
-            </div>
-            <div class="text-center md:text-left space-y-4">
-                <div class="font-size-16 pb-2 txt-color">
-                    <span>{{card.name}}</span>
-                    <mat-icon class="pl-3">mail_outline</mat-icon>
-                </div>
-                <div class="font-size-18 pb-4 org-color">
-                    {{card.organisation}}
-                </div>
-            </div>
-        </mat-card>
-    </div>
+<div infiniteScroll [infiniteScrollDistance]="scrollDistance" [infiniteScrollThrottle]="scrollThrottle"
+    (scrolled)="onScroll($event)" class="scroll-infinite w-100 h-100 flex flex-row flex-wrap justify-center">
+    <ng-container *ngIf="!(error$ | async)">
+        <ng-container *ngIf="(isApiLoading$ | async); else cardTemplate">
+            Loading...
+        </ng-container>
+    </ng-container>
+    <ng-container *ngIf="(error$ | async)">
+        Error occured while fetching data
+    </ng-container>
 </div>
+<div *ngIf="(isDataFinished$ | async)">
+    Data has finished
+</div>
+<ng-template #cardTemplate>
+    <ng-container *ngFor="let val of (apiData$ | async)">
+        <ws-userlist [userData]=val></ws-userlist>
+    </ng-container>
+</ng-template>
