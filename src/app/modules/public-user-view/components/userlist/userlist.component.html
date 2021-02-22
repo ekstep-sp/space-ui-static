@@ -1,8 +1,8 @@
 <div class="content mb-12 relative">
   <mat-card class="rounded-sm profile-card text-center overflow-hidden cursor-pointer">
-    <div class="h-24 w-24 mx-auto pt-4 image">
-      <!-- <img src="/src/fusion-assets/profileimage.png"> -->
-      <img class="img-width" [src]="(!!userData?.source_profile_picture) ? userData.source_profile_picture : defaultUserImage">    </div>
+    <div class="flex h-24 w-24 mx-auto pt-4 image">
+      <img class="img-width" [src]="(!!userData?.source_profile_picture) ? userData.source_profile_picture : defaultUserImage">  
+      </div> 
     <div class="text-center">
       <div class="font-size-18 flex justify-center align-center txt-color">
         <span>{{userData.first_name}}</span>
@@ -21,4 +21,4 @@
       </div>
     </div>
   </mat-card>
-</div>
+</div> 

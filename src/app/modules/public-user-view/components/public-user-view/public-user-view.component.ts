@@ -79,13 +79,8 @@ export class PublicUserViewComponent implements OnInit, OnDestroy{
     }
     // trigger first time page load
     this.searchUsers()
-    // console.log("userproperties",this.userproperties)
-    // this.userproperties = JSON.stringify(this.apiData$.getValue());
-    //  console.log("userdataentry",this.userproperties)
     this.userentry()
   }
-  
-
   searchUsers(q = '') {
       this.query = q
       this.page = DEFAULT_PAGE_NUMBER
@@ -105,9 +100,8 @@ export class PublicUserViewComponent implements OnInit, OnDestroy{
       // hit dummy logic
     if (this.counter <= 3) {
       const currentEntries = this.apiData$.getValue()
-      console.log('dnsdcsd', currentEntries.push(...[1, 2, 3, 4, 5]))
+      currentEntries.push(...[1, 2, 3, 4, 5])
       this.apiData$.next(currentEntries)
-      console.log('data entry', this.apiData$)
       this.counter += 1
       this.page += 1
     } else {
@@ -122,7 +116,6 @@ export class PublicUserViewComponent implements OnInit, OnDestroy{
         tap((data: IPublicUsersResponse | null) => {
           this.isApiLoading$.next(false)
           if (data) {
-            console.log('data-entry', data)
             this.error$.next(false)
             if (data.DATA.length) {
               // merge with old data
@@ -143,15 +136,16 @@ export class PublicUserViewComponent implements OnInit, OnDestroy{
         })
         ).subscribe()
     }
-  
+
   }
-  userentry(){
-    this.apiData$.getValue().forEach(data=>{
-      if(!!data.user_properties){
-      data.user_properties.value= JSON.parse(data.user_properties.value)
+  userentry() {
+    this.apiData$.getValue().forEach(data => {
+      if (!!data.user_properties) {
+      data.user_properties.value = JSON.parse(data.user_properties.value)
       }
     })
-    console.log('currentdata',this.apiData$.getValue())
+    // tslint:disable-next-line:no-console
+    console.log('currentdata', this.apiData$.getValue())
   }
 
   ngOnDestroy() {
