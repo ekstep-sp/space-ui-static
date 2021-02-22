@@ -11,7 +11,12 @@ import { MatIconModule } from '@angular/material/icon'
 import { ReactiveFormsModule } from '@angular/forms'
 import { PublicUsersCoreService } from './services/public-users-core.service'
 import { UserlistComponent } from './components/userlist/userlist.component'
+import {
 
+  MatButtonModule,
+  MatFormFieldModule,
+  MatInputModule,
+} from '@angular/material'
 @NgModule({
   declarations: [PublicUserViewComponent, UserlistComponent],
   providers: [PublicUsersCoreService],
@@ -24,6 +29,9 @@ import { UserlistComponent } from './components/userlist/userlist.component'
     MatToolbarModule,
     BtnPageBackModule,
     ReactiveFormsModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatButtonModule
   ],
 })
 export class PublicUserViewModule { }
