@@ -24,9 +24,11 @@
             Loading...
         </ng-container>
     </ng-container>
-    <ng-container *ngIf="(error$ | async)">
-        Error occured while fetching data
-    </ng-container>
+    <div class="flat-error-alert">
+        <ng-container *ngIf="(error$ | async)">
+            Error occured while fetching data
+        </ng-container>
+    </div>
 </div>
 <div *ngIf="(isDataFinished$ | async)">
     Data has finished
