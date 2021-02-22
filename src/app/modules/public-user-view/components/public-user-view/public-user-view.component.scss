@@ -43,7 +43,6 @@
     }
 
 
-
     .search-container{
         padding-right: 1.5rem;
         padding-top: 8px;
@@ -93,10 +92,8 @@
           .scroll-infinite{
             padding-top: 0px !important;
        
-            }
-        
-       
-        
+            }      
+              
       }
     
       .allign-search-icon{
@@ -123,8 +120,7 @@
         }
     }
 
-    @media screen and (max-width: 768px) {
-    
+    @media screen and (max-width: 768px) {   
         .maticonallign {
         
           overflow: hidden;
@@ -142,16 +138,13 @@
     .search-container-mobile{
    
         padding-right: 1.5rem;
-        padding-top: 8px;
-      
+        padding-top: 8px;      
 
-}
+    }
 .mat-card.blogs-containers{
-    padding: 16px 0px 16px 0px !important;
-    
+    padding: 16px 0px 16px 0px !important;    
 
 }
-
 
 
 .mat-card.card-container{
@@ -173,7 +166,6 @@
     width: 100%;
     padding-left: 55px !important;
 
-
 }
 
 .flat-error-alert {
@@ -189,7 +181,6 @@
     width: 80%;
     margin: auto;
   }
-
 
 
 .expandSearchGroupMobile{
@@ -225,13 +216,6 @@
     }
   }
 
-
-
-
-
-
-
-
     .flat-no-data-alert {
     padding-left: 40px;
     z-index: 10;
@@ -258,7 +242,6 @@
     right: 0;
     
     }
-    
    
     @media only screen and (min-width: 760px) and (max-width:1024px) {
     .search-container{
