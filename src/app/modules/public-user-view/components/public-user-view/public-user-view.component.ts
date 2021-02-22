@@ -22,7 +22,7 @@ export class PublicUserViewComponent implements OnInit, OnDestroy {
   isLoad = false
   userproperties: any
   hideGlobalSearch = false
-  HIT_DUMMY_ENDPOINT = true
+  HIT_DUMMY_ENDPOINT = false
   isXSmall$: Observable<boolean>
   isEnabledSearch = false
 
