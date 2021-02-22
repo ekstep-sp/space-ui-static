@@ -57,7 +57,7 @@
 <div class="wrapper">
     <div infiniteScroll [infiniteScrollDistance]="scrollDistance" [infiniteScrollThrottle]="scrollThrottle"
         (scrolled)="onScroll($event)" [ngClass]="{'scroll-infinite': (apiData$ | async)?.length }"
-        class="w-100 h-100 flex flex-row flex-wrap justify-center fix-issue">
+        class="w-100 h-100 flex flex-row flex-wrap justify-center fix-margin">
         <ng-container [ngTemplateOutlet]="cardTemplate"></ng-container>
     </div>
     <ng-container *ngIf="!(error$ | async)">
