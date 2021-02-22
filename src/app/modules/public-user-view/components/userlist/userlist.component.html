@@ -1,24 +1,33 @@
-<div class="content mb-12 relative">
-  <mat-card class="rounded-sm profile-card text-center overflow-hidden cursor-pointer">
-    <div class="flex h-24 w-24 mx-auto pt-4 image">
-      <img class="img-width" [src]="(!!userData?.source_profile_picture) ? userData.source_profile_picture : defaultUserImage">  
+<div class="content mb-12 ml-6 relative">
+  <div class="orignial rounded-sm">
+    <ng-container [ngTemplateOutlet]="mainCardContent"></ng-container>
+  </div>
+  <div class="substitute rounded-sm absolute top-0 left-0">
+    <ng-container [ngTemplateOutlet]="mainCardContent"></ng-container>
+  </div>
+</div>
+
+<ng-template #mainCardContent>
+  <mat-card class="profile-card text-center overflow-hidden cursor-pointer">
+    <div class="flex mx-auto pt-4 image align-center justify-center">
+      <img class="img-width rounded-full h-24 w-24" [src]="userData?.source_profile_picture ? userData.source_profile_picture : defaultUserImage">  
       </div> 
-    <div class="text-center">
+    <div class="text-center mt-2">
       <div class="font-size-18 flex justify-center align-center txt-color">
-        <span>{{userData.first_name}}</span>
+        <span class="middle-text mr-4">{{userData?.first_name}}</span>
         <mat-icon class="mailicon">mail_outline</mat-icon>
       </div>
-      <div class="font-size-18 org-color">
-       {{userData.department_name}}
+      <div class="font-size-18 txt-color mt-2">
+       {{userData?.department_name}}
       </div>
-      <div class ="hovercard">
-        <div class="profile-link">
+      <div class="hovercard mt-6">
+        <div class="profile-link txt-color">
           <span>{{userData?.user_properties?.value?.profileLink}}</span>
          </div>
-         <div class="bio-desc">
+         <div class="bio-desc txt-color">
           <span>{{userData?.user_properties?.value?.bio}}</span>
          </div>
       </div>
     </div>
   </mat-card>
-</div> 
+</ng-template>

@@ -1,4 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core'
+import { DEFAULT_IMAGE_URL } from '../../constants'
 
 @Component({
   selector: 'ws-userlist',
@@ -9,7 +10,7 @@ export class UserlistComponent implements OnInit {
   // tslint:disable-next-line:no-non-null-assertion
   @Input() !userData: any = {}
   userdata: any
-  defaultUserImage = '/assets/images/profile/profileimage.png'
+  defaultUserImage = DEFAULT_IMAGE_URL
 
   constructor() { }
 
