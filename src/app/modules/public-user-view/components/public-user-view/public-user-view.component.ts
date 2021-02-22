@@ -28,7 +28,7 @@ export class PublicUserViewComponent implements OnInit {
   scrollDistance = INFINITE_SCROLL_CONSTANTS.DISTANCE
   scrollThrottle = INFINITE_SCROLL_CONSTANTS.THROTTLE
   // apiData$: BehaviorSubject<any[]> = new BehaviorSubject<any[]>([1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13])
-  apiData$: BehaviorSubject<IPublicUsers[] | []> = new BehaviorSubject< IPublicUsers[]| []>([])
+  apiData$: BehaviorSubject<IPublicUsers[] | []> = new BehaviorSubject<IPublicUsers[] | []>([])
   isDataFinished$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false)
   noDataFound$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false)
   isApiLoading$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(true)
@@ -51,7 +51,7 @@ export class PublicUserViewComponent implements OnInit {
     if (!this.hideGlobalSearch) {
       this.globalSearch.valueChanges.pipe(debounceTime(1000), distinctUntilChanged())
         .subscribe((searchTerm: string) => {
-          debugger
+
           this.coreSrvc.counter = 0
           this.searchUsers(searchTerm)
         })
@@ -60,14 +60,14 @@ export class PublicUserViewComponent implements OnInit {
     this.searchUsers()
   }
   searchUsers(q = '') {
-    debugger
-      this.query = q
-      this.page = DEFAULT_PAGE_NUMBER
-      this.offset = (this.page ? this.page - 1 : 0) * BATCH_SIZE
-      console.log('search ', { query: this.query, searchSize: BATCH_SIZE, offset: this.offset })
-      // everytime search hits, we have to reset the existing container list
-      this.apiData$.next([])
-      this.updateData({ query: this.query, searchSize: BATCH_SIZE, offset: this.offset })
+
+    this.query = q
+    this.page = DEFAULT_PAGE_NUMBER
+    this.offset = (this.page ? this.page - 1 : 0) * BATCH_SIZE
+    console.log('search ', { query: this.query, searchSize: BATCH_SIZE, offset: this.offset })
+    // everytime search hits, we have to reset the existing container list
+    this.apiData$.next([])
+    this.updateData({ query: this.query, searchSize: BATCH_SIZE, offset: this.offset })
   }
 
   onScroll(_scrollEvent: IScrollUIEvent) {
@@ -83,50 +83,50 @@ export class PublicUserViewComponent implements OnInit {
   }
 
   updateData({ query, offset, searchSize }: IUpdateDataObj) {
-    debugger
+
     this.noDataFound$.next(false)
     this.isDataFinished$.next(false)
     this.isApiLoading$.next(true)
     this.error$.next(false)
     // hit original api
     this.coreSrvc.getApiData(query, offset, searchSize)
-    .pipe(
-      catchError((_e: any) => of(null)),
-      map((rawData: IPublicUsersResponse | null) => {
-        debugger
-        if (rawData) {
-          const formattedData = rawData.DATA.map((dataObj: IPublicUsers)  => ({
-            ...dataObj,
-            // tslint:disable-next-line: max-line-length
-            user_properties: this.coreSrvc.extractUserProperties(dataObj.user_properties as IRawUserProperties),
-          }))
-          return {
-            ...rawData,
-            DATA:  formattedData,
+      .pipe(
+        catchError((_e: any) => of(null)),
+        map((rawData: IPublicUsersResponse | null) => {
+
+          if (rawData) {
+            const formattedData = rawData.DATA.map((dataObj: IPublicUsers) => ({
+              ...dataObj,
+              // tslint:disable-next-line: max-line-length
+              user_properties: this.coreSrvc.extractUserProperties(dataObj.user_properties as IRawUserProperties),
+            }))
+            return {
+              ...rawData,
+              DATA: formattedData,
+            }
           }
-        }
-        return rawData
-      }),
-      catchError((_e: any) => of(null)),
-      tap((data: IPublicUsersResponse | null) => {
-        this.isApiLoading$.next(false)
-        if (data) {
-          this.error$.next(false)
-          if (data.DATA.length) {
-            // merge with old data
-            const currentData = this.apiData$.getValue()
-            this.apiData$.next([...currentData, ...data.DATA])
-          } else if (!data.DATA.length && this.page === DEFAULT_PAGE_NUMBER) {
-            // did not get any results matching the search query
-            this.noDataFound$.next(true)
+          return rawData
+        }),
+        catchError((_e: any) => of(null)),
+        tap((data: IPublicUsersResponse | null) => {
+          this.isApiLoading$.next(false)
+          if (data) {
+            this.error$.next(false)
+            if (data.DATA.length) {
+              // merge with old data
+              const currentData = this.apiData$.getValue()
+              this.apiData$.next([...currentData, ...data.DATA])
+            } else if (!data.DATA.length && this.page === DEFAULT_PAGE_NUMBER) {
+              // did not get any results matching the search query
+              this.noDataFound$.next(true)
+            } else {
+              // data empty
+              this.isDataFinished$.next(true)
+            }
           } else {
-            // data empty
-            this.isDataFinished$.next(true)
+            this.error$.next(true)
           }
-        } else {
-          this.error$.next(true)
-        }
-      })
+        })
       ).subscribe()
   }
 
