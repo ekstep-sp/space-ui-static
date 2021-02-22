@@ -4,11 +4,9 @@ import { FormControl } from '@angular/forms'
 import { NsPage, ConfigurationsService } from '@ws-widget/utils'
 import { BehaviorSubject, of } from 'rxjs'
 import { catchError, debounceTime, distinctUntilChanged, tap } from 'rxjs/operators'
-import { UserViewSearchPipe } from '../../pipes/user-view-search.pipe'
 import { PublicUsersCoreService } from '../../services/public-users-core.service'
 import { BATCH_SIZE, DEFAULT_OFFSET, DEFAULT_PAGE_NUMBER, DEFAULT_QUERY, INFINITE_SCROLL_CONSTANTS } from './../../constants'
 import { IPublicUsersResponse, IUpdateDataObj } from './../../models/public-users.interface'
-
 interface IScrollUIEvent {
   currentScrollPosition: number
 }
@@ -21,10 +19,10 @@ interface IScrollUIEvent {
 export class PublicUserViewComponent implements OnInit, OnDestroy {
   pageNavbar: Partial<NsPage.INavBackground> = this.configSvc.pageNavBar
   globalSearch = new FormControl('')
-  userproperties: any;
+  isLoad = false
+  userproperties: any
   hideGlobalSearch = false
   HIT_DUMMY_ENDPOINT = true
-
   scrollDistance = INFINITE_SCROLL_CONSTANTS.DISTANCE
   scrollThrottle = INFINITE_SCROLL_CONSTANTS.THROTTLE
   // apiData$: BehaviorSubject<any[]> = new BehaviorSubject<any[]>([1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13])
@@ -35,7 +33,7 @@ export class PublicUserViewComponent implements OnInit, OnDestroy {
         type: 'json',
         value:
           // tslint:disable-next-line: max-line-length
-          '{"bio":"this is hritik and it s ahuge abijakdawk adkja auabsd awdbjca awda  alwkd afnajnkadbkbg awbfakj afa oadbjaks akbfak akbfaln akba ahbasf rhf askrbg akjbawdkbj asjkbae gjbk as as as jdk asndflkn this is hritik and it s ahuge abijakdawk adkja auabsd awdbjca awda  alwkd afnajnkadbkbg awbfakj afa oadbjaks","profileLink":"twitter.com"}',
+          '{"bio":"this is hritik and it s ahuge abijakdawk adkja auabsd awdbjca awda alwkd afnajnkadbkbg awbfakj afa oadbjaks akbfak akbfaln akba ahbasf rhf askrbg akjbawdkbj asjkbae gjbk as as as jdk asndflkn this is hritik and it s ahuge abijakdawk adkja auabsd awdbjca awda alwkd afnajnkadbkbg awbfakj afa oadbjaks","profileLink":"twitter.com"}',
       },
       department_name: 'space',
       last_name: 'test1',
@@ -70,9 +68,7 @@ export class PublicUserViewComponent implements OnInit, OnDestroy {
   error$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false)
   constructor(
     private readonly configSvc: ConfigurationsService,
-    private readonly coreSrvc: PublicUsersCoreService,
-    private pipeData: UserViewSearchPipe
-
+    private readonly coreSrvc: PublicUsersCoreService
   ) {
     this.pageNavbar = this.configSvc.pageNavBar
   }
@@ -103,6 +99,7 @@ export class PublicUserViewComponent implements OnInit, OnDestroy {
     this.isApiLoading$.next(true)
     this.error$.next(false)
     if (dummy) {
+      this.isLoad = true
       // hit dummy logic
       if (this.counter <= 3) {
         const currentEntries = this.apiData$.getValue()
@@ -112,10 +109,12 @@ export class PublicUserViewComponent implements OnInit, OnDestroy {
         this.page += 1
       } else {
         this.isDataFinished$.next(true)
+        this.isLoad = false
       }
       this.isApiLoading$.next(false)
     } else {
       // hit original api
+      this.isLoad = true
       this.coreSrvc.getApiData(query, offset, searchSize)
         .pipe(
           catchError((_e: any) => of(null)),
@@ -128,10 +127,11 @@ export class PublicUserViewComponent implements OnInit, OnDestroy {
                 const currentData = this.apiData$.getValue()
                 // tslint:disable-next-line:whitespace
                 // this.apiData$.getValue().forEach(data=>{
-                //   data.user_properties.value= JSON.parse(data.user_properties.value)
+                // data.user_properties.value= JSON.parse(data.user_properties.value)
                 // })
                 // console.log('currentdata',this.apiData$.getValue())
                 this.apiData$.next([...currentData, ...data.DATA])
+                this.isLoad = false
               } else {
                 // data empty
                 this.isDataFinished$.next(true)
@@ -158,28 +158,6 @@ export class PublicUserViewComponent implements OnInit, OnDestroy {
     this.apiData$.unsubscribe()
     this.isApiLoading$.unsubscribe()
     this.error$.unsubscribe()
-  }
-
-
-
-  triggerGlobalSearch() {
-    const termToSearch = this.globalSearch.value.trim() ? this.globalSearch.value.trim() : ''
-    this.apiData$.next(this.filterdataForSearch(termToSearch, this.apiData$.getValue()))
-
-  }
-
-  filterdataForSearch(searchedValue: string, apiData: any) {
-    if (!!apiData) {
-      if (!!searchedValue) {
-        const fiteredArr = this.pipeData.transform(apiData, searchedValue);
-        console.log('Filered Data : ', fiteredArr);
-
-        return fiteredArr;
-      } else {
-        return (apiData);
-
-      }
-    }
   }
 
 }

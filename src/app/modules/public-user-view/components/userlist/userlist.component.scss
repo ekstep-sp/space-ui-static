@@ -8,11 +8,17 @@ $card-height: 214px;
 }
 
  .content {
+  @include breakpoint-xs {
+    margin-left: 0 !important;
+  }
    .middle-text {
      line-height: 1.5;
    }
-  .txt-color {
+  .txt-color{
     color: #696466 !important;
+  }
+  .org-color{
+    color: rgba(105, 100, 102, 0.8) !important
   }
   .mailicon {
     color: #42428B;
@@ -46,7 +52,6 @@ $card-height: 214px;
     // display: flex;
     // flex-wrap: wrap;
     @include breakpoint-xs {
-      margin-left: 4px !important;
       width:300px;
     }
     @include breakpoint-xxs{
@@ -77,6 +82,9 @@ $card-height: 214px;
   .substitute:hover{
     .txt-color {
       color: white !important;
+    }
+    .org-color{
+      color: rgba(255, 255, 255, 0.8) !important;
     }
     z-index: 1000;
     background: #42428B !important;

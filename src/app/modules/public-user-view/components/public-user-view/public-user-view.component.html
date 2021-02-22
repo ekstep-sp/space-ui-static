@@ -17,6 +17,7 @@
     </div>
     <!-- </div> -->
 </mat-toolbar>
+
 <div infiniteScroll [infiniteScrollDistance]="scrollDistance" [infiniteScrollThrottle]="scrollThrottle"
     (scrolled)="onScroll($event)" class="scroll-infinite w-100 h-100 flex flex-row flex-wrap justify-center">
     <ng-container *ngIf="!(error$ | async)">
@@ -28,11 +29,17 @@
         Error occured while fetching data
     </ng-container>
 </div>
-<div *ngIf="(isDataFinished$ | async)">
-    Data has finished
+
+<div class="alertmsg">
+    <div class="flat-no-data-alert flex flex-row" *ngIf="(isDataFinished$ | async)">
+        Data has finished
+    </div>
 </div>
 <ng-template #cardTemplate>
     <ng-container *ngFor="let card of (apiData$ | async)">
         <ws-userlist [userData]=card></ws-userlist>
     </ng-container>
 </ng-template>
+<div *ngIf="isLoad">
+    <mat-spinner class="spinner" color="primary"></mat-spinner>
+</div>
