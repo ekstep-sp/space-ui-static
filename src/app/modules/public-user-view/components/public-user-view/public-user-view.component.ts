@@ -31,7 +31,8 @@ export class PublicUserViewComponent implements OnInit, OnDestroy{
     user_properties: {
     type: 'json',
     value:
-    '{"bio":"this is hritik","profileLink":"twitter.com"}',
+    // tslint:disable-next-line: max-line-length
+    '{"bio":"this is hritik and it s ahuge abijakdawk adkja auabsd awdbjca awda  alwkd afnajnkadbkbg awbfakj afa oadbjaks akbfak akbfaln akba ahbasf rhf askrbg akjbawdkbj asjkbae gjbk as as as jdk asndflkn this is hritik and it s ahuge abijakdawk adkja auabsd awdbjca awda  alwkd afnajnkadbkbg awbfakj afa oadbjaks","profileLink":"twitter.com"}',
     },
     department_name: 'space',
     last_name: 'test1',
