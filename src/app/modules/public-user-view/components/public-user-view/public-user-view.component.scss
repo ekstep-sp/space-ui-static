@@ -70,8 +70,8 @@
 
       .blogs-container {
         // max-width: 900px;
-        width: 80%;
-        margin: auto;
+        max-width: 300px;
+        margin:0 auto;
         padding: $size-m $size-s;
         .blog-content {
           @include breakpoint-xs {
@@ -79,7 +79,7 @@
           }
         }
     }
-      @media only screen and (max-width:510px) {
+      @media only screen and (max-width:560px) {
         .search-container{
             display: none;
 
@@ -108,6 +108,8 @@
           }
 
       }
+
+
     // .scroll-infinite{
     //     // margin-top: 58px;
     //     margin-bottom:31px;
@@ -148,8 +150,8 @@
 
 
 .mat-card.card-container{
-    width: 90%;
-    margin: auto;
+    width: 300px;
+    max-width: 300px;
     // border: 1px red solid;
 }
 .searchIconMobile{
@@ -195,7 +197,7 @@
       border-radius: 10px;
       padding-top: 8px ;
       outline: none;
-      width:120px;
+      width:140px;
       height: 21px;
       display:flex;
       caret-color: white;
