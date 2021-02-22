@@ -30,6 +30,7 @@ export class PublicUserViewComponent implements OnInit {
   // apiData$: BehaviorSubject<any[]> = new BehaviorSubject<any[]>([1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13])
   apiData$: BehaviorSubject<IPublicUsers[] | []> = new BehaviorSubject< IPublicUsers[]| []>([])
   isDataFinished$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false)
+  noDataFound$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false)
   isApiLoading$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(true)
   counter = 0
   page = DEFAULT_PAGE_NUMBER
@@ -48,24 +49,42 @@ export class PublicUserViewComponent implements OnInit {
   ngOnInit() {
     // enable search functionality using search bar
     if (!this.hideGlobalSearch) {
-      this.globalSearch.valueChanges.pipe(debounceTime(500), distinctUntilChanged())
-        .subscribe((searchTerm: string) => this.searchUsers(searchTerm))
+      this.globalSearch.valueChanges.pipe(debounceTime(1000), distinctUntilChanged())
+        .subscribe((searchTerm: string) => {
+          debugger
+          this.coreSrvc.counter = 0
+          this.searchUsers(searchTerm)
+        })
     }
     // trigger first time page load
     this.searchUsers()
   }
   searchUsers(q = '') {
+    debugger
       this.query = q
       this.page = DEFAULT_PAGE_NUMBER
-      this.offset = (this.page - 1) * BATCH_SIZE
+      this.offset = (this.page ? this.page - 1 : 0) * BATCH_SIZE
+      console.log('search ', { query: this.query, searchSize: BATCH_SIZE, offset: this.offset })
+      // everytime search hits, we have to reset the existing container list
+      this.apiData$.next([])
       this.updateData({ query: this.query, searchSize: BATCH_SIZE, offset: this.offset })
   }
 
   onScroll(_scrollEvent: IScrollUIEvent) {
+    this.nextPage()
+    console.log('scrolled')
+    console.log({ query: this.query, searchSize: BATCH_SIZE, offset: this.offset })
     this.updateData({ query: this.query, searchSize: BATCH_SIZE, offset: this.offset })
   }
 
+  nextPage() {
+    this.page += 1
+    this.offset = ((this.page - 1) * BATCH_SIZE) + 1
+  }
+
   updateData({ query, offset, searchSize }: IUpdateDataObj) {
+    debugger
+    this.noDataFound$.next(false)
     this.isDataFinished$.next(false)
     this.isApiLoading$.next(true)
     this.error$.next(false)
@@ -97,6 +116,9 @@ export class PublicUserViewComponent implements OnInit {
             // merge with old data
             const currentData = this.apiData$.getValue()
             this.apiData$.next([...currentData, ...data.DATA])
+          } else if (!data.DATA.length && this.page === DEFAULT_PAGE_NUMBER) {
+            // did not get any results matching the search query
+            this.noDataFound$.next(true)
           } else {
             // data empty
             this.isDataFinished$.next(true)
