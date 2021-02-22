@@ -22,10 +22,9 @@ export class PublicUserViewComponent implements OnInit, OnDestroy {
   isLoad = false
   userproperties: any
   hideGlobalSearch = false
-  HIT_DUMMY_ENDPOINT = false
+  HIT_DUMMY_ENDPOINT = true
   isXSmall$: Observable<boolean>
   isEnabledSearch = false
-
 
   scrollDistance = INFINITE_SCROLL_CONSTANTS.DISTANCE
   scrollThrottle = INFINITE_SCROLL_CONSTANTS.THROTTLE

@@ -25,8 +25,6 @@
 
 </mat-toolbar>
 
-
-
 <section class="blogs-container">
     <div *ngIf="(isXSmall$ | async) === true" class="flex">
         <mat-card class="card-container" *ngIf="isEnabledSearch === true">
@@ -43,9 +41,6 @@
                         </label>
                     </ng-container>
                 </div>
-
-
-
 
                 <div class="align-icon">
                     <button mat-icon-button (click)="disableSearchbar()">
@@ -73,7 +68,9 @@
     </div>
 
 </div>
-
+<div *ngIf="isLoad">
+  <mat-spinner class="spinner" color="primary"></mat-spinner>
+    </div>
 <div class="alertmsg">
     <div class="flat-no-data-alert flex flex-row" *ngIf="(isDataFinished$ | async)">
         Data has finished
@@ -81,9 +78,6 @@
 </div>
 <ng-template #cardTemplate>
     <ng-container *ngFor="let card of (apiData$ | async)">
-        <ws-userlist [userData]=card></ws-userlist>
-    </ng-container>
+ <ws-public-userlist [userData]=card></ws-public-userlist>
+ </ng-container>
 </ng-template>
-<div *ngIf="isLoad">
-    <mat-spinner class="spinner" color="primary"></mat-spinner>
-</div>

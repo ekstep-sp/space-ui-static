@@ -4,23 +4,17 @@ import { InfiniteScrollModule } from 'ngx-infinite-scroll'
 import { PublicUserViewRoutingModule } from './public-user-view-routing.module'
 import { PublicUserViewComponent } from './components/public-user-view/public-user-view.component'
 import { MatCardModule } from '@angular/material/card'
-import { MatToolbarModule, MatProgressSpinnerModule } from '@angular/material'
+import { MatToolbarModule, MatProgressSpinnerModule, MatButtonModule, MatFormFieldModule, MatInputModule } from '@angular/material'
 
 import { BtnPageBackModule } from '@ws-widget/collection'
 import { MatIconModule } from '@angular/material/icon'
 import { ReactiveFormsModule } from '@angular/forms'
 import { PublicUsersCoreService } from './services/public-users-core.service'
-import { UserlistComponent } from './components/userlist/userlist.component'
-import {
+import { PublicUserlistComponent } from './components/public-userlist/public-userlist.component'
 
-  MatButtonModule,
-  MatFormFieldModule,
-  MatInputModule,
-} from '@angular/material'
-import { UserViewSearchPipe } from './pipes/user-view-search.pipe'
 @NgModule({
-  declarations: [PublicUserViewComponent, UserlistComponent, UserViewSearchPipe],
-  providers: [PublicUsersCoreService, UserViewSearchPipe],
+  declarations: [PublicUserViewComponent, PublicUserlistComponent],
+  providers: [PublicUsersCoreService],
   imports: [
     CommonModule,
     MatCardModule,
@@ -33,7 +27,7 @@ import { UserViewSearchPipe } from './pipes/user-view-search.pipe'
     MatFormFieldModule,
     MatInputModule,
     MatButtonModule,
-    MatProgressSpinnerModule
+    MatProgressSpinnerModule,
   ],
 })
 export class PublicUserViewModule { }
