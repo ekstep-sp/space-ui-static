@@ -221,18 +221,17 @@
         margin: auto;
       }
       .alertmsg{
-        // width: 89%;
-        // margin: 0 auto 20px auto;
-        // .flat-no-data-alert {
-        //     padding-left: 40px;
-        //     z-index: 10;
-        //     min-height: 65px;
-        //     border-radius: 4px;
-        //     align-items: center;
-        //     box-shadow: 1px 1px 10px 0 #FFD180;
-        //     background-color: #FFD180;
-        //     }
-        display: none;
+        width: 89%;
+        margin: 0 auto 20px auto;
+        .flat-no-data-alert {
+            padding-left: 40px;
+            z-index: 10;
+            min-height: 65px;
+            border-radius: 4px;
+            align-items: center;
+            box-shadow: 1px 1px 10px 0 #FFD180;
+            background-color: #FFD180;
+            }
       }
 }
 

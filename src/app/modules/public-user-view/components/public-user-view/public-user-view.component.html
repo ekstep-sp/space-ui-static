@@ -64,11 +64,11 @@
     <div class="flat-error-alert" *ngIf="(error$ | async)">
         Error occured while fetching data
     </div>
-    <div class="alertmsg" *ngIf="(isDataFinished$ | async)">
+    <!-- <div class="alertmsg" *ngIf="(isDataFinished$ | async)">
         <div class="flat-no-data-alert flex flex-row">
             No more Users
         </div>
-    </div>
+    </div> -->
     <div class="alertmsg" *ngIf="(noDataFound$ | async)">
         <div class="flat-no-data-alert flex flex-row">
             No Users Found
