@@ -1,25 +1,25 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { async, ComponentFixture, TestBed } from '@angular/core/testing'
 
-import { PublicUserViewComponent } from './public-user-view.component';
+import { PublicUserViewComponent } from './public-user-view.component'
 
 describe('PublicUserViewComponent', () => {
-  let component: PublicUserViewComponent;
-  let fixture: ComponentFixture<PublicUserViewComponent>;
+  let component: PublicUserViewComponent
+  let fixture: ComponentFixture<PublicUserViewComponent>
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ PublicUserViewComponent ]
+      declarations: [PublicUserViewComponent],
     })
-    .compileComponents();
-  }));
+    .compileComponents()
+  }))
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(PublicUserViewComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
-  });
+    fixture = TestBed.createComponent(PublicUserViewComponent)
+    component = fixture.componentInstance
+    fixture.detectChanges()
+  })
 
   it('should create', () => {
-    expect(component).toBeTruthy();
-  });
-});
+    expect(component).toBeTruthy()
+  })
+})
