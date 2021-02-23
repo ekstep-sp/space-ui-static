@@ -252,7 +252,7 @@
     }
     .scroll-infinite{
     // padding-top: 58px;
-    padding-bottom:160px;
+ padding-bottom: 175px;
     }
 
 
@@ -273,12 +273,17 @@
       grid-row-gap: 48px;
       grid-template-columns: repeat(auto-fit, minmax(280px, auto)) !important;
     }
+
   }
    @media only screen and (max-width: 320px) {
         .fix-margin:not(:root:root){
       grid-template-columns: repeat(auto-fit, minmax(302px, auto)) !important;
         }
    }
+
+  //  .search-container:not(:root:root){
+  //   padding-top: 0px;
+  //   }
 
 
 
