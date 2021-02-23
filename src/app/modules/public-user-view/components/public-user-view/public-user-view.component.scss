@@ -273,15 +273,15 @@
 }
 
 
-.search-container:not(:root:root){   
-    padding-top: 0px;
-    }
 
   @media only screen and (max-width: 320px) {
     .fix-margin:not(:root:root){
       grid-template-columns: repeat(auto-fit, minmax(302px, auto)) !important;
     }
   }
+//   .search-container:not(:root:root){   
+//     padding-top: 0px;
+//     }
 
 
 
