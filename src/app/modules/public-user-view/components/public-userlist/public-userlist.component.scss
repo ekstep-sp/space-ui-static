@@ -1,12 +1,6 @@
 @import 'ws-mixins';
 $card-height: 215px;
 
-@keyframes slowzindex {
-  0%   { z-index: 1000; }
-  50%   { z-index: 500; }
-  100% { z-index: 1; }
-}
-
  .content {
   @include breakpoint-xs {
     margin-left: 0 !important;
@@ -89,7 +83,7 @@ $card-height: 215px;
     .org-color{
       color: rgba(255, 255, 255, 0.8) !important;
     }
-    z-index: 1000;
+    z-index: 500;
     background: #42428B !important;
     color: white !important;
     height: $card-height*1.8;
