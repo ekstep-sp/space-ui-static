@@ -22,8 +22,12 @@
         {{userData?.department_name}}
       </div>
       <div class="hovercard mt-6">
-        <div class="profile-link font-size-14 txt-color">
-          <span>{{userData?.user_properties?.value?.profileLink}}</span>
+        <div class="font-size-14 txt-color">
+          <!-- <span>{{userData?.user_properties?.value?.profileLink}}</span> -->
+          <a [attr.href]="userData?.user_properties?.value?.profileLink" target="_blank"
+            class="profile-link">{{userData?.user_properties?.value?.profileLink}}</a>
+          <a [attr.href]="userData?.user_properties?.value?.profileLink"
+            class="profile-link-responsive">{{userData?.user_properties?.value?.profileLink}}</a>
         </div>
         <div class="bio-desc overflow-y-auto font-size-14 mx-5 txt-color">
           <p>{{userData?.user_properties?.value?.bio}}</p>

@@ -1,7 +1,7 @@
 import { HttpClient, HttpParams } from '@angular/common/http'
 import { Injectable } from '@angular/core'
 import { Observable, of } from 'rxjs'
-import { delay} from 'rxjs/operators'
+import { delay } from 'rxjs/operators'
 import { IFormattedUserProperties, IPublicUsers, IPublicUsersResponse, IRawUserProperties } from '../models/public-users.interface'
 import { ENDPOINT_URL, BATCH_SIZE, DEFAULT_OFFSET, DUMMY_DATA } from './../constants'
 @Injectable({
@@ -26,6 +26,7 @@ export class PublicUsersCoreService {
       } else {
         result = { ...DUMMY_DATA, DATA: [] }
       }
+      // tslint:disable-next-line: no-console
       console.log('returning api data as ', result)
       return of(result).pipe(delay(1000))
     }

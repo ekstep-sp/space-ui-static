@@ -1,6 +1,6 @@
-import { NgModule } from '@angular/core';
-import { Routes, RouterModule } from '@angular/router';
-import { PublicUserViewComponent } from './components/public-user-view/public-user-view.component';
+import { NgModule } from '@angular/core'
+import { Routes, RouterModule } from '@angular/router'
+import { PublicUserViewComponent } from './components/public-user-view/public-user-view.component'
 
 const routes: Routes = [
   {

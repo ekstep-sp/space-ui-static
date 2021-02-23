@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing'
 
-import { PublicUserViewComponent } from './public-user-view.component'
+import { PublicUsercardComponent } from './public-user-card.component'
 
-describe('PublicUserViewComponent', () => {
-  let component: PublicUserViewComponent
-  let fixture: ComponentFixture<PublicUserViewComponent>
+describe('PublicUsercardComponent', () => {
+  let component: PublicUsercardComponent
+  let fixture: ComponentFixture<PublicUsercardComponent>
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [PublicUserViewComponent],
+      declarations: [PublicUsercardComponent],
     })
     .compileComponents()
   }))
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(PublicUserViewComponent)
+    fixture = TestBed.createComponent(PublicUsercardComponent)
     component = fixture.componentInstance
     fixture.detectChanges()
   })
