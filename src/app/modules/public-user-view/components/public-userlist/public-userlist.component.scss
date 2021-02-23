@@ -103,5 +103,20 @@ $card-height: 215px;
     .mailicon{
       color:yellow;
     }
+    a{
+    color: white !important;
+    text-decoration: underline !important;
+    }
+    .profile-link{
+      @include breakpoint-lt-m{
+        display: none !important;
+      }
+    }
+    .profile-link-responsive{
+      display: none !important;
+       @include breakpoint-lt-m{
+        display: block !important;
+      }
+    }
   }
 }
