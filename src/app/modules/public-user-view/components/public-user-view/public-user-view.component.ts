@@ -64,6 +64,7 @@ export class PublicUserViewComponent implements OnInit {
     this.query = q
     this.page = DEFAULT_PAGE_NUMBER
     this.offset = (this.page ? this.page - 1 : 0) * BATCH_SIZE
+    // tslint:disable-next-line:no-console
     console.log('search ', { query: this.query, searchSize: BATCH_SIZE, offset: this.offset })
     // everytime search hits, we have to reset the existing container list
     this.apiData$.next([])
@@ -72,7 +73,8 @@ export class PublicUserViewComponent implements OnInit {
 
   onScroll(_scrollEvent: IScrollUIEvent) {
     this.nextPage()
-    console.log('scrolled')
+    // console.log('scrolled')
+    // tslint:disable-next-line:no-console
     console.log({ query: this.query, searchSize: BATCH_SIZE, offset: this.offset })
     this.updateData({ query: this.query, searchSize: BATCH_SIZE, offset: this.offset })
   }
