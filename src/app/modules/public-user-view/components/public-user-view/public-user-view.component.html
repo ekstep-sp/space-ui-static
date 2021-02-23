@@ -77,6 +77,6 @@
 </div>
 <ng-template #cardTemplate>
     <ng-container *ngFor="let card of (apiData$ | async)">
-        <ws-publi-usercard [userData]=card></ws-publi-usercard>
+        <ws-public-user-card [userData]=card></ws-public-user-card>
     </ng-container>
 </ng-template>
