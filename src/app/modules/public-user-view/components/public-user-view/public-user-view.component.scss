@@ -59,7 +59,7 @@
      
       }     
       
-   .blogs-container {
+   .search-mobile-container {
         // max-width: 900px;
         max-width: 300px;
         margin:0 auto;
@@ -97,13 +97,13 @@
               padding-right: 32px;
               padding-bottom: 8px;
             }
-            .searchIcon{
-              position: absolute;
-              top: 0;
-            //   right: 0;
-              padding: 8px 8px 0px 22px ;
-              color: white;
-            }
+            // .searchIcon{
+            //   position: absolute;
+            //   top: 0;
+            // //   right: 0;
+            //   padding: 8px 8px 0px 22px ;
+            //   color: white;
+            // }
             &:focus{
               input{
                 padding-left: 50px !important;
@@ -126,7 +126,7 @@
     
     }
 
-
+::ng-deep{
       @media only screen and (max-width:560px) {
         .search-container{
             display: none;
@@ -142,7 +142,26 @@
 
             }
 
+            .theme-muave.night-mode ::placeholder{
+                
+                    color: white !important;
+                    // padding-left: 3rem;
+                  
+              }
+            .theme-muave.night-mode mat-icon.searchIconMobile.mat-icon.notranslate.material-icons.mat-icon-no-color{               
+                color: white !important;
+              
+                }
+            .theme-muave.night-mode input.forms-control-mobile{
+              color: white !important;
+                }
+
+            .theme-muave.night-mode .search-mobile-container .expandSearchGroupMobile input {
+              caret-color: white !important;
+                }          
+
       }
+    }
 
       @media only screen and (min-width: 760px) and (max-width:1024px) {
         .search-container{
@@ -157,7 +176,7 @@
             width: 90px !important;
             }
         }
-        .blogs-container{
+        .search-mobile-container{
             padding: 16px !important;
         }
     }
@@ -174,7 +193,7 @@
         }
     }
 
-.mat-card.blogs-containers{
+.mat-card.search-mobile-containers{
     padding: 16px 0px 16px 0px !important;
 
 }
