@@ -10,7 +10,6 @@ import { ENDPOINT_URL, BATCH_SIZE, DEFAULT_OFFSET, DUMMY_DATA } from './../const
 export class PublicUsersCoreService {
   dummy = true
   counter = 0
-
   constructor(private readonly http: HttpClient) { }
 
   getApiData(searchQuery: string, offset = DEFAULT_OFFSET, searchSize = BATCH_SIZE): Observable<IPublicUsersResponse> {
@@ -26,7 +25,7 @@ export class PublicUsersCoreService {
       } else {
         result = { ...DUMMY_DATA, DATA: [] }
       }
-      // tslint:disable-next-line: no-console
+      // tslint:disable-next-line:no-console
       console.log('returning api data as ', result)
       return of(result).pipe(delay(1000))
     }
