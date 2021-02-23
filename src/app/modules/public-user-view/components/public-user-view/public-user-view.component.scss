@@ -13,9 +13,10 @@
         flex:2
     }
 
+
     .search-container{
         padding-right: 1.5rem;
-        padding-top: 8px;
+        display: flex;
         .expandSearchGroup{
             display: inline-block;
             position: relative;
@@ -286,11 +287,6 @@
     }
 }
 
-  @media only screen and (max-width:600px) {
-    .search-container:not(:root:root){
-        display: none !important;
 
-      }
-    }
 
 
