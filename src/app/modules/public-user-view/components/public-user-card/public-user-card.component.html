@@ -14,7 +14,7 @@
       <img class="img-width rounded-full h-24 w-24"
         [src]="userData?.source_profile_picture && userData?.source_profile_picture !== 'null' ? userData.source_profile_picture : defaultUserImage">
     </div>
-    <div class="text-center mt-2">
+    <div class="text-center mt-2 px-small-7">
       <div class="font-size-18 flex justify-center align-center break-words txt-color">
         <span *ngIf="userData?.first_name.length || userData?.middle_name.length || userData?.last_name.length"
           class="middle-text mr-2">{{userData?.first_name}} {{userData?.middle_name}} {{userData?.last_name}}</span>
@@ -26,7 +26,7 @@
         {{userData?.department_name}}
       </div>
       <div class="hovercard mt-6" *ngIf="userData?.user_properties">
-        <div class="font-size-14 txt-color">
+        <div class="font-size-14 txt-color break-all">
           <!-- <span>{{userData?.user_properties?.value?.profileLink}}</span> -->
           <a [attr.href]="userData?.user_properties?.value?.profileLink" target="_blank"
             class="profile-link">{{userData?.user_properties?.value?.profileLink}}</a>

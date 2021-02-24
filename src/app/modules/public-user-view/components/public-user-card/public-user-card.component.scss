@@ -1,6 +1,11 @@
 @import 'ws-mixins';
 $card-height: 215px;
 
+.px-small-7 {
+  padding-left: 7px;
+  padding-right: 7px;
+}
+
  .content {
   @include breakpoint-xs {
     margin-left: 0 !important;
