@@ -3,7 +3,7 @@ import { FormControl } from '@angular/forms'
 // import { Router } from '@angular/router';
 import { NsPage, ConfigurationsService, ValueService } from '@ws-widget/utils'
 import { BehaviorSubject, Observable, of } from 'rxjs'
-import { catchError, debounceTime, distinctUntilChanged, map, tap } from 'rxjs/operators'
+import { catchError, debounceTime, distinctUntilChanged, filter, map, tap } from 'rxjs/operators'
 import { PublicUsersCoreService } from '../../services/public-users-core.service'
 import { BATCH_SIZE, DEFAULT_OFFSET, DEFAULT_PAGE_NUMBER, DEFAULT_QUERY, INFINITE_SCROLL_CONSTANTS } from './../../constants'
 import { IPublicUsers, IPublicUsersResponse, IRawUserProperties, IUpdateDataObj } from './../../models/public-users.interface'
@@ -49,10 +49,13 @@ export class PublicUserViewComponent implements OnInit {
   ngOnInit() {
     // enable search functionality using search bar
     if (!this.hideGlobalSearch) {
-      this.globalSearch.valueChanges.pipe(debounceTime(1000), distinctUntilChanged())
-        .subscribe((searchTerm: string) => {
-
-          this.coreSrvc.counter = 0
+      // tslint:disable-next-line: max-line-length
+      this.globalSearch.valueChanges.pipe(
+        filter((vals: string) => (vals.trim().length === 0 || vals.trim().length >= 3)),
+        debounceTime(1000),
+        distinctUntilChanged()
+        ).subscribe((searchTerm: string) => {
+          this.coreSrvc.counter = 0 // for dummy data
           this.searchUsers(searchTerm)
         })
     }
@@ -81,7 +84,7 @@ export class PublicUserViewComponent implements OnInit {
 
   nextPage() {
     this.page += 1
-    this.offset = ((this.page - 1) * BATCH_SIZE) + 1
+    this.offset = ((this.page - 1) * BATCH_SIZE)
   }
 
   updateData({ query, offset, searchSize }: IUpdateDataObj) {

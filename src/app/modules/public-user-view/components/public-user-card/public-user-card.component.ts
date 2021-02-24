@@ -8,6 +8,7 @@ import { DEFAULT_IMAGE_URL } from '../../constants'
 })
 export class PublicUsercardComponent implements OnInit {
   @Input() userData: any = {}
+  @Input() allowToMail = true
   userdata: any
   defaultUserImage = DEFAULT_IMAGE_URL
 

@@ -11,19 +11,20 @@
   <mat-card class="profile-card text-center overflow-hidden cursor-pointer">
     <div class="flex mx-auto pt-4 image align-center justify-center">
       <img class="img-width rounded-full h-24 w-24"
-        [src]="userData?.source_profile_picture ? userData.source_profile_picture : defaultUserImage">
+        [src]="userData?.source_profile_picture && userData?.source_profile_picture !== 'null' ? userData.source_profile_picture : defaultUserImage">
     </div>
     <div class="text-center mt-2">
       <div class="font-size-18 flex justify-center align-center break-words txt-color">
         <span *ngIf="userData?.first_name.length || userData?.middle_name.length || userData?.last_name.length"
           class="middle-text mr-2">{{userData?.first_name}} {{userData?.middle_name}} {{userData?.last_name}}</span>
-
-        <mat-icon class="mailicon mr-3">mail_outline</mat-icon>
+        <ng-container *ngIf="allowToMail">
+          <mat-icon class="mailicon mr-3">mail_outline</mat-icon>
+        </ng-container>
       </div>
       <div class="font-size-18 org-color mt-2">
         {{userData?.department_name}}
       </div>
-      <div class="hovercard mt-6">
+      <div class="hovercard mt-6" *ngIf="userData?.user_properties">
         <div class="font-size-14 txt-color">
           <!-- <span>{{userData?.user_properties?.value?.profileLink}}</span> -->
           <a [attr.href]="userData?.user_properties?.value?.profileLink" target="_blank"

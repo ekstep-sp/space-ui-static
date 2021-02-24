@@ -8,7 +8,7 @@ import { ENDPOINT_URL, BATCH_SIZE, DEFAULT_OFFSET, DUMMY_DATA } from './../const
   providedIn: 'root',
 })
 export class PublicUsersCoreService {
-  dummy = true
+  dummy = false
   counter = 0
   constructor(private readonly http: HttpClient) { }
 
@@ -30,7 +30,7 @@ export class PublicUsersCoreService {
       return of(result).pipe(delay(1000))
     }
     let requestParams = new HttpParams().set('searchSize', `${searchSize}`)
-    requestParams = requestParams.append('offset', `${offset}`)
+    requestParams = requestParams.append('offSet', `${offset}`)
     if (searchQuery && searchQuery.length) {
       requestParams = requestParams.append('search_query', searchQuery)
     }
@@ -38,8 +38,10 @@ export class PublicUsersCoreService {
   }
 
   extractUserProperties(rawObj: IRawUserProperties | IFormattedUserProperties): IFormattedUserProperties {
-    const rawData = { ...rawObj }
-    rawData.value = (typeof rawObj.value === 'string' ? JSON.parse(rawObj.value) : rawObj.value) as any
+    const rawData = rawObj ? { ...rawObj } : rawObj
+    if (rawData && Object.keys(rawData).length) {
+      rawData.value = (typeof rawObj.value === 'string' ? JSON.parse(rawObj.value) : rawObj.value) as any
+    }
     return rawData as IFormattedUserProperties
   }
 }
