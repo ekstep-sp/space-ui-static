@@ -45,8 +45,7 @@ export class PublicUserViewComponent implements OnInit {
     this.pageNavbar = this.configSvc.pageNavBar
     this.isXSmall$ = this.valueSvc.isXSmall$
   }
-
-  ngOnInit() {
+    ngOnInit() {
     // enable search functionality using search bar
     if (!this.hideGlobalSearch) {
       // tslint:disable-next-line: max-line-length

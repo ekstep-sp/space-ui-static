@@ -1,5 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core'
 import { DEFAULT_IMAGE_URL } from '../../constants'
+import { ValueService } from '@ws-widget/utils'
 
 @Component({
   selector: 'ws-public-user-card',
@@ -11,10 +12,16 @@ export class PublicUsercardComponent implements OnInit {
   @Input() allowToMail = true
   userdata: any
   defaultUserImage = DEFAULT_IMAGE_URL
-
-  constructor() { }
-
+  isXSmall$ = this.valueSvc.isXSmall$
+  isXSmall = false
+  constructor(private valueSvc: ValueService) {
+    this.valueSvc.isXSmall$.subscribe(isXSmall => {
+      this.isXSmall = isXSmall
+    })
+   }
   ngOnInit() {
-
   }
-}
+  navigateToProfileLink(url: string) {
+  return (!this.isXSmall) ? window.open(url, '_blank') :  window.open(url, '_self')
+      }
+    }

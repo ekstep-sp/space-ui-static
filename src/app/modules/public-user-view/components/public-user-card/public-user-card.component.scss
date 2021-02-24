@@ -102,21 +102,6 @@ $card-height: 215px;
     .mailicon{
       color:yellow;
     }
-    a{
-    color: white !important;
-    text-decoration: underline !important;
-    }
-    .profile-link{
-      @include breakpoint-lt-m{
-        display: none !important;
-      }
-    }
-    .profile-link-responsive{
-      display: none !important;
-       @include breakpoint-lt-m{
-        display: block !important;
-      }
-    }
   }
 
   .subsitute-no-user-properties:hover{
@@ -138,10 +123,10 @@ $card-height: 215px;
       display: block;
       color: white !important;
     }
-    a{
-      color: white !important;
-      text-decoration: underline !important;
-      }
+    // a{
+    //   color: white !important;
+    //   text-decoration: underline !important;
+    //   }
 
   }
 }
