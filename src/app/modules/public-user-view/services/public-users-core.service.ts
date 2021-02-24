@@ -44,4 +44,15 @@ export class PublicUsersCoreService {
     }
     return rawData as IFormattedUserProperties
   }
+
+  getAuthoringUrl(url: string): string {
+    if (url && url !== 'null') {
+      return `/apis/authContent/${url.includes('/content-store/') ? new URL(url).pathname.slice(1) : encodeURIComponent(url)}`
+    }
+    return ''
+  }
+
+  getSanitisedProfileUrl(url: string): string {
+    return this.getAuthoringUrl(url)
+  }
 }

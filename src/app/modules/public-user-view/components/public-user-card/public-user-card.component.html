@@ -12,7 +12,7 @@
   <mat-card class="profile-card text-center overflow-hidden cursor-pointer">
     <div class="flex mx-auto pt-4 image align-center justify-center">
       <img class="img-width rounded-full h-24 w-24"
-        [src]="userData?.source_profile_picture && userData?.source_profile_picture !== 'null' ? userData.source_profile_picture : defaultUserImage">
+        [src]="userData?.source_profile_picture ? userData.source_profile_picture : defaultUserImage">
     </div>
     <div class="text-center mt-2 px-small-7">
       <div class="font-size-18 flex justify-center align-center break-words txt-color">

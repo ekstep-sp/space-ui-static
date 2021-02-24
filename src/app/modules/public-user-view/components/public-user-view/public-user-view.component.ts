@@ -102,6 +102,7 @@ export class PublicUserViewComponent implements OnInit {
           if (rawData) {
             const formattedData = rawData.DATA.map((dataObj: IPublicUsers) => ({
               ...dataObj,
+              source_profile_picture: this.coreSrvc.getSanitisedProfileUrl(dataObj.source_profile_picture),
               // tslint:disable-next-line: max-line-length
               user_properties: this.coreSrvc.extractUserProperties(dataObj.user_properties as IRawUserProperties),
             }))
