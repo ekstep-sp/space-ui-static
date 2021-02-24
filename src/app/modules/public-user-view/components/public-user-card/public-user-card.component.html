@@ -2,7 +2,8 @@
   <div class="orignial rounded-sm">
     <ng-container [ngTemplateOutlet]="mainCardContent"></ng-container>
   </div>
-  <div class="substitute rounded-sm absolute top-0 left-0">
+  <div [ngClass]="(userData?.user_properties?.value)?'substitute':'subsitute-no-user-properties'"
+    class="substitute rounded-sm absolute top-0 left-0">
     <ng-container [ngTemplateOutlet]="mainCardContent"></ng-container>
   </div>
 </div>

@@ -20,7 +20,7 @@ export interface IRawUserProperties extends IBaseUserProperties {
 }
 export interface IPublicUsers {
     wid: string
-    user_properties: IRawUserProperties | IFormattedUserProperties
+    user_properties: IRawUserProperties | IFormattedUserProperties | null
     department_name: string
     first_name: string
     middle_name: string | null
@@ -30,4 +30,4 @@ export interface IPublicUsers {
     time_inserted: string
 }
 
-export interface IUpdateDataObj {query: string, searchSize: number, offset: number}
+export interface IUpdateDataObj { query: string, searchSize: number, offset: number }

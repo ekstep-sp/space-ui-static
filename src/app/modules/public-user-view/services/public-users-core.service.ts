@@ -20,7 +20,7 @@ export class PublicUsersCoreService {
         result = {
           ...DUMMY_DATA,
           // tslint:disable-next-line: max-line-length
-          DATA: searchQuery ? DUMMY_DATA.DATA.filter((dataObj: IPublicUsers) =>  dataObj.first_name.includes(searchQuery)) : DUMMY_DATA.DATA,
+          DATA: searchQuery ? DUMMY_DATA.DATA.filter((dataObj: IPublicUsers) => dataObj.first_name.includes(searchQuery)) : DUMMY_DATA.DATA,
         }
       } else {
         result = { ...DUMMY_DATA, DATA: [] }
