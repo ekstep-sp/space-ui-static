@@ -130,7 +130,7 @@
 ::ng-deep{
       @media only screen and (max-width:560px) {
         .search-container{
-            display: none;
+            display: none !important;
 
           }
           ::placeholder{
