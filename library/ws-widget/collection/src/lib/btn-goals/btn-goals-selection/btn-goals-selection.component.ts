@@ -63,6 +63,7 @@ export class BtnGoalsSelectionComponent implements OnInit {
       this.goalsSvc.addContentToGoal(goalId, this.contentId, NsGoal.EGoalTypes.USER).subscribe(
         () => {
           this.snackBar.open(this.contentAddMessage.nativeElement.value)
+          this.selectedGoals.add(goalId)
         }
         ,
         err => {
@@ -72,8 +73,6 @@ export class BtnGoalsSelectionComponent implements OnInit {
             },
             duration: 10000,
           })
-
-          this.selectedGoals.delete(goalId)
           option.toggle()
         },
       )
@@ -82,6 +81,7 @@ export class BtnGoalsSelectionComponent implements OnInit {
       this.goalsSvc.removeContentFromGoal(goalId, this.contentId, NsGoal.EGoalTypes.USER).subscribe(
         () => {
           this.snackBar.open(this.contentRemoveMessage.nativeElement.value)
+          this.selectedGoals.delete(goalId)
         }
         ,
         err => {
@@ -91,7 +91,6 @@ export class BtnGoalsSelectionComponent implements OnInit {
             },
             duration: 10000,
           })
-          this.selectedGoals.add(goalId)
           option.toggle()
         },
       )

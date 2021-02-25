@@ -15,6 +15,7 @@
     Done
   </button>
   <a (click)="closeDialog.emit()" [routerLink]="'/app/goals/create/custom'"
+    [disabled]="!isDoneDisabled()"
     [queryParams]="{ preselected: contentId, preselectedName: contentName }" mat-button color="primary" class="btn-font"
     i18n i18n>Create
     New</a>
