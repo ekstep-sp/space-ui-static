@@ -793,8 +793,9 @@ export class ContentComponent implements OnInit, OnDestroy {
       .pipe(
         switchMap((originalData: any) => {
           if (contentType === 'Resource') {
+            debugger
             // tslint:disable-next-line: max-line-length
-            return this.analyticsSrv.getAndMergeExternalResources(contentType, originalData, { startDate, endDate, searchQuery })
+            return this.analyticsSrv.mergeAdditionalDataPoints(contentType, originalData, { startDate, endDate, searchQuery })
           }
           return of(originalData)
         })
@@ -854,7 +855,7 @@ export class ContentComponent implements OnInit, OnDestroy {
                 name: cur.content_name,
                 id: cur.content_id,
                 completed: cur.num_of_users,
-                isExternal: true,
+                isExternal: cur.is_external,
                 users_accessed: cur.users_accessed || [],
                 contentUrl: `https://space.societalplatform.org/app/toc/${cur.content_id}`,
                 data: [],

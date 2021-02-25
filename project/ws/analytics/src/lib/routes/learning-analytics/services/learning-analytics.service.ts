@@ -5,8 +5,7 @@ import { NsAnalytics } from '../models/learning-analytics.model'
 import { NsUserDashboard } from '@ws/app/src/lib/routes/user-dashboard/models/user-dashboard.model'
 import moment from 'moment'
 import { START_DATE } from '@ws/author/src/lib/constants/constant'
-import { catchError, map, tap } from 'rxjs/operators'
-import { sortBy } from 'lodash'
+import { catchError, finalize, map, switchMap, tap } from 'rxjs/operators'
 
 const PROTECTED_SLAG_V8 = `/apis/proxies/v8/LA/api`
 const COUNT = `/apis/protected/v8/content/count`
@@ -34,6 +33,19 @@ interface IResponse {
   TIME_STAMP?: any,
   wid?: string,
   email?: string,
+}
+
+namespace Ires {
+  export interface Response {
+    ok: boolean,
+    status: number,
+    response: ResponseDATA[]
+  }
+  export interface ResponseDATA {
+    identifier: string,
+    name: string,
+    isExternal: boolean,
+  }
 }
 @Injectable({
   providedIn: 'root',
@@ -138,6 +150,121 @@ export class LearningAnalyticsService {
       })
     )
   }
+  quickSortForObjects(arrayOfObjects: any[], topLevelKey: string): any[] {
+    if (arrayOfObjects.length < 2) {
+      return arrayOfObjects
+    }
+    const pivot = arrayOfObjects[0]
+    const lesserArray = []
+    const greaterArray = []
+    // tslint:disable-next-line: no-increment-decrement
+    for (let i = 1; i < arrayOfObjects.length; ++i) {
+      if (arrayOfObjects[i][topLevelKey] > pivot[topLevelKey]) {
+        greaterArray.push(arrayOfObjects[i])
+      } else {
+        lesserArray.push(arrayOfObjects[i])
+      }
+    }
+    return this.quickSortForObjects(lesserArray, topLevelKey).concat(pivot, this.quickSortForObjects(greaterArray, topLevelKey))
+  }
+
+  mergeAdditionalDataPoints(contentType: string, originalData: any, otherData: any) {
+    return of(originalData).pipe(
+      // merge all external resources
+      // tslint:disable-next-line: max-line-length
+      switchMap((dataWithoutExternalInfo: any) => this.getAndMergeExternalResources(contentType, dataWithoutExternalInfo, otherData)),
+      // merge all missing resources which do not have any analytics details
+      switchMap((dataWithExternalInfo: any) => this.addMissingDataPoints(contentType, dataWithExternalInfo, otherData)),
+      // sort all the data in descending order of number of users
+      switchMap((nonSortedData: any) => {
+        const sortedLH = this.quickSortForObjects(nonSortedData.learning_history, 'num_of_users')
+        return of({
+          ...nonSortedData,
+          learning_history: sortedLH.reverse(),
+        })
+      })
+    )
+  }
+
+  addMissingDataPoints(contentType: string, originalData: any, otherData: any) {
+    // 1. hit the all content API to get all the possible resources
+    // 2. merge the new list of contents with the originalData list,the originalData list will contain all resources which have some
+    // analytics info, including external ones. The end result will contain all the contents which have analytics and resources
+    // which don't have analytics. Make sure to format no analytics data properly
+    // 3. sort in descending order for total user access and send back
+    const totalResourceMap = new Map()
+    // store all the concerned ids for duplication
+    originalData.learning_history.forEach((item: any) => {
+      if (!totalResourceMap.has(item.content_id)) {
+        totalResourceMap.set(item.content_id, item)
+      }
+    })
+    const params: {
+      startDate: string,
+      endDate: string,
+      search_query: string,
+      includeFields: string
+    } | any = {}
+    if (otherData.hasOwnProperty('startDate')) {
+      const sd = new Date(otherData.startDate).toISOString()
+      params.startDate = this.getLocalTime(sd, 'startDate')
+    }
+    if (otherData.hasOwnProperty('endDate')) {
+      const ed = new Date(otherData.endDate).toISOString()
+      params.endDate = this.getLocalTime(ed, 'endDate')
+    }
+    if (otherData.hasOwnProperty('searchQuery') && otherData.searchQuery) {
+      params.search_query = otherData.searchQuery
+    }
+    // add default keys to retrieve
+    params.include = 'identifier,name,isExternal'
+    const obs = this.http.get(`${LA_API_END_POINTS.TIME_SPENT}/resources/all`, { params })
+    return obs.pipe(
+      map((apiData: any) => apiData.response),
+      map((allData: Ires.ResponseDATA[]) => {
+        // find out all the contents which do not have any analytics information
+        return allData.filter((item: Ires.ResponseDATA) => !totalResourceMap.has(item.identifier))
+      }),
+      // all the content that will reach here will have no analytics information by logic
+      map((nonAnalyticsData: Ires.ResponseDATA[]) => {
+        return nonAnalyticsData.map((item: Ires.ResponseDATA) => {
+          return {
+            content_name: item.name,
+            content_id: item.identifier,
+            content_type: contentType,
+            is_external: item.isExternal || false,  // to handle the edge case
+            num_of_users: 0,
+            users_accessed: [],
+          }
+        })
+      }),
+      map((transformedAnalyticsData: any[]) => {
+        const oldData = totalResourceMap.values()
+        // merge all of them
+        return [
+          ...oldData,
+          ...transformedAnalyticsData,
+        ]
+      }),
+      // return new data in original format
+      map((newLearningHistory: any[]) => {
+        return {
+          ...originalData,
+          learning_history: [...newLearningHistory],
+        }
+      }),
+      // this will catch all the errors happening in the pipeline
+      catchError(_e => {
+        // tslint:disable-next-line: no-console
+        console.error('captured error while fetching all resources, ', _e)
+        return of(originalData)
+      }),
+      finalize(() => {
+        // clean up
+        totalResourceMap.clear()
+      })
+    )
+  }
 
   getAndMergeExternalResources(contentType: string, originalData: any, otherData: any) {
     // get the external resources
@@ -160,13 +287,10 @@ export class LearningAnalyticsService {
         console.error('network error detected --> ', _e)
         return of(originalData)
       }),
-      // tap(s => console.log('sample recieved is ', s)),
       map((data: any) => {
         return data.response
       }),
-      // tap(s => console.log('sample recieved is 2', s)),
       map((data: any) => {
-        // debugger
         if (data.hasOwnProperty('external_content_access') && data.external_content_access.doc_count) {
           return {
             doc_count: data.external_content_access.doc_count,
@@ -176,7 +300,6 @@ export class LearningAnalyticsService {
         return { doc_count: null, data: [] }
       }),
       map((data: any) => {
-        // debugger
         if (data.doc_count) {
           const newData = data.data.map((externalContent: any) => {
             return {
@@ -201,7 +324,6 @@ export class LearningAnalyticsService {
         }
       }),
       map(finalData => {
-        // debugger
         const previousData = {
           ...finalData.original_data,
         }
@@ -213,14 +335,6 @@ export class LearningAnalyticsService {
           ],
         }
         return newDataWithExtRes
-      }),
-      map((nonSortedData: any) => {
-        // debugger
-        const sortedLearningHistoryWithExt = sortBy(nonSortedData.learning_history, ['num_of_users']).reverse()
-        return {
-          ...nonSortedData,
-          learning_history: sortedLearningHistoryWithExt,
-        }
       }),
       catchError(_e => {
         // tslint:disable-next-line: no-console

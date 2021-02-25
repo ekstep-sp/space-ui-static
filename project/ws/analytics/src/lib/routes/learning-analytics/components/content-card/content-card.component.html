@@ -11,7 +11,8 @@
     </mat-grid-tile>
     <mat-grid-tile style="overflow: visible!important;">
       <mat-icon class="mat-icon notranslate material-icons mat-icon-no-color ws-mat-primary-text info" 
-      role="img" 
+      role="img"
+      *ngIf="nonGraphData?.totalUsers && nonGraphData?.totalUsers > 0" 
       aria-hidden="true" 
       (click)="triggerInfoPopup(false)"
       i18n-matTooltip matTooltip="More Info"
@@ -163,12 +164,13 @@
       </ng-container>
     </mat-grid-tile>
     <mat-grid-tile style="overflow: visible!important;">
-      <mat-icon class="mat-icon notranslate material-icons mat-icon-no-color ws-mat-primary-text info" 
+      <mat-icon *ngIf="contentData?.users_accessed?.length > 0" class="mat-icon notranslate material-icons mat-icon-no-color ws-mat-primary-text info" 
       role="img" 
       aria-hidden="true" 
       (click)="triggerInfoPopup(false)"
       i18n-matTooltip matTooltip="More Info"
       >visibility</mat-icon>
+      <p *ngIf="contentData?.users_accessed?.length <= 0" class="text-outline-grid" i18n-matTooltip matTooltip="Total Users are 0">Not Available</p>
     </mat-grid-tile>
     <!-- <mat-grid-tile>{{ source }}</mat-grid-tile> -->
   </mat-grid-list>
@@ -235,12 +237,13 @@
       </ng-container>
     </mat-grid-tile>
     <mat-grid-tile style="overflow: visible!important;">
-      <mat-icon class="mat-icon notranslate material-icons mat-icon-no-color ws-mat-primary-text info" 
+      <mat-icon *ngIf="contentData?.users_accessed?.length > 0" class="mat-icon notranslate material-icons mat-icon-no-color ws-mat-primary-text info" 
       role="img" 
       aria-hidden="true" 
       (click)="triggerInfoPopup(false)"
       i18n-matTooltip matTooltip="More Info"
       >visibility</mat-icon>
+      <p *ngIf="contentData?.users_accessed?.length <= 0" class="text-outline-grid">Not Available</p>
     </mat-grid-tile>
     <!-- <mat-grid-tile>{{ source }}</mat-grid-tile> -->
   </mat-grid-list>
