@@ -36,6 +36,8 @@ export class PublicUserViewComponent implements OnInit {
   page = DEFAULT_PAGE_NUMBER
   offset = DEFAULT_OFFSET
   query = DEFAULT_QUERY
+  DEFAULT_DEBOUNCE = 1000
+  DEFAULT_MIN_LENGTH_TO_ACTIVATE_SEARCH = 3
   error$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false)
   constructor(
     private readonly configSvc: ConfigurationsService,
@@ -50,8 +52,8 @@ export class PublicUserViewComponent implements OnInit {
     if (!this.hideGlobalSearch) {
       // tslint:disable-next-line: max-line-length
       this.globalSearch.valueChanges.pipe(
-        filter((vals: string) => (vals.trim().length === 0 || vals.trim().length >= 3)),
-        debounceTime(1000),
+        filter((vals: string) => (vals.trim().length === 0 || vals.trim().length >= this.DEFAULT_MIN_LENGTH_TO_ACTIVATE_SEARCH)),
+        debounceTime(this.DEFAULT_DEBOUNCE),
         distinctUntilChanged()
         ).subscribe((searchTerm: string) => {
           this.searchUsers(searchTerm)
@@ -72,9 +74,6 @@ export class PublicUserViewComponent implements OnInit {
 
   onScroll(_scrollEvent: IScrollUIEvent) {
     this.nextPage()
-    // console.log('scrolled')
-    // tslint:disable-next-line:no-console
-    console.log({ query: this.query, searchSize: BATCH_SIZE, offset: this.offset })
     this.updateData({ query: this.query, searchSize: BATCH_SIZE, offset: this.offset })
   }
 
@@ -133,12 +132,10 @@ export class PublicUserViewComponent implements OnInit {
   }
 
   showSearchBar() {
-
     this.isEnabledSearch = true
-
   }
-  disableSearchbar() {
 
+  disableSearchbar() {
     this.isEnabledSearch = false
   }
 
