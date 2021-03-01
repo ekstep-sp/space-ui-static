@@ -18,10 +18,16 @@ export class PublicUsercardComponent implements OnInit {
     this.valueSvc.isXSmall$.subscribe(isXSmall => {
       this.isXSmall = isXSmall
     })
-   }
+  }
   ngOnInit() {
   }
   navigateToProfileLink(url: string) {
-  return (!this.isXSmall) ? window.open(url, '_blank') :  window.open(url, '_self')
-      }
+    return (!this.isXSmall) ? window.open(url, '_blank') : window.open(url, '_self')
+  }
+  atLeastOnevaluePresent(propertyObject: any) {
+    if (typeof propertyObject === 'object' && propertyObject !== null && propertyObject !== undefined) {
+      return Object.keys(propertyObject).some((key: string) => !!propertyObject[key])
     }
+    return false
+  }
+}

@@ -19,10 +19,22 @@ export class PublicUsersCoreService {
     return this.http.get<IPublicUsersResponse>(ENDPOINT_URL, { params: requestParams })
   }
 
+  parseProfileLink(url: String | null) {
+    if (url && !(url.includes('http://') || url.includes('https://'))) {
+      // reconstruct the changes
+      return `http://${url}`
+    }
+    return url as any
+  }
+
   extractUserProperties(rawObj: IRawUserProperties | IFormattedUserProperties): IFormattedUserProperties {
     const rawData = rawObj ? { ...rawObj } : rawObj
     if (rawData && Object.keys(rawData).length) {
-      rawData.value = (typeof rawObj.value === 'string' ? JSON.parse(rawObj.value) : rawObj.value) as any
+      (rawData as IFormattedUserProperties).value = (typeof rawObj.value === 'string' ? JSON.parse(rawObj.value) : rawObj.value) as any
+      if ((rawData as IFormattedUserProperties).value.profileLink) {
+        // tslint:disable-next-line: max-line-length
+        (rawData as IFormattedUserProperties).value.profileLink = (rawData as IFormattedUserProperties).value.profileLink && this.parseProfileLink((rawData as IFormattedUserProperties).value.profileLink)
+      }
     }
     return rawData as IFormattedUserProperties
   }
