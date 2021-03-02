@@ -1,0 +1,17 @@
+<mat-toolbar [color]="pageNavbar.color">
+    <ws-widget-btn-page-back [widgetData]="{ url: '/app/users' }"></ws-widget-btn-page-back>
+
+    <span class="margin-left-xs text-truncate span-class">
+        <span class="visible-xs-inline nav-bar-style" i18n>People</span>
+    </span>
+</mat-toolbar>
+<!--Adding logic for invitations criteria-->
+<div class="invitation-container">
+    <div *ngIf="(isLoading$ | async)">
+        <ng-container *ngTemplateOutlet="spinner"></ng-container>
+    </div>
+</div>
+
+<ng-template #spinner>
+    <mat-spinner class="spinner" color="primary"></mat-spinner>
+</ng-template>

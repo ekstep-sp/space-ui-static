@@ -280,7 +280,7 @@ const routes: Routes = [
     },
   },
   {
-    path: 'app/users/public',
+    path: 'app/users',
     canActivate: [GeneralGuard],
     loadChildren: () => import('./routes/route-public-user.module').then(u => u.RoutePublicUserModule),
   },
