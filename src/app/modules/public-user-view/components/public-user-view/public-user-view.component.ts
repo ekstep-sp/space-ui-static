@@ -6,7 +6,7 @@ import { BehaviorSubject, Observable, of } from 'rxjs'
 import { catchError, debounceTime, distinctUntilChanged, filter, map, tap } from 'rxjs/operators'
 import { PublicUsersCoreService } from '../../services/public-users-core.service'
 import { BATCH_SIZE, DEFAULT_OFFSET, DEFAULT_PAGE_NUMBER, DEFAULT_QUERY, INFINITE_SCROLL_CONSTANTS } from './../../constants'
-import { IPublicUsers, IPublicUsersResponse, IRawUserProperties, IUpdateDataObj } from './../../models/public-users.interface'
+import { IPublicUsers, IPublicUsersResponse, IRawUserProperties, IUpdateDataObj, IUserConnections } from './../../models/public-users.interface'
 interface IScrollUIEvent {
   currentScrollPosition: number
 }
@@ -39,6 +39,7 @@ export class PublicUserViewComponent implements OnInit {
   DEFAULT_DEBOUNCE = 1000
   DEFAULT_MIN_LENGTH_TO_ACTIVATE_SEARCH = 3
   error$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false)
+  userConnectionsList$:BehaviorSubject<IUserConnections[]> = new BehaviorSubject<IUserConnections[] | []>([])
   constructor(
     private readonly configSvc: ConfigurationsService,
     private readonly coreSrvc: PublicUsersCoreService,
@@ -61,6 +62,7 @@ export class PublicUserViewComponent implements OnInit {
     }
     // trigger first time page load
     this.searchUsers()
+    this.getConnectionsListResponse()
   }
   searchUsers(q = '') {
 
@@ -138,5 +140,18 @@ export class PublicUserViewComponent implements OnInit {
   disableSearchbar() {
     this.isEnabledSearch = false
   }
-
+    //this will send wid of logged in user and get list of connections as response
+  getConnectionsListResponse() {
+      const loggedInUserWid = this.configSvc.userProfile?this.configSvc.userProfile.userId : '';
+      this.coreSrvc.getConnectionsList(loggedInUserWid).pipe(
+        catchError((_e:any)=> of(null)),
+        map(response=>{
+          if(response){
+            response = response.filter((eachresponse)=> eachresponse.user_id !== loggedInUserWid)
+            this.userConnectionsList$.next(response)
+          }
+        })
+      ).subscribe()
+      
+  }
 }

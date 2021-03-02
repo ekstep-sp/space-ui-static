@@ -1,7 +1,7 @@
 import { HttpClient, HttpParams } from '@angular/common/http'
 import { Injectable } from '@angular/core'
-import { Observable } from 'rxjs'
-import { IFormattedUserProperties, IPublicUsersResponse, IRawUserProperties } from '../models/public-users.interface'
+import { Observable, of } from 'rxjs'
+import { IFormattedUserProperties, IPublicUsersResponse, IRawUserProperties , IUserConnections} from '../models/public-users.interface'
 import { ENDPOINT_URL, BATCH_SIZE, DEFAULT_OFFSET } from './../constants'
 @Injectable({
   providedIn: 'root',
@@ -48,5 +48,20 @@ export class PublicUsersCoreService {
 
   getSanitisedProfileUrl(url: string): string {
     return this.getAuthoringUrl(url)
+  }
+  getConnectionsList(wid:string):Observable<IUserConnections[]>{
+    const response = [{
+      id:'123', created_on:'2/03/2021', last_updated_on:'2/03/2021', status:'connected', requested_by:'acbf4053-c126-4e85-a0bf-252a896535ea', email: 'anjitha.r98@gmail.com', user_id:'10af49b7-3874-41ca-9d4c-02cfbe5a9ba8',fname:'Aaditeshwar',lname:'Seth',root_org:'space',org:'IIT Delhi'
+    },{
+    id:'123', created_on:'2/03/2021', last_updated_on:'2/03/2021', status:'connected', requested_by:'acbf4053-c126-4e85-a0bf-252a896535ea', email: 'anjitha.r98@gmail.com', user_id:'acbf4053-c126-4e85-a0bf-252a896535ea',fname:'Aaditeshwar',lname:'Seth',root_org:'space',org:'IIT Delhi'
+  },
+    {
+      id:'123', created_on:'2/03/2021', last_updated_on:'2/03/2021', status:'pending', requested_by:'acbf4053-c126-4e85-a0bf-252a896535ea', email: 'anjitha.r98@gmail.com', user_id:'00b4a61e-be61-4e48-9edc-62a29172ef2b',fname:'Aakash',lname:'Vishwakarma',root_org:'space',org:'Sustainable Environment and Ecological Development Society'
+    },
+    {
+      id:'123', created_on:'2/03/2021', last_updated_on:'2/03/2021', status:'rejected', requested_by:'acbf4053-c126-4e85-a0bf-252a896535ea', email: 'anjitha.r98@gmail.com', user_id:'da9d37a0-1ed3-49a1-a69f-7b045569d41e',fname:'Aayushi',lname:'Chaturvedi',root_org:'space',org:'WPP India CSR Foundation'
+    }]
+      //response from connectio list api
+  return  of(response)
   }
 }

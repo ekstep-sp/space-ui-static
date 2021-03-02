@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core'
 import { ConfigurationsService, NsPage } from '@ws-widget/utils/src/public-api'
 import { BehaviorSubject } from 'rxjs'
-import { PublicUsersUtilsService } from '../../services/public-users-utils.service'
+// import { PublicUsersUtilsService } from '../../services/public-users-utils.service'
 
 @Component({
   selector: 'ws-public-user-invitation',
@@ -14,7 +14,7 @@ export class PublicUserInvitationComponent implements OnInit {
   isLoading$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(true)
   constructor(
     private readonly configSvc: ConfigurationsService,
-    private readonly _utilSvc: PublicUsersUtilsService,
+    // private readonly _utilSvc: PublicUsersUtilsService,
   ) { }
 
   ngOnInit() {}

@@ -1,7 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core'
 import { DEFAULT_IMAGE_URL } from '../../constants'
 import { ValueService } from '@ws-widget/utils'
-
+import { IUserConnections } from './../../models/public-users.interface'
 @Component({
   selector: 'ws-public-user-card',
   templateUrl: './public-user-card.component.html',
@@ -10,6 +10,7 @@ import { ValueService } from '@ws-widget/utils'
 export class PublicUsercardComponent implements OnInit {
   @Input() userData: any = {}
   @Input() allowToMail = true
+  @Input() userConnectionsList:IUserConnections[] = []
   userdata: any
   defaultUserImage = DEFAULT_IMAGE_URL
   isXSmall$ = this.valueSvc.isXSmall$

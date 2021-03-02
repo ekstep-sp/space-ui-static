@@ -95,6 +95,9 @@ $card-height: 215px;
     .hovercard {
       display: block;
       color: white !important;
+      .btn-txt-clr{
+        color: #42428B;
+      }
     }
     .profile-card {
       height: $card-height*1.8;
@@ -122,11 +125,8 @@ $card-height: 215px;
     .hovercard {
       display: block;
       color: white !important;
+
     }
-    // a{
-    //   color: white !important;
-    //   text-decoration: underline !important;
-    //   }
 
   }
 }

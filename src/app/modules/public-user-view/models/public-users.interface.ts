@@ -31,3 +31,17 @@ export interface IPublicUsers {
 }
 
 export interface IUpdateDataObj { query: string, searchSize: number, offset: number }
+
+export interface IUserConnections {
+    id:string,
+    created_on:string,
+    last_updated_on: string,
+    status:string,
+    requested_by:string,
+    email?: string, 
+    user_id?: string,
+    fname?:string,
+    lname?:string,
+    root_org?:string,
+    org?:string
+}
