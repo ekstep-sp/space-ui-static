@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core'
-import { ConfigurationsService } from '@ws-widget/utils/src/public-api';
-import { of } from 'rxjs';
-import { catchError, map, delay } from 'rxjs/operators';
-import { IActionUpdate } from '../models/public-users.interface';
-import { PublicUsersCoreService } from './public-users-core.service';
+import { ConfigurationsService } from '@ws-widget/utils/src/public-api'
+import { of } from 'rxjs'
+import { catchError, map, delay } from 'rxjs/operators'
+import { IActionUpdate } from '../models/public-users.interface'
+import { PublicUsersCoreService } from './public-users-core.service'
 @Injectable({
   providedIn: 'root',
 })

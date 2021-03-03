@@ -1,25 +1,25 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { async, ComponentFixture, TestBed } from '@angular/core/testing'
 
-import { PublicUserInvitationComponent } from './public-user-invitation.component';
+import { PublicUserInvitationComponent } from './public-user-invitation.component'
 
 describe('PublicUserInvitationComponent', () => {
-  let component: PublicUserInvitationComponent;
-  let fixture: ComponentFixture<PublicUserInvitationComponent>;
+  let component: PublicUserInvitationComponent
+  let fixture: ComponentFixture<PublicUserInvitationComponent>
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ PublicUserInvitationComponent ]
+      declarations: [PublicUserInvitationComponent],
     })
-    .compileComponents();
-  }));
+    .compileComponents()
+  }))
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(PublicUserInvitationComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
-  });
+    fixture = TestBed.createComponent(PublicUserInvitationComponent)
+    component = fixture.componentInstance
+    fixture.detectChanges()
+  })
 
   it('should create', () => {
-    expect(component).toBeTruthy();
-  });
-});
+    expect(component).toBeTruthy()
+  })
+})

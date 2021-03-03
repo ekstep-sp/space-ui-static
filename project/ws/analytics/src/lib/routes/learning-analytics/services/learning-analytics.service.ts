@@ -36,11 +36,13 @@ interface IResponse {
 }
 
 namespace Ires {
+  // tslint:disable-next-line: interface-name
   export interface Response {
     ok: boolean,
     status: number,
     response: ResponseDATA[]
   }
+  // tslint:disable-next-line: interface-name
   export interface ResponseDATA {
     identifier: string,
     name: string,
