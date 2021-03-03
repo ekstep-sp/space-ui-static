@@ -29,18 +29,20 @@
       <div class="font-size-18 org-color mt-2">
         {{userData?.department_name}}
       </div>
-      <div class="hovercard mt-6"  *ngIf="userData?.user_properties">
-        <div class="font-size-14 txt-color underline break-all">
+      <div class="hovercard mt-3">
+        <div class="font-size-14 txt-color underline break-all" *ngIf="userData?.user_properties?.value?.profileLink">
             <div class="profile" (click)="navigateToProfileLink(userData?.user_properties?.value?.profileLink)">{{userData?.user_properties?.value?.profileLink}}</div>
         </div>
-        <div class="bio-desc overflow-y-auto font-size-14 mx-5 txt-color">
-          <p>{{userData?.user_properties?.value?.bio}}</p>
+        <div class="flex flex-col">
+          <div class="bio-desc overflow-y-auto font-size-14 mx-5 txt-color">
+            <p>{{userData?.user_properties?.value?.bio}}</p>
+          </div>
+          <div class="hovercard mt-1" *ngIf = "loggedInUserWid != userData?.wid ">
+            <button mat-raised-button  (click)="acceptConnection(userData,connectionData)">
+              <span class="btn-txt-clr">{{buttonStatus}}</span>
+            </button>
+          </div>
         </div>
-      </div>
-      <div class="hovercard mt-2" *ngIf = "loggedInUserWid != userData.wid ">
-        <button mat-raised-button  (click)="acceptConnection(userData,connectionData)">
-          <span class="btn-txt-clr">{{buttonStatus}}</span>
-        </button>
       </div>
     </div>
   </mat-card>
