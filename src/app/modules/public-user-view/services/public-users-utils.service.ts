@@ -1,13 +1,12 @@
 import { Injectable } from '@angular/core'
-import { ConfigurationsService } from '@ws-widget/utils/src/public-api';
-import { catchError, map, delay } from 'rxjs/operators';
 import { IActionUpdate } from '../models/public-users.interface';
 import { IUserConnections } from '../models/public-users.interface'
 import { DUMMY_RESPONSE, CONNECTION_STATUS_CONNECT } from './../constants'
 import { Observable, of, BehaviorSubject} from 'rxjs';
-import { PublicUsersCoreService } from './public-users-core.service';
+import { PublicUsersCoreService } from './public-users-core.service'
 
-
+import { ConfigurationsService } from '@ws-widget/utils/src/public-api'
+import { catchError, map, delay } from 'rxjs/operators'
 @Injectable({
   providedIn: 'root',
 })
