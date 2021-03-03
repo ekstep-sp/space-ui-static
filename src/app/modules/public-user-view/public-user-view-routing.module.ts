@@ -5,7 +5,7 @@ import { PublicUserViewComponent } from './components/public-user-view/public-us
 
 const routes: Routes = [
   {
-    path: 'invitation/:requestID',
+    path: 'invitation/:requestId',
     component: PublicUserInvitationComponent,
   },
   {

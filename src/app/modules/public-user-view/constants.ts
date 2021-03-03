@@ -10,3 +10,4 @@ export const BATCH_SIZE = 50
 export const DEFAULT_OFFSET = 0
 export const DEFAULT_PAGE_NUMBER = 1
 export const DEFAULT_QUERY = ''
+export const POST_INVITATION_ACTION_URL = ''

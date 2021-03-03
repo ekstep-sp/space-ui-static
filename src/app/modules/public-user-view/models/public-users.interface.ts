@@ -31,3 +31,9 @@ export interface IPublicUsers {
 }
 
 export interface IUpdateDataObj { query: string, searchSize: number, offset: number }
+
+export interface IActionUpdate {
+    wid: string
+    requestId: string
+    actionType: string
+}

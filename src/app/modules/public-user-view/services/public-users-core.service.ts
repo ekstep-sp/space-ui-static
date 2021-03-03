@@ -2,7 +2,7 @@ import { HttpClient, HttpParams } from '@angular/common/http'
 import { Injectable } from '@angular/core'
 import { Observable } from 'rxjs'
 import { IFormattedUserProperties, IPublicUsersResponse, IRawUserProperties } from '../models/public-users.interface'
-import { ENDPOINT_URL, BATCH_SIZE, DEFAULT_OFFSET } from './../constants'
+import { ENDPOINT_URL, BATCH_SIZE, DEFAULT_OFFSET, POST_INVITATION_ACTION_URL } from './../constants'
 @Injectable({
   providedIn: 'root',
 })
@@ -48,5 +48,9 @@ export class PublicUsersCoreService {
 
   getSanitisedProfileUrl(url: string): string {
     return this.getAuthoringUrl(url)
+  }
+
+  postInvitationAction(actionData: any) {
+    return this.http.post(POST_INVITATION_ACTION_URL, { ...actionData })
   }
 }
