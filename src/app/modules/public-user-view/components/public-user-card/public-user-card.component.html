@@ -2,36 +2,45 @@
   <div class="orignial rounded-sm">
     <ng-container [ngTemplateOutlet]="mainCardContent"></ng-container>
   </div>
-  <div [ngClass]="(userData?.user_properties?.value) && atLeastOnevaluePresent(userData?.user_properties?.value) ? 'substitute':'subsitute-no-user-properties'"
-    class="substitute rounded-sm absolute top-0 left-0">
+  <div class="substitute rounded-sm absolute top-0 left-0">
     <ng-container [ngTemplateOutlet]="mainCardContent"></ng-container>
   </div>
 </div>
 
 <ng-template #mainCardContent>
   <mat-card class="profile-card text-center overflow-hidden cursor-pointer">
-    <div class="flex mx-auto pt-4 image align-center justify-center">
+    <div class="flex mx-auto pt-4 image align-center justify-center" >
       <img class="img-width rounded-full h-24 w-24"
         [src]="userData?.source_profile_picture ? userData.source_profile_picture : defaultUserImage">
     </div>
-    <div class="text-center mt-2 px-small-7">
+    <div class="text-center mt-2 px-small-7 card-body">
+     <div>
       <div class="font-size-18 flex justify-center align-center break-words txt-color">
+        <ng-container *ngIf="connectionData?.status === 'connected' && loggedInUserWid != userData.wid">
+          <mat-icon class="conn-done mr-3">done</mat-icon>
+        </ng-container>
         <span *ngIf="userData?.first_name.length || userData?.middle_name.length || userData?.last_name.length"
           class="middle-text mr-2">{{userData?.first_name}} {{userData?.middle_name}} {{userData?.last_name}}</span>
-        <ng-container *ngIf="allowToMail">
-          <mat-icon class="mailicon mr-3">mail_outline</mat-icon>
+        <ng-container *ngIf="connectionData?.status === 'connected' && connectionData?.email && loggedInUserWid != userData.wid">
+         <a href="mailto:{{connectionData.email}}"><mat-icon class="color-on-hover mr-3">mail_outline</mat-icon></a> 
         </ng-container>
       </div>
+    </div>
       <div class="font-size-18 org-color mt-2">
         {{userData?.department_name}}
       </div>
-      <div class="hovercard mt-6" *ngIf="userData?.user_properties">
+      <div class="hovercard mt-6"  *ngIf="userData?.user_properties">
         <div class="font-size-14 txt-color underline break-all">
             <div class="profile" (click)="navigateToProfileLink(userData?.user_properties?.value?.profileLink)">{{userData?.user_properties?.value?.profileLink}}</div>
         </div>
         <div class="bio-desc overflow-y-auto font-size-14 mx-5 txt-color">
           <p>{{userData?.user_properties?.value?.bio}}</p>
         </div>
+      </div>
+      <div class="hovercard mt-2" *ngIf = "loggedInUserWid != userData.wid ">
+        <button mat-raised-button  (click)="acceptConnection(userData,connectionData)">
+          <span class="btn-txt-clr">{{buttonStatus}}</span>
+        </button>
       </div>
     </div>
   </mat-card>

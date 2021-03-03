@@ -45,3 +45,8 @@ export interface IUserConnections {
     root_org?:string,
     org?:string
 }
+export interface IActionUpdate {
+    wid: string
+    requestId: string
+    actionType: string
+}

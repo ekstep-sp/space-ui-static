@@ -5,8 +5,9 @@ import { NsPage, ConfigurationsService, ValueService } from '@ws-widget/utils'
 import { BehaviorSubject, Observable, of } from 'rxjs'
 import { catchError, debounceTime, distinctUntilChanged, filter, map, tap } from 'rxjs/operators'
 import { PublicUsersCoreService } from '../../services/public-users-core.service'
-import { BATCH_SIZE, DEFAULT_OFFSET, DEFAULT_PAGE_NUMBER, DEFAULT_QUERY, INFINITE_SCROLL_CONSTANTS } from './../../constants'
-import { IPublicUsers, IPublicUsersResponse, IRawUserProperties, IUpdateDataObj, IUserConnections } from './../../models/public-users.interface'
+import { BATCH_SIZE, DEFAULT_OFFSET, DEFAULT_PAGE_NUMBER, DEFAULT_QUERY, INFINITE_SCROLL_CONSTANTS, CONNECTION_STATUS_PENDING } from './../../constants'
+import { IPublicUsers, IPublicUsersResponse, IRawUserProperties, IUpdateDataObj } from './../../models/public-users.interface'
+import { PublicUsersUtilsService } from '../../services/public-users-utils.service'
 interface IScrollUIEvent {
   currentScrollPosition: number
 }
@@ -39,10 +40,11 @@ export class PublicUserViewComponent implements OnInit {
   DEFAULT_DEBOUNCE = 1000
   DEFAULT_MIN_LENGTH_TO_ACTIVATE_SEARCH = 3
   error$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false)
-  userConnectionsList$:BehaviorSubject<IUserConnections[]> = new BehaviorSubject<IUserConnections[] | []>([])
+  userConnectionsList$:BehaviorSubject<any> = new BehaviorSubject< any>(null)
   constructor(
     private readonly configSvc: ConfigurationsService,
     private readonly coreSrvc: PublicUsersCoreService,
+    private readonly utilSvc: PublicUsersUtilsService,
     private valueSvc: ValueService,
   ) {
     this.pageNavbar = this.configSvc.pageNavBar
@@ -58,6 +60,7 @@ export class PublicUserViewComponent implements OnInit {
         distinctUntilChanged()
         ).subscribe((searchTerm: string) => {
           this.searchUsers(searchTerm)
+             this.getConnectionsListResponse()
         })
     }
     // trigger first time page load
@@ -143,15 +146,38 @@ export class PublicUserViewComponent implements OnInit {
     //this will send wid of logged in user and get list of connections as response
   getConnectionsListResponse() {
       const loggedInUserWid = this.configSvc.userProfile?this.configSvc.userProfile.userId : '';
-      this.coreSrvc.getConnectionsList(loggedInUserWid).pipe(
+      let userMap  = new Map();
+      this.utilSvc.getConnectionsList(loggedInUserWid).pipe(
         catchError((_e:any)=> of(null)),
         map(response=>{
           if(response){
-            response = response.filter((eachresponse)=> eachresponse.user_id !== loggedInUserWid)
-            this.userConnectionsList$.next(response)
+            //filtering the reponse to get the connections of loggedin user
+            response = response.filter((eachresponse)=> eachresponse.requested_by === loggedInUserWid)
+            response.forEach(eachConnection=>{
+            userMap.set(eachConnection.user_id, eachConnection)
+            })
+            this.userConnectionsList$.next(userMap)
           }
         })
       ).subscribe()
-      
+  }
+  getConnectionDetailsForCurrentUser(userData: any){
+    if(this.userConnectionsList$.getValue()){
+      return this.getConnectionObjectIfExists(this.userConnectionsList$.getValue(), userData);
+    }
+    }
+    getConnectionObjectIfExists(userConnectionsMap: any,userData:any){
+    if(userConnectionsMap.has(userData.wid)){
+     return userConnectionsMap.get(userData.wid)
+    }
+  }
+  getSelectedUserConnectionData(userConnectionData: any){
+    let userDataAndConnectionObject = JSON.parse(userConnectionData)
+    console.log("event", userDataAndConnectionObject)
+    //if the connection data is present
+    //check the status
+    //asssign the vaue to upfdate the status to service
+
+    this.utilSvc.buttonStatus$.next(CONNECTION_STATUS_PENDING)
   }
 }

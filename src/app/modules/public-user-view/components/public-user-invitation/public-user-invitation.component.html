@@ -6,10 +6,23 @@
     </span>
 </mat-toolbar>
 <!--Adding logic for invitations criteria-->
-<div class="invitation-container">
+<div class="invitation-container pt-10" [ngClass]="{'flex justify-center mt-6': (isLoading$ | async) }">
     <div *ngIf="(isLoading$ | async)">
         <ng-container *ngTemplateOutlet="spinner"></ng-container>
     </div>
+    <div class="flat-alert-error" *ngIf="(isApiError$ | async)">
+        Error occured while processing your request, try again later
+    </div>
+    <ng-container *ngIf="notifyUser && notificationDetails !== null">
+        <div class="flat-alert-success">
+            Your action to "{{notificationDetails?.sourceActionType || 'NA'}}" the request has been processed successfully.
+        </div>
+        <div class="go-back-container">
+            <button mat-button mat-raised-button type="button" color="primary" routerLink="/app/users/list">
+                Go to Users Page
+            </button>
+        </div>
+    </ng-container>
 </div>
 
 <ng-template #spinner>
