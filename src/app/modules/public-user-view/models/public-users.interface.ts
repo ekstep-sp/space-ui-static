@@ -50,3 +50,11 @@ export interface IActionUpdate {
     requestId: string
     actionType: string
 }
+
+export interface IRequestUpdate{
+    requested_by: string
+    requested_to: string
+}
+export interface IRevokeConnection{
+    connectionId: string
+}

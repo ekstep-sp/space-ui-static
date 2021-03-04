@@ -1,0 +1,8 @@
+
+<div mat-dialog-content class="line-height">{{message}}</div>
+<div class="container ">
+  <mat-dialog-actions align="end">
+    <button mat-button [mat-dialog-close]="false">No</button>
+    <button mat-flat-button [mat-dialog-close]="true" class="logout-btn" color="primary" (click)= "onConfirmClick()">Yes</button>
+  </mat-dialog-actions>
+</div>

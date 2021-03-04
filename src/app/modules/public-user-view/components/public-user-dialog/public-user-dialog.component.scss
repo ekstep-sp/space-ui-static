@@ -1,0 +1,23 @@
+.align-buttons{
+    align-items: end;
+    justify-self: end;
+    }
+    .container {
+        justify-content: space-between;
+        flex-direction: column;
+        display: flex;
+      }
+    //   .container .btn-holder {
+    //     justify-content:space-around;
+    //     display: flex;
+    //   }
+    
+      .line-height{
+        line-height: 1.7em;
+      }
+      ::ng-deep{
+      .theme-muave.night-mode .mat-flat-button.logout-btn{
+        background:#f44336!important;
+         color: white !important;
+      }
+    }

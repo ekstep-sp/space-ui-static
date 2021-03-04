@@ -12,10 +12,12 @@ import { ReactiveFormsModule } from '@angular/forms'
 import { PublicUsersCoreService } from './services/public-users-core.service'
 import { PublicUsercardComponent } from './components/public-user-card/public-user-card.component'
 import { PublicUserInvitationComponent } from './components/public-user-invitation/public-user-invitation.component'
-import { PublicUsersUtilsService } from './services/public-users-utils.service'
+import { PublicUsersUtilsService } from './services/public-users-utils.service';
+import { PublicUserDialogComponent } from './components/public-user-dialog/public-user-dialog.component'
+import {MatDialogModule} from '@angular/material/dialog';
 
 @NgModule({
-  declarations: [PublicUserViewComponent, PublicUsercardComponent, PublicUserInvitationComponent],
+  declarations: [PublicUserViewComponent, PublicUsercardComponent, PublicUserInvitationComponent, PublicUserDialogComponent],
   providers: [PublicUsersCoreService, PublicUsersUtilsService],
   imports: [
     CommonModule,
@@ -30,6 +32,8 @@ import { PublicUsersUtilsService } from './services/public-users-utils.service'
     MatInputModule,
     MatButtonModule,
     MatProgressSpinnerModule,
+    MatDialogModule,
   ],
+  entryComponents: [ PublicUserDialogComponent ]
 })
 export class PublicUserViewModule { }

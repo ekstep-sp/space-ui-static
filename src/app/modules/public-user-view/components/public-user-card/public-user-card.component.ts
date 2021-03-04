@@ -1,5 +1,5 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core'
-import { DEFAULT_IMAGE_URL, CONNECTION_STATUS_CONNECT } from '../../constants'
+import { DEFAULT_IMAGE_URL, CONNECTION_STATUS_CONNECT, CHECK_CONNECTION_STATUS_CONNECTED } from '../../constants'
 import { ValueService, ConfigurationsService } from '@ws-widget/utils'
 import { IUserConnections } from './../../models/public-users.interface'
 import { PublicUsersUtilsService } from '../../services/public-users-utils.service'
@@ -28,25 +28,14 @@ export class PublicUsercardComponent implements OnInit {
   }
   ngOnInit() {
     this.loggedInUserWid = this.configSvc.userProfile?this.configSvc.userProfile.userId:''
-    // if(this.connectionData.status === DEFAULT_CONNECTION_STATUS){
-    //   this.buttonStatus = "Revoke"
-    // }
-    // else if(this.connectionData.status === "pending"){
-    //   this.buttonStatus = "Pending"
-    // }
-    // else if(this.connectionData.status === "rejected"){
-    //   this.buttonStatus = "Connect"
-    // }
-    console.log("getvaleu",this.utilSvc.buttonStatus$ )
-    if(this.utilSvc.buttonStatus$) {
-     this.utilSvc.updateButtonStatus()
-    }
+    console.log("button status", this.buttonStatus)
+    this.buttonStatus = this.utilSvc.getButtonStatus(this.connectionData)
   }
 
   ngOnChanges(){
-
-    console.log("getonchange" )
-
+   
+    this.buttonStatus = this.utilSvc.getButtonStatus(this.connectionData)
+    console.log("button status on chanages", this.buttonStatus)
   }
 
   navigateToProfileLink(url: string) {
@@ -63,6 +52,8 @@ export class PublicUsercardComponent implements OnInit {
       userData,connectionData
     }
       this.connectionButtonClickEmitter.emit(JSON.stringify(userDataAndConnectionbject))
+      // this.connectionButtonClickEmitter.emit(userDataAndConnectionbject)
+
     }
     //todo:make buttonstatus as behaviour subject
     //call api 
@@ -77,5 +68,15 @@ export class PublicUsercardComponent implements OnInit {
     if(this.connectionData){
       console.log("connectiondata",this.connectionData)
     }
+  }
+  showConnectedSymbol(userData: any, connectionData: any){
+    return (connectionData && (connectionData.status === CHECK_CONNECTION_STATUS_CONNECTED) &&
+    (this.loggedInUserWid != userData.wid)) ? true: false
+  }
+  showMailIcon(userData: any, connectionData: any){
+    return ( connectionData && (connectionData.status === CHECK_CONNECTION_STATUS_CONNECTED)
+       && (connectionData.email) && 
+       (this.loggedInUserWid != userData.wid))?
+       true : false
   }
 }

@@ -1,13 +1,14 @@
 import { Component, OnInit } from '@angular/core'
 import { FormControl } from '@angular/forms'
-// import { Router } from '@angular/router';
 import { NsPage, ConfigurationsService, ValueService } from '@ws-widget/utils'
 import { BehaviorSubject, Observable, of } from 'rxjs'
 import { catchError, debounceTime, distinctUntilChanged, filter, map, tap } from 'rxjs/operators'
 import { PublicUsersCoreService } from '../../services/public-users-core.service'
-import { BATCH_SIZE, DEFAULT_OFFSET, DEFAULT_PAGE_NUMBER, DEFAULT_QUERY, INFINITE_SCROLL_CONSTANTS, CONNECTION_STATUS_PENDING } from './../../constants'
+import { BATCH_SIZE, DEFAULT_OFFSET, DEFAULT_PAGE_NUMBER, DEFAULT_QUERY, INFINITE_SCROLL_CONSTANTS} from './../../constants'
 import { IPublicUsers, IPublicUsersResponse, IRawUserProperties, IUpdateDataObj } from './../../models/public-users.interface'
 import { PublicUsersUtilsService } from '../../services/public-users-utils.service'
+import { PublicUserDialogComponent } from '../public-user-dialog/public-user-dialog.component'
+import { MatDialog } from '@angular/material'
 interface IScrollUIEvent {
   currentScrollPosition: number
 }
@@ -41,11 +42,13 @@ export class PublicUserViewComponent implements OnInit {
   DEFAULT_MIN_LENGTH_TO_ACTIVATE_SEARCH = 3
   error$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false)
   userConnectionsList$:BehaviorSubject<any> = new BehaviorSubject< any>(null)
+  dummyCheck = true
   constructor(
     private readonly configSvc: ConfigurationsService,
     private readonly coreSrvc: PublicUsersCoreService,
     private readonly utilSvc: PublicUsersUtilsService,
     private valueSvc: ValueService,
+    private dialog: MatDialog,
   ) {
     this.pageNavbar = this.configSvc.pageNavBar
     this.isXSmall$ = this.valueSvc.isXSmall$
@@ -60,12 +63,12 @@ export class PublicUserViewComponent implements OnInit {
         distinctUntilChanged()
         ).subscribe((searchTerm: string) => {
           this.searchUsers(searchTerm)
-             this.getConnectionsListResponse()
+             this.getUserConnections()
         })
     }
     // trigger first time page load
     this.searchUsers()
-    this.getConnectionsListResponse()
+    this.getUserConnections()
   }
   searchUsers(q = '') {
 
@@ -144,40 +147,114 @@ export class PublicUserViewComponent implements OnInit {
     this.isEnabledSearch = false
   }
     //this will send wid of logged in user and get list of connections as response
-  getConnectionsListResponse() {
+  getUserConnections(requested_to = '') {
       const loggedInUserWid = this.configSvc.userProfile?this.configSvc.userProfile.userId : '';
       let userMap  = new Map();
       this.utilSvc.getConnectionsList(loggedInUserWid).pipe(
         catchError((_e:any)=> of(null)),
-        map(response=>{
+        tap(response=>{
           if(response){
             //filtering the reponse to get the connections of loggedin user
             response = response.filter((eachresponse)=> eachresponse.requested_by === loggedInUserWid)
             response.forEach(eachConnection=>{
             userMap.set(eachConnection.user_id, eachConnection)
             })
-            this.userConnectionsList$.next(userMap)
+          }
+        }),
+        tap((_d:any)=>{
+          if(this.dummyCheck){
+            userMap.set(requested_to, 
+              {
+                id: requested_to , created_on:'2/03/2021', last_updated_on:'2/03/2021', status:'Pending', requested_by:'acbf4053-c126-4e85-a0bf-252a896535ea', email: 'anjitha.r98@gmail.com', user_id: requested_to ,fname:'Aakash',lname:'Vishwakarma',root_org:'space',org:'Sustainable Environment and Ecological Development Society'
+              } )
+              this.userConnectionsList$.next(userMap)
           }
         })
       ).subscribe()
+
   }
+
   getConnectionDetailsForCurrentUser(userData: any){
     if(this.userConnectionsList$.getValue()){
       return this.getConnectionObjectIfExists(this.userConnectionsList$.getValue(), userData);
     }
     }
+
     getConnectionObjectIfExists(userConnectionsMap: any,userData:any){
     if(userConnectionsMap.has(userData.wid)){
      return userConnectionsMap.get(userData.wid)
     }
   }
+
   getSelectedUserConnectionData(userConnectionData: any){
     let userDataAndConnectionObject = JSON.parse(userConnectionData)
     console.log("event", userDataAndConnectionObject)
-    //if the connection data is present
-    //check the status
-    //asssign the vaue to upfdate the status to service
+    //if connectionData, means user is already connected
+    if(userDataAndConnectionObject.connectionData){
+            
+    }
 
-    this.utilSvc.buttonStatus$.next(CONNECTION_STATUS_PENDING)
+    //user is requesting for new user to get connection
+    else if(userDataAndConnectionObject.userData && !userDataAndConnectionObject.connectionData){
+      //confirmation box
+      this.openDialogBoxForConfirmation(userDataAndConnectionObject.userData, userDataAndConnectionObject.connectionData, true, "confirm" , userDataAndConnectionObject.userData.first_name )
+      //hit an api
+
+
+
+    }
+  }
+
+  trackUserData(_index:any, data: any){
+    return data.wid
+  }
+
+  openDialogBoxForConfirmation(userData: any, connectionData: any, isNewUserConnection: boolean, confirmOrWidthdraw: string, firstName:String){
+    const dialogRefForPublicUser = this.dialog.open(PublicUserDialogComponent, 
+     { width:'500px',
+      data:{
+        connectionObject : connectionData,
+        userData: userData,
+        isNewUserConnection,
+        confirmOrWidthdraw,
+        targetUser: firstName
+        
+      }})
+      dialogRefForPublicUser.afterClosed().subscribe(result =>{
+        console.log("result", result.confirmOrWidthdraw)
+        if(result.confirmOrWidthdraw === 'confirm'){
+        this.sendRequestConnectionAndUpdateUsersData(userData.wid)
+        }
+        // if(result.confirmOrWidthdraw === 'revoke'){
+        //    let successResponse =  this.revokeConnection(connectionData.id)
+        //    if(successResponse){
+        //     this.apiData$.next(this.apiData$.getValue())
+        //    }
+        // }
+      })
+  }
+
+  sendRequestConnectionAndUpdateUsersData(requestedUserWid:string){
+    return  this.utilSvc.sendRequest(requestedUserWid).pipe(
+        catchError((_e:any)=> of(null)),
+        map((response: any)=>{
+          if(response.ok && response.data.request_id ){
+         this.getUserConnections(requestedUserWid)
+         this.apiData$.next(this.apiData$.getValue())
+          }
+        })
+      ).subscribe()
+  }
+
+  revokeConnection(connectionId: string){
+    return  this.utilSvc.revokeRequest(connectionId).pipe(
+        catchError((_e:any)=> of(null)),
+        map((response: any)=>{
+           if(response.ok){
+            response
+           }
+        })
+
+      ).subscribe()
   }
 }

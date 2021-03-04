@@ -16,12 +16,12 @@
     <div class="text-center mt-2 px-small-7 card-body">
      <div>
       <div class="font-size-18 flex justify-center align-center break-words txt-color">
-        <ng-container *ngIf="connectionData?.status === 'connected' && loggedInUserWid != userData.wid">
+        <ng-container *ngIf="showConnectedSymbol(userData, connectionData)">
           <mat-icon class="conn-done mr-3">done</mat-icon>
         </ng-container>
         <span *ngIf="userData?.first_name.length || userData?.middle_name.length || userData?.last_name.length"
           class="middle-text mr-2">{{userData?.first_name}} {{userData?.middle_name}} {{userData?.last_name}}</span>
-        <ng-container *ngIf="connectionData?.status === 'connected' && connectionData?.email && loggedInUserWid != userData.wid">
+        <ng-container *ngIf="showMailIcon(userData, connectionData)">
          <a href="mailto:{{connectionData.email}}"><mat-icon class="color-on-hover mr-3">mail_outline</mat-icon></a> 
         </ng-container>
       </div>
@@ -38,7 +38,7 @@
             <p>{{userData?.user_properties?.value?.bio}}</p>
           </div>
           <div class="hovercard mt-1" *ngIf = "loggedInUserWid != userData?.wid ">
-            <button mat-raised-button  (click)="acceptConnection(userData,connectionData)">
+            <button mat-raised-button  (click)="acceptConnection(userData, connectionData)">
               <span class="btn-txt-clr">{{buttonStatus}}</span>
             </button>
           </div>
