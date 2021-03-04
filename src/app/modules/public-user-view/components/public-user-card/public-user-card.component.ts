@@ -26,13 +26,11 @@ export class PublicUsercardComponent implements OnInit {
   }
   ngOnInit() {
     this.loggedInUserWid = this.configSvc.userProfile?this.configSvc.userProfile.userId:''
-    console.log("button status", this.buttonStatus)
     this.buttonStatus = this.utilSvc.getButtonStatus(this.connectionData)
   }
 
   ngOnChanges(){
     this.buttonStatus = this.utilSvc.getButtonStatus(this.connectionData)
-    console.log("button status on chanages", this.buttonStatus)
   }
 
   navigateToProfileLink(url: string) {

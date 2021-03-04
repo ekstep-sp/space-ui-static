@@ -1,5 +1,4 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing'
-
 import { PublicUsercardComponent } from './public-user-card.component'
 
 describe('PublicUsercardComponent', () => {

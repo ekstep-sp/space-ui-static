@@ -38,7 +38,7 @@
             <p>{{userData?.user_properties?.value?.bio}}</p>
           </div>
           <div class="hovercard mt-1" *ngIf = "hideButtonStatus(userData, connectionData) ">
-            <button mat-raised-button  (click)="acceptConnection(userData, connectionData)">
+            <button mat-raised-button [ngClass] = "{'btn-status': buttonStatus === 'Pending'}" (click)="acceptConnection(userData, connectionData)">
               <span class="btn-txt-clr">{{buttonStatus}}</span>
             </button>
           </div>

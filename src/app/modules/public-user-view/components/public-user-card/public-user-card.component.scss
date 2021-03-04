@@ -123,6 +123,12 @@ $card-height: 215px;
     .conn-done{
        font-size: 28px !important;
     }
+    .btn-status:hover{
+      background-color: purple;
+      .btn-txt-clr{
+        color: white;
+      }
+    }
   }
 
   .subsitute-no-user-properties:hover{
