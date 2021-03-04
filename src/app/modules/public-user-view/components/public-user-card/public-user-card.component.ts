@@ -1,5 +1,5 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core'
-import { DEFAULT_IMAGE_URL, CONNECTION_STATUS_CONNECT, CHECK_CONNECTION_STATUS_CONNECTED } from '../../constants'
+import { DEFAULT_IMAGE_URL, CONNECTION_STATUS_CONNECT, CHECK_CONNECTION_STATUS_CONNECTED, ALLOW_WITHDRAW_STATUS } from '../../constants'
 import { ValueService, ConfigurationsService } from '@ws-widget/utils'
 import { IUserConnections } from './../../models/public-users.interface'
 import { PublicUsersUtilsService } from '../../services/public-users-utils.service'
@@ -56,14 +56,28 @@ export class PublicUsercardComponent implements OnInit {
       console.log("connectiondata",this.connectionData)
     }
   }
-  showConnectedSymbol(userData: any, connectionData: any){
+  showConnectedUser(userData: any, connectionData: any){
+    console.log(" show connected" , (connectionData && (connectionData.status === CHECK_CONNECTION_STATUS_CONNECTED) &&
+    (this.loggedInUserWid != userData.wid)) ? true: false)
     return (connectionData && (connectionData.status === CHECK_CONNECTION_STATUS_CONNECTED) &&
     (this.loggedInUserWid != userData.wid)) ? true: false
   }
   showMailIcon(userData: any, connectionData: any){
+    
     return ( connectionData && (connectionData.status === CHECK_CONNECTION_STATUS_CONNECTED)
        && (connectionData.email) && 
        (this.loggedInUserWid != userData.wid))?
        true : false
   }
+  hideButtonStatus(userData: any, connectionData: any){
+    if(!ALLOW_WITHDRAW_STATUS && (this.loggedInUserWid != userData.wid) && connectionData && connectionData.status === CHECK_CONNECTION_STATUS_CONNECTED){
+      return false
+    }
+   else if((this.loggedInUserWid != userData.wid)){
+    return true
+   }
+   return false
+  }
+
 }
+

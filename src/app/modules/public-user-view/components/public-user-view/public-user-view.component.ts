@@ -198,6 +198,7 @@ export class PublicUserViewComponent implements OnInit {
     //if connectionData, means user is already connected
     //if user is connected, button status wil be withdraw, connection status wil be connected
     //if the connection status is connected, and user wish to withdraw the connection, call delete api
+
     if(userDataAndConnectionObject.connectionData && userDataAndConnectionObject.connectionData.status === CHECK_CONNECTION_STATUS_CONNECTED){
       this.openDialogBoxForConfirmation(userDataAndConnectionObject.userData, userDataAndConnectionObject.connectionData, false ,  "revoke")
     }
@@ -229,12 +230,12 @@ export class PublicUserViewComponent implements OnInit {
         if(result.confirmOrWidthdraw === 'confirm'){
         this.sendRequestConnection(userData.wid)
         }
-        if(result.confirmOrWidthdraw === 'revoke'){
-           this.revokeConnection(connectionData.id)
-        }
         if(result.confirmOrWidthdraw === 'pending'){
           this.revokeConnection(connectionData.id)
        }
+       if(result.confirmOrWidthdraw === 'revoke'){
+        this.revokeConnection(connectionData.id)
+     }
       })
   }
 

@@ -52,15 +52,15 @@ export class PublicUsersCoreService {
     return this.getAuthoringUrl(url)
   }
   getConnectionAPIResponse(requestParams:any):Observable<any>{
-    return this.http.post( CONNECTION_END_POINT, requestParams)
+    return this.http.post( CONNECTION_END_POINT, { ...requestParams })
   }
   postInvitationAction(actionData: any) {
     return this.http.post(POST_INVITATION_ACTION_URL, { ...actionData })
   }
   sendRequestApi(requestBody: any){
-   return this.http.post(SEND_REQUEST_CONNECTION_URL, {...requestBody} )
+   return this.http.post(SEND_REQUEST_CONNECTION_URL, { ...requestBody } )
   }
   revokeConnectionAPi(requestBody: any){
-    return this.http.post(REVOKE_REQUEST_CONNECTION_URL, {...requestBody} )
+    return this.http.post(REVOKE_REQUEST_CONNECTION_URL, { ...requestBody } )
   }
 }

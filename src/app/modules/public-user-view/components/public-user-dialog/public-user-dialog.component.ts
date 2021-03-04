@@ -1,6 +1,6 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
-import { CONFIRMATION_TEXT, REVOKING_TEXT} from '../../constants';
+import { CONFIRMATION_TEXT, REVOKING_TEXT, ALLOW_WITHDRAW_STATUS} from '../../constants';
 
 
 @Component({
@@ -21,10 +21,10 @@ export class PublicUserDialogComponent implements OnInit {
      if(this.data.confirmOrWidthdraw === "confirm"){
        this.message = `${CONFIRMATION_TEXT}${this.data.targetUser} ?` 
      }
-     if(this.data.confirmOrWidthdraw === "revoke"){
+     if(this.data.confirmOrWidthdraw === "pending"){
       this.message = REVOKING_TEXT
      }
-     if(this.data.confirmOrWidthdraw === "pending"){
+     if(ALLOW_WITHDRAW_STATUS && this.data.confirmOrWidthdraw === "revoke"){
       this.message = REVOKING_TEXT
      }
    }
