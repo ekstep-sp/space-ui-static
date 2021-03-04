@@ -4,7 +4,7 @@ import { NsPage, ConfigurationsService, ValueService } from '@ws-widget/utils'
 import { BehaviorSubject, Observable, of } from 'rxjs'
 import { catchError, debounceTime, distinctUntilChanged, filter, map, tap } from 'rxjs/operators'
 import { PublicUsersCoreService } from '../../services/public-users-core.service'
-import { BATCH_SIZE, DEFAULT_OFFSET, DEFAULT_PAGE_NUMBER, DEFAULT_QUERY, INFINITE_SCROLL_CONSTANTS, CHECK_CONNECTION_STATUS_CONNECTED, CHECK_CONNECTION_STATUS_PENDING} from './../../constants'
+import { BATCH_SIZE, DEFAULT_OFFSET, DEFAULT_PAGE_NUMBER, DEFAULT_QUERY, INFINITE_SCROLL_CONSTANTS, CHECK_CONNECTION_STATUS_CONNECTED, CHECK_CONNECTION_STATUS_PENDING, CHECK_CONNECTION_STATUS_REJECTED} from './../../constants'
 import { IPublicUsers, IPublicUsersResponse, IRawUserProperties, IUpdateDataObj } from './../../models/public-users.interface'
 import { PublicUsersUtilsService } from '../../services/public-users-utils.service'
 import { PublicUserDialogComponent } from '../public-user-dialog/public-user-dialog.component'
@@ -204,6 +204,9 @@ export class PublicUserViewComponent implements OnInit {
     }
     else if(userDataAndConnectionObject.connectionData && userDataAndConnectionObject.connectionData.status === CHECK_CONNECTION_STATUS_PENDING){
       this.openDialogBoxForConfirmation(userDataAndConnectionObject.userData, userDataAndConnectionObject.connectionData, false ,  "pending")
+    }
+    else if(userDataAndConnectionObject.connectionData && userDataAndConnectionObject.connectionData.status === CHECK_CONNECTION_STATUS_REJECTED){
+      this.openDialogBoxForConfirmation(userDataAndConnectionObject.userData, userDataAndConnectionObject.connectionData, false ,  "confirm", userDataAndConnectionObject.userData.first_name)
     }
     //user is requesting for new user to get connection
     else if(userDataAndConnectionObject.userData && !userDataAndConnectionObject.connectionData){

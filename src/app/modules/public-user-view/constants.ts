@@ -24,7 +24,7 @@ export const DUMMY_RESPONSE = [{
   },
   
 {
-    id:'fd5bb3d6-bd45-414e-9a43-248f25584369', created_on:'2/03/2021', last_updated_on:'2/03/2021', status:'Pending', requested_by:'acbf4053-c126-4e85-a0bf-252a896535ea', email: 'anjitha.r98@gmail.com', user_id:'fd5bb3d6-bd45-414e-9a43-248f25584369',fname:'Abhishek',lname:'Srivatsava',root_org:'space',org:'WPP India CSR Foundation'
+    id:'fd5bb3d6-bd45-414e-9a43-248f25584369', created_on:'2/03/2021', last_updated_on:'2/03/2021', status:'', requested_by:'acbf4053-c126-4e85-a0bf-252a896535ea', email: 'anjitha.r98@gmail.com', user_id:'fd5bb3d6-bd45-414e-9a43-248f25584369',fname:'Abhishek',lname:'Srivatsava',root_org:'space',org:'WPP India CSR Foundation'
 
 }]
 export const CONNECTION_END_POINT = ''
