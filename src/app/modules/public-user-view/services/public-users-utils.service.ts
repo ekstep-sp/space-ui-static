@@ -87,7 +87,7 @@ export class PublicUsersUtilsService {
     }
     revokeRequest(connectionId: string){
       if (this.isDummySendrequest) {
-        return of({ status: 204, ok: true}).pipe(delay(2000))
+        return of({ status: 204, ok: true})
       }
       const requestBody: IRevokeConnection = {
         connectionId

@@ -4,7 +4,7 @@ import { NsPage, ConfigurationsService, ValueService } from '@ws-widget/utils'
 import { BehaviorSubject, Observable, of } from 'rxjs'
 import { catchError, debounceTime, distinctUntilChanged, filter, map, tap } from 'rxjs/operators'
 import { PublicUsersCoreService } from '../../services/public-users-core.service'
-import { BATCH_SIZE, DEFAULT_OFFSET, DEFAULT_PAGE_NUMBER, DEFAULT_QUERY, INFINITE_SCROLL_CONSTANTS} from './../../constants'
+import { BATCH_SIZE, DEFAULT_OFFSET, DEFAULT_PAGE_NUMBER, DEFAULT_QUERY, INFINITE_SCROLL_CONSTANTS, CHECK_CONNECTION_STATUS_CONNECTED, CHECK_CONNECTION_STATUS_PENDING} from './../../constants'
 import { IPublicUsers, IPublicUsersResponse, IRawUserProperties, IUpdateDataObj } from './../../models/public-users.interface'
 import { PublicUsersUtilsService } from '../../services/public-users-utils.service'
 import { PublicUserDialogComponent } from '../public-user-dialog/public-user-dialog.component'
@@ -147,7 +147,7 @@ export class PublicUserViewComponent implements OnInit {
     this.isEnabledSearch = false
   }
     //this will send wid of logged in user and get list of connections as response
-  getUserConnections(requested_to = '') {
+  getUserConnections(requested_to = '', isDummyDelete = false) {
       const loggedInUserWid = this.configSvc.userProfile?this.configSvc.userProfile.userId : '';
       let userMap  = new Map();
       this.utilSvc.getConnectionsList(loggedInUserWid).pipe(
@@ -169,6 +169,12 @@ export class PublicUserViewComponent implements OnInit {
               } )
               this.userConnectionsList$.next(userMap)
           }
+        }),
+        tap((_d:any)=>{
+          if(isDummyDelete){
+                userMap.delete(requested_to)
+          }
+          this.userConnectionsList$.next(userMap)
         })
       ).subscribe()
 
@@ -190,18 +196,17 @@ export class PublicUserViewComponent implements OnInit {
     let userDataAndConnectionObject = JSON.parse(userConnectionData)
     console.log("event", userDataAndConnectionObject)
     //if connectionData, means user is already connected
-    if(userDataAndConnectionObject.connectionData){
-            
+    //if user is connected, button status wil be withdraw, connection status wil be connected
+    //if the connection status is connected, and user wish to withdraw the connection, call delete api
+    if(userDataAndConnectionObject.connectionData && userDataAndConnectionObject.connectionData.status === CHECK_CONNECTION_STATUS_CONNECTED){
+      this.openDialogBoxForConfirmation(userDataAndConnectionObject.userData, userDataAndConnectionObject.connectionData, false ,  "revoke")
     }
-
+    else if(userDataAndConnectionObject.connectionData && userDataAndConnectionObject.connectionData.status === CHECK_CONNECTION_STATUS_PENDING){
+      this.openDialogBoxForConfirmation(userDataAndConnectionObject.userData, userDataAndConnectionObject.connectionData, false ,  "pending")
+    }
     //user is requesting for new user to get connection
     else if(userDataAndConnectionObject.userData && !userDataAndConnectionObject.connectionData){
-      //confirmation box
       this.openDialogBoxForConfirmation(userDataAndConnectionObject.userData, userDataAndConnectionObject.connectionData, true, "confirm" , userDataAndConnectionObject.userData.first_name )
-      //hit an api
-
-
-
     }
   }
 
@@ -209,7 +214,7 @@ export class PublicUserViewComponent implements OnInit {
     return data.wid
   }
 
-  openDialogBoxForConfirmation(userData: any, connectionData: any, isNewUserConnection: boolean, confirmOrWidthdraw: string, firstName:String){
+  openDialogBoxForConfirmation(userData: any, connectionData: any, isNewUserConnection: boolean, confirmOrWidthdraw: string, firstName:String = ''){
     const dialogRefForPublicUser = this.dialog.open(PublicUserDialogComponent, 
      { width:'500px',
       data:{
@@ -221,20 +226,19 @@ export class PublicUserViewComponent implements OnInit {
         
       }})
       dialogRefForPublicUser.afterClosed().subscribe(result =>{
-        console.log("result", result.confirmOrWidthdraw)
         if(result.confirmOrWidthdraw === 'confirm'){
-        this.sendRequestConnectionAndUpdateUsersData(userData.wid)
+        this.sendRequestConnection(userData.wid)
         }
-        // if(result.confirmOrWidthdraw === 'revoke'){
-        //    let successResponse =  this.revokeConnection(connectionData.id)
-        //    if(successResponse){
-        //     this.apiData$.next(this.apiData$.getValue())
-        //    }
-        // }
+        if(result.confirmOrWidthdraw === 'revoke'){
+           this.revokeConnection(connectionData.id)
+        }
+        if(result.confirmOrWidthdraw === 'pending'){
+          this.revokeConnection(connectionData.id)
+       }
       })
   }
 
-  sendRequestConnectionAndUpdateUsersData(requestedUserWid:string){
+  sendRequestConnection(requestedUserWid:string){
     return  this.utilSvc.sendRequest(requestedUserWid).pipe(
         catchError((_e:any)=> of(null)),
         map((response: any)=>{
@@ -251,10 +255,11 @@ export class PublicUserViewComponent implements OnInit {
         catchError((_e:any)=> of(null)),
         map((response: any)=>{
            if(response.ok){
-            response
+             console.log("revoke",response )
+            this.getUserConnections(connectionId, true)
+            this.apiData$.next(this.apiData$.getValue())
            }
         })
-
       ).subscribe()
   }
 }

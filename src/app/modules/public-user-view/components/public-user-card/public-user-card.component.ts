@@ -23,8 +23,6 @@ export class PublicUsercardComponent implements OnInit {
     this.valueSvc.isXSmall$.subscribe(isXSmall => {
       this.isXSmall = isXSmall
     })
-
-
   }
   ngOnInit() {
     this.loggedInUserWid = this.configSvc.userProfile?this.configSvc.userProfile.userId:''
@@ -33,7 +31,6 @@ export class PublicUsercardComponent implements OnInit {
   }
 
   ngOnChanges(){
-   
     this.buttonStatus = this.utilSvc.getButtonStatus(this.connectionData)
     console.log("button status on chanages", this.buttonStatus)
   }
@@ -52,17 +49,7 @@ export class PublicUsercardComponent implements OnInit {
       userData,connectionData
     }
       this.connectionButtonClickEmitter.emit(JSON.stringify(userDataAndConnectionbject))
-      // this.connectionButtonClickEmitter.emit(userDataAndConnectionbject)
-
     }
-    //todo:make buttonstatus as behaviour subject
-    //call api 
-    // if(this.buttonStatus === "Pending"){
-    //   this.buttonStatus = "Revoke"
-    // }
-    // else{
-    //   this.buttonStatus = "Pending"
-    // }
 
   changeButtonStatus(){
     if(this.connectionData){

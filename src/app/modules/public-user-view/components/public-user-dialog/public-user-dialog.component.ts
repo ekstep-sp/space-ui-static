@@ -24,10 +24,11 @@ export class PublicUserDialogComponent implements OnInit {
      if(this.data.confirmOrWidthdraw === "revoke"){
       this.message = REVOKING_TEXT
      }
+     if(this.data.confirmOrWidthdraw === "pending"){
+      this.message = REVOKING_TEXT
+     }
    }
    onConfirmClick(): void {
     this.dialogRef.close({ event: 'close', confirmOrWidthdraw: this.data.confirmOrWidthdraw });
   }
-
-
 }
