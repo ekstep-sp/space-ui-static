@@ -31,19 +31,19 @@ id:'acbf4053-c126-4e85-a0bf-252a896535ea', created_on:'2/03/2021', last_updated_
 
 }]
 export const CONNECTION_END_POINT = ''
-//this is used to display the status on card
+// this is used to display the status on card
 export const CONNECTION_STATUS_CONNECT = 'Connect'
 export const CONNECTION_STATUS_PENDING =  'Pending'
 export const CONNECTION_STATUS_REJECTED =  'Withdraw'
-//this is to check the status 
+// this is to check the status 
 export const CHECK_CONNECTION_STATUS_CONNECTED = 'Connected'
 export const CHECK_CONNECTION_STATUS_PENDING = 'Pending'
 export const CHECK_CONNECTION_STATUS_REJECTED = 'Rejected'
 
 export const CONFIRMATION_TEXT = 'Send connection request to '
 export const REVOKING_TEXT = 'Are you sure to revoke the pending request ? '
-export const FAILED_CONNECTION_REQUEST_MSQ = 'Failed to send connection request, Please try again'
-export const FAILED_REVOKE_PENDING_REQUEST_MSQ = 'Failed to revoke the pending request, please try again'
+export const FAILED_CONNECTION_REQUEST_MSQ = 'Failed to send connection request, Please try again later'
+export const FAILED_REVOKE_PENDING_REQUEST_MSQ = 'Failed to withdraw the pending request, please try again later'
 export const FAILED_USERS_CONNECTION_REQUEST_MSQ = 'Failed to retrieve latest connection, please try reloading app'
 export const SEND_REQUEST_CONNECTION_URL = ''
 export const REVOKE_REQUEST_CONNECTION_URL = ''

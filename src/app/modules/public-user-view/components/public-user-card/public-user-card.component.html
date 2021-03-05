@@ -37,8 +37,8 @@
           <div class="bio-desc overflow-y-auto font-size-14 mx-5 txt-color">
             <p>{{userData?.user_properties?.value?.bio}}</p>
           </div>
-          <div class="hovercard mt-1" *ngIf = "hideButtonStatus(userData, connectionData) ">
-            <button mat-raised-button  [class.spinner]="isLoadingConnection"  [attr.outage-count]="Withdraw" [ngClass] = "{'btn-status': buttonStatus === 'Pending'}" (click)="acceptConnection(userData, connectionData)">
+          <div class="hovercard exactly-middle-button mt-1" *ngIf = "hideButtonStatus(userData, connectionData) ">
+            <button class="m-auto" mat-raised-button  [class.spinner]="isLoadingConnection"  [attr.outage-count]="Withdraw" [ngClass] = "{'btn-status': buttonStatus === 'Pending'}" (click)="acceptConnection(userData, connectionData)">
               <span class="btn-txt">{{buttonStatus}}</span>
             </button>
           </div>

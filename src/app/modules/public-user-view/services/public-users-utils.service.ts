@@ -11,9 +11,9 @@ import { catchError, map, delay } from 'rxjs/operators'
 })
 export class PublicUsersUtilsService {
   isDummy = true
-  dummyResponse_connection_list = true
+  dummyResConnectionList = true
   isDummySendrequest = true
-  buttonStatus$:BehaviorSubject<string> = new BehaviorSubject<string>(CONNECTION_STATUS_CONNECT)
+  buttonStatus$: BehaviorSubject<string> = new BehaviorSubject<string>(CONNECTION_STATUS_CONNECT)
   constructor(
     private readonly coreSrvc: PublicUsersCoreService,
     private readonly configSvc: ConfigurationsService,
@@ -36,35 +36,35 @@ export class PublicUsersUtilsService {
       delay(2000)
       )
     }
-  getConnectionsList(wid:string) {
-    if(this.dummyResponse_connection_list){
-      return  of({ status: 200, ok: true , data : DUMMY_RESPONSE})
+  getConnectionsList(wid: string) {
+    if (this.dummyResConnectionList) {
+      return  of({ status: 200, ok: false , data : DUMMY_RESPONSE })
     }
     const requestParams = {
-         wid
+         wid,
     }
    return  this.coreSrvc.getConnectionAPIResponse(requestParams).pipe(
-     catchError(_err=>of([])),
-     map(response=>response)
+     catchError(_err => of([])),
+     map(response => response)
    )
   }
   updateButtonStatus(){
-    this.buttonStatus$.next("pending")
+    this.buttonStatus$.next('pending')
   }
   getButtonStatus(connectionObject: any){
      if(connectionObject && connectionObject.status ===  CHECK_CONNECTION_STATUS_CONNECTED){
       return CONNECTION_STATUS_REJECTED;
-     }
-     else if(connectionObject && connectionObject.status ===  CHECK_CONNECTION_STATUS_REJECTED){
+     } 
+     if (connectionObject && connectionObject.status ===  CHECK_CONNECTION_STATUS_REJECTED){
        return CONNECTION_STATUS_CONNECT
      }
-     else if(connectionObject && connectionObject.status === CHECK_CONNECTION_STATUS_PENDING){
+     if(connectionObject && connectionObject.status === CHECK_CONNECTION_STATUS_PENDING){
        return  CONNECTION_STATUS_PENDING
      }
      return  CONNECTION_STATUS_CONNECT
   }
 
-  sendRequest(requestedUserWid: string){
+  sendRequest(requestedUserWid: string) {
     const currentWID = this.configSvc.userProfile ? this.configSvc.userProfile.userId : ''
     if (this.isDummySendrequest) {
       return of({ status: 204, ok: true ,
@@ -74,7 +74,7 @@ export class PublicUsersUtilsService {
     }
     const requestBody: IRequestUpdate = {
       requested_by: currentWID,
-      requested_to: requestedUserWid
+      requested_to: requestedUserWid,
 
     }
     return this.coreSrvc.sendRequestApi(requestBody).pipe(
@@ -86,10 +86,10 @@ export class PublicUsersUtilsService {
     }
     revokeRequest(connectionId: string){
       if (this.isDummySendrequest) {
-        return of({ status: 204, ok: true})
+        return of({ status: 204, ok: true })
       }
       const requestBody: IRevokeConnection = {
-        connectionId
+        connectionId,
       }
       return this.coreSrvc.revokeConnectionAPi(requestBody).pipe(
         catchError(_e => of(null)),
