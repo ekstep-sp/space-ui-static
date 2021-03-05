@@ -4,7 +4,7 @@ import { InfiniteScrollModule } from 'ngx-infinite-scroll'
 import { PublicUserViewRoutingModule } from './public-user-view-routing.module'
 import { PublicUserViewComponent } from './components/public-user-view/public-user-view.component'
 import { MatCardModule } from '@angular/material/card'
-import { MatToolbarModule, MatProgressSpinnerModule, MatButtonModule, MatFormFieldModule, MatInputModule,  MatSnackBarModule, } from '@angular/material'
+import { MatToolbarModule, MatProgressSpinnerModule, MatButtonModule, MatFormFieldModule, MatInputModule,  MatSnackBarModule } from '@angular/material'
 
 import { BtnPageBackModule } from '@ws-widget/collection'
 import { MatIconModule } from '@angular/material/icon'
@@ -12,9 +12,9 @@ import { ReactiveFormsModule } from '@angular/forms'
 import { PublicUsersCoreService } from './services/public-users-core.service'
 import { PublicUsercardComponent } from './components/public-user-card/public-user-card.component'
 import { PublicUserInvitationComponent } from './components/public-user-invitation/public-user-invitation.component'
-import { PublicUsersUtilsService } from './services/public-users-utils.service';
+import { PublicUsersUtilsService } from './services/public-users-utils.service'
 import { PublicUserDialogComponent } from './components/public-user-dialog/public-user-dialog.component'
-import {MatDialogModule} from '@angular/material/dialog';
+import { MatDialogModule } from '@angular/material/dialog'
 
 @NgModule({
   declarations: [PublicUserViewComponent, PublicUsercardComponent, PublicUserInvitationComponent, PublicUserDialogComponent],
@@ -33,8 +33,8 @@ import {MatDialogModule} from '@angular/material/dialog';
     MatButtonModule,
     MatProgressSpinnerModule,
     MatDialogModule,
-    MatSnackBarModule
+    MatSnackBarModule,
   ],
-  entryComponents: [ PublicUserDialogComponent ]
+  entryComponents: [PublicUserDialogComponent],
 })
 export class PublicUserViewModule { }

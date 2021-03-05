@@ -1,25 +1,25 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { async, ComponentFixture, TestBed } from '@angular/core/testing'
 
-import { PublicUserDialogComponent } from './public-user-dialog.component';
+import { PublicUserDialogComponent } from './public-user-dialog.component'
 
 describe('PublicUserDialogComponent', () => {
-  let component: PublicUserDialogComponent;
-  let fixture: ComponentFixture<PublicUserDialogComponent>;
+  let component: PublicUserDialogComponent
+  let fixture: ComponentFixture<PublicUserDialogComponent>
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ PublicUserDialogComponent ]
+      declarations: [PublicUserDialogComponent],
     })
-    .compileComponents();
-  }));
+    .compileComponents()
+  }))
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(PublicUserDialogComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
-  });
+    fixture = TestBed.createComponent(PublicUserDialogComponent)
+    component = fixture.componentInstance
+    fixture.detectChanges()
+  })
 
   it('should create', () => {
-    expect(component).toBeTruthy();
-  });
-});
+    expect(component).toBeTruthy()
+  })
+})

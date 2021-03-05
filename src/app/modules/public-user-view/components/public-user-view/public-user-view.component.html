@@ -80,7 +80,7 @@
         <ws-public-user-card 
         [userData]=card  
         [connectionData]="getConnectionDetailsForCurrentUser(card)"
-        [resultsOK]="!(connectionListError$ | async)" 
+        [resultsOK]="(connectionListError$ | async) === false" 
         (connectionButtonClickEmitter)= "performConnection($event)"></ws-public-user-card>
     </ng-container>
 </ng-template>

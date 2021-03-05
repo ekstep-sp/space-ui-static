@@ -1,12 +1,11 @@
-import { Component, OnInit, Inject } from '@angular/core';
-import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
-import { CONFIRMATION_TEXT, REVOKING_TEXT, CONNECTION_STATUS_REJECTED, CONNECTION_STATUS_PENDING, CONNECTION_STATUS_CONNECT} from '../../constants';
-import { CONSTANT } from '../../constants';
+import { Component, OnInit, Inject } from '@angular/core'
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material'
+import { CONFIRMATION_TEXT, REVOKING_TEXT, CONNECTION_STATUS_REJECTED, CONNECTION_STATUS_PENDING, CONNECTION_STATUS_CONNECT, CONSTANT } from '../../constants'
 
 @Component({
   selector: 'ws-public-user-dialog',
   templateUrl: './public-user-dialog.component.html',
-  styleUrls: ['./public-user-dialog.component.scss']
+  styleUrls: ['./public-user-dialog.component.scss'],
 })
 export class PublicUserDialogComponent implements OnInit {
 
@@ -21,12 +20,12 @@ export class PublicUserDialogComponent implements OnInit {
     this.getMessage()
     }
 
-    getMessage(){
+    getMessage() {
      if (this.data.actionType === CONNECTION_STATUS_CONNECT) {
        this.message = `${CONFIRMATION_TEXT}${this.data.targetUser} ?`
      } else if (this.data.actionType === CONNECTION_STATUS_PENDING) {
       this.message = REVOKING_TEXT
-     } else if(this.data.actionType === CONNECTION_STATUS_REJECTED) {
+     } else if (this.data.actionType === CONNECTION_STATUS_REJECTED) {
       this.message = `${CONSTANT.WITHDRAW_TEXT}${this.data.targetUser}`
      } else {
        this.message = ''

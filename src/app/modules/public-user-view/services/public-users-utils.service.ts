@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core'
-import { IActionUpdate, IRequestUpdate, IRevokeConnection } from '../models/public-users.interface';
-import { DUMMY_RESPONSE, CONNECTION_STATUS_CONNECT, CHECK_CONNECTION_STATUS_CONNECTED, CONNECTION_STATUS_REJECTED, CHECK_CONNECTION_STATUS_REJECTED, CHECK_CONNECTION_STATUS_PENDING, CONNECTION_STATUS_PENDING} from './../constants'
-import { of } from 'rxjs';
+import { IActionUpdate, IRequestUpdate, IRevokeConnection } from '../models/public-users.interface'
+import { DUMMY_RESPONSE, CONNECTION_STATUS_CONNECT, CHECK_CONNECTION_STATUS_CONNECTED, CONNECTION_STATUS_REJECTED, CHECK_CONNECTION_STATUS_REJECTED, CHECK_CONNECTION_STATUS_PENDING, CONNECTION_STATUS_PENDING } from './../constants'
+import { of } from 'rxjs'
 import { PublicUsersCoreService } from './public-users-core.service'
 
 import { ConfigurationsService } from '@ws-widget/utils/src/public-api'
@@ -62,7 +62,7 @@ export class PublicUsersUtilsService {
     if (this.isDummySendrequest) {
       return of({ status: 204, ok: true ,
       data: {
-        request_id: '1234'
+        request_id: '1234',
       }})
     }
     const requestBody: IRequestUpdate = {
@@ -77,7 +77,7 @@ export class PublicUsersUtilsService {
       delay(2000)
       )
     }
-    revokeRequest(connectionId: string){
+    revokeRequest(connectionId: string) {
       if (this.isDummySendrequest) {
         return of({ status: 204, ok: true })
       }

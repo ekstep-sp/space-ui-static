@@ -31,8 +31,7 @@ export class PublicUsercardComponent implements OnInit, OnChanges {
 
   ngOnChanges() {
     this.buttonStatus = this.utilSvc.getButtonDisplayStatus(this.connectionData)
-    console.log('touching changes ', this.buttonStatus)
-  }
+    }
   navigateToProfileLink(url: string) {
     return (!this.isXSmall) ? window.open(url, '_blank') : window.open(url, '_self')
   }
@@ -42,21 +41,21 @@ export class PublicUsercardComponent implements OnInit, OnChanges {
     }
     return false
   }
-  acceptConnection(userData: any, connectionData: IUserConnections){
+  acceptConnection(userData: any, connectionData: IUserConnections) {
       this.connectionButtonClickEmitter.emit({ userData, connectionData })
     }
 
     isConnected(userData: any, connectionData: any, currentWID: string, connectionStatus: string) {
       if (currentWID !== userData.wid) {
-        return (connectionData && (connectionData.status === connectionStatus ))
+        return (connectionData && (connectionData.status === connectionStatus))
       }
       return false
     }
-    showConnectedUserIcon(userData: any, connectionData: any){
+    showConnectedUserIcon(userData: any, connectionData: any) {
     return this.isConnected(userData, connectionData, this.loggedInUserWid, CHECK_CONNECTION_STATUS_CONNECTED)
   }
 
-  showMailIcon(userData: any, connectionData: any){
+  showMailIcon(userData: any, connectionData: any) {
     return this.isConnected(userData, connectionData, this.loggedInUserWid, CHECK_CONNECTION_STATUS_CONNECTED) && connectionData.email
   }
 
@@ -70,8 +69,8 @@ export class PublicUsercardComponent implements OnInit, OnChanges {
     if (ALLOW_WITHDRAW_STATUS && this.isConnected(userData, connectionData, this.loggedInUserWid, CHECK_CONNECTION_STATUS_CONNECTED)) {
       return false
     }
-    if(this.isConnected(userData, connectionData, this.loggedInUserWid, CHECK_CONNECTION_STATUS_PENDING) || 
-    this.isConnected(userData, connectionData, this.loggedInUserWid, CHECK_CONNECTION_STATUS_REJECTED)){
+    if (this.isConnected(userData, connectionData, this.loggedInUserWid, CHECK_CONNECTION_STATUS_PENDING) ||
+    this.isConnected(userData, connectionData, this.loggedInUserWid, CHECK_CONNECTION_STATUS_REJECTED)) {
        return false
     }
    return true

@@ -2,13 +2,13 @@ import { HttpClient, HttpParams } from '@angular/common/http'
 import { Injectable } from '@angular/core'
 import { Observable } from 'rxjs'
 import { IFormattedUserProperties, IPublicUsersResponse, IRawUserProperties } from '../models/public-users.interface'
-import { ENDPOINT_URL, BATCH_SIZE, DEFAULT_OFFSET, CONNECTION_END_POINT, POST_INVITATION_ACTION_URL, SEND_REQUEST_CONNECTION_URL, REVOKE_REQUEST_CONNECTION_URL} from './../constants'
+import { ENDPOINT_URL, BATCH_SIZE, DEFAULT_OFFSET, CONNECTION_END_POINT, POST_INVITATION_ACTION_URL, SEND_REQUEST_CONNECTION_URL, REVOKE_REQUEST_CONNECTION_URL } from './../constants'
 @Injectable({
   providedIn: 'root',
 })
 export class PublicUsersCoreService {
 
-  dummy_response = true
+  dummyresponse = true
 
   constructor(private readonly http: HttpClient) { }
 
@@ -51,16 +51,16 @@ export class PublicUsersCoreService {
   getSanitisedProfileUrl(url: string): string {
     return this.getAuthoringUrl(url)
   }
-  getConnectionAPIResponse(requestParams:any):Observable<any>{
-    return this.http.post( CONNECTION_END_POINT, { ...requestParams })
+  getConnectionAPIResponse(requestParams: any): Observable<any> {
+    return this.http.post(CONNECTION_END_POINT, { ...requestParams })
   }
   postInvitationAction(actionData: any) {
     return this.http.post(POST_INVITATION_ACTION_URL, { ...actionData })
   }
-  sendRequestApi(requestBody: any){
-   return this.http.post(SEND_REQUEST_CONNECTION_URL, { ...requestBody } )
+  sendRequestApi(requestBody: any) {
+   return this.http.post(SEND_REQUEST_CONNECTION_URL, { ...requestBody })
   }
-  revokeConnectionAPi(requestBody: any){
-    return this.http.post(REVOKE_REQUEST_CONNECTION_URL, { ...requestBody } )
+  revokeConnectionAPi(requestBody: any) {
+    return this.http.post(REVOKE_REQUEST_CONNECTION_URL, { ...requestBody })
   }
 }
