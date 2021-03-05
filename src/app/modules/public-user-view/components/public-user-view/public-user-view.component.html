@@ -77,6 +77,10 @@
 </div>
 <ng-template #cardTemplate>
     <ng-container *ngFor="let card of (apiData$ | async); trackBy: trackUserData ">
-        <ws-public-user-card [userData]=card  [connectionData]= "getConnectionDetailsForCurrentUser(card)" (connectionButtonClickEmitter)= "getSelectedUserConnectionData($event)"></ws-public-user-card>
+        <ws-public-user-card 
+        [userData]=card  
+        [connectionData]="getConnectionDetailsForCurrentUser(card)"
+        [resultsOK]="!(connectionListError$ | async)" 
+        (connectionButtonClickEmitter)= "performConnection($event)"></ws-public-user-card>
     </ng-container>
 </ng-template>

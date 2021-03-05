@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core'
+import { Component, OnInit, Input, Output, EventEmitter, OnChanges } from '@angular/core'
 import { DEFAULT_IMAGE_URL, CONNECTION_STATUS_CONNECT, CHECK_CONNECTION_STATUS_CONNECTED, ALLOW_WITHDRAW_STATUS } from '../../constants'
 import { ValueService, ConfigurationsService } from '@ws-widget/utils'
 import { IUserConnections } from './../../models/public-users.interface'
@@ -8,11 +8,11 @@ import { PublicUsersUtilsService } from '../../services/public-users-utils.servi
   templateUrl: './public-user-card.component.html',
   styleUrls: ['./public-user-card.component.scss'],
 })
-export class PublicUsercardComponent implements OnInit {
+export class PublicUsercardComponent implements OnInit, OnChanges {
   @Input() userData: any = {}
-  @Input() connectionData:IUserConnections= {} as IUserConnections;
-  @Output()
-  connectionButtonClickEmitter = new EventEmitter();
+  @Input() connectionData: IUserConnections | null = null
+  @Input() resultsOK = false
+  @Output() connectionButtonClickEmitter = new EventEmitter<any>(undefined)
   userdata: any
   defaultUserImage = DEFAULT_IMAGE_URL
   isXSmall$ = this.valueSvc.isXSmall$
@@ -26,14 +26,13 @@ export class PublicUsercardComponent implements OnInit {
     })
   }
   ngOnInit() {
-    this.loggedInUserWid = this.configSvc.userProfile?this.configSvc.userProfile.userId:''
-    this.buttonStatus = this.utilSvc.getButtonStatus(this.connectionData)
+    this.loggedInUserWid = this.configSvc.userProfile ? this.configSvc.userProfile.userId : ''
   }
 
-  ngOnChanges(){
-    this.buttonStatus = this.utilSvc.getButtonStatus(this.connectionData)
+  ngOnChanges() {
+    this.buttonStatus = this.utilSvc.getButtonDisplayStatus(this.connectionData)
+    console.log('touching changes ', this.buttonStatus)
   }
-
   navigateToProfileLink(url: string) {
     return (!this.isXSmall) ? window.open(url, '_blank') : window.open(url, '_self')
   }
@@ -44,34 +43,33 @@ export class PublicUsercardComponent implements OnInit {
     return false
   }
   acceptConnection(userData: any, connectionData: IUserConnections){
-    let userDataAndConnectionbject = {
-      userData,connectionData
+      this.connectionButtonClickEmitter.emit({ userData, connectionData })
     }
-      this.connectionButtonClickEmitter.emit(JSON.stringify(userDataAndConnectionbject))
+
+    isConnected(userData: any, connectionData: any, currentWID: string) {
+      if (currentWID !== userData.wid) {
+        return (connectionData && (connectionData.status === CHECK_CONNECTION_STATUS_CONNECTED))
+      }
+      return false
     }
-  showConnectedUser(userData: any, connectionData: any){
-    return (connectionData && (connectionData.status === CHECK_CONNECTION_STATUS_CONNECTED) &&
-    (this.loggedInUserWid != userData.wid)) ? true: false
+    showConnectedUserIcon(userData: any, connectionData: any){
+    return this.isConnected(userData, connectionData, this.loggedInUserWid)
   }
 
   showMailIcon(userData: any, connectionData: any){
-    return ( connectionData && (connectionData.status === CHECK_CONNECTION_STATUS_CONNECTED)
-       && (connectionData.email) && 
-       (this.loggedInUserWid != userData.wid))?
-       true : false
+    return this.isConnected(userData, connectionData, this.loggedInUserWid) && connectionData.email
   }
-  hideButtonStatus(userData: any, connectionData: any){
-    console.log("ths.connection",this.connectionData )
-    if(!this.connectionData){
+
+  hideButtonStatus(userData: any, connectionData: any) {
+    if (this.loggedInUserWid === userData.wid) {
       return true
-    }
-    if(!ALLOW_WITHDRAW_STATUS && (this.loggedInUserWid != userData.wid) && connectionData.status === CHECK_CONNECTION_STATUS_CONNECTED){
-      return false
-    }
-    if((this.loggedInUserWid != userData.wid)){
-      return false
      }
+    if (!this.connectionData) {
+      return false
+    }
+    if (ALLOW_WITHDRAW_STATUS && this.isConnected(userData, connectionData, this.loggedInUserWid)) {
+      return false
+    }
    return true
   }
 }
-

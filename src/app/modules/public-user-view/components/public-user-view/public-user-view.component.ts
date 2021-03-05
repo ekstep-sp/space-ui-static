@@ -1,11 +1,13 @@
 import { Component, OnInit } from '@angular/core'
 import { FormControl } from '@angular/forms'
 import { NsPage, ConfigurationsService, ValueService } from '@ws-widget/utils'
-import { BehaviorSubject, Observable, of } from 'rxjs'
+import { BehaviorSubject, Observable, of, Subscription } from 'rxjs'
 import { catchError, debounceTime, distinctUntilChanged, filter, map, tap } from 'rxjs/operators'
 import { PublicUsersCoreService } from '../../services/public-users-core.service'
-import { BATCH_SIZE, DEFAULT_OFFSET, DEFAULT_PAGE_NUMBER, DEFAULT_QUERY, INFINITE_SCROLL_CONSTANTS, CHECK_CONNECTION_STATUS_CONNECTED, CHECK_CONNECTION_STATUS_PENDING, CHECK_CONNECTION_STATUS_REJECTED, FAILED_CONNECTION_REQUEST_MSQ,
-   FAILED_REVOKE_PENDING_REQUEST_MSQ, FAILED_USERS_CONNECTION_REQUEST_MSQ, DAILOG_CONFIRMATION_WIDTH, CONNECTION_STATUS_REJECTED, CONNECTION_STATUS_PENDING,CONNECTION_STATUS_CONNECT  } from './../../constants'
+import { BATCH_SIZE, DEFAULT_OFFSET, DEFAULT_PAGE_NUMBER, DEFAULT_QUERY, INFINITE_SCROLL_CONSTANTS, CHECK_CONNECTION_STATUS_CONNECTED, CHECK_CONNECTION_STATUS_PENDING, CHECK_CONNECTION_STATUS_REJECTED, FAILED_CONNECTION_REQUEST_MSG,
+   FAILED_REVOKE_PENDING_REQUEST_MSG, FAILED_USERS_CONNECTION_REQUEST_MSG,
+    DAILOG_CONFIRMATION_WIDTH, CONNECTION_STATUS_REJECTED,
+    CONNECTION_STATUS_PENDING, CONNECTION_STATUS_CONNECT  } from './../../constants'
 import { IPublicUsers, IPublicUsersResponse, IRawUserProperties, IUpdateDataObj } from './../../models/public-users.interface'
 import { PublicUsersUtilsService } from '../../services/public-users-utils.service'
 import { PublicUserDialogComponent } from '../public-user-dialog/public-user-dialog.component'
@@ -43,8 +45,9 @@ export class PublicUserViewComponent implements OnInit {
   DEFAULT_DEBOUNCE = 1000
   DEFAULT_MIN_LENGTH_TO_ACTIVATE_SEARCH = 3
   error$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false)
-  connectionListError$:BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false)
-  userConnectionsList$:BehaviorSubject<any> = new BehaviorSubject<any>(new Map())
+  connectionListError$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false)
+  userConnectionsList$: BehaviorSubject<any> = new BehaviorSubject<any>(new Map())
+  apiSub$: Subscription | null = null
   dummyCheck = true
   constructor(
     private readonly configSvc: ConfigurationsService,
@@ -53,7 +56,7 @@ export class PublicUserViewComponent implements OnInit {
     private valueSvc: ValueService,
     private snackBar: MatSnackBar,
     private dialog: MatDialog,
-    
+
   ) {
     this.pageNavbar = this.configSvc.pageNavBar
     this.isXSmall$ = this.valueSvc.isXSmall$
@@ -68,12 +71,12 @@ export class PublicUserViewComponent implements OnInit {
         distinctUntilChanged()
         ).subscribe((searchTerm: string) => {
           this.searchUsers(searchTerm)
-             this.getUserConnections()
+          this.getUserConnections().subscribe()
         })
     }
     // trigger first time page load
     this.searchUsers()
-    this.getUserConnections()
+    this.getUserConnections().subscribe()
   }
   searchUsers(q = '') {
 
@@ -151,32 +154,34 @@ export class PublicUserViewComponent implements OnInit {
   disableSearchbar() {
     this.isEnabledSearch = false
   }
-    //this will send wid of logged in user and get list of connections as response
+    // this will send wid of logged in user and get list of connections as response
   getUserConnections(requested_to = '', isDummyDelete = false) {
-      const loggedInUserWid = this.configSvc.userProfile?this.configSvc.userProfile.userId : '';
-      let userMap  = new Map();
+      const loggedInUserWid = this.configSvc.userProfile ? this.configSvc.userProfile.userId : ''
+      const possibleConnectionMap  = new Map()
       this.connectionListError$.next(false)
-      this.utilSvc.getConnectionsList(loggedInUserWid).pipe(
-        catchError((_e:any)=> {
+      return this.utilSvc.getConnectionsList(loggedInUserWid)
+      .pipe(
+        catchError((_e: any) => {
           this.connectionListError$.next(true)
            return of(null)
         }),
-        tap((response: any)=>{
-          if(response && response.ok && response.data ){
-            //filtering the reponse to get the connections of loggedin user
-            response.data = response.data.filter((eachresponse: { requested_by: string, status: string })=> (eachresponse.requested_by === loggedInUserWid)||(eachresponse.status === CHECK_CONNECTION_STATUS_CONNECTED))
-            response.data.forEach((eachConnection: { user_id: string })=>{
-            userMap.set(eachConnection.user_id, eachConnection)
+        tap((response: any) => {
+          if (response && response.ok && response.data) {
+            // filtering the reponse to get the connections of loggedin user
+            response.data.forEach((eachresponse: { user_id: string, requested_by: string, status: string }) => {
+              if ((eachresponse.status === CHECK_CONNECTION_STATUS_CONNECTED) || (eachresponse.requested_by === loggedInUserWid)) {
+                possibleConnectionMap.set(eachresponse.user_id, eachresponse)
+              }
             })
-          }
-          else{         
-            this.snackBar.open(FAILED_USERS_CONNECTION_REQUEST_MSQ, '',
-           {duration: 3000})
+          } else {
+            this.snackBar.open(FAILED_USERS_CONNECTION_REQUEST_MSG, '', { duration: 3000 })
         }
+        // will be empty if there is empty conenciton or error
+        this.userConnectionsList$.next(possibleConnectionMap)
         }),
         // tap((_d:any)=>{
         //   if(this.dummyCheck){
-        //     userMap.set(requested_to, 
+        //     userMap.set(requested_to,
         //       {
         //         id: requested_to , created_on:'2/03/2021', last_updated_on:'2/03/2021', status:'Pending', requested_by:'acbf4053-c126-4e85-a0bf-252a896535ea', email: 'anjitha.r98@gmail.com', user_id: requested_to ,fname:'Aakash',lname:'Vishwakarma',root_org:'space',org:'Sustainable Environment and Ecological Development Society'
         //       } )
@@ -189,107 +194,105 @@ export class PublicUserViewComponent implements OnInit {
         //   }
         //   this.userConnectionsList$.next(userMap)
         // }),
-        catchError((_err)=>
-        {
+        catchError((_err: any) => {
           this.connectionListError$.next(true)
-          console.log("marking error ", this.connectionListError$.getValue())
+          console.log('marking error ', this.connectionListError$.getValue())
           return of(null)
         })
-      ).subscribe()
+      )
 
   }
 
-  getConnectionDetailsForCurrentUser(userData: any){
-    if(!this.connectionListError$.getValue() && this.userConnectionsList$.getValue()){
-      return this.getConnectionObjectIfExists(this.userConnectionsList$.getValue(), userData);
+  getConnectionDetailsForCurrentUser(userData: any) {
+    if (!this.connectionListError$.getValue()) {
+      return this.getConnectionObjectIfExists(userData)
     }
     return null
     }
 
-    getConnectionObjectIfExists(userConnectionsMap: any,userData:any){
-    if(userConnectionsMap.has(userData.wid)){
-     return userConnectionsMap.get(userData.wid)
+    getConnectionObjectIfExists(userData: any) {
+      const existingConnectionsData = this.userConnectionsList$.getValue()
+    if (existingConnectionsData.has(userData.wid)) {
+     return existingConnectionsData.get(userData.wid)
+    }
+    return null
+  }
+
+  performConnection(userConnectionData: any) {
+    if (userConnectionData.connectionData && userConnectionData.connectionData.status === CHECK_CONNECTION_STATUS_CONNECTED) {
+      // tslint:disable-next-line: max-line-length
+      this.openDialogBoxForConfirmation(userConnectionData.userData, userConnectionData.connectionData, CONNECTION_STATUS_REJECTED, userConnectionData.userData.first_name)
+    } else if (userConnectionData.connectionData && userConnectionData.connectionData.status === CHECK_CONNECTION_STATUS_PENDING) {
+      this.openDialogBoxForConfirmation(userConnectionData.userData, userConnectionData.connectionData, CONNECTION_STATUS_PENDING)
+    } else if (userConnectionData.connectionData && userConnectionData.connectionData.status === CHECK_CONNECTION_STATUS_REJECTED) {
+      // tslint:disable-next-line: max-line-length
+      this.openDialogBoxForConfirmation(userConnectionData.userData, userConnectionData.connectionData, CONNECTION_STATUS_CONNECT, userConnectionData.userData.first_name)
+    } else {
+      // tslint:disable-next-line: max-line-length
+      this.openDialogBoxForConfirmation(userConnectionData.userData, userConnectionData.connectionData, CONNECTION_STATUS_CONNECT, userConnectionData.userData.first_name) 
     }
   }
 
-  getSelectedUserConnectionData(userConnectionData: any){
-
-    let userDataAndConnectionObject = JSON.parse(userConnectionData)
-    //if connectionData, means user is already connected
-    //if user is connected, button status wil be withdraw, connection status wil be connected
-    //if the connection status is connected, and user wish to withdraw the connection, call delete api
-
-    if(userDataAndConnectionObject.connectionData && userDataAndConnectionObject.connectionData.status === CHECK_CONNECTION_STATUS_CONNECTED){
-      this.openDialogBoxForConfirmation(userDataAndConnectionObject.userData, userDataAndConnectionObject.connectionData, false ,  CONNECTION_STATUS_REJECTED, userDataAndConnectionObject.userData.first_name)
-    }
-    else if(userDataAndConnectionObject.connectionData && userDataAndConnectionObject.connectionData.status === CHECK_CONNECTION_STATUS_PENDING){
-      this.openDialogBoxForConfirmation(userDataAndConnectionObject.userData, userDataAndConnectionObject.connectionData, false , CONNECTION_STATUS_PENDING)
-    }
-    else if(userDataAndConnectionObject.connectionData && userDataAndConnectionObject.connectionData.status === CHECK_CONNECTION_STATUS_REJECTED){
-      this.openDialogBoxForConfirmation(userDataAndConnectionObject.userData, userDataAndConnectionObject.connectionData, false ,  CONNECTION_STATUS_CONNECT , userDataAndConnectionObject.userData.first_name)
-    }
-    //user is requesting for new user to get connection
-    else if(userDataAndConnectionObject.userData && !userDataAndConnectionObject.connectionData){
-      this.openDialogBoxForConfirmation(userDataAndConnectionObject.userData, userDataAndConnectionObject.connectionData, true, CONNECTION_STATUS_CONNECT , userDataAndConnectionObject.userData.first_name )
-    }
-  }
-
-  trackUserData(_index:any, data: any){
+  trackUserData(_index: any, data: any) {
     return data.wid
   }
 
-  openDialogBoxForConfirmation(userData: any, connectionData: any, isNewUserConnection: boolean, confirmOrWidthdraw: string, firstName:String = ''){
-    const dialogRefForPublicUser = this.dialog.open(PublicUserDialogComponent, 
-     { width:DAILOG_CONFIRMATION_WIDTH,
-      data:{
-        connectionObject : connectionData,
-        userData: userData,
-        isNewUserConnection,
-        confirmOrWidthdraw,
-        targetUser: firstName
-        
-      }})
-      dialogRefForPublicUser.afterClosed().subscribe(result =>{
-        if(result.confirmOrWidthdraw === CONNECTION_STATUS_CONNECT){
-        this.sendRequestConnection(userData.wid)
-        }
-        if(result.confirmOrWidthdraw === CONNECTION_STATUS_PENDING){
-          this.revokeConnection(connectionData.id)
-       }
-       if(result.confirmOrWidthdraw === CONNECTION_STATUS_REJECTED ){
-        this.revokeConnection(connectionData.id)
-     }
+  openDialogBoxForConfirmation(
+    userData: any, connectionData: any, actionType: string,
+    firstName: String = ''
+  ) {
+    const dialogRefForPublicUser = this.dialog.open(PublicUserDialogComponent, {
+        width: DAILOG_CONFIRMATION_WIDTH,
+        data: {
+          actionType,
+          targetUser: firstName,
+        },
       })
+    dialogRefForPublicUser.afterClosed().pipe(filter(result => result)).subscribe(result => {
+      if (result.actionType === CONNECTION_STATUS_CONNECT) {
+        this.sendConnectionRequest(userData.wid)
+      }
+      if (result.actionType === CONNECTION_STATUS_PENDING) {
+        this.revokeConnection(connectionData.id)
+      }
+      if (result.actionType === CONNECTION_STATUS_REJECTED) {
+        this.revokeConnection(connectionData.id)
+      }
+    })
   }
 
-  sendRequestConnection(requestedUserWid:string){
-   
-    return  this.utilSvc.sendRequest(requestedUserWid).pipe(
-        catchError((_e:any)=> of(null)),
-        map((response: any)=>{
-          if(response.ok && response.data.request_id ){
-         this.getUserConnections(requestedUserWid)
-         this.apiData$.next(this.apiData$.getValue())
-          }
-           else {
-               this.snackBar.open(FAILED_CONNECTION_REQUEST_MSQ, '',
-              {duration: 3000})
+  sendConnectionRequest(requestedUserWid: string) {
+    this.utilSvc.sendRequest(requestedUserWid).pipe(
+        catchError((_e: any) => of({ ok: true, request_id: 'someid' })),
+        map((response: any) => {
+          if (response && response.ok && response.data.request_id) {
+            this.refreshData(requestedUserWid)
+            } else {
+               this.snackBar.open(FAILED_CONNECTION_REQUEST_MSG, '',
+                                  { duration: 3000 })
            }
         })
       ).subscribe()
   }
 
-  revokeConnection(connectionId: string){
+  refreshData(requestedUserWid: string, dummyLogic = false) {
+    if (this.apiSub$) {
+      this.apiSub$.unsubscribe()
+    }
+    this.apiSub$ = this.getUserConnections(requestedUserWid, dummyLogic).subscribe(() => {
+      this.apiData$.next(this.apiData$.getValue())
+    })
+  }
+
+  revokeConnection(connectionId: string) {
     return  this.utilSvc.revokeRequest(connectionId).pipe(
-        catchError((_e:any)=> of(null)),
-        map((response: any)=>{
-           if(response.ok){
-            this.getUserConnections(connectionId, true)
-            this.apiData$.next(this.apiData$.getValue())
-           }
-           else {
-            this.snackBar.open(FAILED_REVOKE_PENDING_REQUEST_MSQ, '',
-           {duration: 3000})
+        catchError((_e: any) => of(null)),
+        map((response: any) => {
+           if (response.ok) {
+            this.refreshData(connectionId, true)
+           } else {
+            this.snackBar.open(FAILED_REVOKE_PENDING_REQUEST_MSG, '',
+                               { duration: 3000 })
         }
         })
       ).subscribe()

@@ -37,28 +37,25 @@ export class PublicUsersUtilsService {
       )
     }
   getConnectionsList(wid: string) {
-    // if (this.dummyResConnectionList) {
-    //   return  of({ status: 404, ok: false , data : DUMMY_RESPONSE })
-    // }
+    if (this.dummyResConnectionList) {
+      return  of({ status: 200, ok: true , data : DUMMY_RESPONSE }).pipe(delay(2000))
+    }
     const requestParams = {
          wid,
     }
-   return  this.coreSrvc.getConnectionAPIResponse(requestParams).pipe(
-     catchError(_err => of([])),
-     map(response => response)
-   )
+   return  this.coreSrvc.getConnectionAPIResponse(requestParams)
   }
-  updateButtonStatus(){
+  updateButtonStatus() {
     this.buttonStatus$.next('pending')
   }
-  getButtonStatus(connectionObject: any){
-     if(connectionObject && connectionObject.status ===  CHECK_CONNECTION_STATUS_CONNECTED){
-      return CONNECTION_STATUS_REJECTED;
-     } 
-     if (connectionObject && connectionObject.status ===  CHECK_CONNECTION_STATUS_REJECTED){
+  getButtonDisplayStatus(connectionObject: any) {
+     if (connectionObject && connectionObject.status ===  CHECK_CONNECTION_STATUS_CONNECTED) {
+      return CONNECTION_STATUS_REJECTED
+     }
+     if (connectionObject && connectionObject.status ===  CHECK_CONNECTION_STATUS_REJECTED) {
        return CONNECTION_STATUS_CONNECT
      }
-     if(connectionObject && connectionObject.status === CHECK_CONNECTION_STATUS_PENDING){
+     if (connectionObject && connectionObject.status === CHECK_CONNECTION_STATUS_PENDING) {
        return  CONNECTION_STATUS_PENDING
      }
      return  CONNECTION_STATUS_CONNECT

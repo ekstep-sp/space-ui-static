@@ -10,25 +10,29 @@ import { CONSTANT } from '../../constants';
 })
 export class PublicUserDialogComponent implements OnInit {
 
-  constructor(public dialogRef: MatDialogRef<PublicUserDialogComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: any) { }
-   message = ''
-  ngOnInit() {
-  this.getMessage()
-    
-  }
-   getMessage(){
-     if(this.data.confirmOrWidthdraw === CONNECTION_STATUS_CONNECT ){
-       this.message = `${CONFIRMATION_TEXT}${this.data.targetUser} ?` 
-     }
-     if(this.data.confirmOrWidthdraw === CONNECTION_STATUS_PENDING){
+  message = ''
+
+  constructor(
+    public dialogRef: MatDialogRef<PublicUserDialogComponent>,
+    @Inject(MAT_DIALOG_DATA) public data: any
+    ) { }
+
+    ngOnInit() {
+    this.getMessage()
+    }
+
+    getMessage(){
+     if (this.data.actionType === CONNECTION_STATUS_CONNECT) {
+       this.message = `${CONFIRMATION_TEXT}${this.data.targetUser} ?`
+     } else if (this.data.actionType === CONNECTION_STATUS_PENDING) {
       this.message = REVOKING_TEXT
-     }
-     if(this.data.confirmOrWidthdraw === CONNECTION_STATUS_REJECTED){
+     } else if(this.data.actionType === CONNECTION_STATUS_REJECTED) {
       this.message = `${CONSTANT.WITHDRAW_TEXT}${this.data.targetUser}`
+     } else {
+       this.message = ''
      }
    }
    onConfirmClick(): void {
-    this.dialogRef.close({ event: 'close', confirmOrWidthdraw: this.data.confirmOrWidthdraw });
+    this.dialogRef.close({ event: 'close', actionType: this.data.actionType })
   }
 }
