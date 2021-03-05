@@ -11,7 +11,6 @@ import { PublicUsersUtilsService } from '../../services/public-users-utils.servi
 export class PublicUsercardComponent implements OnInit {
   @Input() userData: any = {}
   @Input() connectionData:IUserConnections= {} as IUserConnections;
-  // @Input()  isLoadingConnection = false;
   @Output()
   connectionButtonClickEmitter = new EventEmitter();
   userdata: any
@@ -45,17 +44,11 @@ export class PublicUsercardComponent implements OnInit {
     return false
   }
   acceptConnection(userData: any, connectionData: IUserConnections){
-    // this.isLoadingConnection = true
     let userDataAndConnectionbject = {
       userData,connectionData
     }
       this.connectionButtonClickEmitter.emit(JSON.stringify(userDataAndConnectionbject))
     }
-
-  // changeButtonStatus(){
-  //   if(this.connectionData){
-  //   }
-  // }
   showConnectedUser(userData: any, connectionData: any){
     return (connectionData && (connectionData.status === CHECK_CONNECTION_STATUS_CONNECTED) &&
     (this.loggedInUserWid != userData.wid)) ? true: false
@@ -68,14 +61,17 @@ export class PublicUsercardComponent implements OnInit {
        true : false
   }
   hideButtonStatus(userData: any, connectionData: any){
-    if(!ALLOW_WITHDRAW_STATUS && (this.loggedInUserWid != userData.wid) && connectionData && connectionData.status === CHECK_CONNECTION_STATUS_CONNECTED){
+    console.log("ths.connection",this.connectionData )
+    if(!this.connectionData){
+      return true
+    }
+    if(!ALLOW_WITHDRAW_STATUS && (this.loggedInUserWid != userData.wid) && connectionData.status === CHECK_CONNECTION_STATUS_CONNECTED){
       return false
     }
-   else if((this.loggedInUserWid != userData.wid)){
-    return true
-   }
-   return false
+    if((this.loggedInUserWid != userData.wid)){
+      return false
+     }
+   return true
   }
-
 }
 

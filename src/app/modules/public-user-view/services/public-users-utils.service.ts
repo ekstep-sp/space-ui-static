@@ -37,9 +37,9 @@ export class PublicUsersUtilsService {
       )
     }
   getConnectionsList(wid: string) {
-    if (this.dummyResConnectionList) {
-      return  of({ status: 200, ok: false , data : DUMMY_RESPONSE })
-    }
+    // if (this.dummyResConnectionList) {
+    //   return  of({ status: 404, ok: false , data : DUMMY_RESPONSE })
+    // }
     const requestParams = {
          wid,
     }

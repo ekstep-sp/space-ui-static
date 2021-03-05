@@ -5,7 +5,7 @@ import { BehaviorSubject, Observable, of } from 'rxjs'
 import { catchError, debounceTime, distinctUntilChanged, filter, map, tap } from 'rxjs/operators'
 import { PublicUsersCoreService } from '../../services/public-users-core.service'
 import { BATCH_SIZE, DEFAULT_OFFSET, DEFAULT_PAGE_NUMBER, DEFAULT_QUERY, INFINITE_SCROLL_CONSTANTS, CHECK_CONNECTION_STATUS_CONNECTED, CHECK_CONNECTION_STATUS_PENDING, CHECK_CONNECTION_STATUS_REJECTED, FAILED_CONNECTION_REQUEST_MSQ,
-   FAILED_REVOKE_PENDING_REQUEST_MSQ, FAILED_USERS_CONNECTION_REQUEST_MSQ, DAILOG_CONFIRMATION_WIDTH } from './../../constants'
+   FAILED_REVOKE_PENDING_REQUEST_MSQ, FAILED_USERS_CONNECTION_REQUEST_MSQ, DAILOG_CONFIRMATION_WIDTH, CONNECTION_STATUS_REJECTED, CONNECTION_STATUS_PENDING,CONNECTION_STATUS_CONNECT  } from './../../constants'
 import { IPublicUsers, IPublicUsersResponse, IRawUserProperties, IUpdateDataObj } from './../../models/public-users.interface'
 import { PublicUsersUtilsService } from '../../services/public-users-utils.service'
 import { PublicUserDialogComponent } from '../public-user-dialog/public-user-dialog.component'
@@ -43,9 +43,9 @@ export class PublicUserViewComponent implements OnInit {
   DEFAULT_DEBOUNCE = 1000
   DEFAULT_MIN_LENGTH_TO_ACTIVATE_SEARCH = 3
   error$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false)
-  userConnectionsList$:BehaviorSubject<any> = new BehaviorSubject< any>(null)
+  connectionListError$:BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false)
+  userConnectionsList$:BehaviorSubject<any> = new BehaviorSubject<any>(new Map())
   dummyCheck = true
-  // isLoadingConnection: any = {} as any
   constructor(
     private readonly configSvc: ConfigurationsService,
     private readonly coreSrvc: PublicUsersCoreService,
@@ -155,45 +155,55 @@ export class PublicUserViewComponent implements OnInit {
   getUserConnections(requested_to = '', isDummyDelete = false) {
       const loggedInUserWid = this.configSvc.userProfile?this.configSvc.userProfile.userId : '';
       let userMap  = new Map();
+      this.connectionListError$.next(false)
       this.utilSvc.getConnectionsList(loggedInUserWid).pipe(
-        catchError((_e:any)=> of(null)),
+        catchError((_e:any)=> {
+          this.connectionListError$.next(true)
+           return of(null)
+        }),
         tap((response: any)=>{
-          if(response.ok && response.data){
+          if(response && response.ok && response.data ){
             //filtering the reponse to get the connections of loggedin user
             response.data = response.data.filter((eachresponse: { requested_by: string, status: string })=> (eachresponse.requested_by === loggedInUserWid)||(eachresponse.status === CHECK_CONNECTION_STATUS_CONNECTED))
-            console.log("response.data", response.data)
             response.data.forEach((eachConnection: { user_id: string })=>{
             userMap.set(eachConnection.user_id, eachConnection)
             })
           }
-          else{
+          else{         
             this.snackBar.open(FAILED_USERS_CONNECTION_REQUEST_MSQ, '',
            {duration: 3000})
         }
         }),
-        tap((_d:any)=>{
-          if(this.dummyCheck){
-            userMap.set(requested_to, 
-              {
-                id: requested_to , created_on:'2/03/2021', last_updated_on:'2/03/2021', status:'Pending', requested_by:'acbf4053-c126-4e85-a0bf-252a896535ea', email: 'anjitha.r98@gmail.com', user_id: requested_to ,fname:'Aakash',lname:'Vishwakarma',root_org:'space',org:'Sustainable Environment and Ecological Development Society'
-              } )
-              this.userConnectionsList$.next(userMap)
-          }
-        }),
-        tap((_d:any)=>{
-          if(isDummyDelete){
-                userMap.delete(requested_to)
-          }
-          this.userConnectionsList$.next(userMap)
+        // tap((_d:any)=>{
+        //   if(this.dummyCheck){
+        //     userMap.set(requested_to, 
+        //       {
+        //         id: requested_to , created_on:'2/03/2021', last_updated_on:'2/03/2021', status:'Pending', requested_by:'acbf4053-c126-4e85-a0bf-252a896535ea', email: 'anjitha.r98@gmail.com', user_id: requested_to ,fname:'Aakash',lname:'Vishwakarma',root_org:'space',org:'Sustainable Environment and Ecological Development Society'
+        //       } )
+        //       this.userConnectionsList$.next(userMap)
+        //   }
+        // }),
+        // tap((_d:any)=>{
+        //   if(isDummyDelete){
+        //         userMap.delete(requested_to)
+        //   }
+        //   this.userConnectionsList$.next(userMap)
+        // }),
+        catchError((_err)=>
+        {
+          this.connectionListError$.next(true)
+          console.log("marking error ", this.connectionListError$.getValue())
+          return of(null)
         })
       ).subscribe()
 
   }
 
   getConnectionDetailsForCurrentUser(userData: any){
-    if(this.userConnectionsList$.getValue()){
+    if(!this.connectionListError$.getValue() && this.userConnectionsList$.getValue()){
       return this.getConnectionObjectIfExists(this.userConnectionsList$.getValue(), userData);
     }
+    return null
     }
 
     getConnectionObjectIfExists(userConnectionsMap: any,userData:any){
@@ -203,25 +213,24 @@ export class PublicUserViewComponent implements OnInit {
   }
 
   getSelectedUserConnectionData(userConnectionData: any){
-    // this.isLoadingConnection = {userId: userConnectionData.wid,isLoading:true}
+
     let userDataAndConnectionObject = JSON.parse(userConnectionData)
-    console.log("event", userDataAndConnectionObject)
     //if connectionData, means user is already connected
     //if user is connected, button status wil be withdraw, connection status wil be connected
     //if the connection status is connected, and user wish to withdraw the connection, call delete api
 
     if(userDataAndConnectionObject.connectionData && userDataAndConnectionObject.connectionData.status === CHECK_CONNECTION_STATUS_CONNECTED){
-      this.openDialogBoxForConfirmation(userDataAndConnectionObject.userData, userDataAndConnectionObject.connectionData, false ,  "revoke")
+      this.openDialogBoxForConfirmation(userDataAndConnectionObject.userData, userDataAndConnectionObject.connectionData, false ,  CONNECTION_STATUS_REJECTED, userDataAndConnectionObject.userData.first_name)
     }
     else if(userDataAndConnectionObject.connectionData && userDataAndConnectionObject.connectionData.status === CHECK_CONNECTION_STATUS_PENDING){
-      this.openDialogBoxForConfirmation(userDataAndConnectionObject.userData, userDataAndConnectionObject.connectionData, false ,  "pending")
+      this.openDialogBoxForConfirmation(userDataAndConnectionObject.userData, userDataAndConnectionObject.connectionData, false , CONNECTION_STATUS_PENDING)
     }
     else if(userDataAndConnectionObject.connectionData && userDataAndConnectionObject.connectionData.status === CHECK_CONNECTION_STATUS_REJECTED){
-      this.openDialogBoxForConfirmation(userDataAndConnectionObject.userData, userDataAndConnectionObject.connectionData, false ,  "confirm", userDataAndConnectionObject.userData.first_name)
+      this.openDialogBoxForConfirmation(userDataAndConnectionObject.userData, userDataAndConnectionObject.connectionData, false ,  CONNECTION_STATUS_CONNECT , userDataAndConnectionObject.userData.first_name)
     }
     //user is requesting for new user to get connection
     else if(userDataAndConnectionObject.userData && !userDataAndConnectionObject.connectionData){
-      this.openDialogBoxForConfirmation(userDataAndConnectionObject.userData, userDataAndConnectionObject.connectionData, true, "confirm" , userDataAndConnectionObject.userData.first_name )
+      this.openDialogBoxForConfirmation(userDataAndConnectionObject.userData, userDataAndConnectionObject.connectionData, true, CONNECTION_STATUS_CONNECT , userDataAndConnectionObject.userData.first_name )
     }
   }
 
@@ -241,14 +250,13 @@ export class PublicUserViewComponent implements OnInit {
         
       }})
       dialogRefForPublicUser.afterClosed().subscribe(result =>{
-        if(result.confirmOrWidthdraw === 'confirm'){
+        if(result.confirmOrWidthdraw === CONNECTION_STATUS_CONNECT){
         this.sendRequestConnection(userData.wid)
-
         }
-        if(result.confirmOrWidthdraw === 'pending'){
+        if(result.confirmOrWidthdraw === CONNECTION_STATUS_PENDING){
           this.revokeConnection(connectionData.id)
        }
-       if(result.confirmOrWidthdraw === 'revoke'){
+       if(result.confirmOrWidthdraw === CONNECTION_STATUS_REJECTED ){
         this.revokeConnection(connectionData.id)
      }
       })
@@ -260,12 +268,10 @@ export class PublicUserViewComponent implements OnInit {
         catchError((_e:any)=> of(null)),
         map((response: any)=>{
           if(response.ok && response.data.request_id ){
-            // this.isLoadingConnection = { userId: '2aed1387-fc4b-4e2c-a57a-ae2030328e14', isLoading: false }
          this.getUserConnections(requestedUserWid)
          this.apiData$.next(this.apiData$.getValue())
           }
            else {
-            // this.isLoadingConnection = {userId: '2aed1387-fc4b-4e2c-a57a-ae2030328e14', isLoading: false}
                this.snackBar.open(FAILED_CONNECTION_REQUEST_MSQ, '',
               {duration: 3000})
            }
@@ -288,11 +294,4 @@ export class PublicUserViewComponent implements OnInit {
         })
       ).subscribe()
   }
-  // sendLoaderInfoForUser(userData:any){
-  //   if('2aed1387-fc4b-4e2c-a57a-ae2030328e14' === userData.wid){
-  //     console.log("loading", this.isLoadingConnection)
-  //     return false ;
-  //   }
-  //   return false
-  // }
 }

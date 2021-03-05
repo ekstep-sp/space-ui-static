@@ -42,11 +42,15 @@ export const CHECK_CONNECTION_STATUS_REJECTED = 'Rejected'
 
 export const CONFIRMATION_TEXT = 'Send connection request to '
 export const REVOKING_TEXT = 'Are you sure to revoke the pending request ? '
+
 export const FAILED_CONNECTION_REQUEST_MSQ = 'Failed to send connection request, Please try again later'
 export const FAILED_REVOKE_PENDING_REQUEST_MSQ = 'Failed to withdraw the pending request, please try again later'
 export const FAILED_USERS_CONNECTION_REQUEST_MSQ = 'Failed to retrieve latest connection, please try reloading app'
 export const SEND_REQUEST_CONNECTION_URL = ''
 export const REVOKE_REQUEST_CONNECTION_URL = ''
 export const ALLOW_WITHDRAW_STATUS = false
+export const CONSTANT = {
+    WITHDRAW_TEXT : 'Withdraw the connection request from '
+}
 
 
