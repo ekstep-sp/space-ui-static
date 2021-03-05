@@ -4,11 +4,13 @@ import { NsPage, ConfigurationsService, ValueService } from '@ws-widget/utils'
 import { BehaviorSubject, Observable, of } from 'rxjs'
 import { catchError, debounceTime, distinctUntilChanged, filter, map, tap } from 'rxjs/operators'
 import { PublicUsersCoreService } from '../../services/public-users-core.service'
-import { BATCH_SIZE, DEFAULT_OFFSET, DEFAULT_PAGE_NUMBER, DEFAULT_QUERY, INFINITE_SCROLL_CONSTANTS, CHECK_CONNECTION_STATUS_CONNECTED, CHECK_CONNECTION_STATUS_PENDING, CHECK_CONNECTION_STATUS_REJECTED} from './../../constants'
+import { BATCH_SIZE, DEFAULT_OFFSET, DEFAULT_PAGE_NUMBER, DEFAULT_QUERY, INFINITE_SCROLL_CONSTANTS, CHECK_CONNECTION_STATUS_CONNECTED, CHECK_CONNECTION_STATUS_PENDING, CHECK_CONNECTION_STATUS_REJECTED, FAILED_CONNECTION_REQUEST_MSQ,
+   FAILED_REVOKE_PENDING_REQUEST_MSQ, FAILED_USERS_CONNECTION_REQUEST_MSQ, DAILOG_CONFIRMATION_WIDTH } from './../../constants'
 import { IPublicUsers, IPublicUsersResponse, IRawUserProperties, IUpdateDataObj } from './../../models/public-users.interface'
 import { PublicUsersUtilsService } from '../../services/public-users-utils.service'
 import { PublicUserDialogComponent } from '../public-user-dialog/public-user-dialog.component'
 import { MatDialog } from '@angular/material'
+import { MatSnackBar } from '@angular/material/snack-bar'
 interface IScrollUIEvent {
   currentScrollPosition: number
 }
@@ -43,12 +45,15 @@ export class PublicUserViewComponent implements OnInit {
   error$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false)
   userConnectionsList$:BehaviorSubject<any> = new BehaviorSubject< any>(null)
   dummyCheck = true
+  // isLoadingConnection: any = {} as any
   constructor(
     private readonly configSvc: ConfigurationsService,
     private readonly coreSrvc: PublicUsersCoreService,
     private readonly utilSvc: PublicUsersUtilsService,
     private valueSvc: ValueService,
+    private snackBar: MatSnackBar,
     private dialog: MatDialog,
+    
   ) {
     this.pageNavbar = this.configSvc.pageNavBar
     this.isXSmall$ = this.valueSvc.isXSmall$
@@ -152,14 +157,19 @@ export class PublicUserViewComponent implements OnInit {
       let userMap  = new Map();
       this.utilSvc.getConnectionsList(loggedInUserWid).pipe(
         catchError((_e:any)=> of(null)),
-        tap(response=>{
-          if(response){
+        tap((response: any)=>{
+          if(response.ok && response.data){
             //filtering the reponse to get the connections of loggedin user
-            response = response.filter((eachresponse)=> eachresponse.requested_by === loggedInUserWid)
-            response.forEach(eachConnection=>{
+            response.data = response.data.filter((eachresponse: { requested_by: string, status: string })=> (eachresponse.requested_by === loggedInUserWid)||(eachresponse.status === CHECK_CONNECTION_STATUS_CONNECTED))
+            console.log("response.data", response.data)
+            response.data.forEach((eachConnection: { user_id: string })=>{
             userMap.set(eachConnection.user_id, eachConnection)
             })
           }
+          else{
+            this.snackBar.open(FAILED_USERS_CONNECTION_REQUEST_MSQ, '',
+           {duration: 3000})
+        }
         }),
         tap((_d:any)=>{
           if(this.dummyCheck){
@@ -193,6 +203,7 @@ export class PublicUserViewComponent implements OnInit {
   }
 
   getSelectedUserConnectionData(userConnectionData: any){
+    // this.isLoadingConnection = {userId: userConnectionData.wid,isLoading:true}
     let userDataAndConnectionObject = JSON.parse(userConnectionData)
     console.log("event", userDataAndConnectionObject)
     //if connectionData, means user is already connected
@@ -220,7 +231,7 @@ export class PublicUserViewComponent implements OnInit {
 
   openDialogBoxForConfirmation(userData: any, connectionData: any, isNewUserConnection: boolean, confirmOrWidthdraw: string, firstName:String = ''){
     const dialogRefForPublicUser = this.dialog.open(PublicUserDialogComponent, 
-     { width:'500px',
+     { width:DAILOG_CONFIRMATION_WIDTH,
       data:{
         connectionObject : connectionData,
         userData: userData,
@@ -232,6 +243,7 @@ export class PublicUserViewComponent implements OnInit {
       dialogRefForPublicUser.afterClosed().subscribe(result =>{
         if(result.confirmOrWidthdraw === 'confirm'){
         this.sendRequestConnection(userData.wid)
+
         }
         if(result.confirmOrWidthdraw === 'pending'){
           this.revokeConnection(connectionData.id)
@@ -243,13 +255,20 @@ export class PublicUserViewComponent implements OnInit {
   }
 
   sendRequestConnection(requestedUserWid:string){
+   
     return  this.utilSvc.sendRequest(requestedUserWid).pipe(
         catchError((_e:any)=> of(null)),
         map((response: any)=>{
           if(response.ok && response.data.request_id ){
+            // this.isLoadingConnection = { userId: '2aed1387-fc4b-4e2c-a57a-ae2030328e14', isLoading: false }
          this.getUserConnections(requestedUserWid)
          this.apiData$.next(this.apiData$.getValue())
           }
+           else {
+            // this.isLoadingConnection = {userId: '2aed1387-fc4b-4e2c-a57a-ae2030328e14', isLoading: false}
+               this.snackBar.open(FAILED_CONNECTION_REQUEST_MSQ, '',
+              {duration: 3000})
+           }
         })
       ).subscribe()
   }
@@ -259,11 +278,21 @@ export class PublicUserViewComponent implements OnInit {
         catchError((_e:any)=> of(null)),
         map((response: any)=>{
            if(response.ok){
-             console.log("revoke",response )
             this.getUserConnections(connectionId, true)
             this.apiData$.next(this.apiData$.getValue())
            }
+           else {
+            this.snackBar.open(FAILED_REVOKE_PENDING_REQUEST_MSQ, '',
+           {duration: 3000})
+        }
         })
       ).subscribe()
   }
+  // sendLoaderInfoForUser(userData:any){
+  //   if('2aed1387-fc4b-4e2c-a57a-ae2030328e14' === userData.wid){
+  //     console.log("loading", this.isLoadingConnection)
+  //     return false ;
+  //   }
+  //   return false
+  // }
 }

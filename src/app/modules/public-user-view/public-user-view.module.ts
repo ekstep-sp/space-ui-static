@@ -4,7 +4,7 @@ import { InfiniteScrollModule } from 'ngx-infinite-scroll'
 import { PublicUserViewRoutingModule } from './public-user-view-routing.module'
 import { PublicUserViewComponent } from './components/public-user-view/public-user-view.component'
 import { MatCardModule } from '@angular/material/card'
-import { MatToolbarModule, MatProgressSpinnerModule, MatButtonModule, MatFormFieldModule, MatInputModule } from '@angular/material'
+import { MatToolbarModule, MatProgressSpinnerModule, MatButtonModule, MatFormFieldModule, MatInputModule,  MatSnackBarModule, } from '@angular/material'
 
 import { BtnPageBackModule } from '@ws-widget/collection'
 import { MatIconModule } from '@angular/material/icon'
@@ -33,6 +33,7 @@ import {MatDialogModule} from '@angular/material/dialog';
     MatButtonModule,
     MatProgressSpinnerModule,
     MatDialogModule,
+    MatSnackBarModule
   ],
   entryComponents: [ PublicUserDialogComponent ]
 })

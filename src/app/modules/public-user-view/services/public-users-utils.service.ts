@@ -1,8 +1,7 @@
 import { Injectable } from '@angular/core'
 import { IActionUpdate, IRequestUpdate, IRevokeConnection } from '../models/public-users.interface';
-import { IUserConnections } from '../models/public-users.interface'
 import { DUMMY_RESPONSE, CONNECTION_STATUS_CONNECT, CHECK_CONNECTION_STATUS_CONNECTED, CONNECTION_STATUS_REJECTED, CHECK_CONNECTION_STATUS_REJECTED, CHECK_CONNECTION_STATUS_PENDING, CONNECTION_STATUS_PENDING} from './../constants'
-import { Observable, of, BehaviorSubject} from 'rxjs';
+import { of, BehaviorSubject} from 'rxjs';
 import { PublicUsersCoreService } from './public-users-core.service'
 
 import { ConfigurationsService } from '@ws-widget/utils/src/public-api'
@@ -37,9 +36,9 @@ export class PublicUsersUtilsService {
       delay(2000)
       )
     }
-  getConnectionsList(wid:string): Observable<IUserConnections[]>{
+  getConnectionsList(wid:string) {
     if(this.dummyResponse_connection_list){
-      return  of(DUMMY_RESPONSE)
+      return  of({ status: 200, ok: true , data : DUMMY_RESPONSE})
     }
     const requestParams = {
          wid
@@ -68,7 +67,7 @@ export class PublicUsersUtilsService {
   sendRequest(requestedUserWid: string){
     const currentWID = this.configSvc.userProfile ? this.configSvc.userProfile.userId : ''
     if (this.isDummySendrequest) {
-      return of({ status: 200, ok: true ,
+      return of({ status: 204, ok: true ,
       data: {
         request_id: '1234'
       }})

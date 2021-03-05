@@ -1,4 +1,5 @@
 @import 'ws-mixins';
+
 $card-height: 215px;
 
 .px-small-7 {
@@ -102,7 +103,7 @@ $card-height: 215px;
     .hovercard {
       display: block;
       color: white !important;
-      .btn-txt-clr{
+      .btn-txt{
         color: #42428B;
       }
     }
@@ -125,10 +126,38 @@ $card-height: 215px;
     }
     .btn-status:hover{
       background-color: purple;
-      .btn-txt-clr{
+      .btn-txt{
         color: white;
       }
     }
+    @keyframes spinner {
+      to {transform: rotate(360deg);}
+    }
+     
+    .spinner:before {
+      content: '';
+      box-sizing: border-box;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 20px;
+      height: 20px;
+      margin-top: -10px;
+      margin-left: -10px;
+      border-radius: 50%;
+      border: 2px solid #ffffff;
+      border-top-color: #000000;
+      animation: spinner .8s linear infinite;
+
+    }
+    .btn-status:hover span {
+      display:none
+    }
+    .btn-status:hover:before {
+      content:"Withdraw";
+      color:white;
+  }
+
   }
 
   .subsitute-no-user-properties:hover{
@@ -149,7 +178,7 @@ $card-height: 215px;
     .hovercard {
       display: block;
       color: white !important;
-      .btn-txt-clr{
+      .btn-txt{
         color: #42428B;
       }
     }

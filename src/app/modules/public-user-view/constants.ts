@@ -9,6 +9,7 @@ export const FETCH_CONNECTION_URL = ``
 export const BATCH_SIZE = 50
 export const DEFAULT_OFFSET = 0
 export const DEFAULT_PAGE_NUMBER = 1
+export const DAILOG_CONFIRMATION_WIDTH = '500px'
 export const DEFAULT_QUERY = ''
 export const POST_INVITATION_ACTION_URL = ''
 export const DUMMY_RESPONSE = [{
@@ -16,15 +17,17 @@ export const DUMMY_RESPONSE = [{
   },{
   id:'acbf4053-c126-4e85-a0bf-252a896535ea', created_on:'2/03/2021', last_updated_on:'2/03/2021', status:'Connected', requested_by:'acbf4053-c126-4e85-a0bf-252a896535ea', email: 'abhishek@seedsindia.org', user_id:'2aed1387-fc4b-4e2c-a57a-ae2030328e14',fname:'Abhishek',lname:'Das',root_org:'space',org:'SEEDS'
 },
+{
+id:'acbf4053-c126-4e85-a0bf-252a896535ea', created_on:'2/03/2021', last_updated_on:'2/03/2021', status:'Connected', requested_by:'10af49b7-3874-41ca-9d4c-02cfbe5a9ba8', email: 'abhishek@seedsindia.org', user_id:'acbf4053-c126-4e85-a0bf-252a896535ea',fname:'Anjitha',lname:'Das',root_org:'space',org:'SEEDS'
+},
   {
     id:'00b4a61e-be61-4e48-9edc-62a29172ef2b', created_on:'2/03/2021', last_updated_on:'2/03/2021', status:'Pending', requested_by:'acbf4053-c126-4e85-a0bf-252a896535ea', email: 'anjitha.r98@gmail.com', user_id:'00b4a61e-be61-4e48-9edc-62a29172ef2b',fname:'Aakash',lname:'Vishwakarma',root_org:'space',org:'Sustainable Environment and Ecological Development Society'
   },
   {
     id:'da9d37a0-1ed3-49a1-a69f-7b045569d41e', created_on:'2/03/2021', last_updated_on:'2/03/2021', status:'Connected', requested_by:'acbf4053-c126-4e85-a0bf-252a896535ea', email: 'anjitha.r98@gmail.com', user_id:'da9d37a0-1ed3-49a1-a69f-7b045569d41e',fname:'Aayushi',lname:'Chaturvedi',root_org:'space',org:'WPP India CSR Foundation'
   },
-  
 {
-    id:'fd5bb3d6-bd45-414e-9a43-248f25584369', created_on:'2/03/2021', last_updated_on:'2/03/2021', status:'', requested_by:'acbf4053-c126-4e85-a0bf-252a896535ea', email: 'anjitha.r98@gmail.com', user_id:'fd5bb3d6-bd45-414e-9a43-248f25584369',fname:'Abhishek',lname:'Srivatsava',root_org:'space',org:'WPP India CSR Foundation'
+    id:'fd5bb3d6-bd45-414e-9a43-248f25584369', created_on:'2/03/2021', last_updated_on:'2/03/2021', status:'Rejected', requested_by:'acbf4053-c126-4e85-a0bf-252a896535ea', email: 'anjitha.r98@gmail.com', user_id:'fd5bb3d6-bd45-414e-9a43-248f25584369',fname:'Abhishek',lname:'Srivatsava',root_org:'space',org:'WPP India CSR Foundation'
 
 }]
 export const CONNECTION_END_POINT = ''
@@ -36,8 +39,14 @@ export const CONNECTION_STATUS_REJECTED =  'Withdraw'
 export const CHECK_CONNECTION_STATUS_CONNECTED = 'Connected'
 export const CHECK_CONNECTION_STATUS_PENDING = 'Pending'
 export const CHECK_CONNECTION_STATUS_REJECTED = 'Rejected'
+
 export const CONFIRMATION_TEXT = 'Send connection request to '
 export const REVOKING_TEXT = 'Are you sure to revoke the pending request ? '
+export const FAILED_CONNECTION_REQUEST_MSQ = 'Failed to send connection request, Please try again'
+export const FAILED_REVOKE_PENDING_REQUEST_MSQ = 'Failed to revoke the pending request, please try again'
+export const FAILED_USERS_CONNECTION_REQUEST_MSQ = 'Failed to retrieve latest connection, please try reloading app'
 export const SEND_REQUEST_CONNECTION_URL = ''
 export const REVOKE_REQUEST_CONNECTION_URL = ''
 export const ALLOW_WITHDRAW_STATUS = false
+
+

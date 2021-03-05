@@ -11,6 +11,7 @@ import { PublicUsersUtilsService } from '../../services/public-users-utils.servi
 export class PublicUsercardComponent implements OnInit {
   @Input() userData: any = {}
   @Input() connectionData:IUserConnections= {} as IUserConnections;
+  // @Input()  isLoadingConnection = false;
   @Output()
   connectionButtonClickEmitter = new EventEmitter();
   userdata: any
@@ -19,6 +20,7 @@ export class PublicUsercardComponent implements OnInit {
   isXSmall = false
   buttonStatus = CONNECTION_STATUS_CONNECT
   loggedInUserWid = ''
+  isLoadingConnection = false
   constructor(private valueSvc: ValueService, private configSvc: ConfigurationsService, private utilSvc: PublicUsersUtilsService) {
     this.valueSvc.isXSmall$.subscribe(isXSmall => {
       this.isXSmall = isXSmall
@@ -43,25 +45,23 @@ export class PublicUsercardComponent implements OnInit {
     return false
   }
   acceptConnection(userData: any, connectionData: IUserConnections){
+    // this.isLoadingConnection = true
     let userDataAndConnectionbject = {
       userData,connectionData
     }
       this.connectionButtonClickEmitter.emit(JSON.stringify(userDataAndConnectionbject))
     }
 
-  changeButtonStatus(){
-    if(this.connectionData){
-      console.log("connectiondata",this.connectionData)
-    }
-  }
+  // changeButtonStatus(){
+  //   if(this.connectionData){
+  //   }
+  // }
   showConnectedUser(userData: any, connectionData: any){
-    console.log(" show connected" , (connectionData && (connectionData.status === CHECK_CONNECTION_STATUS_CONNECTED) &&
-    (this.loggedInUserWid != userData.wid)) ? true: false)
     return (connectionData && (connectionData.status === CHECK_CONNECTION_STATUS_CONNECTED) &&
     (this.loggedInUserWid != userData.wid)) ? true: false
   }
+
   showMailIcon(userData: any, connectionData: any){
-    
     return ( connectionData && (connectionData.status === CHECK_CONNECTION_STATUS_CONNECTED)
        && (connectionData.email) && 
        (this.loggedInUserWid != userData.wid))?
