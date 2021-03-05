@@ -1,7 +1,7 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
-import { CONFIRMATION_TEXT, REVOKING_TEXT, ALLOW_WITHDRAW_STATUS} from '../../constants';
-
+import { CONFIRMATION_TEXT, REVOKING_TEXT, CONNECTION_STATUS_REJECTED, CONNECTION_STATUS_PENDING, CONNECTION_STATUS_CONNECT} from '../../constants';
+import { CONSTANT } from '../../constants';
 
 @Component({
   selector: 'ws-public-user-dialog',
@@ -18,14 +18,14 @@ export class PublicUserDialogComponent implements OnInit {
     
   }
    getMessage(){
-     if(this.data.confirmOrWidthdraw === "confirm"){
+     if(this.data.confirmOrWidthdraw === CONNECTION_STATUS_CONNECT ){
        this.message = `${CONFIRMATION_TEXT}${this.data.targetUser} ?` 
      }
-     if(this.data.confirmOrWidthdraw === "pending"){
+     if(this.data.confirmOrWidthdraw === CONNECTION_STATUS_PENDING){
       this.message = REVOKING_TEXT
      }
-     if(ALLOW_WITHDRAW_STATUS && this.data.confirmOrWidthdraw === "revoke"){
-      this.message = REVOKING_TEXT
+     if(this.data.confirmOrWidthdraw === CONNECTION_STATUS_REJECTED){
+      this.message = `${CONSTANT.WITHDRAW_TEXT}${this.data.targetUser}`
      }
    }
    onConfirmClick(): void {
