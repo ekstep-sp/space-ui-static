@@ -1,5 +1,5 @@
 import { Component, OnInit, Input, Output, EventEmitter, OnChanges } from '@angular/core'
-import { DEFAULT_IMAGE_URL, CONNECTION_STATUS_CONNECT, CHECK_CONNECTION_STATUS_CONNECTED, ALLOW_WITHDRAW_STATUS } from '../../constants'
+import { DEFAULT_IMAGE_URL, CONNECTION_STATUS_CONNECT, CHECK_CONNECTION_STATUS_CONNECTED, ALLOW_WITHDRAW_STATUS, CHECK_CONNECTION_STATUS_PENDING, CHECK_CONNECTION_STATUS_REJECTED } from '../../constants'
 import { ValueService, ConfigurationsService } from '@ws-widget/utils'
 import { IUserConnections } from './../../models/public-users.interface'
 import { PublicUsersUtilsService } from '../../services/public-users-utils.service'
@@ -46,18 +46,18 @@ export class PublicUsercardComponent implements OnInit, OnChanges {
       this.connectionButtonClickEmitter.emit({ userData, connectionData })
     }
 
-    isConnected(userData: any, connectionData: any, currentWID: string) {
+    isConnected(userData: any, connectionData: any, currentWID: string, connectionStatus: string) {
       if (currentWID !== userData.wid) {
-        return (connectionData && (connectionData.status === CHECK_CONNECTION_STATUS_CONNECTED))
+        return (connectionData && (connectionData.status === connectionStatus ))
       }
       return false
     }
     showConnectedUserIcon(userData: any, connectionData: any){
-    return this.isConnected(userData, connectionData, this.loggedInUserWid)
+    return this.isConnected(userData, connectionData, this.loggedInUserWid, CHECK_CONNECTION_STATUS_CONNECTED)
   }
 
   showMailIcon(userData: any, connectionData: any){
-    return this.isConnected(userData, connectionData, this.loggedInUserWid) && connectionData.email
+    return this.isConnected(userData, connectionData, this.loggedInUserWid, CHECK_CONNECTION_STATUS_CONNECTED) && connectionData.email
   }
 
   hideButtonStatus(userData: any, connectionData: any) {
@@ -67,8 +67,12 @@ export class PublicUsercardComponent implements OnInit, OnChanges {
     if (!this.connectionData) {
       return false
     }
-    if (ALLOW_WITHDRAW_STATUS && this.isConnected(userData, connectionData, this.loggedInUserWid)) {
+    if (ALLOW_WITHDRAW_STATUS && this.isConnected(userData, connectionData, this.loggedInUserWid, CHECK_CONNECTION_STATUS_CONNECTED)) {
       return false
+    }
+    if(this.isConnected(userData, connectionData, this.loggedInUserWid, CHECK_CONNECTION_STATUS_PENDING) || 
+    this.isConnected(userData, connectionData, this.loggedInUserWid, CHECK_CONNECTION_STATUS_REJECTED)){
+       return false
     }
    return true
   }

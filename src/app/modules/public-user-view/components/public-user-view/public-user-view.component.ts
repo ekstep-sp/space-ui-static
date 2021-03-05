@@ -56,7 +56,6 @@ export class PublicUserViewComponent implements OnInit {
     private valueSvc: ValueService,
     private snackBar: MatSnackBar,
     private dialog: MatDialog,
-
   ) {
     this.pageNavbar = this.configSvc.pageNavBar
     this.isXSmall$ = this.valueSvc.isXSmall$
@@ -179,21 +178,21 @@ export class PublicUserViewComponent implements OnInit {
         // will be empty if there is empty conenciton or error
         this.userConnectionsList$.next(possibleConnectionMap)
         }),
-        // tap((_d:any)=>{
-        //   if(this.dummyCheck){
-        //     userMap.set(requested_to,
-        //       {
-        //         id: requested_to , created_on:'2/03/2021', last_updated_on:'2/03/2021', status:'Pending', requested_by:'acbf4053-c126-4e85-a0bf-252a896535ea', email: 'anjitha.r98@gmail.com', user_id: requested_to ,fname:'Aakash',lname:'Vishwakarma',root_org:'space',org:'Sustainable Environment and Ecological Development Society'
-        //       } )
-        //       this.userConnectionsList$.next(userMap)
-        //   }
-        // }),
-        // tap((_d:any)=>{
-        //   if(isDummyDelete){
-        //         userMap.delete(requested_to)
-        //   }
-        //   this.userConnectionsList$.next(userMap)
-        // }),
+        tap((_d:any)=>{
+          if(this.dummyCheck){
+            possibleConnectionMap.set(requested_to,
+              {
+                id: requested_to , created_on:'2/03/2021', last_updated_on:'2/03/2021', status:'Pending', requested_by:'acbf4053-c126-4e85-a0bf-252a896535ea', email: 'anjitha.r98@gmail.com', user_id: requested_to ,fname:'Aakash',lname:'Vishwakarma',root_org:'space',org:'Sustainable Environment and Ecological Development Society'
+              } )
+              this.userConnectionsList$.next(possibleConnectionMap)
+          }
+        }),
+        tap((_d:any)=>{
+          if(isDummyDelete){
+            possibleConnectionMap.delete(requested_to)
+          }
+          this.userConnectionsList$.next(possibleConnectionMap)
+        }),
         catchError((_err: any) => {
           this.connectionListError$.next(true)
           console.log('marking error ', this.connectionListError$.getValue())
@@ -288,7 +287,7 @@ export class PublicUserViewComponent implements OnInit {
     return  this.utilSvc.revokeRequest(connectionId).pipe(
         catchError((_e: any) => of(null)),
         map((response: any) => {
-           if (response.ok) {
+           if (response && response.ok) {
             this.refreshData(connectionId, true)
            } else {
             this.snackBar.open(FAILED_REVOKE_PENDING_REQUEST_MSG, '',

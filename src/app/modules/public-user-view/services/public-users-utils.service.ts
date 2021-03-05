@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core'
 import { IActionUpdate, IRequestUpdate, IRevokeConnection } from '../models/public-users.interface';
 import { DUMMY_RESPONSE, CONNECTION_STATUS_CONNECT, CHECK_CONNECTION_STATUS_CONNECTED, CONNECTION_STATUS_REJECTED, CHECK_CONNECTION_STATUS_REJECTED, CHECK_CONNECTION_STATUS_PENDING, CONNECTION_STATUS_PENDING} from './../constants'
-import { of, BehaviorSubject} from 'rxjs';
+import { of } from 'rxjs';
 import { PublicUsersCoreService } from './public-users-core.service'
 
 import { ConfigurationsService } from '@ws-widget/utils/src/public-api'
@@ -13,8 +13,7 @@ export class PublicUsersUtilsService {
   isDummy = true
   dummyResConnectionList = true
   isDummySendrequest = true
-  buttonStatus$: BehaviorSubject<string> = new BehaviorSubject<string>(CONNECTION_STATUS_CONNECT)
-  constructor(
+    constructor(
     private readonly coreSrvc: PublicUsersCoreService,
     private readonly configSvc: ConfigurationsService,
     ) { }
@@ -38,15 +37,12 @@ export class PublicUsersUtilsService {
     }
   getConnectionsList(wid: string) {
     if (this.dummyResConnectionList) {
-      return  of({ status: 200, ok: true , data : DUMMY_RESPONSE }).pipe(delay(2000))
+      return  of({ status: 200, ok: true , data : DUMMY_RESPONSE })
     }
     const requestParams = {
          wid,
     }
    return  this.coreSrvc.getConnectionAPIResponse(requestParams)
-  }
-  updateButtonStatus() {
-    this.buttonStatus$.next('pending')
   }
   getButtonDisplayStatus(connectionObject: any) {
      if (connectionObject && connectionObject.status ===  CHECK_CONNECTION_STATUS_CONNECTED) {
