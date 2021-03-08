@@ -105,7 +105,7 @@ export const REVOKING_TEXT = 'Are you sure to withdraw the pending request ? '
 
 export const FAILED_CONNECTION_REQUEST_MSG = 'Failed to send connection request, Please try again later'
 export const FAILED_REVOKE_PENDING_REQUEST_MSG = 'Failed to withdraw the pending request, please try again later'
-export const FAILED_USERS_CONNECTION_REQUEST_MSG = 'Failed to retrieve latest connection, please try reloading app'
+export const FAILED_USERS_CONNECTION_REQUEST_MSG = 'Failed to retrieve connections, try to reloading the page'
 export const SEND_REQUEST_CONNECTION_URL = ''
 export const REVOKE_REQUEST_CONNECTION_URL = ''
 export const ALLOW_WITHDRAW_STATUS = false

@@ -278,8 +278,7 @@ export class PublicUserViewComponent implements OnInit {
         if (response && response.ok && response.data.request_id) {
           this.refreshData(requestedUserWid)
         } else {
-          this.snackBar.open(FAILED_CONNECTION_REQUEST_MSG, '',
-                             { duration: 3000 })
+          this.snackBar.open(FAILED_CONNECTION_REQUEST_MSG, '', { duration: 3000 })
         }
       })
     ).subscribe()
@@ -301,8 +300,7 @@ export class PublicUserViewComponent implements OnInit {
         if (response && response.ok) {
           this.refreshData(connectionId, true)
         } else {
-          this.snackBar.open(FAILED_REVOKE_PENDING_REQUEST_MSG, '',
-                             { duration: 3000 })
+          this.snackBar.open(FAILED_REVOKE_PENDING_REQUEST_MSG, '', { duration: 3000 })
         }
       })
     ).subscribe()

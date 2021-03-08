@@ -45,18 +45,18 @@ export class PublicUsercardComponent implements OnInit, OnChanges {
       this.connectionButtonClickEmitter.emit({ userData, connectionData })
     }
 
-    isConnected(userData: any, connectionData: any, currentWID: string, connectionStatus: string) {
+    isConnected(userData: any, connectionData: any, currentWID: string, connectionStatus = CHECK_CONNECTION_STATUS_CONNECTED) {
       if (currentWID !== userData.wid) {
         return (connectionData && (connectionData.status === connectionStatus))
       }
       return false
     }
     showConnectedUserIcon(userData: any, connectionData: any) {
-    return this.isConnected(userData, connectionData, this.loggedInUserWid, CHECK_CONNECTION_STATUS_CONNECTED)
+    return this.isConnected(userData, connectionData, this.loggedInUserWid)
   }
 
   showMailIcon(userData: any, connectionData: any) {
-    return this.isConnected(userData, connectionData, this.loggedInUserWid, CHECK_CONNECTION_STATUS_CONNECTED) && connectionData.email
+    return this.isConnected(userData, connectionData, this.loggedInUserWid ) && connectionData.email
   }
 
   hideButtonStatus(userData: any, connectionData: any) {
@@ -66,7 +66,7 @@ export class PublicUsercardComponent implements OnInit, OnChanges {
     if (!this.connectionData) {
       return false
     }
-    if (ALLOW_WITHDRAW_STATUS && this.isConnected(userData, connectionData, this.loggedInUserWid, CHECK_CONNECTION_STATUS_CONNECTED)) {
+    if (ALLOW_WITHDRAW_STATUS && this.isConnected(userData, connectionData, this.loggedInUserWid)) {
       return false
     }
     if (this.isConnected(userData, connectionData, this.loggedInUserWid, CHECK_CONNECTION_STATUS_PENDING) ||

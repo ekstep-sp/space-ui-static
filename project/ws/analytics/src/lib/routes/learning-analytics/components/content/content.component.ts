@@ -793,7 +793,6 @@ export class ContentComponent implements OnInit, OnDestroy {
       .pipe(
         switchMap((originalData: any) => {
           if (contentType === 'Resource') {
-            debugger
             // tslint:disable-next-line: max-line-length
             return this.analyticsSrv.mergeAdditionalDataPoints(contentType, originalData, { startDate, endDate, searchQuery })
           }

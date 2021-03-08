@@ -13,10 +13,10 @@ export class PublicUsersUtilsService {
   isDummy = true
   dummyResConnectionList = true
   isDummySendrequest = true
-    constructor(
+  constructor(
     private readonly coreSrvc: PublicUsersCoreService,
     private readonly configSvc: ConfigurationsService,
-    ) { }
+  ) { }
 
   sendAction(requestId: string, actionType: string) {
     const currentWID = this.configSvc.userProfile ? this.configSvc.userProfile.userId : ''
@@ -33,37 +33,39 @@ export class PublicUsersUtilsService {
       map(data => data),
       catchError(_e => of(null)),
       delay(2000)
-      )
-    }
+    )
+  }
   getConnectionsList(wid: string) {
     if (this.dummyResConnectionList) {
-      return  of({ status: 200, ok: true , data : DUMMY_RESPONSE })
+      return of({ status: 200, ok: true, data: DUMMY_RESPONSE })
     }
     const requestParams = {
-         wid,
+      wid,
     }
-   return  this.coreSrvc.getConnectionAPIResponse(requestParams)
+    return this.coreSrvc.getConnectionAPIResponse(requestParams)
   }
   getButtonDisplayStatus(connectionObject: any) {
-     if (connectionObject && connectionObject.status ===  CHECK_CONNECTION_STATUS_CONNECTED) {
+    if (connectionObject && connectionObject.status === CHECK_CONNECTION_STATUS_CONNECTED) {
       return CONNECTION_STATUS_REJECTED
-     }
-     if (connectionObject && connectionObject.status ===  CHECK_CONNECTION_STATUS_REJECTED) {
-       return CONNECTION_STATUS_CONNECT
-     }
-     if (connectionObject && connectionObject.status === CHECK_CONNECTION_STATUS_PENDING) {
-       return  CONNECTION_STATUS_PENDING
-     }
-     return  CONNECTION_STATUS_CONNECT
+    }
+    if (connectionObject && connectionObject.status === CHECK_CONNECTION_STATUS_REJECTED) {
+      return CONNECTION_STATUS_CONNECT
+    }
+    if (connectionObject && connectionObject.status === CHECK_CONNECTION_STATUS_PENDING) {
+      return CONNECTION_STATUS_PENDING
+    }
+    return CONNECTION_STATUS_CONNECT
   }
 
   sendRequest(requestedUserWid: string) {
     const currentWID = this.configSvc.userProfile ? this.configSvc.userProfile.userId : ''
     if (this.isDummySendrequest) {
-      return of({ status: 204, ok: true ,
-      data: {
-        request_id: '1234',
-      }})
+      return of({
+        status: 204, ok: true,
+        data: {
+          request_id: '1234',
+        },
+      })
     }
     const requestBody: IRequestUpdate = {
       requested_by: currentWID,
@@ -75,17 +77,18 @@ export class PublicUsersUtilsService {
       map(data => data),
       catchError(_e => of(null)),
       delay(2000)
-      )
+    )
+  }
+
+  revokeRequest(connectionId: string) {
+    if (this.isDummySendrequest) {
+      return of({ status: 204, ok: true })
     }
-    revokeRequest(connectionId: string) {
-      if (this.isDummySendrequest) {
-        return of({ status: 204, ok: true })
-      }
-      const requestBody: IRevokeConnection = {
-        connectionId,
-      }
-      return this.coreSrvc.revokeConnectionAPi(requestBody).pipe(
-        catchError(_e => of(null)),
-        map(data => data))
-      }
+    const requestBody: IRevokeConnection = {
+      connectionId,
+    }
+    return this.coreSrvc.revokeConnectionAPi(requestBody).pipe(
+      catchError(_e => of(null)),
+      map(data => data))
+  }
 }
