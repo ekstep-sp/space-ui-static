@@ -11,7 +11,9 @@ export const DEFAULT_OFFSET = 0
 export const DEFAULT_PAGE_NUMBER = 1
 export const DAILOG_CONFIRMATION_WIDTH = '500px'
 export const DEFAULT_QUERY = ''
-export const POST_INVITATION_ACTION_URL = ''
+export const POST_INVITATION_ACTION_URL = (invitationID: string, invitationType: string) => {
+    return `/apis/protected/v8/user/connection/invitation/${invitationID}/${invitationType}`
+}
 export const DUMMY_RESPONSE = [{
   id: '10af49b7-3874-41ca-9d4c-02cfbe5a9ba8',
   created_on: '2/03/2021',
@@ -90,7 +92,7 @@ export const DUMMY_RESPONSE = [{
             org: 'WPP India CSR Foundation',
     },
 ]
-export const CONNECTION_END_POINT = ''
+export const CONNECTION_END_POINT = '/apis/protected/v8/user/connection/list'
 // this is used to display the status on card
 export const CONNECTION_STATUS_CONNECT = 'Connect'
 export const CONNECTION_STATUS_PENDING =  'Pending'
@@ -106,7 +108,7 @@ export const REVOKING_TEXT = 'Are you sure to withdraw the pending request ? '
 export const FAILED_CONNECTION_REQUEST_MSG = 'Failed to send connection request, Please try again later'
 export const FAILED_REVOKE_PENDING_REQUEST_MSG = 'Failed to withdraw the pending request, please try again later'
 export const FAILED_USERS_CONNECTION_REQUEST_MSG = 'Failed to retrieve connections, try to reloading the page'
-export const SEND_REQUEST_CONNECTION_URL = ''
+export const SEND_REQUEST_CONNECTION_URL = '/apis/protected/v8/user/connection/send-request'
 export const REVOKE_REQUEST_CONNECTION_URL = ''
 export const ALLOW_WITHDRAW_STATUS = false
 export const CONSTANT = {

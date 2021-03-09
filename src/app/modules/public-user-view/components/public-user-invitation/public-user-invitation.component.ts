@@ -41,7 +41,7 @@ export class PublicUserInvitationComponent implements OnInit {
   triggerAction({ requestId, actionType }: any) {
     this.isLoading$.next(true)
     this.isApiError$.next(false)
-    this._utilSvc.sendAction(requestId, actionType).pipe(
+    this._utilSvc.sendInvitationAction(requestId, actionType).pipe(
       map((response: any) => response.status),
       tap((data: any) => {
         if (data) {

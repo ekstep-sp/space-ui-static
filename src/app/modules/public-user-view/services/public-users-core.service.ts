@@ -54,8 +54,8 @@ export class PublicUsersCoreService {
   getConnectionAPIResponse(requestParams: any): Observable<any> {
     return this.http.post(CONNECTION_END_POINT, { ...requestParams })
   }
-  postInvitationAction(actionData: any) {
-    return this.http.post(POST_INVITATION_ACTION_URL, { ...actionData })
+  sendInvitationAction(invitationID: string, invitationType: string) {
+    return this.http.get(POST_INVITATION_ACTION_URL(invitationID, invitationType))
   }
   sendRequestApi(requestBody: any) {
    return this.http.post(SEND_REQUEST_CONNECTION_URL, { ...requestBody })
