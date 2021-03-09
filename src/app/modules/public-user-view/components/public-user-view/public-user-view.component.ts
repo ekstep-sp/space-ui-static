@@ -172,13 +172,18 @@ export class PublicUserViewComponent implements OnInit {
           if (response && response.ok && response.data) {
             // filtering the reponse to get the connections of loggedin user
             response.data.forEach((eachresponse: { user_id: string, requested_by: string, status: string }) => {
-              if ((eachresponse.status === CHECK_CONNECTION_STATUS_CONNECTED) || (eachresponse.requested_by === loggedInUserWid)) {
-                possibleConnectionMap.set(eachresponse.user_id, eachresponse)
+              if (possibleConnectionMap.has(eachresponse.user_id)) {
+                possibleConnectionMap.set(eachresponse.user_id, [...possibleConnectionMap.get(eachresponse.user_id
+                  ), eachresponse])
+              }
+              else {
+                possibleConnectionMap.set(eachresponse.user_id, [eachresponse])
               }
             })
           } else {
             this.snackBar.open(FAILED_USERS_CONNECTION_REQUEST_MSG, '', { duration: 3000 })
           }
+          console.log("possibleconnections", possibleConnectionMap)
           // will be empty if there is empty conenciton or error
           this.userConnectionsList$.next(possibleConnectionMap)
         }),
@@ -222,6 +227,7 @@ export class PublicUserViewComponent implements OnInit {
 
   getConnectionObjectIfExists(userData: any) {
     const existingConnectionsData = this.userConnectionsList$.getValue()
+    debugger
     if (existingConnectionsData.has(userData.wid)) {
       return existingConnectionsData.get(userData.wid)
     }

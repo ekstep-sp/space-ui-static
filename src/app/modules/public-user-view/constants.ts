@@ -40,7 +40,7 @@ export const DUMMY_RESPONSE = [{
               org: 'SEEDS',
     },
     {
-    id: 'acbf4053-c126-4e85-a0bf-252a896535ea',
+    id: 'abc-1234',
      created_on: '2/03/2021',
       last_updated_on: '2/03/2021',
        status: 'Connected',
@@ -91,12 +91,23 @@ export const DUMMY_RESPONSE = [{
             root_org: 'space',
             org: 'WPP India CSR Foundation',
     },
+    {
+        id: 'abcd-23222',
+           status: 'Pending',
+            requested_by: '0c8ad557-b346-4d85-82ea-a6a773345a5d',
+             email: 'anjitha.r98@gmail.com',
+              user_id: 'acbf4053-c126-4e85-a0bf-252a896535ea',
+        },
 ]
 export const CONNECTION_END_POINT = '/apis/protected/v8/user/connection/list'
 // this is used to display the status on card
 export const CONNECTION_STATUS_CONNECT = 'Connect'
 export const CONNECTION_STATUS_PENDING =  'Pending'
 export const CONNECTION_STATUS_REJECTED =  'Withdraw'
+
+export const ACCEPT_BUTTON = 'Accept'
+export const REJECT_BUTTON =  'Reject'
+
 // this is to check the status
 export const CHECK_CONNECTION_STATUS_CONNECTED = 'Connected'
 export const CHECK_CONNECTION_STATUS_PENDING = 'Pending'
