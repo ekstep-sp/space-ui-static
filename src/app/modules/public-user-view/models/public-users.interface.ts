@@ -50,5 +50,5 @@ export interface IRequestUpdate {
     requested_to: string
 }
 export interface IRevokeConnection {
-    connectionId: string
+    request_id: string
 }

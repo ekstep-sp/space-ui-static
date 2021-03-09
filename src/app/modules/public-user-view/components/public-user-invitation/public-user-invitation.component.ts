@@ -4,6 +4,7 @@ import { ConfigurationsService, NsPage } from '@ws-widget/utils/src/public-api'
 // import { PublicUsersUtilsService } from '../../services/public-users-utils.service'
 import { BehaviorSubject, of } from 'rxjs'
 import { catchError, filter, finalize, map, tap } from 'rxjs/operators'
+import { ALLOWED_INVITATION_STATES } from '../../constants'
 import { PublicUsersUtilsService } from '../../services/public-users-utils.service'
 
 @Component({
@@ -34,7 +35,18 @@ export class PublicUserInvitationComponent implements OnInit {
           actionType: this.activatedRoute.snapshot.queryParamMap.get('actionType'),
           requestId: params.requestId,
         }
-      })
+      }),
+      // it will map words with proper case, like acTion will become Action
+      map((invitationObj: {actionType: string | null, requestId: string}) => {
+        let finalActionType = invitationObj.actionType ? invitationObj.actionType.toLowerCase() : ''
+        if (finalActionType && ALLOWED_INVITATION_STATES.includes(finalActionType)) {
+          finalActionType = finalActionType.substr(0, 1).toUpperCase() + finalActionType.substr(1)
+        }
+        return {
+        ...invitationObj,
+        actionType : finalActionType,
+      }
+    })
       ).subscribe(this.triggerAction.bind(this))
   }
 
@@ -49,14 +61,13 @@ export class PublicUserInvitationComponent implements OnInit {
             this.notifyUser = true
             this.notificationDetails = { sourceActionType: actionType }
         } else {
-          // an error occured
-          this.isApiError$.next(true)
-          this.notifyUser = false
-          this.notificationDetails = null
+          throw new Error('non matching data recieved from endpoint, verify manually')
         }
       }),
       catchError(_e => {
         this.isApiError$.next(true)
+        this.notifyUser = false
+        this.notificationDetails = null
         return of(null)
       }),
       finalize(() => {
