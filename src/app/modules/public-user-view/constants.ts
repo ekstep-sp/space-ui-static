@@ -5,7 +5,6 @@ export class INFINITE_SCROLL_CONSTANTS {
 }
 export const ENDPOINT_URL = `/usersubmission/usersubmission/user/v2/users/public`
 export const DEFAULT_IMAGE_URL = '/assets/images/profile/profileimage.png'
-export const FETCH_CONNECTION_URL = ``
 export const BATCH_SIZE = 50
 export const DEFAULT_OFFSET = 0
 export const DEFAULT_PAGE_NUMBER = 1
@@ -120,8 +119,9 @@ export const FAILED_CONNECTION_REQUEST_MSG = 'Failed to send connection request,
 export const FAILED_REVOKE_PENDING_REQUEST_MSG = 'Failed to withdraw the pending request, please try again later'
 export const FAILED_USERS_CONNECTION_REQUEST_MSG = 'Failed to retrieve connections, try to reloading the page'
 export const SEND_REQUEST_CONNECTION_URL = '/apis/protected/v8/user/connection/send-request'
-export const REVOKE_REQUEST_CONNECTION_URL = ''
+export const REVOKE_REQUEST_CONNECTION_URL = 'apis/protected/v8/user/connection/withdraw-request'
 export const ALLOW_WITHDRAW_STATUS = false
+export const ALLOWED_INVITATION_STATES = ['accept', 'reject', 'withdraw']
 export const CONSTANT = {
     WITHDRAW_TEXT : 'Withdraw the connection request from ',
 }

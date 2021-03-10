@@ -20,7 +20,7 @@ export class PublicUsersUtilsService {
 
   sendInvitationAction(requestId: string, actionType: string) {
     if (this.isDummy) {
-      return of().pipe(delay(2000))
+      return of({ ok: true, status: 200, data: undefined }).pipe(delay(2000))
     }
     return this.coreSrvc.sendInvitationAction(requestId, actionType).pipe(
       catchError(_e => of(null)),
@@ -79,7 +79,7 @@ export class PublicUsersUtilsService {
       return of({ status: 204, ok: true })
     }
     const requestBody: IRevokeConnection = {
-      connectionId,
+      request_id: connectionId,
     }
     return this.coreSrvc.revokeConnectionAPi(requestBody).pipe(
       catchError(_e => of(null)),
