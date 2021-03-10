@@ -34,7 +34,7 @@ export class PublicUserViewComponent implements OnInit {
   hideGlobalSearch = false
   isXSmall$: Observable<boolean>
   isEnabledSearch = false
-
+  currentLoggedInUserId = this.configSvc.userProfile ? this.configSvc.userProfile.userId : ''
   scrollDistance = INFINITE_SCROLL_CONSTANTS.DISTANCE
   scrollThrottle = INFINITE_SCROLL_CONSTANTS.THROTTLE
   // apiData$: BehaviorSubject<any[]> = new BehaviorSubject<any[]>([1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13])
@@ -173,10 +173,10 @@ export class PublicUserViewComponent implements OnInit {
             // filtering the reponse to get the connections of loggedin user
             response.data.forEach((eachresponse: { user_id: string, requested_by: string, status: string }) => {
               if (possibleConnectionMap.has(eachresponse.user_id)) {
-                possibleConnectionMap.set(eachresponse.user_id, [...possibleConnectionMap.get(eachresponse.user_id
-                  ), eachresponse])
-              }
-              else {
+                const newValues = possibleConnectionMap.get(eachresponse.user_id)
+                newValues.push(eachresponse)
+                possibleConnectionMap.set(eachresponse.user_id, newValues)
+              } else {
                 possibleConnectionMap.set(eachresponse.user_id, [eachresponse])
               }
             })
@@ -188,8 +188,8 @@ export class PublicUserViewComponent implements OnInit {
           this.userConnectionsList$.next(possibleConnectionMap)
         }),
         tap((_d: any) => {
-          if (this.dummyCheck) {
-            possibleConnectionMap.set(requestedto, {
+          if (this.dummyCheck && requestedto) {
+            possibleConnectionMap.set(requestedto, [{
               id: requestedto,
               created_on: '2/03/2021',
                last_updated_on: '2/03/2021',
@@ -201,7 +201,7 @@ export class PublicUserViewComponent implements OnInit {
                      lname: 'Vishwakarma',
                       root_org: 'space',
                        org: 'Sustainable Environment and Ecological Development Society',
-            })
+            }])
             this.userConnectionsList$.next(possibleConnectionMap)
           }
         }),
@@ -225,13 +225,28 @@ export class PublicUserViewComponent implements OnInit {
     return null
   }
 
-  getConnectionObjectIfExists(userData: any) {
+  getConnectionObjectIfExists(currentCard: any) {
     const existingConnectionsData = this.userConnectionsList$.getValue()
-    debugger
-    if (existingConnectionsData.has(userData.wid)) {
-      return existingConnectionsData.get(userData.wid)
+    // first check whether the logged in user is the target or not
+    // if yes, check whether current card user is the source or not
+    // if yes, return that connection object
+    // if no, search currentCard user as the target and return the corresponding object
+    let resolvedConnectionObj
+    let foundConnection = false
+    if (existingConnectionsData.has(this.currentLoggedInUserId)) {
+      // means current user is the target
+      resolvedConnectionObj = existingConnectionsData.get(this.currentLoggedInUserId).find((connectionObj: any) => (
+        connectionObj.requested_by === currentCard.wid))
+        if (resolvedConnectionObj) {
+          foundConnection = true
+        }
     }
-    return null
+    if (!foundConnection && existingConnectionsData.has(currentCard.wid)) {
+      // when current user is not the targed
+      resolvedConnectionObj = existingConnectionsData.get(currentCard.wid).find((connectionObj: any) => (
+        connectionObj.requested_by === this.currentLoggedInUserId))
+    }
+    return resolvedConnectionObj ? resolvedConnectionObj : null
   }
 
   performConnection(userConnectionData: any) {
@@ -265,6 +280,7 @@ export class PublicUserViewComponent implements OnInit {
       },
     })
     dialogRefForPublicUser.afterClosed().pipe(filter(result => result)).subscribe(result => {
+      debugger
       if (result.actionType === CONNECTION_STATUS_CONNECT) {
         this.sendConnectionRequest(userData.wid)
       }
