@@ -124,8 +124,8 @@ export const ALLOW_WITHDRAW_STATUS = false
 export const ALLOWED_INVITATION_STATES = ['accept', 'reject', 'withdraw']
 export const CONSTANT = {
     WITHDRAW_TEXT : 'Withdraw the connection request from ',
-    ACCEPT_CONNECTION_MESSAGE : 'Are you sure to accept connection request from ',
-    REJECT_CONNECTION_MESSAGE : 'Are you sure to decline connection request from ',
+    ACCEPT_CONNECTION_MESSAGE : 'Are you sure to accept the connection request from ',
+    REJECT_CONNECTION_MESSAGE : 'Are you sure to decline the connection request from ',
     CONNECTION_STATUS_ACCEPT : 'Accept',
     CONNECTION_STATUS_REJECT : 'Reject',
 }

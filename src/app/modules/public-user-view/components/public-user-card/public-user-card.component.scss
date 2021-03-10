@@ -112,6 +112,18 @@ $card-height: 215px;
         width: 96%;
         display: flex;
         justify-content: space-evenly;
+        .transparent-btn:hover{
+           background-color: #884898;
+           border-radius: 5px;
+           border-color: #884898;
+           transition: 0.5s;
+        }
+        .transparent-btn{
+          font-size: 18px;
+          color: white;
+          height: 36px;
+          line-height: 36px;
+        }
       }
     }
     .profile-card {

@@ -185,8 +185,7 @@ export class PublicUserViewComponent implements OnInit {
           } else {
             this.snackBar.open(FAILED_USERS_CONNECTION_REQUEST_MSG, '', { duration: 3000 })
           }
-          console.log("possibleconnections", possibleConnectionMap)
-          // will be empty if there is empty conenciton or error
+          // will be empty if there is empty connection or error
           this.userConnectionsList$.next(possibleConnectionMap)
         }),
         tap((_d: any) => {
@@ -286,11 +285,11 @@ export class PublicUserViewComponent implements OnInit {
       if (result.actionType === CONNECTION_STATUS_CONNECT) {
         this.sendConnectionRequest(userData.wid)
       }
-      if (result.actionType === CONNECTION_STATUS_PENDING) {
-        this.revokeConnection(connectionData.id)
+      if (result.connectionData && result.actionType === CONNECTION_STATUS_PENDING) {
+        this.revokeConnection(result.connectionData.id)
       }
-      if (result.actionType === CONNECTION_STATUS_WITHDRAW) {
-        this.revokeConnection(connectionData.id)
+      if (result.connectionData && result.actionType === CONNECTION_STATUS_WITHDRAW) {
+        this.revokeConnection(result.connectionData.id)
       }
       if (result.connectionData && result.actionType === CONSTANT.CONNECTION_STATUS_ACCEPT) {
         this.navigateToActionPage(result.connectionData.id, result.actionType)

@@ -60,7 +60,7 @@ export class PublicUsercardComponent implements OnInit, OnChanges {
   }
 
   showMailIcon(userData: any, connectionData: any) {
-    return this.isConnected(userData, connectionData, this.loggedInUserWid ) && connectionData.email
+    return this.isConnected(userData, connectionData, this.loggedInUserWid) && connectionData.email
   }
 
   hideButtonStatus(userData: any, connectionData: any) {

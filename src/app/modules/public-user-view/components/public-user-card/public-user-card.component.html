@@ -46,12 +46,8 @@
         </ng-container>
         <ng-container *ngIf="showAcceptAndReject(connectionData)">
           <div class="hovercard exactly-middle-button mt-1">
-            <button class="m-auto" mat-raised-button  (click)="acceptOrRejectConnection(userData, connectionData, rejectConnection)">
-              <span class="material-icons"> close </span>
-            </button>
-            <button class="m-auto" mat-raised-button  (click)="acceptOrRejectConnection(userData, connectionData, acceptConnection)">
-              <span class="material-icons"> done </span>
-            </button>
+            <button type="button"  matTooltip="Reject connection" class="focus:outline-none bg-transparent  border-none text-sm py-2.5 px-5 rounded-md  transparent-btn" (click)="acceptOrRejectConnection(userData, connectionData, rejectConnection)">Ignore</button>
+            <button type="button"  matTooltip="Accept connection" class="focus:outline-none bg-transparent  border-none text-sm py-2.5 px-5 rounded-md  transparent-btn"  (click)="acceptOrRejectConnection(userData, connectionData, acceptConnection)">Accept</button>
           </div>
         </ng-container>
         </div>

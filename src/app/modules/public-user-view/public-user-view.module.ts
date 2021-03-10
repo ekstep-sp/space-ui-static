@@ -15,6 +15,7 @@ import { PublicUserInvitationComponent } from './components/public-user-invitati
 import { PublicUsersUtilsService } from './services/public-users-utils.service'
 import { PublicUserDialogComponent } from './components/public-user-dialog/public-user-dialog.component'
 import { MatDialogModule } from '@angular/material/dialog'
+import { MatTooltipModule } from '@angular/material/tooltip'
 
 @NgModule({
   declarations: [PublicUserViewComponent, PublicUsercardComponent, PublicUserInvitationComponent, PublicUserDialogComponent],
@@ -34,6 +35,7 @@ import { MatDialogModule } from '@angular/material/dialog'
     MatProgressSpinnerModule,
     MatDialogModule,
     MatSnackBarModule,
+    MatTooltipModule,
   ],
   entryComponents: [PublicUserDialogComponent],
 })
