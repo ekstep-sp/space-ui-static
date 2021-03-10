@@ -336,11 +336,9 @@ export class PublicUserViewComponent implements OnInit {
     ).subscribe()
   }
   getActionType(event: any) {
-  console.log("event", event)
   this.openDialogBoxForConfirmation(event.userData, event.connectionData, event.actionType, event.userData.first_name)
-
   }
   navigateToActionPage(connectionId: any, actionType: any) {
-    this.router.navigate([`/app/users/invitation/${connectionId}`], {queryParams: {actionType : actionType || null} } )
+    this.router.navigate([`/app/users/invitation/${connectionId}`], { queryParams: { actionType : actionType || null } })
   }
 }

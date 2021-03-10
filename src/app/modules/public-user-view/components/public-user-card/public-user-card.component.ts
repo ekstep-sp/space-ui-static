@@ -83,7 +83,7 @@ export class PublicUsercardComponent implements OnInit, OnChanges {
     if (connectionData && this.loggedInUserWid === connectionData.user_id && connectionData.status === CHECK_CONNECTION_STATUS_PENDING) {
       return true
     }
-    return true
+    return false
   }
   acceptOrRejectConnection(userData: any, connectionData: any, actionType: string) {
      this.buttonActionEmitter.emit({ userData, connectionData, actionType })
