@@ -102,7 +102,7 @@ export const CONNECTION_END_POINT = '/apis/protected/v8/user/connection/list'
 // this is used to display the status on card
 export const CONNECTION_STATUS_CONNECT = 'Connect'
 export const CONNECTION_STATUS_PENDING =  'Pending'
-export const CONNECTION_STATUS_REJECTED =  'Withdraw'
+export const CONNECTION_STATUS_WITHDRAW =  'Withdraw'
 
 export const ACCEPT_BUTTON = 'Accept'
 export const REJECT_BUTTON =  'Reject'
@@ -124,4 +124,8 @@ export const ALLOW_WITHDRAW_STATUS = false
 export const ALLOWED_INVITATION_STATES = ['accept', 'reject', 'withdraw']
 export const CONSTANT = {
     WITHDRAW_TEXT : 'Withdraw the connection request from ',
+    ACCEPT_CONNECTION_MESSAGE : 'Are you sure to accept connection request from ',
+    REJECT_CONNECTION_MESSAGE : 'Are you sure to decline connection request from ',
+    CONNECTION_STATUS_ACCEPT : 'Accept',
+    CONNECTION_STATUS_REJECT : 'Reject',
 }

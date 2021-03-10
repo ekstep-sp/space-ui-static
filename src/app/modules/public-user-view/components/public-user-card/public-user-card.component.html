@@ -17,7 +17,7 @@
      <div>
       <div class="font-size-18 flex justify-center align-center break-words txt-color">
         <ng-container *ngIf="resultsOK && showConnectedUserIcon(userData, connectionData)">
-          <mat-icon class="conn-done mr-3">done</mat-icon>
+          <mat-icon class="conn-done mr-3">done_all</mat-icon>
         </ng-container>
         <span *ngIf="userData?.first_name.length || userData?.middle_name.length || userData?.last_name.length"
           class="middle-text mr-2">{{userData?.first_name}} {{userData?.middle_name}} {{userData?.last_name}}</span>
@@ -37,19 +37,21 @@
           <div class="bio-desc overflow-y-auto font-size-14 mx-5 txt-color">
             <p>{{userData?.user_properties?.value?.bio}}</p>
           </div>
-          <ng-container *ngIf ="resultsOK && !hideButtonStatus(userData, connectionData) && !showAcceptAndReject(connectionData) ">
+          <!-- <ng-container *ngIf ="resultsOK && !hideButtonStatus(userData, connectionData) && !showAcceptAndReject(connectionData) ">
           <div class="hovercard exactly-middle-button mt-1">
-            <button class="m-auto" mat-raised-button  [class.spinner]="isLoadingConnection"  [attr.outage-count]="Withdraw" [ngClass] = "{'btn-status': buttonStatus === 'Pending'}" (click)="acceptConnection(userData, connectionData)">
+            <button class="m-auto" mat-raised-button  [class.spinner]="isLoadingConnection"  [attr.outage-count]="Withdraw" [ngClass] = "{'btn-status': buttonStatus === 'Pending'}" (click)="sendConnectionStatus(userData, connectionData)">
               <span class="btn-txt">{{buttonStatus}}</span>
             </button>
           </div>
-        </ng-container>
+        </ng-container> -->
         <ng-container *ngIf="showAcceptAndReject(connectionData)">
           <div class="hovercard exactly-middle-button mt-1">
-            Accept | Reject
-            <!-- <button class="m-auto" mat-raised-button  [class.spinner]="isLoadingConnection"  [attr.outage-count]="Withdraw" [ngClass] = "{'btn-status': buttonStatus === 'Pending'}" (click)="acceptConnection(userData, connectionData)">
-              <span class="btn-txt">{{buttonStatus}}</span>
-            </button> -->
+            <button class="m-auto" mat-raised-button  (click)="acceptOrRejectConnection(userData, connectionData, rejectConnection)">
+              <span class="material-icons"> close </span>
+            </button>
+            <button class="m-auto" mat-raised-button  (click)="acceptOrRejectConnection(userData, connectionData, acceptConnection)">
+              <span class="material-icons"> done </span>
+            </button>
           </div>
         </ng-container>
         </div>

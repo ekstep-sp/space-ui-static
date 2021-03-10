@@ -1,5 +1,6 @@
 import { Component, OnInit, Input, Output, EventEmitter, OnChanges } from '@angular/core'
-import { DEFAULT_IMAGE_URL, CONNECTION_STATUS_CONNECT, CHECK_CONNECTION_STATUS_CONNECTED, ALLOW_WITHDRAW_STATUS, CHECK_CONNECTION_STATUS_PENDING, CHECK_CONNECTION_STATUS_REJECTED } from '../../constants'
+import { DEFAULT_IMAGE_URL, CONNECTION_STATUS_CONNECT, CHECK_CONNECTION_STATUS_CONNECTED, ALLOW_WITHDRAW_STATUS, CHECK_CONNECTION_STATUS_PENDING, CHECK_CONNECTION_STATUS_REJECTED,
+CONSTANT } from '../../constants'
 import { ValueService, ConfigurationsService } from '@ws-widget/utils'
 import { IUserConnections } from './../../models/public-users.interface'
 import { PublicUsersUtilsService } from '../../services/public-users-utils.service'
@@ -13,6 +14,7 @@ export class PublicUsercardComponent implements OnInit, OnChanges {
   @Input() connectionData: IUserConnections | null = null
   @Input() resultsOK = false
   @Output() connectionButtonClickEmitter = new EventEmitter<any>(undefined)
+  @Output() buttonActionEmitter = new EventEmitter<any>(undefined)
   userdata: any
   defaultUserImage = DEFAULT_IMAGE_URL
   isXSmall$ = this.valueSvc.isXSmall$
@@ -20,6 +22,8 @@ export class PublicUsercardComponent implements OnInit, OnChanges {
   buttonStatus = CONNECTION_STATUS_CONNECT
   loggedInUserWid = ''
   isLoadingConnection = false
+  acceptConnection = CONSTANT.CONNECTION_STATUS_ACCEPT
+  rejectConnection = CONSTANT.CONNECTION_STATUS_REJECT
   constructor(private valueSvc: ValueService, private configSvc: ConfigurationsService, private utilSvc: PublicUsersUtilsService) {
     this.valueSvc.isXSmall$.subscribe(isXSmall => {
       this.isXSmall = isXSmall
@@ -41,7 +45,7 @@ export class PublicUsercardComponent implements OnInit, OnChanges {
     }
     return false
   }
-  acceptConnection(userData: any, connectionData: IUserConnections) {
+  sendConnectionStatus(userData: any, connectionData: IUserConnections) {
       this.connectionButtonClickEmitter.emit({ userData, connectionData })
     }
 
@@ -79,6 +83,9 @@ export class PublicUsercardComponent implements OnInit, OnChanges {
     if (connectionData && this.loggedInUserWid === connectionData.user_id && connectionData.status === CHECK_CONNECTION_STATUS_PENDING) {
       return true
     }
-    return false
+    return true
+  }
+  acceptOrRejectConnection(userData: any, connectionData: any, actionType: string) {
+     this.buttonActionEmitter.emit({ userData, connectionData, actionType })
   }
 }

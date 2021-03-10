@@ -110,6 +110,8 @@ $card-height: 215px;
         position: absolute;
         bottom: 15px;
         width: 96%;
+        display: flex;
+        justify-content: space-evenly;
       }
     }
     .profile-card {

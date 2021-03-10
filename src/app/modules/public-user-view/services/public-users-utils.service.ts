@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core'
 import { IRequestUpdate, IRevokeConnection } from '../models/public-users.interface'
-import { DUMMY_RESPONSE, CONNECTION_STATUS_CONNECT, CHECK_CONNECTION_STATUS_CONNECTED, CONNECTION_STATUS_REJECTED, CHECK_CONNECTION_STATUS_REJECTED, CHECK_CONNECTION_STATUS_PENDING, CONNECTION_STATUS_PENDING } from './../constants'
+import { DUMMY_RESPONSE, CONNECTION_STATUS_CONNECT, CHECK_CONNECTION_STATUS_CONNECTED, CONNECTION_STATUS_WITHDRAW, CHECK_CONNECTION_STATUS_REJECTED, CHECK_CONNECTION_STATUS_PENDING, CONNECTION_STATUS_PENDING } from './../constants'
 import { of } from 'rxjs'
 import { PublicUsersCoreService } from './public-users-core.service'
 
@@ -40,7 +40,7 @@ export class PublicUsersUtilsService {
   }
   getButtonDisplayStatus(connectionObject: any) {
     if (connectionObject && connectionObject.status === CHECK_CONNECTION_STATUS_CONNECTED) {
-      return CONNECTION_STATUS_REJECTED
+      return CONNECTION_STATUS_WITHDRAW
     }
     if (connectionObject && connectionObject.status === CHECK_CONNECTION_STATUS_REJECTED) {
       return CONNECTION_STATUS_CONNECT

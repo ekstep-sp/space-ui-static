@@ -9,14 +9,15 @@ import {
    DEFAULT_QUERY, INFINITE_SCROLL_CONSTANTS, CHECK_CONNECTION_STATUS_CONNECTED,
     CHECK_CONNECTION_STATUS_PENDING, CHECK_CONNECTION_STATUS_REJECTED, FAILED_CONNECTION_REQUEST_MSG,
   FAILED_REVOKE_PENDING_REQUEST_MSG, FAILED_USERS_CONNECTION_REQUEST_MSG,
-  DAILOG_CONFIRMATION_WIDTH, CONNECTION_STATUS_REJECTED,
-  CONNECTION_STATUS_PENDING, CONNECTION_STATUS_CONNECT,
+  DAILOG_CONFIRMATION_WIDTH, CONNECTION_STATUS_WITHDRAW,
+  CONNECTION_STATUS_PENDING, CONNECTION_STATUS_CONNECT, CONSTANT,
 } from './../../constants'
 import { IPublicUsers, IPublicUsersResponse, IRawUserProperties, IUpdateDataObj } from './../../models/public-users.interface'
 import { PublicUsersUtilsService } from '../../services/public-users-utils.service'
 import { PublicUserDialogComponent } from '../public-user-dialog/public-user-dialog.component'
 import { MatDialog } from '@angular/material'
 import { MatSnackBar } from '@angular/material/snack-bar'
+import { Router } from '@angular/router'
 interface IScrollUIEvent {
   currentScrollPosition: number
 }
@@ -60,6 +61,7 @@ export class PublicUserViewComponent implements OnInit {
     private valueSvc: ValueService,
     private snackBar: MatSnackBar,
     private dialog: MatDialog,
+    private router: Router,
   ) {
     this.pageNavbar = this.configSvc.pageNavBar
     this.isXSmall$ = this.valueSvc.isXSmall$
@@ -252,7 +254,7 @@ export class PublicUserViewComponent implements OnInit {
   performConnection(userConnectionData: any) {
     if (userConnectionData.connectionData && userConnectionData.connectionData.status === CHECK_CONNECTION_STATUS_CONNECTED) {
       // tslint:disable-next-line: max-line-length
-      this.openDialogBoxForConfirmation(userConnectionData.userData, userConnectionData.connectionData, CONNECTION_STATUS_REJECTED, userConnectionData.userData.first_name)
+      this.openDialogBoxForConfirmation(userConnectionData.userData, userConnectionData.connectionData, CONNECTION_STATUS_WITHDRAW, userConnectionData.userData.first_name)
     } else if (userConnectionData.connectionData && userConnectionData.connectionData.status === CHECK_CONNECTION_STATUS_PENDING) {
       this.openDialogBoxForConfirmation(userConnectionData.userData, userConnectionData.connectionData, CONNECTION_STATUS_PENDING)
     } else if (userConnectionData.connectionData && userConnectionData.connectionData.status === CHECK_CONNECTION_STATUS_REJECTED) {
@@ -276,19 +278,25 @@ export class PublicUserViewComponent implements OnInit {
       width: DAILOG_CONFIRMATION_WIDTH,
       data: {
         actionType,
+        connectionData,
         targetUser: firstName,
       },
     })
     dialogRefForPublicUser.afterClosed().pipe(filter(result => result)).subscribe(result => {
-      debugger
       if (result.actionType === CONNECTION_STATUS_CONNECT) {
         this.sendConnectionRequest(userData.wid)
       }
       if (result.actionType === CONNECTION_STATUS_PENDING) {
         this.revokeConnection(connectionData.id)
       }
-      if (result.actionType === CONNECTION_STATUS_REJECTED) {
+      if (result.actionType === CONNECTION_STATUS_WITHDRAW) {
         this.revokeConnection(connectionData.id)
+      }
+      if (result.connectionData && result.actionType === CONSTANT.CONNECTION_STATUS_ACCEPT) {
+        this.navigateToActionPage(result.connectionData.id, result.actionType)
+      }
+      if (result.connectionData  && result.actionType === CONSTANT.CONNECTION_STATUS_REJECT) {
+        this.navigateToActionPage(result.connectionData.id, result.actionType)
       }
     })
   }
@@ -326,5 +334,13 @@ export class PublicUserViewComponent implements OnInit {
         }
       })
     ).subscribe()
+  }
+  getActionType(event: any) {
+  console.log("event", event)
+  this.openDialogBoxForConfirmation(event.userData, event.connectionData, event.actionType, event.userData.first_name)
+
+  }
+  navigateToActionPage(connectionId: any, actionType: any) {
+    this.router.navigate([`/app/users/invitation/${connectionId}`], {queryParams: {actionType : actionType || null} } )
   }
 }
