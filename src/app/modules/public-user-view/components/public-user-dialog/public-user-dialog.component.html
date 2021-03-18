@@ -1,6 +1,14 @@
 
 <div mat-dialog-content class="line-height">{{message}}</div>
-<div class="container ">
+<div *ngIf="showCommentContainer" class="container dialog-body">
+  <div class="form-container w-full pt-6">
+    <mat-form-field class="w-full" appearance="outline">
+      <mat-label>Add note</mat-label>
+      <textarea matInput placeholder="Ex. I'd like to connect to you...." [(ngModel)]="userComment"></textarea>
+    </mat-form-field>
+  </div>
+</div>
+<div class="container">
   <mat-dialog-actions align="end">
     <button mat-button [mat-dialog-close]="false">No</button>
     <button mat-flat-button [mat-dialog-close]="true" class="logout-btn" color="primary" (click)= "onConfirmClick()">Yes</button>

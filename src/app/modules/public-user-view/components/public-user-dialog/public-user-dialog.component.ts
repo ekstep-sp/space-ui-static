@@ -1,6 +1,13 @@
 import { Component, OnInit, Inject } from '@angular/core'
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material'
-import { CONFIRMATION_TEXT, REVOKING_TEXT, CONNECTION_STATUS_WITHDRAW, CONNECTION_STATUS_PENDING, CONNECTION_STATUS_CONNECT, CONSTANT } from '../../constants'
+import {
+  CONFIRMATION_TEXT,
+  REVOKING_TEXT,
+  CONNECTION_STATUS_WITHDRAW,
+  CONNECTION_STATUS_PENDING,
+  CONNECTION_STATUS_CONNECT,
+  CONSTANT,
+} from '../../constants'
 
 @Component({
   selector: 'ws-public-user-dialog',
@@ -10,6 +17,8 @@ import { CONFIRMATION_TEXT, REVOKING_TEXT, CONNECTION_STATUS_WITHDRAW, CONNECTIO
 export class PublicUserDialogComponent implements OnInit {
 
   message = ''
+  showCommentContainer = false
+  userComment = ''
 
   constructor(
     public dialogRef: MatDialogRef<PublicUserDialogComponent>,
@@ -17,7 +26,14 @@ export class PublicUserDialogComponent implements OnInit {
     ) { }
 
     ngOnInit() {
+    this.initiateContainer()
     this.getMessage()
+    }
+
+    initiateContainer() {
+      if ('showCommentContainer' in this.data) {
+        this.showCommentContainer = this.data.showCommentContainer || false
+      }
     }
 
     getMessage() {
@@ -35,7 +51,13 @@ export class PublicUserDialogComponent implements OnInit {
        this.message = ''
      }
    }
+
    onConfirmClick(): void {
-    this.dialogRef.close({ event: 'close', actionType: this.data.actionType, connectionData: this.data.connectionData })
+    this.dialogRef.close({
+      event: 'close',
+      actionType: this.data.actionType,
+      connectionData: this.data.connectionData,
+      userComment: this.userComment,
+    })
   }
 }

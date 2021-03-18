@@ -8,7 +8,7 @@ import { MatToolbarModule, MatProgressSpinnerModule, MatButtonModule, MatFormFie
 
 import { BtnPageBackModule } from '@ws-widget/collection'
 import { MatIconModule } from '@angular/material/icon'
-import { ReactiveFormsModule } from '@angular/forms'
+import { FormsModule, ReactiveFormsModule } from '@angular/forms'
 import { PublicUsersCoreService } from './services/public-users-core.service'
 import { PublicUsercardComponent } from './components/public-user-card/public-user-card.component'
 import { PublicUserInvitationComponent } from './components/public-user-invitation/public-user-invitation.component'
@@ -36,6 +36,7 @@ import { MatTooltipModule } from '@angular/material/tooltip'
     MatDialogModule,
     MatSnackBarModule,
     MatTooltipModule,
+    FormsModule,
   ],
   entryComponents: [PublicUserDialogComponent],
 })

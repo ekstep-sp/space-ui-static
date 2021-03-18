@@ -78,6 +78,11 @@ $card-height: 215px;
     height: 100%;
     overflow: hidden;
     z-index: 1;
+    .connection-invitation-text {
+      font-style: italic;
+      font-size: small;
+      font-weight: 700;
+    }
     .color-on-hover{
       color:#42428B;
     }
@@ -92,6 +97,18 @@ $card-height: 215px;
   .substitute:hover{
     .txt-color {
       color: white !important;
+    }
+    .adjustable-margin {
+      margin-top: 0.5rem;
+    }
+    .connection-invitation-text {
+      display: none;
+      font-style: italic;
+      font-size: small;
+      font-weight: 700;
+    }
+    .adjustable-margin {
+      margin-top: 0.5rem;
     }
     .org-color{
       color: rgba(255, 255, 255, 0.8) !important;
@@ -143,20 +160,20 @@ $card-height: 215px;
     .conn-done{
        font-size: 28px !important;
     }
-    .btn-status:hover{
+    .btn-status{
       background-color: #884898;
       font-weight: bold;
       .btn-txt{
         color: white;
       }
     }
-    .btn-status:hover span {
+    /* .btn-status:hover span {
       display:none
-    }
-    .btn-status:hover:before {
+    } */
+    /* .btn-status:before {
       content:"Withdraw";
       color:white;
-  }
+  } */
   }
   .subsitute-no-user-properties:hover{
     .txt-color {
@@ -180,4 +197,8 @@ $card-height: 215px;
       }
     }
   }
+}
+
+.adjustable-margin {
+  margin-top: 1.5rem;
 }

@@ -1,6 +1,13 @@
 import { Component, OnInit, Input, Output, EventEmitter, OnChanges } from '@angular/core'
-import { DEFAULT_IMAGE_URL, CONNECTION_STATUS_CONNECT, CHECK_CONNECTION_STATUS_CONNECTED, ALLOW_WITHDRAW_STATUS, CHECK_CONNECTION_STATUS_PENDING, CHECK_CONNECTION_STATUS_REJECTED,
-CONSTANT } from '../../constants'
+import { 
+  DEFAULT_IMAGE_URL,
+  CONNECTION_STATUS_CONNECT,
+  CHECK_CONNECTION_STATUS_CONNECTED,
+  ALLOW_WITHDRAW_STATUS,
+  CHECK_CONNECTION_STATUS_PENDING,
+  CHECK_CONNECTION_STATUS_REJECTED,
+  CONSTANT,
+} from '../../constants'
 import { ValueService, ConfigurationsService } from '@ws-widget/utils'
 import { IUserConnections } from './../../models/public-users.interface'
 import { PublicUsersUtilsService } from '../../services/public-users-utils.service'
@@ -24,11 +31,13 @@ export class PublicUsercardComponent implements OnInit, OnChanges {
   isLoadingConnection = false
   acceptConnection = CONSTANT.CONNECTION_STATUS_ACCEPT
   rejectConnection = CONSTANT.CONNECTION_STATUS_REJECT
+
   constructor(private valueSvc: ValueService, private configSvc: ConfigurationsService, private utilSvc: PublicUsersUtilsService) {
     this.valueSvc.isXSmall$.subscribe(isXSmall => {
       this.isXSmall = isXSmall
     })
   }
+
   ngOnInit() {
     this.loggedInUserWid = this.configSvc.userProfile ? this.configSvc.userProfile.userId : ''
   }
@@ -45,6 +54,7 @@ export class PublicUsercardComponent implements OnInit, OnChanges {
     }
     return false
   }
+
   sendConnectionStatus(userData: any, connectionData: IUserConnections) {
       this.connectionButtonClickEmitter.emit({ userData, connectionData })
     }
@@ -57,6 +67,11 @@ export class PublicUsercardComponent implements OnInit, OnChanges {
     }
     showConnectedUserIcon(userData: any, connectionData: any) {
     return this.isConnected(userData, connectionData, this.loggedInUserWid)
+  }
+
+  isOwnUser() {
+    // checks if the card is of current logged in user
+    return this.userData && (this.userData.wid === this.loggedInUserWid)
   }
 
   showMailIcon(userData: any, connectionData: any) {
@@ -79,13 +94,16 @@ export class PublicUsercardComponent implements OnInit, OnChanges {
     }
    return true
   }
+
   showAcceptAndReject(connectionData: any) {
     if (connectionData && this.loggedInUserWid === connectionData.user_id && connectionData.status === CHECK_CONNECTION_STATUS_PENDING) {
       return true
     }
     return false
   }
+
   acceptOrRejectConnection(userData: any, connectionData: any, actionType: string) {
      this.buttonActionEmitter.emit({ userData, connectionData, actionType })
   }
+
 }

@@ -10,7 +10,7 @@ import {
     CHECK_CONNECTION_STATUS_PENDING, CHECK_CONNECTION_STATUS_REJECTED, FAILED_CONNECTION_REQUEST_MSG,
   FAILED_REVOKE_PENDING_REQUEST_MSG, FAILED_USERS_CONNECTION_REQUEST_MSG,
   DAILOG_CONFIRMATION_WIDTH, CONNECTION_STATUS_WITHDRAW,
-  CONNECTION_STATUS_PENDING, CONNECTION_STATUS_CONNECT, CONSTANT,
+  CONNECTION_STATUS_PENDING, CONNECTION_STATUS_CONNECT, CONSTANT, DEFAULT_SNACKBAR_TIMEOUT,
 } from './../../constants'
 import { IPublicUsers, IPublicUsersResponse, IRawUserProperties, IUpdateDataObj } from './../../models/public-users.interface'
 import { PublicUsersUtilsService } from '../../services/public-users-utils.service'
@@ -53,7 +53,7 @@ export class PublicUserViewComponent implements OnInit {
   connectionListError$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false)
   userConnectionsList$: BehaviorSubject<any> = new BehaviorSubject<any>(new Map())
   apiSub$: Subscription | null = null
-  dummyCheck = true
+
   constructor(
     private readonly configSvc: ConfigurationsService,
     private readonly coreSrvc: PublicUsersCoreService,
@@ -160,11 +160,10 @@ export class PublicUserViewComponent implements OnInit {
     this.isEnabledSearch = false
   }
   // this will send wid of logged in user and get list of connections as response
-  getUserConnections(requestedto = '', isDummyDelete = false) {
-    const loggedInUserWid = this.configSvc.userProfile ? this.configSvc.userProfile.userId : ''
+  getUserConnections() {
     const possibleConnectionMap = new Map()
     this.connectionListError$.next(false)
-    return this.utilSvc.getConnectionsList(loggedInUserWid)
+    return this.utilSvc.getConnectionsList()
       .pipe(
         catchError((_e: any) => {
           this.connectionListError$.next(true)
@@ -183,33 +182,9 @@ export class PublicUserViewComponent implements OnInit {
               }
             })
           } else {
-            this.snackBar.open(FAILED_USERS_CONNECTION_REQUEST_MSG, '', { duration: 3000 })
+            this.snackBar.open(FAILED_USERS_CONNECTION_REQUEST_MSG, '', { duration: DEFAULT_SNACKBAR_TIMEOUT })
           }
           // will be empty if there is empty connection or error
-          this.userConnectionsList$.next(possibleConnectionMap)
-        }),
-        tap((_d: any) => {
-          if (this.dummyCheck && requestedto) {
-            possibleConnectionMap.set(requestedto, [{
-              id: requestedto,
-              created_on: '2/03/2021',
-               last_updated_on: '2/03/2021',
-                status: 'Pending',
-                 requested_by: 'acbf4053-c126-4e85-a0bf-252a896535ea',
-                  email: 'anjitha.r98@gmail.com',
-                   user_id: requestedto,
-                    fname: 'Aakash',
-                     lname: 'Vishwakarma',
-                      root_org: 'space',
-                       org: 'Sustainable Environment and Ecological Development Society',
-            }])
-            this.userConnectionsList$.next(possibleConnectionMap)
-          }
-        }),
-        tap((_d: any) => {
-          if (isDummyDelete) {
-            possibleConnectionMap.delete(requestedto)
-          }
           this.userConnectionsList$.next(possibleConnectionMap)
         }),
         catchError((_err: any) => {
@@ -279,11 +254,12 @@ export class PublicUserViewComponent implements OnInit {
         actionType,
         connectionData,
         targetUser: firstName,
+        showCommentContainer: actionType === CONNECTION_STATUS_CONNECT,
       },
     })
     dialogRefForPublicUser.afterClosed().pipe(filter(result => result)).subscribe(result => {
       if (result.actionType === CONNECTION_STATUS_CONNECT) {
-        this.sendConnectionRequest(userData.wid)
+        this.sendConnectionRequest(userData.wid, 'userComment' in result ? result.userComment : '')
       }
       if (result.connectionData && result.actionType === CONNECTION_STATUS_PENDING) {
         this.revokeConnection(result.connectionData.id)
@@ -300,24 +276,24 @@ export class PublicUserViewComponent implements OnInit {
     })
   }
 
-  sendConnectionRequest(requestedUserWid: string) {
-    this.utilSvc.sendRequest(requestedUserWid).pipe(
-      catchError((_e: any) => of({ ok: true, request_id: 'someid' })),
+  sendConnectionRequest(requestedUserWid: string, userCommentForConnection: string) {
+    this.utilSvc.sendRequest(requestedUserWid, userCommentForConnection).pipe(
+      catchError((_e: any) => of(null)),
       map((response: any) => {
-        if (response && response.ok && response.data.request_id) {
-          this.refreshData(requestedUserWid)
+        if (response && response.request_id) {
+          this.refreshData()
         } else {
-          this.snackBar.open(FAILED_CONNECTION_REQUEST_MSG, '', { duration: 3000 })
+          this.snackBar.open(FAILED_CONNECTION_REQUEST_MSG, '', { duration: DEFAULT_SNACKBAR_TIMEOUT })
         }
       })
     ).subscribe()
   }
 
-  refreshData(requestedUserWid: string, dummyLogic = false) {
+  refreshData() {
     if (this.apiSub$) {
       this.apiSub$.unsubscribe()
     }
-    this.apiSub$ = this.getUserConnections(requestedUserWid, dummyLogic).subscribe(() => {
+    this.apiSub$ = this.getUserConnections().subscribe(() => {
       this.apiData$.next(this.apiData$.getValue())
     })
   }
@@ -326,10 +302,10 @@ export class PublicUserViewComponent implements OnInit {
     return this.utilSvc.revokeRequest(connectionId).pipe(
       catchError((_e: any) => of(null)),
       map((response: any) => {
-        if (response && response.ok) {
-          this.refreshData(connectionId, true)
+        if (response === '') {
+          this.refreshData()
         } else {
-          this.snackBar.open(FAILED_REVOKE_PENDING_REQUEST_MSG, '', { duration: 3000 })
+          this.snackBar.open(FAILED_REVOKE_PENDING_REQUEST_MSG, '', { duration: DEFAULT_SNACKBAR_TIMEOUT })
         }
       })
     ).subscribe()

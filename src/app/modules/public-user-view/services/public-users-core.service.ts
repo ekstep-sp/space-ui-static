@@ -8,8 +8,6 @@ import { ENDPOINT_URL, BATCH_SIZE, DEFAULT_OFFSET, CONNECTION_END_POINT, POST_IN
 })
 export class PublicUsersCoreService {
 
-  dummyresponse = true
-
   constructor(private readonly http: HttpClient) { }
 
   getApiData(searchQuery: string, offset = DEFAULT_OFFSET, searchSize = BATCH_SIZE): Observable<IPublicUsersResponse> {
@@ -51,8 +49,8 @@ export class PublicUsersCoreService {
   getSanitisedProfileUrl(url: string): string {
     return this.getAuthoringUrl(url)
   }
-  getConnectionAPIResponse(requestParams: any): Observable<any> {
-    return this.http.post(CONNECTION_END_POINT, { ...requestParams })
+  getConnectionAPIResponse(): Observable<any> {
+    return this.http.get(CONNECTION_END_POINT)
   }
   sendInvitationAction(invitationID: string, invitationType: string) {
     return this.http.get(POST_INVITATION_ACTION_URL(invitationID, invitationType))

@@ -9,24 +9,34 @@
 
 <ng-template #mainCardContent>
   <mat-card class="profile-card text-center overflow-hidden cursor-pointer">
-    <div class="flex mx-auto pt-4 image align-center justify-center" >
+    <p *ngIf="resultsOK && showAcceptAndReject(connectionData)" class="connection-invitation-text p-3 pb-0 pt-4 m-0 txt-color">
+      The user wants to connect with you
+    </p>
+    <div class="flex mx-auto image pt-4 align-center justify-center">
       <img class="img-width rounded-full h-24 w-24"
         [src]="userData?.source_profile_picture ? userData.source_profile_picture : defaultUserImage">
     </div>
     <div class="text-center mt-2 px-small-7 card-body">
      <div>
       <div class="font-size-18 flex justify-center align-center break-words txt-color">
-        <ng-container *ngIf="resultsOK && showConnectedUserIcon(userData, connectionData)">
+        <!-- <ng-container *ngIf="resultsOK && showConnectedUserIcon(userData, connectionData)">
           <mat-icon class="conn-done mr-3">done_all</mat-icon>
-        </ng-container>
+        </ng-container> -->
         <span *ngIf="userData?.first_name.length || userData?.middle_name.length || userData?.last_name.length"
           class="middle-text mr-2">{{userData?.first_name}} {{userData?.middle_name}} {{userData?.last_name}}</span>
         <ng-container *ngIf="resultsOK && showMailIcon(userData, connectionData)">
-         <a href="mailto:{{connectionData.email}}"><mat-icon class="color-on-hover mr-3">mail_outline</mat-icon></a> 
+         <a href="mailto:{{connectionData.email}}"><mat-icon matTooltip="Send Mail" class="color-on-hover mr-3">mail_outline</mat-icon></a> 
+        </ng-container>
+        <ng-container *ngIf="resultsOK && !showAcceptAndReject(connectionData) && !isOwnUser()">
+          <mat-icon *ngIf="buttonStatus === 'Connect'" matTooltip="Not Connected" class="color-on-hover mr-3">person_add_alt</mat-icon>
+          <mat-icon *ngIf="buttonStatus === 'Pending'" matTooltip="Request pending" class="color-on-hover mr-3">query_builder</mat-icon>
         </ng-container>
       </div>
     </div>
-      <div class="font-size-18 org-color mt-2">
+      <div class="font-size-18 org-color" [ngClass]="{
+        'mt-2': !showAcceptAndReject(connectionData),
+        'adjustable-margin': showAcceptAndReject(connectionData)
+      }">
         {{userData?.department_name}}
       </div>
       <div class="hovercard mt-3">
@@ -40,7 +50,7 @@
           <ng-container *ngIf ="resultsOK && !hideButtonStatus(userData, connectionData) && !showAcceptAndReject(connectionData) ">
           <div class="hovercard exactly-middle-button mt-1">
             <button class="m-auto" mat-raised-button  [class.spinner]="isLoadingConnection"  [attr.outage-count]="Withdraw" [ngClass] = "{'btn-status': buttonStatus === 'Pending'}" (click)="sendConnectionStatus(userData, connectionData)">
-              <span class="btn-txt">{{buttonStatus}}</span>
+              <span class="btn-txt">{{buttonStatus === 'Pending' ? 'Withdraw' : buttonStatus}}</span>
             </button>
           </div>
         </ng-container>

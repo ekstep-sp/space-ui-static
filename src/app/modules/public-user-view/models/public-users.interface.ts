@@ -48,6 +48,7 @@ export interface IUserConnections {
 export interface IRequestUpdate {
     requested_by: string
     requested_to: string
+    comment?: string
 }
 export interface IRevokeConnection {
     request_id: string
