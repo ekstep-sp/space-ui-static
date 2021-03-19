@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core'
-import { Routes, RouterModule } from '@angular/router'
-import { AppSetupHomeComponent } from './app-setup-home.component'
+import { RouterModule } from '@angular/router'
+// import { AppSetupHomeComponent } from './app-setup-home.component'
 import { HomeComponent } from '../app-setup/components/home/home.component'
 import { LangSelectComponent } from './components/lang-select/lang-select.component'
 import { AboutVideoComponent } from '../info/about-video/about-video.component'
@@ -8,13 +8,14 @@ import { TncAppResolverService } from '../../../../../../../src/app/services/tnc
 import { TncComponent } from './components/tnc/tnc.component'
 import { PageResolve } from '../../../../../../../library/ws-widget/utils/src/public-api'
 import { InterestComponent } from './module/interest/interest/interest.component'
+import { UserProfileComponent } from './module/user-profile/user-profile.component'
 
-const routes: Routes = []
+// const routes: Routes = []
 
 @NgModule({
   imports: [
     RouterModule.forChild([
-      {
+      /* {
         path: '',
         component: AppSetupHomeComponent,
         children: routes,
@@ -25,7 +26,7 @@ const routes: Routes = []
         resolve: {
           pageData: PageResolve,
         },
-      },
+      }, */
       {
         path: 'home',
         component: HomeComponent,
@@ -55,7 +56,19 @@ const routes: Routes = []
           resolve: {
             pageData: PageResolve,
           },
-        }],
+        },
+        {
+          path: 'user-profile',
+          component: UserProfileComponent,
+          data: {
+            pageType: 'feature',
+            pageKey: 'edit-profile',
+          },
+          resolve: {
+            pageData: PageResolve,
+          },
+        },
+      ],
 
       },
     ]),

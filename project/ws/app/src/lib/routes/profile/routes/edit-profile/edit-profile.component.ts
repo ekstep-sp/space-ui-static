@@ -1,5 +1,5 @@
 
-import { Component, OnInit } from '@angular/core'
+import { Component, OnInit, Input } from '@angular/core'
 import { InitService } from 'src/app/services/init.service'
 import { FormGroup, FormControl, Validators } from '@angular/forms'
 import { ProfileService } from '../../services/profile.service'
@@ -30,6 +30,7 @@ export namespace NsEditProfile {
   styleUrls: ['./edit-profile.component.scss'],
 })
 export class EditProfileComponent implements OnInit {
+  @Input() enableToolbar = true
   isShowUploadMobile = false
   isShowUploadIOS = false
   isShowUploadAndroid = false
@@ -60,6 +61,7 @@ export class EditProfileComponent implements OnInit {
   // userPropertiesData: NsEditProfile.IUserProperties = {} as NsEditProfile.IUserProperties
   isLoad = false
   ngOnInit() {
+    // this.enableToolbar = !this.activateRoute.snapshot.url.toString().includes('user-profile')
     this.activateRoute.data.subscribe(data => {
       this.isShowUploadMobile = data.pageData.data.isMobileUpload
       this.isShowUploadIOS = data.pageData.data.isIOSUpload

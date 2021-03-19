@@ -4,7 +4,7 @@
   class="position-relative small-height-toolbar"
 >
   <ws-widget-btn-page-back [widgetData]="{ url: 'back' }"></ws-widget-btn-page-back>
-  <div class="center-align text-white" i18n>What are you looking for?</div>
+  <div class="w-full center-align text-white" i18n>What are you looking for?</div>
 </mat-toolbar>
 <div class="p-4">
   <div class="search-holder">
@@ -282,7 +282,7 @@
     value="Saved"
     #toastSuccess
   />
-  <button class="tnc-bottom-navbar" color="primary" (click)="gotoHomePage()" mat-raised-button i18n>
+  <button class="tnc-bottom-navbar" color="primary" (click)="gotoNextPage()" mat-raised-button i18n>
     Done
   </button>
 </div>

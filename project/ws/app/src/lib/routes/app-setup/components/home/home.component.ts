@@ -3,6 +3,13 @@ import { ConfigurationsService } from '../../../../../../../../../library/ws-wid
 import { SafeUrl, DomSanitizer } from '@angular/platform-browser'
 import { Event, NavigationEnd, Router } from '@angular/router'
 
+enum STEPS {
+  STEP_1 = 1,
+  STEP_2,
+  STEP_3,
+  STEP_4,
+  STEP_5,
+}
 @Component({
   selector: 'ws-app-home',
   templateUrl: './home.component.html',
@@ -10,23 +17,27 @@ import { Event, NavigationEnd, Router } from '@angular/router'
 })
 export class HomeComponent implements OnInit {
   appIcon: SafeUrl = ''
-  stepCount = 1
+  stepCount = STEPS.STEP_1
   appName = ''
   showStepCount = false
+  totalSteps = Object.keys(STEPS).length / 2
   constructor(private configSvc: ConfigurationsService, private domSanitizer: DomSanitizer, private router: Router) {
     this.router.events.subscribe((e: Event) => {
       if (e instanceof NavigationEnd) {
         if (e.url.includes('lang')) {
-          this.stepCount = 1
+          this.stepCount = STEPS.STEP_1
           this.showStepCount = true
         } else if (e.url.includes('tnc')) {
-          this.stepCount = 2
+          this.stepCount = STEPS.STEP_2
           this.showStepCount = true
         } else if (e.url.includes('about-video')) {
-          this.stepCount = 3
+          this.stepCount = STEPS.STEP_3
           this.showStepCount = true
         } else if (e.url.includes('interest')) {
-          this.stepCount = 4
+          this.stepCount = STEPS.STEP_4
+          this.showStepCount = true
+        } else if (e.url.includes('user-profile')) {
+          this.stepCount = STEPS.STEP_5
           this.showStepCount = true
         } else {
           this.showStepCount = false

@@ -1,0 +1,10 @@
+<mat-toolbar
+  color="primary"
+  [ngStyle]="pageNavbar?.styles"
+  class="position-relative small-height-toolbar"
+>
+  <ws-widget-btn-page-back [widgetData]="{ url: 'back' }"></ws-widget-btn-page-back>
+  <div class="w-full float-left center-align text-white" i18n>Update your Profile</div>
+</mat-toolbar>
+
+<ws-app-edit-profile [enableToolbar]="false"></ws-app-edit-profile>

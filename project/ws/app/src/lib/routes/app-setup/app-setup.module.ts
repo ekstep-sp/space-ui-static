@@ -40,6 +40,7 @@ import { SetupDoneComponent } from './components/setup-done/setup-done.component
 import { InterestModules } from './module/interest/interest.module'
 import { Globals } from './globals'
 import { InterestModule } from '../profile/routes/interest/interest.module'
+import { UserProfileModule } from './module/user-profile/user-profile.module'
 
 @NgModule({
   declarations: [
@@ -80,6 +81,7 @@ import { InterestModule } from '../profile/routes/interest/interest.module'
     LanguageSelectorModule,
     AppTourDialogModule,
     InterestModule,
+    UserProfileModule,
     MatProgressSpinnerModule,
   ],
   providers: [TncAppResolverService, Globals],
