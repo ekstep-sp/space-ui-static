@@ -1,5 +1,5 @@
 import { Component, OnInit, Input, Output, EventEmitter, OnChanges } from '@angular/core'
-import { 
+import {
   DEFAULT_IMAGE_URL,
   CONNECTION_STATUS_CONNECT,
   CHECK_CONNECTION_STATUS_CONNECTED,
