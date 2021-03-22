@@ -25,7 +25,7 @@
         <span *ngIf="userData?.first_name.length || userData?.middle_name.length || userData?.last_name.length"
           class="middle-text mr-2">{{userData?.first_name}} {{userData?.middle_name}} {{userData?.last_name}}</span>
         <ng-container *ngIf="resultsOK && showMailIcon(userData, connectionData)">
-         <a href="mailto:{{connectionData.email}}"><mat-icon matTooltip="Send Mail" class="color-on-hover mr-3">mail_outline</mat-icon></a> 
+         <a href="mailto:{{connectionData.email}}"><mat-icon matTooltip="Send Mail" class="color-on-hover mr-3">mail_outline</mat-icon></a>
         </ng-container>
         <ng-container *ngIf="resultsOK && !showAcceptAndReject(connectionData) && !isOwnUser()">
           <mat-icon *ngIf="buttonStatus === 'Connect'" matTooltip="Not Connected" class="color-on-hover mr-3">person_add_alt</mat-icon>

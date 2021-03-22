@@ -53,6 +53,8 @@ export class PublicUserViewComponent implements OnInit {
   connectionListError$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false)
   userConnectionsList$: BehaviorSubject<any> = new BehaviorSubject<any>(new Map())
   apiSub$: Subscription | null = null
+  sendName: any
+  receivedName: any
 
   constructor(
     private readonly configSvc: ConfigurationsService,
@@ -75,12 +77,17 @@ export class PublicUserViewComponent implements OnInit {
         debounceTime(this.DEFAULT_DEBOUNCE),
         distinctUntilChanged()
       ).subscribe((searchTerm: string) => {
+        this.sendName = searchTerm
         this.searchUsers(searchTerm)
         this.getUserConnections().subscribe()
       })
     }
-    // trigger first time page load
-    this.searchUsers()
+    // trigger first time page load and also on accept/reject page route with searched name
+    // this.router.getCurrentNavigation().extras.state
+    //   ? this.receivedName = this.router.getCurrentNavigation().extras.state.name
+    //   : ""
+    this.receivedName = history.state.name || ""
+    this.searchUsers(this.receivedName)
     this.getUserConnections().subscribe()
   }
   searchUsers(q = '') {
@@ -311,9 +318,12 @@ export class PublicUserViewComponent implements OnInit {
     ).subscribe()
   }
   getActionType(event: any) {
-  this.openDialogBoxForConfirmation(event.userData, event.connectionData, event.actionType, event.userData.first_name)
+    this.openDialogBoxForConfirmation(event.userData, event.connectionData, event.actionType, event.userData.first_name)
   }
   navigateToActionPage(connectionId: any, actionType: any) {
-    this.router.navigate([`/app/users/invitation/${connectionId}`], { queryParams: { actionType : actionType || null } })
+    this.router.navigate(
+      [`/app/users/invitation/${connectionId}`],
+      { queryParams: { actionType: actionType, name: this.sendName } },
+    )
   }
 }
