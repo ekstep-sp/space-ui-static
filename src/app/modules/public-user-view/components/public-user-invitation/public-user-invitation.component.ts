@@ -19,7 +19,6 @@ export class PublicUserInvitationComponent implements OnInit {
   isApiError$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(true)
   notifyUser = false
   notificationDetails: any = null
-  sendName: any
 
   constructor(
     private readonly configSvc: ConfigurationsService,
@@ -34,7 +33,6 @@ export class PublicUserInvitationComponent implements OnInit {
     this.activatedRoute.params.pipe(
       filter((params: any) => params.requestId),
       map((params: any) => {
-        this.sendName = this.activatedRoute.snapshot.queryParamMap.get( 'name' )
         return {
           actionType: this.activatedRoute.snapshot.queryParamMap.get('actionType'),
           requestId: params.requestId,
@@ -83,7 +81,11 @@ export class PublicUserInvitationComponent implements OnInit {
   goToUserPage () {
     this.router.navigate(
       [ '/app/users/list' ],
-      { state: { name: this.sendName } }
+      { state: {
+        search_query: this.activatedRoute.snapshot.queryParamMap.get( 'actionType' ) === 'Reject'
+                        ? ''
+                        : this.activatedRoute.snapshot.queryParamMap.get( 'search_query' ) || ''
+      } }
     );
   }
 

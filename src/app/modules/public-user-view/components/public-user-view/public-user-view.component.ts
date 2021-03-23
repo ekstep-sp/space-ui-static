@@ -82,16 +82,11 @@ export class PublicUserViewComponent implements OnInit {
         this.getUserConnections().subscribe()
       })
     }
-    // trigger first time page load and also on accept/reject page route with searched name
-    // this.router.getCurrentNavigation().extras.state
-    //   ? this.receivedName = this.router.getCurrentNavigation().extras.state.name
-    //   : ""
-    this.receivedName = history.state.name || ""
-    this.searchUsers(this.receivedName)
+    this.receivedName = history.state.search_query || ""
+    this.searchUsers( this.receivedName )
     this.getUserConnections().subscribe()
   }
   searchUsers(q = '') {
-
     this.query = q
     this.page = DEFAULT_PAGE_NUMBER
     this.offset = (this.page ? this.page - 1 : 0) * BATCH_SIZE
@@ -323,7 +318,7 @@ export class PublicUserViewComponent implements OnInit {
   navigateToActionPage(connectionId: any, actionType: any) {
     this.router.navigate(
       [`/app/users/invitation/${connectionId}`],
-      { queryParams: { actionType: actionType, name: this.sendName } },
+      { queryParams: { actionType: actionType, search_query: this.sendName } },
     )
   }
 }
