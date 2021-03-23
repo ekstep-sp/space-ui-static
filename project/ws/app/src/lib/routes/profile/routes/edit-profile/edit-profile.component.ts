@@ -9,6 +9,7 @@ import { CONTENT_BASE_STATIC } from '../../../../../../../author/src/lib/constan
 import { ActivatedRoute } from '@angular/router'
 import { FOLDER_NAME_EDIT_PROFILE } from '../../../../../../../author/src/lib/constants/constant'
 import { UtilityService } from '@ws-widget/utils/src/public-api'
+import { Router } from '@angular/router'
 
 export namespace NsEditProfile {
   export interface IResponseBody {
@@ -42,6 +43,7 @@ export class EditProfileComponent implements OnInit {
     private snackBar: MatSnackBar,
     private activateRoute: ActivatedRoute,
     private utilitySvc: UtilityService,
+    private router: Router,
   ) { }
   url = ''
   profileUrlParams = ''
@@ -173,6 +175,7 @@ export class EditProfileComponent implements OnInit {
           this.snackBar.open(editresponse.MESSAGE, '', {
             duration: 1000,
           })
+          setTimeout( () => this.router.navigate( [ `page/home` ] ) , 1000 )
         }
       } else {
         this.snackBar.open(editresponse.MESSAGE, '', {
@@ -184,11 +187,14 @@ export class EditProfileComponent implements OnInit {
   fetchInitialUserData() {
     try {
       // this.initService.updatePidDetails()
-       this.profileSvc.fecthDetailsFromPid()
+      this.profileSvc.fecthDetailsFromPid()
     } catch (e) {
       this.snackBar.open('Reload to view latest changes', '', {
         duration: 1000,
       })
     }
+  }
+  skipToHomePage() {
+    this.router.navigate( [ `page/home` ] )
   }
 }
