@@ -235,7 +235,7 @@ export class InterestComponent implements OnInit {
     })
   }
   gotoNextPage() {
-    this.router.navigateByUrl('/app/setup/home/user-profile')
+    this.router.navigateByUrl('/app/setup/home/user-profile', { state: { skip: true } })
   }
   raiseTelemetry(action: 'add' | 'remove', interest: string) {
     this.events.raiseInteractTelemetry('interest', action, { interest })

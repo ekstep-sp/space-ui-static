@@ -29,7 +29,7 @@ export class AboutVideoComponent implements OnInit {
       widgetType: 'player',
       widgetHostStyle: {
         height: '100%',
-        'max-width': '90%',
+        'max-width': '100%',
         'margin-left': 'auto',
         'margin-right': 'auto',
       },

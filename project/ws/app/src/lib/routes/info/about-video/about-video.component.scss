@@ -1,41 +1,43 @@
 @import 'ws-mixins';
 
-.small-height-toolbar{
+.small-height-toolbar {
   @include breakpoint-xs {
     height: 32px;
   }
 }
 
 .tnc-bottom-navbar {
-  position: absolute;
-  right: 0%;
-  bottom: -38%;
+  margin-top: 10px;
+  margin-bottom: 10px;
 }
 
 .video-intro {
   height: calc(100vh - 394px);
-    padding-top: 16px
-
+  padding-top: 16px;
 }
 
-.center-align{
+.center-align {
   position: relative;
   left: 50%;
-  transform: translate(-50%,0);
+  transform: translate(-50%, 0);
   @include breakpoint-xs {
-    transform: translate(0,0);
+    transform: translate(0, 0);
     left: inherit;
   }
 }
 
-.intro-video{
-  height: calc(100vh - 410px);
+.intro-video .video-full .video-js {
+  height: calc(100vh - 410px) !important;
   @include breakpoint-xs {
-    height: calc(100vh - 360px);
-
+    height: calc(100vh - 360px) !important;
   }
-
+  @include breakpoint-s {
+    height: calc(100vh - 310px) !important;
+  }
+  @include breakpoint-m {
+    height: calc(100vh - 260px) !important;
+  }
 }
-.btn-color{
-  color:white !important
+.btn-color {
+  color: white !important;
 }

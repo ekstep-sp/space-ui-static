@@ -62,7 +62,13 @@ export class EditProfileComponent implements OnInit {
   userProfile: any
   // userPropertiesData: NsEditProfile.IUserProperties = {} as NsEditProfile.IUserProperties
   isLoad = false
+  showSkip:boolean = false
+
   ngOnInit() {
+    history.state.skip === true
+      ? ( this.showSkip = history.state.skip, localStorage.setItem( 'showSkip', this.showSkip.toString() ) )
+      : this.showSkip = localStorage.getItem( "showSkip" ) === null ? false : true
+    console.log( this.showSkip)
     // this.enableToolbar = !this.activateRoute.snapshot.url.toString().includes('user-profile')
     this.activateRoute.data.subscribe(data => {
       this.isShowUploadMobile = data.pageData.data.isMobileUpload
@@ -175,7 +181,10 @@ export class EditProfileComponent implements OnInit {
           this.snackBar.open(editresponse.MESSAGE, '', {
             duration: 1000,
           })
-          setTimeout( () => this.router.navigate( [ `page/home` ] ) , 1000 )
+          setTimeout( () => {
+            this.router.navigate( [ `page/home` ] )
+            localStorage.getItem( 'showSkip' ) === null ? '' : localStorage.removeItem( 'showSkip' )
+          } , 1000 )
         }
       } else {
         this.snackBar.open(editresponse.MESSAGE, '', {
@@ -196,5 +205,6 @@ export class EditProfileComponent implements OnInit {
   }
   skipToHomePage() {
     this.router.navigate( [ `page/home` ] )
+    localStorage.getItem( 'showSkip' ) === null ? '' : localStorage.removeItem( 'showSkip' )
   }
 }

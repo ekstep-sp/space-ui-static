@@ -65,7 +65,7 @@
         </div>
         <br />
         <div class="button-align">
-          <button type="button" mat-raised-button color="primary" (click)="skipToHomePage()">
+          <button type="button" mat-raised-button color="primary" (click)="skipToHomePage()" *ngIf="showSkip">
             <span class="font-montserrat">Skip</span>
           </button>
           <button type="submit" mat-raised-button [disabled]="isDisabled()" color="primary"><span
