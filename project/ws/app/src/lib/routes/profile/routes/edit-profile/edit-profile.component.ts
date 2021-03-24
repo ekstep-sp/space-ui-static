@@ -6,10 +6,9 @@ import { ProfileService } from '../../services/profile.service'
 import { MatSnackBar } from '@angular/material'
 import { UploadService } from '../../../../../../../author/src/lib/routing/modules/editor/shared/services/upload.service'
 import { CONTENT_BASE_STATIC } from '../../../../../../../author/src/lib/constants/apiEndpoints'
-import { ActivatedRoute } from '@angular/router'
+import { Router, ActivatedRoute } from '@angular/router'
 import { FOLDER_NAME_EDIT_PROFILE } from '../../../../../../../author/src/lib/constants/constant'
 import { UtilityService } from '@ws-widget/utils/src/public-api'
-import { Router } from '@angular/router'
 
 export namespace NsEditProfile {
   export interface IResponseBody {
@@ -177,11 +176,14 @@ export class EditProfileComponent implements OnInit {
           this.snackBar.open(editresponse.MESSAGE, '', {
             duration: 1000,
           })
-          setTimeout( () => {
-            this.enableSkip === true
-              ? this.router.navigate( [ `/app/setup/home/interest` ] )
-              : ''
-          } , 1000 )
+          setTimeout(
+            () => {
+              if (this.enableSkip) {
+                this.router.navigate(['/app/setup/home/interest'])
+              }
+            },
+            1000
+          )
         }
       } else {
         this.snackBar.open(editresponse.MESSAGE, '', {
@@ -201,6 +203,6 @@ export class EditProfileComponent implements OnInit {
     }
   }
   skipToHomePage() {
-    this.router.navigate( [ "/app/setup/home/interest" ] )
+    this.router.navigate(['/app/setup/home/interest'])
   }
 }

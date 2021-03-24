@@ -21,8 +21,6 @@ import { ApiService, AccessControlService } from '../../../../../../../author/sr
     FormsModule,
   ],
   providers: [AccessControlService, ApiService, UploadService],
-  exports: [
-    EditProfileComponent,
-  ]
+  exports: [EditProfileComponent],
 })
 export class EditProfileModule { }

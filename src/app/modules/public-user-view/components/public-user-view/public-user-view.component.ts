@@ -82,8 +82,8 @@ export class PublicUserViewComponent implements OnInit {
         this.getUserConnections().subscribe()
       })
     }
-    this.receivedName = history.state.search_query || ""
-    this.searchUsers( this.receivedName )
+    this.receivedName = history.state.search_query || ''
+    this.searchUsers(this.receivedName)
     this.getUserConnections().subscribe()
   }
   searchUsers(q = '') {
@@ -318,7 +318,7 @@ export class PublicUserViewComponent implements OnInit {
   navigateToActionPage(connectionId: any, actionType: any) {
     this.router.navigate(
       [`/app/users/invitation/${connectionId}`],
-      { queryParams: { actionType: actionType, search_query: this.sendName } },
+      { queryParams: { actionType, search_query: this.sendName } },
     )
   }
 }
