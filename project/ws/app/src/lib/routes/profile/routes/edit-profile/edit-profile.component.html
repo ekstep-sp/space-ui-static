@@ -6,6 +6,11 @@
         <mat-toolbar color="primary" *ngIf="enableToolbar">
           <span class="title-center body-font-size-primary">Edit Profile</span>
         </mat-toolbar>
+        <div *ngIf="!enableToolbar">
+          <h3 class="mat-h3 ws-mat-primary-text montserrat">
+            Tell us more! It helps you connect with people more meaningfully
+          </h3>
+        </div>
         <div class="hoverable">
 
           <img [src]="url ? url : relativeUrl">
@@ -65,7 +70,7 @@
         </div>
         <br />
         <div class="button-align">
-          <button type="button" mat-raised-button color="primary" (click)="skipToHomePage()" *ngIf="showSkip">
+          <button type="button" mat-raised-button color="primary" (click)="skipToHomePage()" *ngIf="enableSkip">
             <span class="font-montserrat">Skip</span>
           </button>
           <button type="submit" mat-raised-button [disabled]="isDisabled()" color="primary"><span
