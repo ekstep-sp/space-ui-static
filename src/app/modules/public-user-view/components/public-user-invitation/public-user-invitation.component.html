@@ -18,7 +18,7 @@
             Your action to "{{notificationDetails?.sourceActionType || 'NA'}}" the request has been processed successfully.
         </div>
         <div class="go-back-container">
-            <button mat-button mat-raised-button type="button" color="primary" routerLink="/app/users/list">
+            <button mat-button mat-raised-button type="button" color="primary" (click)="goToUserPage()">
                 Go to Users Page
             </button>
         </div>

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core'
-import { ActivatedRoute } from '@angular/router'
+import { Router, ActivatedRoute } from '@angular/router'
 import { ConfigurationsService, NsPage } from '@ws-widget/utils/src/public-api'
 // import { PublicUsersUtilsService } from '../../services/public-users-utils.service'
 import { BehaviorSubject, of } from 'rxjs'
@@ -19,11 +19,13 @@ export class PublicUserInvitationComponent implements OnInit {
   isApiError$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(true)
   notifyUser = false
   notificationDetails: any = null
+
   constructor(
     private readonly configSvc: ConfigurationsService,
     // private readonly _utilSvc: PublicUsersUtilsService,
     private readonly _utilSvc: PublicUsersUtilsService,
-    private readonly activatedRoute: ActivatedRoute
+    private readonly activatedRoute: ActivatedRoute,
+    private router: Router,
   ) { }
 
   ngOnInit() {
@@ -43,11 +45,11 @@ export class PublicUserInvitationComponent implements OnInit {
           finalActionType = finalActionType.substr(0, 1).toUpperCase() + finalActionType.substr(1)
         }
         return {
-        ...invitationObj,
-        actionType : finalActionType,
-      }
-    })
-      ).subscribe(this.triggerAction.bind(this))
+          ...invitationObj,
+          actionType : finalActionType,
+        }
+      })
+    ).subscribe(this.triggerAction.bind(this))
   }
 
   triggerAction({ requestId, actionType }: any) {
@@ -74,6 +76,17 @@ export class PublicUserInvitationComponent implements OnInit {
         this.isLoading$.next(false)
       })
     ).subscribe()
+  }
+
+  goToUserPage () {
+    this.router.navigate(
+      [ '/app/users/list' ],
+      { state: {
+        search_query: this.activatedRoute.snapshot.queryParamMap.get( 'actionType' ) === 'Reject'
+                        ? ''
+                        : this.activatedRoute.snapshot.queryParamMap.get( 'search_query' ) || ''
+      } }
+    );
   }
 
 }

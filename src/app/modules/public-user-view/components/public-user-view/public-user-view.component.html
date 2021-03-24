@@ -9,7 +9,7 @@
         <ng-container>
             <label class="expandSearchGroup">
                 <mat-icon matPrefix class="searchIcon">search</mat-icon>
-                <input class="forms-control" type="text" placeholder="Search People" name="search"
+                <input class="forms-control" type="text" placeholder="Search People" name="search" value="{{receivedName}}"
                     [formControl]="globalSearch">
             </label>
         </ng-container>
@@ -77,10 +77,10 @@
 </div>
 <ng-template #cardTemplate>
     <ng-container *ngFor="let card of (apiData$ | async); trackBy: trackUserData ">
-        <ws-public-user-card 
-        [userData]=card  
+        <ws-public-user-card
+        [userData]=card
         [connectionData]="getConnectionDetailsForCurrentUser(card)"
-        [resultsOK]="(connectionListError$ | async) === false" 
+        [resultsOK]="(connectionListError$ | async) === false"
         (connectionButtonClickEmitter)= "performConnection($event)"
         (buttonActionEmitter)= "getActionType($event)"></ws-public-user-card>
     </ng-container>
