@@ -178,7 +178,9 @@ export class EditProfileComponent implements OnInit {
             duration: 1000,
           })
           setTimeout( () => {
-            this.router.navigate( [ `/app/setup/home/interest` ] )
+            this.enableSkip === true
+              ? this.router.navigate( [ `/app/setup/home/interest` ] )
+              : ''
           } , 1000 )
         }
       } else {
