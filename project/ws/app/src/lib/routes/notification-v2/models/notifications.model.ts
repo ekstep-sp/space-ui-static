@@ -17,6 +17,7 @@ export interface INotification {
   seenOn: Date
   targetData: any
   userId: string
+  targetUrl: any
 }
 
 export enum ENotificationType {
@@ -42,4 +43,7 @@ export enum ENotificationEvent {
   DelegateContent = 'delegate_content',
   ApproveContent = 'approve_content',
   ContentFeedback = 'content_feedback_response',
+
+  // Notification Events
+  NewConnectionRequest = 'new_connection_request',
 }

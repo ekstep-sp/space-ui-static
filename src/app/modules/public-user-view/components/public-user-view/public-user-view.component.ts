@@ -17,7 +17,7 @@ import { PublicUsersUtilsService } from '../../services/public-users-utils.servi
 import { PublicUserDialogComponent } from '../public-user-dialog/public-user-dialog.component'
 import { MatDialog } from '@angular/material'
 import { MatSnackBar } from '@angular/material/snack-bar'
-import { Router } from '@angular/router'
+import { Router, ActivatedRoute } from '@angular/router'
 interface IScrollUIEvent {
   currentScrollPosition: number
 }
@@ -64,6 +64,7 @@ export class PublicUserViewComponent implements OnInit {
     private snackBar: MatSnackBar,
     private dialog: MatDialog,
     private router: Router,
+    private activatedRoute: ActivatedRoute,
   ) {
     this.pageNavbar = this.configSvc.pageNavBar
     this.isXSmall$ = this.valueSvc.isXSmall$
@@ -78,11 +79,12 @@ export class PublicUserViewComponent implements OnInit {
         distinctUntilChanged()
       ).subscribe((searchTerm: string) => {
         this.sendName = searchTerm
+        this.router.navigate(['/app/users/list'], { queryParams: {search_query: this.sendName} })
         this.searchUsers(searchTerm)
         this.getUserConnections().subscribe()
       })
     }
-    this.receivedName = history.state.search_query || ''
+    this.receivedName = '' || this.activatedRoute.snapshot.queryParamMap.get('search_query')
     this.searchUsers(this.receivedName)
     this.getUserConnections().subscribe()
   }
@@ -318,7 +320,7 @@ export class PublicUserViewComponent implements OnInit {
   navigateToActionPage(connectionId: any, actionType: any) {
     this.router.navigate(
       [`/app/users/invitation/${connectionId}`],
-      { queryParams: { actionType, search_query: this.sendName } },
+      { queryParams: { actionType, search_query: this.sendName || this.activatedRoute.snapshot.queryParamMap.get('search_query') } },
     )
   }
 }

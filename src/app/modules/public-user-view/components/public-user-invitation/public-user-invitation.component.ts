@@ -81,12 +81,11 @@ export class PublicUserInvitationComponent implements OnInit {
   goToUserPage () {
     this.router.navigate(
       ['/app/users/list'],
-      { state: {
-        search_query: this.activatedRoute.snapshot.queryParamMap.get('actionType') === 'Reject'
+      { queryParams: { search_query: this.activatedRoute.snapshot.queryParamMap.get('actionType') === 'Reject'
                         ? ''
                         : this.activatedRoute.snapshot.queryParamMap.get('search_query') || '',
-      } },
+                      }
+      }
     )
   }
-
 }
