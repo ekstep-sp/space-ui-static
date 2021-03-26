@@ -14,10 +14,9 @@ export class NotificationService {
     switch (event) {
       case ENotificationEvent.NewConnectionRequest:
         route = 'app/users/list'
-        // notification.targetUrl = 'space.societalplatform.org/app/users/list?search_query=hritik'
         let searchQuery = ''
-        if ('targetUrl' in notification) {
-          searchQuery = notification.targetUrl.split('=')[1]
+        if ('targetData' in notification && 'targetUrl' in notification.targetData) {
+          searchQuery = notification.targetData.targetUrl.split('=')[1]
         }
         queryParam = { queryParams: { search_query: searchQuery } }
         break

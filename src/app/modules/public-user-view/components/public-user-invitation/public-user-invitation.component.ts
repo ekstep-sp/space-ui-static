@@ -84,7 +84,7 @@ export class PublicUserInvitationComponent implements OnInit {
       { queryParams: { search_query: this.activatedRoute.snapshot.queryParamMap.get('actionType') === 'Reject'
                         ? ''
                         : this.activatedRoute.snapshot.queryParamMap.get('search_query') || '',
-                      }
+                      },
       }
     )
   }
