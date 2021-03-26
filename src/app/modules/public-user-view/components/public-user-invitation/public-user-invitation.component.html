@@ -17,17 +17,16 @@
         <button mat-button mat-raised-button type="button" color="primary" routerLink="/app/users/list">
             Go to Users Page
         </button>
-        </div>
+    </div>
     <ng-container *ngIf="notifyUser && notificationDetails !== null">
         <div class="flat-alert-success">
             Your action to "{{notificationDetails?.sourceActionType || 'NA'}}" the request has been processed successfully.
         </div>
         <div class="go-back-container">
-            <button mat-button mat-raised-button type="button" name="emailConnect" color="primary"
-                *ngIf="notificationDetails?.sourceActionType === 'Accept'" (click)="goToUserPage()">
+            <button mat-button mat-raised-button type="button" name="emailConnect" color="primary" (click)="goToUserPage()">
                 Connect with User
             </button>
-            <button mat-button mat-raised-button type="button" color="primary" routerLink="/app/users/list">
+            <button mat-button mat-raised-button type="button" color="primary" name="backToUser" routerLink="/app/users/list">
                 Go to Users Page
             </button>
         </div>
