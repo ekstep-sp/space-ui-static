@@ -79,7 +79,7 @@ export class PublicUserViewComponent implements OnInit {
         distinctUntilChanged()
       ).subscribe((searchTerm: string) => {
         this.sendName = searchTerm
-        this.router.navigate(['/app/users/list'], { queryParams: {search_query: this.sendName} })
+        this.router.navigate(['/app/users/list'], { queryParams: { search_query: this.sendName } })
         this.searchUsers(searchTerm)
         this.getUserConnections().subscribe()
       })
