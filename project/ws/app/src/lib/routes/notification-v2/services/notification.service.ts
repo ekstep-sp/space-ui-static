@@ -8,14 +8,17 @@ export class NotificationService {
 
   mapRoute(notification: INotification) {
     const event = notification.eventId
-    notification.targetUrl = 'space.societalplatform.org/app/users/list?search_query=hritik'
-    const searchQuery = notification.targetUrl.split('=')[1]
     let identifier: string
     let route: string
     let queryParam
     switch (event) {
       case ENotificationEvent.NewConnectionRequest:
         route = 'app/users/list'
+        // notification.targetUrl = 'space.societalplatform.org/app/users/list?search_query=hritik'
+        let searchQuery = ''
+        if ('targetUrl' in notification) {
+          searchQuery = notification.targetUrl.split('=')[1]
+        }
         queryParam = { queryParams: { search_query: searchQuery } }
         break
       case ENotificationEvent.ShareGoal:
