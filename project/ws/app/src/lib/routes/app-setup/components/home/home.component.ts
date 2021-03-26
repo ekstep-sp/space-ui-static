@@ -8,7 +8,6 @@ enum STEPS {
   STEP_2,
   STEP_3,
   STEP_4,
-  STEP_5,
 }
 @Component({
   selector: 'ws-app-home',
@@ -33,11 +32,8 @@ export class HomeComponent implements OnInit {
         } else if (e.url.includes('about-video')) {
           this.stepCount = STEPS.STEP_3
           this.showStepCount = true
-        } else if (e.url.includes('user-profile')) {
-          this.stepCount = STEPS.STEP_4
-          this.showStepCount = true
         } else if (e.url.includes('interest')) {
-          this.stepCount = STEPS.STEP_5
+          this.stepCount = STEPS.STEP_4
           this.showStepCount = true
         } else {
           this.showStepCount = false
