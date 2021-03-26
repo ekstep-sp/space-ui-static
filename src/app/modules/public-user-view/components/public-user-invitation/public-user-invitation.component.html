@@ -23,7 +23,7 @@
             Your action to "{{notificationDetails?.sourceActionType || 'NA'}}" the request has been processed successfully.
         </div>
         <div class="go-back-container">
-            <button mat-button mat-raised-button type="button" name="emailConnect" color="primary" (click)="goToUserPage()">
+            <button mat-button mat-raised-button type="button" name="emailConnect" color="primary" (click)="goToUserPage()" *ngIf="notificationDetails?.sourceActionType === 'Accept'">
                 Connect with User
             </button>
             <button mat-button mat-raised-button type="button" color="primary" name="backToUser" routerLink="/app/users/list">

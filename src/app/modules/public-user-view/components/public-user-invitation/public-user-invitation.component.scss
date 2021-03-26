@@ -51,6 +51,13 @@
         align-items: center;
         justify-content: center;
     }
+    @include breakpoint-l {
+        padding: 5rem;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: center;
+    }
 }
 
 button[name="emailConnect"] {
