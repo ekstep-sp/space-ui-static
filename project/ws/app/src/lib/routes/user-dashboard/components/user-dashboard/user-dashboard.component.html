@@ -1,3 +1,5 @@
+
+
 <mat-toolbar [color]="navBackground?.color" [ngStyle]="navBackground?.styles">
   <ws-widget-btn-page-back [widgetData]="{ url: 'back' }"></ws-widget-btn-page-back>
   <span class="margin-left-s text-color font-size-navbar-heading font-montserrat" i18n>User Dashboard</span>
@@ -103,12 +105,20 @@
               </div>
             </button>
 
+            <button mat-menu-item >
+              <div fxLayout="row" fxLayoutAlign="start center">
+                <mat-icon class="ws-mat-primary-text">double_arrow</mat-icon>
+                <span class="nav-caction">Migrate Content</span>
+              </div>
+            </button>
+
             <button mat-menu-item (click)="openDialogForReject(element)">
               <div fxLayout="row" fxLayoutAlign="start center">
                 <mat-icon color="warn">delete_outline</mat-icon>
                 <span class="nav-caction">Delete</span>
               </div>
             </button>
+
           </mat-menu>
         </td>
       </ng-container>
