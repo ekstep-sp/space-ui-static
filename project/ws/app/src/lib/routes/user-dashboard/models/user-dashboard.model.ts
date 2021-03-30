@@ -31,7 +31,8 @@ export namespace NsUserDashboard {
     exportOption: {
       mobile?: boolean,
       web?: boolean
-    }
+    },
+    contentMigration: IContentMigration
   }
   export interface IUserListDataFromUserTable {
     wid: UUID
@@ -166,5 +167,9 @@ export namespace NsUserDashboard {
   export interface ITimeZone {
     locales: string,
     timeZone: string,
+  }
+  export interface IContentMigration {
+    rolesAllowed: any
+    errorMessage: string
   }
 }

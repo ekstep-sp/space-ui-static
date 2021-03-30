@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core'
 import { UserDashboardService } from '../../services/user-dashboard.service'
-import { ActivatedRoute } from '@angular/router'
+import { ActivatedRoute, Router } from '@angular/router'
 import { Subscription, Observable, forkJoin, of } from 'rxjs'
 import { NsUserDashboard } from '../../models/user-dashboard.model'
 import { FormControl } from '@angular/forms'
@@ -29,6 +29,7 @@ export class UserDashboardComponent implements OnInit {
     public dialog: MatDialog,
     private activateRoute: ActivatedRoute,
     private configSvc: ConfigurationsService,
+    private router: Router,
   ) {
 
     const instanceConfig = this.configSvc.userProfile
@@ -404,5 +405,23 @@ export class UserDashboardComponent implements OnInit {
     } else if (type === 'xlsx') {
       this.userDashboardSvc.exportDashboardUsers(data, 'xlsx', 'user-dashboard-details', 'users')
     }
+  }
+   migrateContent(element: any) {
+   this.userDashboardSvc.fetchPublishersList(element.email).subscribe(data => {
+      if (data.length && data[0].roles && this.userDashboardData.contentMigration && this.userDashboardData.contentMigration.rolesAllowed) {
+        const userRoles = data[0].roles
+        const rolesAllowedForContentMigration = this.userDashboardData.contentMigration.rolesAllowed
+        const rolesOK = rolesAllowedForContentMigration.some((_role: string) => userRoles.includes(_role))
+        if (rolesOK) {
+          this.router.navigate(['/migratecontent'], { queryParams: { userId: element.wid } })
+        } else {
+          this.snackBar.open(this.userDashboardData.contentMigration.errorMessage, '', {
+            duration: 3000,
+          })
+        }
+      } else {
+        this.router.navigate(['/migratecontent'], { queryParams: { userId: element.wid } })
+      }
+    })
   }
 }
