@@ -5,8 +5,6 @@ import { take, catchError, map, tap, finalize } from 'rxjs/operators'
 import { UserMigrationUtilsService } from '../../services/user-migration-utils/user-migration-utils.service'
 import { NsPage, ConfigurationsService } from '@ws-widget/utils/src/public-api'
 import { IMigrationReqBody } from '../../models/user-migration.model'
-import { responsiveSuffix } from '@ws-widget/collection/src/public-api'
-
 interface IUser {
   name: string
   id: string
@@ -31,7 +29,7 @@ export class ContentMigrationDashboardComponent implements OnInit {
   userList$ = new BehaviorSubject<any[]>([])
   pageNavbar: Partial<NsPage.INavBackground> = this.configSvc.pageNavBar
   isLoading$ = new BehaviorSubject<boolean>(false)
-  successMessage$ = new BehaviorSubject<boolean>(false)
+  isSuccess$ = new BehaviorSubject<boolean>(false)
   constructor(
     private readonly activatedRoute: ActivatedRoute,
     private readonly configSvc: ConfigurationsService,
@@ -47,12 +45,10 @@ export class ContentMigrationDashboardComponent implements OnInit {
         this.utilsSrvc.validateUser(this.sourceUser)
         this.utilsSrvc.getCuratorList().
         pipe(take(1),
-             map(response => response.status),
              tap(data => {
           if (data.ok && data.status === 200) {
-            this.userList$.next(data.data)
-          } else {
-            throw new Error('no data recieved from endpoint, verify manually')
+            console.log(data)
+            this.userList$.next(data.data.data)
           }
         })).subscribe()
       } catch (e) {
@@ -73,11 +69,11 @@ export class ContentMigrationDashboardComponent implements OnInit {
        tap((data: any) => {
         this.isLoading$.next(false)
          if (data.ok && data.status === 200) {
-             this.successMessage$.next(true)
+             this.isSuccess$.next(true)
          }
         }),
        catchError((_e: any) => {
-        this.successMessage$.next(false)
+        this.isSuccess$.next(false)
           return of(null)
         }),
        finalize(() => {

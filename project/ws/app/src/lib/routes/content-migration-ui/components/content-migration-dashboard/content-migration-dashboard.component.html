@@ -34,6 +34,16 @@
             </div>
         </div>
     </div>
+    
+    <ng-container *ngIf="!(isLoading$ | async) && (isSuccess$ | async)" >
+ success
+
+    </ng-container>
+    <ng-container *ngIf="!(isLoading$ | async) && !(isSuccess$ | async)" >
+        failure
+       
+    </ng-container>
+
 </div>
 
 <ng-template #spinner>
