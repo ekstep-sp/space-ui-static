@@ -5,6 +5,7 @@ import { ContentMigrationDashboardComponent } from './components/content-migrati
 
 import { LoaderService } from '@ws/author/src/lib/services/loader.service'
 import { UserMigrationUiRoutingModule } from './user-migration-ui-routing.module'
+import { UserMigrationUtilsService } from './services/user-migration-utils/user-migration-utils.service'
 
 @NgModule({
   declarations: [
@@ -15,6 +16,7 @@ import { UserMigrationUiRoutingModule } from './user-migration-ui-routing.module
   ],
   providers: [
     LoaderService,
+    UserMigrationUtilsService,
   ],
 })
 export class UserMigrationUiModule { }
