@@ -13,7 +13,9 @@ export class ContentMigrationDashboardComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    const routeData = this.activatedRoute.snapshot.data
+    const routeData = this.activatedRoute.data.subscribe(_=>{
+      console.log("value", _)
+    })
     console.log('recieved route data as ', routeData)
   }
 

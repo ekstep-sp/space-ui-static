@@ -413,14 +413,17 @@ export class UserDashboardComponent implements OnInit {
         const rolesAllowedForContentMigration = this.userDashboardData.contentMigration.rolesAllowed
         const rolesOK = rolesAllowedForContentMigration.some((_role: string) => userRoles.includes(_role))
         if (rolesOK) {
-          this.router.navigate(['/migratecontent'], { queryParams: { userId: element.wid } })
+          this.router.navigate(['/app/migrate-user'], { queryParams :
+             { id: element.wid , name: `${element.first_name} ${element.last_name}` }
+           })
         } else {
           this.snackBar.open(this.userDashboardData.contentMigration.errorMessage, '', {
             duration: 3000,
           })
         }
       } else {
-        this.router.navigate(['/migratecontent'], { queryParams: { userId: element.wid } })
+        this.router.navigate(['/app/migrate-user'], { queryParams :
+          { id: element.wid , name: `${element.first_name} ${element.last_name}` } })
       }
     })
   }
