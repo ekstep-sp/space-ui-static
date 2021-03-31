@@ -30,7 +30,6 @@ export class ContentMigrationDashboardComponent implements OnInit {
       this.sourceUser = { name: params.get('name'), id: params.get('id') } as IUser
       try {
         this.utilsSrvc.validateUser(this.sourceUser)
-        console.log('ok')
       } catch (e) {
         this.error$.next(e.toString())
       }
