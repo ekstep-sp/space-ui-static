@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'ws-app-content-migration-dashboard',
@@ -7,9 +8,13 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ContentMigrationDashboardComponent implements OnInit {
 
-  constructor() { }
+  constructor(
+    private readonly activatedRoute: ActivatedRoute,
+  ) { }
 
   ngOnInit() {
+    const routeData = this.activatedRoute.snapshot.data
+    console.log('recieved route data as ', routeData)
   }
 
 }

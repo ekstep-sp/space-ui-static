@@ -7,12 +7,13 @@ import { LoaderService } from '@ws/author/src/lib/services/loader.service'
 import { UserMigrationUiRoutingModule } from './user-migration-ui-routing.module'
 
 @NgModule({
-  declarations: [ContentMigrationDialogComponent, ContentMigrationDashboardComponent],
+  declarations: [
+    ContentMigrationDashboardComponent],
   imports: [
     CommonModule,
     UserMigrationUiRoutingModule,
   ],
-  entryComponents: [ContentMigrationDialogComponent, ContentMigrationDashboardComponent],
+  entryComponents: [ContentMigrationDialogComponent],
   providers: [
     LoaderService,
   ],
