@@ -28,8 +28,8 @@ export class UserMigrationUtilsService {
       catchError((_e: any) => {
         if (isDummy) {
           return of({
-            status: 200, data: 'Migration started successfully',
-          }).pipe(delay(2000))
+            ok: true, status: 200, data: 'Migration started successfully',
+          }).pipe()
         }
         return of(null)
       }),

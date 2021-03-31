@@ -1,10 +1,41 @@
-<div class="container flex flex-col">
-    <ng-container *ngIf="sourceUser && !(error$ | async); else errorTemplate">
+<mat-toolbar [color]="pageNavbar.color">
+    <ws-widget-btn-page-back [widgetData]="{ url: '/app/user-dashboard' }"></ws-widget-btn-page-back>
+    <span class="margin-left-xs text-truncate span-class">
+        <span class="visible-xs-inline nav-bar-style" i18n>Migrate User</span>
+    </span>
+</mat-toolbar>
 
-    </ng-container>
+<div >
+
+    <div *ngIf="(isLoading$ | async)" class ="flex justify-center py-12">
+        <ng-container *ngTemplateOutlet="spinner"></ng-container>
+    </div>
+
+    <div *ngIf="!(isLoading$ | async)" >
+        <div class ="flex justify-center">
+            <h1 class ="flex text-8xl items-center">Migrate content of {{sourceUser?.name}} to </h1>
+            <mat-form-field appearance="outline" class="p-4 w-80">
+                <mat-label>Curators</mat-label>
+                <mat-select [(value)]="targetUser" >
+                    <mat-option *ngFor="let user of (userList$ | async)" [value]="user">
+                    {{user.first_name}} {{user.last_name}} | {{user.department_name}}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+        </div>
+
+        <div class="flex justify-center py-12" *ngIf="targetUser">
+            <div>
+                <p>Are you sure to migrate content?</p>
+                <div class="flex justify-around">
+                    <button mat-flat-button  color="primary" (click)="acceptContentMigration()">Yes</button>
+                    <button mat-button  (click)="rejectContentMigration()">No</button>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
 
-<ng-template #spinner></ng-template>
-<ng-template #errorTemplate>
-    {{error$ | async}}
+<ng-template #spinner>
+    <mat-spinner class="spinner" color="primary"></mat-spinner>
 </ng-template>

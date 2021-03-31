@@ -5,22 +5,24 @@ import { ContentMigrationDashboardComponent } from './components/content-migrati
 
 import { LoaderService } from '@ws/author/src/lib/services/loader.service'
 import { UserMigrationUiRoutingModule } from './user-migration-ui-routing.module'
-import { UserMigrationUtilsService } from './services/user-migration-utils/user-migration-utils.service'
-import { UserMigrationCoreService } from './services/user-migration-core/user-migration-core.service'
-import { HttpClientModule } from '@angular/common/http'
+import { MatSelectModule } from '@angular/material/select'
+import { MatToolbarModule, MatProgressSpinnerModule, MatButtonModule } from '@angular/material'
+import { BtnPageBackModule } from '@ws-widget/collection/src/public-api'
 
 @NgModule({
   declarations: [
     ContentMigrationDashboardComponent],
   imports: [
     CommonModule,
-    HttpClientModule,
     UserMigrationUiRoutingModule,
+    MatSelectModule,
+    MatButtonModule,
+    BtnPageBackModule,
+    MatToolbarModule,
+    MatProgressSpinnerModule,
   ],
   providers: [
     LoaderService,
-    UserMigrationUtilsService,
-    UserMigrationCoreService,
   ],
 })
 export class UserMigrationUiModule { }
