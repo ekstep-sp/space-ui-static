@@ -157,7 +157,12 @@ const routes: Routes = [
       pageData: PageResolve,
     },
   },
-
+  {
+    path: 'app/migrate-user',
+    loadChildren: () =>
+      import('./routes/route-user-migration.module').then(u => u.RouteUserMigrationModule),
+    canActivate: [GeneralGuard],
+  },
   {
     path: 'app/my-learning',
     loadChildren: () =>
