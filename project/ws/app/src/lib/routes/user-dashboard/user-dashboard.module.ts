@@ -21,8 +21,11 @@ import { MatPaginatorModule } from '@angular/material/paginator'
 import { MatAutocompleteModule } from '@angular/material/autocomplete'
 import { LoaderService } from '@ws/author/src/lib/services/loader.service'
 
+import { ContentMigrationDashboardComponent } from '../content-migration-ui/components/content-migration-dashboard/content-migration-dashboard.component';
+import { UserMigrationUiModule } from '../content-migration-ui/user-migration-ui.module'
+
 @NgModule({
-  declarations: [UserDashboardComponent, DailogUserDashboardComponent, AcceptUserDailogComponent],
+  declarations: [ UserDashboardComponent, DailogUserDashboardComponent, AcceptUserDailogComponent, ContentMigrationDashboardComponent],
   imports: [
     CommonModule,
     UserDashboardRoutingModule,
