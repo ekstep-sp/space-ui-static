@@ -46,7 +46,7 @@ export class ContentMigrationDashboardComponent implements OnInit {
         this.utilsSrvc.validateUser(this.sourceUser)
         this.utilsSrvc.getCuratorList().
         pipe(take(1),
-             tap(data => {
+             tap((data: any) => {
           if (data.ok && data.status === 200) {
             this.userList$.next(data.data)
           }
@@ -60,8 +60,8 @@ export class ContentMigrationDashboardComponent implements OnInit {
     this.isLoading$.next(true)
   if (this.targetUser && 'wid' in this.targetUser && this.sourceUser && 'id' in this.sourceUser) {
     const reqObject: IMigrationReqBody = {
-      from: this.targetUser.wid || '',
-      to: this.sourceUser.id || '',
+      to: this.targetUser.wid || '',
+      from: this.sourceUser.id || '',
     }
      this.utilsSrvc.sendMigrationRequest(reqObject).pipe(
        take(1),
