@@ -48,7 +48,8 @@ export class ContentMigrationDashboardComponent implements OnInit {
         pipe(take(1),
              tap((data: any) => {
           if (data.ok && data.status === 200) {
-            this.userList$.next(data.data)
+            const sortedUserList = this.sortUserListData(data.data)
+            this.userList$.next(sortedUserList)
           }
         })).subscribe()
       } catch (e) {
@@ -88,5 +89,8 @@ export class ContentMigrationDashboardComponent implements OnInit {
   }
   rejectContentMigration() {
     this.targetUser = null
+  }
+  sortUserListData(data: any) {
+   return data.sort((obj1: { first_name: string }, obj2: { first_name: string }) => (obj1.first_name) < obj2.first_name ? -1 : 1)
   }
 }

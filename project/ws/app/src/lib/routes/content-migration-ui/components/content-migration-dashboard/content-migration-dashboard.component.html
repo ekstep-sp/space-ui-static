@@ -18,7 +18,10 @@
                     <mat-label>Select Content Creator</mat-label>
                     <mat-select [(value)]="targetUser" >
                         <mat-option *ngFor="let user of (userList$ | async)" [value]="user">
-                        {{user.first_name}} {{user.last_name}} | {{user.department_name}}
+                        {{user?.first_name}} {{user?.last_name}} 
+                        <ng-container *ngIf="user?.department_name">
+                        | {{user?.department_name}}
+                        </ng-container>
                         </mat-option>
                     </mat-select>
                 </mat-form-field>
