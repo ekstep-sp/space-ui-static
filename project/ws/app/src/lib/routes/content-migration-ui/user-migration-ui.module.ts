@@ -6,7 +6,7 @@ import { ContentMigrationDashboardComponent } from './components/content-migrati
 import { LoaderService } from '@ws/author/src/lib/services/loader.service'
 import { UserMigrationUiRoutingModule } from './user-migration-ui-routing.module'
 import { MatSelectModule } from '@angular/material/select'
-import { MatToolbarModule, MatProgressSpinnerModule, MatButtonModule } from '@angular/material'
+import { MatToolbarModule, MatProgressSpinnerModule, MatButtonModule, MatSnackBarModule } from '@angular/material'
 import { BtnPageBackModule } from '@ws-widget/collection/src/public-api'
 
 @NgModule({
@@ -19,6 +19,7 @@ import { BtnPageBackModule } from '@ws-widget/collection/src/public-api'
     MatButtonModule,
     BtnPageBackModule,
     MatToolbarModule,
+    MatSnackBarModule,
     MatProgressSpinnerModule,
   ],
   providers: [

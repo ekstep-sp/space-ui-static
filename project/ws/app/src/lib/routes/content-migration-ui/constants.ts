@@ -8,3 +8,4 @@ export const allowedProperties = [
   'last_name',
   'department_name',
 ]
+export const errorMessage = 'Failed to fetch users, please try again latter'

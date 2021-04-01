@@ -16,7 +16,7 @@
                 <h1 class ="flex text-8xl items-center text-center md:text-left">Migrate {{sourceUser?.name}}'s content to </h1>
                 <mat-form-field appearance="outline" class="p-4 form-style">
                     <mat-label>Select Content Creator</mat-label>
-                    <mat-select [(value)]="targetUser" >
+                    <mat-select [(value)]="targetUser" [disabled]="isDisabled$ | async" >
                         <mat-option *ngFor="let user of (userList$ | async)" [value]="user">
                         {{user?.first_name}} {{user?.last_name}} 
                         <ng-container *ngIf="user?.department_name">

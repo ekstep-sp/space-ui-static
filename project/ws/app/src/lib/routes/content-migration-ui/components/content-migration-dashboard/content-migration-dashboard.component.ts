@@ -5,6 +5,8 @@ import { take, catchError, tap, finalize } from 'rxjs/operators'
 import { UserMigrationUtilsService } from '../../services/user-migration-utils/user-migration-utils.service'
 import { NsPage, ConfigurationsService } from '@ws-widget/utils/src/public-api'
 import { IMigrationReqBody } from '../../models/user-migration.model'
+import { errorMessage } from '../../constants'
+import { MatSnackBar } from '@angular/material'
 interface IUser {
   name: string
   id: string
@@ -31,9 +33,11 @@ export class ContentMigrationDashboardComponent implements OnInit {
   isLoading$ = new BehaviorSubject<boolean>(false)
   isSuccess$ = new BehaviorSubject<boolean>(false)
   isError$ = new BehaviorSubject<boolean>(false)
+  isDisabled$ = new BehaviorSubject<boolean>(false)
   constructor(
     private readonly activatedRoute: ActivatedRoute,
     private readonly configSvc: ConfigurationsService,
+    public snackBar: MatSnackBar,
     private readonly utilsSrvc: UserMigrationUtilsService,
   ) { }
 
@@ -49,9 +53,21 @@ export class ContentMigrationDashboardComponent implements OnInit {
              tap((data: any) => {
           if (data.ok && data.status === 200) {
             const sortedUserList = this.sortUserListData(data.data)
-            this.userList$.next(sortedUserList)
+           const filterdArray = this.filterNonSourceUser(sortedUserList)
+            this.userList$.next(filterdArray)
+          } else {
+            this.isDisabled$.next(true)
+            this.snackBar.open(errorMessage, '', {
+              duration: 3000,
+            })
           }
-        })).subscribe()
+        }),  catchError((_error: any) => {
+          this.isDisabled$.next(true)
+              this.snackBar.open(errorMessage, '', {
+                duration: 3000,
+              })
+              return of(null)
+            })).subscribe()
       } catch (e) {
         this.error$.next(e.toString())
       }
@@ -90,7 +106,11 @@ export class ContentMigrationDashboardComponent implements OnInit {
   rejectContentMigration() {
     this.targetUser = null
   }
-  sortUserListData(data: any) {
+  sortUserListData(data: IUserListResponse[]) {
    return data.sort((obj1: { first_name: string }, obj2: { first_name: string }) => (obj1.first_name) < obj2.first_name ? -1 : 1)
+  }
+  filterNonSourceUser(userList: IUserListResponse[]) {
+    const sourceUserId = (this.sourceUser && 'id' in this.sourceUser) ? this.sourceUser.id : ''
+        return (userList.filter((userObject: IUserListResponse) => userObject.wid !== sourceUserId))
   }
 }
