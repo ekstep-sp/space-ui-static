@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core'
 import { ActivatedRoute, ParamMap } from '@angular/router'
 import { BehaviorSubject, of } from 'rxjs'
-import { take, catchError, map, tap, finalize } from 'rxjs/operators'
+import { take, catchError, tap, finalize } from 'rxjs/operators'
 import { UserMigrationUtilsService } from '../../services/user-migration-utils/user-migration-utils.service'
 import { NsPage, ConfigurationsService } from '@ws-widget/utils/src/public-api'
 import { IMigrationReqBody } from '../../models/user-migration.model'
@@ -48,7 +48,6 @@ export class ContentMigrationDashboardComponent implements OnInit {
         pipe(take(1),
              tap(data => {
           if (data.ok && data.status === 200) {
-            console.log(data)
             this.userList$.next(data.data)
           }
         })).subscribe()
@@ -66,19 +65,17 @@ export class ContentMigrationDashboardComponent implements OnInit {
     }
      this.utilsSrvc.sendMigrationRequest(reqObject).pipe(
        take(1),
-       map(response => response),
        tap((data: any) => {
         this.isLoading$.next(false)
          if (data.ok && data.status === 200) {
              this.isSuccess$.next(true)
              this.isError$.next(false)
-         } else{
+         } else {
           this.isSuccess$.next(false)
           this.isError$.next(true)
          }
         }),
        catchError((_e: any) => {
-         console.log("error")
         this.isSuccess$.next(false)
         this.isError$.next(true)
           return of(null)
@@ -87,11 +84,6 @@ export class ContentMigrationDashboardComponent implements OnInit {
           this.isLoading$.next(false)
         }),
      ).subscribe()
-  //   this.utilsSrvc.sendMigrationRequest(reqObject).pipe(take(1)).subscribe(
-  //     data =>{
-  //       console.log("data", data)
-  //     }
-  //   )
   }
   }
   rejectContentMigration() {

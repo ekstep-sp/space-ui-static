@@ -39,8 +39,17 @@
         }
     }
 }
+.mb-12 {
+    margin-bottom: 3rem !important;
+}
+.max-270 {
+    max-width: 270px;
+    width: 100%;
+}
 .form-style{
-    width: 20rem !important;
+    min-width: 10rem !important;
+    max-width: 20rem !important;
+    width: 100%;
 }
 .spinner {
     position: fixed;

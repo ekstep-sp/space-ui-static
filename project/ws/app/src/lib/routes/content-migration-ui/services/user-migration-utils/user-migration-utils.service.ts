@@ -29,7 +29,9 @@ export class UserMigrationUtilsService {
         if (isDummy) {
           return of({
             ok: true, status: 200, data: 'Migration started successfully',
-          }).pipe()
+          }).pipe(
+            delay(2000)
+            )
         }
         return of(null)
       }),
