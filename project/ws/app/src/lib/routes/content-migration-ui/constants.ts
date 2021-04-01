@@ -1,7 +1,7 @@
 export const isDummy = true
-export const migrationApi = ''
-export const contentCreatorIDsApi = ''
-export const userDetailsByIDApi = ''
+export const migrationApi = '/apis/protected/v8/content/migrate/curator'
+export const contentCreatorIDsApi = '/usersubmission/usersubmission/user/v1/roles/content-creator/users'
+export const userDetailsByIDApi = '/apis/protected/v8/user/details/detailV3'
 export const allowedProperties = [
   'wid',
   'first_name',
