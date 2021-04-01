@@ -53,9 +53,7 @@ export class UserMigrationUtilsService {
 
   getCuratorList() {
     if (isDummy) {
-      return of({
-        ok: true, status: 200,
-        data: dummyCuratorResponse}).pipe(delay(2000))
+      return of(dummyCuratorResponse).pipe(delay(2000))
     }
     return this.coreSrvc.getContentCreatorIDs().pipe(
       catchError((_e: any) => {

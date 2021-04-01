@@ -30,6 +30,7 @@ export class ContentMigrationDashboardComponent implements OnInit {
   pageNavbar: Partial<NsPage.INavBackground> = this.configSvc.pageNavBar
   isLoading$ = new BehaviorSubject<boolean>(false)
   isSuccess$ = new BehaviorSubject<boolean>(false)
+  isError$ = new BehaviorSubject<boolean>(false)
   constructor(
     private readonly activatedRoute: ActivatedRoute,
     private readonly configSvc: ConfigurationsService,
@@ -48,7 +49,7 @@ export class ContentMigrationDashboardComponent implements OnInit {
              tap(data => {
           if (data.ok && data.status === 200) {
             console.log(data)
-            this.userList$.next(data.data.data)
+            this.userList$.next(data.data)
           }
         })).subscribe()
       } catch (e) {
@@ -70,10 +71,16 @@ export class ContentMigrationDashboardComponent implements OnInit {
         this.isLoading$.next(false)
          if (data.ok && data.status === 200) {
              this.isSuccess$.next(true)
+             this.isError$.next(false)
+         } else{
+          this.isSuccess$.next(false)
+          this.isError$.next(true)
          }
         }),
        catchError((_e: any) => {
+         console.log("error")
         this.isSuccess$.next(false)
+        this.isError$.next(true)
           return of(null)
         }),
        finalize(() => {

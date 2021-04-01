@@ -1,20 +1,20 @@
 <mat-toolbar [color]="pageNavbar.color">
     <ws-widget-btn-page-back [widgetData]="{ url: '/app/user-dashboard' }"></ws-widget-btn-page-back>
     <span class="margin-left-xs text-truncate span-class">
-        <span class="visible-xs-inline nav-bar-style" i18n>Migrate User</span>
+        <span class="visible-xs-inline nav-bar-style" i18n>Migrate Content</span>
     </span>
 </mat-toolbar>
 
-<div >
+<div class="py-12">
 
-    <div *ngIf="(isLoading$ | async)" class ="flex justify-center py-12">
-        <ng-container *ngTemplateOutlet="spinner"></ng-container>
+    <div *ngIf="(isLoading$ | async)" class ="flex justify-center ">
+        <ng-container  *ngTemplateOutlet="spinner"></ng-container>
     </div>
 
-    <div *ngIf="!(isLoading$ | async)" >
+    <div *ngIf="!(isLoading$ | async) && !(isSuccess$ | async) && !(isError$ | async)" >
         <div class ="flex justify-center">
             <h1 class ="flex text-8xl items-center">Migrate content of {{sourceUser?.name}} to </h1>
-            <mat-form-field appearance="outline" class="p-4 w-80">
+            <mat-form-field appearance="outline" class="p-4 form-style">
                 <mat-label>Curators</mat-label>
                 <mat-select [(value)]="targetUser" >
                     <mat-option *ngFor="let user of (userList$ | async)" [value]="user">
@@ -24,7 +24,7 @@
             </mat-form-field>
         </div>
 
-        <div class="flex justify-center py-12" *ngIf="targetUser">
+        <div class="flex justify-center py-32" *ngIf="targetUser">
             <div>
                 <p>Are you sure to migrate content?</p>
                 <div class="flex justify-around">
@@ -35,13 +35,25 @@
         </div>
     </div>
     
-    <ng-container *ngIf="!(isLoading$ | async) && (isSuccess$ | async)" >
- success
-
-    </ng-container>
-    <ng-container *ngIf="!(isLoading$ | async) && !(isSuccess$ | async)" >
-        failure
-       
+    <ng-container *ngIf="!(isLoading$ | async) && (isSuccess$ | async) && targetUser" >
+        <div class="flat-alert-success">
+            Content of {{sourceUser?.name}} have been migrated to {{targetUser?.first_name}} {{targetUser?.last_name}} successfully
+        </div>
+        <div class="go-back-container" >
+            <button mat-button mat-raised-button type="button" color="primary" routerLink="/app/user-dashboard">
+                Go to User dashboard Page
+            </button>
+        </div>
+        </ng-container>
+    <ng-container *ngIf="!(isLoading$ | async) && (isError$ | async) && targetUser" >
+        <div class="flat-alert-error">
+            Error occured while migrating the content of {{sourceUser?.name}} to {{targetUser?.first_name}} {{targetUser?.last_name}}, try again later
+        </div>
+        <div class="go-back-container">
+            <button mat-button mat-raised-button type="button" color="primary" routerLink="/app/user-dashboard">
+                Go to User dashboard Page
+            </button>
+        </div>
     </ng-container>
 
 </div>
