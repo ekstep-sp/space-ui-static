@@ -10,7 +10,7 @@
     <div *ngIf="(isLoading$ | async)" class ="flex justify-center ">
         <ng-container  *ngTemplateOutlet="spinner"></ng-container>
     </div>
-    <ng-container *ngIf="!(isLoading$ | async) && !(isSuccess$ | async) && !(isError$ | async)">
+    <ng-container *ngIf="((isLoading$ | async) === false) && ((isSuccess$ | async) === false) && ((isError$ | async) === false)">
         <div class="flex flex-col">
             <div class ="p-5 flex items-center justify-center flex-col md:flex-row">
                 <h1 class ="flex text-8xl items-center text-center md:text-left">Migrate {{sourceUser?.name}}'s content to </h1>
@@ -39,7 +39,7 @@
         </div>
     </ng-container>
     
-    <ng-container *ngIf="!(isLoading$ | async) && (isSuccess$ | async) && targetUser" >
+    <ng-container *ngIf="((isLoading$ | async) === false) && (isSuccess$ | async) && targetUser" >
         <div class="flat-alert-success">
             {{sourceUser?.name}}'s content has been migrated to {{targetUser?.first_name}} {{targetUser?.last_name}} successfully
         </div>
@@ -49,7 +49,7 @@
             </button>
         </div>
         </ng-container>
-    <ng-container *ngIf="!(isLoading$ | async) && (isError$ | async) && targetUser" >
+    <ng-container *ngIf="((isLoading$ | async) === false) && (isError$ | async) && targetUser" >
         <div class="flat-alert-error">
             Error occured while migrating the content of {{sourceUser?.name}} to {{targetUser?.first_name}} {{targetUser?.last_name}}, try again later
         </div>

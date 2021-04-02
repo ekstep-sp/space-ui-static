@@ -159,6 +159,12 @@ const routes: Routes = [
   },
   {
     path: 'app/migrate-user',
+    data: {
+      requiredRoles: [
+        'admin',
+        'org-admin',
+      ],
+    },
     loadChildren: () =>
       import('./routes/route-user-migration.module').then(u => u.RouteUserMigrationModule),
     canActivate: [GeneralGuard],
