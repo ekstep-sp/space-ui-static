@@ -83,7 +83,6 @@ export class ContentMigrationDashboardComponent implements OnInit {
      this.utilsSrvc.sendMigrationRequest(reqObject).pipe(
        take(1),
        tap((data: any) => {
-        this.isLoading$.next(false)
          if (data.ok && data.status === 200) {
              this.isSuccess$.next(true)
              this.isError$.next(false)
