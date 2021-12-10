@@ -9,7 +9,8 @@ import { CONTENT_BASE_STATIC } from '../../../../../../../author/src/lib/constan
 import { Router, ActivatedRoute } from '@angular/router'
 import { FOLDER_NAME_EDIT_PROFILE } from '../../../../../../../author/src/lib/constants/constant'
 import { UtilityService } from '@ws-widget/utils/src/public-api'
-
+import { IWidgetsPlayerMediaData } from '@ws-widget/collection'
+import { NsWidgetResolver } from '@ws-widget/resolver'
 export namespace NsEditProfile {
   export interface IResponseBody {
     wid: string,
@@ -36,6 +37,24 @@ export class EditProfileComponent implements OnInit {
   isShowUploadIOS = false
   isShowUploadAndroid = false
   paramsForEditProfile: NsEditProfile.IResponseBody = {} as NsEditProfile.IResponseBody
+  widgetResolverData: NsWidgetResolver.IRenderConfigWithTypedData<
+  IWidgetsPlayerMediaData
+> = {
+    widgetData: {
+      url: 'assets/instances/space/videos/intro_video.mp4',
+      autoplay: true,
+      identifier: '',
+    },
+    widgetHostClass: 'video-full block',
+    widgetSubType: 'playerVideo',
+    widgetType: 'player',
+    widgetHostStyle: {
+      height: '100%',
+      'max-width': '100%',
+      'margin-left': 'auto',
+      'margin-right': 'auto',
+    },
+  }
   constructor(
     private initService: InitService,
     private profileSvc: ProfileService,

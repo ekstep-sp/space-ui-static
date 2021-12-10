@@ -1,11 +1,36 @@
-<!-- <div class="setup-container">
-  <div class="mat-elevation-z4 setup-box-container">
+<!-- header-->
+<header>
+  <nav class="container">
+    <div class="box-row">
+        <a href="https://space.societalplatform.org/" class="brand">
+            <img src="https://space.societalplatform.org/auth/resources/d3nnr/login/space-keycloak-theme-v3/img/spacelogonew.png" alt="SPace (Societal Platform Assets Collaboration Environment)" />
+        </a>
+        <ul class="nav-lists hidden-xs">
+            <li><a href ="https://space.societalplatform.org/public/about">About Us</a></li>
+            <li><a href="https://space.societalplatform.org/public/collaborators">Collaborators</a></li>
+        </ul>
+        <div class="dropdown visible-xs">
+            <button id="dLabel" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <img src ="https://space.societalplatform.org/auth/resources/d3nnr/login/space-keycloak-theme-v3/img/Vector.png" alt="menu icon">
+            </button>
+            <ul class="dropdown-menu" aria-labelledby="dLabel">
+                <li><a href ="https://space.societalplatform.org/public/about">About Us</a></li>
+                <li role="separator" class="divider"></li>
+                <li><a href="https://space.societalplatform.org/public/collaborators">Collaborators</a></li>
+            </ul>
+        </div>
+    </div>
+  </nav>
+</header>
+<!--Main starts-->
+<main class="container">
+  <div class="mainBody">
     <router-outlet></router-outlet>
   </div>
-  <h3 class="title">Step 1/4</h3>
-</div> -->
+</main>
 
-<div class="outer">
+<!--Main ends-->
+<!-- <div class="outer">
   <div class="flex flex-center flex-middle logo-size">
   <a mat-button routerLink="." i18n-matTooltip matTooltip="Home" >
     <img [src]="appIcon" i18n-alt alt="Application Logo" class="app-logo" />
@@ -20,4 +45,4 @@
   </div>
   <div *ngIf="showStepCount" class="mat-subheading-1 margin-remove margin-top-m"><span i18n>Step </span> {{stepCount}}/{{totalSteps}}
   </div>
-</div>
+</div> -->

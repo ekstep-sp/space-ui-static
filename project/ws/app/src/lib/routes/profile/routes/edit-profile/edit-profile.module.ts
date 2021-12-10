@@ -5,7 +5,7 @@ import { MatCardModule, MatInputModule, MatButtonModule, MatIconModule, MatToolb
 import { EditProfileComponent } from './edit-profile.component'
 import { UploadService } from '../../../../../../../author/src/lib/routing/modules/editor/shared/services/upload.service'
 import { ApiService, AccessControlService } from '../../../../../../../author/src/public-api'
-
+import { WidgetResolverModule } from '@ws-widget/resolver'
 @NgModule({
   declarations: [EditProfileComponent],
   imports: [
@@ -19,6 +19,7 @@ import { ApiService, AccessControlService } from '../../../../../../../author/sr
     MatSnackBarModule,
     ReactiveFormsModule,
     FormsModule,
+    WidgetResolverModule
   ],
   providers: [AccessControlService, ApiService, UploadService],
   exports: [EditProfileComponent],
