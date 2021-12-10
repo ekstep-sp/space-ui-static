@@ -1,29 +1,29 @@
 <div class="row form-container f-outline m-tb r-position">
-  <section class="col-xs-12 col-sm-12 col-md-8 col-lg-8">
+  <section class="col-xs-12 col-sm-12 col-md-8 col-lg-8 mt-12">
       <p class="s-text">You are almost done! Please help us and the community to know you better.</p>
-      <form>
+      <form [formGroup]="profileForm" (ngSubmit)="onSubmit()" class="mt-16">
           <div class="form-inline f-step">
               <div class="form-group r-position">
                   <div class="circle">
-                      <img class="profile-pic" src="../../../../../../../../../fusion-assets/img/v-avatar.svg">
+                      <img class="profile-pic" [src]="url ? url : relativeUrl">
                   </div>
                   <div class="p-image">
-                  <i class="v-camera upload-button a-position"></i>
-                      <input class="file-upload" type="file" accept="image/*"/>
+                  <i class="v-camera upload-button a-position" (click)="fileInput.click()"></i>
+                  <input class="file-upload" #fileInput type="file" (change)="onSelectFile($event.target.files[0])" accept="image/*"/>
                   </div>
               </div>
-              <div class="form-group form-btext">
-                  <input tabindex="1" id="org" class="form-control" name="org" value="Mangalam Gupta" type="text" autocomplete="off" autofocus>
+              <div class="form-group form-btext pl-10">
+                  <input tabindex="1" id="org" class="form-control" placeholder="First Name" formControlName="userFirstName" type="text" autocomplete="off" autofocus>
               </div>
           </div>
           <div class="form-inline multiple m-tb">
               <div class="form-group">
                   <label for="org" class="control-label">Organisation <span class="text-warning">*</span></label>   
-                  <input tabindex="1" id="org" class="form-control" name="org" value="" type="text" autocomplete="off" autofocus>
+                  <input tabindex="1" id="org" class="form-control" formControlName="userOrganisation" type="text" autocomplete="off" autofocus>
               </div>
               <div class="form-group">
                   <label for="ctry" class="control-label">Country <span class="text-warning">*</span></label>
-                  <select class="form-control" id="ctry">
+                  <select class="form-control" id="ctry" placeholder="" formControlName="userCountry">
                       <option>&nbsp;</option>
                       <option>Afghanistan</option>
                       <option>Albania</option>
@@ -33,7 +33,7 @@
               </div>
               <div class="form-group">
                   <label for="role" class="control-label">Current Role <span class="text-warning">*</span></label>
-                  <input id="role" class="form-control" name="role" type="text" autocomplete="off">
+                  <input id="role" class="form-control" name="role" placeholder="" formControlName="userRole" type="text" autocomplete="off">
               </div>
           </div>
           <div class="form-group">
@@ -41,41 +41,53 @@
                   Domain / Area of work <span class="text-warning">*</span>
                   <span class="help-block m-0 xs-text">(use comma to add upto 5 entries)</span>
               </label>
-              
-              <input id="domain" class="form-control" name="domain" value="" type="text" autocomplete="off">
-              <div class="well mt-10 b-none b-shadow-none">
-                  <div class="chips">domain1 <span class="icon-close"></span></div>
-                  <div class="chips">domain2 <span class="icon-close"></span></div>
-                  <div class="chips">domain3 <span class="icon-close"></span></div>
-                  <div class="chips">longer domain4 <span class="icon-close"></span></div>
-                  <div class="chips">text is long for this domain5 <span class="icon-close"></span></div>
-              </div>
+              <mat-form-field class="chips-container" appearance="fill">
+                <mat-chip-list #chipList aria-label="Domain selection">
+                  <mat-chip *ngFor="let domain of domains" (removed)="remove(domain, domains)" class="chip-value">
+                    <span >{{domain.name}}</span>
+                      <span class="icon-close" matChipRemove></span>
+                  </mat-chip>
+                  <input autocomplete="off"
+                         [matChipInputFor]="chipList"
+                         [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+                         [matChipInputAddOnBlur]="addOnBlur"
+                         (matChipInputTokenEnd)="add($event, domains)">
+                </mat-chip-list>
+              </mat-form-field>
           </div>
           <div class="form-group">
               <label for="area" class="control-label">
                   Areas of expertise
                   <span class="help-block m-0 xs-text">(use comma to add upto 5 entries)</span>
               </label>
-              <input id="area" class="form-control" name="area" type="text" autocomplete="off">
-              <div class="well mt-10 b-none b-shadow-none">
-                  <div class="chips">Communication <span class="icon-close"></span></div>
-                  <div class="chips">Customer service <span class="icon-close"></span></div>
-                  <div class="chips">Leadership <span class="icon-close"></span></div>
-                  <div class="chips">Management skills <span class="icon-close"></span></div>
-                  <div class="chips">Interpersonal communication <span class="icon-close"></span></div>
-              </div>
+              <mat-form-field class="chips-container" appearance="fill">
+                <mat-chip-list #chipListExpertise aria-label="Expertise selection">
+                  <mat-chip *ngFor="let expertise of expertises" (removed)="remove(expertise, expertises)" class="chip-value">
+                    <span >{{expertise.name}}</span>
+                      <span class="icon-close" matChipRemove></span>
+                  </mat-chip>
+                  <input autocomplete="off"
+                         [matChipInputFor]="chipListExpertise"
+                         [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+                         [matChipInputAddOnBlur]="addOnBlur"
+                         (matChipInputTokenEnd)="add($event, expertises)">
+                </mat-chip-list>
+              </mat-form-field>
           </div>
           <div class="form-group">
               <label for="profile" class="control-label">
                   Profile Link
                   <span class="help-block m-0 xs-text">(Ex. LinkedIn, Organization Profile, etc.,)</span>
               </label>   
-              <input id="profile" class="form-control" name="profile" placeholder="https://www.linkedIn.com/" type="text" autocomplete="off">
+              <input id="profile" class="form-control" formControlName="profileLink" name="profile" placeholder="https://www.linkedIn.com/" type="text" autocomplete="off">
           </div>
           
           <div class="form-group btn-group center">
               <input class="btn btn-primary btn-lg disabled" name="next" id="nextTC" type="submit" value="Finish">
-              <input class="btn btn-primary" name="next" id="nextTC" type="submit" value="Back">
+              <span class="btn btn-primary" id="custom-back">
+                <span class="a-position">Back</span>
+                <ws-widget-btn-page-back [widgetData]="{ url: 'back' }"></ws-widget-btn-page-back>
+              </span>
           </div>
       </form>
 
@@ -95,9 +107,10 @@
       <div class="modal-content">
           <div class="modal-body">
               <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-              <div class="intro-video">
+              <iframe width="860" height="315" src="https://www.youtube.com/embed/W86-mjWXQaw" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+              <!-- <div class="intro-video">
                 <ng-container [wsResolverWidget]="widgetResolverData"></ng-container>
-              </div>
+              </div> -->
           </div>
       </div>
   </div>

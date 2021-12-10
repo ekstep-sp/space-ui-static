@@ -1,25 +1,31 @@
-<!-- <ng-container *ngIf="errorFetchingTnc" [wsResolverWidget]="errorWidget"></ng-container> -->
-<mat-toolbar id="khubHome-id-12" [color]="pageNavbar.color" [ngStyle]="pageNavbar?.styles"
-  class="position-relative small-height-toolbar">
-  <ws-widget-btn-page-back [widgetData]="{ url: 'back' }"></ws-widget-btn-page-back>
-  <span class="margin-left-xs center-align text-white" i18n>Terms & Conditions</span>
-</mat-toolbar>
-<ws-app-tnc-renderer *ngIf="tncData" (tncChange)="getTnc($event)" (dpChange)="getDp($event)" [tncData]="tncData">
-</ws-app-tnc-renderer>
-
-<div class="flex flex-middle flex-between buttons-class flex-wrapped" *ngIf="!isPublic && tncData">
-  <mat-checkbox *ngIf="!this.tncData.isNewUser" class="width-full-wrapped" [checked]="tncData.isAccepted"
-    (change)="acceptTnc()" [disabled]="tncData.isAccepted" [color]="'primary'" i18n class="ml-3">
-    <span class="font-size-small">I agree to the terms & conditions</span>
-
-  </mat-checkbox>
-
-  <mat-checkbox *ngIf="this.tncData.isNewUser" class="width-full-wrapped" [(ngModel)]="acceptData"
-    (ngModelChange)="acceptDataForNewUser()" [color]="'primary'" i18n class="ml-3">
-    <span class="font-size-small">I agree to the terms & conditions</span>
-
-  </mat-checkbox>
-  <a [disabled]="isDisabled()" class="margin-right-xs width-full-wrapped button-color" type="button" color="primary"
-    mat-flat-button routerLink="/app/setup/home/about-video" (click)="acceptTnc()" i18n>Next
-  </a>
+<div class="row form-container mx-12 my-24 mb-6 r-position">
+  <section class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+      <form>
+          <div class="sub-heading">
+              <span>Hi {{userName}}, we are excited to have you here!</span>
+          </div>
+          <p class="s-text">Please read and accept the following Terms and Conditions to start exploring :</p>
+          <div class="well tc-card p-all mt-12">
+            <ws-app-tnc-renderer *ngIf="tncData" (tncChange)="getTnc($event)" (dpChange)="getDp($event)" [tncData]="tncData">
+            </ws-app-tnc-renderer>
+          </div>
+          <div class="text-center" *ngIf="!isPublic && tncData">
+            <mat-checkbox *ngIf="!this.tncData.isNewUser" class="width-full-wrapped" [checked]="tncData.isAccepted"
+              (change)="acceptTnc()" [disabled]="tncData.isAccepted" [color]="'primary'" i18n class="display-block ml-3 text-left">
+              <span class="font-size-small">I agree to the terms & conditions</span>
+          
+            </mat-checkbox>
+          
+            <mat-checkbox *ngIf="this.tncData.isNewUser" class="width-full-wrapped" [(ngModel)]="acceptData"
+              (ngModelChange)="acceptDataForNewUser()" [color]="'primary'" i18n class="ml-3 text-left">
+              <span class="font-size-small">I agree to the terms & conditions</span>
+          
+            </mat-checkbox>
+            <a [attr.disabled]="isDisabled() ? true : null" class="btn btn-primary btn-lg mt-16" type="button" color="primary"
+               routerLink="/app/setup/home/user-profile" (click)="acceptTnc()" i18n>Next
+            </a>
+          </div>
+      </form>
+      <span class="v-diamond a-position visible-md visible-lg">&nbsp;</span>
+  </section>
 </div>

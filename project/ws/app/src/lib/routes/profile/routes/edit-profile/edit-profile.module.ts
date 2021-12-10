@@ -6,6 +6,8 @@ import { EditProfileComponent } from './edit-profile.component'
 import { UploadService } from '../../../../../../../author/src/lib/routing/modules/editor/shared/services/upload.service'
 import { ApiService, AccessControlService } from '../../../../../../../author/src/public-api'
 import { WidgetResolverModule } from '@ws-widget/resolver'
+import { BtnPageBackModule } from '@ws-widget/collection'
+import { MatChipsModule } from '@angular/material/chips';
 @NgModule({
   declarations: [EditProfileComponent],
   imports: [
@@ -19,7 +21,9 @@ import { WidgetResolverModule } from '@ws-widget/resolver'
     MatSnackBarModule,
     ReactiveFormsModule,
     FormsModule,
-    WidgetResolverModule
+    WidgetResolverModule,
+    BtnPageBackModule,
+    MatChipsModule
   ],
   providers: [AccessControlService, ApiService, UploadService],
   exports: [EditProfileComponent],

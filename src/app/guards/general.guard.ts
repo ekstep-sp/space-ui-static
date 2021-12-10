@@ -64,15 +64,9 @@ export class GeneralGuard implements CanActivate {
       ) {
         this.configSvc.userUrl = state.url
       }
-      if (
-        this.configSvc.restrictedFeatures &&
-        !this.configSvc.restrictedFeatures.has('firstTimeSetupV2')
-      ) {
-        return this.router.parseUrl(`/app/setup/home/lang`)
-      }
-      return this.router.parseUrl(`/app/tnc`)
+      return this.router.parseUrl(`/app/setup/home/tnc`)
     }
-
+    
     /**
      * Test IF User has requried role to access the page
      */

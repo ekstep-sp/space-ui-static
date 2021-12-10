@@ -1,16 +1,18 @@
 
 import { Component, OnInit, Input } from '@angular/core'
 import { InitService } from 'src/app/services/init.service'
-import { FormGroup, FormControl, Validators } from '@angular/forms'
+import { FormGroup, FormControl } from '@angular/forms'
 import { ProfileService } from '../../services/profile.service'
 import { MatSnackBar } from '@angular/material'
 import { UploadService } from '../../../../../../../author/src/lib/routing/modules/editor/shared/services/upload.service'
 import { CONTENT_BASE_STATIC } from '../../../../../../../author/src/lib/constants/apiEndpoints'
 import { Router, ActivatedRoute } from '@angular/router'
 import { FOLDER_NAME_EDIT_PROFILE } from '../../../../../../../author/src/lib/constants/constant'
-import { UtilityService } from '@ws-widget/utils/src/public-api'
+import { ConfigurationsService, UtilityService } from '@ws-widget/utils/src/public-api'
 import { IWidgetsPlayerMediaData } from '@ws-widget/collection'
 import { NsWidgetResolver } from '@ws-widget/resolver'
+import {MatChipInputEvent} from '@angular/material/chips';
+import {COMMA, ENTER} from '@angular/cdk/keycodes';
 export namespace NsEditProfile {
   export interface IResponseBody {
     wid: string,
@@ -24,7 +26,9 @@ export namespace NsEditProfile {
     profileLink: string
   }
 }
-
+export interface Chips {
+  name?: string;
+}
 @Component({
   selector: 'ws-app-edit-profile',
   templateUrl: './edit-profile.component.html',
@@ -36,12 +40,20 @@ export class EditProfileComponent implements OnInit {
   isShowUploadMobile = false
   isShowUploadIOS = false
   isShowUploadAndroid = false
+  isPartOfFirstTimeSetupV2 = false
+  locale = ''
+  appName = ''
+  introVideos: any
+  domains:Chips[] = []
+  expertises:Chips[] = []
+  addOnBlur = true;
+  readonly separatorKeysCodes = [ENTER, COMMA] as const;
   paramsForEditProfile: NsEditProfile.IResponseBody = {} as NsEditProfile.IResponseBody
   widgetResolverData: NsWidgetResolver.IRenderConfigWithTypedData<
   IWidgetsPlayerMediaData
 > = {
     widgetData: {
-      url: 'assets/instances/space/videos/intro_video.mp4',
+      url: 'https://www.youtube.com/embed/W86-mjWXQaw',
       autoplay: true,
       identifier: '',
     },
@@ -63,6 +75,7 @@ export class EditProfileComponent implements OnInit {
     private activateRoute: ActivatedRoute,
     private utilitySvc: UtilityService,
     private router: Router,
+    private configSvc: ConfigurationsService
   ) { }
   url = ''
   profileUrlParams = ''
@@ -71,11 +84,12 @@ export class EditProfileComponent implements OnInit {
   profileForm: FormGroup = new FormGroup({
     userFirstName: new FormControl(''),
     userOrganisation: new FormControl(''),
-    email: new FormControl({ value: '', disabled: true }),
-    profileLink: new FormControl(''),
-    bio: new FormControl('', Validators.maxLength(1000)),
-    userLastName: new FormControl(''),
+    userCountry: new FormControl(''),
+    userRole: new FormControl(''),
+    userDomain: new FormControl([]),
+    userExpertise: new FormControl([]),
     sourceProfilePicture: new FormControl(''),
+    profileLink: new FormControl('')
   })
 
   userProfile: any
@@ -83,7 +97,7 @@ export class EditProfileComponent implements OnInit {
   isLoad = false
 
   ngOnInit() {
-
+    //this.loadVideo();
     this.activateRoute.data.subscribe(data => {
       this.isShowUploadMobile = data.pageData.data.isMobileUpload
       this.isShowUploadIOS = data.pageData.data.isIOSUpload
@@ -97,15 +111,15 @@ export class EditProfileComponent implements OnInit {
     this.userProfile = this.initService.getUserProfile()
     if (this.userProfile) {
       this.profileForm.controls.userFirstName.setValue(this.userProfile.givenName
-        && this.userProfile.givenName !== 'null' ? this.userProfile.givenName : '')
+        && this.userProfile.givenName !== 'null' ? this.userProfile.givenName : '' + ' ' +this.userProfile.lastName
+        && this.userProfile.lastName !== 'null' ? this.userProfile.lastName : '')
       this.profileForm.controls.userOrganisation.setValue(this.userProfile.departmentName &&
         this.userProfile.departmentName !== 'null' ? this.userProfile.departmentName : '')
-      this.profileForm.controls.userLastName.setValue(this.userProfile.lastName
-        && this.userProfile.lastName !== 'null' ? this.userProfile.lastName : '')
-      this.profileForm.controls.email.setValue(this.userProfile.email && this.userProfile.email !== 'null' ? this.userProfile.email : '')
+      this.profileForm.controls.userCountry.setValue('Afghanistan')
+      this.profileForm.controls.userRole.setValue('dev')
+      this.profileForm.controls['userDomain'].setValue(['dev'])
+      this.profileForm.controls.userExpertise.setValue(['dev'])
       if (this.userProfile.userProperties) {
-        this.profileForm.controls.bio.setValue(this.userProfile.userProperties.bio &&
-          this.userProfile.userProperties.bio !== 'null' ? this.userProfile.userProperties.bio : '')
         this.profileForm.controls.profileLink.setValue(this.userProfile.userProperties.profileLink
           && this.userProfile.userProperties.profileLink !== 'null' ? this.userProfile.userProperties.profileLink : '')
       }
@@ -223,5 +237,46 @@ export class EditProfileComponent implements OnInit {
   }
   skipToHomePage() {
     this.router.navigate(['/app/setup/home/interest'])
+  }
+
+  loadVideo() {
+    if (this.configSvc.instanceConfig) {
+      this.introVideos = this.configSvc.instanceConfig.introVideo
+      this.appName = this.configSvc.instanceConfig.details.appName
+
+    } if (this.configSvc.restrictedFeatures
+      && !this.configSvc.restrictedFeatures.has('firstTimeSetupV2')) {
+      this.isPartOfFirstTimeSetupV2 = true
+    }
+
+    this.locale = this.configSvc.userPreference && this.configSvc.userPreference.selectedLocale || ''
+    this.locale = Object.keys(this.introVideos).includes(this.locale) ? this.locale : 'en'
+    this.widgetResolverData = {
+      ...this.widgetResolverData,
+      widgetData: {
+        ...this.widgetResolverData.widgetData,
+        url: this.introVideos[this.locale],
+      },
+    }
+  }
+
+  add(event: MatChipInputEvent, chipList: any): void {
+    const value = (event.value || '').trim();
+
+    // Add our fruit
+    if (value && !this.domains.some(dom => dom.name === value) && chipList.length <= 5) {
+      chipList.push({name: value});
+    }
+
+    // Clear the input value
+    event.input.value = '';
+  }
+
+  remove(chip: Chips, chipList: Chips[]): void {
+    const index = chipList.indexOf(chip);
+
+    if (index >= 0) {
+      chipList.splice(index, 1);
+    }
   }
 }

@@ -25,7 +25,7 @@ import { Globals } from '../../globals'
 export class TncComponent implements OnInit, OnDestroy {
   tncData: NsTnc.ITnc | null = null
   routeSubscription: Subscription | null = null
-  // errorFetchingTnc = false
+  userName = ''
   isAcceptInProgress = false
   errorInAccepting = false
   isPublic = false
@@ -54,6 +54,9 @@ export class TncComponent implements OnInit, OnDestroy {
   ) { }
 
   ngOnInit() {
+    if (this.configSvc.userProfile) {
+      this.userName = this.configSvc.userProfile.givenName || ''
+    }
     this.routeSubscription = this.activatedRoute.data.subscribe((response: Data) => {
       if (response.tnc.data) {
         this.tncData = response.tnc.data

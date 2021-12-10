@@ -25,7 +25,6 @@
 }
 
 ::ng-deep{
-
 @media screen and (max-width:599px){
       span.mat-button-wrapper {
         font-size: large !important;
@@ -62,4 +61,43 @@
 
 .button-color{
   color: white !important;
+}
+
+/* positions */
+.r-position {position:relative;}
+.m-tb {
+  margin: 16px 0;
+}
+.form-container .sub-heading {
+  display: flex;
+  flex-direction: column;
+  margin: 10px 0 60px;
+  font-size: 24px;
+  font-weight: 600;
+}
+.s-text {
+  font-size: 18px;
+}
+.btn.disabled, .btn[disabled], fieldset[disabled] .btn {
+  background-color: #f1f1f1!important;
+}
+.btn-primary {
+  background-color: #925eb0;
+  color: #FFFFFF;
+  padding: 8px 24px;
+  border: none;
+  background-image: none;
+}
+.btn-lg {
+  min-width: 250px;
+}
+.btn {
+  font-size: 16px;
+  height: 50px;
+  display: inline-block;
+  font-weight: 500;
+  vertical-align: middle;
+  line-height: 2.5;
+  text-align: center;
+  transition: color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out,box-shadow .15s ease-in-out;
 }

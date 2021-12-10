@@ -2,12 +2,23 @@
 @import 'ws-vars';
 
 
-body {
-  font-family: 'Montserrat', sans-serif;
-  font-size: 16px;
+#custom-back mat-icon {
+  display: none;
 }
 
+#custom-back a, #custom-back a:focus{
+  outline: none;
+  outline-offset: 0px;
+}
 
+.chips-container {
+  display: block;
+}
+
+.chip-value{
+  background-color: rgba(33, 33, 33, 0.08);
+    color: #696466;
+}
 /* Global button stylings */
 
 /* Typography */
