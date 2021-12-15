@@ -7,7 +7,7 @@ import { UploadService } from '../../../../../../../author/src/lib/routing/modul
 import { ApiService, AccessControlService } from '../../../../../../../author/src/public-api'
 import { WidgetResolverModule } from '@ws-widget/resolver'
 import { BtnPageBackModule } from '@ws-widget/collection'
-import { MatChipsModule } from '@angular/material/chips';
+import { MatChipsModule } from '@angular/material/chips'
 @NgModule({
   declarations: [EditProfileComponent],
   imports: [
@@ -23,7 +23,7 @@ import { MatChipsModule } from '@angular/material/chips';
     FormsModule,
     WidgetResolverModule,
     BtnPageBackModule,
-    MatChipsModule
+    MatChipsModule,
   ],
   providers: [AccessControlService, ApiService, UploadService],
   exports: [EditProfileComponent],

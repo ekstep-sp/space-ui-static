@@ -1,6 +1,9 @@
 @import 'ws-mixins';
 @import 'ws-vars';
 
+select option {
+  width: 200px;
+}
 
 #custom-back mat-icon {
   display: none;
@@ -459,8 +462,8 @@ color: #999;
 }
 .v-oGraphic span.icon-play {
   position: absolute;
-  left: 130px;
-  top: 242px;
+  left: 135px;
+  top: 249px;
 }
 .modal .close {}
 

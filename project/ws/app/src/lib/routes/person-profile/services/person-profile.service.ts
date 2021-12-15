@@ -17,6 +17,8 @@ const API_END_POINTS = {
   getDetails: `${PROTECTED_SLAG_V8}/user/details/detailV3`,
   getUserGoals: (type: NsGoal.EGoalTypes, sourceFields: string, wid: string) =>
     `/apis/protected/v8/user/goals/${type}?sourceFields=${sourceFields}&wid=${wid}`,
+    userDomains: `${PROTECTED_SLAG_V8}/user/areaofwork`,
+    userExpertise: `${PROTECTED_SLAG_V8}/user/areaofexpertise`,
 }
 
 @Injectable({

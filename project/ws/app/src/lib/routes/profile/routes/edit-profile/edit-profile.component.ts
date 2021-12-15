@@ -11,8 +11,10 @@ import { FOLDER_NAME_EDIT_PROFILE } from '../../../../../../../author/src/lib/co
 import { ConfigurationsService, UtilityService } from '@ws-widget/utils/src/public-api'
 import { IWidgetsPlayerMediaData } from '@ws-widget/collection'
 import { NsWidgetResolver } from '@ws-widget/resolver'
-import {MatChipInputEvent} from '@angular/material/chips';
-import {COMMA, ENTER} from '@angular/cdk/keycodes';
+import { MatChipInputEvent } from '@angular/material/chips'
+import { COMMA, ENTER } from '@angular/cdk/keycodes'
+import { forkJoin } from 'rxjs'
+import { countryList } from '../../models/countries.model'
 export namespace NsEditProfile {
   export interface IResponseBody {
     wid: string,
@@ -27,7 +29,7 @@ export namespace NsEditProfile {
   }
 }
 export interface Chips {
-  name?: string;
+  name?: string
 }
 @Component({
   selector: 'ws-app-edit-profile',
@@ -44,10 +46,13 @@ export class EditProfileComponent implements OnInit {
   locale = ''
   appName = ''
   introVideos: any
-  domains:Chips[] = []
-  expertises:Chips[] = []
-  addOnBlur = true;
-  readonly separatorKeysCodes = [ENTER, COMMA] as const;
+  countryList = countryList
+  domains: Chips[] = []
+  expertises: Chips[] = []
+  actualDomains: Chips[] = []
+  actualExpertises: Chips[] = []
+  addOnBlur = true
+  readonly separatorKeysCodes = [ENTER, COMMA] as const
   paramsForEditProfile: NsEditProfile.IResponseBody = {} as NsEditProfile.IResponseBody
   widgetResolverData: NsWidgetResolver.IRenderConfigWithTypedData<
   IWidgetsPlayerMediaData
@@ -89,7 +94,7 @@ export class EditProfileComponent implements OnInit {
     userDomain: new FormControl([]),
     userExpertise: new FormControl([]),
     sourceProfilePicture: new FormControl(''),
-    profileLink: new FormControl('')
+    profileLink: new FormControl(''),
   })
 
   userProfile: any
@@ -97,7 +102,7 @@ export class EditProfileComponent implements OnInit {
   isLoad = false
 
   ngOnInit() {
-    //this.loadVideo();
+    // this.loadVideo();
     this.activateRoute.data.subscribe(data => {
       this.isShowUploadMobile = data.pageData.data.isMobileUpload
       this.isShowUploadIOS = data.pageData.data.isIOSUpload
@@ -109,16 +114,26 @@ export class EditProfileComponent implements OnInit {
       }
     })
     this.userProfile = this.initService.getUserProfile()
+    forkJoin({
+      domains: this.profileSvc.getDomain(),
+      expertise: this.profileSvc.getExpertise(),
+    })
+    .subscribe(({ domains, expertise }) => {
+      this.domains = domains ? domains : []
+      this.expertises = expertise ? expertise : []
+      this.actualDomains = [...this.domains]
+      this.actualExpertises = [...this.expertises]
+    })
     if (this.userProfile) {
       this.profileForm.controls.userFirstName.setValue(this.userProfile.givenName
-        && this.userProfile.givenName !== 'null' ? this.userProfile.givenName : '' + ' ' +this.userProfile.lastName
+        && this.userProfile.givenName !== 'null' ? this.userProfile.givenName : '' + ' ' + this.userProfile.lastName
         && this.userProfile.lastName !== 'null' ? this.userProfile.lastName : '')
       this.profileForm.controls.userOrganisation.setValue(this.userProfile.departmentName &&
         this.userProfile.departmentName !== 'null' ? this.userProfile.departmentName : '')
-      this.profileForm.controls.userCountry.setValue('Afghanistan')
-      this.profileForm.controls.userRole.setValue('dev')
-      this.profileForm.controls['userDomain'].setValue(['dev'])
-      this.profileForm.controls.userExpertise.setValue(['dev'])
+      this.profileForm.controls.userCountry.setValue(this.userProfile.country &&
+        this.userProfile.country !== 'null' ? this.userProfile.country : '')
+      this.profileForm.controls.userRole.setValue(this.userProfile.currentRole &&
+        this.userProfile.currentRole !== 'null' ? this.userProfile.currentRole : '')
       if (this.userProfile.userProperties) {
         this.profileForm.controls.profileLink.setValue(this.userProfile.userProperties.profileLink
           && this.userProfile.userProperties.profileLink !== 'null' ? this.userProfile.userProperties.profileLink : '')
@@ -196,12 +211,31 @@ export class EditProfileComponent implements OnInit {
   }
   async onSubmit() {
     if (!(this.profileForm.controls.userFirstName.value.trim()).match(/^[A-Za-z]+$/)) {
-      this.snackBar.open('First name is invalid or empty', '', {
+      this.snackBar.open('Name is invalid or empty', '', {
         duration: 1000,
       })
-    } else if (this.profileForm.valid) {
+    } else if (!(this.profileForm.controls.userOrganisation.value.trim())) {
+      this.snackBar.open('Organisation is invalid or empty', '', {
+        duration: 1000,
+      })
+    } else if (!(this.profileForm.controls.userRole.value.trim()).match(/^[A-Za-z]+$/)) {
+      this.snackBar.open('Current Role is invalid or empty', '', {
+        duration: 1000,
+      })
+      } else if (this.domains.length === 0) {
+        this.snackBar.open('Domain is invalid or empty', '', {
+          duration: 1000,
+        })
+        } else if (this.profileForm.valid) {
       this.isLoad = true
-      const editresponse = await this.profileSvc.editProfile(this.userProfile.userId, this.profileForm.controls)
+      const domainDiff = this.actualDomains.filter(dom => !this.domains.includes(dom))
+      const expertiseDiff = this.actualExpertises.filter(exp => !this.expertises.includes(exp))
+      forkJoin({
+        domains: this.profileSvc.deleteDomains(domainDiff),
+        expertise: this.profileSvc.deteleExpertise(expertiseDiff),
+      }).subscribe(({}) => {
+      })
+      const editresponse = await this.profileSvc.editProfile(this.userProfile.userId, this.profileForm.controls, { domains: this.domains, expertises: this.expertises })
       this.isLoad = false
       if (editresponse.ok) {
         if (editresponse.DATA != null) {
@@ -261,22 +295,22 @@ export class EditProfileComponent implements OnInit {
   }
 
   add(event: MatChipInputEvent, chipList: any): void {
-    const value = (event.value || '').trim();
+    const value = (event.value || '').trim()
 
     // Add our fruit
-    if (value && !this.domains.some(dom => dom.name === value) && chipList.length <= 5) {
-      chipList.push({name: value});
+    if (value && value.length >= 3 && !this.domains.some(dom => dom === value) && chipList.length <= 5) {
+      chipList.push(value)
     }
 
     // Clear the input value
-    event.input.value = '';
+    event.input.value = ''
   }
 
   remove(chip: Chips, chipList: Chips[]): void {
-    const index = chipList.indexOf(chip);
+    const index = chipList.indexOf(chip)
 
     if (index >= 0) {
-      chipList.splice(index, 1);
+      chipList.splice(index, 1)
     }
   }
 }

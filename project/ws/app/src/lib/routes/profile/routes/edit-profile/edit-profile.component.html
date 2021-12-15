@@ -13,7 +13,7 @@
                   </div>
               </div>
               <div class="form-group form-btext pl-10">
-                  <input tabindex="1" id="org" class="form-control" placeholder="First Name" formControlName="userFirstName" type="text" autocomplete="off" autofocus>
+                  <input tabindex="1" id="org" class="form-control" formControlName="userFirstName" type="text" autocomplete="off" autofocus>
               </div>
           </div>
           <div class="form-inline multiple m-tb">
@@ -24,11 +24,8 @@
               <div class="form-group">
                   <label for="ctry" class="control-label">Country <span class="text-warning">*</span></label>
                   <select class="form-control" id="ctry" placeholder="" formControlName="userCountry">
-                      <option>&nbsp;</option>
-                      <option>Afghanistan</option>
-                      <option>Albania</option>
-                      <option>Algeria</option>
-                      <option>Andorra</option>
+                      <option disabled>Select a country</option>
+                      <option *ngFor="let country of countryList" [value]="country">{{country}}</option>
                     </select>
               </div>
               <div class="form-group">
@@ -44,7 +41,7 @@
               <mat-form-field class="chips-container" appearance="fill">
                 <mat-chip-list #chipList aria-label="Domain selection">
                   <mat-chip *ngFor="let domain of domains" (removed)="remove(domain, domains)" class="chip-value">
-                    <span >{{domain.name}}</span>
+                    <span >{{domain}}</span>
                       <span class="icon-close" matChipRemove></span>
                   </mat-chip>
                   <input autocomplete="off"
@@ -63,7 +60,7 @@
               <mat-form-field class="chips-container" appearance="fill">
                 <mat-chip-list #chipListExpertise aria-label="Expertise selection">
                   <mat-chip *ngFor="let expertise of expertises" (removed)="remove(expertise, expertises)" class="chip-value">
-                    <span >{{expertise.name}}</span>
+                    <span >{{expertise}}</span>
                       <span class="icon-close" matChipRemove></span>
                   </mat-chip>
                   <input autocomplete="off"
@@ -83,7 +80,7 @@
           </div>
           
           <div class="form-group btn-group center">
-              <input class="btn btn-primary btn-lg disabled" name="next" id="nextTC" type="submit" value="Finish">
+              <input class="btn btn-primary btn-lg" name="next" id="nextTC" type="submit" value="Finish">
               <span class="btn btn-primary" id="custom-back">
                 <span class="a-position">Back</span>
                 <ws-widget-btn-page-back [widgetData]="{ url: 'back' }"></ws-widget-btn-page-back>
@@ -115,87 +112,3 @@
       </div>
   </div>
 </div>
-
-
-<!-- <div class="flexcontainercol">
-  <div class="flexcontainer">
-    <form [formGroup]="profileForm" (ngSubmit)="onSubmit()">
-      <mat-card class="profile-form">
-
-        <mat-toolbar color="primary" *ngIf="enableToolbar">
-          <span class="title-center body-font-size-primary">Edit Profile</span>
-        </mat-toolbar>
-        <div *ngIf="!enableToolbar">
-          <h3 class="mat-h3 ws-mat-primary-text montserrat">
-            Tell us more! It helps you connect with people more meaningfully
-          </h3>
-        </div>
-        <div class="hoverable">
-
-          <img [src]="url ? url : relativeUrl">
-          <div *ngIf="showUploadMobile" (click)="fileInput.click()">
-            <mat-icon class="photo-icon ws-mat-primary-text">photo_camera</mat-icon>
-            <input class="font-montserrat" #fileInput type='file' (change)="onSelectFile($event.target.files[0])"
-              accept="image/*">
-          </div>
-          <!-- <mat-icon class="delete-photo" *ngIf="url" (click)="delete()">close</mat-icon> -->
-        <!-- </div>
-        <div class="format">
-          <p>
-            <mat-form-field class="width" appearance="legacy">
-              <mat-label>Enter your First Name</mat-label>
-              <input class="font-montserrat" matInput placeholder="First Name" formControlName="userFirstName">
-            </mat-form-field>
-          </p>
-          <p>
-            <mat-form-field class="width" appearance="legacy">
-              <mat-label>Enter your Last Name</mat-label>
-              <input class="font-montserrat" matInput placeholder="Last Name" formControlName="userLastName">
-            </mat-form-field>
-          </p>
-          <p>
-            <mat-form-field class="width" appearance="legacy">
-              <mat-label>Email</mat-label>
-              <input class="font-montserrat" matInput placeholder="Email" formControlName="email">
-            </mat-form-field>
-          </p>
-          <p>
-            <mat-form-field class="width" appearance="legacy">
-              <mat-label>Organization</mat-label>
-              <input class="font-montserrat" matInput placeholder="Organization" formControlName="userOrganisation">
-
-            </mat-form-field>
-          </p>
-          <p>
-            <mat-form-field class="width" appearance="legacy">
-              <mat-label>Profile Link</mat-label>
-              <input class="font-montserrat" matInput placeholder="Profile Link" formControlName="profileLink">
-            </mat-form-field>
-          </p>
-          <p>
-            <mat-form-field class="width" appearance="legacy">
-              <mat-label>Bio</mat-label>
-              <textarea class="textarea.mat-input-element" matInput placeholder="Add a description about yourself..."
-                formControlName="bio"></textarea>
-              <mat-hint>Maximum length of 3000 characters</mat-hint>
-              <mat-error *ngIf="profileForm.hasError('maxlength')">
-                Maximum character length exceeded
-              </mat-error>
-            </mat-form-field>
-          </p>
-        </div>
-        <div class="spinner" *ngIf="isLoad">
-          <mat-spinner color="primary"></mat-spinner>
-        </div>
-        <br />
-        <div class="button-align">
-          <button type="button" mat-raised-button color="primary" (click)="skipToHomePage()" *ngIf="enableSkip">
-            <span class="font-montserrat">Next</span>
-          </button>
-          <button type="submit" mat-raised-button [disabled]="isDisabled()" color="primary"><span
-              class="font-montserrat">Save</span></button>
-        </div>
-      </mat-card>
-    </form>
-  </div>
-</div> -->

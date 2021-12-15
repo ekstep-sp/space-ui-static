@@ -257,7 +257,8 @@ export namespace NsUser {
     dealerCode?: null | string
     isManager?: boolean
     lastName?: string
-    userProperties?: IUserProperties
+    userProperties?: IUserProperties,
+    currentRole?: string
   }
   export interface IUserProperties {
     bio?: string

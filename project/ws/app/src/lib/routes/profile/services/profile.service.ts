@@ -14,6 +14,14 @@ const LA_API_END_POINTS = {
   NSO_PROGRESS: `${LA_API}/nsoArtifactsAndCollaborators`,
   SKILL_DATA: `${LA_API}/managerRecommendedSkills`,
 }
+const API_END_POINTS = {
+    userDomains: `${PROTECTED_SLAG_V8}/user/areaofwork`,
+    userExpertise: `${PROTECTED_SLAG_V8}/user/areaofexpertise`,
+    addUserDomains: `${PROTECTED_SLAG_V8}/user/areaofwork/addMultiple`,
+    addUserExpertise: `${PROTECTED_SLAG_V8}/user/areaofexpertise/addMultiple`,
+    deleteUserDomains: `${PROTECTED_SLAG_V8}/user/areaofwork/deleteMultiple`,
+    deleteUserExpertise: `${PROTECTED_SLAG_V8}/user/areaofexpertise/deleteMultiple`,
+}
 interface IResponse {
   ok: boolean
   error?: string | null,
@@ -82,23 +90,25 @@ export class ProfileService {
     )
   }
 
-  async editProfile(widUser: string, params: any): Promise<IResponse> {
+  async editProfile(widUser: string, params: any, params2: any): Promise<IResponse> {
     const responseBodyAsJSON = {
       wid: widUser,
       userFirstName: params.userFirstName.value,
-      userLastName: params.userLastName.value,
       sourceProfilePicture: params.sourceProfilePicture.value,
       userProperties: {
-        bio: params.bio.value,
         profileLink: params.profileLink.value,
       },
       userOrganisation: params.userOrganisation.value,
+      country: params.userCountry.value,
+      currentRole: params.userRole.value,
     }
     try {
       // tslint:disable-next-line: prefer-template
       // tslint:disable-next-line: max-line-length
       const responseData = await this.http.patch<IResponse>(this.userData.API_END_POINT + this.userData.edit_profile.url, responseBodyAsJSON).toPromise()
-      if (responseData && responseData.STATUS === 'OK') {
+      const responseDataDomain = await this.addDomains(params2.domains)
+      const responseDataExpertise = await this.addExpertise(params2.expertises)
+      if (responseData && responseDataDomain && responseDataExpertise && responseData.STATUS === 'OK') {
         return Promise.resolve({
           ok: true,
           DATA: responseData.DATA,
@@ -166,5 +176,77 @@ export class ProfileService {
   }
   updateNavStatus(value: boolean) {
     this.navtrigger.next(value)
+  }
+
+  getDomain(): Observable<any> {
+    return this.http.get<any>(
+      `${API_END_POINTS.userDomains}`,
+    )
+  }
+
+  getExpertise(): Observable<any> {
+    return this.http.get<any>(
+      `${API_END_POINTS.userExpertise}`,
+    )
+  }
+
+  async addDomains(domains: any): Promise<IResponse> {
+    try {
+      // tslint:disable-next-line: prefer-template
+      // tslint:disable-next-line: max-line-length
+      const responseData = await this.http.patch<IResponse>(API_END_POINTS.addUserDomains, { areaOfWork: domains }).toPromise()
+      if (responseData && responseData.STATUS === 'OK') {
+        return Promise.resolve({
+          ok: true,
+          DATA: responseData.DATA,
+          MESSAGE: responseData.MESSAGE,
+        })
+      }
+      return { ok: false, error: responseData.MESSAGE, MESSAGE: responseData.MESSAGE }
+    } catch (ex) {
+      if (ex) {
+        return Promise.resolve({
+          ok: false, error: ex,
+          MESSAGE: 'error',
+        })
+      }
+      return Promise.resolve({ ok: false, error: null, MESSAGE: this.userData.edit_profile.errorMessage })
+    }
+  }
+
+  async addExpertise(expertise: any): Promise<IResponse> {
+    try {
+      // tslint:disable-next-line: prefer-template
+      // tslint:disable-next-line: max-line-length
+      const responseData = await this.http.patch<IResponse>(API_END_POINTS.addUserExpertise, { areaOfExpertise: expertise }).toPromise()
+      if (responseData && responseData.STATUS === 'OK') {
+        return Promise.resolve({
+          ok: true,
+          DATA: responseData.DATA,
+          MESSAGE: responseData.MESSAGE,
+        })
+      }
+      return { ok: false, error: responseData.MESSAGE, MESSAGE: responseData.MESSAGE }
+    } catch (ex) {
+      if (ex) {
+        return Promise.resolve({
+          ok: false, error: ex,
+          MESSAGE: 'error',
+        })
+      }
+      return Promise.resolve({ ok: false, error: null, MESSAGE: this.userData.edit_profile.errorMessage })
+    }
+  }
+
+  deleteDomains(domains: any) {
+      // tslint:disable-next-line: prefer-template
+      // tslint:disable-next-line: max-line-length
+      return this.http.request('delete', `${API_END_POINTS.deleteUserDomains}`, { body: { areaOfWork: domains } })
+  }
+
+  deteleExpertise(expertise: any) {
+      // tslint:disable-next-line: prefer-template
+      // tslint:disable-next-line: max-line-length
+      return this.http.request('delete', `${API_END_POINTS.deleteUserExpertise}`, { body: { areaOfExpertise: expertise } })
   }
 }

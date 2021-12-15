@@ -282,6 +282,7 @@ export class InitService {
               ? userPidProfile.user.json_unmapped_fields.is_manager
               : false,
           // userName: `${userPidProfile.user.first_name} ${userPidProfile.user.last_name}`,
+          currentRole: userPidProfile.user.job_role || '',
         }
         this.userData = await this.fetchUserDataFromConfigAndUpdateUser()
         if (this.userData) {
