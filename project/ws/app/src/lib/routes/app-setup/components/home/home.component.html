@@ -1,22 +1,23 @@
+<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/patternfly/3.24.0/css/patternfly.min.css">
 <!-- header-->
 <header>
   <nav class="container">
     <div class="box-row">
-        <a href="https://space.societalplatform.org/" class="brand">
-            <img src="https://space.societalplatform.org/auth/resources/d3nnr/login/space-keycloak-theme-v3/img/spacelogonew.png" alt="SPace (Societal Platform Assets Collaboration Environment)" />
+        <a routerLink="/app/setup/home/tnc" class="brand">
+            <img [src]="appIcon" i18n-alt alt="Application Logo" />
         </a>
         <ul class="nav-lists hidden-xs">
-            <li><a href ="https://space.societalplatform.org/public/about">About Us</a></li>
-            <li><a href="https://space.societalplatform.org/public/collaborators">Collaborators</a></li>
+            <li><a [routerLink]="'/public/about'">About Us</a></li>
+            <li><a routerLink="/public/collaborators">Collaborators</a></li>
         </ul>
         <div class="dropdown visible-xs">
             <button id="dLabel" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 <img src ="https://space.societalplatform.org/auth/resources/d3nnr/login/space-keycloak-theme-v3/img/Vector.png" alt="menu icon">
             </button>
             <ul class="dropdown-menu" aria-labelledby="dLabel">
-                <li><a href ="https://space.societalplatform.org/public/about">About Us</a></li>
+                <li><a [routerLink]="'/public/about'">About Us</a></li>
                 <li role="separator" class="divider"></li>
-                <li><a href="https://space.societalplatform.org/public/collaborators">Collaborators</a></li>
+                <li><a routerLink="/public/collaborators">Collaborators</a></li>
             </ul>
         </div>
     </div>
@@ -28,21 +29,4 @@
     <router-outlet></router-outlet>
   </div>
 </main>
-
 <!--Main ends-->
-<!-- <div class="outer">
-  <div class="flex flex-center flex-middle logo-size">
-  <a mat-button routerLink="." i18n-matTooltip matTooltip="Home" >
-    <img [src]="appIcon" i18n-alt alt="Application Logo" class="app-logo" />
-    <span class="title-app" *ngIf="appName"></span>
-  </a>
-  </div>
-
-  <div class="middle">
-    <div class="inner mat-elevation-z4">
-      <router-outlet></router-outlet>
-    </div>
-  </div>
-  <div *ngIf="showStepCount" class="mat-subheading-1 margin-remove margin-top-m"><span i18n>Step </span> {{stepCount}}/{{totalSteps}}
-  </div>
-</div> -->
