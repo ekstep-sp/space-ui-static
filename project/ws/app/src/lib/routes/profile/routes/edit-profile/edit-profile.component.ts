@@ -1,5 +1,5 @@
 
-import { Component, OnInit, Input } from '@angular/core'
+import { Component, OnInit, Input, ViewChild } from '@angular/core'
 import { InitService } from 'src/app/services/init.service'
 import { FormGroup, FormControl } from '@angular/forms'
 import { ProfileService } from '../../services/profile.service'
@@ -15,6 +15,7 @@ import { MatChipInputEvent } from '@angular/material/chips'
 import { COMMA, ENTER } from '@angular/cdk/keycodes'
 import { forkJoin } from 'rxjs'
 import { countryList } from '../../models/countries.model'
+import {MatDialog, MatDialogConfig} from '@angular/material/dialog';
 export namespace NsEditProfile {
   export interface IResponseBody {
     wid: string,
@@ -72,6 +73,8 @@ export class EditProfileComponent implements OnInit {
       'margin-right': 'auto',
     },
   }
+  @ViewChild('video', {static: false}) video: any;
+  
   constructor(
     private initService: InitService,
     private profileSvc: ProfileService,
@@ -80,7 +83,8 @@ export class EditProfileComponent implements OnInit {
     private activateRoute: ActivatedRoute,
     private utilitySvc: UtilityService,
     private router: Router,
-    private configSvc: ConfigurationsService
+    private configSvc: ConfigurationsService,
+    public dialog: MatDialog
   ) { }
   url = ''
   profileUrlParams = ''
@@ -218,7 +222,7 @@ export class EditProfileComponent implements OnInit {
       this.snackBar.open('Organisation is invalid or empty', '', {
         duration: 1000,
       })
-    } else if (!(this.profileForm.controls.userRole.value.trim()).match(/^[A-Za-z]+$/)) {
+    } else if (!(this.profileForm.controls.userRole.value.trim())) {
       this.snackBar.open('Current Role is invalid or empty', '', {
         duration: 1000,
       })
@@ -312,5 +316,9 @@ export class EditProfileComponent implements OnInit {
     if (index >= 0) {
       chipList.splice(index, 1)
     }
+  }
+
+  open(config?: MatDialogConfig) {
+    return this.dialog.open(this.video, config);
   }
 }
