@@ -250,7 +250,7 @@ export class EditProfileComponent implements OnInit {
           setTimeout(
             () => {
               if (this.enableSkip) {
-                this.router.navigate(['/app/setup/home/interest'])
+                this.router.navigate(['/page/home'])
               }
             },
             1000
@@ -274,7 +274,7 @@ export class EditProfileComponent implements OnInit {
     }
   }
   skipToHomePage() {
-    this.router.navigate(['/app/setup/home/interest'])
+    this.router.navigate(['/page/home'])
   }
 
   loadVideo() {

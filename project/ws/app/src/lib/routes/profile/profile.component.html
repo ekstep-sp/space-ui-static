@@ -47,7 +47,7 @@
             {{ enabledTabs?.achievements?.displayName }}</span>
         </ng-container>
       </a>
-      <a class="navs-height left" mat-list-item *ngIf="enabledTabs?.interests?.enabled" routerLinkActive="mat-toolbar-selected" (click)="
+      <!-- <a class="navs-height left" mat-list-item *ngIf="enabledTabs?.interests?.enabled" routerLinkActive="mat-toolbar-selected" (click)="
           tabUpdate(enabledTabs?.interests?.displayName);
           screenSizeIsLtMedium ? sideNavBar.toggle() : null
         "   routerLink="/app/profile/interest" matTooltip="{{ enabledTabs?.interests?.displayName }}">
@@ -57,7 +57,7 @@
           enabledTabs?.interests?.displayName
         }}</span>
         </ng-container>
-      </a>
+      </a> -->
       <a mat-list-item class="left" *ngIf="enabledTabs?.plans?.enabled" routerLinkActive="mat-toolbar-selected" (click)="
           tabUpdate(enabledTabs?.plans?.displayName);
           screenSizeIsLtMedium ? sideNavBar.toggle() : null
