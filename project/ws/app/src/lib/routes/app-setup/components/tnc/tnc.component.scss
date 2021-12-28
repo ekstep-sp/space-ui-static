@@ -68,15 +68,21 @@
 .m-tb {
   margin: 16px 0;
 }
+
+.well {
+  background-color: rgba(146, 94, 176, 0.07);
+  border: none;
+}
+
 .form-container .sub-heading {
   display: flex;
   flex-direction: column;
-  margin: 10px 0 60px;
+  margin: 20px 0 40px;
   font-size: 24px;
   font-weight: 600;
 }
 .s-text {
-  font-size: 18px;
+  font-size: 16px;
 }
 .btn.disabled, .btn[disabled], fieldset[disabled] .btn {
   background-color: #f1f1f1!important;

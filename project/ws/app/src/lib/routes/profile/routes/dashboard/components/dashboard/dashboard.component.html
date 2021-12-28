@@ -1,118 +1,180 @@
-<div class="profile-container">
-  <div class="flex flex-wrap">
-    <mat-card class="about-me ">
-      <div class="user-avatar ws-mat-primary-lite-background-on-day">
-        <ws-widget-user-image class="user-image" [email]="userEmail" [imageType]="'rounded'" [userProfilePicture]= "userProfilePicture" [enableProfilePicture] = "true"></ws-widget-user-image>
-        <div class="user-name">
-          <div class="name-edit"><h2 class="body-font-size-primary font-montserrat pl-4 ws-mat-primary-text sm:pl-0">{{ userName }}</h2>
-            <mat-icon  class="icon-space" (click)="edituserdetails()">create</mat-icon>
-          </div>
-          <h3 class="font-bold body-font-size-secondary font-montserrat margin-zero pl-4 sm:pl-0">{{ departmentName }}</h3>
-        </div>
-            <!-- <button mat-button  class="profile-form" color="primary" (click)="edituserdetails()"> -->
-              <!-- <mat-icon (click)="edituserdetails()">create</mat-icon> -->
-            <!-- </button> -->
-      </div>
-<!--new changes for edit profile-->
+<link
+  rel="stylesheet"
+  type="text/css"
+  href="https://cdnjs.cloudflare.com/ajax/libs/patternfly/3.24.0/css/patternfly.min.css"
+/>
 
-
-
-    </mat-card>
-
-    <div *ngIf="enabledTabs?.subFeatures?.calendar && apiFetchStatus !=='error'"
-      class=" calendar-data description-container padding-xl mat-elevation-z2 ">
-      <div class=" text-center" *ngIf="apiFetchStatus === 'fetching'">
-        <mat-spinner></mat-spinner>
-      </div>
-      <div *ngIf="apiFetchStatus === 'done'">
-        <div class="w-full">
-          <div class="flex flex-middle">
-            <mat-icon>history</mat-icon>
-            <h2 class="font-bold mat-title margin-zero pl-2" i18n="learning time">Learning Time</h2>
-          </div>
-          <!-- <div class="flex flex-middle">
-            <h2 i18n>Total learning hours</h2>
-            <button type="button" mat-icon-button (click)="showInfo('myLearningHours')" i18n-matTooltip
-              matTooltip="info" class="margin-left-xs margin-bottom-m">
-              <mat-icon>info</mat-icon>
-            </button>
-          </div> -->
-          <p *ngIf="totalLearningHours > 0">
-            <span class="ws-mat-primary-text mat-display-1 margin-remove-bottom font-bold margin-left-xl">
-              {{ totalLearningHours | pipeDurationTransform: 'hms' }}
-            </span><sup class="star">*</sup>
-          </p>
-          <p *ngIf="totalLearningHours === 0">
-            <span class="ws-mat-primary-text mat-display-1 margin-remove-bottom font-bold margin-left-xl">
-              0
-            </span>
-            <sup class="star">*</sup>
-          </p>
-          <div class="w-full margin-left-xl margin-top-s" *ngIf="timeSpentData">
-            <h4>
-              <ng-container *ngIf="orgWideTimePercent !== 0" i18n> You are </ng-container>
-              <ng-container *ngIf="orgWideTimePercent > 0 || orgWideTimePercent < 0">
-                {{ orgWideTimePercent }}
-              </ng-container>
-              <ng-container *ngIf="orgWideTimePercent > 0" i18n>
-                % more than org-wide average
-              </ng-container>
-              <ng-container *ngIf="orgWideTimePercent < 0" i18n>
-                % less than org-wide average
-              </ng-container>
-              <ng-container *ngIf="orgWideTimePercent === 0" i18n>
-                You are with org wide average
-              </ng-container>
-            </h4>
-          </div>
-          <div class="flex flex-middle">
-            <mat-icon>history</mat-icon>
-            <h2 class="font-bold mat-title margin-zero pl-2" i18n="learning points">Learning Points</h2>
-          </div>
-          <p class="ws-mat-primary-text mat-display-1 margin-remove-bottom font-bold margin-left-xl">
-            {{ userPointsEarned }}
-          </p>
-          <div class="w-full margin-left-xl margin-top-s" *ngIf="timeSpentData">
-            <!-- <h4 i18n>Learning points compared to Org</h4> -->
-            <h4>
-              <ng-container *ngIf="orgWidePointsPercent !== 0" i18n> You are </ng-container>
-              <ng-container *ngIf="orgWidePointsPercent > 0 || orgWidePointsPercent < 0">
-                {{ orgWidePointsPercent }}
-              </ng-container>
-              <ng-container *ngIf="orgWidePointsPercent > 0" i18n>
-                % more than org-wide average
-              </ng-container>
-              <ng-container *ngIf="orgWidePointsPercent < 0" i18n>
-                % less than org-wide average
-              </ng-container>
-              <ng-container *ngIf="orgWidePointsPercent === 0" i18n>
-                You are with org wide average
-              </ng-container>
-            </h4>
+<div class="row form-container f-outline m-tb r-position">
+  <div class="v-oGraphic visible-md visible-lg">
+    <button type="button" class="r-position" (click)="open()">
+      <span class="icon-play a-position">&nbsp;</span>
+    </button>
+  </div>
+  <section class="col-xs-12 col-sm-12 col-md-8 col-lg-8 mt-12">
+    <p class="s-text">
+      You are almost done! Please help us and the community to know you better.
+    </p>
+    <form class="mt-16">
+      <div class="form-inline f-step">
+        <div class="form-group r-position">
+          <div class="circle">
+            <img class="profile-pic" [src]="userProfilePicture" />
           </div>
         </div>
-        <p class="mat-caption msg content-end text-right" i18n>* Last 12 Months only</p>
-        <div *ngIf="timeSpentData?.last_updated_on"
-          class="mat-caption flex flex-middle content-end justify-end remove-margin-top">
-          <ng-container>
-            <span i18n>Last Updated on :</span>
-            <span class="ml-2"> {{ timeSpentData?.last_updated_on | date: 'MMM d, y'}}</span>
-          </ng-container>
+        <div class="form-group form-btext pl-10">
+          <!-- <input
+          tabindex="1"
+          id="org"
+          name="name"
+          class="form-control"
+          formControlName="userFirstName"
+          type="text"
+          autocomplete="off"
+          autofocus
+        /> -->
+          <label id="org" name="name" class="form-control">{{
+            userName
+          }}</label>
         </div>
       </div>
-    </div>
-  </div>
-  <div *ngIf="enabledTabs?.subFeatures?.pendingCourses && coursePending?.length > 0" class="margin-top-xl">
-    <h1 class="mat-h1" i18n>Pending Courses</h1>
-    <div class="text-center" *ngIf="historyFetchStatus === 'fetching'">
-      <mat-spinner></mat-spinner>
-    </div>
-    <ws-utils-horizontal-scroller *ngIf="historyFetchStatus === 'done'" [loadStatus]="'done'">
-      <ws-app-course-pending-card class="margin-bottom-xl" *ngFor="let pending of coursePending" [cardData]="pending">
-      </ws-app-course-pending-card>
-    </ws-utils-horizontal-scroller>
-  </div>
-  <div *ngIf="enabledTabs?.subFeatures?.latest">
-    <ng-container [wsResolverWidget]="widgetResolverData"></ng-container>
-  </div>
+      <div class="form-inline multiple m-tb">
+        <div class="form-group">
+          <label for="org" class="control-label"
+            >Organisation <span class="text-warning">*</span></label
+          >
+          <!-- <input
+          tabindex="1"
+          id="org"
+          class="form-control"
+          type="text"
+          autocomplete="off"
+          autofocus
+        /> -->
+          <label class="form-control" id="org">{{ departmentName }}</label>
+        </div>
+        <div class="form-group">
+          <label tabindex="1" for="ctry" class="control-label"
+            >Country <span class="text-warning">*</span></label
+          >
+
+          <!-- <select
+            tabindex="1"
+            class="form-control"
+            id="ctry"
+            placeholder=""
+          >
+            <option disabled>Select a country</option>
+          </select> -->
+
+          <label class="form-control" id="ctry">{{ country }}</label>
+        </div>
+        <div class="form-group">
+          <label for="role" class="control-label"
+            >Current Role <span class="text-warning">*</span></label
+          >
+          <!-- <input
+            tabindex="1"
+            id="role"
+            class="form-control"
+            name="role"
+            placeholder=""
+            type="text"
+            autocomplete="off"
+          /> -->
+          <label id="role" class="form-control" name="role">{{
+          currentRole
+        }}</label>
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="domain" class="control-label">
+          Domain / Area of work <span class="text-warning">*</span>
+          <span class="help-block m-0 xs-text"
+            >(use comma to add upto 5 entries)</span
+          >
+        </label>
+        <mat-form-field class="chips-container" appearance="fill">
+          <mat-chip-list #chipList aria-label="Domain selection">
+            <mat-chip
+              *ngFor="let domain of domains"
+              (removed)="remove(domain, domains)"
+              class="chip-value"
+            >
+              <span>{{ domain }}</span>
+              <span class="icon-close" matChipRemove></span>
+            </mat-chip>
+          </mat-chip-list>
+        </mat-form-field>
+      </div>
+      <div class="form-group">
+        <label for="area" class="control-label">
+          Areas of expertise <span class="text-warning">*</span>
+          <span class="help-block m-0 xs-text"
+            >(use comma to add upto 5 entries)</span
+          >
+        </label>
+        <mat-form-field class="chips-container" appearance="fill">
+          <mat-chip-list #chipListExpertise aria-label="Expertise selection">
+            <mat-chip
+              *ngFor="let expertise of expertises"
+              (removed)="remove(expertise, expertises)"
+              class="chip-value"
+            >
+              <span>{{ expertise }}</span>
+              <span class="icon-close" matChipRemove></span>
+            </mat-chip>
+          </mat-chip-list>
+        </mat-form-field>
+      </div>
+      <div class="form-group">
+        <label for="profile" class="control-label">
+          Profile Link
+          <span class="help-block m-0 xs-text"
+            >(Ex. LinkedIn, Organization Profile, etc.,)</span
+          >
+        </label>
+        <!-- <input id="profile" class="form-control" formControlName="profileLink" name="profile" placeholder="https://www.linkedIn.com/" type="text" autocomplete="off"> -->
+        <label id="profile" class="form-control-profile" name="profile">{{
+          profileLink
+        }}</label>
+        <span class="v-diamond a-position visible-md visible-lg">&nbsp;</span>
+      </div>
+
+      <div class="form-group btn-group center">
+        <!-- <button
+        (click)="editusedetails()"
+        style="color: white; background: #865ba0"
+        mat-flat-button
+      >
+        Edit
+      </button> -->
+        <a
+          class="btn btn-primary btn-lg mt-16"
+          type="button"
+          color="primary"
+          (click)="edituserdetails()"
+          i18n
+          >Edit
+        </a>
+      </div>
+    </form>
+  </section>
 </div>
+
+<ng-template #video>
+  <mat-dialog-actions align="end">
+    <button mat-icon-button aria-label="close dialog" mat-dialog-close>
+      <mat-icon>close</mat-icon>
+    </button>
+  </mat-dialog-actions>
+  <iframe
+    width="1100"
+    class="pt-10"
+    height="600"
+    src="https://www.youtube.com/embed/W86-mjWXQaw"
+    title="YouTube video player"
+    frameborder="0"
+    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+    allowfullscreen
+  ></iframe>
+</ng-template>

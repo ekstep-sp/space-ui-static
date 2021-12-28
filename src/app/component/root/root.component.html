@@ -1,7 +1,7 @@
 <mat-progress-bar mode="indeterminate" color="warn" class="route-change" *ngIf="routeChangeInProgress">
 </mat-progress-bar>
 
-<ws-app-public-nav-bar class="top-nav-bar" *ngIf="(authSvc.isLoggedIn$ | async) === false"></ws-app-public-nav-bar>
+<!-- <ws-app-public-nav-bar class="top-nav-bar" *ngIf="(authSvc.isLoggedIn$ | async) === false"></ws-app-public-nav-bar> -->
 <!-- <ws-widget-sticky-header> -->
 <ws-app-nav-bar class="top-nav-bar" *ngIf="
     isNavBarRequired && (isXSmall$ | async) === false && (authSvc.isLoggedIn$ | async) === true
@@ -11,10 +11,9 @@
   [ngClass]="{
     'height-on-bottom custom-scroll':
       (isXSmall$ | async) === true && (authSvc.isLoggedIn$ | async) === true && showNavbar,
-    'height-adjust-setup': isSetupPage,
     'height-on-top':
       (isXSmall$ | async) === false &&
-      (authSvc.isLoggedIn$ | async) === true &&
+      (authSvc.isLoggedIn$ | async) === false &&
       showNavbar &&
       isNavBarRequired,
       'height-on-top-login': (authSvc.isLoggedIn$ | async) === false

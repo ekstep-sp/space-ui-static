@@ -37,6 +37,7 @@ export class AppHomeComponent implements OnInit {
     } else {
       this.redirectUrl = document.baseURI
     }
+    this.login('S')
   }
   login(key: 'E' | 'N' | 'S') {
     this.authSvc.login(key, this.redirectUrl)

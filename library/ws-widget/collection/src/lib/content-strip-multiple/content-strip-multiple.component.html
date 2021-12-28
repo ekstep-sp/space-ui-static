@@ -24,7 +24,7 @@
                 stripsResultDataMap[key]?.showOnLoader ||
                 stripsResultDataMap[key]?.showOnError
               " [ngClass]="
-                !widgetData.isChannelStrip ? ['latest_connections'].includes(key) 
+                !widgetData.isChannelStrip ? ['continueLearning'].includes(key) 
                 ? 'bottom-align px-4 medium' : 'px-4 medium' : i > 0 ? 'mt-12' : ''
               " [id]="key">
           <div [ngClass]="{ pad: stripsResultDataMap[key]?.stripBackground }"

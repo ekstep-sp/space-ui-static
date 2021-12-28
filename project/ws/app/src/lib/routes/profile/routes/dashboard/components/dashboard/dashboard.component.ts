@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core'
+import { Component, OnInit, ViewChild } from '@angular/core'
 import { ActivatedRoute, Router } from '@angular/router'
 import { NsContent, NsContentStripMultiple, ROOT_WIDGET_CONFIG } from '@ws-widget/collection'
 import { NsWidgetResolver } from '@ws-widget/resolver'
@@ -8,6 +8,9 @@ import { ProfileService } from '../../../../services/profile.service'
 import { InterestService } from '../../../interest/services/interest.service'
 import { NSLearningHistory } from '../../../learning/models/learning.models'
 import { LearningHistoryService } from '../../../learning/services/learning-history.service'
+import { forkJoin } from 'rxjs'
+import { InitService } from 'src/app/services/init.service'
+import {MatDialog, MatDialogConfig} from '@angular/material/dialog';
 
 interface ILearningHistoryContent {
   content: NSLearningHistory.ILearningHistory
@@ -17,6 +20,11 @@ interface ILearningHistoryContent {
   isLoadingFirstTime: boolean
   fetchStatus: 'fetching' | 'done' | 'error'
 }
+
+export interface Chips {
+  name?: string
+}
+
 @Component({
   selector: 'ws-app-dashboard',
   templateUrl: './dashboard.component.html',
@@ -43,6 +51,11 @@ export class DashboardComponent implements OnInit {
   userName = ''
   userEmail = ''
   departmentName = ''
+  country = ''
+  currentRole = ''
+  domains: Chips[] = []
+  expertises: Chips[] = []
+  profileLink : string | undefined= ''
   userProfilePicture = ''
   skillData: any
   skillFetchStatus: TFetchStatus = 'none'
@@ -95,24 +108,42 @@ export class DashboardComponent implements OnInit {
   pageNum = ''
   ongoingCertifications: NSLearningHistory.ILearningHistoryItem[] = []
   passedCertifications: NSLearningHistory.ILearningHistoryItem[] = []
+
+  @ViewChild('video', {static: false}) video: any;
+
   constructor(
     private configSvc: ConfigurationsService,
+    private initService: InitService, 
     // private badgesSvc: BadgesService,
     private profileSvc: ProfileService,
     private learnHstSvc: LearningHistoryService,
     private interestSvc: InterestService,
     private activatedRoute: ActivatedRoute,
     private router: Router,
+    public dialog: MatDialog
   ) {
     if (this.configSvc.userProfile) {
       this.userName = this.configSvc.userProfile.givenName || ''
+      this.country = this.configSvc.userProfile.country || ''
+      this.currentRole = this.configSvc.userProfile.currentRole || ''
+      this.initService.getUserProfile()
+      forkJoin({
+        domains: this.profileSvc.getDomain(),
+        expertise: this.profileSvc.getExpertise(),
+      })
+      .subscribe(({ domains, expertise }) => {
+        this.domains = domains ? domains : []
+        this.expertises = expertise ? expertise : []
+      })
+      this.profileLink = (this.configSvc.userProfile.userProperties && this.configSvc.userProfile.userProperties!== 'null') ?
+            this.configSvc.userProfile.userProperties.profileLink : ''
       this.userEmail = this.configSvc.userProfile.email || ''
       this.departmentName = (this.configSvc.userProfile.departmentName && this.configSvc.userProfile.departmentName !== 'null')
         ? this.configSvc.userProfile.departmentName : ''
       if (this.configSvc.userProfile.source_profile_picture &&
         this.configSvc.userProfile.source_profile_picture !== 'null' &&
         this.configSvc.userProfile.source_profile_picture !== '') {
-           this.userProfilePicture = this.configSvc.userProfile.source_profile_picture
+           this.userProfilePicture = this.getAuthoringUrl(this.configSvc.userProfile.source_profile_picture)
         }
     }
   }
@@ -204,6 +235,18 @@ export class DashboardComponent implements OnInit {
   edituserdetails() {
     this.profileSvc.updateStatus(true)
     this.router.navigate(['/app/profile/edit-profile'])
+  }
+
+  open(config?: MatDialogConfig) {
+    return this.dialog.open(this.video, config);
+  }
+
+  getAuthoringUrl(url: string): string {
+    return url
+      ? `/apis/authContent/${
+      url.includes('/content-store/') ? new URL(url).pathname.slice(1) : encodeURIComponent(url)
+      }`
+      : ''
   }
 
 }

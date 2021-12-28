@@ -226,11 +226,16 @@ export class EditProfileComponent implements OnInit {
       this.snackBar.open('Current Role is invalid or empty', '', {
         duration: 1000,
       })
-      } else if (this.domains.length === 0) {
+      } else if (this.domains.length === 0 || this.domains.length > 5) {
         this.snackBar.open('Domain is invalid or empty', '', {
           duration: 1000,
         })
-        } else if (this.profileForm.valid) {
+        }
+        else if (this.expertises.length === 0 || this.expertises.length > 5) {
+          this.snackBar.open('Area of Expertise is invalid or empty', '', {
+            duration: 1000,
+          })
+          }  else if (this.profileForm.valid) {
       this.isLoad = true
       const domainDiff = this.actualDomains.filter(dom => !this.domains.includes(dom))
       const expertiseDiff = this.actualExpertises.filter(exp => !this.expertises.includes(exp))

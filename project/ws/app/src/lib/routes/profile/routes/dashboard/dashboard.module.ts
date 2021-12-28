@@ -4,7 +4,7 @@ import { DashboardComponent } from './components/dashboard/dashboard.component'
 import { HorizontalScrollerModule, PipeDurationTransformModule, DefaultThumbnailModule } from '@ws-widget/utils'
 import { UserImageModule, CardKnowledgeModule } from '@ws-widget/collection'
 import {
-  MatCardModule,
+  MatCardModule,MatFormFieldModule,
   MatChipsModule,
   MatIconModule,
   MatDatepickerModule,
@@ -12,6 +12,7 @@ import {
   MatButtonModule,
   MatProgressSpinnerModule,
   MatTooltipModule,
+  MatDialogModule,
 } from '@angular/material'
 import { WidgetResolverModule } from '@ws-widget/resolver'
 import { CalendarModule } from '../../module/calendar-module/calendar.module'
@@ -23,6 +24,7 @@ import { CoursePendingCardComponent } from './components/course-pending-card/cou
   imports: [
     CommonModule,
     MatCardModule,
+    MatFormFieldModule,
     MatChipsModule,
     MatIconModule,
     MatDatepickerModule,
@@ -38,6 +40,7 @@ import { CoursePendingCardComponent } from './components/course-pending-card/cou
     CardKnowledgeModule,
     MatProgressSpinnerModule,
     MatTooltipModule,
+    MatDialogModule,
   ],
 })
 export class DashboardModule {}

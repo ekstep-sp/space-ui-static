@@ -1,6 +1,11 @@
 <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/patternfly/3.24.0/css/patternfly.min.css">
 
 <div class="row form-container f-outline m-tb r-position">
+    <div class="v-oGraphic visible-md visible-lg">
+        <button type="button" class="r-position" (click)="open()">
+            <span class="icon-play a-position">&nbsp;</span>
+        </button>
+    </div>
   <section class="col-xs-12 col-sm-12 col-md-8 col-lg-8 mt-12">
       <p class="s-text">You are almost done! Please help us and the community to know you better.</p>
       <form [formGroup]="profileForm" (ngSubmit)="onSubmit()" class="mt-16">
@@ -25,14 +30,14 @@
               </div>
               <div class="form-group">
                   <label for="ctry" class="control-label">Country <span class="text-warning">*</span></label>
-                  <select class="form-control" id="ctry" placeholder="" formControlName="userCountry">
+                  <select  tabindex="1" class="form-control" id="ctry" placeholder="" formControlName="userCountry">
                       <option disabled>Select a country</option>
                       <option *ngFor="let country of countryList" [value]="country">{{country}}</option>
                     </select>
               </div>
               <div class="form-group">
                   <label for="role" class="control-label">Current Role <span class="text-warning">*</span></label>
-                  <input id="role" class="form-control" name="role" placeholder="" formControlName="userRole" type="text" autocomplete="off">
+                  <input  tabindex="1" id="role" class="form-control" name="role" placeholder="" formControlName="userRole" type="text" autocomplete="off">
               </div>
           </div>
           <div class="form-group">
@@ -40,7 +45,7 @@
                   Domain / Area of work <span class="text-warning">*</span>
                   <span class="help-block m-0 xs-text">(use comma to add upto 5 entries)</span>
               </label>
-              <mat-form-field class="chips-container" appearance="fill">
+              <mat-form-field tabindex="1" class="chips-container" appearance="fill">
                 <mat-chip-list #chipList aria-label="Domain selection">
                   <mat-chip *ngFor="let domain of domains" (removed)="remove(domain, domains)" class="chip-value">
                     <span >{{domain}}</span>
@@ -59,7 +64,7 @@
                   Areas of expertise
                   <span class="help-block m-0 xs-text">(use comma to add upto 5 entries)</span>
               </label>
-              <mat-form-field class="chips-container" appearance="fill">
+              <mat-form-field tabindex="1" class="chips-container" appearance="fill">
                 <mat-chip-list #chipListExpertise aria-label="Expertise selection">
                   <mat-chip *ngFor="let expertise of expertises" (removed)="remove(expertise, expertises)" class="chip-value">
                     <span >{{expertise}}</span>
@@ -78,26 +83,23 @@
                   Profile Link
                   <span class="help-block m-0 xs-text">(Ex. LinkedIn, Organization Profile, etc.,)</span>
               </label>   
-              <input id="profile" class="form-control" formControlName="profileLink" name="profile" placeholder="https://www.linkedIn.com/" type="text" autocomplete="off">
-          </div>
+              <input tabindex="1" id="profile" class="form-control-profile" formControlName="profileLink" name="profile" placeholder="https://www.linkedIn.com/" type="text" autocomplete="off">
+              <span class="v-diamond a-position visible-md visible-lg">&nbsp;</span>
+            </div>
           
           <div class="form-group btn-group center">
-              <input class="btn btn-primary btn-lg" name="next" id="nextTC" type="submit" value="Finish">
+              <input tabindex="1" class="btn btn-primary btn-lg" name="next" id="nextTC" type="submit" value="Finish">
               <span class="btn btn-primary" id="custom-back">
-                <span class="a-position">Back</span>
+                <span tabindex="1" class="a-position">Back</span>
                 <ws-widget-btn-page-back [widgetData]="{ url: 'back' }"></ws-widget-btn-page-back>
               </span>
           </div>
       </form>
 
   </section>
-  <div class="v-oGraphic a-position visible-md visible-lg">
-      <button type="button" class="r-position" (click)="open()">
-          <span class="icon-play a-position">&nbsp;</span>
-      </button>
-  </div>
   
-  <span class="v-diamond a-position visible-md visible-lg">&nbsp;</span>
+  
+  
 </div>
 
 <!-- Video Modal -->
@@ -120,6 +122,6 @@
             <mat-icon>close</mat-icon>
           </button>
       </mat-dialog-actions>
-    <iframe width="860" class="pt-10" height="315" src="https://www.youtube.com/embed/W86-mjWXQaw" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+    <iframe width="1100" class="pt-10" height="600" src="https://www.youtube.com/embed/W86-mjWXQaw" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
 </ng-template>
