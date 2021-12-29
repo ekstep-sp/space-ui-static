@@ -15,13 +15,14 @@
               <span class="font-size-small">I agree to the terms & conditions</span>
           
             </mat-checkbox>
-          
-            <mat-checkbox *ngIf="this.tncData.isNewUser" class="width-full-wrapped" [(ngModel)]="acceptData"
-              (ngModelChange)="acceptDataForNewUser()" [color]="'primary'" i18n class="display-block ml-3 text-left">
+
+            <mat-checkbox *ngIf="this.tncData.isNewUser" class="width-full-wrapped"  [checked]="tncData.isAccepted"
+              (change)="acceptDataForNewUser()" [color]="'primary'" i18n class="display-block ml-3 text-left">
               <span class="font-size-small">I agree to the terms & conditions</span>
           
             </mat-checkbox>
-            <a *ngIf="isDisabled()" [attr.disabled]="true" class="btn btn-primary btn-lg mt-16" type="button" color="primary"
+          
+            <a *ngIf="isDisabled()" class="btn btn-primary btn-lg mt-16 disabled" type="button" color="primary"
                routerLink="/app/setup/home/user-profile" (click)="acceptTnc()" i18n>Next
             </a>
             <a *ngIf="!isDisabled()" class="btn btn-primary btn-lg mt-16" type="button" color="primary"

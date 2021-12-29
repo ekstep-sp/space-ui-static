@@ -61,12 +61,12 @@
           </div>
           <div class="form-group">
               <label for="area" class="control-label">
-                  Areas of expertise
+                  Areas of expertise<span class="text-warning">*</span>
                   <span class="help-block m-0 xs-text">(use comma to add upto 5 entries)</span>
               </label>
               <mat-form-field tabindex="1" class="chips-container" appearance="fill">
                 <mat-chip-list #chipListExpertise aria-label="Expertise selection">
-                  <mat-chip *ngFor="let expertise of expertises" (removed)="remove(expertise, expertises)" class="chip-value">
+                  <mat-chip *ngFor="let expertise of expertises" (removed)="removeExpertise(expertise, expertises)" class="chip-value">
                     <span >{{expertise}}</span>
                       <span class="icon-close" matChipRemove></span>
                   </mat-chip>
@@ -74,7 +74,7 @@
                          [matChipInputFor]="chipListExpertise"
                          [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
                          [matChipInputAddOnBlur]="addOnBlur"
-                         (matChipInputTokenEnd)="add($event, expertises)">
+                         (matChipInputTokenEnd)="addExpertise($event, expertises)">
                 </mat-chip-list>
               </mat-form-field>
           </div>
@@ -88,7 +88,7 @@
             </div>
           
           <div class="form-group btn-group center">
-              <input tabindex="1" class="btn btn-primary btn-lg" name="next" id="nextTC" type="submit" value="Finish">
+              <input tabindex="1" class="btn btn-primary btn-lg" name="next" id="nextTC" type="submit" value="Finish" [disabled]="profileForm.invalid">
               <span class="btn btn-primary" id="custom-back">
                 <span tabindex="1" class="a-position">Back</span>
                 <ws-widget-btn-page-back [widgetData]="{ url: 'back' }"></ws-widget-btn-page-back>

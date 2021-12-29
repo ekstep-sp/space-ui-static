@@ -22,19 +22,17 @@
           </div>
         </div>
         <div class="form-group form-btext pl-10">
-          <!-- <input
-          tabindex="1"
+          <input
           id="org"
           name="name"
           class="form-control"
-          formControlName="userFirstName"
           type="text"
-          autocomplete="off"
-          autofocus
-        /> -->
-          <label id="org" name="name" class="form-control">{{
+          [value]="userName"
+          readonly
+        />
+          <!-- <label id="org" name="name" class="form-control">{{
             userName
-          }}</label>
+          }}</label> -->
         </div>
       </div>
       <div class="form-inline multiple m-tb">
@@ -50,23 +48,38 @@
           autocomplete="off"
           autofocus
         /> -->
-          <label class="form-control" id="org">{{ departmentName }}</label>
+        <input
+          id="org"
+          class="form-control"
+          type="text"
+          [value]="departmentName"
+          readonly          
+        />
+          <!-- <label class="form-control" id="org">{{ departmentName }}</label> -->
         </div>
         <div class="form-group">
           <label tabindex="1" for="ctry" class="control-label"
             >Country <span class="text-warning">*</span></label
           >
 
-          <!-- <select
+          <select
             tabindex="1"
             class="form-control"
             id="ctry"
             placeholder=""
+           readonly            
           >
-            <option disabled>Select a country</option>
+            <option selected >{{ country }}</option>
+          </select>
+
+           <!-- <select
+            class="form-control"
+            id="ctry"
+          >
+            <option selected disabled>{{ country }}</option>
           </select> -->
 
-          <label class="form-control" id="ctry">{{ country }}</label>
+          <!-- <label class="form-control" id="ctry">{{ country }}</label> -->
         </div>
         <div class="form-group">
           <label for="role" class="control-label"
@@ -81,9 +94,17 @@
             type="text"
             autocomplete="off"
           /> -->
-          <label id="role" class="form-control" name="role">{{
+           <input
+            id="role"
+            class="form-control"
+            name="role"
+            type="text"
+            [value]="currentRole"
+            readonly
+          />
+          <!-- <label id="role" class="form-control" name="role">{{ 
           currentRole
-        }}</label>
+        }}</label>-->
         </div>
       </div>
       <div class="form-group">
@@ -134,9 +155,10 @@
           >
         </label>
         <!-- <input id="profile" class="form-control" formControlName="profileLink" name="profile" placeholder="https://www.linkedIn.com/" type="text" autocomplete="off"> -->
-        <label id="profile" class="form-control-profile" name="profile">{{
+        <input id="profile" class="form-control" formControlName="profileLink" name="profile" type="text" [value]="profileLink" readonly>
+        <!-- <label id="profile" class="form-control-profile" name="profile">{{
           profileLink
-        }}</label>
+        }}</label> -->
         <span class="v-diamond a-position visible-md visible-lg">&nbsp;</span>
       </div>
 

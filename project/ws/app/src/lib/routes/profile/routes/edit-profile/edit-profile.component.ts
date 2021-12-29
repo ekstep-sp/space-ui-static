@@ -1,7 +1,7 @@
 
 import { Component, OnInit, Input, ViewChild } from '@angular/core'
 import { InitService } from 'src/app/services/init.service'
-import { FormGroup, FormControl } from '@angular/forms'
+import { FormGroup, FormControl, Validators } from '@angular/forms'
 import { ProfileService } from '../../services/profile.service'
 import { MatSnackBar } from '@angular/material'
 import { UploadService } from '../../../../../../../author/src/lib/routing/modules/editor/shared/services/upload.service'
@@ -91,12 +91,12 @@ export class EditProfileComponent implements OnInit {
   relativeUrl = ''
   isEnable = false
   profileForm: FormGroup = new FormGroup({
-    userFirstName: new FormControl(''),
-    userOrganisation: new FormControl(''),
-    userCountry: new FormControl(''),
-    userRole: new FormControl(''),
-    userDomain: new FormControl([]),
-    userExpertise: new FormControl([]),
+    userFirstName: new FormControl('',Validators.required),
+    userOrganisation: new FormControl('',Validators.required),
+    userCountry: new FormControl('',Validators.required),
+    userRole: new FormControl('',Validators.required),
+    userDomain: new FormControl([],Validators.required),
+    userExpertise: new FormControl([],Validators.required),
     sourceProfilePicture: new FormControl(''),
     profileLink: new FormControl(''),
   })
@@ -127,6 +127,8 @@ export class EditProfileComponent implements OnInit {
       this.expertises = expertise ? expertise : []
       this.actualDomains = [...this.domains]
       this.actualExpertises = [...this.expertises]
+      this.profileForm.controls.userDomain.setValue(this.domains)
+      this.profileForm.controls.userExpertise.setValue(this.expertises)
     })
     if (this.userProfile) {
       this.profileForm.controls.userFirstName.setValue(this.userProfile.givenName
@@ -306,12 +308,23 @@ export class EditProfileComponent implements OnInit {
   add(event: MatChipInputEvent, chipList: any): void {
     const value = (event.value || '').trim()
 
-    // Add our fruit
-    if (value && value.length >= 3 && !this.domains.some(dom => dom === value) && chipList.length <= 5) {
+    // Add
+    if (value && value.length >= 3 && !this.domains.some(dom => dom === value) && chipList.length < 5) {
       chipList.push(value)
     }
+    this.profileForm.controls.userDomain.setValue(null)
+    this.profileForm.controls.userDomain.setValue(chipList)
+    event.input.value = ''
+  }
+  addExpertise(event: MatChipInputEvent, chipList: any): void {
+    const value = (event.value || '').trim()
 
-    // Clear the input value
+    // Add 
+    if (value && value.length >= 3 && !this.expertises.some(dom => dom === value) && chipList.length < 5) {
+      chipList.push(value)
+    }
+    this.profileForm.controls.userExpertise.setValue(null)
+    this.profileForm.controls.userExpertise.setValue(chipList)
     event.input.value = ''
   }
 
@@ -321,6 +334,18 @@ export class EditProfileComponent implements OnInit {
     if (index >= 0) {
       chipList.splice(index, 1)
     }
+    this.profileForm.controls.userDomain.setValue(null)
+    this.profileForm.controls.userDomain.setValue(chipList)
+  }
+
+  removeExpertise(chip: Chips, chipList: Chips[]): void {
+    const index = chipList.indexOf(chip)
+
+    if (index >= 0) {
+      chipList.splice(index, 1)
+    }
+    this.profileForm.controls.userExpertise.setValue(null)
+    this.profileForm.controls.userExpertise.setValue(chipList)
   }
 
   open(config?: MatDialogConfig) {
