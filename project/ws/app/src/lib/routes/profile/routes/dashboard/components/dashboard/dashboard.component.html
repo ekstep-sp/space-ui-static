@@ -18,7 +18,7 @@
       <div class="form-inline f-step">
         <div class="form-group r-position">
           <div class="circle">
-            <img class="profile-pic" [src]="userProfilePicture" />
+            <img class="profile-pic" [src]="userProfilePicture ? userProfilePicture : defaultProfileImage" />
           </div>
         </div>
         <div class="form-group form-btext pl-10">

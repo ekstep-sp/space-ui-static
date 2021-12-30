@@ -108,6 +108,7 @@ export class DashboardComponent implements OnInit {
   pageNum = ''
   ongoingCertifications: NSLearningHistory.ILearningHistoryItem[] = []
   passedCertifications: NSLearningHistory.ILearningHistoryItem[] = []
+  defaultProfileImage = '../../../../../../../../../../../fusion-assets/profileimage.png'
 
   @ViewChild('video', {static: false}) video: any;
 
@@ -145,7 +146,7 @@ export class DashboardComponent implements OnInit {
         this.configSvc.userProfile.source_profile_picture !== '') {
            this.userProfilePicture = this.getAuthoringUrl(this.configSvc.userProfile.source_profile_picture)
         }
-    }
+      }
   }
 
   ngOnInit() {
