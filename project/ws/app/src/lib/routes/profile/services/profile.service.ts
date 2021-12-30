@@ -142,6 +142,7 @@ export class ProfileService {
         this.configSvc.unMappedUser = userPidProfile.user
         this.configSvc.userProfile = {
           country: userPidProfile.user.organization_location_country || null,
+          currentRole: userPidProfile.user.job_role || '',
           departmentName: userPidProfile.user.department_name || '',
           email: userPidProfile.user.email,
           givenName: userPidProfile.user.first_name,
