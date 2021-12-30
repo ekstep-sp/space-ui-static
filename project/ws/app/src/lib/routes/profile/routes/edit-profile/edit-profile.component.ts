@@ -216,7 +216,7 @@ export class EditProfileComponent implements OnInit {
     return true
   }
   async onSubmit() {
-    if (!(this.profileForm.controls.userFirstName.value.trim()).match(/^[A-Za-z]+$/)) {
+    if (!(this.profileForm.controls.userFirstName.value.trim()).match(/^[A-Za-z\s]+$/)) {
       this.snackBar.open('Name is invalid or empty', '', {
         duration: 1000,
       })
