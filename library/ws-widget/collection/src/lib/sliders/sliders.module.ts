@@ -5,6 +5,7 @@ import { RouterModule } from '@angular/router'
 import { NavigationModule, ImageResponsiveModule } from '@ws-widget/utils'
 
 import { HAMMER_GESTURE_CONFIG, HammerGestureConfig } from '@angular/platform-browser'
+import { MatDialogModule, MatIconModule } from '@angular/material'
 export class MyHammerConfig extends HammerGestureConfig {
   buildHammer(element: HTMLElement) {
     const mc = new Hammer(element, {
@@ -22,6 +23,8 @@ export class MyHammerConfig extends HammerGestureConfig {
     RouterModule,
     NavigationModule,
     ImageResponsiveModule,
+    MatIconModule,
+    MatDialogModule,
   ],
   entryComponents: [SlidersComponent],
   providers: [

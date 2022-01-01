@@ -1,13 +1,72 @@
 <div class="banner-container" (swipeleft)="slideTo(currentIndex + 1)" (swiperight)="slideTo(currentIndex - 1)"
   *ngIf="widgetData?.length">
-  <a (click)="raiseTelemetry(widgetData[currentIndex].redirectUrl)"
+  <div class="p-10 grid grid-cols-1 sm:grid-cols-1 md:grid-cols-3 lg:grid-cols-3 xl:grid-cols-3 gap-5 purple-font light-purple-bg home-card-container">
+    <div class="max-w-sm rounded-md overflow-hidden p-6 home-card font-semibold bg-white">
+      <div class="py-4">
+        <div class="font-bold text-xl mb-2">Societal Thinking: Learning Course</div>
+      </div>
+      <div class="max-w-sm w-full lg:max-w-full lg:flex -mx-2 h-32">
+        <div class="md:w-1/4 px-2 text-center w-full">
+          <img src="../../../../../../../../../fusion-assets/img/think.svg" alt="">
+        </div>
+        <div class="md:w-3/4 px-3 w-full" >
+        <span class="display-block">Curated journey for learning about the What, Why and How’s of Societal Thinking.</span>
+        </div>
+      </div>
+      <div class="lg:flex flex-row-reverse  space-x-reverse">
+        <div class="">
+          <a class="btn btn-primary " type="button" routerLink="/app/setup/home/user-profile" i18n>Continue Learning
+          </a>
+        </div>
+      </div>
+    </div>
+    <div class="max-w-sm rounded-md overflow-hidden p-6 home-card font-semibold bg-white">
+      <div class="py-4">
+        <div class="font-bold text-xl mb-2">Societal Thinking: Design Kit</div>
+      </div>
+      <div class="max-w-sm w-full lg:max-w-full lg:flex -mx-2 h-32">
+        <div class="md:w-1/4 px-2 text-center w-full">
+          <img src="../../../../../../../../../fusion-assets/img/design.svg" alt="">
+        </div>
+        <div class="md:w-3/4 px-3 w-full" >
+        <span class="display-block">Toolkit to think through the various building blocks that help in building a Societal Programs and Societal Platforms.</span>
+        </div>
+      </div>
+      <div class="lg:flex flex-row-reverse  space-x-reverse">
+        <div class="">
+          <a class="btn btn-primary " type="button" routerLink="/app/setup/home/user-profile" i18n>Continue Designing
+          </a>
+        </div>
+      </div>
+    </div>
+    <div class="max-w-sm rounded-md overflow-hidden p-6 home-card font-semibold bg-white">
+      <div class="py-4">
+        <div class="font-bold text-xl mb-2">Explore</div>
+      </div>
+      <div class="max-w-sm w-full lg:max-w-full lg:flex -mx-2 h-32">
+        <div class="md:w-1/4 px-2 text-center w-full">
+          <img src="../../../../../../../../../fusion-assets/img/explore.svg" alt="">
+        </div>
+        <div class="md:w-3/4 px-3 w-full" >
+        <span class="display-block">Navigate the resources catering to the What, Why and How’s of Societal Thinking.</span>
+        </div>
+      </div>
+      <div class="lg:flex flex-row-reverse  space-x-reverse">
+        <div class="">
+          <a class="btn btn-primary " type="button" routerLink="/app/setup/home/user-profile" i18n>Continue Exploring
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- <a (click)="raiseTelemetry(widgetData[currentIndex].redirectUrl)"
     [queryParams]="widgetData[currentIndex].queryParams || {}"
     [routerLink]="!isOpenInNewTab ? widgetData[currentIndex].redirectUrl : './'" class="banner-overlay"
     [ngClass]="{ 'cursor-auto': !widgetData[currentIndex].redirectUrl }"></a>
   <div class="banner WidgetInstanceId" *ngFor="let slide of widgetData; let i = index" [hidden]="i !== currentIndex">
-    <!-- <div class="overlay-banner"></div> -->
+     <div class="overlay-banner"></div> 
     <img i18n-alt alt="Page Banner" [src]="slide.banners" wsUtilsImageResponsive class="banner-image" />
-  </div>
+  </div> -->
   <div class="banner-meta">
     <a [routerLink]="!isOpenInNewTab ? widgetData[currentIndex].redirectUrl : './'" class="banner-title text-truncate"
       *ngIf="widgetData[currentIndex].title" [title]="widgetData[currentIndex].title">
@@ -26,3 +85,34 @@
   </button>
 
 </div>
+<ng-template #welcomeModal class="welcome-modal">
+  <mat-dialog-actions class="justify-between">
+    <div class="ml-6 purple-font">
+      <span class="display-block font-semibold text-4xl mb-3">Welcome to Space</span>
+      <span class="display-block font-medium text-lg ">Here are some quick suggestions for you</span>
+    </div>
+      <button mat-icon-button aria-label="close dialog" mat-dialog-close class="close-button cursor-pointer">
+          <mat-icon>close</mat-icon>
+        </button>
+    </mat-dialog-actions>
+    <div class="flex mb-4 font-semibold purple-font welcome-modal-card px-16 flex-column mx-8 mt-12">
+      <div class="py-6 w-full">
+        <div class="font-bold text-xl mb-2">Societal Thinking: Learning Course</div>
+        <span class="display-block font-medium text-lg">Curated journey for learning about the What, Why and How’s of Societal Thinking.</span>
+      </div>
+      <div class="pb-6">
+          <a class="btn btn-primary text-base px-16" type="button" routerLink="/app/setup/home/user-profile" i18n mat-dialog-close>Start Exploring
+          </a>
+      </div>
+    </div>
+    <div class="flex mb-4 font-semibold purple-font welcome-modal-card px-16 flex-column mx-8">
+      <div class="py-6 w-full">
+        <div class="font-bold text-xl mb-2">FAQ’s: Societal Thinking & SPace</div>
+        <span class="display-block font-medium text-lg ">Frequently asked Questions on Societal Thinking and on the SPace platform.</span>
+      </div>
+        <div class="pb-6">
+          <a class="btn btn-primary text-base px-16" type="button" routerLink="/app/setup/home/user-profile" i18n mat-dialog-close>Start Exploring
+          </a>
+        </div>
+    </div>
+</ng-template>

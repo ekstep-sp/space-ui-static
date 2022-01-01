@@ -1,9 +1,9 @@
-import { Component, Input, OnInit } from '@angular/core'
+import { Component, Input, OnInit, ViewChild } from '@angular/core'
 import { NsWidgetResolver, WidgetBaseComponent } from '@ws-widget/resolver'
 import { ICarousel } from './sliders.model'
 import { Subscription, interval } from 'rxjs'
 import { EventService } from '../../../../utils/src/public-api'
-
+import {MatDialog, MatDialogConfig} from '@angular/material/dialog';
 @Component({
   selector: 'ws-widget-sliders',
   templateUrl: './sliders.component.html',
@@ -15,13 +15,19 @@ export class SlidersComponent extends WidgetBaseComponent
 
   currentIndex = 0
   slideInterval: Subscription | null = null
+  @ViewChild('welcomeModal', {static: false}) welcomeModal: any;
 
-  constructor(private events: EventService) {
+  constructor(private events: EventService,
+    public dialog: MatDialog) {
     super()
   }
 
   ngOnInit() {
     this.reInitiateSlideInterval()
+  }
+
+  ngAfterViewInit(): void {
+    this.open({width: '100vw', panelClass:'welcome-modal',hasBackdrop:true});
   }
   reInitiateSlideInterval() {
     if (this.widgetData.length > 1) {
@@ -74,5 +80,8 @@ export class SlidersComponent extends WidgetBaseComponent
       pageUrl: url,
       bannerRedirectUrl: bannerUrl,
     })
+  }
+  open(config?: MatDialogConfig) {
+    return this.dialog.open(this.welcomeModal, config);
   }
 }

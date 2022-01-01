@@ -87,6 +87,56 @@ export class AppNavBarComponent implements OnInit, OnChanges {
       this.primaryNavbarConfig = this.configSvc.primaryNavBarConfig
     }
     if (this.configSvc.appsConfig) {
+      if (this.configSvc.appsConfig.features.feature_aboutUs) {
+        delete this.configSvc.appsConfig.features.feature_aboutUs
+      }
+      if (this.configSvc.appsConfig.features.feature_collaborators) {
+        delete this.configSvc.appsConfig.features.feature_collaborators
+      }
+  //     const faq:NsAppsConfig.IFeature = {
+  //       "accessKey": "K",
+  //       "icon": "",
+  //       "iconType": "mat-icon",
+  //       "id": "feature_Q&A",
+  //       "keywords": [
+  //           "about platform",
+  //           "information",
+  //           "about",
+  //           "about us"
+  //       ],
+  //       "name": "FAQs",
+  //       "permission": [
+  //           "ABOUT_US"
+  //       ],
+  //       "show": true,
+  //       "status": "live",
+  //       "toolTip": "FAQs",
+  //       "url": "/public/about",
+  //       "shortName": "About"
+  //   }
+  //   const Community = {
+  //     "accessKey": "",
+  //     "icon": "",
+  //     "iconType": "mat-icon",
+  //     "id": "feature_aboutUs",
+  //     "keywords": [
+  //         "about platform",
+  //         "information",
+  //         "about",
+  //         "about us"
+  //     ],
+  //     "name": "Community",
+  //     "permission": [
+  //         "ABOUT_US"
+  //     ],
+  //     "show": true,
+  //     "status": "live",
+  //     "toolTip": "Community",
+  //     "url": "/public/about",
+  //     "shortName": "About"
+  // }
+  // this.configSvc.appsConfig.features['feature_Q&A']=faq;
+  // this.configSvc.appsConfig.features['feature_aboutUs']=Community;
       this.featureApps = Object.keys(this.configSvc.appsConfig.features)
     }
     this.configSvc.tourGuideNotifier.subscribe(canShow => {
