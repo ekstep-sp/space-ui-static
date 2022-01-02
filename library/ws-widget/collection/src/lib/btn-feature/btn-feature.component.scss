@@ -21,6 +21,9 @@
 .custom-padding {
   margin-left: 20px;
 }
+.custom-padding.ml-10 {
+  margin-left: 40px;
+}
  @media screen and (max-width:600px){
 .custom-padding {
   margin-left: 0px !important;
@@ -156,4 +159,7 @@
   .custom-padding {
     margin-left: 0px;
   }
+}
+.custom-padding span.text-sm{
+  font-size: .875rem;
 }

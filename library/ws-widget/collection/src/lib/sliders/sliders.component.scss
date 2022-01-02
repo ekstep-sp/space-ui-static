@@ -155,17 +155,18 @@ $banner-min-height: 200px;
 }
 .btn-primary {
   background-color: #42428B;
-  color: #FFFFFF;
-  padding: 0 50px;
+  color: #FFFFFF !important;
+  padding: 0 55px;
   border: none;
   background-image: none;
+  margin-right: 20px;
 }
 .btn-lg {
   min-width: 250px;
 }
 .btn {
-  font-size: 18px;
-  height: 50px;
+  font-size: 0.875rem;
+  height: 35px;
   display: inline-block;
   font-weight: 500;
   vertical-align: middle;
@@ -174,7 +175,7 @@ $banner-min-height: 200px;
   transition: color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out,box-shadow .15s ease-in-out;
 }
 .home-card{
-  height: 250px;
+  height: 200px;
   background-image: url(../../../../../../src/fusion-assets/img/cardbgL.svg), url(../../../../../../src/fusion-assets/img/cardbgR.svg);
   background-position: left bottom, right top;
   background-repeat: no-repeat, no-repeat;
@@ -184,7 +185,7 @@ $banner-min-height: 200px;
   background-image: url(../../../../../../src/fusion-assets/img/leftpyramid.svg), url(../../../../../../src/fusion-assets/img/rightpyramid.svg);
   background-position: left bottom, right top;
   background-repeat: no-repeat, no-repeat;
-  background-size: 30px,50px;
+  background-size: 25px,35px;
   margin-top: 55px;
 }
 

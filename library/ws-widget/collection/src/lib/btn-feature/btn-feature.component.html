@@ -25,12 +25,13 @@
       [disableRipple]="true" mat-flat-button routerLinkActive="ws-mat-primary-text link-active">
       <ng-container [ngTemplateOutlet]="buttonContent" [ngTemplateOutletContext]="widgetData"></ng-container>
     </a>
-    <a *ngSwitchCase="displayType.matIconButton" [disableRipple]="true" [name]="widgetData.actionBtn?.name"
+    <a *ngSwitchCase="displayType.matIconButton" [ngClass]="{'ml-10': widgetData.actionBtn?.showName}" [disableRipple]="true" [name]="widgetData.actionBtn?.name"
       class="custom-padding" [routerLink]="widgetData.actionBtn?.url" mat-icon-button>
       <ng-container [ngTemplateOutlet]="icon" [ngTemplateOutletContext]="{
           iconType: widgetData.actionBtn.iconType,
           icon: widgetData.actionBtn.icon
         }"></ng-container>
+        <span class="ml-2 display-inline-block text-sm" *ngIf="widgetData.actionBtn?.showName">{{ widgetData.actionBtn.name }}</span>
     </a>
     <a *ngSwitchCase="displayType.matMiniFabButton" [routerLink]="widgetData.actionBtn?.url" mat-mini-fab>
       <ng-container [ngTemplateOutlet]="icon" [ngTemplateOutletContext]="widgetData.actionBtn"></ng-container>

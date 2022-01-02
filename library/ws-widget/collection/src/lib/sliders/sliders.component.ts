@@ -16,6 +16,10 @@ export class SlidersComponent extends WidgetBaseComponent
   currentIndex = 0
   slideInterval: Subscription | null = null
   @ViewChild('welcomeModal', {static: false}) welcomeModal: any;
+  isFirstVisit = true
+  isExploring = true
+  isLearning = true
+  isDesigning = true
 
   constructor(private events: EventService,
     public dialog: MatDialog) {
@@ -23,11 +27,17 @@ export class SlidersComponent extends WidgetBaseComponent
   }
 
   ngOnInit() {
+    this.checkCookies()
     this.reInitiateSlideInterval()
   }
 
   ngAfterViewInit(): void {
-    this.open({width: '100vw', panelClass:'welcome-modal',hasBackdrop:true});
+    if(this.isFirstVisit) {
+      setTimeout(() => {
+        this.open({width: '100vw', panelClass:'welcome-modal',hasBackdrop:true});
+      },5000)
+      this.setCookie('isFirstVisit',false,2147483647)
+    }
   }
   reInitiateSlideInterval() {
     if (this.widgetData.length > 1) {
@@ -83,5 +93,47 @@ export class SlidersComponent extends WidgetBaseComponent
   }
   open(config?: MatDialogConfig) {
     return this.dialog.open(this.welcomeModal, config);
+  }
+  
+  getCookie(name: string) {
+    let ca: Array<string> = document.cookie.split(';');
+    let caLen: number = ca.length;
+    let cookieName = `${name}=`;
+    let c: string;
+
+    for (let i: number = 0; i < caLen; i += 1) {
+        c = ca[i].replace(/^\s+/g, '');
+        if (c.indexOf(cookieName) == 0) {
+            return c.substring(cookieName.length, c.length);
+        }
+    }
+    return '';
+  }
+
+  setCookie(name: string, value: boolean, expireDays: number, path: string = '') {
+    let d:Date = new Date();
+    d.setTime(d.getTime() + expireDays * 24 * 60 * 60 * 1000);
+    let expires:string = `expires=${d.toUTCString()}`;
+    let cpath:string = path ? `; path=${path}` : '';
+    document.cookie = `${name}=${value}; ${expires}${cpath}`;
+  }
+
+  checkCookies() {
+    const isVisitedStr = this.getCookie('isFirstVisit')
+    if(isVisitedStr !== ''){
+      this.isFirstVisit = false
+    }
+    const isLearningStr = this.getCookie('isLearning')
+    if(isLearningStr === ''){
+      this.isLearning = false
+    }
+    const isDesigningStr = this.getCookie('isDesigning')
+    if(isDesigningStr === ''){
+      this.isDesigning = false
+    }
+    const isExploringStr = this.getCookie('isExploring')
+    if(isExploringStr === ''){
+      this.isExploring = false
+    }
   }
 }
