@@ -15,7 +15,7 @@ import { MatChipInputEvent } from '@angular/material/chips'
 import { COMMA, ENTER } from '@angular/cdk/keycodes'
 import { forkJoin } from 'rxjs'
 import { countryList } from '../../models/countries.model'
-import {MatDialog, MatDialogConfig} from '@angular/material/dialog';
+import { MatDialog, MatDialogConfig } from '@angular/material/dialog'
 export namespace NsEditProfile {
   export interface IResponseBody {
     wid: string,
@@ -29,7 +29,7 @@ export namespace NsEditProfile {
     profileLink: string
   }
 }
-export interface Chips {
+export interface IChips {
   name?: string
 }
 @Component({
@@ -48,10 +48,10 @@ export class EditProfileComponent implements OnInit {
   appName = ''
   introVideos: any
   countryList = countryList
-  domains: Chips[] = []
-  expertises: Chips[] = []
-  actualDomains: Chips[] = []
-  actualExpertises: Chips[] = []
+  domains: IChips[] = []
+  expertises: IChips[] = []
+  actualDomains: IChips[] = []
+  actualExpertises: IChips[] = []
   addOnBlur = true
   readonly separatorKeysCodes = [ENTER, COMMA] as const
   paramsForEditProfile: NsEditProfile.IResponseBody = {} as NsEditProfile.IResponseBody
@@ -73,8 +73,8 @@ export class EditProfileComponent implements OnInit {
       'margin-right': 'auto',
     },
   }
-  @ViewChild('video', {static: false}) video: any;
-  
+  @ViewChild('video', { static: false }) video: any
+
   constructor(
     private initService: InitService,
     private profileSvc: ProfileService,
@@ -91,12 +91,12 @@ export class EditProfileComponent implements OnInit {
   relativeUrl = ''
   isEnable = false
   profileForm: FormGroup = new FormGroup({
-    userFirstName: new FormControl('',Validators.required),
-    userOrganisation: new FormControl('',Validators.required),
-    userCountry: new FormControl('',Validators.required),
-    userRole: new FormControl('',Validators.required),
-    userDomain: new FormControl([],Validators.required),
-    userExpertise: new FormControl([],Validators.required),
+    userFirstName: new FormControl('', Validators.required),
+    userOrganisation: new FormControl('', Validators.required),
+    userCountry: new FormControl('', Validators.required),
+    userRole: new FormControl('', Validators.required),
+    userDomain: new FormControl([], Validators.required),
+    userExpertise: new FormControl([], Validators.required),
     sourceProfilePicture: new FormControl(''),
     profileLink: new FormControl(''),
   })
@@ -232,8 +232,7 @@ export class EditProfileComponent implements OnInit {
         this.snackBar.open('Domain is invalid or empty', '', {
           duration: 1000,
         })
-        }
-        else if (this.expertises.length === 0 || this.expertises.length > 5) {
+        } else if (this.expertises.length === 0 || this.expertises.length > 5) {
           this.snackBar.open('Area of Expertise is invalid or empty', '', {
             duration: 1000,
           })
@@ -246,7 +245,8 @@ export class EditProfileComponent implements OnInit {
         expertise: this.profileSvc.deteleExpertise(expertiseDiff),
       }).subscribe(({}) => {
       })
-      const editresponse = await this.profileSvc.editProfile(this.userProfile.userId, this.profileForm.controls, { domains: this.domains, expertises: this.expertises })
+      const editresponse =
+      await this.profileSvc.editProfile(this.userProfile.userId, this.profileForm.controls, { domains: this.domains, expertises: this.expertises })
       this.isLoad = false
       if (editresponse.ok) {
         if (editresponse.DATA != null) {
@@ -319,7 +319,7 @@ export class EditProfileComponent implements OnInit {
   addExpertise(event: MatChipInputEvent, chipList: any): void {
     const value = (event.value || '').trim()
 
-    // Add 
+    // Add
     if (value && value.length >= 3 && !this.expertises.some(dom => dom === value) && chipList.length < 5) {
       chipList.push(value)
     }
@@ -328,7 +328,7 @@ export class EditProfileComponent implements OnInit {
     event.input.value = ''
   }
 
-  remove(chip: Chips, chipList: Chips[]): void {
+  remove(chip: IChips, chipList: IChips[]): void {
     const index = chipList.indexOf(chip)
 
     if (index >= 0) {
@@ -338,7 +338,7 @@ export class EditProfileComponent implements OnInit {
     this.profileForm.controls.userDomain.setValue(chipList)
   }
 
-  removeExpertise(chip: Chips, chipList: Chips[]): void {
+  removeExpertise(chip: IChips, chipList: IChips[]): void {
     const index = chipList.indexOf(chip)
 
     if (index >= 0) {
@@ -349,6 +349,6 @@ export class EditProfileComponent implements OnInit {
   }
 
   open(config?: MatDialogConfig) {
-    return this.dialog.open(this.video, config);
+    return this.dialog.open(this.video, config)
   }
 }

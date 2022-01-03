@@ -4,7 +4,7 @@ import { DashboardComponent } from './components/dashboard/dashboard.component'
 import { HorizontalScrollerModule, PipeDurationTransformModule, DefaultThumbnailModule } from '@ws-widget/utils'
 import { UserImageModule, CardKnowledgeModule } from '@ws-widget/collection'
 import {
-  MatCardModule,MatFormFieldModule,
+  MatCardModule, MatFormFieldModule,
   MatChipsModule,
   MatIconModule,
   MatDatepickerModule,

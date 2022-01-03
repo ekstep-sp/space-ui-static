@@ -21,9 +21,9 @@ export class HomeComponent implements OnInit, OnDestroy {
   feedbackSummary?: IFeedbackSummary
   rolesSet: Set<string>
   subscriptionSubject$: Subject<any>
-  widgetData= {
-    "autoplay": true,
-    "url": "/assets/instances/space/videos/intro_video.mp4"
+  widgetData = {
+    autoplay: true,
+    url: '/assets/instances/space/videos/intro_video.mp4',
 }
 
   constructor(
@@ -63,7 +63,6 @@ export class HomeComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
-    this.route.data.subscribe(routeData => {console.log(routeData)})
     let tab
     if (this.route.children[0].snapshot.url.length) {
       tab = this.route.children[0].snapshot.url[0].path

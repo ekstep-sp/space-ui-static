@@ -12,7 +12,6 @@ import { HomeComponent } from './components/home/home.component'
 import { ServiceRequestComponent } from './components/service-request/service-request.component'
 import { ProvideFeedbackRoutingModule } from './provide-feedback-routing.module'
 
-
 @NgModule({
   declarations: [
     HomeComponent,

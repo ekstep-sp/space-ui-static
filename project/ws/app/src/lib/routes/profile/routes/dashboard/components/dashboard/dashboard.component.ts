@@ -10,7 +10,7 @@ import { NSLearningHistory } from '../../../learning/models/learning.models'
 import { LearningHistoryService } from '../../../learning/services/learning-history.service'
 import { forkJoin } from 'rxjs'
 import { InitService } from 'src/app/services/init.service'
-import {MatDialog, MatDialogConfig} from '@angular/material/dialog';
+import { MatDialog, MatDialogConfig } from '@angular/material/dialog'
 
 interface ILearningHistoryContent {
   content: NSLearningHistory.ILearningHistory
@@ -55,7 +55,7 @@ export class DashboardComponent implements OnInit {
   currentRole = ''
   domains: Chips[] = []
   expertises: Chips[] = []
-  profileLink : string | undefined= ''
+  profileLink: string | undefined = ''
   userProfilePicture = ''
   skillData: any
   skillFetchStatus: TFetchStatus = 'none'
@@ -110,11 +110,11 @@ export class DashboardComponent implements OnInit {
   passedCertifications: NSLearningHistory.ILearningHistoryItem[] = []
   defaultProfileImage = '../../../../../../../../../../../fusion-assets/profileimage.png'
 
-  @ViewChild('video', {static: false}) video: any;
+  @ViewChild('video', { static: false }) video: any
 
   constructor(
     private configSvc: ConfigurationsService,
-    private initService: InitService, 
+    private initService: InitService,
     // private badgesSvc: BadgesService,
     private profileSvc: ProfileService,
     private learnHstSvc: LearningHistoryService,
@@ -136,7 +136,7 @@ export class DashboardComponent implements OnInit {
         this.domains = domains ? domains : []
         this.expertises = expertise ? expertise : []
       })
-      this.profileLink = (this.configSvc.userProfile.userProperties && this.configSvc.userProfile.userProperties!== 'null') ?
+      this.profileLink = (this.configSvc.userProfile.userProperties && this.configSvc.userProfile.userProperties !== 'null') ?
             this.configSvc.userProfile.userProperties.profileLink : ''
       this.userEmail = this.configSvc.userProfile.email || ''
       this.departmentName = (this.configSvc.userProfile.departmentName && this.configSvc.userProfile.departmentName !== 'null')
@@ -239,7 +239,7 @@ export class DashboardComponent implements OnInit {
   }
 
   open(config?: MatDialogConfig) {
-    return this.dialog.open(this.video, config);
+    return this.dialog.open(this.video, config)
   }
 
   getAuthoringUrl(url: string): string {

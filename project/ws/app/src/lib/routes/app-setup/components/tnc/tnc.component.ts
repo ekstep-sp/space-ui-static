@@ -191,7 +191,7 @@ export class TncComponent implements OnInit, OnDestroy {
     this.http.patch('/apis/protected/v8/user/tnc/postprocessing', {}).subscribe()
   }
   acceptDataForNewUser() {
-    this.acceptData= true
+    this.acceptData = true
       if (this.tncData) {
         this.tncData.isAccepted = true
       }
