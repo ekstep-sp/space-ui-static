@@ -31,7 +31,7 @@
           iconType: widgetData.actionBtn.iconType,
           icon: widgetData.actionBtn.icon
         }"></ng-container>
-        <span class="ml-2 display-inline-block text-sm" *ngIf="widgetData.actionBtn?.showName">{{ widgetData.actionBtn.name }}</span>
+        <span class="ml-2 mt-1 display-inline-block text-sm" *ngIf="widgetData.actionBtn?.showName">{{ widgetData.actionBtn.name }}</span>
     </a>
     <a *ngSwitchCase="displayType.matMiniFabButton" [routerLink]="widgetData.actionBtn?.url" mat-mini-fab>
       <ng-container [ngTemplateOutlet]="icon" [ngTemplateOutletContext]="widgetData.actionBtn"></ng-container>
