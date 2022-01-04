@@ -1,19 +1,19 @@
 <div class="banner-container" (swipeleft)="slideTo(currentIndex + 1)" (swiperight)="slideTo(currentIndex - 1)"
   *ngIf="widgetData?.length">
-  <div class="p-10 grid grid-cols-1 sm:grid-cols-1 md:grid-cols-3 lg:grid-cols-3 xl:grid-cols-3 gap-5 purple-font light-purple-bg home-card-container">
-    <div class="max-w-sm rounded-md overflow-hidden p-4 home-card font-semibold bg-white mx-2">
+  <div class="px-10 grid grid-cols-1 sm:grid-cols-1 md:grid-cols-3 lg:grid-cols-3 xl:grid-cols-3 gap-5 purple-font light-purple-bg home-card-container justify-items-center">
+    <div class="max-w-sm rounded-md overflow-hidden p-4 home-card font-semibold bg-white mx-2 my-10">
       <div class="py-4">
         <div class="font-bold text-lg mb-2">Societal Thinking: Learning Course</div>
       </div>
-      <div class="max-w-sm w-full lg:max-w-full lg:flex -mx-2 h-24">
-        <div class="md:w-1/4 px-2 text-center w-full">
+      <div class="max-w-sm w-full max-w-full flex -mx-2 h-24">
+        <div class="md:w-1/4 px-2 text-center">
           <img src="../../../../../../../../../fusion-assets/img/think.svg" class="h-24">
         </div>
         <div class="md:w-3/4 px-3 w-full" >
         <span class="display-block text-sm">Curated journey for learning about the What, Why and How’s of Societal Thinking.</span>
         </div>
       </div>
-      <div class="lg:flex flex-row-reverse  space-x-reverse">
+      <div class="flex flex-row-reverse  space-x-reverse">
         <div class="">
           <a class="btn btn-primary " (click)="setCookie('isLearning',true,3650)" type="button" href="https://www.udemy.com/" target="_blank" i18n>
             {{isLearning ? 'Continue Learning':'Start Learning'}}
@@ -21,19 +21,19 @@
         </div>
       </div>
     </div>
-    <div class="max-w-sm rounded-md overflow-hidden p-4 home-card font-semibold bg-white mx-2">
+    <div class="max-w-sm rounded-md overflow-hidden p-4 home-card font-semibold bg-white mx-2 my-10">
       <div class="py-4">
         <div class="font-bold text-lg mb-2">Societal Thinking: Design Kit</div>
       </div>
-      <div class="max-w-sm w-full lg:max-w-full lg:flex -mx-2 h-24">
-        <div class="md:w-1/4 px-2 text-center w-full">
+      <div class="max-w-sm w-full max-w-full flex -mx-2 h-24">
+        <div class="md:w-1/4 px-2 text-center">
           <img src="../../../../../../../../../fusion-assets/img/design.svg" alt="">
         </div>
         <div class="md:w-3/4 px-3 w-full" >
         <span class="display-block text-sm">Toolkit to think through the various building blocks that help in building a Societal Programs and Societal Platforms.</span>
         </div>
       </div>
-      <div class="lg:flex flex-row-reverse  space-x-reverse">
+      <div class="flex flex-row-reverse  space-x-reverse">
         <div class="">
           <a class="btn btn-primary " (click)="setCookie('isDesigning',true,3650)" type="button" routerLink="/app/toc/lex_auth_013204067934060544308/overview" i18n>
             {{isDesigning ? 'Continue Designing':'Start Designing'}}
@@ -41,19 +41,19 @@
         </div>
       </div>
     </div>
-    <div class="max-w-sm rounded-md overflow-hidden p-4 home-card font-semibold bg-white mx-2">
+    <div class="max-w-sm rounded-md overflow-hidden p-4 home-card font-semibold bg-white mx-2 my-10">
       <div class="py-4">
         <div class="font-bold text-lg mb-2">Explore</div>
       </div>
-      <div class="max-w-sm w-full lg:max-w-full lg:flex -mx-2 h-24">
-        <div class="md:w-1/4 px-2 text-center w-full">
+      <div class="max-w-sm w-full max-w-full flex -mx-2 h-24">
+        <div class="md:w-1/4 px-2 text-center">
           <img src="../../../../../../../../../fusion-assets/img/explore.svg" alt="">
         </div>
         <div class="md:w-3/4 px-3 w-full" >
         <span class="display-block text-sm">Navigate the resources catering to the What, Why and How’s of Societal Thinking.</span>
         </div>
       </div>
-      <div class="lg:flex flex-row-reverse  space-x-reverse">
+      <div class="flex flex-row-reverse  space-x-reverse">
         <div class="">
           <a class="btn btn-primary " (click)="setCookie('isExploring',true,3650)" type="button" routerLink="/page/explore" i18n>
             {{isExploring ? 'Continue Exploring':'Start Exploring'}}
