@@ -34,7 +34,7 @@ export class SlidersComponent extends WidgetBaseComponent
   ngAfterViewInit() {
     if (this.isFirstVisit) {
       setTimeout(() => {
-        this.open({ width: '100vw', panelClass: 'welcome-modal', hasBackdrop: true })
+        this.open({ width: '100vw', hasBackdrop: true })
       },         5000)
       this.setCookie('isFirstVisit', false, 3650)
     }

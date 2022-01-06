@@ -175,7 +175,7 @@ $banner-min-height: 200px;
   transition: color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out,box-shadow .15s ease-in-out;
 }
 .home-card{
-  height: 200px;
+  min-height: 200px;
   background-image: url(../../../../../../src/fusion-assets/img/cardbgL.svg), url(../../../../../../src/fusion-assets/img/cardbgR.svg);
   background-position: left bottom, right top;
   background-repeat: no-repeat, no-repeat;
@@ -210,3 +210,27 @@ border-radius: 10px !important;
   padding-left: 4rem;
   padding-right: 4rem;
 }
+.home-card-body {
+  min-height: 6rem;
+}
+ 
+.arrow-direction{
+  background-image: url(../../../../../../src/fusion-assets/img/arrow1.svg), url(../../../../../../src/fusion-assets/img/arrow2.svg);
+  background-position: 5% 230px, 5.9% 0px;
+  background-repeat: no-repeat, no-repeat;
+  background-size: 150px, 300px;
+  // background-position: 5% 30%, 5.9% 0px;
+  // background-repeat: no-repeat, no-repeat;
+  // background-size: 8.3%, 16.9%;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+  pointer-events: auto;
+  -webkit-tap-highlight-color: transparent;
+  transition: opacity 400ms cubic-bezier(0.25, 0.8, 0.25, 1);
+  transform: rotate(-2deg);
+  pointer-events: none;
+} 
