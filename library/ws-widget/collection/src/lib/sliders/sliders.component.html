@@ -89,8 +89,8 @@
 
 </div>
 <ng-template #welcomeModal class="welcome-modal">
-  <div class="arrow-direction"></div>
-  <mat-dialog-actions class="justify-between">
+  <div class="arrow-direction hidden"></div>
+  <mat-dialog-actions class="justify-between flex-no-wrap">
     <div class="ml-6 purple-font">
       <span class="display-block font-semibold text-2xl mb-3">Welcome to Space</span>
       <span class="display-block font-medium text-base">Here are some quick suggestions for you</span>
@@ -99,23 +99,23 @@
           <mat-icon>close</mat-icon>
         </button>
     </mat-dialog-actions>
-    <div class="flex mb-5 font-semibold purple-font welcome-modal-card px-16 flex-column mx-8 mt-12">
+    <div class="flex mb-5 px-3 font-semibold purple-font welcome-modal-card md:px-16 flex-column md:mx-8 mt-12">
       <div class="py-6 w-full">
         <div class="font-bold text-lg mb-2">Societal Thinking: Learning Course</div>
         <span class="display-block font-medium text-base">Curated journey for learning about the What, Why and How’s of Societal Thinking.</span>
       </div>
       <div class="pb-6">
-          <a class="btn btn-primary text-base px-16" type="button" href="https://www.udemy.com/" target="_blank" i18n mat-dialog-close>Start Exploring
+          <a class="btn btn-primary text-base px-16 px-8" type="button" href="https://www.udemy.com/" target="_blank" i18n mat-dialog-close>Start Exploring
           </a>
       </div>
     </div>
-    <div class="flex mb-4 font-semibold purple-font welcome-modal-card px-16 flex-column mx-8">
+    <div class="flex mb-4 px-3 font-semibold purple-font welcome-modal-card md:px-16 flex-column md:mx-8">
       <div class="py-6 w-full">
         <div class="font-bold text-lg mb-2">FAQ’s: Societal Thinking & SPace</div>
         <span class="display-block font-medium text-base">Frequently asked Questions on Societal Thinking and on the SPace platform.</span>
       </div>
         <div class="pb-6">
-          <a class="btn btn-primary text-base px-16" type="button" routerLink="/app/social/qna" i18n mat-dialog-close>Start Exploring
+          <a class="btn btn-primary text-base px-16 px-8" type="button" routerLink="/app/social/qna" i18n mat-dialog-close>Start Exploring
           </a>
         </div>
     </div>

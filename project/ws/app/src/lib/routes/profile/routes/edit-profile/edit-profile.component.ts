@@ -132,7 +132,7 @@ export class EditProfileComponent implements OnInit {
     })
     if (this.userProfile) {
       this.profileForm.controls.userFirstName.setValue(this.userProfile.givenName
-        && this.userProfile.givenName !== 'null' ? this.userProfile.givenName : '' + ' ' + this.userProfile.lastName
+        && this.userProfile.givenName !== 'null' ? this.userProfile.givenName : ` ${this.userProfile.lastName}`
         && this.userProfile.lastName !== 'null' ? this.userProfile.lastName : '')
       this.profileForm.controls.userOrganisation.setValue(this.userProfile.departmentName &&
         this.userProfile.departmentName !== 'null' ? this.userProfile.departmentName : '')
@@ -246,7 +246,8 @@ export class EditProfileComponent implements OnInit {
       }).subscribe(({}) => {
       })
       const editresponse =
-      await this.profileSvc.editProfile(this.userProfile.userId, this.profileForm.controls, { domains: this.domains, expertises: this.expertises })
+      await this.profileSvc.editProfile(this.userProfile.userId, this.profileForm.controls,
+                                        { domains: this.domains, expertises: this.expertises })
       this.isLoad = false
       if (editresponse.ok) {
         if (editresponse.DATA != null) {

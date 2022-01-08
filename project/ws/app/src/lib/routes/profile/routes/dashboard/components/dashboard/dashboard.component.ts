@@ -21,7 +21,7 @@ interface ILearningHistoryContent {
   fetchStatus: 'fetching' | 'done' | 'error'
 }
 
-export interface Chips {
+export interface IChips {
   name?: string
 }
 
@@ -53,8 +53,8 @@ export class DashboardComponent implements OnInit {
   departmentName = ''
   country = ''
   currentRole = ''
-  domains: Chips[] = []
-  expertises: Chips[] = []
+  domains: IChips[] = []
+  expertises: IChips[] = []
   profileLink: string | undefined = ''
   userProfilePicture = ''
   skillData: any
