@@ -114,7 +114,6 @@ font-size: 18px
 .card-style {
    padding-top: 40px !important;
     padding: 0 0;
-    padding-bottom: 72px !important;
       @include breakpoint-xs {
        padding-bottom: 0px !important;
     }
@@ -130,7 +129,6 @@ font-size: 18px
 .custom-flex {
 
     flex-direction: row;
-    flex-wrap: wrap;
     flex: auto;
     display: flex !important;
     //margin: 0px 64px;
@@ -178,7 +176,6 @@ mat-chip {
   .custom-flex {
      margin-top: 40px !important;
     flex-direction: row;
-    flex-wrap: wrap;
     flex: auto;
     display: flex !important;
     // margin: 0px 40px;
