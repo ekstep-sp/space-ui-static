@@ -27,6 +27,8 @@ export class AppTocContentsComponent implements OnInit, OnDestroy {
   expandPartOf = false
   contextId!: string
   contextPath!: string
+  hasTocStructure = false
+  tocStructure: any = null
 
   constructor(
     private route: ActivatedRoute,
@@ -53,6 +55,9 @@ export class AppTocContentsComponent implements OnInit, OnDestroy {
     const instanceConfig = this.configSvc.instanceConfig
     if (instanceConfig) {
       this.defaultThumbnail = instanceConfig.logos.defaultContent
+    }
+    if (!this.tocStructure) {
+      this.resetAndFetchTocStructure()
     }
   }
   ngOnDestroy() {
@@ -149,6 +154,36 @@ export class AppTocContentsComponent implements OnInit, OnDestroy {
     switch (this.configSvc.rootOrg) {
       default:
         return true
+    }
+  }
+
+  resetAndFetchTocStructure() {
+    this.tocStructure = {
+      assessment: 0,
+      course: 0,
+      handsOn: 0,
+      interactiveVideo: 0,
+      learningModule: 0,
+      other: 0,
+      pdf: 0,
+      podcast: 0,
+      quiz: 0,
+      video: 0,
+      webModule: 0,
+      webPage: 0,
+      youtube: 0,
+    }
+    if (this.content) {
+      this.hasTocStructure = false
+      this.tocStructure.learningModule = this.content.contentType === 'Collection' ? -1 : 0
+      this.tocStructure.course = this.content.contentType === 'Course' ? -1 : 0
+      this.tocStructure = this.tocSvc.getTocStructure(this.content, this.tocStructure)
+      for (const progType in this.tocStructure) {
+        if (this.tocStructure[progType] > 0) {
+          this.hasTocStructure = true
+          break
+        }
+      }
     }
   }
 }

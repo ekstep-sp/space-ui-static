@@ -4,7 +4,74 @@
   <!-- <div class="contents-container nav-space" #contents id="contents" *ngIf="content?.children?.length"> -->
       <div class="contents-container nav-space" #contents *ngIf="content?.children?.length">
 
-      <h2 class="btn-text-font text-clr">Contents</h2>
+      <h2 class="btn-text-font text-clr">Contents
+
+       <span class="content-details" *ngIf="hasTocStructure && content?.children?.length">(
+          <span  class="content-before" *ngIf="tocStructure?.course > 0">
+            <ng-container>{{ tocStructure?.course }}</ng-container>
+            <ng-container *ngIf="tocStructure?.course === 1" i18n> Collection</ng-container>
+            <ng-container *ngIf="tocStructure?.course > 1" i18n> Collections</ng-container>
+          </span>
+          <span class="content-before"  *ngIf="tocStructure?.learningModule > 0">
+            <ng-container>{{ tocStructure?.learningModule }}</ng-container>
+            <ng-container *ngIf="tocStructure?.learningModule === 1" i18n> Asset</ng-container>
+            <ng-container *ngIf="tocStructure?.learningModule > 1" i18n> Assets</ng-container>
+          </span>
+          <span class="content-before" *ngIf="tocStructure?.video > 0">
+            <ng-container>{{ tocStructure?.video }}</ng-container>
+            <ng-container *ngIf="tocStructure?.video === 1" i18n> Video</ng-container>
+            <ng-container *ngIf="tocStructure?.video > 1" i18n> Videos</ng-container>
+          </span>
+          <span  class="content-before" *ngIf="tocStructure?.interactiveVideo > 0">
+            <ng-container>{{ tocStructure?.interactiveVideo }}</ng-container>
+            <ng-container *ngIf="tocStructure?.interactiveVideo === 1" i18n>
+              Interactive Video</ng-container>
+            <ng-container *ngIf="tocStructure?.interactiveVideo > 1" i18n>
+              Interactive Videos</ng-container>
+          </span>
+          <span class="content-before"  *ngIf="tocStructure?.youtube > 0">
+            <ng-container>{{ tocStructure?.youtube }}</ng-container>
+            <ng-container *ngIf="tocStructure?.youtube === 1" i18n> Youtube Video</ng-container>
+            <ng-container *ngIf="tocStructure?.youtube > 1" i18n> Youtube Videos</ng-container>
+          </span>
+          <span class="content-before" *ngIf="tocStructure?.pdf > 0">
+            <ng-container>{{ tocStructure?.pdf }}</ng-container>
+            <ng-container *ngIf="tocStructure?.pdf === 1" i18n> PDF</ng-container>
+            <ng-container *ngIf="tocStructure?.pdf > 1" i18n> PDFs</ng-container>
+          </span>
+          <span class="content-before"  *ngIf="tocStructure?.podcast > 0">
+            <ng-container>{{ tocStructure?.podcast }}</ng-container>
+            <ng-container *ngIf="tocStructure?.podcast === 1" i18n> Podcast</ng-container>
+            <ng-container *ngIf="tocStructure?.podcast > 1" i18n> Podcasts</ng-container>
+          </span>
+          <span class="content-before"  *ngIf="tocStructure?.webModule > 0">
+            <ng-container>{{ tocStructure?.webModule }}</ng-container>
+            <ng-container *ngIf="tocStructure?.webModule === 1" i18n> Web Asset</ng-container>
+            <ng-container *ngIf="tocStructure?.webModule > 1" i18n> Web Assets</ng-container>
+          </span>
+          <span class="content-before"  *ngIf="tocStructure?.webPage > 0">
+            <ng-container>{{ tocStructure?.webPage }}</ng-container>
+            <ng-container *ngIf="tocStructure?.webPage === 1" i18n> Web Page</ng-container>
+            <ng-container *ngIf="tocStructure?.webPage > 1" i18n> Web Pages</ng-container>
+          </span>
+          <span class="content-before"  *ngIf="tocStructure?.quiz > 0">
+            <ng-container>{{ tocStructure?.quiz }}</ng-container>
+            <ng-container *ngIf="tocStructure?.quiz === 1" i18n> Quiz</ng-container>
+            <ng-container *ngIf="tocStructure?.quiz > 1" i18n> Quizzes</ng-container>
+          </span>
+          <span class="content-before"  *ngIf="tocStructure?.assessment > 0">
+            <ng-container>{{ tocStructure?.assessment }}</ng-container>
+            <ng-container *ngIf="tocStructure?.assessment === 1" i18n> Assessment</ng-container>
+            <ng-container *ngIf="tocStructure?.assessment > 1" i18n> Assessments</ng-container>
+          </span>
+          <span class="content-before"  *ngIf="tocStructure?.other > 0">
+            <ng-container>{{ tocStructure?.other }}</ng-container>
+            <ng-container *ngIf="tocStructure?.other === 1" i18n> Other Item</ng-container>
+            <ng-container *ngIf="tocStructure?.other > 1" i18n> Other Items</ng-container>
+          </span>)
+        </span>
+      </h2>
+
     <div class="main-container">
       <ng-container *ngIf="content?.children?.length; else noChildren">
         <!-- <div class="toc-section">

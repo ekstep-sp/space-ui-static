@@ -3,7 +3,7 @@
 
 // $border-color: #c7c7c7;
 .contents-container{
-  padding:0px 64px 113px 64px !important;
+  padding:50px 64px 64px 64px !important;
     @include breakpoint-xs {
      padding-top: 50px !important;
      padding-bottom: 30px !important;
@@ -168,4 +168,18 @@ $border-color: #d8d8d8;
   .theme-muave.night-mode .text-clr{
     color: #c6bcb8 !important;
   }
+}
+.content-details{
+font-size: 16px;
+font-style: normal;
+font-weight: 500;
+line-height: 22px;
+letter-spacing: 0em;
+color:#696466;
+}
+
+.content-before{
+  &:nth-child(n+2)::before{
+      content:', ';
+    } 
 }

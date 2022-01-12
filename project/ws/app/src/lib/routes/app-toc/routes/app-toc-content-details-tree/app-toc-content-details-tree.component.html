@@ -18,16 +18,18 @@
     </ul>
 </ng-container>
 <ng-container *ngIf="isResource">
-    <li class="event m-0 pb-32" *ngIf="hasChild" [ngClass]="{'last': lastEemFromChild}">
-        <div class="flex items-center pb-33">
+    <li class="event m-0 pl-10 pb-32" *ngIf="hasChild" [ngClass]="{'last': lastEemFromChild}">
+        <div class="flex items-center">
             <div class="resource-container mr-3 contentType">
                 <ws-widget-display-content-type-icon class="flex contentType_icon"
                     [displayContentType]="content?.displayContentType" [displayResourceType]="content?.mimeType">
                 </ws-widget-display-content-type-icon>
             </div>
             <a [routerLink]="resourceLink.url" [queryParams]="resourceLink.queryParams">
-                <h4 class="child_node m-0">{{content?.name}}</h4>
+                <h4 class="child_node m-0">{{content?.name}}
+                </h4>                           
             </a>
+            <img class="pt-3 pl-2" src="../../../../../../../../../fusion-assets/img/pointer.svg" alt=""/> 
             <ng-container *ngIf="content?.duration">
                 <div class="hidden-block-xs">
                     <ng-container [ngTemplateOutlet]="timer"></ng-container>
@@ -40,7 +42,7 @@
     </li>
      <ul class="event1 m-0" *ngIf="!hasChild" [ngClass]="{'last': lastEemFromParent}">
         <div class="flex pb-32">
-            <div class="resource-container mr-3 contentType mt-1">
+            <div class="resource-container mr-3 contentType">
                 <ws-widget-display-content-type-icon class="flex contentType_icon"
                     [displayContentType]="content?.displayContentType" [displayResourceType]="content?.mimeType">
                 </ws-widget-display-content-type-icon>
