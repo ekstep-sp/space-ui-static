@@ -31,6 +31,9 @@ export class AppTocOverviewComponent implements OnInit, OnDestroy {
   contentParents: { [key: string]: NsAppToc.IContentParentResponse[] } = {}
   objKeys = Object.keys
   mailIcon = true
+  showMore = false
+  showMoreButton = false
+  showLessButton = false
 
   constructor(
     private route: ActivatedRoute,
@@ -179,5 +182,37 @@ export class AppTocOverviewComponent implements OnInit, OnDestroy {
         .getTrainingCount(this.content.identifier)
         .pipe(retry(2))
     }
+  }
+
+  showComplete(){
+    this.showMore = true;
+    this.showMoreButton = true;
+    this.showLessButton = true;
+  }
+
+  showReduced(){
+    this.showMore = false;
+    this.showMoreButton = false;
+    this.showLessButton = false;
+  }
+
+  getDivHeight(el:HTMLDivElement){
+    let divElement = window.getComputedStyle(el).height
+    if(divElement!=null){
+      return divElement.slice(0,divElement.length-2)
+    }
+    return 0
+  }
+
+  getLineHeight(el: HTMLSpanElement){
+    let divElement = window.getComputedStyle(el).lineHeight
+    if(divElement!=null){
+      return divElement.slice(0,divElement.length-2)
+    }
+    return 0
+  }
+
+  displayShowMore(el:HTMLDivElement){
+    return Number(this.getDivHeight(el)) >= Number(this.getLineHeight(el))*3 
   }
 }

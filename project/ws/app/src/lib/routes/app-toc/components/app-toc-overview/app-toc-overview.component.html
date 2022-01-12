@@ -275,7 +275,23 @@
     <!-- <mat-card *ngIf="showDescription && content?.description" class="unit-meta-item"> -->
       <!-- <h2 class="font-16px" i18n>Overview</h2> -->
       <!-- <mat-card-content> -->
-        <div class="mat-subheading-1 ov-clr" [innerHTML]="content?.description"></div>
+        <div class="description-heading">Description</div>
+        <div #description class="mat-subheading-1 ov-clr" [ngClass]="{'line-clamp': !showMore}" [innerHTML]="content?.description"></div>
+        <div class="show-more-description">
+          <span *ngIf="!showMoreButton && displayShowMore(description)" (click)=showComplete()>Show more</span>
+          <span *ngIf="showLessButton" (click)=showReduced()>Show Less</span>
+        </div>
+        <div class="info-container">
+          <div class="info-item flex-keyword" *ngIf="content?.keywords?.length">
+            <mat-chip-list>
+              <mat-chip style="background:#925EB0; color: white; margin:0 8px 10px 0px" selected *ngFor="let keyword of content?.keywords">
+                <h3 class="font-montserrat font-weight-bold width-expand keyword">
+                  {{ keyword }}
+                </h3>
+              </mat-chip>
+            </mat-chip-list>
+          </div>
+        
       <!-- </mat-card-content> -->
     <!-- </mat-card> -->
 
