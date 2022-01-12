@@ -43,145 +43,7 @@
           <div class="visible-block-xs">
             <ng-container [ngTemplateOutlet]="starMenu"></ng-container>
           </div>
-          <!-- <button mat-icon-button class="visible-block-xs" [matMenuTriggerFor]="starMenu">
-                <mat-icon class="text-white mbl-star mat-accent">star_border</mat-icon>
-              </button> -->
         </ng-container>
-      </div>
-      <div class="header-actions">
-        <div class="action-btns">
-          <ng-container *ngIf="
-              actionBtnStatus !== 'wait' &&
-              content?.status !== 'Deleted' &&
-              content?.status !== 'Expired'
-            ">
-            <div [hidden]="isResource && !content?.artifactUrl?.length" class="pb-4">
-              <ng-container *ngIf="
-                  actionBtnStatus === 'grant' &&
-                  !(isMobile && content?.isInIntranet) &&
-                  !(
-                    content?.contentType === 'Course' &&
-                    content?.children.length === 0 &&
-                    !content?.artifactUrl?.length
-                  ) &&
-                  !(content?.contentType === 'Resource' && !content?.artifactUrl)
-                "
-              >
-                <ng-container *ngIf="toResume === false && contentMissing === false">
-                  <a
-                    [color]="'primary'"
-                    *ngIf="showStart.show && !isPostAssessment"
-                    [routerLink]="resumeData ? resumeDataLink?.url : firstResourceLink?.url"
-                    [queryParams]="resumeData ? generateQuery('RESUME') : generateQuery('START')"
-                    class="margin-right-m common_sub_text" id="clr" mat-flat-button>
-                    <!-- <ng-container *ngIf="!forPreview || isInIFrame; else authView" i18n
-                    >View</ng-container
-                  > -->
-                    <mat-spinner [diameter]="25" style="color: black; background: white;" *ngIf="isLoad"></mat-spinner>
-                    <span class="btn-text-font" *ngIf="!isLoad" i18n>View</span>
-                  </a>
-                </ng-container>
-                <ng-container *ngIf="toResume === true && contentMissing === false">
-                  <a
-                    [color]="'primary'"
-                    *ngIf="showStart.show && !isPostAssessment"
-                    [routerLink]="resumeData ? resumeDataLink?.url : firstResourceLink?.url"
-                    [queryParams]="resumeData ? generateQuery('RESUME') : generateQuery('START')"
-                    class="margin-right-m common_sub_text " id="clr" mat-flat-button>
-                    <!-- <ng-container *ngIf="!forPreview || isInIFrame; else authView" i18n
-                    >View</ng-container
-                  > -->
-                    <span class="btn-text-font">Resume</span>
-                  </a>
-                </ng-container>
-                <ng-container *ngIf="contentMissing">
-                  <a
-                    [color]="'primary'"
-                    class="margin-right-m common_sub_text "
-                    id="disabled-content-button"
-                    mat-flat-button
-                    (click)="showMissingMessage = !showMissingMessage"
-                  >
-                  <mat-icon class="display_type">info</mat-icon>
-                  </a>
-                </ng-container>
-                <!-- <a
-                  [color]="'primary'"
-                  *ngIf="isPostAssessment && showTakeAssessment?.post_assessment"
-                  [routerLink]="firstResourceLink?.url"
-                  class="margin-right-m"
-                  mat-flat-button
-                >
-                  <ng-container *ngIf="!forPreview || isInIFrame; else authView" i18n
-                    >Take Assessment</ng-container
-                  >
-                </a> -->
-                <!-- <a
-                      [color]="'primary'"
-                      *ngIf="isPracticeVisible"
-                      [hidden]="!content?.children?.length"
-                      class="margin-right-m"
-                      mat-flat-button
-                      i18n
-                      >Practice</a
-                    >
-                    <a
-                      [color]="'primary'"
-                      *ngIf="isAssessVisible"
-                      [hidden]="!content?.children?.length"
-                      mat-flat-button
-                      i18n
-                      >Assess</a
-                    > -->
-              </ng-container>
-              <ng-container *ngIf="actionBtnStatus == 'reject' && content?.registrationUrl">
-                <a [href]="content?.registrationUrl" target="_blank" [color]="'primary'" class="margin-right-m" i18n
-                  mat-flat-button>Register</a>
-              </ng-container>
-            </div>
-          </ng-container>
-          <!-- <div class="hidden-block-xs"> -->
-          <ng-container [ngTemplateOutlet]="actions"></ng-container>
-          <!-- </div> -->
-          <!-- <button mat-icon-button class="visible-block-xs" [matMenuTriggerFor]="actionMenu">
-              <mat-icon class="text-white -mt-2">more_vert</mat-icon>
-            </button> -->
-        </div>
-        <!-- <h3
-          *ngIf="content?.status === 'Deleted' || content?.status === 'Expired'"
-          class="ws-mat-primary-text margin-remove-bottom pt-4"
-          i18n
-        >
-          The content is expired or deleted.
-        </h3>
-        <h3
-          class="ws-mat-primary-text margin-remove-bottom pt-4"
-          i18n
-          *ngIf="content?.status === 'Unpublished'"
-        >
-          The content has been unpublished.
-        </h3>
-        <h3
-          class="ws-mat-primary-text margin-remove-bottom pt-4"
-          i18n
-          *ngIf="content?.status === 'Draft'"
-        >
-          The content is in draft.
-        </h3>
-        <h3
-          class="ws-mat-primary-text margin-remove-bottom pt-4"
-          i18n
-          *ngIf="content?.status === 'InReview'"
-        >
-          The content is in review.
-        </h3>
-        <h3
-          class="ws-mat-primary-text margin-remove-bottom pt-4"
-          i18n
-          *ngIf="content?.status === 'Processing'"
-        >
-          The content is in review.
-        </h3> -->
       </div>
       <h4 *ngIf="showMissingMessage" style = "color: yellow;" [innerHTML]="contentMissingMessage"></h4>     
     <div *ngIf="content?.averageRating" class="flex items-center my-1 mb-3">
@@ -254,17 +116,81 @@
         <ng-container i18n>Access to this YouTube content is blocked.</ng-container>
       </p>
     </div>
-    <!--curator details-->
-    <div *ngIf="content?.creatorContacts.length">
-      <h3 class="display_type curator sub-heading-font">Curators</h3>
-      <div class="flex curator-align" *ngFor="let curatorName of content?.creatorContacts">
-        <img src="/assets/instances/space/common/overview_account.png" class="pr-3 prf-icon">
-        <h3 class="display_type btn-text-font common-width">{{curatorName.name}}</h3>
-        <ws-widget-btn-mail-user *ngIf="askAuthorEnabled"
-          [widgetData]="{ content: content, emails: [{email: curatorName.email, name: curatorName.name}] }">
-        </ws-widget-btn-mail-user>
+    <!--Right Side details-->
+    <div>
+      <div class="justify-end header-actions">
+        <div class="action-btns">
+          <ng-container *ngIf="
+              actionBtnStatus !== 'wait' &&
+              content?.status !== 'Deleted' &&
+              content?.status !== 'Expired'
+            ">
+            <div [hidden]="isResource && !content?.artifactUrl?.length" class="pb-8">
+              <ng-container *ngIf="
+                  actionBtnStatus === 'grant' &&
+                  !(isMobile && content?.isInIntranet) &&
+                  !(
+                    content?.contentType === 'Course' &&
+                    content?.children.length === 0 &&
+                    !content?.artifactUrl?.length
+                  ) &&
+                  !(content?.contentType === 'Resource' && !content?.artifactUrl)
+                "
+              >
+                <ng-container *ngIf="toResume === false && contentMissing === false">
+                  <a
+                    [color]="'primary'"
+                    *ngIf="showStart.show && !isPostAssessment"
+                    [routerLink]="resumeData ? resumeDataLink?.url : firstResourceLink?.url"
+                    [queryParams]="resumeData ? generateQuery('RESUME') : generateQuery('START')"
+                    class="common_sub_text" id="clr" mat-flat-button>
+                        <mat-spinner [diameter]="25" style="color: black; background: white;" *ngIf="isLoad"></mat-spinner>
+                    <span class="btn-text-font" *ngIf="!isLoad" i18n>View</span>
+                  </a>
+                </ng-container>
+                <ng-container *ngIf="toResume === true && contentMissing === false">
+                  <a
+                    [color]="'primary'"
+                    *ngIf="showStart.show && !isPostAssessment"
+                    [routerLink]="resumeData ? resumeDataLink?.url : firstResourceLink?.url"
+                    [queryParams]="resumeData ? generateQuery('RESUME') : generateQuery('START')"
+                    class="common_sub_text " id="clr" mat-flat-button>
+                    <span class="btn-text-font">Resume</span>
+                  </a>
+                </ng-container>
+                <ng-container *ngIf="contentMissing">
+                  <a
+                    [color]="'primary'"
+                    class="common_sub_text "
+                    id="disabled-content-button"
+                    mat-flat-button
+                    (click)="showMissingMessage = !showMissingMessage"
+                  >
+                  <mat-icon class="display_type">info</mat-icon>
+                  </a>
+                </ng-container>
+              </ng-container>
+              <ng-container *ngIf="actionBtnStatus == 'reject' && content?.registrationUrl">
+                <a [href]="content?.registrationUrl" target="_blank" [color]="'primary'" i18n
+                  mat-flat-button>Register</a>
+              </ng-container>
+            </div>
+          </ng-container>
+          <ng-container [ngTemplateOutlet]="actions"></ng-container>
+        </div>
+      </div> 
+      <div *ngIf="content?.creatorContacts.length > 1">
+        <h3 class="display_type curator sub-heading-font">Curators</h3>
+        <div class="flex curator-align" *ngFor="let curatorName of content?.creatorContacts">
+          <h3 class="display_type btn-text-font common-width">{{curatorName.name}}</h3>
+        </div>
       </div>
-    </div>
+      <div *ngIf="content?.creatorContacts.length === 1">
+        <div class="flex curator-align" *ngFor="let curatorName of content?.creatorContacts">
+          <h3 class="display_type btn-text-font common-width">Curators : {{curatorName.name}}</h3>
+        </div>
+      </div>
+  </div>
   </div>
 </div>
 <ws-widget-content-progress *ngIf="content?.identifier" [forPreview]="forPreview" [contentId]="content?.identifier">
@@ -287,7 +213,7 @@
   </div>
 </mat-menu>
 
-<ng-template #actions>
+<!-- <ng-template #actions>
   <a i18n-aria-label aria-label="Edit" i18n-matTooltip matTooltip="Edit" mat-icon-button *ngIf="editButton"
     [routerLink]="['/author/editor/' + content?.identifier]">
     <mat-icon class="text-white">edit</mat-icon>
@@ -337,5 +263,5 @@
       [widgetData]="content | pipePartialContent: ['identifier', 'name']">
     </ws-widget-btn-content-feedback-v2>
   </span>
-</ng-template>
+</ng-template> -->
 <ng-template #authView i18n>View</ng-template>
