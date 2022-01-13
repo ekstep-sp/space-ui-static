@@ -259,6 +259,8 @@ export class EditProfileComponent implements OnInit {
             () => {
               if (this.enableSkip) {
                 this.router.navigate(['/page/home'])
+              }else{
+                this.router.navigate(['/app/profile/dashboard'])
               }
             },
             1000
@@ -310,7 +312,7 @@ export class EditProfileComponent implements OnInit {
     const value = (event.value || '').trim()
 
     // Add
-    if (value && value.length >= 3 && !this.domains.some(dom => dom === value) && chipList.length < 5) {
+    if (value && value.length > 2 && !this.domains.some(dom => dom === value) && chipList.length < 5) {
       chipList.push(value)
     }
     this.profileForm.controls.userDomain.setValue(null)
@@ -321,7 +323,7 @@ export class EditProfileComponent implements OnInit {
     const value = (event.value || '').trim()
 
     // Add
-    if (value && value.length >= 3 && !this.expertises.some(dom => dom === value) && chipList.length < 5) {
+    if (value && value.length > 2 && !this.expertises.some(dom => dom === value) && chipList.length < 5) {
       chipList.push(value)
     }
     this.profileForm.controls.userExpertise.setValue(null)

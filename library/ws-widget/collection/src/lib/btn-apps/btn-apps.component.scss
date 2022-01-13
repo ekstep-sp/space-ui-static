@@ -94,4 +94,11 @@ mat-icon {
 
 }
 
+@media screen and (min-width: 0px) and (max-width: 600px) {
+  #help{ display: block; }  /* show it on smaller screen */
+}
+@media screen and (min-width: 600px) and (max-width: 2000px) {
+  #help{ display: none; }   /* hide it on larger screens */
+}
+
 
