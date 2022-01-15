@@ -184,35 +184,35 @@ export class AppTocOverviewComponent implements OnInit, OnDestroy {
     }
   }
 
-  showComplete(){
-    this.showMore = true;
-    this.showMoreButton = true;
-    this.showLessButton = true;
+  showComplete() {
+    this.showMore = true
+    this.showMoreButton = true
+    this.showLessButton = true
   }
 
-  showReduced(){
-    this.showMore = false;
-    this.showMoreButton = false;
-    this.showLessButton = false;
+  showReduced() {
+    this.showMore = false
+    this.showMoreButton = false
+    this.showLessButton = false
   }
 
-  getDivHeight(el:HTMLDivElement){
-    let divElement = window.getComputedStyle(el).height
-    if(divElement!=null){
-      return divElement.slice(0,divElement.length-2)
+  getDivHeight(el: HTMLDivElement) {
+    const divElement = window.getComputedStyle(el).height
+    if (divElement != null) {
+      return divElement.slice(0, divElement.length - 2)
     }
     return 0
   }
 
-  getLineHeight(el: HTMLSpanElement){
-    let divElement = window.getComputedStyle(el).lineHeight
-    if(divElement!=null){
-      return divElement.slice(0,divElement.length-2)
+  getLineHeight(el: HTMLSpanElement) {
+    const divElement = window.getComputedStyle(el).lineHeight
+    if (divElement != null) {
+      return divElement.slice(0, divElement.length - 2)
     }
     return 0
   }
 
-  displayShowMore(el:HTMLDivElement){
-    return Number(this.getDivHeight(el)) >= Number(this.getLineHeight(el))*3 
+  displayShowMore(el: HTMLDivElement) {
+    return Number(this.getDivHeight(el)) >= Number(this.getLineHeight(el)) * 3
   }
 }

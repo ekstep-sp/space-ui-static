@@ -13,7 +13,7 @@
       (isXSmall$ | async) === true && (authSvc.isLoggedIn$ | async) === true && showNavbar,
     'height-on-top':
       (isXSmall$ | async) === false &&
-      (authSvc.isLoggedIn$ | async) === false &&
+      (authSvc.isLoggedIn$ | async) === true &&
       showNavbar &&
       isNavBarRequired,
       'height-on-top-login': (authSvc.isLoggedIn$ | async) === false

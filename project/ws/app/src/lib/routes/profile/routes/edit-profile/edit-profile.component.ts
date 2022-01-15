@@ -259,7 +259,7 @@ export class EditProfileComponent implements OnInit {
             () => {
               if (this.enableSkip) {
                 this.router.navigate(['/page/home'])
-              }else{
+              } else {
                 this.router.navigate(['/app/profile/dashboard'])
               }
             },
