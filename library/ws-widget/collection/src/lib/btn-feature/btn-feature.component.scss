@@ -160,6 +160,13 @@
     margin-left: 0px;
   }
 }
+
+@media only screen and (max-width: 1000px) {
+  .icon-text{
+    display: none;
+  }
+}
+
 .custom-padding span.text-sm{
   font-size: .875rem;
 }

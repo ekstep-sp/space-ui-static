@@ -67,18 +67,24 @@
     user-select: none;
   }
 }
-@media only screen and (max-width: 1000px){
+@media only screen and (min-width:760px) and (max-width: 1300px){
   .expandSearch {
     overflow: initial;
     input {
-      width: 509px;
+      width: 220px;
    }
-  }
+  }  
   
 }
-@media only screen and (max-width: 768px) {
+@media only screen and (max-width: 759px) {
   .custom-style {
     padding-left: 0px;
+  }
+  .expandSearch {
+    overflow: initial;
+    input {
+      width: 100px;
+   }
   }
 }
 
