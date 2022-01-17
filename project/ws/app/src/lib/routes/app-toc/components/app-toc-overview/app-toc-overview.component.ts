@@ -1,5 +1,5 @@
 import { AccessControlService } from '@ws/author'
-import { Component, Input, OnDestroy, OnInit } from '@angular/core'
+import { AfterViewInit, Component, ElementRef, Input, OnDestroy, OnInit, ViewChild } from '@angular/core'
 import { DomSanitizer, SafeHtml } from '@angular/platform-browser'
 import { ActivatedRoute, Data } from '@angular/router'
 import { NsContent, WidgetContentService } from '@ws-widget/collection'
@@ -16,7 +16,7 @@ import { AppTocService } from '../../services/app-toc.service'
   templateUrl: './app-toc-overview.component.html',
   styleUrls: ['./app-toc-overview.component.scss'],
 })
-export class AppTocOverviewComponent implements OnInit, OnDestroy {
+export class AppTocOverviewComponent implements OnInit, OnDestroy, AfterViewInit{
   content: NsContent.IContent | null = null
   routeSubscription: Subscription | null = null
   viewMoreRelatedTopics = false
@@ -32,8 +32,9 @@ export class AppTocOverviewComponent implements OnInit, OnDestroy {
   objKeys = Object.keys
   mailIcon = true
   showMore = false
-  showMoreButton = false
-  showLessButton = false
+  showLess = false
+  @ViewChild('description', { static: false })
+  description!: ElementRef
 
   constructor(
     private route: ActivatedRoute,
@@ -68,6 +69,10 @@ export class AppTocOverviewComponent implements OnInit, OnDestroy {
       this.mailIcon = this.widgetContentSvc.isVisibileAccToRoles(this.tocConfig.rolesAllowed.mail, this.tocConfig.rolesNotAllowed.mail)
     })
   }
+
+  ngAfterViewInit() {
+    this.displayShowMore(this.description.nativeElement)
+    }
 
   ngOnDestroy() {
     if (this.routeSubscription) {
@@ -184,24 +189,9 @@ export class AppTocOverviewComponent implements OnInit, OnDestroy {
     }
   }
 
-  showComplete() {
-    this.showMore = true
-    this.showMoreButton = true
-    this.showLessButton = true
-  }
-
-  showReduced() {
-    this.showMore = false
-    this.showMoreButton = false
-    this.showLessButton = false
-  }
-
-  getDivHeight(el: HTMLDivElement) {
-    const divElement = window.getComputedStyle(el).height
-    if (divElement != null) {
-      return divElement.slice(0, divElement.length - 2)
-    }
-    return 0
+  showToggle() {
+    this.showMore = !this.showMore
+    this.showLess = !this.showLess
   }
 
   getLineHeight(el: HTMLSpanElement) {
@@ -213,6 +203,6 @@ export class AppTocOverviewComponent implements OnInit, OnDestroy {
   }
 
   displayShowMore(el: HTMLDivElement) {
-    return Number(this.getDivHeight(el)) >= Number(this.getLineHeight(el)) * 3
+    this.showMore = el.offsetHeight > Number(this.getLineHeight(el)) * 3
   }
 }

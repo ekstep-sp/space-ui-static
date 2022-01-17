@@ -276,10 +276,10 @@
       <!-- <h2 class="font-16px" i18n>Overview</h2> -->
       <!-- <mat-card-content> -->
         <div class="description-heading">Description</div>
-        <div #description class="mat-subheading-1 ov-clr" [ngClass]="{'line-clamp': !showMore}" [innerHTML]="content?.description"></div>
+        <div #description class="mat-subheading-1 ov-clr" [ngClass]="{'line-clamp': showMore}" [innerHTML]="content?.description"></div>
         <div class="show-more-description">
-          <span *ngIf="!showMoreButton && displayShowMore(description)" (click)=showComplete()>Show more</span>
-          <span *ngIf="showLessButton" (click)=showReduced()>Show Less</span>
+          <span *ngIf="showMore" (click)=showToggle()>Show more</span>
+          <span *ngIf="showLess" (click)=showToggle()>Show Less</span>
         </div>
         <div class="info-container">
           <div class="info-item flex-keyword" *ngIf="content?.keywords?.length">
