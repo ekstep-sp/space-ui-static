@@ -49,7 +49,7 @@ ws-app-public-nav-bar{
 
 .height-adjust {
   // background-color: white;
-  min-height: calc(100vh - (0px + 72px));
+  min-height: calc(100vh - (0px + 225px));
   @include breakpoint-xs {
     min-height: calc(100vh - (56px + 72px));
   }
