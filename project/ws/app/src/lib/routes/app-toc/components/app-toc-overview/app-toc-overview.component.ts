@@ -16,7 +16,7 @@ import { AppTocService } from '../../services/app-toc.service'
   templateUrl: './app-toc-overview.component.html',
   styleUrls: ['./app-toc-overview.component.scss'],
 })
-export class AppTocOverviewComponent implements OnInit, OnDestroy, AfterViewInit{
+export class AppTocOverviewComponent implements OnInit, OnDestroy, AfterViewInit {
   content: NsContent.IContent | null = null
   routeSubscription: Subscription | null = null
   viewMoreRelatedTopics = false

@@ -7,7 +7,7 @@
       (toggle)="toggleSideBar()">
     </viewer-viewer-top-bar>
     <section class="px-8 pb-4 stickprop">
-      <ng-container *ngIf="isTypeOfCollection || technicalResource">
+      <ng-container>
         <div class="isMobile">
            <button *ngIf="snav?.opened" mat-icon-button aria-label="Navbar Toggle button" color="primary" class="toggleBtn side-nav-button-opened btn-reverse" (click)="snav?.toggle()">
             <mat-icon class="dehaze-icon reverse" >double_arrow</mat-icon>
@@ -20,9 +20,13 @@
             <mat-sidenav #snav [ngClass]="isTypeOfCollection ? 'viewer-sidenav':'viewer-sidenav-standalone'"
             [opened]="sideNavBarOpened" [mode]="mode" class="sidenav-effect"
             >
-            <viewer-viewer-toc [forPreview]="forPreview" (hidenav)="minimizeBar()" [technicalResource]="technicalResource" (techResourceChange)="updateViewURL($event)">
+            <viewer-viewer-toc [forPreview]="forPreview" (hidenav)="minimizeBar()" [technicalResource]="technicalResource" (techResourceChange)="updateViewURL($event)"
+            [discussionForumWidget]="discussionForumWidgetWithComment" (discussionForumEvent)="discussionForumEvent($event)">
             </viewer-viewer-toc>
           </mat-sidenav>
+          <!-- <div>
+            <ng-container [wsResolverWidget]="discussionForumWidgetWithComment"></ng-container>
+          </div> -->
           <mat-sidenav-content class="sidenavContent" #scrollableContent  [ngClass]="{'sideNavOpend':snav?.opened}">
             <button *ngIf="snav?.opened" mat-icon-button aria-label="Navbar Toggle button" color="primary" class="toggleBtn side-nav-button-opened" (click)="snav?.toggle()">
               <mat-icon class="dehaze-icon reverse" >double_arrow</mat-icon>
@@ -30,22 +34,19 @@
             <button *ngIf="!snav?.opened" mat-icon-button aria-label="Navbar Toggle button" color="primary" class="toggleBtn side-nav-button-closed" (click)="snav?.toggle()">
               <mat-icon class="dehaze-icon">double_arrow</mat-icon>
             </button>
-            <ng-container *ngTemplateOutlet="mainContentTemplate"></ng-container>
+            <ng-container *ngTemplateOutlet="mainContentTemplate; context: {navStatus:snav?.opened}"></ng-container>
           </mat-sidenav-content>
         </mat-sidenav-container>
       </ng-container>
-      <ng-container *ngIf="!isTypeOfCollection && !technicalResource">
+      <!-- <ng-container *ngIf="!isTypeOfCollection && !technicalResource">
         <ng-container *ngTemplateOutlet="mainContentTemplate"></ng-container>
-      </ng-container>
+      </ng-container> -->
     </section>
-    <section class="px-8 py-6">
+    <section class="px-8 py-6" *ngIf="toggleChatWindow">
       <div class="wrapper flex-none md:flex md:flex-row-reverse discussionforum md:mr-3" [ngClass]="{'guest-view': configService.isGuestUser === true}">
-        <div class="w-full section-right pb-4 md:pb-0 atglancecard" [ngClass]="{'md\:w-1\/3 custom-padding': !configService.isGuestUser }">
-          <ws-widget-player-brief [newUI]="true" [askAuthorEnabled]="!configService?.isGuestUser" [forPreview]="forPreview || configService?.isGuestUser" [content]="content"></ws-widget-player-brief>
-        </div>
-        <div class="w-full md:w-3/4 section-left dfcard" *ngIf="!configService.isGuestUser">
-          <div *ngIf="!configService?.isGuestUser" class="mat-card df-card video-discussion-forum-in margin-top-m margin-bottom-m padding-s">
-              <h2 class="discussion-head font-montserrat body-font-size-primary space">Let's Discuss</h2>
+        <div class="w-full section-left dfcard px-64" *ngIf="!configService.isGuestUser">
+          <div *ngIf="!configService?.isGuestUser" class="video-discussion-forum-in margin-top-m margin-bottom-m px-20">
+              <h2 class="discussion-head font-montserrat body-font-size-primary space text-decoration-line cursor-pointer" (click)="toggleChatWindow = false">Show less</h2>
             <ng-container [wsResolverWidget]="discussionForumWidget"></ng-container>
           </div>
         </div>
@@ -58,7 +59,7 @@
 </div>
 
 <!--Template logics-->
-<ng-template #mainContentTemplate>
+<ng-template #mainContentTemplate let-navStatus="navStatus">
   <section *ngIf="status === 'error'">
     <div *ngIf="errorWidgetData?.widgetData?.errorType" [wsResolverWidget]="errorWidgetData"></div>
     <div *ngIf="error.errorType === errorType.mimeTypeMismatch">
@@ -105,6 +106,9 @@
     <mat-spinner></mat-spinner>
   </section>
   <ng-container *ngIf="!configService?.isGuestUser">
+    <div class="chat-container" *ngIf="!navStatus">
+      <ng-container [wsResolverWidget]="discussionForumWidgetWithComment" (someEvent)="discussionForumEvent($event)"></ng-container>
+    </div>
     <router-outlet (activate)="getContentData($event)"></router-outlet>
   </ng-container>
   <ng-container *ngIf="configService?.isGuestUser">

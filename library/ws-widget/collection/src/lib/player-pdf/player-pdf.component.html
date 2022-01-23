@@ -5,7 +5,7 @@
       <div [ngClass]="{ 'custom-scroll-small': !isInFullScreen }" class="container" #pdfContainer></div>
     </div>
   </section>
-  <section class="toolbar-container sticky bottom-0">
+  <section class="toolbar-container sticky bottom-0 flex flex-center">
     <mat-toolbar class="pdf-nav-bar" *ngIf="widgetData?.hideControls">
       <div class="page-counter">
         <span i18n class="mr-2"*ngIf="!isSmallViewPort">Page </span>

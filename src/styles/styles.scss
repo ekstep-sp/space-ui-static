@@ -43,7 +43,6 @@ body {
 }
 
 .customColorToolbar {
-  background-color: #8684A2;
   min-height: 90px;
 }
 
@@ -850,4 +849,7 @@ overflow: hidden !important;
 .welcome-modal{
   background: rgba(255, 255, 255, 0.9);
 border-radius: 10px;
+}
+.text-decoration-line {
+  text-decoration-line: underline;
 }

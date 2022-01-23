@@ -29,8 +29,9 @@ class="color-viewer-top mat-elevation-z3 px-8"
       <div class = "main-div-breadcrumbs-item">
       <div *ngFor = "let data of heirarchyTitle; let i = index">
         <li class = "breadcrumbs_child">
-        <div  [ngClass]= "(heirarchyTitle.length-1 === i) ? 'text-style-last-child': 'text-style-parent'">{{data.title}}</div>
-       <div><mat-icon  *ngIf="heirarchyTitle.length-1 > i" class="icon-display">navigate_next</mat-icon></div>
+        <div *ngIf = "i===0" [ngClass]= "(heirarchyTitle.length-1 === i) ? 'text-style-last-child': 'text-style-parent'">Content Overview</div>
+        <div *ngIf = "i!==0 && i!==1" [ngClass]= "(heirarchyTitle.length-1 === i) ? 'text-style-last-child': 'text-style-parent'">{{data.title}}</div>
+       <div *ngIf = "i!==1"><mat-icon  *ngIf="heirarchyTitle.length-1 > i" class="icon-display">navigate_next</mat-icon></div>
       </li>
   </div>
     </div>
@@ -39,7 +40,7 @@ class="color-viewer-top mat-elevation-z3 px-8"
   </span>
   <a
     mat-icon-button
-    class="width-auto"
+    class="width-auto next-mr"
     aria-label="previous content"
     i18n-aria-label
     [routerLink]="prevResourceUrl"
@@ -48,11 +49,13 @@ class="color-viewer-top mat-elevation-z3 px-8"
     queryParamsHandling="preserve"
     accesskey="<"
   >
-    <mat-icon style="color: white;" class="reverse">play_circle_outline</mat-icon>
+    <mat-icon style="color: white;" class="reverse mr-1">play_circle_outline</mat-icon>
+    Prev
   </a>
+  <div class="verticle-line" *ngIf="isTypeOfCollection"></div>
   <a
     mat-icon-button
-    class="width-auto"
+    class="width-auto next-pr"
     aria-label="next content"
     i18n-aria-label
     [routerLink]="nextResourceUrl"
@@ -60,8 +63,8 @@ class="color-viewer-top mat-elevation-z3 px-8"
     [disabled]="!nextResourceUrl"
     queryParamsHandling="preserve"
     accesskey=">"
-  >
-    <mat-icon style="color: white;">play_circle_outline</mat-icon>
+  >Next
+    <mat-icon style="color: white;"  class="ml-1">play_circle_outline</mat-icon>
   </a>
   <a mat-icon-button class="clr" *ngIf="showFullScreenButton">
     <ws-widget-btn-fullscreen

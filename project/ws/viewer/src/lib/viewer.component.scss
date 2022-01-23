@@ -51,12 +51,13 @@
 }
 .sidenavContent {
   overflow-x: hidden !important;
+  background-color: #925EB033;
 }
 .toggleBtn {
-    margin-left: 2px;
-    margin-top: 3px;
     position: absolute;
     z-index: 3;
+    left: 0;
+    top: 24px;
     &.side-nav-button-opened {
       width: 25px;
       height: 25px;
@@ -193,4 +194,18 @@ display: none;
   .mat-drawer-container{
     overflow: unset!important;
   }
+}
+
+.discussionforum {
+  background: rgba(146, 94, 176, 0.2);
+  background-image: url(../../../../../src/fusion-assets/img/comments-bg.svg);
+  background-position: 45% 51px;
+  background-repeat: no-repeat;
+  background-size: 95%;
+}
+.chat-container{
+  position: absolute;
+  width: 20%;
+  bottom: 0;
+  z-index: 1;
 }

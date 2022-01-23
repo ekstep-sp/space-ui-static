@@ -1,4 +1,4 @@
-import { Directive, Input, ViewContainerRef, OnChanges } from '@angular/core'
+import { Directive, Input, ViewContainerRef, OnChanges, EventEmitter, Output } from '@angular/core'
 import { LoggerService } from '@ws-widget/utils'
 import { NsWidgetResolver } from './widget-resolver.model'
 import { WidgetResolverService } from './widget-resolver.service'
@@ -8,6 +8,7 @@ import { WidgetResolverService } from './widget-resolver.service'
 })
 export class WidgetResolverDirective implements OnChanges {
   @Input() wsResolverWidget: NsWidgetResolver.IRenderConfigWithAnyData | null = null
+  @Output() public someEvent = new EventEmitter();
   constructor(
     private viewContainerRef: ViewContainerRef,
     private widgetResolverSvc: WidgetResolverService,
@@ -27,6 +28,10 @@ export class WidgetResolverDirective implements OnChanges {
         this.wsResolverWidget,
         this.viewContainerRef,
       )
+      if (compRef!.instance.someEvent){
+        compRef!.instance.someEvent.subscribe(this.someEvent);
+      }
+
       if (compRef) {
         compRef.changeDetectorRef.detectChanges()
       }

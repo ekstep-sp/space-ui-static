@@ -1,4 +1,4 @@
-import { Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core'
+import { Component, ElementRef, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core'
 import { MatSnackBar } from '@angular/material'
 import { NsWidgetResolver, WidgetBaseComponent } from '@ws-widget/resolver'
 import { ConfigurationsService, TFetchStatus } from '@ws-widget/utils'
@@ -68,6 +68,7 @@ export class DiscussionForumComponent extends WidgetBaseComponent
   commentMentions = []
   contentCreatorId: any
   result: any
+  @Output() someEvent = new EventEmitter()
   constructor(
     private snackBar: MatSnackBar,
     private discussionSvc: WsDiscussionForumService,
@@ -301,5 +302,8 @@ export class DiscussionForumComponent extends WidgetBaseComponent
     if (notificationRequest.length) {
       this.forumSrvc.triggerTagNotification(notificationRequest)
     }
+  }
+  emitToParent(data: any) {
+    this.someEvent.emit(data)
   }
 }

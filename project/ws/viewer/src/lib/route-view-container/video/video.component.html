@@ -1,51 +1,13 @@
-<div *ngIf="videoData && isNotEmbed" class="mr-3">
-  <div class="flex flex-around flex-wrapped">
+<div *ngIf="videoData && isNotEmbed">
+  <div class="flex flex-around flex-wrapped pt-6 mx-6">
     <div class="w-full" [ngClass]="{'relative': configSvc?.isGuestUser }">
       <div class="pos">
         <div id="fullScreenContainer" class="video-player">
           <ng-container *ngIf="isFetchingDataComplete" [wsResolverWidget]="widgetResolverVideoData"></ng-container>
         </div>
-        <div class="flex bottom-0 w-full items-center customColorToolbar">
+        <div class="bottom-0 w-full items-center customColorToolbar">
           <div class="inline ml-3">
             <ws-author-viewer-curator-list class="text-white" [askAuthorEnabled]="!configSvc?.isGuestUser" [fixLineIssue]="true" [content]="videoData"></ws-author-viewer-curator-list>
-          </div>
-          <div class="mr-5 mt-4 text-white sm:mt-0 buttons" *ngIf="!isShared && !configSvc?.isGuestUser">
-            <ws-widget-btn-content-download [forPreview]="forPreview" [widgetData]="
-                videoData
-                  | pipePartialContent
-                    : [
-                        'identifier',
-                        'contentType',
-                        'resourceType',
-                        'mimeType',
-                        'downloadUrl',
-                        'isExternal',
-              'artifactUrl'
-                      ]
-              "></ws-widget-btn-content-download>
-            <ws-widget-btn-content-like [forPreview]="forPreview"
-              [widgetData]="videoData | pipePartialContent: ['identifier']">
-            </ws-widget-btn-content-like>
-
-            <ws-widget-btn-content-share [forPreview]="forPreview" [overview]="true" [widgetData]="{
-              identifier: videoData?.identifier,
-              contentType: 'Resource',
-              name: videoData?.name,
-              mode: 'dialog',
-              isDisabled: isPreviewMode
-            }" [isDisabled]="isPreviewMode"></ws-widget-btn-content-share>
-            <ws-widget-btn-goals [forPreview]="forPreview"></ws-widget-btn-goals>
-            <ws-widget-btn-playlist [forPreview]="forPreview" [widgetData]="{
-              contentId: videoData?.identifier,
-              contentName: videoData?.name,
-              contentType: 'Resource',
-              mode: 'dialog',
-              isDisabled: isPreviewMode
-            }"></ws-widget-btn-playlist>
-            <!-- <ws-widget-btn-content-feedback [forPreview]="forPreview"></ws-widget-btn-content-feedback> -->
-            <ws-widget-btn-content-feedback-v2 [forPreview]="forPreview"
-              [widgetData]="videoData | pipePartialContent: ['identifier', 'name']">
-            </ws-widget-btn-content-feedback-v2>
           </div>
         </div>
       </div>

@@ -20,6 +20,7 @@ export interface IBtnMailUser {
 export class BtnMailUserComponent extends WidgetBaseComponent
   implements OnInit, NsWidgetResolver.IWidgetData<IBtnMailUser> {
   @Input() widgetData!: IBtnMailUser
+  @Input() isNewButton = false
   isShareEnabled = false
 
   constructor(

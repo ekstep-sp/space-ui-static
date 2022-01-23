@@ -124,6 +124,7 @@ export namespace NsDiscussionForum {
     isLoggedInUserRestricted?: boolean
     isDisabled?: boolean
     contentData?: any
+    commentsCount?: number
   }
   export interface ITimelinePostSource {
     id: string

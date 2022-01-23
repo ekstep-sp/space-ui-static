@@ -19,4 +19,15 @@
   }
   .author-name{
       font-size: 18px;
+      color: #42428B;
+  }
+  .author {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+  }
+  .list-container {
+    position: absolute;
+    right: 0;
+    bottom: 0;
   }

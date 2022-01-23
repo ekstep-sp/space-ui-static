@@ -1,9 +1,13 @@
-<div [hidden]="isRestricted" class="df-container">
+<div [hidden]="isRestricted" class="df-container" [ngClass]="{'chat-bg':widgetData.commentsCount }">
+  <div class="flex flex-between mb-4 text-white font-semibold" *ngIf = "widgetData.commentsCount">
+    <div>Comments ({{widgetData.commentsCount}})</div>
+    <div class="text-decoration-line cursor-pointer" (click)="emitToParent(true)">Show All</div>
+  </div>
     <div class="discussion-header" [hidden]="widgetData.isLoggedInUserRestricted">
         <!-- <p class="ws-mat-primary-text font-medium text-xl body-font-size-secondary" i18n>Start a new thread</p> -->
         <div class="question-container">
           <ws-widget-user-image
-            class="user-image mt-1"
+            class="user-image mt-2"
             [userId]="userId"
             [email]="userEmail"
             [userName]="userName"
@@ -32,7 +36,7 @@
             [title]="widgetData?.isDisabled ? postDisabled.value : postEnabled.value"
             [ngClass]="{'disabled':!isValidPost || isPostingDiscussion || widgetData?.isDisabled}"
           >
-          <mat-icon [ngClass]="{'disabled':!isValidPost || isPostingDiscussion || widgetData?.isDisabled}" class="send-icon mt-3 line matdark material-icons-outlined">send</mat-icon>
+          <mat-icon [ngClass]="{'disabled':!isValidPost || isPostingDiscussion || widgetData?.isDisabled, 'chat-send': widgetData.commentsCount && !(!isValidPost || isPostingDiscussion || widgetData?.isDisabled) }" class="send-icon mt-3 line matdark material-icons-outlined">send</mat-icon>
           </a>
           </div>
         </div>
@@ -53,7 +57,7 @@
         </div>
         <div></div> -->
       </div>
-  <div class="discussion-body mb-6">
+  <div class="discussion-body mb-6" *ngIf = "!widgetData.commentsCount">
     <!-- <div *ngIf="discussionFetchStatus === 'none'" class="no-conversation mat-toolbar body-font-size-primary" i18n>
       There aren’t any conversations yet
     </div> -->

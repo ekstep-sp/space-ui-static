@@ -59,6 +59,8 @@ export class ViewerTocComponent implements OnInit, OnDestroy {
   @Input() forPreview = false
   @Output() techResourceChange = new EventEmitter<any>()
   @Input() technicalResource: any = null
+  @Input() discussionForumWidget: any = {}
+  @Output() discussionForumEvent = new EventEmitter<any>()
   isExpand = false
 
   constructor(
@@ -156,6 +158,8 @@ export class ViewerTocComponent implements OnInit, OnDestroy {
         this.processCurrentResourceChange()
       }
     })
+  } else {
+    this.isFetching = false
   }
 })
   }
@@ -522,5 +526,9 @@ export class ViewerTocComponent implements OnInit, OnDestroy {
     return this.pathSet.has(correctResourceID[0])
     }
     return false
+  }
+
+  someFunction(event: any) {
+    this.discussionForumEvent.emit(event)
   }
 }

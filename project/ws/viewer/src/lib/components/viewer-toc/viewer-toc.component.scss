@@ -33,9 +33,10 @@ list-style-type: none;
 }
 
 .content-active {
-color: #FFFFFF;
-font-size: 1.02rem;
+color: #42428B;
+font-size: 14px;
 width:100% !important;
+font-weight: bold;
 }
 
 .content-duration {
@@ -142,19 +143,20 @@ padding-left: 12px;
 }
 
 .main-title {
-background-color: #925EB0;
-height: 25px;
-font-size:12px;
-line-height: 15px;
-align-items: center;
-font-weight: bolder !important;
+  background-color: #ffffff;
+  font-size: 14px;
+  line-height: 15px;
+  align-items: center;
+  font-weight: bolder !important;
+  color: black;
+  height: 4rem;
 p {
 margin: 0;
 }
 }
 
 .parent-item {
-background-color: rgba(198, 188, 184, 0.48);
+background-color: rgba(198, 188, 184, 0.1);
 margin-top: 4px;
 .mat-tree-node.mat-toolbar {
 height: 40px;
@@ -168,17 +170,19 @@ max-height: 65px;
 line-height: 2;
 mat-icon {
 padding-top: 2px !important;
-font-size: 20px !important;
+font-size: 18px !important;
 }
 }
 
 .cusotm-bg {
-background-color: rgb(66, 66, 139);
-color: white;
+color: #696466;
+background-color: white;
+font-weight: 500;
+;
 }
 .cusotm-bg:hover{
-background-color: rgb(66, 66, 139);
-color: white;
+  color: #42428B;
+  background-color: rgb(66 66 139 / 10%);
 }
 .remove-background{
 background: unset !important;
@@ -194,6 +198,7 @@ font-weight: bolder !important;
 }
 .title-subheading{
 font-size:14px;
+font-weight: 500;
 }
 // .active {
 // background-color: rgb(66, 66, 139);
@@ -201,7 +206,7 @@ font-size:14px;
 // }
 .active{
 // background-color:rgb(91 91 149 / 64%);
-background-color: rgba(66, 66, 139, 0.64) !important;
+background-color: #ffffff !important;
 transition: 0.5s;
 }
 .active-sublink{
@@ -311,3 +316,8 @@ color: white !important;
 //   }
 // }
 
+.chat-container{
+  position: absolute;
+  width: 100%;
+  bottom: 0;
+}

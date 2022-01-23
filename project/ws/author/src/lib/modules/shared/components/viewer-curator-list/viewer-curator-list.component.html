@@ -5,21 +5,21 @@
 </ng-container>
 
 <ng-template #creators let-authors="authors" let-title="title">
-  <h2 class="overflow-ellipsis overflow-x-hidden font-montserrat body-font-size-primary font-bold m-0 curator-title"
-    i18n *ngIf="title">{{title}}</h2>
-  <div class="list-container">
-    <div *ngFor="let author of authors" class="author font-montserrat">
+  <div class="list-container text-right">
+    <div class="author font-montserrat m-2">
       <!-- <ws-widget-user-image class="author-image" [imageType]="'name-initial'" [userName]="author.name || ''"
                   [email]="author.email"></ws-widget-user-image> -->
-      <div class="inline-flex flex-middle mr-2">
-        <img class="pr-2 prf-icon" src="/assets/instances/space/common/overview_account.png">
-        <h3 class="inline font-montserrat margin-remove author-name">{{ author.name }}</h3>
-        <ng-container *ngIf="mailIcon$">
-          <ws-widget-btn-mail-user *ngIf="askAuthorEnabled"
-            [widgetData]="{ content: content, fixLine: fixLineIssue, emails: [{email: author.email, name: author.name}] }">
-          </ws-widget-btn-mail-user>
-        </ng-container>
-      </div>
+      <ng-container *ngFor="let author of authors">
+        <div class="inline-flex flex-middle mr-2">
+          <img class="pr-2 prf-icon" src="/assets/instances/space/common/overview_account.png">
+          <h3 class="inline font-montserrat margin-remove author-name">{{ author.name }}</h3>
+        </div>
+      </ng-container>
+      <ng-container *ngIf="mailIcon$">
+        <ws-widget-btn-mail-user *ngIf="askAuthorEnabled" [isNewButton]="true"
+          [widgetData]="{ content: content, fixLine: fixLineIssue, emails: authors }">
+        </ws-widget-btn-mail-user>
+      </ng-container>
     </div>
   </div>
 </ng-template>

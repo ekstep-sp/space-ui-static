@@ -4,9 +4,22 @@
   aria-label="Send Mail"
   i18n-matTooltip
   matTooltip="Ask a query"
-  *ngIf="isShareEnabled && widgetData?.emails?.length"
+  *ngIf="isShareEnabled && widgetData?.emails?.length && !isNewButton"
   (click)="openQueryMailDialog($event)"
 >
   <mat-icon class="mail-icon mt-1" [ngClass]="{'fixLine': widgetData?.fixLine}">mail_outline</mat-icon>
   <span i18n *ngIf="widgetData?.labelled">Email</span>
+</button>
+<button
+  mat-icon-button
+  i18n-aria-label="Send mail action button ARIA label"
+  aria-label="Send Mail"
+  i18n-matTooltip
+  matTooltip="Ask a query"
+  *ngIf="isShareEnabled && widgetData?.emails?.length && isNewButton"
+  (click)="openQueryMailDialog($event)"
+  class="mail-button"
+>
+  <span i18n class="mr-1">Ask the Author</span>
+  <mat-icon class="mail-icon mt-1" [ngClass]="{'fixLine': widgetData?.fixLine}">mail_outline</mat-icon>
 </button>
