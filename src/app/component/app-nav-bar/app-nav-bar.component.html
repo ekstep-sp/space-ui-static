@@ -51,7 +51,7 @@
   <ng-container *ngIf="item.type === 'searchNewUIBtn' && !hideGlobalSearch">
     <span class="expandSearch">
       <input [formControl]="globalSearch" (keyup.enter)="triggerGlobalSearch()" type="text"
-        placeholder="Search People or Content" name="search">
+        placeholder="Search Content" name="search">
       <mat-icon (click)="triggerGlobalSearch()" class="searchIcon">search</mat-icon>
     </span>
   </ng-container>

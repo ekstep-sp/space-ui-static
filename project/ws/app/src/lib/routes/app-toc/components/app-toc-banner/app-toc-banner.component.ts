@@ -79,6 +79,8 @@ export class AppTocBannerComponent implements OnInit, OnChanges, OnDestroy {
   mailIcon = false
   parentElem = 'toc'
   class = true
+  averageRating = 0.0  
+  totalRatingCount = 0
 
   constructor(
     private sanitizer: DomSanitizer,
@@ -163,6 +165,24 @@ export class AppTocBannerComponent implements OnInit, OnChanges, OnDestroy {
         contentName: this.content.name,
         contentType: this.content.contentType,
       }
+    }
+
+    this.getContentRating()
+  }
+
+  getContentRating(){
+    if(this.content !== null){
+      const contentIdentifiers = {
+        contentIds:
+        [this.content.identifier] || []
+      }
+      const contantIden = this.content.identifier
+      this.contentSvc.fetchContentRatings(contentIdentifiers).then(
+        ratingObj => {
+          const rating:any = (<any>ratingObj)[contantIden]
+          this.averageRating = rating.averageRating
+          this.totalRatingCount = rating.ratingCount
+      })
     }
   }
 
@@ -390,8 +410,8 @@ export class AppTocBannerComponent implements OnInit, OnChanges, OnDestroy {
     }
   }
   getRatingIcon(ratingIndex: number): 'star' | 'star_border' | 'star_half' {
-    if (this.content && this.content.averageRating) {
-      const avgRating = this.content.averageRating
+    if (this.content && this.averageRating) {
+      const avgRating = this.averageRating
       const ratingFloor = Math.floor(avgRating)
       if (ratingIndex <= ratingFloor) {
         return 'star'
