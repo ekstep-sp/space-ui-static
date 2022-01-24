@@ -1,85 +1,172 @@
-<div [ngClass]="{
+<div
+  [ngClass]="{
     'banner-container': bannerUrl,
     'ws-mat-primary-lite-background-on-day': !bannerUrl
-  }" [style.backgroundImage]="bannerUrl" class="banner-clr-night-mode banner-clr">
-  <div class="header-synopsis flex" [ngClass]="{ 'header-synopsis-gradient': bannerUrl }" *ngIf="content">
+  }"
+  [style.backgroundImage]="bannerUrl"
+  class="banner-clr-night-mode banner-clr"
+>
+  <div
+    class="header-synopsis flex"
+    [ngClass]="{ 'header-synopsis-gradient': bannerUrl }"
+    *ngIf="content"
+  >
     <!--content details-->
     <div class="content-desc">
       <div class="header-title">
-        <h1 class="font-campaign heading margin-remove-bottom padding-bottom-xs hidden sm:block" style="max-width: 68%;"
-          [title]="content?.name">
-          {{ content?.name | lowercase | titlecase}}
+        <h1
+          class="font-campaign heading margin-remove-bottom padding-bottom-xs hidden sm:block"
+          style="max-width: 68%"
+          [title]="content?.name"
+        >
+          {{ content?.name | lowercase | titlecase }}
         </h1>
-        <h1 class="margin-remove-bottom padding-bottom-xs block sm:hidden" [title]="content?.name">
-          {{ content?.name | lowercase | titlecase}}
+        <h1
+          class="margin-remove-bottom padding-bottom-xs block sm:hidden"
+          [title]="content?.name"
+        >
+          {{ content?.name | lowercase | titlecase }}
         </h1>
         <span *ngIf="contentProgress === 1" class="margin-left-s">
-          <mat-icon i18n-matTooltip matTooltip="Completed" class="ws-mat-accent-text">check_circle</mat-icon>
+          <mat-icon
+            i18n-matTooltip
+            matTooltip="Completed"
+            class="ws-mat-accent-text"
+            >check_circle</mat-icon
+          >
         </span>
       </div>
       <div class="feature">
         <ng-container *ngIf="content?.category === 'Resource'">
           <div *ngIf="content?.categoryType">
-            <h4 class="display_type category sub-heading-font">{{content?.categoryType}}</h4>
+            <h4 class="display_type category sub-heading-font">
+              {{ content?.categoryType }}
+            </h4>
           </div>
           <div *ngIf="!content?.categoryType">
-            <h4 class="display_type category sub-heading-font">{{content?.category}}</h4>
+            <h4 class="display_type category sub-heading-font">
+              {{ content?.category }}
+            </h4>
           </div>
-          <span *ngIf="!this.configSvc?.isGuestUser && content?.identifier && content?.assetType !== 'Connection'"
-            class="hr-line ml-3 text-white mt-1 hidden-block-xs"></span>
+          <span
+            *ngIf="
+              !this.configSvc?.isGuestUser &&
+              content?.identifier &&
+              content?.assetType !== 'Connection'
+            "
+            class="hr-line ml-3 text-white mt-1 hidden-block-xs"
+          ></span>
         </ng-container>
         <ng-container *ngIf="content?.category !== 'Resource'">
           <div *ngIf="content?.category">
-            <h4 class="sub-heading-font category display_type">{{content?.category === 'Course' ?
-                    'Collection': content?.category === 'Collection' ? 'Asset' : content?.category }}</h4>
+            <h4 class="sub-heading-font category display_type">
+              {{
+                content?.category === 'Course'
+                  ? 'Collection'
+                  : content?.category === 'Collection'
+                  ? 'Asset'
+                  : content?.category
+              }}
+            </h4>
           </div>
-          <span *ngIf="!this.configSvc?.isGuestUser && content?.identifier && content?.assetType !== 'Connection'"
-            class="hr-line ml-4 text-white mt-1 hidden-block-xs"></span>
+          <span
+            *ngIf="
+              !this.configSvc?.isGuestUser &&
+              content?.identifier &&
+              content?.assetType !== 'Connection'
+            "
+            class="hr-line ml-4 text-white mt-1 hidden-block-xs"
+          ></span>
         </ng-container>
-        <ng-container *ngIf="!hideRatings">
-          <div class="hidden-block-xs">
-            <ng-container [ngTemplateOutlet]="star"></ng-container>
-          </div>
-          <div class="visible-block-xs">
-            <ng-container [ngTemplateOutlet]="starMenu"></ng-container>
-          </div>
-        </ng-container>
+        <div class="flex items-center display_type category sub-heading-font mb-3">
+          <span *ngIf="averageRating" class="ml-2"
+            >{{ averageRating }}&nbsp;</span
+          >
+          <span *ngIf="!averageRating" class="ml-2"
+            >0.0&nbsp;</span
+          >
+          <mat-icon
+            color="accent"
+            class="mr-2"
+            *ngFor="let rating of [1, 2, 3, 4, 5]"
+          >
+            {{ getRatingIcon(rating) }}</mat-icon
+          >
+          <span>({{ totalRatingCount | pipeCountTransform }})</span>
+          <!-- <span *ngIf="totalRatingCount">(&nbsp;{{ totalRatingCount | pipeCountTransform }}&nbsp;
+            <ng-container i18n *ngIf="(totalRatingCount || 0) > 1">
+              ratings
+            </ng-container>
+            <ng-container i18n *ngIf="(totalRatingCount || 0) <= 1">
+              rating
+            </ng-container> )</span> -->
+        </div>
       </div>
-      <h4 *ngIf="showMissingMessage" style = "color: yellow;" [innerHTML]="contentMissingMessage"></h4>     
-    <div *ngIf="content?.averageRating" class="flex items-center my-1 mb-3">
-      <mat-icon color="accent" class="mr-2" *ngFor="let rating of [1, 2, 3, 4, 5]">
-        {{ getRatingIcon(rating) }}</mat-icon
+      <h4
+        *ngIf="showMissingMessage"
+        style="color: yellow"
+        [innerHTML]="contentMissingMessage"
+      ></h4>
+      <!-- <div *ngIf="averageRating" class="flex items-center my-1 mb-3">
+        <span class="ml-2 font-medium text-xl"
+          >{{ averageRating }}&nbsp;</span
+        >
+        <mat-icon
+          color="accent"
+          class="mr-2"
+          *ngFor="let rating of [1, 2, 3, 4, 5]"
+        >
+          {{ getRatingIcon(rating) }}</mat-icon
+        >
+        
+        <span *ngIf="totalRatingCount">(&nbsp;{{ totalRatingCount | pipeCountTransform }}&nbsp;
+          <ng-container i18n *ngIf="(totalRatingCount || 0) > 1">
+            ratings
+          </ng-container>
+          <ng-container i18n *ngIf="(totalRatingCount || 0) <= 1">
+            rating
+          </ng-container> )</span>
+      </div> -->
+      <div
+        [ngSwitch]="routePath"
+        class="header-meta"
+        [ngClass]="{ 'header-meta-banner': bannerUrl }"
       >
-      <span class="ml-2 font-medium text-xl">{{ content?.averageRating }}&nbsp;</span>
-      (
-      <span i18n>from</span>
-      <span *ngIf="content?.totalRating"
-        >&nbsp;{{ content?.totalRating | pipeCountTransform }}&nbsp;</span
-      >
-      <span>
-        <ng-container i18n *ngIf="(content?.totalRating || 0) > 1">
-          votes
-        </ng-container>
-        <ng-container i18n *ngIf="(content?.totalRating || 0) <= 1">
-          vote
-        </ng-container> </span
-      >)
-    </div>
-    <div [ngSwitch]="routePath" class="header-meta" [ngClass]="{ 'header-meta-banner': bannerUrl }">
-      <!-- Overview Section -->
+        <!-- Overview Section -->
 
-        <div class="banner-overview-container" [hidden]="!content?.subTitle && showSubtitleOnBanner"
-          *ngSwitchCase="'overview'">
-          <h2 class="overview-description" *ngIf="showSubtitleOnBanner" i18n-title title="Subtitle">
+        <div
+          class="banner-overview-container"
+          [hidden]="!content?.subTitle && showSubtitleOnBanner"
+          *ngSwitchCase="'overview'"
+        >
+          <h2
+            class="overview-description"
+            *ngIf="showSubtitleOnBanner"
+            i18n-title
+            title="Subtitle"
+          >
             {{ content?.subTitle | pipeLimitTo: 250 }}
           </h2>
-          <h3 class="overview-description" *ngIf="!showSubtitleOnBanner" i18n-title title="Description">
+          <h3
+            class="overview-description"
+            *ngIf="!showSubtitleOnBanner"
+            i18n-title
+            title="Description"
+          >
             {{ content?.description | pipeLimitTo: 450 }}
           </h3>
-          <div *ngIf="sanitizedIntroductoryVideoIcon" class="overview-intro ws-mat-primary-lite-background"
-            [style.backgroundImage]="sanitizedIntroductoryVideoIcon" role="button" (click)="playIntroVideo()"
-            i18n-matTooltip matTooltip="Play Intro Video">
-            <mat-icon role="button" class="overview-intro-overlay">play_arrow</mat-icon>
+          <div
+            *ngIf="sanitizedIntroductoryVideoIcon"
+            class="overview-intro ws-mat-primary-lite-background"
+            [style.backgroundImage]="sanitizedIntroductoryVideoIcon"
+            role="button"
+            (click)="playIntroVideo()"
+            i18n-matTooltip
+            matTooltip="Play Intro Video"
+          >
+            <mat-icon role="button" class="overview-intro-overlay"
+              >play_arrow</mat-icon
+            >
           </div>
         </div>
         <!-- Toc Section -->
@@ -87,46 +174,86 @@
           <!-- Contents Bannner -->
         </div>
         <!-- Analytics Section -->
-        <div class="banner-overview-container" [hidden]="!content?.subTitle && showSubtitleOnBanner"
-          *ngSwitchCase="'analytics'">
-          <h2 class="overview-description" *ngIf="showSubtitleOnBanner" i18n-title title="Subtitle">
+        <div
+          class="banner-overview-container"
+          [hidden]="!content?.subTitle && showSubtitleOnBanner"
+          *ngSwitchCase="'analytics'"
+        >
+          <h2
+            class="overview-description"
+            *ngIf="showSubtitleOnBanner"
+            i18n-title
+            title="Subtitle"
+          >
             {{ content?.subTitle | pipeLimitTo: 250 }}
           </h2>
-          <h3 class="overview-description" *ngIf="!showSubtitleOnBanner" i18n-title title="Description">
+          <h3
+            class="overview-description"
+            *ngIf="!showSubtitleOnBanner"
+            i18n-title
+            title="Description"
+          >
             {{ content?.description | pipeLimitTo: 450 }}
           </h3>
-          <div *ngIf="sanitizedIntroductoryVideoIcon" class="overview-intro ws-mat-primary-lite-background"
-            [style.backgroundImage]="sanitizedIntroductoryVideoIcon" role="button" (click)="playIntroVideo()"
-            i18n-matTooltip matTooltip="Play Intro Video">
-            <mat-icon role="button" class="overview-intro-overlay">play_arrow</mat-icon>
+          <div
+            *ngIf="sanitizedIntroductoryVideoIcon"
+            class="overview-intro ws-mat-primary-lite-background"
+            [style.backgroundImage]="sanitizedIntroductoryVideoIcon"
+            role="button"
+            (click)="playIntroVideo()"
+            i18n-matTooltip
+            matTooltip="Play Intro Video"
+          >
+            <mat-icon role="button" class="overview-intro-overlay"
+              >play_arrow</mat-icon
+            >
           </div>
         </div>
       </div>
-      <p class="margin-top-l margin-remove-bottom" *ngIf="content?.isInIntranet && showIntranetMsg">
+      <p
+        class="margin-top-l margin-remove-bottom"
+        *ngIf="content?.isInIntranet && showIntranetMsg"
+      >
         <mat-icon class="align-bottom text-white">info</mat-icon>&nbsp;
-        <ng-container i18n>This can be viewed only in the Intranet.</ng-container>
+        <ng-container i18n
+          >This can be viewed only in the Intranet.</ng-container
+        >
       </p>
       <p class="margin-top-l margin-remove-bottom" *ngIf="showInstructorLedMsg">
         <mat-icon class="align-bottom text-white">info</mat-icon>&nbsp;
-        <ng-container i18n>This is instructor-led classroom course and is not available online.</ng-container>
+        <ng-container i18n
+          >This is instructor-led classroom course and is not available
+          online.</ng-container
+        >
       </p>
 
-      <p class="margin-top-l margin-remove-bottom" *ngIf="showStart.msg === 'youtubeForbidden'">
+      <p
+        class="margin-top-l margin-remove-bottom"
+        *ngIf="showStart.msg === 'youtubeForbidden'"
+      >
         <mat-icon class="align-bottom text-white">info</mat-icon>&nbsp;
-        <ng-container i18n>Access to this YouTube content is blocked.</ng-container>
+        <ng-container i18n
+          >Access to this YouTube content is blocked.</ng-container
+        >
       </p>
     </div>
     <!--Right Side details-->
     <div>
       <div class="justify-end header-actions">
         <div class="action-btns">
-          <ng-container *ngIf="
+          <ng-container
+            *ngIf="
               actionBtnStatus !== 'wait' &&
               content?.status !== 'Deleted' &&
               content?.status !== 'Expired'
-            ">
-            <div [hidden]="isResource && !content?.artifactUrl?.length" class="pb-8">
-              <ng-container *ngIf="
+            "
+          >
+            <div
+              [hidden]="isResource && !content?.artifactUrl?.length"
+              class="pb-8"
+            >
+              <ng-container
+                *ngIf="
                   actionBtnStatus === 'grant' &&
                   !(isMobile && content?.isInIntranet) &&
                   !(
@@ -134,68 +261,117 @@
                     content?.children.length === 0 &&
                     !content?.artifactUrl?.length
                   ) &&
-                  !(content?.contentType === 'Resource' && !content?.artifactUrl)
+                  !(
+                    content?.contentType === 'Resource' && !content?.artifactUrl
+                  )
                 "
               >
-                <ng-container *ngIf="toResume === false && contentMissing === false">
+                <ng-container
+                  *ngIf="toResume === false && contentMissing === false"
+                >
                   <a
                     [color]="'primary'"
                     *ngIf="showStart.show && !isPostAssessment"
-                    [routerLink]="resumeData ? resumeDataLink?.url : firstResourceLink?.url"
-                    [queryParams]="resumeData ? generateQuery('RESUME') : generateQuery('START')"
-                    class="common_sub_text" id="clr" mat-flat-button>
-                        <mat-spinner [diameter]="25" style="color: black; background: white;" *ngIf="isLoad"></mat-spinner>
+                    [routerLink]="
+                      resumeData ? resumeDataLink?.url : firstResourceLink?.url
+                    "
+                    [queryParams]="
+                      resumeData
+                        ? generateQuery('RESUME')
+                        : generateQuery('START')
+                    "
+                    class="common_sub_text"
+                    id="clr"
+                    mat-flat-button
+                  >
+                    <mat-spinner
+                      [diameter]="25"
+                      style="color: black; background: white"
+                      *ngIf="isLoad"
+                    ></mat-spinner>
                     <span class="btn-text-font" *ngIf="!isLoad" i18n>View</span>
                   </a>
                 </ng-container>
-                <ng-container *ngIf="toResume === true && contentMissing === false">
+                <ng-container
+                  *ngIf="toResume === true && contentMissing === false"
+                >
                   <a
                     [color]="'primary'"
                     *ngIf="showStart.show && !isPostAssessment"
-                    [routerLink]="resumeData ? resumeDataLink?.url : firstResourceLink?.url"
-                    [queryParams]="resumeData ? generateQuery('RESUME') : generateQuery('START')"
-                    class="common_sub_text " id="clr" mat-flat-button>
+                    [routerLink]="
+                      resumeData ? resumeDataLink?.url : firstResourceLink?.url
+                    "
+                    [queryParams]="
+                      resumeData
+                        ? generateQuery('RESUME')
+                        : generateQuery('START')
+                    "
+                    class="common_sub_text"
+                    id="clr"
+                    mat-flat-button
+                  >
                     <span class="btn-text-font">Resume</span>
                   </a>
                 </ng-container>
                 <ng-container *ngIf="contentMissing">
                   <a
                     [color]="'primary'"
-                    class="common_sub_text "
+                    class="common_sub_text"
                     id="disabled-content-button"
                     mat-flat-button
                     (click)="showMissingMessage = !showMissingMessage"
                   >
-                  <mat-icon class="display_type">info</mat-icon>
+                    <mat-icon class="display_type">info</mat-icon>
                   </a>
                 </ng-container>
               </ng-container>
-              <ng-container *ngIf="actionBtnStatus == 'reject' && content?.registrationUrl">
-                <a [href]="content?.registrationUrl" target="_blank" [color]="'primary'" i18n
-                  mat-flat-button>Register</a>
+              <ng-container
+                *ngIf="actionBtnStatus == 'reject' && content?.registrationUrl"
+              >
+                <a
+                  [href]="content?.registrationUrl"
+                  target="_blank"
+                  [color]="'primary'"
+                  i18n
+                  mat-flat-button
+                  >Register</a
+                >
               </ng-container>
             </div>
           </ng-container>
           <ng-container [ngTemplateOutlet]="actions"></ng-container>
         </div>
-      </div> 
-      <div *ngIf="content?.creatorContacts.length > 1">
+      </div>
+      <!-- <div *ngIf="content?.creatorContacts.length > 1">
         <h3 class="display_type curator sub-heading-font">Curators</h3>
-        <div class="flex curator-align" *ngFor="let curatorName of content?.creatorContacts">
-          <h3 class="display_type btn-text-font common-width">{{curatorName.name}}</h3>
+        <div
+          class="flex curator-align"
+          *ngFor="let curatorName of content?.creatorContacts"
+        >
+          <h3 class="display_type btn-text-font common-width">
+            {{ curatorName.name }}
+          </h3>
+        </div>
+      </div> -->
+      <div *ngIf="content?.creatorContacts.length">
+        <div
+          class="flex curator-align"
+        >
+          <h3 class="display_type btn-text-font common-width">
+            Curator : {{ content?.creatorContacts[0].name }}
+          </h3>
         </div>
       </div>
-      <div *ngIf="content?.creatorContacts.length === 1">
-        <div class="flex curator-align" *ngFor="let curatorName of content?.creatorContacts">
-          <h3 class="display_type btn-text-font common-width">Curator : {{curatorName.name}}</h3>
-        </div>
-      </div>
-  </div>
+    </div>
   </div>
 </div>
-<ws-widget-content-progress *ngIf="content?.identifier" [forPreview]="forPreview" [contentId]="content?.identifier">
+<ws-widget-content-progress
+  *ngIf="content?.identifier"
+  [forPreview]="forPreview"
+  [contentId]="content?.identifier"
+>
 </ws-widget-content-progress>
-<ng-template #starMenu>
+<!-- <ng-template #starMenu>
   <ws-widget-user-content-rating class="block" [mobileView]="true"
     *ngIf="!this.configSvc?.isGuestUser && content?.identifier && content?.assetType !== 'Connection'"
     [contentId]="content?.identifier" [isDisabled]="isRatingsDisabled" [parentElem]="parentElem">
@@ -206,19 +382,19 @@
     *ngIf="!this.configSvc?.isGuestUser && content?.identifier && content?.assetType !== 'Connection'"
     [contentId]="content?.identifier" [isDisabled]="isRatingsDisabled" [parentElem]="parentElem">
   </ws-widget-user-content-rating>
-</ng-template>
+</ng-template> -->
 <mat-menu #actionMenu="matMenu">
   <div mat-menu-item>
     <ng-container *ngIf="content" [ngTemplateOutlet]="actions"></ng-container>
   </div>
 </mat-menu>
 
-<!-- <ng-template #actions>
+<ng-template #actions>
   <a i18n-aria-label aria-label="Edit" i18n-matTooltip matTooltip="Edit" mat-icon-button *ngIf="editButton"
     [routerLink]="['/author/editor/' + content?.identifier]">
-    <mat-icon class="text-white">edit</mat-icon>
+    <mat-icon class="ml-4 mt-2 text-white">edit</mat-icon>
   </a>
-  <a i18n-aria-label aria-label="Take Action" i18n-matTooltip matTooltip="Take Action" mat-icon-button
+  <!-- <a i18n-aria-label aria-label="Take Action" i18n-matTooltip matTooltip="Take Action" mat-icon-button
     *ngIf="reviewButton" [routerLink]="['/author/editor/' + content?.identifier]">
     <mat-icon class="text-white">publish</mat-icon>
   </a>
@@ -262,6 +438,6 @@
     <ws-widget-btn-content-feedback-v2 [forPreview]="forPreview" [overview]="true"
       [widgetData]="content | pipePartialContent: ['identifier', 'name']">
     </ws-widget-btn-content-feedback-v2>
-  </span>
-</ng-template> -->
+  </span> -->
+</ng-template>
 <ng-template #authView i18n>View</ng-template>
