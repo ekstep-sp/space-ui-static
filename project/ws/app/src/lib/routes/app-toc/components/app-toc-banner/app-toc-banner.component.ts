@@ -180,8 +180,8 @@ export class AppTocBannerComponent implements OnInit, OnChanges, OnDestroy {
       this.contentSvc.fetchContentRatings(contentIdentifiers).then(
         ratingObj => {
           const rating:any = (<any>ratingObj)[contantIden]
-          this.averageRating = rating.averageRating
-          this.totalRatingCount = rating.ratingCount
+          this.averageRating = rating? rating.averageRating : 0.0
+          this.totalRatingCount = rating? rating.ratingCount : 0
       })
     }
   }
