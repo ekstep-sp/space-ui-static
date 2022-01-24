@@ -9,14 +9,18 @@
   // margin-top: 77vh;
   display: flex;
   align-items: center;
-  min-height: 56px;
+  min-height: 48px;
   overflow: hidden;
   font: inherit;
   justify-content: center;
   background-color: #696466 !important;
   border-radius: 30px;
-  width: 50%;
+  width: 40%;
 }
+// .toolbar-container{
+//   background-color: #696466 !important;
+// }
+
 .pdf-page-container {
   height:88vh;
   width: calc(100%-80px);
@@ -133,11 +137,10 @@ input[type=number] {
 
 
 .customColor {
-  background-color: #C6BCB8 !important;
   border-radius: 0px !important;
 
   .icon-color{
-    color: #696466;
+    color: #FFFFFF;
   }
 }
 .page-counter{
@@ -165,4 +168,7 @@ input[type=number] {
     font-weight: bold !important;
   }
 }
+}
+mat-toolbar.mat-toolbar-single-row {
+  height: 48px;
 }

@@ -8,7 +8,7 @@ import { WidgetResolverService } from './widget-resolver.service'
 })
 export class WidgetResolverDirective implements OnChanges {
   @Input() wsResolverWidget: NsWidgetResolver.IRenderConfigWithAnyData | null = null
-  @Output() public someEvent = new EventEmitter();
+  @Output() public someEvent = new EventEmitter()
   constructor(
     private viewContainerRef: ViewContainerRef,
     private widgetResolverSvc: WidgetResolverService,
@@ -28,8 +28,8 @@ export class WidgetResolverDirective implements OnChanges {
         this.wsResolverWidget,
         this.viewContainerRef,
       )
-      if (compRef!.instance.someEvent){
-        compRef!.instance.someEvent.subscribe(this.someEvent);
+      if (compRef!.instance.someEvent) {
+        compRef!.instance.someEvent.subscribe(this.someEvent)
       }
 
       if (compRef) {

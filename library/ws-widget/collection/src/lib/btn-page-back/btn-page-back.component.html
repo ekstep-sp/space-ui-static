@@ -6,6 +6,8 @@
   [queryParams]="backUrl.queryParams"
   [fragment]="backUrl?.fragment"
   mat-icon-button
+  [ngClass]="{'text-view': displayText}"
 >
-  <mat-icon class="text-white">arrow_back</mat-icon>
+  <span *ngIf="displayText">{{displayText}}</span>
+  <mat-icon *ngIf="!displayText" class="text-white">arrow_back</mat-icon>
 </a>

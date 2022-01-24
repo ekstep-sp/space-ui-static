@@ -11,6 +11,7 @@ type TUrl = undefined | 'none' | 'back' | string
 export class BtnPageBackComponent extends WidgetBaseComponent
   implements OnInit, NsWidgetResolver.IWidgetData<{ url: TUrl }> {
   @Input() widgetData: { url: TUrl } = { url: 'none' }
+  @Input() displayText: string | undefined
   presentUrl = ''
   constructor(
     private btnBackSvc: BtnPageBackService,
