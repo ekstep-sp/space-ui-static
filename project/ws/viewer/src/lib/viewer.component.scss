@@ -96,7 +96,7 @@
 }
 
 .sidenav-effect {
-  background: #f2ecf6 !important;
+  background: #ffffff !important;
   box-shadow: none !important;
   padding-bottom: 140px;
 }
@@ -142,6 +142,9 @@ display: none;
 @media screen and (max-width: 599px) {
   .isMobile {
   display: block;
+}
+.chat-container {
+  display: none;
 }
 }
 ::ng-deep {
@@ -206,7 +209,7 @@ display: none;
 }
 .chat-container{
   position: absolute;
-  width: 20%;
+  width: 23%;
   bottom: 0;
   z-index: 1;
 }

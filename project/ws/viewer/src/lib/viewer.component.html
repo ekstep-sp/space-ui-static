@@ -44,8 +44,8 @@
     </section>
     <section class="px-8 py-6" *ngIf="toggleChatWindow">
       <div class="wrapper flex-none md:flex md:flex-row-reverse discussionforum md:mr-3" [ngClass]="{'guest-view': configService.isGuestUser === true}">
-        <div class="w-full section-left dfcard px-64" *ngIf="!configService.isGuestUser">
-          <div *ngIf="!configService?.isGuestUser" class="video-discussion-forum-in margin-top-m margin-bottom-m px-20">
+        <div class="w-full section-left dfcard lg:px-64" *ngIf="!configService.isGuestUser">
+          <div *ngIf="!configService?.isGuestUser" class="video-discussion-forum-in margin-top-m margin-bottom-m lg:px-20">
               <h2 class="discussion-head font-montserrat body-font-size-primary space text-decoration-line cursor-pointer" (click)="toggleChatWindow = false">Show less</h2>
             <ng-container [wsResolverWidget]="discussionForumWidget"></ng-container>
           </div>

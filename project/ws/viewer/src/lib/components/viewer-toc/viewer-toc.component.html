@@ -124,6 +124,43 @@
         </mat-card-content>
       </mat-card>
     </ng-container>
+    <ng-container *ngIf="!collection && !collectionCard">
+      <div class="mat-body-2 text-truncate flex pl-4 main-title">
+        <p> Table of Resource</p>
+      </div>
+      <div class="resource-container content-active active">
+        <div class="resource-meta width-expand content-resource">
+          <a>
+            <span class="width-expand flex flex-middle tech-span content-active">
+              <img
+                i18n-alt
+                alt="thumbnail"
+                class="viewer-toc-thumbnail  margin-auto mat-app-background rounded-lg"
+                [src]="viewerDataSvc.resource.thumbnail"
+                [wsUtilsDefaultThumbnail]="defaultThumbnail"
+              />
+              <span class="width-1-1 margin-left-m flex flex-wrapped">
+                <div
+                  class="width-1-1 flex flex-between flex-col">
+                  <div class="text-truncate flex">
+                    <span>
+                      {{ viewerDataSvc.resource.name | pipeLimitTo: 25 }}
+                    </span>
+                  </div>
+                  <span class="flex font-size-12">
+                    <span>{{ viewerDataSvc.resource.categoryType | pipeLimitTo: 300 }}</span>
+                    <div class="content-duration width-max-content inline-block ml-3">
+                      <span class="flex align-timer">
+                      </span>
+                    </div>
+                  </span>
+                </div>
+              </span>
+            </span>
+          </a>
+        </div>
+      </div>
+    </ng-container>
   </ul>
   <div class="chat-container">
     <ng-container [wsResolverWidget]="discussionForumWidget" (someEvent)="someFunction($event)"></ng-container>
