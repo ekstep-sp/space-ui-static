@@ -7,33 +7,60 @@
 [ngStyle]="pageNavbar?.styles"
 class="color-viewer-top mat-elevation-z3 px-8"
 >
-  <ws-widget-btn-page-back
-    *ngIf="!forChannel"
-    [widgetData]="{
-      url: isTypeOfCollection
-        ? collectionType === 'Playlist'
-          ? '/app/playlist/me/' + collectionId
-          : (forPreview ? '/author' : '/app') + '/toc/' + collectionId + '/overview'
-        : (forPreview ? '/author' : '/app') + '/toc/' + resourceId + '/overview'
-    }"
-  ></ws-widget-btn-page-back>
   <mat-icon style="cursor: pointer; color: white;" (click)="back()" *ngIf="forChannel"
     >arrow_back</mat-icon
   >
   <span class="width-expand text-left text-truncate text-white body-font-size-secondary font-montserrat" [matTooltip]="resourceName">
-   <ng-container *ngIf="!heirarchyTitle || !heirarchyTitle.length"> 
-    {{ resourceName }}
+   <ng-container *ngIf="!heirarchyTitle || !heirarchyTitle.length">
+    <ul class = "breadcrumbs">
+      <div class = "main-div-breadcrumbs-item">
+      <div>
+        <li class = "breadcrumbs_child">
+        <div class="text-style-parent">
+          <ws-widget-btn-page-back
+          *ngIf="!forChannel"
+          [widgetData]="{
+            url: isTypeOfCollection
+              ? collectionType === 'Playlist'
+                ? '/app/playlist/me/' + collectionId
+                : (forPreview ? '/author' : '/app') + '/toc/' + collectionId + '/overview'
+              : (forPreview ? '/author' : '/app') + '/toc/' + resourceId + '/overview'
+          }"
+          [displayText]="'Content Overview'"
+        ></ws-widget-btn-page-back></div>
+        <div><mat-icon class="icon-display">navigate_next</mat-icon></div>
+      </li>
+      </div>
+      <div>
+        <li class="breadcrumbs_child">
+          <div class="text-style-last-child">{{ resourceName }}</div>
+        </li>
+      </div>
+    </div>
+    </ul>
    </ng-container>
 <ng-container *ngIf = "heirarchyTitle && heirarchyTitle.length">
     <ul class = "breadcrumbs">
       <div class = "main-div-breadcrumbs-item">
       <div *ngFor = "let data of heirarchyTitle; let i = index">
         <li class = "breadcrumbs_child">
-        <div *ngIf = "i===0" [ngClass]= "(heirarchyTitle.length-1 === i) ? 'text-style-last-child': 'text-style-parent'">Content Overview</div>
-        <div *ngIf = "i!==0 && i!==1" [ngClass]= "(heirarchyTitle.length-1 === i) ? 'text-style-last-child': 'text-style-parent'">{{data.title}}</div>
+        <div *ngIf = "i===0" [ngClass]= "(heirarchyTitle.length-1 === i) ? 'text-style-last-child': 'text-style-parent'">
+          <ws-widget-btn-page-back
+          *ngIf="!forChannel"
+          [widgetData]="{
+            url: isTypeOfCollection
+              ? collectionType === 'Playlist'
+                ? '/app/playlist/me/' + collectionId
+                : (forPreview ? '/author' : '/app') + '/toc/' + collectionId + '/overview'
+              : (forPreview ? '/author' : '/app') + '/toc/' + resourceId + '/overview'
+          }"
+          [displayText]="'Content Overview'"
+        ></ws-widget-btn-page-back>
+        </div>
+        <div *ngIf = "(i!==0 && i!==1) || (i!==0 && heirarchyTitle.length === 2)" [ngClass]= "(heirarchyTitle.length-1 === i) ? 'text-style-last-child': 'text-style-parent'">{{data.title}}</div>
        <div *ngIf = "i!==1"><mat-icon  *ngIf="heirarchyTitle.length-1 > i" class="icon-display">navigate_next</mat-icon></div>
       </li>
-  </div>
+      </div>
     </div>
     </ul>
   </ng-container>
