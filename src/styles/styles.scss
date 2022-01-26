@@ -17,7 +17,7 @@
   font-family: 'Material Icons';
   font-style: normal;
   font-weight: 400;
-  src: url("src/styles/font-face/flUhRq6tzZclQEJ-Vdg-IuiaDsNc.woff2") format('woff2');
+  src: url(https://fonts.gstatic.com/s/materialicons/v121/flUhRq6tzZclQEJ-Vdg-IuiaDsNc.woff2) format('woff2');
 }
 /* fallback */
 @font-face {
@@ -42,9 +42,9 @@ body {
   font-family: $font-family-montserrat;
 }
 
-.customColorToolbar {
-  min-height: 90px;
-}
+// .customColorToolbar {
+//   min-height: 90px;
+// }
 
 .custom-padding .mat-dialog-container {
           padding: 0;

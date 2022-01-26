@@ -1,4 +1,5 @@
 <ng-container *ngIf="parentElem !== 'viewer' && parentElem !== 'toc' && enableFeature && contentId">
+  <ng-container *ngIf="parentElem !== 'crud'">
     <mat-card>
       <h2 class="font-montserrat body-font-size-primary" *ngIf="!isDisabled" i18n>Rate the content</h2>
       <div class="flex">
@@ -6,11 +7,12 @@
           i18n-aria-label
           aria-label="Rating"
           name="user-content-rating-star-{{ i + 1 }}"
-          class="rating-button"
+          class="rating-button pointer-events-none"
           mat-icon-button
           *ngFor="let _ of [1, 2, 3, 4, 5]; let i = index"
           (click)="addRating(i)"
           style="color: #865ba0;"
+          [ngClass]="{'pointer-events-none': parentElem !== 'crud'}"
         >
           <mat-icon class="rating-icon">
             {{ (userRating || -1) > i ? 'star' : 'star_border' }}</mat-icon
@@ -18,6 +20,27 @@
         </button>
       </div>
     </mat-card>
+  </ng-container>
+  <ng-container *ngIf="parentElem === 'crud'">
+    <div class="flex flex-baseline">
+      <div class="body-font-size-primary font-montserrat font-semibold mr-4 inline-block purple-font" i18n>Rate this Resource</div>
+      <button
+        i18n-aria-label
+        aria-label="Rating"
+        name="user-content-rating-star-{{ i + 1 }}"
+        class="rating-button"
+        mat-icon-button
+        *ngFor="let _ of [1, 2, 3, 4, 5]; let i = index"
+        (click)="addRating(i)"
+        style="color: #865ba0;"
+      >
+        <mat-icon class="rating-icon">
+          {{ (userRating || -1) > i ? 'star' : 'star_border' }}</mat-icon
+        >
+      </button>
+    </div>
+  </ng-container>
+
   </ng-container>
   <ng-container *ngIf="parentElem === 'viewer' || parentElem === 'toc' && enableFeature && contentId">
         <div class="flex">
@@ -27,7 +50,7 @@
             i18n-aria-label
             aria-label="Rating"
             name="user-content-rating-star-{{ i + 1 }}"
-            class="rating-button"
+            class="rating-button pointer-events-none"
             mat-icon-button
             *ngFor="let _ of [1, 2, 3, 4, 5]; let i = index"
             (click)="addRating(i)"

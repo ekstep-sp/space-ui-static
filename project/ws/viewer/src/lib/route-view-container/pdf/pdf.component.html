@@ -5,9 +5,11 @@
         <div id="fullScreenContainer" class="video-player">
           <ng-container *ngIf="isFetchingDataComplete" [wsResolverWidget]="widgetResolverPdfData"></ng-container>
         </div>
-        <div class="items-center customColorToolbar mx-8">
+        <div class="items-center customColorToolbar">
           <div class="inline">
             <ng-container [wsResolverWidget]="discussionForumWidget"></ng-container>
+            <ws-widget-user-content-rating class="display-inline-block mt-5" [contentId]="pdfData?.identifier" [parentElem]="'crud'">
+            </ws-widget-user-content-rating>
             <ws-author-viewer-curator-list class="text-white" [askAuthorEnabled]="!configSvc?.isGuestUser" [fixLineIssue]="true" [content]="pdfData"></ws-author-viewer-curator-list>
           </div>
         </div>
