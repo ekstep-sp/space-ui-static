@@ -143,6 +143,13 @@ display: none;
   .isMobile {
   display: block;
 }
+.toggleBtn {
+  top: 3px;
+}
+.isMobile .toggleBtn {
+  left: 33px;
+  top: 60px;
+}
 .chat-container {
   display: none;
 }
