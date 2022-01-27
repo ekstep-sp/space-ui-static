@@ -853,3 +853,9 @@ border-radius: 10px;
 .text-decoration-line {
   text-decoration-line: underline;
 }
+
+@media (min-width: 1000px) and (max-width: 1351px) {
+  mat-toolbar.mat-toolbar-single-row {
+      height: 45px;
+    }
+}
