@@ -160,3 +160,9 @@ h5 {
 .pb-35 {
   padding-bottom: 35px;
 }
+
+@media (max-width: 600px) {
+  .timeline::before, .timeline::after {
+    display: none !important;
+  }
+}
