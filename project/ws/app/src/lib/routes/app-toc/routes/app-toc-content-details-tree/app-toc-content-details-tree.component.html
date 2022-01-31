@@ -50,6 +50,15 @@
             <a [routerLink]="resourceLink.url" [queryParams]="resourceLink.queryParams">
             <h3 class="child_node m-0" style="color:darkblue">{{content?.name}}</h3>
             </a>
+            <img class="pt-3 pl-2" src="../../../../../../../../../fusion-assets/img/pointer.svg" alt=""/> 
+            <ng-container *ngIf="content?.duration">
+                <div class="hidden-block-xs">
+                    <ng-container [ngTemplateOutlet]="timer"></ng-container>
+                </div>
+                <div class="visible-block-xs ml-6">
+                        <ng-container [ngTemplateOutlet]="timerMenu"></ng-container>
+                 </div>
+            </ng-container>
         </div>
     </ul>
 </ng-container>

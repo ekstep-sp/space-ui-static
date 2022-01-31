@@ -176,7 +176,7 @@
               </ng-container>
               <ng-template #attributionsValue>
                 <h3 class="font-montserrat font-weight-bold text-black width-expand btn-text-font ">
-                  {{ content?.spaceLicenseAttribution  | lowercase}}
+                  {{ content?.spaceLicenseAttribution}}
                 </h3>
               </ng-template>
               <ng-template #hyphen>
@@ -190,7 +190,7 @@
               </ng-container>
               <ng-template #copyrightValue>
                 <h3 class="font-montserrat font-weight-bold text-black width-expand btn-text-font ">
-                  {{ content?.spaceLicenseCopyright  | lowercase}}
+                  {{ content?.spaceLicenseCopyright}}
                 </h3>
               </ng-template>
               <ng-template #hyphen>
@@ -204,8 +204,8 @@
               </ng-container>
               <ng-template #sourceValue>
                 <h3 class="font-montserrat font-weight-bold text-black width-expand btn-text-font">
-                  {{ content?.sourceName | lowercase }} <span *ngIf="content?.sourceName === 'Other'">(
-                    {{content?.otherSourceName | lowercase}} )</span>
+                  {{ content?.sourceName}} <span *ngIf="content?.sourceName === 'Other'">(
+                    {{content?.otherSourceName}} )</span>
                 </h3>
               </ng-template>
               <ng-template #hyphen>
@@ -219,7 +219,7 @@
               </ng-container>
               <ng-template #licenceValue>
               <h3 class="font-montserrat font-weight-bold text-black width-expand btn-text-font ">
-                {{ content?.spaceLicense  | lowercase}}
+                {{ content?.spaceLicense}}
               </h3>
             </ng-template>
               <ng-template #hyphen>
@@ -301,14 +301,14 @@
                 </h3>
               </div> -->
                 <!-- <mat-divider *ngIf="content?.locale"></mat-divider> -->
-                <div class="info-item" *ngIf="content?.hasTranslations?.length || content?.isTranslationOf?.length">
+                <!-- <div class="info-item" *ngIf="content?.hasTranslations?.length || content?.isTranslationOf?.length">
                   <h3 class="item-heading ws-mat-primary-text font-montserrat" i18n>Available in</h3>
                   <h3 class="font-montserrat font-weight-bold text-black width-expand btn-text-font ">
                     <span class="cursor-pointer" (click)="goToContent(trans?.identifier)"
-                      *ngFor="let trans of content?.hasTranslations || content?.isTranslationOf">{{trans.locale | uppercase}}
+                      *ngFor="let trans of content?.hasTranslations || content?.isTranslationOf">{{trans.locale}}
                     </span>
                   </h3>
-                </div>
+                </div> -->
                 <!-- <mat-divider *ngIf="content?.hasTranslations?.length || content?.isTranslationOf?.length"></mat-divider> -->
                 <!-- <mat-divider *ngIf="content?.keywords?.length"></mat-divider> -->
                 <!-- <ng-container *ngFor="let item of content?.collections">
@@ -504,7 +504,7 @@
       </ng-container>
       <ng-template #viewerAttributions>
         <h3 class="viewer-flex-column m-0 p-0 font-montserrat font-weight-bold text-black btn-text-font darktheme-color">
-          {{ content?.spaceLicenseAttribution  | lowercase}}
+          {{ content?.spaceLicenseAttribution}}
         </h3>
       </ng-template>
       <ng-template #hyphen>
@@ -519,7 +519,7 @@
       </ng-container>
       <ng-template #viewerCopyright>
         <h3 class="viewer-flex-column m-0 p-0 font-montserrat font-weight-bold text-black width-expand btn-text-font darktheme-color">
-          {{ content?.spaceLicenseCopyright  | lowercase}}
+          {{ content?.spaceLicenseCopyright}}
         </h3>
       </ng-template>
       <ng-template #hyphen>
@@ -540,8 +540,8 @@
       </ng-container>
       <ng-template #viewerSourceName>
         <h3 class="viewer-flex-column m-0 p-0 font-montserrat font-weight-bold text-black btn-text-font darktheme-color">
-          {{ content?.sourceName | lowercase }} <span *ngIf="content?.sourceName === 'Other'">(
-            {{content?.otherSourceName | lowercase}} )</span>
+          {{ content?.sourceName } <span *ngIf="content?.sourceName === 'Other'">(
+            {{content?.otherSourceName }} )</span>
         </h3>
       </ng-template>
       <ng-template #hyphen>
@@ -556,7 +556,7 @@
       </ng-container>
       <ng-template #viewerLicense>
         <h3 class="viewer-flex-column m-0 p-0 font-montserrat font-weight-bold text-black btn-text-font darktheme-color">
-          {{ content?.spaceLicense  | lowercase}}
+          {{ content?.spaceLicense }}
         </h3>
       </ng-template>
       <ng-template #hyphen>
