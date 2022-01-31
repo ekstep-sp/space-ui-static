@@ -1,13 +1,13 @@
 <div *ngIf="videoData && isNotEmbed">
   <div class="flex flex-around flex-wrapped pt-6 mx-6">
     <div class="w-full" [ngClass]="{'relative': configSvc?.isGuestUser }">
-      <div class="">
+      <div class="flex flex-col">
         <div id="fullScreenContainer" class="video-player">
           <ng-container *ngIf="isFetchingDataComplete" [wsResolverWidget]="widgetResolverVideoData"></ng-container>
         </div>
         <div class="bottom-0 w-full items-center customColorToolbar">
-          <div class="inline ml-3">
-            <ws-widget-user-content-rating class="display-inline-block mt-5" [contentId]="videoData?.identifier" [parentElem]="'crud'">
+          <div class="flex justify-between">
+            <ws-widget-user-content-rating class="display-inline-block" [contentId]="videoData?.identifier" [parentElem]="'crud'">
             </ws-widget-user-content-rating>
             <ws-author-viewer-curator-list class="text-white" [askAuthorEnabled]="!configSvc?.isGuestUser" [fixLineIssue]="true" [content]="videoData"></ws-author-viewer-curator-list>
           </div>

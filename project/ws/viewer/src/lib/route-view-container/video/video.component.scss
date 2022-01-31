@@ -170,5 +170,11 @@
   }
   }
 
-  
+  @media screen and (min-width:1169px){
+     ::ng-deep{
+      .video-player ws-widget-player-video.video-full .video-js.vjs-default-skin {
+        height: calc(100vh - 225px) !important;
+      }
+    }
+  }
   

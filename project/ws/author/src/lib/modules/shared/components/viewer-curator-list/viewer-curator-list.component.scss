@@ -31,3 +31,11 @@
     right: 0;
     bottom: 0;
   }
+  @media (min-width: 200px) and (max-width: 768px) { 
+    .list-container {
+      position: initial;
+    }
+    .list-container .author div {
+      margin-bottom: 10px;
+    }
+   }

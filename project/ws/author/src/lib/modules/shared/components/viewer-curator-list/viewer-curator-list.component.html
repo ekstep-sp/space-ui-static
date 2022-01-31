@@ -5,8 +5,8 @@
 </ng-container>
 
 <ng-template #creators let-authors="authors" let-title="title">
-  <div class="list-container text-right">
-    <div class="author font-montserrat m-2 ">
+  <div class="">
+    <div class="author font-montserrat my-2 flex-col md:flex-row">
       <!-- <ws-widget-user-image class="author-image" [imageType]="'name-initial'" [userName]="author.name || ''"
                   [email]="author.email"></ws-widget-user-image> -->
       <ng-container *ngFor="let author of authors">
