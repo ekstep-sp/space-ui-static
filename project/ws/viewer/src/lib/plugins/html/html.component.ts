@@ -163,6 +163,7 @@ export class HtmlComponent implements OnInit, OnChanges, OnDestroy {
           )
           this.timeoutSet.add(mobileTimeout)
         } else {
+          const webTimeout = setTimeout(() => {
           const width = window.outerWidth
           const height = window.outerHeight
           const isWindowOpen = this.openWindow(width, height, redirecturl as string)
@@ -170,6 +171,10 @@ export class HtmlComponent implements OnInit, OnChanges, OnDestroy {
             const msg = 'The pop up window has been blocked by your browser, please unblock to continue.'
             this.snackBar.open(msg)
           }
+        },                            3500)
+        this.progress = 100
+        this.setProgressBarLogic()
+        this.timeoutSet.add(webTimeout)
         }
       } else {
         const webTimeout = setTimeout(() => {
