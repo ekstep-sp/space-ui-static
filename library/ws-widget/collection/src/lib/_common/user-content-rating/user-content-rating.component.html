@@ -22,13 +22,13 @@
     </mat-card>
   </ng-container>
   <ng-container *ngIf="parentElem === 'crud'">
-    <div class="flex flex-baseline">
+    <div class="flex flex-baseline my-2">
       <div class="body-font-size-primary font-montserrat font-semibold mr-4 inline-block purple-font" i18n>Rate this Resource</div>
       <button
         i18n-aria-label
         aria-label="Rating"
         name="user-content-rating-star-{{ i + 1 }}"
-        class="rating-button"
+        class="rating-button leading-10"
         mat-icon-button
         *ngFor="let _ of [1, 2, 3, 4, 5]; let i = index"
         (click)="addRating(i)"

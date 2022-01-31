@@ -184,3 +184,8 @@
 .customColorToolbar {
   background-color: inherit;
 }
+@media (min-width: 768px) {
+  .customColorToolbar > div:first-child {
+    justify-content: flex-start;
+  }
+}
