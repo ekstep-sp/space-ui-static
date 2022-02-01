@@ -12,10 +12,14 @@
             </div>
       </div>
       <div class="absolute bottom-0 w-full items-center customColorToolbar">
-        <div class="inline ml-3">
-          <ws-widget-user-content-rating class="display-inline-block mt-5" [contentId]="htmlData?.identifier" [parentElem]="'crud'">
-          </ws-widget-user-content-rating>
-          <ws-author-viewer-curator-list class="text-white" [askAuthorEnabled]="!configSvc.isGuestUser" [fixLineIssue]="true" [content]="htmlData"></ws-author-viewer-curator-list>
+        <div class="flex justify-between mobile-display-block">
+          <div class="ml-4">
+            <ws-widget-user-content-rating class="display-inline-block mt-5" [contentId]="htmlData?.identifier" [parentElem]="'crud'">
+            </ws-widget-user-content-rating>
+          </div>
+          <div class="flex mt-4">
+            <ws-author-viewer-curator-list class="text-white" [askAuthorEnabled]="!configSvc.isGuestUser" [fixLineIssue]="true" [content]="htmlData"></ws-author-viewer-curator-list>
+          </div>
         </div>
       </div>
     </div>

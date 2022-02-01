@@ -6,11 +6,15 @@
           <ng-container *ngIf="isFetchingDataComplete" [wsResolverWidget]="widgetResolverPdfData"></ng-container>
         </div>
         <div class="items-center customColorToolbar">
-          <div class="flex flex-col md:flex-row flex-end text-right">
+          <div class="flex  justify-between mobile-display-block">
             <ng-container [wsResolverWidget]="discussionForumWidget"></ng-container>
-            <ws-widget-user-content-rating class="display-inline-block text-center" [contentId]="pdfData?.identifier" [parentElem]="'crud'">
-            </ws-widget-user-content-rating>
-            <ws-author-viewer-curator-list class="display-inline-block text-center text-white" [askAuthorEnabled]="!configSvc?.isGuestUser" [fixLineIssue]="true" [content]="pdfData"></ws-author-viewer-curator-list>
+            <div>
+              <ws-widget-user-content-rating class="display-inline-block text-center" [contentId]="pdfData?.identifier" [parentElem]="'crud'">
+                        </ws-widget-user-content-rating>
+            </div>
+            <div class="flex">
+              <ws-author-viewer-curator-list class="text-center text-white" [askAuthorEnabled]="!configSvc?.isGuestUser" [fixLineIssue]="true" [content]="pdfData"></ws-author-viewer-curator-list>       
+            </div>
           </div>
         </div>
       </div>

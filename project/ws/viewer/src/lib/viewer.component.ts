@@ -52,6 +52,7 @@ export class ViewerComponent implements OnInit, OnDestroy, AfterViewInit, AfterV
   private screenSizeSubscription: Subscription | null = null
   private resourceChangeSubscription: Subscription | null = null
   toggleChatWindow = false
+
   constructor(
     private activatedRoute: ActivatedRoute,
     private router: Router,
@@ -215,6 +216,21 @@ export class ViewerComponent implements OnInit, OnDestroy, AfterViewInit, AfterV
   }
 
   discussionForumEvent(event: any) {
-    this.toggleChatWindow = event
+    this.toggleChatWindow = event   
+
+    this.changeDetector.detectChanges()
+
+      if(this.toggleChatWindow )
+      {
+        let elem: HTMLElement | null= document.getElementById("chat-window")
+        if(elem !== null) {
+         elem.scrollIntoView()
+        }
+      }
+    
+  }
+  toggleCommentWindow(){
+    this.toggleChatWindow =false
+    window.scroll(0,0);
   }
 }

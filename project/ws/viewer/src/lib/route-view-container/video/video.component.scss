@@ -168,6 +168,9 @@
     position: inherit;
     flex-wrap: wrap;
   }
+  .mobile-display-block{
+    display: block!important;
+  }
   }
 
   @media screen and (min-width:1169px){
