@@ -226,3 +226,14 @@ display: none;
     bottom: -48px;
   }
  }
+
+ @media (min-width: 961px){
+   .comments-mobile-view{
+     display: none;
+   }
+ }
+ @media (max-width: 960px){
+  .comments-mobile-view{
+    display: block;
+  }
+}

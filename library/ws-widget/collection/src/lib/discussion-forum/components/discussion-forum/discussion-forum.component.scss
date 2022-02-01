@@ -102,3 +102,10 @@ height: 40px;
 .chat-send {
   color: #fff !important;
 }
+
+@media (max-width:960px){
+  .chat-bg{
+    display: none;
+  }
+
+}
