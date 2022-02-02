@@ -94,8 +94,6 @@ export class PdfComponent implements OnInit, OnDestroy {
   prepareContent(data: any) {
     window.setTimeout(async () => {
       this.pdfData = data
-      this.pdfData!.artifactUrl.replace('space.societalplatform.org','localhost:3000')
-      this.pdfData!.artifactUploadUrl.replace('space.societalplatform.org','localhost:3000')
           if (this.alreadyRaised && this.oldData && !this.config.isGuestUser) {
             this.raiseEvent(WsEvents.EnumTelemetrySubType.Unloaded, this.oldData)
           }
