@@ -58,9 +58,9 @@
   </div>
   <div class="comments-mobile-view">
     <section id='chat-window' class="px-8 py-6">
-      <div class="wrapper flex-none md:flex md:flex-row-reverse discussionforum md:mr-3" [ngClass]="{'guest-view': configService.isGuestUser === true}">
-        <div class="w-full section-left dfcard lg:px-64" *ngIf="!configService.isGuestUser">
-          <div *ngIf="!configService?.isGuestUser" class="video-discussion-forum-in margin-top-m margin-bottom-m lg:px-20">
+      <div class="wrapper flex-none md:flex md:flex-row-reverse discussionforum md:mr-3">
+        <div class="w-full section-left dfcard lg:px-64">
+          <div class="video-discussion-forum-in margin-top-m margin-bottom-m lg:px-20">
             <ng-container [wsResolverWidget]="discussionForumWidget"></ng-container>
           </div>
         </div>
