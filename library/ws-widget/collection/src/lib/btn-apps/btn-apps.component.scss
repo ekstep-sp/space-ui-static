@@ -101,4 +101,14 @@ mat-icon {
   #help{ display: none; }   /* hide it on larger screens */
 }
 
-
+@media (min-width: 1024px) and (max-width: 1380px){
+  ::ng-deep {
+  .mat-menu-content{
+    background-color: #E8E8E8;
+    position: fixed;
+    top: 48px;
+    right: 20px;
+    width: 280px;
+  }
+}
+}

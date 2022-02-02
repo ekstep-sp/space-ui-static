@@ -49,9 +49,15 @@ ws-app-public-nav-bar{
 
 .height-adjust {
   // background-color: white;
-  min-height: calc(100vh - (0px + 225px));
+  min-height: calc(100vh - (0px + 256px));
   @include breakpoint-xs {
     min-height: calc(100vh - (56px + 72px));
+  }
+}
+
+@media (min-width: 1024px) and (max-width: 1380px){
+  .height-adjust{
+    min-height: calc(125vh - (0px + 256px));
   }
 }
 .theme-muave.night-mode .mat-drawer-container {
