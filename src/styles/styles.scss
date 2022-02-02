@@ -863,3 +863,9 @@ border-radius: 10px;
 .align-items-end {
   align-items: end;
 }
+
+@media (min-width: 1024px) and (max-width: 1380px){
+  .zoom-for-less-resolution{
+    zoom: 80%;
+  }
+}
