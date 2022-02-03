@@ -68,7 +68,7 @@
 
   .header-actions {
     display: flex;
-    margin-top: 16px;
+   // margin-top: 16px;
 
     .action-btns {
       display: flex !important;
@@ -225,4 +225,12 @@ color: #FFFFFF !important;
 }
 .curator-align {
   align-items: center;
+}
+
+@media (max-width: 1024px){
+  .header-synopsis{
+    .header-title{
+      margin-bottom: 0px;
+    }
+  }
 }
