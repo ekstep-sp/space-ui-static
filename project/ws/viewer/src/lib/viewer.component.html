@@ -6,7 +6,7 @@
     <viewer-viewer-top-bar *ngIf="!fullScreenContainer" [showFullScreenButton]="false" [forPreview]="forPreview" [frameReference]="fullScreenContainer"
       (toggle)="toggleSideBar()">
     </viewer-viewer-top-bar>
-    <section class="px-8 stickprop">
+    <section class="px-8 stickprop remove-zoom">
       <ng-container>
         <div class="isMobile">
            <button *ngIf="snav?.opened" mat-icon-button aria-label="Navbar Toggle button" color="primary" class="toggleBtn side-nav-button-opened btn-reverse" (click)="snav?.toggle()">

@@ -11,6 +11,12 @@
   overflow: hidden !important;
 }
 
+@media (min-width: 1024px) and (max-width: 1380px){
+  .viewer-sidenav-container {
+    height: calc(120vh - 56px);
+  }
+}
+
 .viewer-sidenav {
   width: 100%;
 
@@ -235,5 +241,11 @@ display: none;
  @media (max-width: 960px){
   .comments-mobile-view{
     display: block;
+  }
+}
+
+@media (min-width: 1024px) and (max-width: 1380px){
+  .remove-zoom{
+   // zoom: 120%;
   }
 }

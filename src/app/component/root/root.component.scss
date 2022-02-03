@@ -58,6 +58,8 @@ ws-app-public-nav-bar{
 @media (min-width: 1024px) and (max-width: 1380px){
   .height-adjust{
     min-height: calc(125vh - (0px + 256px));
+    zoom: 80%;
+    margin-top: 12px;
   }
 }
 .theme-muave.night-mode .mat-drawer-container {
