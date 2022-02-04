@@ -68,6 +68,12 @@
   }
 }
 
+@media screen and (min-width:1024px) and (max-width: 1380px){
+  .video-player {
+      height: calc(115vh - 147px) !important;
+  }
+}
+
 .video-player-mobile {
   @include breakpoint-xs {
     padding: 0;
@@ -173,7 +179,7 @@
   }
   }
 
-  @media screen and (min-width:1169px){
+  @media screen and (min-width:1381px){
      ::ng-deep{
       .video-player ws-widget-player-video.video-full .video-js.vjs-default-skin {
         height: calc(100vh - 225px) !important;
