@@ -72,8 +72,13 @@
   .expandSearch {
     overflow: initial;
     input {
-      width: 220px;
+     font-size: 14px;
+      width: 200px;
+     height: 10px;
    }
+   .searchIcon{
+    padding: 3px 4px 0px 0px !important;
+  }
   }  
   
 }
@@ -254,6 +259,15 @@
     margin-left:-5px;
   }
   }
+
+  @media screen and (min-width:1024px) and (max-width:1381px){
+    .logosize{
+      zoom: 80%;
+    }
+    .reduce-size{
+      zoom: 90%;
+    }
+    }
 
 @media screen and (max-width:310px){
     .w-full{

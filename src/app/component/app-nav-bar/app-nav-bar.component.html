@@ -15,7 +15,7 @@
       <ng-container [ngTemplateOutlet]="navbarSide" [ngTemplateOutletContext]="{ item: item }"
         *ngFor="let item of primaryNavbarConfig?.mediumScreen?.right">
       </ng-container>
-      <div class="custom-style">
+      <div class="custom-style reduce-size">
         <ng-container [wsResolverWidget]="btnAppsConfig"></ng-container>
       </div>
     </ng-container>
@@ -55,10 +55,12 @@
       <mat-icon (click)="triggerGlobalSearch()" class="searchIcon">search</mat-icon>
     </span>
   </ng-container>
+  <div class="reduce-size">
   <ws-widget-btn-feature class="item.widgetHostClass" style="padding-left:20px;padding-right: 17px;"
     *ngIf="item.type === 'featureButton'" [id]="item.config.actionBtnId" [widgetData]="item.config"
     [showFixedLength]="true">dfnj
   </ws-widget-btn-feature>
+</div>
 </ng-template>
 
 <mat-menu aria-label="helpMenu" #helpMenu="matMenu" name="helpOptionsListContainerHomePage">
