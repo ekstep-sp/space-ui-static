@@ -239,7 +239,7 @@
     </div>
     <!--Right Side details-->
     <div>
-      <div class="justify-end header-actions">
+      <div class="justify-end header-actions mobileView">
         <div class="action-btns">
           <ng-container
             *ngIf="
@@ -250,7 +250,7 @@
           >
             <div
               [hidden]="isResource && !content?.artifactUrl?.length"
-              class="pb-8"
+              class="pb-8 mobilePadding"
             >
               <ng-container
                 *ngIf="
