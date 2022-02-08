@@ -13,7 +13,16 @@
             </div>
             <div class="flex">
               <ws-author-viewer-curator-list class="text-white" [askAuthorEnabled]="!configSvc?.isGuestUser" [fixLineIssue]="true" [content]="videoData"></ws-author-viewer-curator-list>
-          
+              <div class="pt-2" *ngIf="!isShared && !configSvc?.isGuestUser">
+
+                <ws-widget-btn-content-share [forPreview]="forPreview" [overview]="true" [widgetData]="{
+                  identifier: videoData?.identifier,
+                  contentType: 'Resource',
+                  name: videoData?.name,
+                  mode: 'dialog',
+                  isDisabled: isPreviewMode
+                }" [isDisabled]="isPreviewMode"></ws-widget-btn-content-share>
+              </div>
             </div>
           </div>
         </div>
