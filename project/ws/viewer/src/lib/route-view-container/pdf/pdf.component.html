@@ -10,10 +10,16 @@
             <ng-container [wsResolverWidget]="discussionForumWidget"></ng-container>
             <div>
               <ws-widget-user-content-rating class="display-inline-block text-center" [contentId]="pdfData?.identifier" [parentElem]="'crud'">
-                        </ws-widget-user-content-rating>
+                        </ws-widget-user-content-rating>           
+              
             </div>
             <div class="flex">
-              <ws-author-viewer-curator-list class="text-center text-white" [askAuthorEnabled]="!configSvc?.isGuestUser" [fixLineIssue]="true" [content]="pdfData"></ws-author-viewer-curator-list>       
+              <ws-author-viewer-curator-list class="text-center text-white" [askAuthorEnabled]="!configSvc?.isGuestUser" [fixLineIssue]="true" [content]="pdfData"></ws-author-viewer-curator-list>    
+              <div class="pt-2">
+                <ws-widget-btn-content-share [forPreview]="forPreview" [overview]="true" [widgetData]="pdfData"
+                *ngIf="allowedToPdf && !configSvc?.isGuestUser" [isDisabled]="isPreviewMode">
+                </ws-widget-btn-content-share>
+              </div>
             </div>
           </div>
         </div>
