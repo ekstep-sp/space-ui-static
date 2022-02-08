@@ -55,9 +55,9 @@
               {{ widgetData.content.duration | pipeDurationTransform: 'hms' }}
             </span>
           </div>
-          <button mat-icon-button i18n-aria-label class="vertical-icon" aria-label="action items" [matMenuTriggerFor]="cardMenu">
+          <!-- <button mat-icon-button i18n-aria-label class="vertical-icon" aria-label="action items" [matMenuTriggerFor]="cardMenu">
             <mat-icon>more_vertical</mat-icon>
-          </button>
+          </button> -->
         </div>
       </div>
       <ws-widget-content-progress class="progress-bar" *ngIf="widgetData.content?.identifier"
@@ -258,10 +258,10 @@
                   </div> 
               <ng-container *ngIf="widgetData.content?.assetType !== 'Connection'" [ngTemplateOutlet]="rating">
               </ng-container>
-              <button type="button" mat-icon-button class="vertical-icon" i18n-aria-label aria-label="action items"
-                [matMenuTriggerFor]="cardMenu">
+              <!-- <button type="button" mat-icon-button class="vertical-icon " i18n-aria-label aria-label="action items"
+                [matMenuTriggerFor]="cardMenu" >
                 <mat-icon>more_vertical</mat-icon>
-              </button>
+              </button> -->
             </div>
           </div>
           <div *ngIf="!widgetData.content?.displayContentType"
@@ -273,10 +273,10 @@
             <div class="float-right flex items-center">
               <ng-container *ngIf="widgetData.content?.assetType !== 'Connection'" [ngTemplateOutlet]="rating">
               </ng-container>
-              <button type="button" mat-icon-button i18n-aria-label aria-label="action items"
+              <!-- <button type="button" mat-icon-button i18n-aria-label aria-label="action items"
                 [matMenuTriggerFor]="cardMenu">
                 <mat-icon>more_vertical</mat-icon>
-              </button>
+              </button> -->
             </div>
           </div>
         </mat-card-content>
@@ -471,9 +471,9 @@
         <div *ngIf="widgetData.content.sourceName" class="source-name w-64 text-truncate" i18n-title title="Source">
           {{ widgetData.content.sourceName }}
         </div>
-        <button type="button" mat-icon-button i18n-aria-label aria-label="action items" [matMenuTriggerFor]="cardMenu">
+        <!-- <button type="button" mat-icon-button i18n-aria-label aria-label="action items" [matMenuTriggerFor]="cardMenu">
           <mat-icon>more_vertical</mat-icon>
-        </button>
+        </button> -->
       </div>
     </div>
   </mat-card>
@@ -682,10 +682,10 @@
                   </div> 
               <ng-container *ngIf="widgetData.content.assetType !== 'Connection'" [ngTemplateOutlet]="rating">
               </ng-container>
-              <button type="button" class="vertical-icon" mat-icon-button i18n-aria-label aria-label="action items"
+              <!-- <button type="button" class="vertical-icon" mat-icon-button i18n-aria-label aria-label="action items"
                 [matMenuTriggerFor]="cardMenu">
                 <mat-icon>more_vertical</mat-icon>
-              </button>
+              </button> -->
             </div>
           </div>
         </a>
