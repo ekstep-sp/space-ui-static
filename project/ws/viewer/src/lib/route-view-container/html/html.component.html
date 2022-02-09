@@ -20,7 +20,7 @@
           <div class="flex mt-4 ml-4">
             <ws-author-viewer-curator-list class="text-white" [askAuthorEnabled]="!configSvc.isGuestUser" [fixLineIssue]="true" [content]="htmlData"></ws-author-viewer-curator-list>
             <div class="pt-2">
-              <ws-widget-btn-content-share *ngIf="allowedToDiscussionForum" [overview]="true" [forPreview]="forPreview"
+              <ws-widget-btn-content-share [overview]="true" [forPreview]="forPreview"
               [widgetData]="htmlData" [isDisabled]="isPreviewMode">
             </ws-widget-btn-content-share>
             </div>
