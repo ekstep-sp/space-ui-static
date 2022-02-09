@@ -234,3 +234,17 @@ color: #FFFFFF !important;
     }
   }
 }
+
+@media (max-width : 599px){
+  .mobileView {
+    padding-top: 15px;
+    justify-content:left;
+  }
+  .mobileView .mobilePadding{
+    padding-bottom: 5px!important;
+  }
+
+  .mobileView .text-white{
+    margin-top: 0 !important;
+  }
+}
