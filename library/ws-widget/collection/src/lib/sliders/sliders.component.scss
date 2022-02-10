@@ -249,3 +249,19 @@ flex-wrap: nowrap;
     padding-right: 2rem;
   }
 }
+
+@media (min-width: 640px) {
+  .panel-description{
+    padding-left:17px
+  }
+
+  .panel-image{
+    padding-left: 35px;
+  }
+}
+
+@media (max-width: 450px) {
+  .panel-description{
+   font-size: 9px;
+  }
+}
