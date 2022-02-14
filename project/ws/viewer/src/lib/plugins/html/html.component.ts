@@ -35,6 +35,9 @@ export class HtmlComponent implements OnInit, OnChanges, OnDestroy {
   loaderIntervalTimeout: any
   techResourceSub: Subscription | null = null
   timeoutSet = new Set()
+  isWordDocument = false
+  isExcel = false
+
   constructor(
     private domSanitizer: DomSanitizer,
     public mobAppSvc: MobileAppsService,
@@ -86,11 +89,17 @@ export class HtmlComponent implements OnInit, OnChanges, OnDestroy {
       if (this.htmlContent.artifactUrl.startsWith('http://')) {
         this.htmlContent.isIframeSupported = 'No'
       }
+      if (this.htmlContent.artifactUrl.endsWith('.docx')) {
+        this.isWordDocument = true        
+      }
+      if (this.htmlContent.artifactUrl.endsWith('.xlsx')) {
+        this.isExcel = true        
+      }
       if (typeof iframeSupport !== 'boolean') {
         iframeSupport = (this.htmlContent && this.htmlContent.isIframeSupported) ? this.htmlContent.isIframeSupported.toLowerCase() : 'no'
         if (iframeSupport === 'no') {
           this.showIframeSupportWarning = true
-          if (!this.configSvc.isGuestUser) {
+          if (!this.configSvc.isGuestUser && !this.isWordDocument && !this.isExcel) {
             this.progress = 100
             this.openInNewTabForTechResource(false)
 /* this.loaderIntervalTimeout = setTimeout(() => this.openInNewTab(), 3000)

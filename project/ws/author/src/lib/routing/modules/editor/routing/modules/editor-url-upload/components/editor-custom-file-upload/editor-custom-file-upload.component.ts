@@ -87,6 +87,8 @@ export class EditorCustomFileUploadComponent implements OnInit {
   isMobile = false
   @Output() data = new EventEmitter<any>()
   @HostBinding('style.opacity') public opacity = '1'
+  isWordDocument = false
+  isExcel = false
 
   ngOnInit() {
     this.valueSvc.isXSmall$.subscribe(isMobile => (this.isMobile = isMobile))
@@ -193,7 +195,9 @@ export class EditorCustomFileUploadComponent implements OnInit {
       !fileName.toLowerCase().endsWith('.pdf') &&
       !fileName.toLowerCase().endsWith('.zip') &&
       !fileName.toLowerCase().endsWith('.mp4') &&
-      !fileName.toLowerCase().endsWith('.mp3')
+      !fileName.toLowerCase().endsWith('.mp3') &&
+      !fileName.toLowerCase().endsWith('.docx') &&
+      !fileName.toLowerCase().endsWith('.xlsx')
     ) {
       this.snackBar.openFromComponent(NotificationComponent, {
         data: {
@@ -250,11 +254,28 @@ export class EditorCustomFileUploadComponent implements OnInit {
       ? 'application/x-mpegURL'
       : fileName.toLowerCase().endsWith('.zip')
       ? 'application/html'
+      : fileName.toLowerCase().endsWith('.docx')
+      ? 'application/html'
+      : fileName.toLowerCase().endsWith('.xlsx')
+      ? 'application/html'
       : 'audio/mpeg'
+
+    this.isWordDocument = fileName.toLowerCase().endsWith('.docx') ? true : false
+    this.isExcel = fileName.toLowerCase().endsWith('.xlsx') ? true : false
+
     if (this.mimeType === 'application/x-mpegURL' || this.mimeType === 'audio/mpeg') {
       this.getDuration()
     } else if (this.mimeType === 'application/html') {
-      this.extractFile()
+      if(this.isWordDocument || this.isExcel){
+        this.fileUploadCondition.url = fileName
+        this.fileUploadCondition.eval = true
+        this.fileUploadCondition.externalReference = true
+        this.fileUploadCondition.iframe = false
+        this.fileUploadCondition.isSubmitPressed = true
+        
+      }else{
+        this.extractFile()
+      }
     }
   }
 
@@ -316,24 +337,25 @@ export class EditorCustomFileUploadComponent implements OnInit {
             this.mimeType === 'application/pdf'
               ? CONTENT_BASE_STATIC
               : this.mimeType === 'application/html'
+              //? this.isWordDocument ? CONTENT_BASE_STATIC : CONTENT_BASE_WEBHOST
               ? CONTENT_BASE_WEBHOST
               : CONTENT_BASE_STREAM,
         },
         undefined,
-        this.mimeType === 'application/html',
+       // this.mimeType === 'application/html' && !this.isWordDocument,
+       this.mimeType === 'application/html' 
       )
       .pipe(
         tap(v => {
           this.canUpdate = false
           let url = ''
-          if (this.mimeType === 'application/html') {
-            url = `${document.location.origin}/content-store/
-              ${this.accessService.rootOrg}/${this.accessService.org}/Public/
-              ${this.currentContent}/web-hosted/
-              ${this.fileUploadCondition.url}`
+          //if (this.mimeType === 'application/html' && !this.isWordDocument) {
+            if (this.mimeType === 'application/html') {
+            url = `${document.location.origin}/content-store/${this.accessService.rootOrg}/${this.accessService.org}/Public/${this.currentContent}/web-hosted/${this.fileUploadCondition.url}`
           } else {
             url = (v.authArtifactURL || v.artifactURL).replace(/%2F/g, '/')
-          }
+         }
+         
           this.fileUploadForm.controls.artifactUploadUrl.setValue(url)
           this.fileUploadForm.controls.downloadUrl.setValue(v ? v.downloadURL : '')
           this.fileUploadForm.controls.mimeType.setValue(this.mimeType)
