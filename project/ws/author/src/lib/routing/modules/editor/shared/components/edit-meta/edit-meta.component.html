@@ -1605,6 +1605,10 @@
                   <div *ngIf="isFileUploaded" class="flex flex-middle justify-center">
                     <mat-icon class="ws-mat-primary-text"
                       *ngIf="fileUploadForm.controls['content'].value[0].name.includes('pdf')">picture_as_pdf</mat-icon>
+                      <mat-icon class="ws-mat-primary-text"
+                      *ngIf="fileUploadForm.controls['content'].value[0].name.includes('docx')">description</mat-icon>
+                      <mat-icon class="ws-mat-primary-text"
+                      *ngIf="fileUploadForm.controls['content'].value[0].name.includes('xlsx')">grid_on</mat-icon>
                     <mat-icon class="ws-mat-primary-text"
                       *ngIf="fileUploadForm.controls['content'].value[0].name.includes('mp4')">videocam</mat-icon>
                     <mat-icon class="ws-mat-primary-text"

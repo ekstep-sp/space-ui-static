@@ -57,6 +57,8 @@ export class PlayerPdfComponent extends WidgetBaseComponent
   upKey = 38
   rightKey = 39
   downKey = 40
+  isWordDocument = false
+  isExcel = false
 
   private pdfInstance: PDFJS.PDFDocumentProxy | null = null
   private activityStartedAt: Date | null = null
@@ -256,26 +258,38 @@ export class PlayerPdfComponent extends WidgetBaseComponent
     // delete link;
   }
   ngAfterViewInit() {
-    this.contextMenuSubs = fromEvent(this.pdfContainer.nativeElement, 'contextmenu').subscribe(e =>
-      e.preventDefault(),
-    )
-    if (this.widgetData && this.widgetData.pdfUrl) {
-      this.loadDocument(this.widgetData.pdfUrl)
-      if (this.widgetData.identifier) {
-        this.identifier = this.widgetData.identifier
-      }
+
+    if (this.widgetData.pdfUrl.endsWith('.docx')) {
+      this.isWordDocument = true  
+      console.log('docx',this.isWordDocument)      
     }
-    if (this.containerSection.nativeElement.clientWidth < 400) {
-      this.isSmallViewPort = true
+    if (this.widgetData.pdfUrl.endsWith('.xlsx')) {
+      this.isExcel = true        
     }
-    document.addEventListener('textlayerrendered', _event => {
-      const pdfLinks = document.getElementsByClassName('linkAnnotation')
-      for (let i = 0; i < pdfLinks.length; i += 1) {
-        if (pdfLinks[i].getElementsByTagName('a')[0] && !pdfLinks[i].getElementsByTagName('a')[0].classList.contains('internalLink')) {
-          pdfLinks[i].getElementsByTagName('a')[0].setAttribute('target', 'blank')
+
+    if(!(this.isWordDocument || this.isExcel)){
+      
+      this.contextMenuSubs = fromEvent(this.pdfContainer.nativeElement, 'contextmenu').subscribe(e =>
+        e.preventDefault(),
+      )
+      if (this.widgetData && this.widgetData.pdfUrl) {
+        this.loadDocument(this.widgetData.pdfUrl)
+        if (this.widgetData.identifier) {
+          this.identifier = this.widgetData.identifier
         }
       }
-    })
+      if (this.containerSection.nativeElement.clientWidth < 400) {
+        this.isSmallViewPort = true
+      }
+      document.addEventListener('textlayerrendered', _event => {
+        const pdfLinks = document.getElementsByClassName('linkAnnotation')
+        for (let i = 0; i < pdfLinks.length; i += 1) {
+          if (pdfLinks[i].getElementsByTagName('a')[0] && !pdfLinks[i].getElementsByTagName('a')[0].classList.contains('internalLink')) {
+            pdfLinks[i].getElementsByTagName('a')[0].setAttribute('target', 'blank')
+          }
+        }
+      })
+    }
 
   }
   ngOnDestroy() {

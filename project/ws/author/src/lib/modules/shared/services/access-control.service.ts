@@ -265,6 +265,12 @@ export class AccessControlService {
       if (!content.artifactUrl) {
         return ICON_TYPE.emptyFile
       }
+      if(content.artifactUrl.endsWith('docx')){
+        return ICON_TYPE.word
+      }
+      if(content.artifactUrl.endsWith('xlsx')){
+        return ICON_TYPE.excel
+      }
       return ICON_TYPE.pdf
     }
     if (content.mimeType === MIME_TYPE.youtube) {

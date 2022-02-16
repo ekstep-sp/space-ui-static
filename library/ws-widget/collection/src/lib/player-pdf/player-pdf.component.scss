@@ -173,3 +173,64 @@ input[type=number] {
 mat-toolbar.mat-toolbar-single-row {
   height: 48px;
 }
+
+.vertical-sub-align{
+  vertical-align: sub;
+}
+
+.customH{
+  height: auto
+}
+
+@media only screen and (min-width: 481px) and (max-width: 1023px){
+  .customH {
+    height: calc(100vh - 168px) !important
+  }
+}
+
+@media only screen and (min-width: 800px) and (max-width: 1280px){
+  .customH {
+    height: calc(100vh - 168px) !important
+  }
+}
+
+@media screen and (min-width:768px) and (orientation:portrait){
+  .customH {
+     height: calc(100vh - 168px) !important
+   }
+
+}
+
+@media screen and (min-width:1024px){
+  .customH {
+     height: calc(103.5vh - 168px) !important
+   }
+
+}
+
+@media screen and (min-width:1169px){
+  .customH {
+     height: calc(100vh - 146px) !important;
+   }
+
+}
+
+@media screen and (max-width: 1023px){
+  .customH {
+    height: 40em;
+  }
+
+}
+
+@media screen and (max-width: 767px){
+  .customH {
+      height: calc(100vh - 184px) !important;
+    }
+
+}
+
+@media screen and (max-width: 516px){
+  .customH {
+      height: calc(100vh - 216px) !important;
+    }
+}

@@ -102,6 +102,16 @@
             <ng-container *ngIf="tocStructure?.pdf === 1" i18n> PDF</ng-container>
             <ng-container *ngIf="tocStructure?.pdf > 1" i18n> PDFs</ng-container>
           </h3>
+          <h3 class="font-montserrat" *ngIf="tocStructure?.word > 0">
+            <ng-container>{{ tocStructure?.word }}</ng-container>
+            <ng-container *ngIf="tocStructure?.word === 1" i18n> Word document</ng-container>
+            <ng-container *ngIf="tocStructure?.word > 1" i18n> Word documents</ng-container>
+          </h3>
+          <h3 class="font-montserrat" *ngIf="tocStructure?.excel > 0">
+            <ng-container>{{ tocStructure?.excel }}</ng-container>
+            <ng-container *ngIf="tocStructure?.excel === 1" i18n> Excel</ng-container>
+            <ng-container *ngIf="tocStructure?.excel > 1" i18n> Excels</ng-container>
+          </h3>
           <h3 class="font-montserrat" *ngIf="tocStructure?.podcast > 0">
             <ng-container>{{ tocStructure?.podcast }}</ng-container>
             <ng-container *ngIf="tocStructure?.podcast === 1" i18n> Podcast</ng-container>

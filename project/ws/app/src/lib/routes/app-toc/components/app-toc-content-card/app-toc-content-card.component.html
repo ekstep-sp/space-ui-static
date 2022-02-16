@@ -100,6 +100,7 @@
   </ng-container>
   <div *ngIf="isResource" class="resource-container">
     <ws-widget-display-content-type-icon class="flex" [displayContentType]="content?.displayContentType"
+     [contentUrl]="content?.artifactUrl"
       [displayResourceType]="content?.mimeType">
     </ws-widget-display-content-type-icon>
     <div class="resource-meta width-expand">

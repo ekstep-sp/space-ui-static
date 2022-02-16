@@ -168,7 +168,16 @@ export class AppTocService {
           tocStructure.interactiveVideo += 1
           break
         case NsContent.EMimeTypes.PDF:
-          tocStructure.pdf += 1
+          if(content.artifactUrl.endsWith('docx')){
+            tocStructure.word += 1
+          }
+          else if(content.artifactUrl.endsWith('xlsx')){
+            tocStructure.excel += 1
+          }
+          else{
+            tocStructure.pdf += 1
+          }
+          
           break
         case NsContent.EMimeTypes.HTML:
           tocStructure.webPage += 1

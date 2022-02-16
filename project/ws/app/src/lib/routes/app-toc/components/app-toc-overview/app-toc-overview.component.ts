@@ -154,6 +154,8 @@ export class AppTocOverviewComponent implements OnInit, OnDestroy, AfterViewInit
       learningModule: 0,
       other: 0,
       pdf: 0,
+      word: 0,
+      excel: 0,
       podcast: 0,
       quiz: 0,
       video: 0,

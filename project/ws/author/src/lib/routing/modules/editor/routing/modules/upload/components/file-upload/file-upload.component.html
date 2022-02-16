@@ -25,6 +25,9 @@
           </mat-icon>
           <mat-icon class="ws-mat-primary-text" *ngSwitchCase="'application/pdf'">
             picture_as_pdf
+            <ng-container *ngIf="!isWordDocument && !isExcel">picture_as_pdf</ng-container>
+              <ng-container *ngIf="isWordDocument">description</ng-container>
+              <ng-container *ngIf="isExcel">grid_on</ng-container>
           </mat-icon>
           <mat-icon class="ws-mat-primary-text" *ngSwitchCase="'application/html'">
             request_quote

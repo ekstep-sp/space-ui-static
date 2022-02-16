@@ -32,9 +32,8 @@
       </ng-container>
       <ng-container *ngIf="htmlContent?.isIframeSupported === 'No' || !htmlContent?.isIframeSupported">
         <h2 class="ws-mat-primary-text text-left mb-5 title-heading content-title">{{htmlContent?.name}}</h2>
-        <span *ngIf="!isWordDocument && !isExcel" class="font-montserrat body-font-size-primary" i18n>For Better User Experience, we are taking you to the
+        <span class="font-montserrat body-font-size-primary" i18n>For Better User Experience, we are taking you to the
           new tab. <br>In case it does not open, click on the button below.</span>
-        <span *ngIf="isWordDocument || isExcel" class="font-montserrat body-font-size-primary" i18n>For Better User Experience, we request you to download the content.</span>
         <!-- <a *ngIf="!configSvc?.isGuestUser" [routerLink]="'/app/info/faq'" [queryParams]="{ tab: 'popup' }">
           <mat-icon matTooltip="How to Disable Pop-ups" class="align-text-top ws-mat-primary-text mat-icon">help
           </mat-icon>
@@ -47,20 +46,16 @@
       " i18n>
       This content can only be viewed in Intranet.
     </h2>
-    <mat-progress-bar mode="determinate" *ngIf="progress > 0 && htmlContent?.isIframeSupported?.toLowerCase() === 'no' && !isWordDocument && !isExcel"
+    <mat-progress-bar mode="determinate" *ngIf="progress > 0 && htmlContent?.isIframeSupported?.toLowerCase() === 'no'"
       [value]="progress"></mat-progress-bar>
 
     <div class="flex flex-between padding-top-s">
       <!-- <a type="button" [ngClass]="mobAppSvc?.isMobile ? 'block' : 'hidden'" mat-button [href]="prepare()"
         target="_blank" #mobileOpenInNewTab>Open in New Tab</a> -->
 
-      <button *ngIf="!isWordDocument && !isExcel" class="btn-clr block" mat-raised-button color="primary" type="button" i18n mat-button
+      <button class="btn-clr block" mat-raised-button color="primary" type="button" i18n mat-button
         (click)="openInNewTab(true)">
         <span class="font-montserrat">Open in New Tab</span>
-      </button>
-      <button *ngIf="isWordDocument || isExcel" class="btn-clr block" mat-raised-button color="primary" type="button" i18n mat-button
-        (click)="openInNewTab(true)">
-        <span class="font-montserrat">Download</span>
       </button>
       <button type="button" *ngIf="
           htmlContent?.isIframeSupported === 'Maybe' ||

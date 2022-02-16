@@ -31,6 +31,7 @@ export class PdfComponent implements OnInit, OnDestroy {
       identifier: '',
       disableTelemetry: false,
       hideControls: true,
+      description: ''
     },
   }
   isPreviewMode = false
@@ -122,6 +123,7 @@ export class PdfComponent implements OnInit, OnDestroy {
             : ''
           this.widgetResolverPdfData.widgetData.identifier = this.pdfData && this.pdfData.identifier
           this.widgetResolverPdfData = JSON.parse(JSON.stringify(this.widgetResolverPdfData))
+          this.widgetResolverPdfData.widgetData.description = this.pdfData? this.pdfData.description : ''
           if (this.pdfData && !this.config.isGuestUser) {
             this.oldData = this.pdfData
             this.alreadyRaised = true

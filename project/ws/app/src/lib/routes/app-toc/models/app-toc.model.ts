@@ -46,6 +46,8 @@ export namespace NsAppToc {
     learningModule: number
     other: number
     pdf: number
+    word: number
+    excel: number
     podcast: number
     quiz: number
     video: number

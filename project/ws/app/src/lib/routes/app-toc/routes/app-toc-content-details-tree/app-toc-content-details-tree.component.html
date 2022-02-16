@@ -22,6 +22,7 @@
         <div class="flex items-center">
             <div class="resource-container mr-3 contentType">
                 <ws-widget-display-content-type-icon class="flex contentType_icon"
+                [contentUrl]="content?.artifactUrl"
                     [displayContentType]="content?.displayContentType" [displayResourceType]="content?.mimeType">
                 </ws-widget-display-content-type-icon>
             </div>
@@ -44,6 +45,7 @@
         <div class="flex pb-32">
             <div class="resource-container mr-3 contentType">
                 <ws-widget-display-content-type-icon class="flex contentType_icon"
+                [contentUrl]="content?.artifactUrl"
                     [displayContentType]="content?.displayContentType" [displayResourceType]="content?.mimeType">
                 </ws-widget-display-content-type-icon>
             </div>

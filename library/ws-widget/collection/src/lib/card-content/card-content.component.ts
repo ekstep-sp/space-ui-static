@@ -190,7 +190,15 @@ export class CardContentComponent extends WidgetBaseComponent
       case NsContent.EMimeTypes.YOUTUBE:
         return ['library_music', this.widgetData.content.resourceType]
       case NsContent.EMimeTypes.PDF:
-        return ['picture_as_pdf', this.widgetData.content.resourceType]
+        if(this.widgetData.content.artifactUrl.endsWith('docx')){
+          return ['description', this.widgetData.content.resourceType]
+        }
+        else if(this.widgetData.content.artifactUrl.endsWith('xlsx')){
+          return ['grid_on', this.widgetData.content.resourceType]
+        }
+        else{
+          return ['picture_as_pdf', this.widgetData.content.resourceType]
+        }        
       // tslint:disable-next-line: max-line-length
       case NsContent.EMimeTypes.QUIZ:
       case NsContent.EMimeTypes.HANDS_ON:

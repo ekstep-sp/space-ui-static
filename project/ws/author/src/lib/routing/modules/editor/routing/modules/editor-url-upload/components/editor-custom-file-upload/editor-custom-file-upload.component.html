@@ -8,7 +8,7 @@
           <mat-icon>close</mat-icon>
         </button>
         <span class="font-weight-500" [hidden]="file">
-          <input type="file" #fileInput class="inputfile" accept=".mp3,.mp4,.pdf,.zip" [disabled]="!allowedToEdit"
+          <input type="file" #fileInput class="inputfile" accept=".mp3,.mp4,.pdf,.zip,.docx,.xlsx" [disabled]="!allowedToEdit"
             (change)="onDrop($event.target.files[0]); fileInput.value = null" />
           <label for="file" class="mat-h2 ws-mat-primary-text flex flex-middle justify-center">
             <mat-icon style="margin-right:4px">add</mat-icon>
@@ -23,13 +23,13 @@
             <mat-icon class="ws-mat-primary-text" *ngSwitchCase="'application/x-mpegURL'">
               videocam
             </mat-icon>
-            <mat-icon class="ws-mat-primary-text" *ngSwitchCase="'application/pdf'">
-              picture_as_pdf
+            <mat-icon class="ws-mat-primary-text" *ngSwitchCase="'application/pdf'">              
+              <ng-container *ngIf="!isWordDocument && !isExcel">picture_as_pdf</ng-container>
+              <ng-container *ngIf="isWordDocument">description</ng-container>
+              <ng-container *ngIf="isExcel">grid_on</ng-container>
             </mat-icon>
             <mat-icon class="ws-mat-primary-text" *ngSwitchCase="'application/html'">
-              <ng-container *ngIf="!isWordDocument && !isExcel">request_quote</ng-container>
-              <ng-container *ngIf="isWordDocument">wordpress</ng-container>
-              <ng-container *ngIf="isExcel">table_view</ng-container>
+              request_quote
             </mat-icon>
           </ng-container>
           <p class="margin-left-xs mat-h3 font-weight-500 margin-remove-bottom">

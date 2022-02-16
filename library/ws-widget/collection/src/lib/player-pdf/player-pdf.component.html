@@ -1,100 +1,137 @@
-<section class="relative" #fullScreenContainer>
-  <section class="pdf-container">
-    <!-- <mat-toolbar class="pdf-nav-bar" color="primary" *ngIf="widgetData?.hideControls"> -->
-    <div class="pdf-page-container">
-      <div [ngClass]="{ 'custom-scroll-small': !isInFullScreen }" class="container" #pdfContainer></div>
-    </div>
-  </section>
-  <section class="toolbar-container sticky bottom-0 flex flex-center">
-    <mat-toolbar class="pdf-nav-bar" *ngIf="widgetData?.hideControls">
-      <div class="page-counter">
-        <span i18n class="mr-2"*ngIf="!isSmallViewPort">Page </span>
-        <button mat-icon-button class="customColor" [disabled]="currentPage.value < 2" (click)="loadPageNum(currentPage.value - 1)"
-          aria-label="previous" i18n-aria-label>
-          <mat-icon class="icon-color">chevron_left</mat-icon>
-        </button>
-        <div class="counter-container" style="color: white;">
-          <input label="PageNumber" aria-label="Page Number" i18n-aria-label class="pdf-page-num font-size-12" type="number" min="1"
-          [max]="totalPages" [formControl]="currentPage" matInput style="color: white;" (keyleft)="onKeyleft($event)" />
-        </div>
-        <button mat-icon-button class="customColor" [disabled]="currentPage.value >= totalPages" (click)="loadPageNum(currentPage.value + 1)"
-          aria-label="next" i18n-aria-label>
-          <mat-icon class="icon-color">chevron_right</mat-icon>
-        </button>
-        <span class="text-white ml-2"> Of {{ totalPages }}</span>
+<ng-container *ngIf="!(this.isWordDocument || this.isExcel)">
+  <section class="relative" #fullScreenContainer>
+    <section class="pdf-container">
+      <!-- <mat-toolbar class="pdf-nav-bar" color="primary" *ngIf="widgetData?.hideControls"> -->
+      <div class="pdf-page-container">
+        <div [ngClass]="{ 'custom-scroll-small': !isInFullScreen }" class="container" #pdfContainer></div>
       </div>
-      <!-- <button mat-icon-button [disabled]="zoom.value <= MIN_SCALE" (click)="changeScale('zoomout')" aria-label="zoom out"
-        i18n-aria-label>
-        <mat-icon>zoom_out</mat-icon>
-      </button>
-      <button mat-icon-button [disabled]="zoom.value >= MAX_SCALE" (click)="changeScale('zoomin')" aria-label="zoom in"
-        i18n-aria-label>
-        <mat-icon>zoom_in</mat-icon>
-      </button> -->
-    
-      <!-- <button mat-icon-button [matMenuTriggerFor]="zoomMenu" *ngIf="isSmallViewPort">
-        <mat-icon>zoom_in</mat-icon>
-      </button>
-      <mat-menu #zoomMenu="matMenu" xPosition="before" yPosition="below">
-        <div mat-menu-item>
-          <mat-slider min="0.2" max="3" step="0.05" [formControl]="zoom" tickInterval> </mat-slider>
-          {{ zoom.value }}<span>X</span>
-        </div>
-      </mat-menu>
-      <mat-slider *ngIf="!isSmallViewPort" thumbLabel min="0.2" max="3" step="0.05" [formControl]="zoom"></mat-slider> -->
-      <div class="hidden-xs">
-        <button mat-icon-button [disabled]="zoom.value <= MIN_SCALE" (click)="changeScale('zoomout')" aria-label="zoom out"
-        i18n-aria-label>
-        <mat-icon>zoom_out</mat-icon>
-      </button>
-      <button mat-icon-button [disabled]="zoom.value >= MAX_SCALE" (click)="changeScale('zoomin')" aria-label="zoom in"
-        i18n-aria-label>
-        <mat-icon>zoom_in</mat-icon>
-      </button>
-        <button mat-icon-button (click)="refresh()" aria-label="refresh" i18n-aria-label>
-          <mat-icon>refresh</mat-icon>
-        </button>
-     
-        <ng-container
-          *ngIf="!showDownloadPublicGuest && showDownloadMobile && widgetData.pdfUrl && isDownloadable && !showDownloadGuest">
-          <button mat-button>
-            <mat-icon style="color: white;" class="material-icons-outlined mat-icon notranslate innerSpan material-icons mat-icon-no-color" (click)="download()">cloud_download</mat-icon>
+    </section>
+    <section class="toolbar-container sticky bottom-0 flex flex-center">
+      <mat-toolbar class="pdf-nav-bar" *ngIf="widgetData?.hideControls">
+        <div class="page-counter">
+          <span i18n class="mr-2"*ngIf="!isSmallViewPort">Page </span>
+          <button mat-icon-button class="customColor" [disabled]="currentPage.value < 2" (click)="loadPageNum(currentPage.value - 1)"
+            aria-label="previous" i18n-aria-label>
+            <mat-icon class="icon-color">chevron_left</mat-icon>
           </button>
-        </ng-container>
-        <ws-widget-btn-fullscreen class="menu-btn" (fsState)="fullScreenState($event)" (click)="refresh()"
-        [widgetData]="{ fsContainer: fullScreenContainer }">
-      </ws-widget-btn-fullscreen>
-      </div>
-      <button class="hidden-gt-xs text-white show-btn" mat-icon-button [matMenuTriggerFor]="pdfMenu">
-        <mat-icon>more_vert</mat-icon>
-      </button>
-    </mat-toolbar>
+          <div class="counter-container" style="color: white;">
+            <input label="PageNumber" aria-label="Page Number" i18n-aria-label class="pdf-page-num font-size-12" type="number" min="1"
+            [max]="totalPages" [formControl]="currentPage" matInput style="color: white;" (keyleft)="onKeyleft($event)" />
+          </div>
+          <button mat-icon-button class="customColor" [disabled]="currentPage.value >= totalPages" (click)="loadPageNum(currentPage.value + 1)"
+            aria-label="next" i18n-aria-label>
+            <mat-icon class="icon-color">chevron_right</mat-icon>
+          </button>
+          <span class="text-white ml-2"> Of {{ totalPages }}</span>
+        </div>
+        <!-- <button mat-icon-button [disabled]="zoom.value <= MIN_SCALE" (click)="changeScale('zoomout')" aria-label="zoom out"
+          i18n-aria-label>
+          <mat-icon>zoom_out</mat-icon>
+        </button>
+        <button mat-icon-button [disabled]="zoom.value >= MAX_SCALE" (click)="changeScale('zoomin')" aria-label="zoom in"
+          i18n-aria-label>
+          <mat-icon>zoom_in</mat-icon>
+        </button> -->
+      
+        <!-- <button mat-icon-button [matMenuTriggerFor]="zoomMenu" *ngIf="isSmallViewPort">
+          <mat-icon>zoom_in</mat-icon>
+        </button>
+        <mat-menu #zoomMenu="matMenu" xPosition="before" yPosition="below">
+          <div mat-menu-item>
+            <mat-slider min="0.2" max="3" step="0.05" [formControl]="zoom" tickInterval> </mat-slider>
+            {{ zoom.value }}<span>X</span>
+          </div>
+        </mat-menu>
+        <mat-slider *ngIf="!isSmallViewPort" thumbLabel min="0.2" max="3" step="0.05" [formControl]="zoom"></mat-slider> -->
+        <div class="hidden-xs">
+          <button mat-icon-button [disabled]="zoom.value <= MIN_SCALE" (click)="changeScale('zoomout')" aria-label="zoom out"
+          i18n-aria-label>
+          <mat-icon>zoom_out</mat-icon>
+        </button>
+        <button mat-icon-button [disabled]="zoom.value >= MAX_SCALE" (click)="changeScale('zoomin')" aria-label="zoom in"
+          i18n-aria-label>
+          <mat-icon>zoom_in</mat-icon>
+        </button>
+          <button mat-icon-button (click)="refresh()" aria-label="refresh" i18n-aria-label>
+            <mat-icon>refresh</mat-icon>
+          </button>
+      
+          <ng-container
+            *ngIf="!showDownloadPublicGuest && showDownloadMobile && widgetData.pdfUrl && isDownloadable && !showDownloadGuest">
+            <button mat-button>
+              <mat-icon style="color: white;" class="material-icons-outlined mat-icon notranslate innerSpan material-icons mat-icon-no-color" (click)="download()">cloud_download</mat-icon>
+            </button>
+          </ng-container>
+          <ws-widget-btn-fullscreen class="menu-btn" (fsState)="fullScreenState($event)" (click)="refresh()"
+          [widgetData]="{ fsContainer: fullScreenContainer }">
+        </ws-widget-btn-fullscreen>
+        </div>
+        <button class="hidden-gt-xs text-white show-btn" mat-icon-button [matMenuTriggerFor]="pdfMenu">
+          <mat-icon>more_vert</mat-icon>
+        </button>
+      </mat-toolbar>
+    </section>
   </section>
-</section>
 
 <mat-menu class="matclasses" #pdfMenu="matMenu">
-  <button mat-menu-item class="menu-btn menu-btn-galaxy" [disabled]="zoom.value <= MIN_SCALE" (click)="changeScale('zoomout')" aria-label="zoom out"
-        i18n-aria-label>
-        <mat-icon>zoom_out</mat-icon>
-      </button>
-      <button mat-menu-item class="menu-btn menu-btn-galaxy" [disabled]="zoom.value >= MAX_SCALE" (click)="changeScale('zoomin')" aria-label="zoom in"
-        i18n-aria-label>
-        <mat-icon>zoom_in</mat-icon>
-      </button>
-  <button mat-menu-item class="menu-btn menu-btn-galaxy" (click)="refresh()" aria-label="refresh" i18n-aria-label>
-    <mat-icon>refresh</mat-icon>
-  </button>
-  
-  <ng-container
-    *ngIf="!showDownloadPublicGuest && showDownloadMobile && widgetData.pdfUrl && isDownloadable && !showDownloadGuest">
-
-    <button mat-menu-item class="menu-btn menu-btn-galaxy">
-      <mat-icon class="material-icons-outlined mat-icon notranslate innerSpan material-icons mat-icon-no-color" (click)="download()">cloud_download</mat-icon>
+    <button mat-menu-item class="menu-btn menu-btn-galaxy" [disabled]="zoom.value <= MIN_SCALE" (click)="changeScale('zoomout')" aria-label="zoom out"
+          i18n-aria-label>
+          <mat-icon>zoom_out</mat-icon>
+        </button>
+        <button mat-menu-item class="menu-btn menu-btn-galaxy" [disabled]="zoom.value >= MAX_SCALE" (click)="changeScale('zoomin')" aria-label="zoom in"
+          i18n-aria-label>
+          <mat-icon>zoom_in</mat-icon>
+        </button>
+    <button mat-menu-item class="menu-btn menu-btn-galaxy" (click)="refresh()" aria-label="refresh" i18n-aria-label>
+      <mat-icon>refresh</mat-icon>
     </button>
-  </ng-container>
+    
+    <ng-container
+      *ngIf="!showDownloadPublicGuest && showDownloadMobile && widgetData.pdfUrl && isDownloadable && !showDownloadGuest">
 
-  <ws-widget-btn-fullscreen (fsState)="fullScreenState($event)" (click)="refresh()"
-  [widgetData]="{ fsContainer: fullScreenContainer }">
-</ws-widget-btn-fullscreen>
-  
-</mat-menu>
+      <button mat-menu-item class="menu-btn menu-btn-galaxy">
+        <mat-icon class="material-icons-outlined mat-icon notranslate innerSpan material-icons mat-icon-no-color" (click)="download()">cloud_download</mat-icon>
+      </button>
+    </ng-container>
+
+    <ws-widget-btn-fullscreen (fsState)="fullScreenState($event)" (click)="refresh()"
+    [widgetData]="{ fsContainer: fullScreenContainer }">
+  </ws-widget-btn-fullscreen>
+    
+  </mat-menu>
+</ng-container>
+
+
+<ng-container *ngIf="this.isWordDocument || this.isExcel">
+  <div class="flex flex-around relative content-landscape h-100">
+    <div class="w-full flex items-center justify-center customH">
+      <div class="px-2 flex items-center flex-col max-w-screen-sm m-auto text-left">
+        <h2 class="mat-h2">
+          <ng-container>
+            
+            <h2 class="ws-mat-primary-text text-left mb-5 title-heading content-title"> 
+              <ng-container>
+                <mat-icon class="ws-mat-primary-text vertical-sub-align">
+                  <ng-container *ngIf="isWordDocument">description</ng-container>
+                  <ng-container *ngIf="isExcel">grid_on</ng-container>
+                </mat-icon>
+              </ng-container> 
+              {{widgetData?.description}}        
+              </h2>
+            <span class="font-montserrat body-font-size-primary" i18n>For Better User Experience, we request you to download the content.</span>
+            
+          </ng-container>
+        </h2>
+        
+        <div class="flex flex-between padding-top-s">
+          
+          <button class="btn-clr block" mat-raised-button color="primary" type="button" i18n mat-button
+            (click)="download()">
+            <span class="font-montserrat">Download</span>
+          </button>
+          
+        </div>
+      </div>
+    </div>
+  </div>
+</ng-container>

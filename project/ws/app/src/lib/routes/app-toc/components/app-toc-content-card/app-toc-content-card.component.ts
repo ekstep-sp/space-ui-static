@@ -24,6 +24,8 @@ export class AppTocContentCardComponent implements OnInit, OnChanges {
     learningModule: 0,
     other: 0,
     pdf: 0,
+    word: 0,
+    excel: 0,
     podcast: 0,
     quiz: 0,
     video: 0,
@@ -109,7 +111,15 @@ export class AppTocContentCardComponent implements OnInit, OnChanges {
               this.contentStructure.interactiveVideo += 1
               break
             case NsContent.EMimeTypes.PDF:
+              if(child.artifactUrl.endsWith('docx')){
+                this.contentStructure.word +=1
+              }
+              else if(child.artifactUrl.endsWith('xlsx')){
+                this.contentStructure.excel +=1
+              }
+              else{
               this.contentStructure.pdf += 1
+              }
               break
             case NsContent.EMimeTypes.HTML:
               this.contentStructure.webPage += 1

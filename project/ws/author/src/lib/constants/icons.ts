@@ -19,4 +19,6 @@ export const ICON_TYPE = {
   emptyFile: 'insert_drive_file',
   channel: 'chrome_reader_mode',
   kBoard: 'amp_stories',
+  word: 'description',
+  excel: 'grid_on'
 }
