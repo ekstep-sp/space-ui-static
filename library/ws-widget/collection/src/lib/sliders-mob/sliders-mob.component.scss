@@ -149,3 +149,20 @@ $banner-min-height: 200px;
   right: 0;
   border-radius: 3px 0 0 3px;
 }
+
+
+@media (min-width: 640px) {
+  .display-block{
+    padding-left:17px
+  }
+
+  .text-center{
+    padding-left: 35px;
+  }
+}
+
+@media (max-width: 450px) {
+  .display-block{
+   font-size: 9px;
+  }
+}

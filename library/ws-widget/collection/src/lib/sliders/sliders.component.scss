@@ -251,17 +251,25 @@ flex-wrap: nowrap;
 }
 
 @media (min-width: 640px) {
-  .panel-description{
-    padding-left:17px
-  }
 
   .panel-image{
-    padding-left: 35px;
+    padding-left: 17px;
   }
 }
 
 @media (max-width: 450px) {
   .panel-description{
    font-size: 9px;
+  }
+}
+
+@media (min-width: 640px) {
+  .tile-button-align{
+    padding: 0;
+    width: 100%;
+  }
+  .tile-button-heading{
+    width: 66.5%;
+    margin-right: 15px;
   }
 }

@@ -73,3 +73,14 @@
     padding:0 16px !important;
   }
   }
+.multiline-tooltip {
+    padding-left: 5px;
+    color: #696466;
+}
+
+::ng-deep {
+  .multiline-tooltip{
+    white-space: pre-line;
+    padding-left: 5px;
+  }
+}

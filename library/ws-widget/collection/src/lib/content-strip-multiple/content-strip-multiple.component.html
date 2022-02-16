@@ -41,15 +41,16 @@
                         : ''
                     ">
               <div class="flex items-center">
-                <h1 class="mat-h1 margin-remove inline-block font-size-navbar-heading font-montserrat bold-text color-platform-gray" *ngIf="stripsResultDataMap[key]?.stripTitle" [matTooltip]="!widgetData.isChannelStrip
-                ? stripsResultDataMap[key]?.stripTitle === 'Latest Assets & Collections' 
-                ? 'Collections: Two or more assets combined under a broad thematic umbrella to give you the full picture of the concepts and topics at hand. Assets: Two or more resources that have been combined under a broader topic to give you a bigger picture.'
-                : stripsResultDataMap[key]?.stripTitle === 'Latest Resources' 
-                ? 'Resources: Standalone learning materials, activities, tools etc.'
-                :'' 
-                :''">
+                <h1 class="mat-h1 margin-remove inline-block font-size-navbar-heading font-montserrat bold-text color-platform-gray">
                   {{ stripsResultDataMap[key]?.stripTitle }}
                 </h1>
+                <mat-icon matTooltipClass="multiline-tooltip" class="multiline-tooltip" *ngIf="stripsResultDataMap[key]?.stripTitle" [matTooltip]="!widgetData.isChannelStrip
+                ? stripsResultDataMap[key]?.stripTitle === 'Latest Assets & Collections' 
+                ? 'Collections: &#13; Two or more assets combined under a broad thematic umbrella to give you the full picture of the concepts and topics at hand.&#13; Assets: &#13;Two or more resources that have been combined under a broader topic to give you a bigger picture.'
+                : stripsResultDataMap[key]?.stripTitle === 'Latest Resources' 
+                ? 'Resources: &#13; Standalone learning materials, activities, tools etc.'
+                :'' 
+                :''">info_outline</mat-icon>
 
                 <button *ngIf="stripsResultDataMap[key]?.stripTitle === 'Based on your interests' && stripsResultDataMap[key]?.stripInfo?.icon" type="button" mat-icon-button
                   (click)="toggleInfo(stripsResultDataMap[key])" i18n-matTooltip matTooltip="edit"
