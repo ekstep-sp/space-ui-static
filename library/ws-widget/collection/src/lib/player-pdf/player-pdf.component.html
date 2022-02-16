@@ -107,18 +107,17 @@
     <div class="w-full flex items-center justify-center customH">
       <div class="px-2 flex items-center flex-col max-w-screen-sm m-auto text-left">
         <h2 class="mat-h2">
-          <ng-container>
-            
-            <h2 class="ws-mat-primary-text text-left mb-5 title-heading content-title"> 
-              <ng-container>
-                <mat-icon class="ws-mat-primary-text vertical-sub-align">
-                  <ng-container *ngIf="isWordDocument">description</ng-container>
-                  <ng-container *ngIf="isExcel">grid_on</ng-container>
-                </mat-icon>
-              </ng-container> 
+          <ng-container>            
+            <h2 class="ws-mat-primary-text text-center mb-5 title-heading content-title"> 
+                  <ng-container *ngIf="isWordDocument">
+                    <img class="vertical-middle-align" src="../../../../../../fusion-assets/img/word.svg">
+                  </ng-container>
+                  <ng-container *ngIf="isExcel">
+                    <img class="vertical-middle-align" src="../../../../../../fusion-assets/img/excel.svg">
+                  </ng-container>
               {{widgetData?.description}}        
               </h2>
-            <span class="font-montserrat body-font-size-primary" i18n>For Better User Experience, we request you to download the content.</span>
+            <span class="font-montserrat body-font-size-primary" i18n>For better user experience, we request you to download the content.</span>
             
           </ng-container>
         </h2>

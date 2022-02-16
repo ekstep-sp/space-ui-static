@@ -174,8 +174,8 @@ mat-toolbar.mat-toolbar-single-row {
   height: 48px;
 }
 
-.vertical-sub-align{
-  vertical-align: sub;
+.vertical-middle-align{
+  vertical-align: middle;
 }
 
 .customH{
@@ -234,3 +234,32 @@ mat-toolbar.mat-toolbar-single-row {
       height: calc(100vh - 216px) !important;
     }
 }
+
+@media screen and (max-width:992px){
+  .content-title{
+    margin-bottom: 16px !important;
+    max-height: 90px;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    /* white-space: nowrap; */
+    -webkit-line-clamp: 3;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+  }
+  }
+
+  @media screen and (max-width:767px){
+    .content-title{
+      -webkit-line-clamp: 2;
+    }
+    }
+
+    @media screen and (max-width:320px){
+      .content-title{
+        margin-bottom: 0px !important;
+      }
+      .mat-h2{
+        padding-top: 1.5em !important;
+        margin-bottom: 0.5em !important;
+      }
+      }

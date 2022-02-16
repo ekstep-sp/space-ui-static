@@ -1,5 +1,6 @@
-<div [hidden]="isRestricted" class="df-container" [ngClass]="{'chat-bg':widgetData.commentsCount }">
-  <div class="flex flex-between mb-4 text-white font-semibold" *ngIf = "widgetData.commentsCount">
+<!-- <div [hidden]="isRestricted" class="df-container" [ngClass]="{'chat-bg':widgetData.commentsCount }"> -->
+  <div [hidden]="isRestricted" class="df-container chat-bg">
+  <div class="flex flex-between mb-4 text-white font-semibold">
     <div>Comments ({{discussionResult.hits}})</div>
     <div class="text-decoration-line cursor-pointer" (click)="emitToParent(true)">Show All</div>
   </div>

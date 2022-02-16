@@ -19,7 +19,6 @@ export class DisplayContentTypeIconComponent implements OnInit, OnChanges {
 
   ngOnInit() {
 
-    console.log("DisplayContentTypeIconComponent : ", this.contentUrl)
     if(this.contentUrl ){
       if(this.contentUrl.endsWith('docx')){
         this.customIcon='description'

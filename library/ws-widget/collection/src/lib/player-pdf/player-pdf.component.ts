@@ -260,8 +260,7 @@ export class PlayerPdfComponent extends WidgetBaseComponent
   ngAfterViewInit() {
 
     if (this.widgetData.pdfUrl.endsWith('.docx')) {
-      this.isWordDocument = true  
-      console.log('docx',this.isWordDocument)      
+      this.isWordDocument = true    
     }
     if (this.widgetData.pdfUrl.endsWith('.xlsx')) {
       this.isExcel = true        
