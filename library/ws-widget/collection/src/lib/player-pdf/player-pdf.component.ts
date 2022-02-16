@@ -1,5 +1,6 @@
 import {
   AfterViewInit,
+  ChangeDetectorRef,
   Component,
   ElementRef,
   Input,
@@ -30,10 +31,10 @@ const pdfjsViewer = require('pdfjs-dist/web/pdf_viewer')
 export class PlayerPdfComponent extends WidgetBaseComponent
   implements OnInit, AfterViewInit, OnDestroy, NsWidgetResolver.IWidgetData<any> {
   @Input() widgetData!: IWidgetsPlayerPdfData
-  @ViewChild('fullScreenContainer', { static: true })
+  @ViewChild('fullScreenContainer', { static: false })
   containerSection!: ElementRef<HTMLElement>
 
-  @ViewChild('pdfContainer', { static: true })
+  @ViewChild('pdfContainer', { static: false })
   pdfContainer!: ElementRef<HTMLCanvasElement>
   DEFAULT_SCALE = 1.0
   MAX_SCALE = 3
@@ -88,6 +89,7 @@ export class PlayerPdfComponent extends WidgetBaseComponent
     private valueSvc: ValueService,
     private utilitySvc: UtilityService,
     public configSvc: ConfigurationsService,
+    public changeDetection: ChangeDetectorRef
   ) {
     super()
   }
@@ -257,16 +259,18 @@ export class PlayerPdfComponent extends WidgetBaseComponent
     }
     // delete link;
   }
-  ngAfterViewInit() {
-
+  ngAfterViewInit() {  
+     
     if (this.widgetData.pdfUrl.endsWith('.docx')) {
-      this.isWordDocument = true    
+      this.isWordDocument = true        
+      this.changeDetection.detectChanges()  
     }
     if (this.widgetData.pdfUrl.endsWith('.xlsx')) {
-      this.isExcel = true        
+      this.isExcel = true       
+      this.changeDetection.detectChanges()      
     }
 
-    if(!(this.isWordDocument || this.isExcel)){
+     if(!(this.isWordDocument || this.isExcel)){
       
       this.contextMenuSubs = fromEvent(this.pdfContainer.nativeElement, 'contextmenu').subscribe(e =>
         e.preventDefault(),

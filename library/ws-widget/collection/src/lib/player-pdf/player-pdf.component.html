@@ -1,4 +1,4 @@
-<ng-container *ngIf="!(this.isWordDocument || this.isExcel)">
+<ng-container *ngIf="!(isWordDocument || isExcel)">
   <section class="relative" #fullScreenContainer>
     <section class="pdf-container">
       <!-- <mat-toolbar class="pdf-nav-bar" color="primary" *ngIf="widgetData?.hideControls"> -->
@@ -102,7 +102,7 @@
 </ng-container>
 
 
-<ng-container *ngIf="this.isWordDocument || this.isExcel">
+<ng-container *ngIf="isWordDocument || isExcel">
   <div class="flex flex-around relative content-landscape h-100">
     <div class="w-full flex items-center justify-center customH">
       <div class="px-2 flex items-center flex-col max-w-screen-sm m-auto text-left">
