@@ -3,12 +3,15 @@ import { ActivatedRoute, Router } from '@angular/router'
 import { NsContent, NsError, NSSearch, ROOT_WIDGET_CONFIG } from '@ws-widget/collection'
 import { NsWidgetResolver } from '@ws-widget/resolver'
 import { ConfigurationsService, ValueService, UtilityService } from '@ws-widget/utils'
-import { Subscription, BehaviorSubject } from 'rxjs'
+import { Subscription, BehaviorSubject, of } from 'rxjs'
+import { PublicUsersCoreService } from 'src/app/modules/public-user-view/services/public-users-core.service'
 import { IKhubFetchStatus } from '../../../infy/routes/knowledge-hub/models/knowledgeHub.model'
 import { TrainingService } from '../../../infy/routes/training/services/training.service'
 import { FilterDisplayComponent } from '../../components/filter-display/filter-display.component'
 import { IFilterUnitResponse, ISearchRequest, ISearchTab } from '../../models/search.model'
 import { SearchServService } from '../../services/search-serv.service'
+import { catchError, map } from 'rxjs/operators'
+import { IPublicUsersResponse, IPublicUsers, IRawUserProperties } from 'src/app/modules/public-user-view/models/public-users.interface'
 @Component({
   selector: 'ws-app-learning',
   templateUrl: './learning.component.html',
@@ -35,6 +38,13 @@ export class LearningComponent implements OnInit, OnDestroy {
     filtersUsed: [],
     notVisibleFilters: [],
   }
+  finalResult = {}
+  searchPeopleResult = {
+    query: '',
+    offset : 0,
+    searchSize : 50
+  }
+  searchPeopleOutput= {}
   searchRequestObject: ISearchRequest = {
     filters: {},
     query: '',
@@ -92,6 +102,7 @@ export class LearningComponent implements OnInit, OnDestroy {
     private configSvc: ConfigurationsService,
     private trainingSvc: TrainingService,
     private utilitySvc: UtilityService,
+    private coreSrvc: PublicUsersCoreService
   ) { }
 
   getActiveLocale() {
@@ -243,6 +254,7 @@ export class LearningComponent implements OnInit, OnDestroy {
           this.expandToPrefLang = true
         }
         this.searchRequestObject.query = queryParams.get('q') || ''
+        this.searchPeopleResult.query = queryParams.get('q') || ''
       }
       // filters
       if (queryParams.has('f')) {
@@ -480,6 +492,30 @@ export class LearningComponent implements OnInit, OnDestroy {
           this.searchRequestStatus = 'done'
         },
       )
+      this.searchPeopleOutput = this.coreSrvc.getApiData(this.searchPeopleResult.query, this.searchPeopleResult.offset, this.searchPeopleResult.searchSize).pipe(
+        catchError((_e: any) => of(null)),
+          map((rawData: IPublicUsersResponse | null) => {
+            // this.searchResults.result = [...this.searchResults.result, ...data]
+          if (rawData) {
+            const formattedData = rawData.DATA.map((dataObj: IPublicUsers) => ({
+              ...dataObj,
+              source_profile_picture: this.coreSrvc.getSanitisedProfileUrl(dataObj.source_profile_picture),
+              // tslint:disable-next-line: max-line-length
+              user_properties: this.coreSrvc.extractUserProperties(dataObj.user_properties as IRawUserProperties),
+            }))
+            this.finalResult ={
+              userSearch : formattedData,
+              contentSearch : this.searchResults.result
+            }
+            console.log(this.finalResult)
+            return {
+              ...rawData,
+              DATA: formattedData,
+            }
+          }
+          return rawData
+        })
+      ).subscribe()
   }
 
   contentTrackBy(item: NsContent.IContent) {
