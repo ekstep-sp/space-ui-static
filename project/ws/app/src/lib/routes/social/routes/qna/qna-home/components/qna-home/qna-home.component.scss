@@ -62,3 +62,50 @@
 .mat-flat-button.qa-btn:not(:root:root) {
   padding: 0 14px !important;
 }
+
+.question-section{
+  display: flex;
+}
+
+.reference-content {      
+  box-shadow: 0px 2px 1px -1px rgba(0, 0, 0, 0.2), 0px 1px 1px 0px rgba(0, 0, 0, 0.14), 0px 1px 3px 0px rgba(0, 0, 0, 0.12);
+  padding: 10px;
+}
+
+.referance-heading {
+  width: 20%;
+  padding: 40px;
+}
+
+ul.reference-body {
+  font-size: 20px;
+}
+
+span.referance-title {
+  font-weight: 700;
+  font-size: 24px;
+}
+
+li:not(:last-child) { 
+  margin-bottom: 10px;  
+}
+
+.qna-card-question{
+    border-top: 1px solid #865ba0;
+    padding: 10px;
+}
+
+@media only screen and (max-width: 450px) {
+  .question-section{
+    display: block;
+  }
+  .referance-heading{
+    width: 100%;
+    padding: 0;
+  }
+  .reference-content {
+    box-shadow: 0px 2px 1px -1px rgba(0, 0, 0, 0.2), 0px 1px 1px 0px rgba(0, 0, 0, 0.14), 0px 1px 3px 0px rgba(0, 0, 0, 0.12);
+    border: 1px solid #D9D8D8;
+    margin: 5%;
+  } 
+}

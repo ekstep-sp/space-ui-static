@@ -3,6 +3,11 @@
 
 $color-accepted-answer: #5fba7d;
 
+
+.qna-description p {
+  color: black !important;
+  font-size: 18px;
+}
 .item-container {
   display: flex;
   align-items: center;
@@ -13,15 +18,16 @@ $color-accepted-answer: #5fba7d;
 }
 
 .count-section {
-  display: flex;
-  width: 25%;
-  min-width: 200px;
+  // display: flex;
+  // width: 25%;
+  // min-width: 200px;
   margin-right: $size-s;
   align-items: flex-start;
 
   .count-holder {
     width: 33%;
-    text-align: center;
+    // text-align: center;
+    text-align: right;
     padding: $size-xs;
 
     .count {
@@ -97,5 +103,34 @@ $color-accepted-answer: #5fba7d;
       text-align: right;
       margin-top: $size-xs / 2;
     }
+  }
+}
+
+.qna-display{
+  height:75px;
+  }
+  
+.qna-title-display{
+  display:flex;
+}
+
+.qna-title-home-display{
+  margin-top:8px !important ;
+}
+
+.votes-align{
+  margin-top:20px !important ;
+}
+
+.vote-align-text{
+  text-align: right;
+}
+
+@media only screen and (max-width: 450px) {
+  .vote-align-text{
+    display: flex;
+  }
+  .qna-display{
+    height: 100% !important;
   }
 }

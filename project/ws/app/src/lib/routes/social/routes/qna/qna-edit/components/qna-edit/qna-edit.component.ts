@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy, ViewChild, ElementRef } from '@angular/core'
+import { Component, OnInit, OnDestroy, ViewChild, ElementRef, Input } from '@angular/core'
 import { debounceTime, distinctUntilChanged } from 'rxjs/operators'
 import { ENTER, COMMA } from '@angular/cdk/keycodes'
 import { FormControl } from '@angular/forms'
@@ -73,7 +73,7 @@ export class QnaEditComponent implements OnInit, OnDestroy {
   fetchTagsStatus: TFetchStatus | undefined
   userId = ''
   allowedToDiscussionForum = true
-
+  @Input() qanQuestionParent = false
   @ViewChild('tagsInput', { static: true }) tagsInput!: ElementRef<HTMLInputElement>
   @ViewChild('auto', { static: true }) matAutocomplete!: MatAutocomplete
   pageNavbar: Partial<NsPage.INavBackground> = this.configSvc.pageNavBar

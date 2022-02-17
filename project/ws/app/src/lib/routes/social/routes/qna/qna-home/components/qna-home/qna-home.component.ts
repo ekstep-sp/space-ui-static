@@ -34,6 +34,7 @@ export class QnaHomeComponent implements OnInit, OnDestroy {
   allowedToAsk = true
   allowedToEdit = true
   allowedToDeleteForSpecificRoles = false
+  qanQuestionParent = true
   constructor(
     private activatedRoute: ActivatedRoute,
     private router: Router,
