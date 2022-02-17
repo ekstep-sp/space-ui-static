@@ -3,57 +3,81 @@
   <span class="ml-2 hidden sm:inline text-white font-size-navbar-heading font-montserrat" i18n>Question & Answer Forum</span>
   <span class="font-montserrat font-size-navbar-heading ml-2 inline sm:hidden text-white text-truncate" i18n>Latest Questions</span>
 </mat-toolbar>
-<div class="qna-home-container mat-drawer-container mat-drawer-container-has-open mat-drawer-transition">
-  <div class="qna-title">
-    <h1 class="font-montserrat font-size-navbar-heading mat-display-1 margin-remove hidden sm:block" i18n>Latest Questions</h1>
-    <h1 *ngIf="qnaTimeline?.hits" class="margin-remove block sm:hidden font-montserrat body-font-size-primary">
-      {{ qnaTimeline.hits | pipeCountTransform }}
-      <ng-container i18n>Questions</ng-container>
-    </h1>
-    <div *ngIf="allowedToAsk">
-      <a class="qa-btn" role="button" routerLink="./edit" mat-flat-button color="primary" i18n>
-        Ask Question
-      </a>
+<div class="question-section">
+  <div class="referance-heading">
+    <div class="reference-content">
+      <span class="referance-title">
+        Refer to Frequently asked questions on :
+      </span>
+      <ul class="reference-body">
+        <li>
+          <a routerLink="./edit">Societal Thinking</a>
+        </li>
+        <li>
+          <a routerLink="./edit">SPace Platform</a>
+        </li>
+      </ul>
     </div>
   </div>
-  <div class="flex align-center justify-between mt-6 mb-4">
-    <div *ngIf="qnaTimeline" class="hidden sm:block" i18n-aria-label aria-label="Questions Count">
-      <h2 class="margin-remove font-montserrat body-font-size-primary">
-        {{ qnaTimeline.hits | pipeCountTransform }}
-        <ng-container i18n> Questions</ng-container>
-      </h2>
+  <div class="qna-home-container mat-drawer-container mat-drawer-container-has-open mat-drawer-transition">
+    <ws-app-qna-edit [qanQuestionParent]="qanQuestionParent"></ws-app-qna-edit>
+    <div class="qna-card-question">
+      <div class="qna-title">
+        <h1 class="font-montserrat font-size-navbar-heading mat-display-1 margin-remove hidden sm:block" i18n>Questions
+          by the community</h1>
+        <h1 *ngIf="qnaTimeline?.hits" class="margin-remove block sm:hidden font-montserrat body-font-size-primary">
+          {{ qnaTimeline.hits | pipeCountTransform }}
+          <ng-container i18n>Questions</ng-container>
+        </h1>
+        <div *ngIf="allowedToAsk">
+          <a class="qa-btn" role="button" routerLink="./edit" mat-flat-button color="primary" i18n>
+            Ask Question
+          </a>
+        </div>
+      </div>
+      <div class="flex align-center justify-between mt-6 mb-4">
+        <div *ngIf="qnaTimeline" class="hidden sm:block" i18n-aria-label aria-label="Questions Count">
+          <h2 class="margin-remove font-montserrat body-font-size-primary">
+            {{ qnaTimeline.hits | pipeCountTransform }}
+            <ng-container i18n> Questions</ng-container>
+          </h2>
+        </div>
+        <mat-button-toggle-group (change)="onTabChange($event)" i18n-name name="questionType" i18n-aria-label
+          aria-label="Select question type">
+          <mat-button-toggle i18n class="text-clr" [checked]="currentTab === eTimelineTypes.ALL"
+            [value]="eTimelineTypes.ALL"><span class="font-montserrat">All</span>
+          </mat-button-toggle>
+          <mat-button-toggle i18n class="text-clr" [checked]="currentTab === eTimelineTypes.UNANSWERED"
+            [value]="eTimelineTypes.UNANSWERED">
+            <span class="font-montserrat">Unanswered</span>
+          </mat-button-toggle>
+          <mat-button-toggle i18n *ngIf="allowedToEdit" [checked]="currentTab === eTimelineTypes.MY_TIMELINE"
+            [value]="eTimelineTypes.MY_TIMELINE"><span class="font-montserrat">My Timeline</span> </mat-button-toggle>
+          <mat-button-toggle i18n *ngIf="allowedToEdit" [checked]="currentTab === eTimelineTypes.MY_DRAFTS"
+            [value]="eTimelineTypes.MY_DRAFTS"><span class="font-montserrat">My Drafts</span>
+          </mat-button-toggle>
+        </mat-button-toggle-group>
+      </div>
+      <mat-divider></mat-divider>
+      <div *ngIf="qnaTimeline" class="mt-2">
+        <ws-app-qna-item [item]="timeline" [allowedToEdit]="allowedToEdit"
+          [allowedToDeleteForSpecificRoles]="allowedToDeleteForSpecificRoles"
+          *ngFor="let timeline of qnaTimeline?.result">
+        </ws-app-qna-item>
+        <h3 class="text-center mt-4" *ngIf="!qnaTimeline?.result?.length" i18n>
+          No questions under this category
+        </h3>
+        <div *ngIf="fetchStatus === 'fetching'" class="text-center margin-top-s">
+          <mat-spinner></mat-spinner>
+        </div>
+        <div *ngIf="fetchStatus === 'hasMore'" class="my-6 text-center">
+          <button (click)="fetchTimeLine()" type="button" mat-raised-button color="primary">
+            <mat-icon>add</mat-icon>&nbsp;
+            <ng-container i18n>View More</ng-container>
+          </button>
+        </div>
+      </div>
+      <ng-container *ngIf="errorFetchingTimeline" [wsResolverWidget]="errorWidget"> </ng-container>
     </div>
-    <mat-button-toggle-group (change)="onTabChange($event)" i18n-name name="questionType" i18n-aria-label
-      aria-label="Select question type">
-      <mat-button-toggle i18n class="text-clr" [checked]="currentTab === eTimelineTypes.ALL"
-        [value]="eTimelineTypes.ALL"><span class="font-montserrat">All</span>
-      </mat-button-toggle>
-      <mat-button-toggle i18n class="text-clr" [checked]="currentTab === eTimelineTypes.UNANSWERED"
-        [value]="eTimelineTypes.UNANSWERED">
-        <span class="font-montserrat">Unanswered</span> </mat-button-toggle>
-      <mat-button-toggle i18n *ngIf="allowedToEdit" [checked]="currentTab === eTimelineTypes.MY_TIMELINE"
-        [value]="eTimelineTypes.MY_TIMELINE"><span class="font-montserrat">My Timeline</span> </mat-button-toggle>
-      <mat-button-toggle i18n *ngIf="allowedToEdit" [checked]="currentTab === eTimelineTypes.MY_DRAFTS"
-        [value]="eTimelineTypes.MY_DRAFTS"><span class="font-montserrat">My Drafts</span>
-      </mat-button-toggle>
-    </mat-button-toggle-group>
   </div>
-  <mat-divider></mat-divider>
-  <div *ngIf="qnaTimeline" class="mt-2">
-    <ws-app-qna-item [item]="timeline" [allowedToEdit]="allowedToEdit" [allowedToDeleteForSpecificRoles] = "allowedToDeleteForSpecificRoles" *ngFor="let timeline of qnaTimeline?.result">
-    </ws-app-qna-item>
-    <h3 class="text-center mt-4" *ngIf="!qnaTimeline?.result?.length" i18n>
-      No questions under this category
-    </h3>
-    <div *ngIf="fetchStatus === 'fetching'" class="text-center margin-top-s">
-      <mat-spinner></mat-spinner>
-    </div>
-    <div *ngIf="fetchStatus === 'hasMore'" class="my-6 text-center">
-      <button (click)="fetchTimeLine()" type="button" mat-raised-button color="primary">
-        <mat-icon>add</mat-icon>&nbsp;
-        <ng-container i18n>View More</ng-container>
-      </button>
-    </div>
-  </div>
-  <ng-container *ngIf="errorFetchingTimeline" [wsResolverWidget]="errorWidget"> </ng-container>
 </div>

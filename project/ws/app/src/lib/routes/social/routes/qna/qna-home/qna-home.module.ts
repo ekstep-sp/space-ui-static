@@ -17,6 +17,7 @@ import { QnaHomeComponent } from './components/qna-home/qna-home.component'
 import { PipeLimitToModule, PipeCountTransformModule } from '@ws-widget/utils'
 import { BtnPageBackModule, ErrorResolverModule, DialogSocialDeletePostModule } from '@ws-widget/collection'
 import { QnaItemComponent } from './components/qna-item/qna-item.component'
+import { QnaEditModule } from '../qna-edit/qna-edit.module'
 
 @NgModule({
   declarations: [QnaHomeComponent, QnaItemComponent],
@@ -38,6 +39,7 @@ import { QnaItemComponent } from './components/qna-item/qna-item.component'
     PipeLimitToModule,
     PipeCountTransformModule,
     DialogSocialDeletePostModule,
+    QnaEditModule
   ],
 })
 export class QnaHomeModule { }

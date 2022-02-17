@@ -1,11 +1,10 @@
 <ng-container *ngIf="item?.status !== ePostStatus.INACTIVE">
-  <div class="item-container font-montserrat">
-    <a [routerLink]="['./', item.id]" *ngIf="item.status !== 'Draft'" class="count-section">
-      <span class="count-holder vote-padding-left-remove">
+  <div class="item-container font-montserrat qna-display">
+    <a [routerLink]="['./', item.id]" *ngIf="item.status !== 'Draft'" class="count-section vote-align-text">
+      <!-- <span class="count-holder vote-padding-left-remove">
         <div class="count">
-          {{ item.activity.activityData.upVote - item.activity.activityData.downVote }}
+          {{ item.activity.activityData.upVote - item.activity.activityData.downVote }} votes
         </div>
-        <div class="mat-caption">votes</div>
       </span>
       <span
         class="count-holder"
@@ -14,25 +13,28 @@
           answer: !item.acceptedAnswers && item.replyCount
         }"
       >
-        <div class="count">{{ item.replyCount }}</div>
-        <div class="mat-caption">answers</div>
+        <div class="count">{{ item.replyCount }} answers</div>
       </span>
       <span class="count-holder" *ngIf="showSocialLike">
-        <div class="count">{{ item.activity.activityData.like }}</div>
-        <div class="mat-caption">likes</div>
-      </span>
+        <div class="count">{{ item.activity.activityData.like }} likes</div>
+      </span> -->
+      <div class="count">
+          {{ item.activity.activityData.upVote - item.activity.activityData.downVote }} votes
+      </div>
+      <div class="count">{{ item.replyCount }} answers</div>
+      <div class="count">{{ item.activity.activityData.like }} likes</div>
     </a>
-    <div class="question-section">
-      <div class="question-title">
+    <div class="question-section qna-title-description">
+      <div class="question-title qna-title-display">
         <a [routerLink]="['./', item.id]">
-          <h2 *ngIf="item.postContent.title" class="body-font-size-primary font-montserrat ws-mat-primary-text question-text">
+          <h2 *ngIf="item.postContent.title" class="body-font-size-primary font-montserrat ws-mat-primary-text question-text qna-title-home-display">
             {{ item.postContent.title }}
           </h2>
           <h2 *ngIf="!item.postContent.title" class="ws-mat-primary-text question-text">
             {{ item.postContent.abstract }}
           </h2>
-          <h2 *ngIf="!item.postContent.title && !item.postContent.abstract" class="ws-mat-primary-text question-text"
-            [innerHTML]="item.postContent.body | pipeLimitTo: 120"></h2>
+          <p class="margin-bottom-s qna-description"
+            [innerHTML]="item.postContent.body | pipeLimitTo: 120"></p>
         </a>
         <mat-icon *ngIf="userId === item.postCreator.postCreatorId && allowedToEdit || allowedToDeleteForSpecificRoles"
           class="cursor-pointer" role="button" [matMenuTriggerFor]="editMenu">more_vertical</mat-icon>
@@ -55,7 +57,7 @@
     </div>
   </div>
 
-  <mat-divider class="margin-top-xs margin-bottom-xs"></mat-divider>
+  <mat-divider class="margin-top-xs margin-bottom-xs votes-align"></mat-divider>
 </ng-container>
 
 <mat-menu #editMenu="matMenu">

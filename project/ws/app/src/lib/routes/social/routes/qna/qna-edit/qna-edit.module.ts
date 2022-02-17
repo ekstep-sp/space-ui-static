@@ -39,5 +39,6 @@ import { QnaEditComponent } from './components/qna-edit/qna-edit.component'
     BtnPageBackModule,
     EditorQuillModule,
   ],
+  exports:[QnaEditComponent]
 })
 export class QnaEditModule { }

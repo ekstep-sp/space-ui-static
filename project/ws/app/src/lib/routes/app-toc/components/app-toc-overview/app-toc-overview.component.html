@@ -279,8 +279,8 @@
           <div class="description-heading">Description</div>
           <div #description class="mat-subheading-1 ov-clr" [ngClass]="{'line-clamp': showMore}" [innerHTML]="content?.description"></div>
           <div class="show-more-description">
-            <span *ngIf="showMore" (click)=showToggle()>Show more</span>
-            <span *ngIf="showLess" (click)=showToggle()>Show Less</span>
+            <span *ngIf="showMore" [ngClass]="{'show-more-night-mode': showMore}" (click)=showToggle()>Show more</span>
+            <span *ngIf="showLess" [ngClass]="{'show-more-night-mode': showLess}" (click)=showToggle()>Show Less</span>
           </div>
         </ng-container>
         <div class="info-container">
