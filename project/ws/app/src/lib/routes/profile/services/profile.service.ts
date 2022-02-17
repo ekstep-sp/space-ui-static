@@ -90,7 +90,7 @@ export class ProfileService {
     )
   }
 
-  async editProfile(widUser: string, params: any, params2: any): Promise<IResponse> {
+  async editProfile(widUser: string, params: any): Promise<IResponse> {
     const responseBodyAsJSON = {
       wid: widUser,
       userFirstName: params.userFirstName.value,
@@ -101,14 +101,17 @@ export class ProfileService {
       userOrganisation: params.userOrganisation.value,
       country: params.userCountry.value,
       currentRole: params.userRole.value,
+      areaOfWork: params.userDomain.value,
+      areaOfExpertise: params.userExpertise.value
     }
     try {
       // tslint:disable-next-line: prefer-template
       // tslint:disable-next-line: max-line-length
       const responseData = await this.http.patch<IResponse>(this.userData.API_END_POINT + this.userData.edit_profile.url, responseBodyAsJSON).toPromise()
-      const responseDataDomain = await this.addDomains(params2.domains)
-      const responseDataExpertise = await this.addExpertise(params2.expertises)
-      if (responseData && responseDataDomain && responseDataExpertise && responseData.STATUS === 'OK') {
+      // const responseDataDomain = await this.addDomains(params2.domains)
+      // const responseDataExpertise = await this.addExpertise(params2.expertises)
+      //if (responseData && responseDataDomain && responseDataExpertise && responseData.STATUS === 'OK') {
+        if (responseData && responseData.STATUS === 'OK') {
         return Promise.resolve({
           ok: true,
           DATA: responseData.DATA,
@@ -143,6 +146,8 @@ export class ProfileService {
         this.configSvc.userProfile = {
           country: userPidProfile.user.organization_location_country || null,
           currentRole: userPidProfile.user.job_role || '',
+          areaOfWork: userPidProfile.user.area_of_work || '',
+          areaOfExpertise: userPidProfile.user.area_of_expertise || '',
           departmentName: userPidProfile.user.department_name || '',
           email: userPidProfile.user.email,
           givenName: userPidProfile.user.first_name,
