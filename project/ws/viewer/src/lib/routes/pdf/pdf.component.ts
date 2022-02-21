@@ -27,6 +27,7 @@ export class PdfComponent implements OnInit, OnDestroy {
     widgetType: 'player',
     widgetSubType: 'playerPDF',
     widgetData: {
+      name: '',
       pdfUrl: '',
       identifier: '',
       disableTelemetry: false,
@@ -69,6 +70,7 @@ export class PdfComponent implements OnInit, OnDestroy {
             ? `/apis/authContent/${encodeURIComponent(this.pdfData.artifactUrl)}`
             : ''
           this.widgetResolverPdfData.widgetData.disableTelemetry = true
+          this.widgetResolverPdfData.widget.name = this.pdfData.name
           this.isFetchingDataComplete = true
         })
     } else if (this.config.isGuestUser) {
@@ -121,6 +123,7 @@ export class PdfComponent implements OnInit, OnDestroy {
               ? this.viewerSvc.getAuthoringUrl(this.pdfData.artifactUrl)
               : this.pdfData.artifactUrl
             : ''
+          this.widgetResolverPdfData.widgetData.name = this.pdfData? this.pdfData.name : ''
           this.widgetResolverPdfData.widgetData.identifier = this.pdfData && this.pdfData.identifier
           this.widgetResolverPdfData = JSON.parse(JSON.stringify(this.widgetResolverPdfData))
           this.widgetResolverPdfData.widgetData.description = this.pdfData? this.pdfData.description : ''

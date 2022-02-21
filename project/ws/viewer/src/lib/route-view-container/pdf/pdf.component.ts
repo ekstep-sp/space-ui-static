@@ -19,6 +19,7 @@ export class PdfComponent implements OnInit {
     widgetType: 'player',
     widgetSubType: 'playerPDF',
     widgetData: {
+      name:'',
       pdfUrl: '',
       identifier: '',
       disableTelemetry: false,
@@ -57,7 +58,7 @@ export class PdfComponent implements OnInit {
       this.isRestricted =
         !this.configSvc.restrictedFeatures.has('disscussionForum')
     }
-    this.isTypeOfCollection = this.activatedRoute.snapshot.queryParams.collectionType ? true : false
+    this.isTypeOfCollection = this.activatedRoute.snapshot.queryParams.collectionType ? true : false   
   }
 
   extractFeaturesForGuestUser() {
