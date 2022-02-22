@@ -47,6 +47,9 @@ export class PublicUserViewComponent implements OnInit {
   page = DEFAULT_PAGE_NUMBER
   offset = DEFAULT_OFFSET
   query = DEFAULT_QUERY
+  tabOpened = true
+  userDisplay = false
+  contentDisplay = true
   DEFAULT_DEBOUNCE = 1000
   DEFAULT_MIN_LENGTH_TO_ACTIVATE_SEARCH = 3
   error$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false)
@@ -55,7 +58,8 @@ export class PublicUserViewComponent implements OnInit {
   apiSub$: Subscription | null = null
   sendName: any
   receivedName: any
-
+  contentCount : any
+  userCount : any
   constructor(
     private readonly configSvc: ConfigurationsService,
     private readonly coreSrvc: PublicUsersCoreService,
@@ -87,6 +91,9 @@ export class PublicUserViewComponent implements OnInit {
     this.receivedName = '' || this.activatedRoute.snapshot.queryParamMap.get('search_query')
     this.searchUsers(this.receivedName)
     this.getUserConnections().subscribe()
+    this.contentCount = this.activatedRoute.snapshot.queryParamMap.get('sc')
+    this.userCount = this.activatedRoute.snapshot.queryParamMap.get('uc')
+
   }
   searchUsers(q = '') {
     this.query = q
@@ -322,5 +329,25 @@ export class PublicUserViewComponent implements OnInit {
       [`/app/users/invitation/${connectionId}`],
       { queryParams: { actionType, search_query: this.sendName || this.activatedRoute.snapshot.queryParamMap.get('search_query') } },
     )
+  }
+  contentResult(){
+    this.tabOpened = false
+    this.userDisplay = true
+    this.contentDisplay = false
+    const lang = this.configSvc.userPreference && this.configSvc.userPreference.selectedLocale ? this.configSvc.userPreference.selectedLocale : 'en'
+    const filters = { contentType: ['Resource', 'Course', 'Collection'] }
+    console.log(this.receivedName)
+    this.router.navigate(['/app/search/learning'], {
+      queryParams: {
+        lang,
+        q: this.receivedName,
+        f: JSON.stringify(filters),
+      },
+    })
+  }
+  userResult(){
+    this.tabOpened = false
+    this.userDisplay = false
+    this.contentDisplay = true
   }
 }

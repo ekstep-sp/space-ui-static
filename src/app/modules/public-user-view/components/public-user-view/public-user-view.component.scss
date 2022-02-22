@@ -288,5 +288,33 @@
 }
 
 
+.tab-people-content {
+  align-items: center;
+}
+.search-results-section {
+  border: 1px solid #d9d8d8;
+  display: flex;
+}
 
+.tab-content-section, .tab-user-section {
+  height: 40px;
+  width: 100%;
+  border-left: 1px solid #d9d8d8;
+}
+
+.tab-content, .tab-user{
+  height: 100%;
+  background-color: white;
+  border: 1px solid #d9d8d8;
+  border-right: 0;
+  border-left: 0;
+  border-bottom: 0;
+  width: 100%;
+  text-align: center !important;
+}
+
+.tab-content.active, .tab-user.active{
+  color: #925eb0;
+  border: 1px solid #925eb0;
+}
 
