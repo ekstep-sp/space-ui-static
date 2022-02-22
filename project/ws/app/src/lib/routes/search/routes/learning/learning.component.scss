@@ -106,17 +106,24 @@
   min-height: 250px;
   height: 100%;
   align-items: center;
-  padding-top: 30px;
+  padding-top: 0;
+  margin-bottom: 15px;
 }
 .search-results-section {
-  border: 1px solid #d9d8d8;
+  border-bottom: 1px solid #925eb0;
   display: flex;
 }
 
 .tab-content-section, .tab-user-section {
-  height: 40px;
+  height: 50px;
   width: 100%;
-  border-left: 1px solid #d9d8d8;
+  // border-left: 1px solid #d9d8d8;
+}
+
+.tab-content-section .active{
+  border-top: 1px solid #42428b;
+  border-left: 1px solid #42428b !important;
+  // border-bottom : 1px solid #925eb0
 }
 
 .tab-content, .tab-user{
@@ -128,11 +135,14 @@
   border-bottom: 0;
   width: 100%;
   text-align: center !important;
+  font-size: 18px;
 }
 
 .tab-content.active, .tab-user.active{
-  color: #925eb0;
-  border: 1px solid #925eb0;
+  color: white;
+  background-color: #42428b;
+  font-size: 18px;
+  font-weight: 600;
 }
 
 .dynamicHeight{

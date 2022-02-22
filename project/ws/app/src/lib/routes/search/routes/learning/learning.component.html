@@ -1,10 +1,10 @@
 <div class="tab-people-content dynamicHeight">
   <div class="search-results-section">
-    <div class="tab-user-section">
-      <button class="tab-user"  [ngClass]="{'active': userDisplay === false}" (click)="userResult()">People {{finalResult?.userSearch?.length}}</button>
+    <div class="tab-content-section active">
+      <button class="tab-content active" (click)="contentResult()">Contents ({{ searchResults.totalHits }})</button>
     </div>
-    <div class="tab-content-section">
-      <button class="tab-content active" (click)="contentResult()">Contents {{ searchResults.totalHits }}</button>
+    <div class="tab-user-section" [ngClass]="{'active': userDisplay === false}">
+      <button class="tab-user"  [ngClass]="{'active': userDisplay === false}" (click)="userResult()">People ({{finalResult?.userSearch?.length}})</button>
     </div>
   </div>
 </div>

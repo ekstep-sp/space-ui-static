@@ -290,17 +290,27 @@
 
 .tab-people-content {
   align-items: center;
+  padding-top: 0;
+  margin-bottom: 15px;
 }
+
 .search-results-section {
-  border: 1px solid #d9d8d8;
+  border-bottom: 1px solid #925eb0;
   display: flex;
 }
 
 .tab-content-section, .tab-user-section {
-  height: 40px;
+  height: 50px;
   width: 100%;
-  border-left: 1px solid #d9d8d8;
+  // border-left: 1px solid #d9d8d8;
 }
+
+.tab-user-section .active{
+  border-top: 1px solid #42428b;
+  border-left: 1px solid #42428b;
+  // border-bottom : 1px solid #925eb0
+}
+
 
 .tab-content, .tab-user{
   height: 100%;
@@ -311,10 +321,15 @@
   border-bottom: 0;
   width: 100%;
   text-align: center !important;
+  font-size: 18px;  
+  font-weight: 600;
 }
 
 .tab-content.active, .tab-user.active{
   color: #925eb0;
-  border: 1px solid #925eb0;
+  color: white;
+  background-color: #42428b;
+  font-size: 18px;  
+  font-weight: 600;
 }
 

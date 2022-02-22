@@ -25,7 +25,7 @@
 </mat-toolbar>
 
 <!-- for search bar in  mobile view -->
-<section class="search-mobile-container">
+<section class="search-mobile-container" *ngIf = "tabOpened" >
     <div *ngIf="(isXSmall$ | async) === true" class="flex">
         <mat-card class="card-container" *ngIf="isEnabledSearch === true">
             <div class="flex">
@@ -47,14 +47,16 @@
         </mat-card>
     </div>
 </section>
-<div class="tab-people-content" [ngClass]="{'dynamicHeight': contentDisplay === false}">
+<div class="tab-people-content" [ngClass]="{'dynamicHeight': contentDisplay === false}" *ngIf = "!tabOpened">
     <div class="search-results-section">
-      <div class="tab-user-section">
-        <button class="tab-user active"  [ngClass]="{'active': userDisplay === false}" (click)="userResult()">People {{userCount}}</button>
-      </div>
-      <div class="tab-content-section">
-        <button class="tab-content" [ngClass]="{'active': contentDisplay === false}" (click)="contentResult()">Contents {{contentCount}}</button>
-      </div>
+        <div class="tab-content-section" [ngClass]="{'active': contentDisplay === false}">
+            <button class="tab-content" [ngClass]="{'active': contentDisplay === false}" (click)="contentResult()">Contents
+                ({{contentCount}})</button>
+        </div>
+        <div class="tab-user-section active">
+            <button class="tab-user active" [ngClass]="{'active': userDisplay === false}" (click)="userResult()">People
+                ({{userCount}})</button>
+        </div>
     </div>
 </div>
 <div class="wrapper">

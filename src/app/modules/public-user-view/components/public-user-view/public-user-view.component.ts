@@ -93,6 +93,12 @@ export class PublicUserViewComponent implements OnInit {
     this.getUserConnections().subscribe()
     this.contentCount = this.activatedRoute.snapshot.queryParamMap.get('sc')
     this.userCount = this.activatedRoute.snapshot.queryParamMap.get('uc')
+    if(!this.userCount && !this.contentCount){
+      this.tabOpened = true
+    }
+    else{
+      this.tabOpened = false
+    }
 
   }
   searchUsers(q = '') {
