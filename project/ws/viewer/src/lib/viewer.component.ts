@@ -205,8 +205,8 @@ export class ViewerComponent implements OnInit, OnDestroy, AfterViewInit, AfterV
       widgetType: 'discussionForum',
     }
     const widgetWithComment: { [key: string]: any } = { ...this.discussionForumWidget.widgetData, 
-      //commentsCount: this.content!.comments.length || 0
-      commentsCount: this.content!.comments? this.content!.comments.length : 0 || 0 }
+      commentsCount: this.content!.comments.length || 0 }
+      //commentsCount: this.content!.comments? this.content!.comments.length : 0 || 0 }
     const discussionForumWidgetWithComment = { ...this.discussionForumWidget }
     discussionForumWidgetWithComment.widgetData = widgetWithComment
     this.discussionForumWidgetWithComment = discussionForumWidgetWithComment
