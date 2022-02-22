@@ -5,10 +5,8 @@ import { NsWidgetResolver } from '@ws-widget/resolver'
 import { ConfigurationsService, TFetchStatus } from '@ws-widget/utils'
 import { NSProfileData } from '../../../../models/profile.model'
 import { ProfileService } from '../../../../services/profile.service'
-import { InterestService } from '../../../interest/services/interest.service'
 import { NSLearningHistory } from '../../../learning/models/learning.models'
 import { LearningHistoryService } from '../../../learning/services/learning-history.service'
-import { forkJoin } from 'rxjs'
 import { InitService } from 'src/app/services/init.service'
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog'
 
@@ -118,7 +116,6 @@ export class DashboardComponent implements OnInit {
     // private badgesSvc: BadgesService,
     private profileSvc: ProfileService,
     private learnHstSvc: LearningHistoryService,
-    private interestSvc: InterestService,
     private activatedRoute: ActivatedRoute,
     private router: Router,
     public dialog: MatDialog
@@ -128,14 +125,21 @@ export class DashboardComponent implements OnInit {
       this.country = this.configSvc.userProfile.country || ''
       this.currentRole = this.configSvc.userProfile.currentRole || ''
       this.initService.getUserProfile()
-      forkJoin({
-        domains: this.profileSvc.getDomain(),
-        expertise: this.profileSvc.getExpertise(),
-      })
-      .subscribe(({ domains, expertise }) => {
-        this.domains = domains ? domains : []
-        this.expertises = expertise ? expertise : []
-      })
+      // forkJoin({
+      //   domains: this.profileSvc.getDomain(),
+      //   expertise: this.profileSvc.getExpertise(),
+      // })
+      // .subscribe(({ domains, expertise }) => {
+      //   this.domains = domains ? domains : []
+      //   this.expertises = expertise ? expertise : []
+      // })
+
+
+      this.domains = this.configSvc.userProfile.areaOfWork ? 
+        this.configSvc.userProfile.areaOfWork.split(',') as IChips[] : []
+      this.expertises = this.configSvc.userProfile.areaOfExpertise ?
+       this.configSvc.userProfile.areaOfExpertise.split(',') as IChips[] : []
+
       this.profileLink = (this.configSvc.userProfile.userProperties && this.configSvc.userProfile.userProperties !== 'null') ?
             this.configSvc.userProfile.userProperties.profileLink : ''
       this.userEmail = this.configSvc.userProfile.email || ''
@@ -157,15 +161,20 @@ export class DashboardComponent implements OnInit {
     this.followFetchStatus = 'fetching'
     this.historyFetchStatus = 'fetching'
     this.apiFetchStatus = 'fetching'
-    this.interestSvc.fetchUserInterestsV2().subscribe(
-      (data: string[]) => {
-        this.interests = data
-        this.interestFetchStatus = 'done'
-      },
-      () => {
-        this.interestFetchStatus = 'error'
-      },
-    )
+
+
+    // this.interestSvc.fetchUserInterestsV2().subscribe(
+    //   (data: string[]) => {
+    //     this.interests = data
+    //     this.interestFetchStatus = 'done'
+    //   },
+    //   () => {
+    //     this.interestFetchStatus = 'error'
+    //   },
+    // )
+
+
+
     // this.badgesSvc.fetchBadges().subscribe(
     //   (data: IBadgeResponse) => {
     //     this.badgesData = data

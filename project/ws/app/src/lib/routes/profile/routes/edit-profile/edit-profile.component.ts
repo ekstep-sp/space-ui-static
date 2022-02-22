@@ -13,7 +13,6 @@ import { IWidgetsPlayerMediaData } from '@ws-widget/collection'
 import { NsWidgetResolver } from '@ws-widget/resolver'
 import { MatChipInputEvent } from '@angular/material/chips'
 import { COMMA, ENTER } from '@angular/cdk/keycodes'
-import { forkJoin } from 'rxjs'
 import { countryList } from '../../models/countries.model'
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog'
 export namespace NsEditProfile {
@@ -118,18 +117,18 @@ export class EditProfileComponent implements OnInit {
       }
     })
     this.userProfile = this.initService.getUserProfile()
-    forkJoin({
-      domains: this.profileSvc.getDomain(),
-      expertise: this.profileSvc.getExpertise(),
-    })
-    .subscribe(({ domains, expertise }) => {
-      this.domains = domains ? domains : []
-      this.expertises = expertise ? expertise : []
-      this.actualDomains = [...this.domains]
-      this.actualExpertises = [...this.expertises]
-      this.profileForm.controls.userDomain.setValue(this.domains)
-      this.profileForm.controls.userExpertise.setValue(this.expertises)
-    })
+    // forkJoin({
+    //   domains: this.profileSvc.getDomain(),
+    //   expertise: this.profileSvc.getExpertise(),
+    // })
+    // .subscribe(({ domains, expertise }) => {
+    //   this.domains = domains ? domains : []
+    //   this.expertises = expertise ? expertise : []
+    //   this.actualDomains = [...this.domains]
+    //   this.actualExpertises = [...this.expertises]
+    //   this.profileForm.controls.userDomain.setValue(this.domains)
+    //   this.profileForm.controls.userExpertise.setValue(this.expertises)
+    // })
     if (this.userProfile) {
       this.profileForm.controls.userFirstName.setValue(this.userProfile.givenName
         && this.userProfile.givenName !== 'null' ? this.userProfile.givenName : ` ${this.userProfile.lastName}`
@@ -140,6 +139,17 @@ export class EditProfileComponent implements OnInit {
         this.userProfile.country !== 'null' ? this.userProfile.country : '')
       this.profileForm.controls.userRole.setValue(this.userProfile.currentRole &&
         this.userProfile.currentRole !== 'null' ? this.userProfile.currentRole : '')
+
+      this.profileForm.controls.userDomain.setValue(this.userProfile.areaOfWork &&
+         this.userProfile.areaOfWork !== 'null' ? this.userProfile.areaOfWork.split(',') : [])
+      this.domains = this.userProfile.areaOfWork &&
+      this.userProfile.areaOfWork !== 'null' ? this.userProfile.areaOfWork.split(',') as IChips[]: []
+
+      this.profileForm.controls.userExpertise.setValue(this.userProfile.areaOfExpertise &&
+        this.userProfile.areaOfExpertise !== 'null' ? this.userProfile.areaOfExpertise.split(',') : [])
+      this.expertises = this.userProfile.areaOfExpertise &&
+        this.userProfile.areaOfExpertise !== 'null' ? this.userProfile.areaOfExpertise.split(',') as IChips[]: [] 
+
       if (this.userProfile.userProperties) {
         this.profileForm.controls.profileLink.setValue(this.userProfile.userProperties.profileLink
           && this.userProfile.userProperties.profileLink !== 'null' ? this.userProfile.userProperties.profileLink : '')
@@ -238,16 +248,15 @@ export class EditProfileComponent implements OnInit {
           })
           }  else if (this.profileForm.valid) {
       this.isLoad = true
-      const domainDiff = this.actualDomains.filter(dom => !this.domains.includes(dom))
-      const expertiseDiff = this.actualExpertises.filter(exp => !this.expertises.includes(exp))
-      forkJoin({
-        domains: this.profileSvc.deleteDomains(domainDiff),
-        expertise: this.profileSvc.deteleExpertise(expertiseDiff),
-      }).subscribe(({}) => {
-      })
+      // const domainDiff = this.actualDomains.filter(dom => !this.domains.includes(dom))
+      // const expertiseDiff = this.actualExpertises.filter(exp => !this.expertises.includes(exp))
+      // forkJoin({
+      //   domains: this.profileSvc.deleteDomains(domainDiff),
+      //   expertise: this.profileSvc.deteleExpertise(expertiseDiff),
+      // }).subscribe(({}) => {
+      // })
       const editresponse =
-      await this.profileSvc.editProfile(this.userProfile.userId, this.profileForm.controls,
-                                        { domains: this.domains, expertises: this.expertises })
+      await this.profileSvc.editProfile(this.userProfile.userId, this.profileForm.controls)
       this.isLoad = false
       if (editresponse.ok) {
         if (editresponse.DATA != null) {

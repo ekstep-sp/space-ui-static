@@ -259,6 +259,8 @@ export namespace NsUser {
     lastName?: string
     userProperties?: IUserProperties,
     currentRole?: string
+    areaOfWork?: string
+    areaOfExpertise?: string
   }
   export interface IUserProperties {
     bio?: string
@@ -334,5 +336,7 @@ export namespace NsUser {
     json_unmapped_fields?: any
     source_data: ISourceData
     user_properties?: IUserProperties
+    area_of_work: string
+    area_of_expertise: string
   }
 }
