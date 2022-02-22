@@ -72,6 +72,8 @@ export namespace NsUserDashboard {
     time_updated: Timestamp<any>,
     manager_id: string,
     time_zone: string,
+    area_of_work: string
+    area_of_expertise: string
   }
   export interface IUserList {
     type: string,
