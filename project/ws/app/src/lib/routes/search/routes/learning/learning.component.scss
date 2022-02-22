@@ -69,3 +69,72 @@
 .hide-filter-btn {
   visibility: hidden;
 }
+
+.user-data-display{
+  display: flex;
+}
+
+.user-image-section {
+  $width-s: 100px;
+  $width-gts: 130px;
+  position: relative;
+  width: 110px;
+  height: 9 * $width-s / 16;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  @media screen and (min-width: 500px) {
+    width: 130px;
+    height: 9 * $width-gts / 16;
+  }
+
+  img {
+    max-width: 100%;
+    height: auto;
+    max-height: 100%;
+    width: auto;
+  }
+}
+
+.user-data{
+  margin-bottom: 5px;
+}
+
+.tab-people-content {
+  min-height: 250px;
+  height: 100%;
+  align-items: center;
+  padding-top: 30px;
+}
+.search-results-section {
+  border: 1px solid #d9d8d8;
+  display: flex;
+}
+
+.tab-content-section, .tab-user-section {
+  height: 40px;
+  width: 100%;
+  border-left: 1px solid #d9d8d8;
+}
+
+.tab-content, .tab-user{
+  height: 100%;
+  background-color: white;
+  border: 1px solid #d9d8d8;
+  border-right: 0;
+  border-left: 0;
+  border-bottom: 0;
+  width: 100%;
+  text-align: center !important;
+}
+
+.tab-content.active, .tab-user.active{
+  color: #925eb0;
+  border: 1px solid #925eb0;
+}
+
+.dynamicHeight{
+  min-height: 50px;
+}

@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core'
+import { ChangeDetectorRef, Component, OnDestroy, OnInit, ViewChild } from '@angular/core'
 import { ActivatedRoute, Router } from '@angular/router'
 import { NsContent, NsError, NSSearch, ROOT_WIDGET_CONFIG } from '@ws-widget/collection'
 import { NsWidgetResolver } from '@ws-widget/resolver'
@@ -12,18 +12,24 @@ import { IFilterUnitResponse, ISearchRequest, ISearchTab } from '../../models/se
 import { SearchServService } from '../../services/search-serv.service'
 import { catchError, map } from 'rxjs/operators'
 import { IPublicUsersResponse, IPublicUsers, IRawUserProperties } from 'src/app/modules/public-user-view/models/public-users.interface'
+import { DEFAULT_IMAGE_URL } from 'src/app/modules/public-user-view/constants'
+
 @Component({
   selector: 'ws-app-learning',
   templateUrl: './learning.component.html',
   styleUrls: ['./learning.component.scss'],
 })
 export class LearningComponent implements OnInit, OnDestroy {
+  items = ['Item 1', 'Item 2', 'Item 3', 'Item 4', 'Item 5'];
   selectedContentTypes = NsContent.PLAYLIST_SUPPORTED_CONTENT_TYPES
   debounceSubject = new BehaviorSubject<boolean>(false)
   appContentTypes = NsContent.EContentTypes
+  resultsOK = true
   @ViewChild(FilterDisplayComponent, { static: false })
   appFilterDisplay: FilterDisplayComponent | null = null
-
+  tabOpened = true
+  userDisplay = true
+  contentDisplay = true
   removable = true
   defaultSideNavBarOpenedSubscription: Subscription | null = null
   expandToPrefLang = true
@@ -31,6 +37,7 @@ export class LearningComponent implements OnInit, OnDestroy {
   screenSizeIsLtMedium = false
   sideNavBarOpened = true
   searchRequestStatus: IKhubFetchStatus = 'none'
+  defaultUserImage = DEFAULT_IMAGE_URL
   searchResults: NSSearch.ISearchV6ApiResult = {
     totalHits: 0,
     result: [],
@@ -38,6 +45,7 @@ export class LearningComponent implements OnInit, OnDestroy {
     filtersUsed: [],
     notVisibleFilters: [],
   }
+  userCount : any
   finalResult = {}
   searchPeopleResult = {
     query: '',
@@ -102,7 +110,8 @@ export class LearningComponent implements OnInit, OnDestroy {
     private configSvc: ConfigurationsService,
     private trainingSvc: TrainingService,
     private utilitySvc: UtilityService,
-    private coreSrvc: PublicUsersCoreService
+    private coreSrvc: PublicUsersCoreService,
+    private changeDetector : ChangeDetectorRef
   ) { }
 
   getActiveLocale() {
@@ -483,7 +492,6 @@ export class LearningComponent implements OnInit, OnDestroy {
             // tslint:disable-next-line: no-non-null-assertion
             this.searchRequestObject.pageNo! += 1
           }
-
           this.getTrainingsLHub(this.searchResults)
         },
         error => {
@@ -507,7 +515,7 @@ export class LearningComponent implements OnInit, OnDestroy {
               userSearch : formattedData,
               contentSearch : this.searchResults.result
             }
-            console.log(this.finalResult)
+            this.userCount = formattedData.length
             return {
               ...rawData,
               DATA: formattedData,
@@ -690,5 +698,18 @@ export class LearningComponent implements OnInit, OnDestroy {
         queryParamsHandling: 'merge',
       })
     }
+  }
+
+  contentResult(){
+    this.tabOpened = false
+    this.userDisplay = true
+    this.contentDisplay = false
+    this.changeDetector.detectChanges()
+  }
+  userResult(){
+    this.tabOpened = false
+    this.userDisplay = false
+    this.contentDisplay = true
+    this.router.navigate(['/app/users/list'], { queryParams: { search_query: this.searchPeopleResult.query,sc: this.searchResults.totalHits,uc: this.userCount} })
   }
 }

@@ -76,8 +76,8 @@ class="color-viewer-top mat-elevation-z3 px-8"
     queryParamsHandling="preserve"
     accesskey="<"
   >
-    <mat-icon style="color: white;" class="reverse mr-1">play_circle_outline</mat-icon>
-    Prev
+    <mat-icon style="color: white;" class="reverse mr-1" [ngClass]="{'button-disabled': !prevResourceUrl}">play_circle_outline</mat-icon>
+    <span [ngClass]="{'button-disabled': !prevResourceUrl}">Prev</span>
   </a>
   <div class="verticle-line" *ngIf="isTypeOfCollection"></div>
   <a
@@ -90,8 +90,9 @@ class="color-viewer-top mat-elevation-z3 px-8"
     [disabled]="!nextResourceUrl"
     queryParamsHandling="preserve"
     accesskey=">"
-  >Next
-    <mat-icon style="color: white;"  class="ml-1">play_circle_outline</mat-icon>
+  >
+  <span [ngClass]="{'button-disabled': !nextResourceUrl}">Next</span>
+    <mat-icon style="color: white;"  class="ml-1" [ngClass]="{'button-disabled': !nextResourceUrl}">play_circle_outline</mat-icon>
   </a>
   <a mat-icon-button class="clr" *ngIf="showFullScreenButton">
     <ws-widget-btn-fullscreen

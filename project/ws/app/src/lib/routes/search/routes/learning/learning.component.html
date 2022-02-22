@@ -1,3 +1,13 @@
+<div class="tab-people-content dynamicHeight">
+  <div class="search-results-section">
+    <div class="tab-user-section">
+      <button class="tab-user"  [ngClass]="{'active': userDisplay === false}" (click)="userResult()">People {{finalResult?.userSearch?.length}}</button>
+    </div>
+    <div class="tab-content-section">
+      <button class="tab-content active" (click)="contentResult()">Contents {{ searchResults.totalHits }}</button>
+    </div>
+  </div>
+</div>
 <mat-sidenav-container role="main" class="sidenav-container" autosize *ngIf="!error.load">
   <mat-sidenav #sideNavBar class="sidenav" [opened]="sideNavBarOpened" (closed)="closeFilter(false)"
     [mode]="screenSizeIsLtMedium ? 'over' : 'side'">
@@ -81,19 +91,22 @@
                 {{translatedFilters[filter?.displayName]?.value[content?.displayName] || content?.displayName}}
                 <mat-icon matChipRemove
                   (click)="appFilterDisplay.removeFilter({ key : filter?.type, value :content?.type})"
-                  *ngIf="removable">cancel</mat-icon>
+                  *ngIf="removable">
+                  cancel</mat-icon>
               </mat-chip>
               <mat-chip [removable]="removable" *ngIf="content.displayName ==='Module'">
                 {{translatedFilters[filter?.displayName]?.value['Asset'] || 'Asset'}}
                 <mat-icon matChipRemove
                   (click)="appFilterDisplay.removeFilter({ key : filter?.type, value :content?.type})"
-                  *ngIf="removable">cancel</mat-icon>
+                  *ngIf="removable">
+                  cancel</mat-icon>
               </mat-chip>
               <mat-chip [removable]="removable" *ngIf="content.displayName ==='Course'">
                 {{translatedFilters[filter?.displayName]?.value['Collection'] || 'Collection'}}
                 <mat-icon matChipRemove
                   (click)="appFilterDisplay.removeFilter({ key : filter?.type, value :content?.type})"
-                  *ngIf="removable">cancel</mat-icon>
+                  *ngIf="removable">
+                  cancel</mat-icon>
               </mat-chip>
             </span>
             <span *ngIf="content?.children?.length>0">
@@ -117,8 +130,8 @@
       <div *ngIf="searchRequestStatus === 'fetching'" class="margin-top-m flex flex-center">
         <mat-spinner></mat-spinner>
         <!-- <h2 class="h2-title">
-          Loading...
-        </h2> -->
+            Loading...
+          </h2> -->
       </div>
       <button mat-raised-button class="width-1-1" (click)="getResults()" *ngIf="searchRequestStatus != 'done'"
         [hidden]="searchRequestStatus === 'fetching'" accesskey="+">
@@ -148,13 +161,12 @@
         </button>
       </h4>
       <!-- <h4>
-            <span i18n>Browsing</span>&nbsp;
-            <a [routerLink]="'/catalog'" i18n class="catalog-link">Catalog</a>
-          </h4> -->
+              <span i18n>Browsing</span>&nbsp;
+              <a [routerLink]="'/catalog'" i18n class="catalog-link">Catalog</a>
+            </h4> -->
       <h4>Different keywords</h4>
     </div>
   </div>
-
   <div *ngIf="searchRequestStatus === 'error'" class="text-center margin-top-m">
     <!-- <h2 class="h2-title" i18n="search result fetch error">
       Some error occurred! Please retry
