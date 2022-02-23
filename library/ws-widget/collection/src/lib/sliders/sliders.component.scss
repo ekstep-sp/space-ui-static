@@ -220,9 +220,9 @@ flex-wrap: nowrap;
  
 .arrow-direction{
   background-image: url(../../../../../../src/fusion-assets/img/arrow1.svg), url(../../../../../../src/fusion-assets/img/arrow2.svg);
-  background-position: 5% 230px, 5.9% 0px;
+  background-position: 5% 115px, 6.9% 5px;
   background-repeat: no-repeat, no-repeat;
-  background-size: 150px, 300px;
+  background-size: 231px, 300px;
   // background-position: 5% 30%, 5.9% 0px;
   // background-repeat: no-repeat, no-repeat;
   // background-size: 8.3%, 16.9%;
@@ -243,6 +243,46 @@ flex-wrap: nowrap;
   }
 }
 
+@media (min-width : 1301px) and (max-width : 1400px){
+  .arrow-direction{
+    background-position: 4% 115px, 5.9% 5px;
+    background-size: 143px, 236px;
+  }
+}
+
+@media (min-width : 1201px) and (max-width : 1300px){
+  .arrow-direction{
+    background-position: 2% 115px, 3% 5px;
+    background-size: 231px, 281px;
+  }
+}
+
+@media (min-width : 1024px) and (max-width : 1200px){
+  .arrow-direction{
+    background-position: 1% 115px, 1.9% 5px;
+    background-size: 220px, 300px;
+  }
+}
+
+@media (min-width : 1401px) and (max-width : 1500px){
+  .arrow-direction{
+    background-position: 1% 108px, 10.9% 5px;
+    background-size: 199px, 272px;
+  }
+}
+
+@media (min-width : 1501px ) and (max-width : 1600px){
+  .arrow-direction{
+    background-position: 3% 112px, 9.9% 0px;
+    background-size: 176px, 262px;
+  }
+}
+@media (min-width : 1601px ) and (max-width : 1680px){
+  .arrow-direction{
+    background-position: 3% 109px, 6.9% 0px;
+    background-size: 228px, 312px;
+  }
+}
 @media (max-width: 640px) {
   .btn.btn-primary.px-16{
     padding-left: 2rem;
