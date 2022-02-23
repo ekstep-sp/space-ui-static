@@ -55,7 +55,7 @@
         </div>
         <div class="tab-user-section active">
             <button class="tab-user active" [ngClass]="{'active': userDisplay === false}" (click)="userResult()">People
-                ({{userCount}})</button>
+                ({{userCount ? userCount : 0}})</button>
         </div>
     </div>
 </div>

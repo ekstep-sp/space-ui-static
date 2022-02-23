@@ -4,7 +4,7 @@
       <button class="tab-content active" (click)="contentResult()">Contents ({{ searchResults.totalHits }})</button>
     </div>
     <div class="tab-user-section" [ngClass]="{'active': userDisplay === false}">
-      <button class="tab-user"  [ngClass]="{'active': userDisplay === false}" (click)="userResult()">People ({{finalResult?.userSearch?.length}})</button>
+      <button class="tab-user"  [ngClass]="{'active': userDisplay === false}" (click)="userResult()">People ({{finalResult?.userSearch?.length ? finalResult?.userSearch?.length : 0 }})</button>
     </div>
   </div>
 </div>
