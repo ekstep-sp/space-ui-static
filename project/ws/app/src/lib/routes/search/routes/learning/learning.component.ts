@@ -45,8 +45,7 @@ export class LearningComponent implements OnInit, OnDestroy {
     filtersUsed: [],
     notVisibleFilters: [],
   }
-  userCount : any
-  finalResult = {}
+  userCount = 0
   searchPeopleResult = {
     query: '',
     offset : 0,
@@ -512,11 +511,7 @@ export class LearningComponent implements OnInit, OnDestroy {
               // tslint:disable-next-line: max-line-length
               user_properties: this.coreSrvc.extractUserProperties(dataObj.user_properties as IRawUserProperties),
             }))
-            this.finalResult ={
-              userSearch : formattedData,
-              contentSearch : this.searchResults.result
-            }
-            this.userCount = formattedData.length
+            this.userCount = formattedData && formattedData.length ? formattedData.length : 0
             return {
               ...rawData,
               DATA: formattedData,
