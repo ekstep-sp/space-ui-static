@@ -101,8 +101,8 @@ export class ProfileService {
       userOrganisation: params.userOrganisation.value,
       country: params.userCountry.value,
       currentRole: params.userRole.value,
-      areaOfWork: params.userDomain.value,
-      areaOfExpertise: params.userExpertise.value
+      areaOfWork: params.userDomain.value.toString(),
+      areaOfExpertise: params.userExpertise.value.toString()
     }
     try {
       // tslint:disable-next-line: prefer-template
