@@ -39,14 +39,29 @@
       }">
         {{userData?.department_name}}
       </div>
+      <!-- <div class="font-size-18 org-color mt-2">
+        {{userData?.department_name}}
+      </div> -->
       <div class="hovercard mt-3">
-        <div class="font-size-14 txt-color underline break-all" *ngIf="userData?.user_properties?.value?.profileLink">
-            <div class="profile" (click)="navigateToProfileLink(userData?.user_properties?.value?.profileLink)">{{userData?.user_properties?.value?.profileLink}}</div>
+        <div class="font-size-14 txt-color break-all" *ngIf="userData?.job_role">
+          <div>{{userData?.job_role}}</div>
         </div>
+        <div class="font-size-14 txt-color break-all" *ngIf="userData?.organization_location_country">
+          <div class="mt-3">{{userData?.organization_location_country}}</div>
+        </div>
+        <div class="font-size-14 txt-color break-all" *ngIf="userData?.area_of_work">
+          <div class="mt-3">{{userData?.area_of_work}}</div>
+        </div>
+        <div class="font-size-14 txt-color break-all" *ngIf="userData?.area_of_expertise">
+          <div class="mt-3">{{userData?.area_of_expertise}}</div>
+        </div>
+        <div class="font-size-14 txt-color underline break-all" *ngIf="userData?.user_properties?.value?.profileLink">
+            <div class="profile mt-3" (click)="navigateToProfileLink(userData?.user_properties?.value?.profileLink)">{{userData?.user_properties?.value?.profileLink}}</div>
+        </div>        
         <div class="flex flex-col">
-          <div class="bio-desc overflow-y-auto font-size-14 mx-5 txt-color">
+          <!-- <div class="bio-desc overflow-y-auto font-size-14 mx-5 txt-color">
             <p>{{userData?.user_properties?.value?.bio}}</p>
-          </div>
+          </div> -->
           <ng-container *ngIf ="resultsOK && !hideButtonStatus(userData, connectionData) && !showAcceptAndReject(connectionData) ">
           <div class="hovercard exactly-middle-button mt-1">
             <button class="m-auto" mat-raised-button  [class.spinner]="isLoadingConnection"  [attr.outage-count]="Withdraw" [ngClass] = "{'btn-status': buttonStatus === 'Pending'}" (click)="sendConnectionStatus(userData, connectionData)">

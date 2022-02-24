@@ -28,6 +28,10 @@ export interface IPublicUsers {
     source_profile_picture: string
     email: string
     time_inserted: string
+    area_of_work: string
+    area_of_expertise: string
+    organization_location_country?: string
+    job_role: string
 }
 
 export interface IUpdateDataObj { query: string, searchSize: number, offset: number }
