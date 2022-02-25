@@ -2,8 +2,10 @@ import { Platform } from '@angular/cdk/platform'
 import { Component, Input, OnInit } from '@angular/core'
 import { NsWidgetResolver, WidgetBaseComponent } from '@ws-widget/resolver'
 import { ConfigurationsService, EventService } from '@ws-widget/utils'
+//import { FileSaverService } from 'ngx-filesaver'
 import { MobileAppsService } from '../../../../../../src/app/services/mobile-apps.service'
 import { NsContent } from '../_services/widget-content.model'
+import { saveAs } from 'file-saver'
 
 export interface IWidgetBtnDownload {
   identifier: string
@@ -36,9 +38,11 @@ export class BtnContentDownloadComponent extends WidgetBaseComponent
     super()
   }
   ngOnInit() {
-    if (this.configSvc.instanceConfig && this.configSvc.instanceConfig.isContentDownloadAvailable) {
-      this.downloadable = this.mobAppSvc.isMobile && this.isContentDownloadable
-    }
+     if (this.configSvc.instanceConfig && this.configSvc.instanceConfig.isContentDownloadAvailable) {
+    //   this.downloadable = this.mobAppSvc.isMobile && this.isContentDownloadable
+     }
+
+    this.downloadable = this.isContentDownloadable
   }
 
   private get isContentDownloadable(): boolean {
@@ -50,7 +54,7 @@ export class BtnContentDownloadComponent extends WidgetBaseComponent
         this.widgetData.resourceType === 'Classroom Training' ||
         (this.widgetData.mimeType !== NsContent.EMimeTypes.COLLECTION &&
           !this.widgetData.downloadUrl) ||
-        this.widgetData.isExternal ||
+        //this.widgetData.isExternal ||
         (this.widgetData.artifactUrl && this.widgetData.artifactUrl.startsWith('https://scorm.')
         )
       ) {
@@ -77,7 +81,10 @@ export class BtnContentDownloadComponent extends WidgetBaseComponent
     if (!this.forPreview) {
       this.raiseTelemetry()
       this.mobAppSvc.downloadResource(this.widgetData.identifier)
+      
     }
+    console.log('Download artifact url : ',this.widgetData.artifactUrl.toString())
+    saveAs(this.widgetData.artifactUrl.toString())
   }
 
   raiseTelemetry() {
