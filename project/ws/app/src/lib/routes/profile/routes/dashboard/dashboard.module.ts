@@ -13,6 +13,7 @@ import {
   MatProgressSpinnerModule,
   MatTooltipModule,
   MatDialogModule,
+  MatCheckboxModule,
 } from '@angular/material'
 import { WidgetResolverModule } from '@ws-widget/resolver'
 import { CalendarModule } from '../../module/calendar-module/calendar.module'
@@ -41,6 +42,7 @@ import { CoursePendingCardComponent } from './components/course-pending-card/cou
     MatProgressSpinnerModule,
     MatTooltipModule,
     MatDialogModule,
+    MatCheckboxModule
   ],
 })
 export class DashboardModule {}

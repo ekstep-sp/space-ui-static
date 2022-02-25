@@ -102,7 +102,8 @@ export class ProfileService {
       country: params.userCountry.value,
       currentRole: params.userRole.value,
       areaOfWork: params.userDomain.value.toString(),
-      areaOfExpertise: params.userExpertise.value.toString()
+      areaOfExpertise: params.userExpertise.value.toString(),
+      subscribe : params.subscribe.value
     }
     try {
       // tslint:disable-next-line: prefer-template
