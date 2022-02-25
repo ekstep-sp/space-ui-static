@@ -407,9 +407,10 @@ export class LearningComponent implements OnInit, OnDestroy {
           this.filtersResponse = filteR.filtersRes
           const filterData = this.filtersResponse.splice(0, 1)
           this.filtersResponse.splice(6, 0, filterData[0])
-          const contentType = this.filtersResponse.splice(0, 3)
+          const contentType = this.filtersResponse.splice(0, 4)
           this.filtersResponse.splice(0, 0, contentType[0])
-          this.filtersResponse.splice(1, 0, contentType[2])
+          this.filtersResponse.splice(1, 0, contentType[3])
+          this.filtersResponse.splice(2, 0, contentType[2])
           this.filtersResponse.splice(2, 0, contentType[1])
           this.filtersResponse.forEach((element: any, idx: any) => {
             if (element) {
