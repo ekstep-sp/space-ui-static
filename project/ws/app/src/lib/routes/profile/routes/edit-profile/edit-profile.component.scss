@@ -687,3 +687,7 @@ footer .list-inline a {
   font-weight: normal;
   white-space: normal;
 }
+
+::ng-deep .subscribe-check .mat-checkbox-frame {
+  border-color: #d9d8d8 !important;
+}

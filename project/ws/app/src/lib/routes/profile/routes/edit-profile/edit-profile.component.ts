@@ -98,7 +98,7 @@ export class EditProfileComponent implements OnInit {
     userExpertise: new FormControl([], Validators.required),
     sourceProfilePicture: new FormControl(''),
     profileLink: new FormControl(''),
-    subscribe: new FormControl(false, Validators.required)
+    isSubscribed: new FormControl(false, Validators.required)
   })
 
   userProfile: any
@@ -149,8 +149,8 @@ export class EditProfileComponent implements OnInit {
       this.profileForm.controls.userExpertise.setValue(this.userProfile.areaOfExpertise &&
         this.userProfile.areaOfExpertise !== 'null' ? this.userProfile.areaOfExpertise.split(',') : [])
       this.expertises = this.userProfile.areaOfExpertise &&
-        this.userProfile.areaOfExpertise !== 'null' ? this.userProfile.areaOfExpertise.split(',') as IChips[]: [] 
-
+        this.userProfile.areaOfExpertise !== 'null' ? this.userProfile.areaOfExpertise.split(',') as IChips[]: []
+      this.profileForm.controls.isSubscribed.setValue(this.userProfile.isSubscribed ? this.userProfile.isSubscribed : false)
       if (this.userProfile.userProperties) {
         this.profileForm.controls.profileLink.setValue(this.userProfile.userProperties.profileLink
           && this.userProfile.userProperties.profileLink !== 'null' ? this.userProfile.userProperties.profileLink : '')
@@ -366,6 +366,6 @@ export class EditProfileComponent implements OnInit {
   }
 
   subscribed(){
-    this.profileForm.controls.subscribe.setValue(!this.profileForm.controls.subscribe.value)
+    this.profileForm.controls.isSubscribed.setValue(!this.profileForm.controls.isSubscribed.value)
   }
 }
