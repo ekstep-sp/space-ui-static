@@ -74,6 +74,7 @@ export namespace NsUserDashboard {
     time_zone: string,
     area_of_work: string
     area_of_expertise: string
+    is_subscribed_to_space: boolean
   }
   export interface IUserList {
     type: string,

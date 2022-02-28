@@ -261,6 +261,7 @@ export namespace NsUser {
     currentRole?: string
     areaOfWork?: string
     areaOfExpertise?: string
+    isSubscribedToSpace?: boolean
   }
   export interface IUserProperties {
     bio?: string
@@ -338,5 +339,6 @@ export namespace NsUser {
     user_properties?: IUserProperties
     area_of_work: string
     area_of_expertise: string
+    is_subscribed_to_space: boolean
   }
 }

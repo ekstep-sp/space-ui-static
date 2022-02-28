@@ -148,6 +148,7 @@ export class ProfileService {
           currentRole: userPidProfile.user.job_role || '',
           areaOfWork: userPidProfile.user.area_of_work || '',
           areaOfExpertise: userPidProfile.user.area_of_expertise || '',
+          isSubscribedToSpace: userPidProfile.user.is_subscribed_to_space || false,
           departmentName: userPidProfile.user.department_name || '',
           email: userPidProfile.user.email,
           givenName: userPidProfile.user.first_name,
