@@ -55,6 +55,7 @@ export class DashboardComponent implements OnInit {
   expertises: IChips[] = []
   profileLink: string | undefined = ''
   userProfilePicture = ''
+  isSubscribed = false
   skillData: any
   skillFetchStatus: TFetchStatus = 'none'
   badgeApiFetchStatus: TFetchStatus = 'none'
@@ -139,9 +140,10 @@ export class DashboardComponent implements OnInit {
         this.configSvc.userProfile.areaOfWork.split(',') as IChips[] : []
       this.expertises = this.configSvc.userProfile.areaOfExpertise ?
        this.configSvc.userProfile.areaOfExpertise.split(',') as IChips[] : []
-
+      
       this.profileLink = (this.configSvc.userProfile.userProperties && this.configSvc.userProfile.userProperties !== 'null') ?
             this.configSvc.userProfile.userProperties.profileLink : ''
+      this.isSubscribed = this.configSvc.userProfile.isSubscribedToSpace ? this.configSvc.userProfile.isSubscribedToSpace : false
       this.userEmail = this.configSvc.userProfile.email || ''
       this.departmentName = (this.configSvc.userProfile.departmentName && this.configSvc.userProfile.departmentName !== 'null')
         ? this.configSvc.userProfile.departmentName : ''
