@@ -10,7 +10,7 @@
 </div>
 <mat-accordion multi="true" *ngIf="filtersResponse">
   <ng-container  *ngFor="let filter of filtersResponse; trackBy: filterUnitResponseTrackBy">
-  <mat-expansion-panel [expanded]="filter.checked || isExpanded" *ngIf="filter.type !== 'contentType'">
+  <mat-expansion-panel [expanded]="filter.displayName === 'Created By' ? false : filter.checked || isExpanded" *ngIf="filter.type !== 'contentType'">
     <mat-expansion-panel-header >
       <span class="font-montserrat">{{ translatedFilters[filter.displayName.toLowerCase()]?.translatedField || filter.displayName }}</span>
     </mat-expansion-panel-header>

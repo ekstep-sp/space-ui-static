@@ -98,6 +98,7 @@ export class EditProfileComponent implements OnInit {
     userExpertise: new FormControl([], Validators.required),
     sourceProfilePicture: new FormControl(''),
     profileLink: new FormControl(''),
+    subscribe: new FormControl(false, Validators.required)
   })
 
   userProfile: any
@@ -362,5 +363,9 @@ export class EditProfileComponent implements OnInit {
 
   open(config?: MatDialogConfig) {
     return this.dialog.open(this.video, config)
+  }
+
+  subscribed(){
+    this.profileForm.controls.subscribe.setValue(!this.profileForm.controls.subscribe.value)
   }
 }
