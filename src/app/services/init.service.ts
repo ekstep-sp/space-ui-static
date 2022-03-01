@@ -258,6 +258,9 @@ export class InitService {
         this.configSvc.userProfile = {
           country: userPidProfile.user.organization_location_country || null,
           departmentName: userPidProfile.user.department_name || '',
+          areaOfWork: userPidProfile.user.area_of_work || '',
+          areaOfExpertise: userPidProfile.user.area_of_expertise || '',
+          isSubscribedToSpace: userPidProfile.user.is_subscribed_to_space || false,
           email: userPidProfile.user.email,
           givenName: userPidProfile.user.first_name,
           userId: userPidProfile.user.wid,
