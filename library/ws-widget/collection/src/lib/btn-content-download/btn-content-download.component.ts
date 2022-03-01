@@ -76,12 +76,15 @@ export class BtnContentDownloadComponent extends WidgetBaseComponent
 
   download(event: Event) {
     event.stopPropagation()
-    if (!this.forPreview) {
+    if (!this.forPreview && this.mobAppSvc.isMobile) {
       this.raiseTelemetry()
       this.mobAppSvc.downloadResource(this.widgetData.identifier)
       
+    }else{
+      this.raiseTelemetry()
+      saveAs(this.widgetData.artifactUrl.toString())
     }
-    saveAs(this.widgetData.artifactUrl.toString())
+    
   }
 
   raiseTelemetry() {
