@@ -408,10 +408,10 @@ export class LearningComponent implements OnInit, OnDestroy {
           const filterData = this.filtersResponse.splice(0, 1)
           this.filtersResponse.splice(6, 0, filterData[0])
           const contentType = this.filtersResponse.splice(0, 4)
-          this.filtersResponse.splice(0, 0, contentType[0])
-          this.filtersResponse.splice(1, 0, contentType[3])
-          this.filtersResponse.splice(2, 0, contentType[2])
-          this.filtersResponse.splice(2, 0, contentType[1])
+          contentType[0] ? this.filtersResponse.splice(0, 0, contentType[0]) : ''
+          contentType[3] ? this.filtersResponse.splice(1, 0, contentType[3]) : ''
+          contentType[2] ? this.filtersResponse.splice(2, 0, contentType[2]) : ''
+          contentType[1] ? this.filtersResponse.splice(3, 0, contentType[1]) : ''
           this.filtersResponse.forEach((element: any, idx: any) => {
             if (element) {
               if (element.type === 'contentType') {
@@ -422,7 +422,6 @@ export class LearningComponent implements OnInit, OnDestroy {
               }
             }
           })
-          // console.log(this.filtersResponse)
           // if(this.filtersResponse[0] !== 'undefined') {
           // this.filtersResponse[0].content.forEach((element, index) => {
           //  if (element.displayName === 'Module') {

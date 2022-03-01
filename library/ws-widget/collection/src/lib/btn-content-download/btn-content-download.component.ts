@@ -39,10 +39,8 @@ export class BtnContentDownloadComponent extends WidgetBaseComponent
   }
   ngOnInit() {
      if (this.configSvc.instanceConfig && this.configSvc.instanceConfig.isContentDownloadAvailable) {
-    //   this.downloadable = this.mobAppSvc.isMobile && this.isContentDownloadable
-     }
-
-    this.downloadable = this.isContentDownloadable
+      this.downloadable = this.isContentDownloadable
+     }    
   }
 
   private get isContentDownloadable(): boolean {
@@ -83,7 +81,6 @@ export class BtnContentDownloadComponent extends WidgetBaseComponent
       this.mobAppSvc.downloadResource(this.widgetData.identifier)
       
     }
-    console.log('Download artifact url : ',this.widgetData.artifactUrl.toString())
     saveAs(this.widgetData.artifactUrl.toString())
   }
 
