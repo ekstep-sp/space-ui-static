@@ -357,7 +357,7 @@ export class UserDashboardService {
       newObj['Organisation'] = o.department_name
       newObj['Email'] = o.email
       newObj['Registered On'] = o.time_inserted
-      newObj['Is Subscribed to SPace?'] = o.is_subscribed_to_space ? 'Yes' : 'No'
+      newObj['Is Subscribed to SPace?'] = o.is_subscribed_to_space ==='true' ? 'Yes' : 'No'
       return newObj
     })
   }
