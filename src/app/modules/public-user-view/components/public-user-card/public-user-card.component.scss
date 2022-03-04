@@ -1,6 +1,6 @@
 @import 'ws-mixins';
 
-$card-height: 215px;
+$card-height: 240px;
 
 .px-small-7 {
   padding-left: 7px;
@@ -52,6 +52,7 @@ $card-height: 215px;
   }
   .profile-card {
     height: $card-height;
+    overflow: auto;
     width:340px;
     background: inherit !important;
     @include breakpoint-xs {
@@ -117,6 +118,7 @@ $card-height: 215px;
     background: #42428B !important;
     color: white !important;
     height: $card-height*1.9;
+    overflow: auto;
     .hovercard {
       display: block;
       color: white !important;
@@ -124,7 +126,7 @@ $card-height: 215px;
         color: #42428B;
       }
       &.exactly-middle-button {
-        position: absolute;
+        // position: absolute;
         bottom: 15px;
         width: 96%;
         display: flex;
@@ -145,6 +147,7 @@ $card-height: 215px;
     }
     .profile-card {
       height: $card-height*1.9;
+      overflow: auto;
     }
     .image{
       height:25%;
@@ -186,6 +189,7 @@ $card-height: 215px;
     background: #42428B !important;
     color: white !important;
     height:  $card-height;
+    overflow: auto;
     .color-on-hover{
       color:yellow;
     }
@@ -201,4 +205,53 @@ $card-height: 215px;
 
 .adjustable-margin {
   margin-top: 1.5rem;
+}
+
+// .area-ofwork-batch.ng-star-inserted {
+//   margin-right: 10px;
+//   border-radius: 20px;
+//   margin-top: 5px;
+//   padding: 5px;
+//   background-color: #e0e0e0;
+//   color: rgba(0,0,0,0.87);
+//   font-weight: 600;
+//   font-size: 16px;
+// }
+
+.area-ofwork-batch.ng-star-inserted {
+  margin-right: 10px;
+  border-radius: 20px;
+  margin-top: 5px;
+  padding: 5px;
+  background-color: #e0e0e0;
+  color: rgba(0, 0, 0, 0.87);
+  font-weight: 600;
+  font-size: 12px;
+  text-overflow: ellipsis;
+  width: 70px;
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+
+.area-of-work-display{
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+  // overflow: scroll;
+  // height: 36px;
+  // overflow-x: hidden;
+}
+
+
+@media (max-width : 1400px){
+  .content .substitute:hover .profile-card{
+    height: $card-height*2.1 !important;
+    overflow: auto;
+  }
+  .content .substitute:hover{
+    height:  $card-height*2.1 !important;
+    overflow: auto;
+  }
 }

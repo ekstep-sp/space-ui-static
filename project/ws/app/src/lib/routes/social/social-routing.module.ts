@@ -11,6 +11,7 @@ import { QnaEditComponent } from './routes/qna/qna-edit/components/qna-edit/qna-
 import { QnaHomeComponent } from './routes/qna/qna-home/components/qna-home/qna-home.component'
 import { QnaViewComponent } from './routes/qna/qna-view/components/qna-view/qna-view.component'
 import { PageResolve } from '../../../../../../../library/ws-widget/utils/src/public-api'
+import { QnaSpacePlatformTextComponent } from './routes/qna/qna-space-platform-text/components/qna-space-platform-text.component'
 
 const routes: Routes = [
   {
@@ -133,6 +134,21 @@ const routes: Routes = [
     loadChildren: () =>
       import('./routes/socialSearch/social-search.module').then(u => u.SocialSearchModule),
     // component: ForumHomeComponent
+  },
+  {
+    path: 'qna/space-platform',
+    component: QnaSpacePlatformTextComponent,
+    data: {
+      pageType: 'feature',
+      pageKey: 'qna',
+      requiredFeatures: ['QUESTION_AND_ANSWER'],
+      // requiredRoles: ['publisher', 'content-creator', 'editor'],
+    },
+    resolve: {
+      pageData: PageResolve,
+      resolveData: PostFetchResolverService,
+    },
+    canActivate: [GeneralGuard],
   },
   {
     path: 'qna/:id',

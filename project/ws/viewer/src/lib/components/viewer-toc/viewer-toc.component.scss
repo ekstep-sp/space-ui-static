@@ -39,6 +39,15 @@ width:100% !important;
 font-weight: bold;
 }
 
+::ng-deep{
+  .theme-muave.night-mode .content-active {
+    color: #ffffff;
+    font-size: 16px;
+    width:100% !important;
+    font-weight: bold;
+  }
+}
+
 .content-duration {
 margin: 0 $size-xs;
 }

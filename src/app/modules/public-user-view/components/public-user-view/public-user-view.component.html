@@ -59,40 +59,66 @@
         </div>
     </div>
 </div>
-<div class="wrapper">
-    <div infiniteScroll [infiniteScrollDistance]="scrollDistance" [infiniteScrollThrottle]="scrollThrottle"
-        (scrolled)="onScroll($event)" [ngClass]="{'scroll-infinite': (apiData$ | async)?.length }"
-        class="w-100 h-100 flex-row flex-wrap justify-center fix-margin">
-        <ng-container [ngTemplateOutlet]="cardTemplate"></ng-container>
+
+<div class="people-display">
+    <div class="referance-heading">
+        <div class="reference-content">
+            <span class="referance-title">
+                Search people by:
+            </span>
+            <ul class="reference-body">
+                <li>
+                    Domain
+                </li>
+                <li>
+                    Expertise
+                </li>
+                <li>
+                    Designation
+                </li>
+                <li>
+                    Country
+                </li>
+                <li>
+                    Organisation
+                </li>
+            </ul>
+        </div>
     </div>
-    <ng-container *ngIf="(error$ | async) === false">
-        <ng-container *ngIf="(isApiLoading$ | async)">
-            <div class="mb-6">
-                <mat-spinner class="spinner" color="primary"></mat-spinner>
-            </div>
+    <div class="wrapper">
+        <div infiniteScroll [infiniteScrollDistance]="scrollDistance" [infiniteScrollThrottle]="scrollThrottle"
+            (scrolled)="onScroll($event)" [ngClass]="{'scroll-infinite': (apiData$ | async)?.length }"
+            class="w-100 h-100 flex-row flex-wrap justify-center fix-margin">
+            <ng-container [ngTemplateOutlet]="cardTemplate"></ng-container>
+        </div>
+        <ng-container *ngIf="(error$ | async) === false">
+            <ng-container *ngIf="(isApiLoading$ | async)">
+                <div class="mb-6">
+                    <mat-spinner class="spinner" color="primary"></mat-spinner>
+                </div>
+            </ng-container>
         </ng-container>
-    </ng-container>
-    <div class="flat-error-alert" *ngIf="(error$ | async)">
-        Error occured while fetching data
-    </div>
-    <!-- <div class="alertmsg" *ngIf="(isDataFinished$ | async)">
-        <div class="flat-no-data-alert flex flex-row">
-            No more Users
+        <div class="flat-error-alert" *ngIf="(error$ | async)">
+            Error occured while fetching data
         </div>
-    </div> -->
-    <div class="alertmsg" *ngIf="(noDataFound$ | async)">
-        <div class="flat-no-data-alert flex flex-row">
-            No Users Found
+        <!-- <div class="alertmsg" *ngIf="(isDataFinished$ | async)">
+            <div class="flat-no-data-alert flex flex-row">
+                No more Users
+            </div>
+        </div> -->
+        <div class="alertmsg" *ngIf="(noDataFound$ | async)">
+            <div class="flat-no-data-alert flex flex-row">
+                No Users Found
+            </div>
         </div>
     </div>
+    
+    <ng-template #cardTemplate>
+        <ng-container *ngFor="let card of (apiData$ | async); trackBy: trackUserData ">
+            <ws-public-user-card [userData]=card [connectionData]="getConnectionDetailsForCurrentUser(card)"
+                [resultsOK]="(connectionListError$ | async) === false"
+                (connectionButtonClickEmitter)="performConnection($event)" (buttonActionEmitter)="getActionType($event)">
+            </ws-public-user-card>
+        </ng-container>
+    </ng-template>
 </div>
-<ng-template #cardTemplate>
-    <ng-container *ngFor="let card of (apiData$ | async); trackBy: trackUserData ">
-        <ws-public-user-card
-        [userData]=card
-        [connectionData]="getConnectionDetailsForCurrentUser(card)"
-        [resultsOK]="(connectionListError$ | async) === false"
-        (connectionButtonClickEmitter)= "performConnection($event)"
-        (buttonActionEmitter)= "getActionType($event)"></ws-public-user-card>
-    </ng-container>
-</ng-template>

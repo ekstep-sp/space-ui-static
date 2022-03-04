@@ -23,6 +23,8 @@ export class PublicUsercardComponent implements OnInit, OnChanges {
   @Output() connectionButtonClickEmitter = new EventEmitter<any>(undefined)
   @Output() buttonActionEmitter = new EventEmitter<any>(undefined)
   userdata: any
+  areaOfWork : any
+  areaOfExpertise : any
   defaultUserImage = DEFAULT_IMAGE_URL
   isXSmall$ = this.valueSvc.isXSmall$
   isXSmall = false
@@ -31,7 +33,6 @@ export class PublicUsercardComponent implements OnInit, OnChanges {
   isLoadingConnection = false
   acceptConnection = CONSTANT.CONNECTION_STATUS_ACCEPT
   rejectConnection = CONSTANT.CONNECTION_STATUS_REJECT
-
   constructor(private valueSvc: ValueService, private configSvc: ConfigurationsService, private utilSvc: PublicUsersUtilsService) {
     this.valueSvc.isXSmall$.subscribe(isXSmall => {
       this.isXSmall = isXSmall
@@ -71,6 +72,12 @@ export class PublicUsercardComponent implements OnInit, OnChanges {
 
   isOwnUser() {
     // checks if the card is of current logged in user
+    if(this.userData.area_of_work && this.userData.area_of_work.includes(',')){
+      this.areaOfWork = this.userData.area_of_work.split(",");
+    }
+    if(this.userData.area_of_expertise && this.userData.area_of_expertise.includes(',')){
+      this.areaOfExpertise = this.userData.area_of_expertise.split(",")
+    }
     return this.userData && (this.userData.wid === this.loggedInUserWid)
   }
 
@@ -105,5 +112,4 @@ export class PublicUsercardComponent implements OnInit, OnChanges {
   acceptOrRejectConnection(userData: any, connectionData: any, actionType: string) {
      this.buttonActionEmitter.emit({ userData, connectionData, actionType })
   }
-
 }

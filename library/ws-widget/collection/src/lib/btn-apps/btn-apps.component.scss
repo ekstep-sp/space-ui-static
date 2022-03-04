@@ -12,6 +12,12 @@ padding-bottom: 0 !important;
     padding-top: 0 !important;
   }
 }
+@media (max-width: 1400px){
+  .theme-muave.day-mode .mat-menu-panel{
+    background: none;
+    box-shadow: none;
+  }
+}
 }
 .alignment {
   padding-bottom: 0 !important;

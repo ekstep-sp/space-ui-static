@@ -1,0 +1,26 @@
+.horizontal-line {
+    width: 100%;
+    margin-top: 8px;
+    margin-bottom: 8px;
+    border: 0.5px solid #d9d8d8;
+}
+
+.reference-question-section {
+    margin-top: 15px;
+    margin: 40px;
+}
+
+span.frequent-questions {
+    font-size: 18px;
+    font-weight: 700;
+}
+
+.help-page-content {
+    margin-top: 20px;
+}
+
+@media (max-width:700px){
+    .reference-question-section{
+        margin: 10px;
+    }
+}

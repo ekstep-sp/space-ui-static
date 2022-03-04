@@ -1,5 +1,5 @@
 <ng-container *ngIf="item?.status !== ePostStatus.INACTIVE">
-  <div class="item-container font-montserrat qna-display">
+  <div class="item-container font-montserrat qna-display qna-display-item">
     <a [routerLink]="['./', item.id]" *ngIf="item.status !== 'Draft'" class="count-section vote-align-text">
       <!-- <span class="count-holder vote-padding-left-remove">
         <div class="count">
@@ -21,8 +21,8 @@
       <div class="count">
           {{ item.activity.activityData.upVote - item.activity.activityData.downVote }} votes
       </div>
-      <div class="count">{{ item.replyCount }} answers</div>
-      <div class="count">{{ item.activity.activityData.like }} likes</div>
+      <ws-widget-btn-social-vote [postId]="item.id" [activity]="item.activity" [voteType]="'upVote'"
+        [postCreatorId]="item?.postCreator?.postCreatorId" [isDf]="true" [qnaPage]="true" class="upVote-aligment"></ws-widget-btn-social-vote>
     </a>
     <div class="question-section qna-title-description">
       <div class="question-title qna-title-display">
@@ -46,6 +46,9 @@
             </mat-chip>
           </mat-chip-list>
         </div>
+      </div>
+      <div class="answer-author-details">
+        <div _ngcontent-uhm-c21="" class="count">0 answers</div>
         <div class="creation">
           <span class="mat-caption" i18n>asked</span>&nbsp;
           <span class="mat-caption">{{ item.dtCreated | date }}</span>&nbsp;

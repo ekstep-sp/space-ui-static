@@ -10,7 +10,7 @@
         <mat-icon>help_outline</mat-icon>
       </button>
       <div class="w-screen">
-        <textarea class="mat-typography title-textarea title-area" [ngClass] = "{'qanQuestionTextBox': qanQuestionParent}" i18n-placeholder placeholder="Title" required
+        <textarea class="mat-typography title-textarea title-area" [ngClass] = "{'qanQuestionTextBox': qanQuestionParent}" i18n-placeholder [placeholder]="qanQuestionParent ?  'Ask a question' : 'Title'" required
           minlength="10" maxlength="150" name="title" [(ngModel)]="title" autofocus #postTitle="ngModel"></textarea>
         <p *ngIf="(postTitle.dirty || postTitle.touched) && postTitle.invalid && (postTitle.value? postTitle.value.trim().length: false) "
           class="error-text mat-caption" i18n>
@@ -23,7 +23,7 @@
       </div>
     </div>
 
-    <div class="flex align-center">
+    <div class="flex align-center" *ngIf="!qanQuestionParent">
       <button mat-icon-button class="ws-mat-primary-text" (click)="toggleTagsInfo = !toggleTagsInfo">
         <mat-icon>help_outline</mat-icon>
       </button>
@@ -58,7 +58,7 @@
       </div>
     </div>
 
-    <ws-widget-editor-quill class="editor" (textData)="onTextChange($event)" [minLength]="'10'" [htmlText]="body">
+    <ws-widget-editor-quill  *ngIf="!qanQuestionParent" class="editor" (textData)="onTextChange($event)" [minLength]="'10'" [htmlText]="body">
     </ws-widget-editor-quill>
   </form>
 </mat-card>

@@ -150,7 +150,7 @@ export class EditProfileComponent implements OnInit {
         this.userProfile.areaOfExpertise !== 'null' ? this.userProfile.areaOfExpertise.split(',') : [])
       this.expertises = this.userProfile.areaOfExpertise &&
         this.userProfile.areaOfExpertise !== 'null' ? this.userProfile.areaOfExpertise.split(',') as IChips[]: []
-      this.profileForm.controls.isSubscribed.setValue(this.userProfile.isSubscribed ? this.userProfile.isSubscribed : false)
+      this.profileForm.controls.isSubscribed.setValue(this.userProfile.isSubscribedToSpace ? this.userProfile.isSubscribedToSpace : false)
       if (this.userProfile.userProperties) {
         this.profileForm.controls.profileLink.setValue(this.userProfile.userProperties.profileLink
           && this.userProfile.userProperties.profileLink !== 'null' ? this.userProfile.userProperties.profileLink : '')

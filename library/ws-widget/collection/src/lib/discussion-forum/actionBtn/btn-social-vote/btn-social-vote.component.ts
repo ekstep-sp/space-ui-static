@@ -20,6 +20,7 @@ export class BtnSocialVoteComponent implements OnInit {
   @Input() dfVote = false
   @Input() activity: NsDiscussionForum.IPostActivity = {} as NsDiscussionForum.IPostActivity
   @Input() isDisabled = false
+  @Input() qnaPage = false
   @ViewChild('invalidUser', { static: true }) invalidUser!: ElementRef<
     any
   >

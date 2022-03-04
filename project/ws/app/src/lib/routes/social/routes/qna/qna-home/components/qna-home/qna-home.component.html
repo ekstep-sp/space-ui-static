@@ -11,16 +11,26 @@
       </span>
       <ul class="reference-body">
         <li>
-          <a routerLink="./edit">Societal Thinking</a>
+          <div class="frequent-questions">
+            <a routerLink="./edit">
+              Societal Thinking
+            </a>
+            <img _ngcontent-wne-c51="" alt="" class="pt-3 pl-2 pointer-image" src="../../../../../../../../../fusion-assets/img/pointer.svg">
+          </div> 
         </li>
         <li>
-          <a routerLink="./edit">SPace Platform</a>
+          <div class="frequent-questions">
+            <a routerLink="./space-platform">
+              SPace Platform 
+            </a>
+              <img _ngcontent-wne-c51="" alt="" class="pt-3 pl-2" src="../../../../../../../../../fusion-assets/img/pointer.svg">
+          </div>
         </li>
       </ul>
     </div>
   </div>
   <div class="qna-home-container mat-drawer-container mat-drawer-container-has-open mat-drawer-transition">
-    <ws-app-qna-edit [qanQuestionParent]="qanQuestionParent"></ws-app-qna-edit>
+    <ws-app-qna-edit [qanQuestionParent]="true"></ws-app-qna-edit>
     <div class="qna-card-question">
       <div class="qna-title">
         <h1 class="font-montserrat font-size-navbar-heading mat-display-1 margin-remove hidden sm:block" i18n>Questions

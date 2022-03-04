@@ -389,6 +389,14 @@ label {
   border-radius: 14px;
   margin: 0 10px 10px 0;
 }
+
+::ng-deep{
+  .theme-muave.night-mode .icon-close {
+    background: url(../../../../../../../../../src/fusion-assets/img/icon-close-dark.svg)
+      no-repeat !important;
+  }
+}
+
 .icon-close {
   background: url(../../../../../../../../../src/fusion-assets/img/icon-close.svg)
     no-repeat;

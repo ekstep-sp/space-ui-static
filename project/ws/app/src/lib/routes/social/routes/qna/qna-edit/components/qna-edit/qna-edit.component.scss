@@ -73,12 +73,20 @@ color:white !important
 .qanQuestionParent{
   margin: 0 !important;
   max-width: 100%;
-  min-height: 350px !important;
+  min-height: 100px !important;
 }
 
 @media only screen and (max-width: 450px) {
   .qanQuestionParent .editor {
     min-height: 190px;
     border: 1px solid #d9d8d8;
+  }
+}
+
+@media (max-width: 700px){
+  .qanQuestionParent{
+    ::placeholder{
+      font-size: 15px;
+    }
   }
 }

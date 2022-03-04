@@ -164,7 +164,7 @@
   </mat-card>
 
   <mat-card [hidden]="!qnaConversation || !allowedToAnswer" class="my-4">
-    <h2 i18n>Your Answer</h2>
+    <h2 i18n>Type your answer or comments here</h2>
     <ws-widget-editor-quill class="editor" [htmlText]="replyAddRequest?.postContent?.body" [showMention]="allowMention"
       [minLength]="'10'" (textData)="onTextChange($event)" (mentionsData)="mentions = $event" #editor>
     </ws-widget-editor-quill>

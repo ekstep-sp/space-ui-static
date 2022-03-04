@@ -16,6 +16,7 @@ import { PublicUsersUtilsService } from './services/public-users-utils.service'
 import { PublicUserDialogComponent } from './components/public-user-dialog/public-user-dialog.component'
 import { MatDialogModule } from '@angular/material/dialog'
 import { MatTooltipModule } from '@angular/material/tooltip'
+import { PipeLimitToModule } from '@ws-widget/utils/src/public-api'
 
 @NgModule({
   declarations: [PublicUserViewComponent, PublicUsercardComponent, PublicUserInvitationComponent, PublicUserDialogComponent],
@@ -37,6 +38,7 @@ import { MatTooltipModule } from '@angular/material/tooltip'
     MatSnackBarModule,
     MatTooltipModule,
     FormsModule,
+    PipeLimitToModule
   ],
   entryComponents: [PublicUserDialogComponent],
 })

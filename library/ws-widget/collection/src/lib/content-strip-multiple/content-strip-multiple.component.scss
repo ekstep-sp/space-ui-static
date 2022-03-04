@@ -84,3 +84,57 @@
     padding-left: 5px;
   }
 }
+
+.tooltip {
+  position: relative;
+  display: inline-block;
+}
+
+.tooltiphover .tooltiptext {
+  visibility: hidden;
+  // width: 270px;
+  background: rgba(97,97,97,.9);
+  color: #fff;
+  text-align: justify;
+  border-radius: 4px;
+  padding-left: 8px;
+  padding-right: 8px;
+  overflow: auto;
+  // text-overflow: ellipsis;
+  font-size: 10px;
+  padding-top: 8px;
+  // width: 100%;
+  /* Position the tooltip */
+  position: absolute;
+  z-index: 1;
+  // height: 217px;
+}
+
+.tooltiphover .Resources {
+  visibility: hidden;
+  width: 270px;
+  background: rgba(97,97,97,.9);
+  color: #fff;
+  text-align: justify;
+  border-radius: 4px;
+  padding-left: 8px;
+  padding-right: 8px;
+  overflow: auto;
+  // text-overflow: ellipsis;
+  font-size: 10px;
+  // width: 100%;
+  /* Position the tooltip */
+  position: absolute;
+  z-index: 1;
+  // height: 45px;
+}
+
+@media (max-width : 700px){
+  .tooltiphover .tooltiptext{
+    left: -130px;
+  }
+}
+
+.tooltip:hover .tooltiptext {
+  visibility: visible;
+}
