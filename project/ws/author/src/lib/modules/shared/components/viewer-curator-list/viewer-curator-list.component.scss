@@ -39,3 +39,9 @@
       margin-bottom: 10px;
     }
    }
+
+   ::ng-deep{
+     .theme-muave.night-mode .darkMode-authorname{
+       color: #fff;
+     }
+   }

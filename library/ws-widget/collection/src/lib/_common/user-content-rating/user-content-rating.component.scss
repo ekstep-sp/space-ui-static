@@ -24,3 +24,9 @@
 .rating-button.leading-10 {
   line-height: 40px;
 }
+
+::ng-deep{
+  .theme-muave.night-mode .darkMode{
+    color: #fff;
+  }
+}

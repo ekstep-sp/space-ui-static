@@ -3,7 +3,6 @@
           title: content?.name
         }">
 </ng-container>
-
 <ng-template #creators let-authors="authors" let-title="title">
   <div class="">
     <div class="author font-montserrat my-2">
@@ -12,7 +11,7 @@
       <ng-container *ngFor="let author of authors">
         <div class="inline-flex flex-middle mr-2">
           <img class="pr-2 prf-icon" src="/assets/instances/space/common/overview_account.png">
-          <h3 class="inline font-montserrat margin-remove author-name">{{ author.name }}</h3>
+          <h3 class="inline font-montserrat margin-remove author-name darkMode-authorname">{{ author.name }}</h3>
         </div>
       </ng-container>
       <ng-container *ngIf="mailIcon$">

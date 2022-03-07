@@ -18,7 +18,7 @@
     </ul>
 </ng-container>
 <ng-container *ngIf="isResource">
-    <li class="event m-0 pl-10 pb-32" *ngIf="hasChild" [ngClass]="{'last': lastEemFromChild}">
+    <li class="event m-0 pl-10 pb-32 mobile-view-device" *ngIf="hasChild" [ngClass]="{'last': lastEemFromChild}">
         <div class="flex items-center">
             <div class="resource-container mr-3 contentType">
                 <ws-widget-display-content-type-icon class="flex contentType_icon"
@@ -41,7 +41,7 @@
             </ng-container>
         </div>
     </li>
-     <ul class="event1 m-0" *ngIf="!hasChild" [ngClass]="{'last': lastEemFromParent}">
+     <ul class="event1 m-0 mobile-view-device" *ngIf="!hasChild" [ngClass]="{'last': lastEemFromParent}">
         <div class="flex pb-32">
             <div class="resource-container mr-3 contentType">
                 <ws-widget-display-content-type-icon class="flex contentType_icon"

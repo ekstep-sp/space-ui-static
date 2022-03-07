@@ -183,3 +183,9 @@ color:#696466;
       content:', ';
     } 
 }
+
+@media (max-width:700px){
+  .contents-container{
+    padding: 10px !important;
+  }
+}
