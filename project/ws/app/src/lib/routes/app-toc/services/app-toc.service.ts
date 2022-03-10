@@ -121,8 +121,9 @@ export class AppTocService {
       return this.userAutoComplete.fetchAutoComplete(u.name.split(' ')[0]).toPromise()
     })
     const values = await Promise.all(userDetailsPromise)
-    const properValues = values.map(v => v[0])
-    const final = properValues.filter((_v: any) => users.findIndex(u => _v.wid === u.id) > -1).map((_x: any) => {
+    const properValues = values.map(v => v.filter(_v => users.find(u => _v.wid === u.id)))
+    const properValuesSingle = properValues.map(v => v[0])
+    const final = properValuesSingle.map((_x: any) => {
       return {
           id: _x.wid,
           email: _x.email,
