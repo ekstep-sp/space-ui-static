@@ -81,9 +81,9 @@ export class WsDiscussionForumService {
   fetchAllPosts(request: NsDiscussionForum.IPostRequestV2): Observable<NsDiscussionForum.IPostResultV2> {
     return this.http.post<NsDiscussionForum.IPostResultV2>(API_END_POINTS.SOCIAL_VIEW_CONVERSATION_V2, request)
   }
-  fetchQNATimelineData(request: NsDiscussionForum.ITimelineRequest): Observable<NsDiscussionForum.ITimeline> {
+  fetchQNATimelineData(request: NsDiscussionForum.ITimelineRequest,id:string): Observable<NsDiscussionForum.ITimeline> {
     return this.http.post<NsDiscussionForum.ITimeline>(API_END_POINTS.SOCIAL_TIMELINE, request, {
-      headers: { wid: '9bf97317-861e-4e9c-8666-6a891017ebfa' },
+      headers: { wid: id },
     })
   }
 

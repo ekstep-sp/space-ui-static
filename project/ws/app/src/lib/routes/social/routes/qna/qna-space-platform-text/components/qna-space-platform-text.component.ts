@@ -18,6 +18,7 @@ export class QnaSpacePlatformTextComponent implements OnInit {
   questions: NsDiscussionForum.ITimelineResult[] = []
   qnaTimelineForSpacePlatform: NsDiscussionForum.ITimelineResult[] = []
   userId = ''
+  FAQsAuthorId = ''
   constructor(
     private configSvc: ConfigurationsService,
     private fetchTimeLine: WsDiscussionForumService,
@@ -25,15 +26,16 @@ export class QnaSpacePlatformTextComponent implements OnInit {
 
   ngOnInit() {
     this.userId = this.configSvc.userProfile && this.configSvc.userProfile.userId || ''
+    this.FAQsAuthorId = this.configSvc.instanceConfig ? this.configSvc.instanceConfig.FAQsAuthor.id : ''
     const request: NsDiscussionForum.ITimelineRequest = {
       postKind: [NsDiscussionForum.EPostKind.QUERY],
       pgNo: 0,
       pgSize: 100,
       sessionId: Date.now(),
-      userId: '9bf97317-861e-4e9c-8666-6a891017ebfa',
+      userId: this.FAQsAuthorId,
       type: NsDiscussionForum.ETimelineType.MY_TIMELINE
     }
-    this.fetchTimeLine.fetchQNATimelineData(request).subscribe(data => {
+    this.fetchTimeLine.fetchQNATimelineData(request,this.FAQsAuthorId).subscribe(data => {
       this.questions = data.result
       this.questions.map(tagData => {
         tagData.tags.forEach(tag => {
