@@ -340,7 +340,6 @@
   display: flex;
 }
 .referance-heading {
-  width: 20%;
   padding: 40px;
 }
 
@@ -390,6 +389,21 @@ li:not(:last-child) {
     display: block;
   }
   .reference-content{
-    margin: 3%;
+    margin: 10%;
+    margin-top: 0;
+  }
+}
+
+@media (min-width : 701px) and (max-width : 950px){
+  .wrapper {
+    width: 60%;
+  }
+  .referance-heading {
+    width: 40%;
+    padding: 40px;
+  }
+  .reference-content{
+    margin: 10%;
+    margin-top: 0;
   }
 }

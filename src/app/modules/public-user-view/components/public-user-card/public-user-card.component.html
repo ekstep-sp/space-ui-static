@@ -47,19 +47,17 @@
           'mt-2': !showAcceptAndReject(connectionData),
           'adjustable-margin': showAcceptAndReject(connectionData)
         }" *ngIf="userData?.job_role">
-          <div>{{userData?.job_role}}</div>
-        </div>
-        <div class="font-size-14 txt-color break-all" *ngIf="userData?.organization_location_country">
-          <div class="mt-3">{{userData?.organization_location_country}}</div>
+          <div>{{userData?.job_role}}<span *ngIf="userData?.organization_location_country"></span>, {{userData?.organization_location_country}} </div>
         </div>
         <div class="area-of-work-expertise">
+          <span class="area-of-work-text" *ngIf="areaOfWork?.length > 0">Domain / Area of Work</span>
           <div class="font-size-18 org-color break-all area-of-work-display">
-            <div *ngFor="let work of areaOfWork" class="area-ofwork-batch" [ngClass] = "{'ellipsis-class' : work.length > 5}">
-              {{work}}
+            <div *ngFor="let work of areaOfWork" class="area-ofwork-batch" [ngClass] = "{'ellipsis-class' : work.length > 5}" [innerHTML] = "work | pipeLimitTo: 50">
             </div>
           </div>
+          <span class="area-of-expertise-text" *ngIf="areaOfExpertise?.length > 0">Area of Expertise</span>
           <div class="font-size-18 org-color break-all area-of-work-display">
-            <div *ngFor="let expertise of areaOfExpertise" class="area-ofwork-batch" [ngClass] = "{'ellipsis-class' : expertise.length > 5}" [innerHTML]="expertise | pipeLimitTo: 10">
+            <div *ngFor="let expertise of areaOfExpertise" class="area-ofwork-batch" [ngClass] = "{'ellipsis-class' : expertise.length > 5}" [innerHTML]="expertise | pipeLimitTo: 45">
               <span></span>
             </div>
           </div>
