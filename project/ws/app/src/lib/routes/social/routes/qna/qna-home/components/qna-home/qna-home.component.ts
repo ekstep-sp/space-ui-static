@@ -26,6 +26,8 @@ export class QnaHomeComponent implements OnInit, OnDestroy {
   }
   errorFetchingTimeline = false
   qnaTimeline!: NsDiscussionForum.ITimeline
+  qnaTimelineForUI!: NsDiscussionForum.ITimelineResult[]
+  qnaTimelineForCount: NsDiscussionForum.ITimelineResult[] = []
   qnaTimelineRequest!: NsDiscussionForum.ITimelineRequest
   eTimelineTypes = NsDiscussionForum.ETimelineType
   currentTab = NsDiscussionForum.ETimelineType.ALL
@@ -36,6 +38,7 @@ export class QnaHomeComponent implements OnInit, OnDestroy {
   allowedToDeleteForSpecificRoles = false
   qanQuestionParent = true
   isGuestUser = false
+  questionsCount = 0
   constructor(
     private activatedRoute: ActivatedRoute,
     private router: Router,
@@ -68,6 +71,17 @@ export class QnaHomeComponent implements OnInit, OnDestroy {
         this.qnaTimelineRequest = response.resolveData.data.request;
         (this.qnaTimelineRequest.pgNo as number) += 1
         this.qnaTimeline = response.resolveData.data.response
+       if(!(this.currentTab === this.eTimelineTypes.MY_TIMELINE || this.currentTab === this.eTimelineTypes.MY_DRAFTS)){
+        this.qnaTimelineForUI = this.qnaTimeline.result.filter(timeLineResult =>
+         timeLineResult.postCreator.postCreatorId !== (this.configSvc.instanceConfig?this.configSvc.instanceConfig.FAQsAuthor.id: ''))
+        this.qnaTimelineForCount = this.qnaTimeline.result.filter(timeLineResult =>
+          timeLineResult.postCreator.postCreatorId === (this.configSvc.instanceConfig?this.configSvc.instanceConfig.FAQsAuthor.id: ''))
+        this.questionsCount = this.qnaTimeline.hits - this.qnaTimelineForCount.length
+       }
+       else{
+        this.qnaTimelineForUI = this.qnaTimeline.result
+        this.questionsCount = this.qnaTimeline.hits - this.qnaTimelineForCount.length
+       }
         this.verifyTimelineContentStatus()
       }
     })
@@ -95,14 +109,26 @@ export class QnaHomeComponent implements OnInit, OnDestroy {
             ...this.qnaTimeline.result,
             ...data.result,
           ]
+          if(!(this.currentTab === this.eTimelineTypes.MY_TIMELINE || this.currentTab === this.eTimelineTypes.MY_DRAFTS)){
+          this.qnaTimelineForUI = this.qnaTimeline.result.filter(timeLineResult =>
+            timeLineResult.postCreator.postCreatorId !== (this.configSvc.instanceConfig?this.configSvc.instanceConfig.FAQsAuthor.id: ''))
+          this.qnaTimelineForCount = this.qnaTimeline.result.filter(timeLineResult =>
+              timeLineResult.postCreator.postCreatorId === (this.configSvc.instanceConfig?this.configSvc.instanceConfig.FAQsAuthor.id: ''))
+          this.questionsCount = this.qnaTimeline.hits - this.qnaTimelineForCount.length
+          }
+          else{
+            this.qnaTimelineForUI = this.qnaTimeline.result
+            this.questionsCount = this.qnaTimeline.hits - this.qnaTimelineForCount.length
+          }
         }
+       
         (this.qnaTimelineRequest.pgNo as number) += 1
         this.verifyTimelineContentStatus()
       },
       () => {
         this.fetchStatus = 'error'
       },
-    )
+    )    
   }
   verifyTimelineContentStatus() {
     if (this.qnaTimeline.hits > this.qnaTimeline.result.length) {

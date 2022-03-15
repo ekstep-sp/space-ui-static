@@ -33,6 +33,7 @@ export namespace NsInstanceConfig {
     disablePidCheck?: boolean
     fontSizes: IFontSize[]
     isContentDownloadAvailable: boolean
+    FAQsAuthor: IFAQsAuthor
     indexHtmlMeta: IIndexHtmlMeta
     keycloak: IKeycloak
     locals: ILocalsConfig[]
@@ -92,6 +93,11 @@ export namespace NsInstanceConfig {
     baseFontSize: string
     fontClass: string
     scale: number
+  }
+
+  export interface IFAQsAuthor{
+    id: string,
+    name: string
   }
   export interface IKeycloak {
     defaultidpHint: 'E' | 'N' | 'S'

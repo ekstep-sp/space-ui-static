@@ -35,7 +35,7 @@
       <div class="qna-title">
         <h1 class="font-montserrat font-size-navbar-heading mat-display-1 margin-remove hidden sm:block" i18n>Questions by the community</h1>
         <h1 *ngIf="qnaTimeline?.hits" class="margin-remove block sm:hidden font-montserrat body-font-size-primary">
-          {{ qnaTimeline.hits | pipeCountTransform }}
+          {{ questionsCount | pipeCountTransform }}
           <ng-container i18n>Questions</ng-container>
         </h1>
         <!-- <div *ngIf="allowedToAsk">
@@ -47,7 +47,7 @@
       <div class="flex align-center justify-between mt-6 mb-4">
         <div *ngIf="qnaTimeline" class="hidden sm:block" i18n-aria-label aria-label="Questions Count">
           <h2 class="margin-remove font-montserrat body-font-size-primary">
-            {{ qnaTimeline.hits | pipeCountTransform }}
+            {{ questionsCount | pipeCountTransform }}
             <ng-container i18n> Questions</ng-container>
           </h2>
         </div>
@@ -68,12 +68,12 @@
         </mat-button-toggle-group>
       </div>
       <mat-divider></mat-divider>
-      <div *ngIf="qnaTimeline" class="mt-2">
+      <div *ngIf="qnaTimelineForUI" class="mt-2">
         <ws-app-qna-item [item]="timeline" [allowedToEdit]="allowedToEdit"
           [allowedToDeleteForSpecificRoles]="allowedToDeleteForSpecificRoles"
-          *ngFor="let timeline of qnaTimeline?.result">
+          *ngFor="let timeline of qnaTimelineForUI">
         </ws-app-qna-item>
-        <h3 class="text-center mt-4" *ngIf="!qnaTimeline?.result?.length" i18n>
+        <h3 class="text-center mt-4" *ngIf="!qnaTimelineForUI.length" i18n>
           No questions under this category
         </h3>
         <div *ngIf="fetchStatus === 'fetching'" class="text-center margin-top-s">
