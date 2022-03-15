@@ -12,7 +12,7 @@
       <ul class="reference-body">
         <li>
           <div class="frequent-questions">
-            <a routerLink="./edit">
+            <a routerLink="./societal-thinking">
               Societal Thinking
             </a>
             <img _ngcontent-wne-c51="" alt="" class="pt-3 pl-2 pointer-image" src="../../../../../../../../../fusion-assets/img/pointer.svg">
@@ -30,20 +30,19 @@
     </div>
   </div>
   <div class="qna-home-container mat-drawer-container mat-drawer-container-has-open mat-drawer-transition">
-    <ws-app-qna-edit [qanQuestionParent]="true"></ws-app-qna-edit>
-    <div class="qna-card-question">
+    <ws-app-qna-edit *ngIf ="!isGuestUser" [qanQuestionParent]="true"></ws-app-qna-edit>
+    <div class="qna-card-question mobile-qna-question">
       <div class="qna-title">
-        <h1 class="font-montserrat font-size-navbar-heading mat-display-1 margin-remove hidden sm:block" i18n>Questions
-          by the community</h1>
+        <h1 class="font-montserrat font-size-navbar-heading mat-display-1 margin-remove hidden sm:block" i18n>Questions by the community</h1>
         <h1 *ngIf="qnaTimeline?.hits" class="margin-remove block sm:hidden font-montserrat body-font-size-primary">
           {{ qnaTimeline.hits | pipeCountTransform }}
           <ng-container i18n>Questions</ng-container>
         </h1>
-        <div *ngIf="allowedToAsk">
+        <!-- <div *ngIf="allowedToAsk">
           <a class="qa-btn" role="button" routerLink="./edit" mat-flat-button color="primary" i18n>
             Ask Question
           </a>
-        </div>
+        </div> -->
       </div>
       <div class="flex align-center justify-between mt-6 mb-4">
         <div *ngIf="qnaTimeline" class="hidden sm:block" i18n-aria-label aria-label="Questions Count">

@@ -75,6 +75,12 @@ export class ConfigurationsService {
   primaryNavBarConfig: NsInstanceConfig.IPrimaryNavbarConfig | null = null
   defaultCredentials: { username?: string, password?: string } | null = null
   isGuestUser = !!sessionStorage.getItem('default-user')
+  guestUserEnabled = false
+  guestUser(){
+    if(this.userProfile && this.userProfile.email === "guestspace2020@gmail.com" ){
+      this.guestUserEnabled = true
+    }
+  }
 
   removeGuestUser = () => {
     sessionStorage.removeItem('default-user')

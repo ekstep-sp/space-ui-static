@@ -52,6 +52,7 @@ export class EditProfileComponent implements OnInit {
   actualDomains: IChips[] = []
   actualExpertises: IChips[] = []
   addOnBlur = true
+  isSubscribed = false
   readonly separatorKeysCodes = [ENTER, COMMA] as const
   paramsForEditProfile: NsEditProfile.IResponseBody = {} as NsEditProfile.IResponseBody
   widgetResolverData: NsWidgetResolver.IRenderConfigWithTypedData<
@@ -150,6 +151,7 @@ export class EditProfileComponent implements OnInit {
         this.userProfile.areaOfExpertise !== 'null' ? this.userProfile.areaOfExpertise.split(',') : [])
       this.expertises = this.userProfile.areaOfExpertise &&
         this.userProfile.areaOfExpertise !== 'null' ? this.userProfile.areaOfExpertise.split(',') as IChips[]: []
+      this.isSubscribed = this.userProfile.isSubscribedToSpace ? this.userProfile.isSubscribedToSpace : false
       this.profileForm.controls.isSubscribed.setValue(this.userProfile.isSubscribedToSpace ? this.userProfile.isSubscribedToSpace : false)
       if (this.userProfile.userProperties) {
         this.profileForm.controls.profileLink.setValue(this.userProfile.userProperties.profileLink
@@ -366,6 +368,11 @@ export class EditProfileComponent implements OnInit {
   }
 
   subscribed(){
-    this.profileForm.controls.isSubscribed.setValue(!this.profileForm.controls.isSubscribed.value)
+    if(this.profileForm.controls.isSubscribed.value){
+      this.profileForm.controls.isSubscribed.setValue("false")
+    }
+    else{
+      this.profileForm.controls.isSubscribed.setValue("true")
+    }
   }
 }

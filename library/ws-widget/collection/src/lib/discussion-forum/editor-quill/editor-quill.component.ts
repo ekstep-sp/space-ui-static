@@ -37,7 +37,7 @@ export class EditorQuillComponent implements OnInit, OnDestroy {
   text = ''
 
   reset = false
-  defaultPlaceholder = 'Ask a question, or add something you found helpful'
+  defaultPlaceholder = 'Type your answer or comments here'
   userDashboardData: NsUserDashboard.IUserData | any
   widLoggedinUser: string | any
   userListData: NsUserDashboard.IUserListDataFromUserTable[] = []

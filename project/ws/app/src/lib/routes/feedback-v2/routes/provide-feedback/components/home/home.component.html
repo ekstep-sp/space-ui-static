@@ -1,6 +1,6 @@
 <section
   class="display-grid grid-cols-2 gap-3 pt-20 pb-20 h-full mat-drawer-container mat-drawer-container-has-open mat-drawer-transition">
-  <div>
+  <div class="feedback-section">
     <section class="flex flex-wrap justify-between mb-8">
       <div class="p-4">
         <h2 class="font-montserrat mat-title w-full body-font-size-primary" i18n>We appreciate your feedback</h2>
@@ -21,9 +21,34 @@
       <mat-tab label="Other Requests" *ngIf="showTab(feedbackTypes.ServiceRequest)" i18n-label></mat-tab>
     </mat-tab-group>
   
-    <section class="py-8 h-full">
+    <section class="py-8">
       <router-outlet></router-outlet>
     </section>
+    <div class="referance-heading">
+      <div class="reference-content">
+        <span class="referance-title">
+          Refer to Frequently asked questions on :
+        </span>
+        <ul class="reference-body">
+          <li>
+            <div class="frequent-questions">
+              <a routerLink="/app/social/qna/societal-thinking">
+                Societal Thinking
+              </a>
+              <img _ngcontent-wne-c51="" alt="" class="pt-3 pl-2 pointer-image" src="../../../../../../../../../fusion-assets/img/pointer.svg">
+            </div> 
+          </li>
+          <li>
+            <div class="frequent-questions">
+              <a routerLink="/app/social/qna/space-platform">
+                SPace Platform 
+              </a>
+                <img _ngcontent-wne-c51="" alt="" class="pt-3 pl-2" src="../../../../../../../../../fusion-assets/img/pointer.svg">
+            </div>
+          </li>
+        </ul>
+      </div>
+    </div>
   </div>
   <div class="p-5 video-bg">
     <ws-widget-player-video [widgetData]="widgetData">

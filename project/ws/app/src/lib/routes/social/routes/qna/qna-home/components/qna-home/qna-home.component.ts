@@ -35,6 +35,7 @@ export class QnaHomeComponent implements OnInit, OnDestroy {
   allowedToEdit = true
   allowedToDeleteForSpecificRoles = false
   qanQuestionParent = true
+  isGuestUser = false
   constructor(
     private activatedRoute: ActivatedRoute,
     private router: Router,
@@ -45,6 +46,7 @@ export class QnaHomeComponent implements OnInit, OnDestroy {
   ) { }
 
   ngOnInit() {
+    this.isGuestUser = this.configSvc.guestUserEnabled
     combineLatest([this.activatedRoute.data, this.activatedRoute.queryParamMap]).subscribe(_combinedResult => {
       // tslint:disable-next-line: max-line-length
       const isAllowed = this.forumSrvc.isVisibileAccToRoles(_combinedResult[0].socialData.data.rolesAllowed.QnA, _combinedResult[0].socialData.data.rolesNotAllowed.QnA)
@@ -54,7 +56,6 @@ export class QnaHomeComponent implements OnInit, OnDestroy {
       // tslint:disable-next-line: max-line-length
       this.allowedToDeleteForSpecificRoles = this.socialSvc.deleteAccessForSpecificRole(_combinedResult[0].socialData.data.rolesAllowedForDelete ?
       _combinedResult[0].socialData.data.rolesAllowedForDelete.QnA : [])
-
       const queryParams = _combinedResult[1].get('tab')
       if (queryParams) {
         this.currentTab = queryParams as NsDiscussionForum.ETimelineType

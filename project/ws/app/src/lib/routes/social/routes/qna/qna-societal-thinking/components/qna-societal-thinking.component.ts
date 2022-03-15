@@ -1,13 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import { NsDiscussionForum, WsDiscussionForumService } from '@ws-widget/collection';
-import { ConfigurationsService, NsPage } from '@ws-widget/utils';
+import { ConfigurationsService, NsPage } from '@ws-widget/utils'
 
 @Component({
-  selector: 'ws-app-qna-space-platform-text',
-  templateUrl: './qna-space-platform-text.component.html',
-  styleUrls: ['./qna-space-platform-text.component.scss']
+  selector: 'ws-app-qna-societal-thinking',
+  templateUrl: './qna-societal-thinking.component.html',
+  styleUrls: ['./qna-societal-thinking.component.scss']
 })
-export class QnaSpacePlatformTextComponent implements OnInit {
+export class QnaSocietalThinkingComponent implements OnInit {
+
   pageNavbar: Partial<NsPage.INavBackground> = this.configSvc.pageNavBar
   helpTimeLineRequest!: NsDiscussionForum.ITimelineRequest
   errorFetchingTimeline = false
@@ -21,10 +22,11 @@ export class QnaSpacePlatformTextComponent implements OnInit {
   constructor(
     private configSvc: ConfigurationsService,
     private fetchTimeLine: WsDiscussionForumService,
-  ) { }
-
+  ) {
+  }
   ngOnInit() {
     this.userId = this.configSvc.userProfile && this.configSvc.userProfile.userId || ''
+    console.log(this.configSvc)
     const request: NsDiscussionForum.ITimelineRequest = {
       postKind: [NsDiscussionForum.EPostKind.QUERY],
       pgNo: 0,
@@ -37,10 +39,11 @@ export class QnaSpacePlatformTextComponent implements OnInit {
       this.questions = data.result
       this.questions.map(tagData => {
         tagData.tags.forEach(tag => {
-          if (tag.name === 'SPace Platform')
+          if (tag.name === 'Societal Thinking')
             this.qnaTimelineForSpacePlatform.push(tagData)
         })
       })
+      console.log(this.qnaTimelineForSpacePlatform)
     })
   }
 }

@@ -18,17 +18,23 @@
       <span class="count-holder" *ngIf="showSocialLike">
         <div class="count">{{ item.activity.activityData.like }} likes</div>
       </span> -->
-      <div class="count">
-          {{ item.activity.activityData.upVote - item.activity.activityData.downVote }} votes
+      <ws-widget-btn-social-vote *ngIf = "!isGuestUser" [postId]="item.id" [activity]="item.activity" [voteType]="'upVote'"
+      [postCreatorId]="item?.postCreator?.postCreatorId" [isDf]="true" [qnaPage]="true" class="upVote-aligment" [iconType]="'triangle'"></ws-widget-btn-social-vote>
+      <div class="count mobile-view" *ngIf = "!isGuestUser">
+          {{ item.activity.activityData.upVote - item.activity.activityData.downVote }}
       </div>
-      <ws-widget-btn-social-vote [postId]="item.id" [activity]="item.activity" [voteType]="'upVote'"
-        [postCreatorId]="item?.postCreator?.postCreatorId" [isDf]="true" [qnaPage]="true" class="upVote-aligment"></ws-widget-btn-social-vote>
+      <ws-widget-btn-social-vote *ngIf = "!isGuestUser" [postId]="item.id" [activity]="item.activity" [voteType]="'downVote'"
+      [postCreatorId]="item?.postCreator?.postCreatorId" [isDf]="true" [qnaPage]="true" class="upVote-aligment" [iconType]="'triangle'"></ws-widget-btn-social-vote>
+      <!-- <div class="upVote-align-text">
+        <ws-widget-btn-social-vote [postId]="item.id" [activity]="item.activity" [voteType]="'upVote'"
+          [postCreatorId]="item?.postCreator?.postCreatorId" [isDf]="true" [qnaPage]="true" class="upVote-aligment"></ws-widget-btn-social-vote>
+      </div> -->
     </a>
     <div class="question-section qna-title-description">
       <div class="question-title qna-title-display">
         <a [routerLink]="['./', item.id]">
-          <h2 *ngIf="item.postContent.title" class="body-font-size-primary font-montserrat ws-mat-primary-text question-text qna-title-home-display">
-            {{ item.postContent.title }}
+          <h2 *ngIf="item.postContent.title" class="body-font-size-primary font-montserrat ws-mat-primary-text question-text qna-title-home-display" [innerHTML]="item.postContent.title | pipeLimitTo: 95">
+            <!-- {{ item.postContent.title }} -->
           </h2>
           <h2 *ngIf="!item.postContent.title" class="ws-mat-primary-text question-text">
             {{ item.postContent.abstract }}
@@ -48,7 +54,7 @@
         </div>
       </div>
       <div class="answer-author-details">
-        <div _ngcontent-uhm-c21="" class="count">0 answers</div>
+        <div _ngcontent-uhm-c21="" class="count mobile-view">{{ item.replyCount }} answers</div>
         <div class="creation">
           <span class="mat-caption" i18n>asked</span>&nbsp;
           <span class="mat-caption">{{ item.dtCreated | date }}</span>&nbsp;

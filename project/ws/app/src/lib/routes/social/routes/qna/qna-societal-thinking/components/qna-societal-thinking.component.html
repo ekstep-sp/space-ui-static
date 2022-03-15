@@ -1,0 +1,21 @@
+<mat-toolbar [color]="pageNavbar.color" [ngStyle]="pageNavbar?.styles">
+    <ws-widget-btn-page-back [widgetData]="{ url: 'back' }"></ws-widget-btn-page-back>
+    <span class="ml-2 hidden sm:inline text-white font-size-navbar-heading font-montserrat" i18n>Frequently Asked
+      Questions on Societal Thinking </span>
+      <span class="font-montserrat font-size-navbar-heading ml-2 inline sm:hidden text-white text-truncate" i18n> Questions Asked on SPace  </span>
+  </mat-toolbar>
+  
+  <div class="reference-question-section">
+    <div class="reference-qna-section">
+      <div class="frequent-question-societal" *ngFor="let tagData of qnaTimelineForSpacePlatform">
+        <mat-accordion>
+          <mat-expansion-panel>
+            <mat-expansion-panel-header>
+              <span class="tag-title"> {{tagData.postContent.title}} </span>
+            </mat-expansion-panel-header>
+            <div [innerHTML] = "tagData.latestReply.postContent && tagData.latestReply.postContent.body ? tagData.latestReply.postContent.body : 'No Answers'"></div>
+          </mat-expansion-panel>
+        </mat-accordion>
+      </div>
+    </div>
+  </div>

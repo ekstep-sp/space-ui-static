@@ -55,9 +55,8 @@
           <button mat-icon-button (click)="refresh()" aria-label="refresh" i18n-aria-label>
             <mat-icon>refresh</mat-icon>
           </button>
-      
           <ng-container
-            *ngIf="!showDownloadPublicGuest && showDownloadMobile && widgetData.pdfUrl && isDownloadable && !showDownloadGuest">
+            *ngIf="!showDownloadPublicGuest && showDownloadMobile && widgetData.pdfUrl && isDownloadable">
             <button mat-button>
               <mat-icon style="color: white;" class="material-icons-outlined mat-icon notranslate innerSpan material-icons mat-icon-no-color" (click)="download()">cloud_download</mat-icon>
             </button>

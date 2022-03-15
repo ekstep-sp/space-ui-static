@@ -95,7 +95,8 @@ li:not(:last-child) {
     padding: 10px;
 }
 
-@media only screen and (max-width: 450px) {
+
+@media only screen and (max-width: 700px) {
   .question-section{
     display: block;
   }
@@ -107,7 +108,10 @@ li:not(:last-child) {
     box-shadow: 0px 2px 1px -1px rgba(0, 0, 0, 0.2), 0px 1px 1px 0px rgba(0, 0, 0, 0.14), 0px 1px 3px 0px rgba(0, 0, 0, 0.12);
     border: 1px solid #D9D8D8;
     margin: 5%;
-  } 
+  }
+  .mobile-qna-question{
+    padding: 0 !important;
+  }
 }
 
 .frequent-questions{

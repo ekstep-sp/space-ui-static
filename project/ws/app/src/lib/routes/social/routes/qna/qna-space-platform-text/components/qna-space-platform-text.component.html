@@ -5,7 +5,7 @@
     <span class="font-montserrat font-size-navbar-heading ml-2 inline sm:hidden text-white text-truncate" i18n> Questions Asked on SPace  </span>
 </mat-toolbar>
 
-<div class="reference-question-section">
+<!-- <div class="reference-question-section">
   <div class="reference-qna-section">
     <mat-accordion>
       <mat-expansion-panel>
@@ -135,5 +135,19 @@
       Know more about us at <a href="http://societalplatform.org"> societalplatform.org </a>
     </div>
 
+  </div>
+</div> -->
+<div class="reference-question-section">
+  <div class="reference-qna-section">
+    <div class="frequent-question-societal" *ngFor="let tagData of qnaTimelineForSpacePlatform">
+      <mat-accordion>
+        <mat-expansion-panel>
+          <mat-expansion-panel-header>
+            <span class="tag-title"> {{tagData.postContent.title}} </span>
+          </mat-expansion-panel-header>
+          <div [innerHTML] = "tagData.latestReply.postContent && tagData.latestReply.postContent.body ? tagData.latestReply.postContent.body : 'No Answers'"></div>
+        </mat-expansion-panel>
+      </mat-accordion>
+    </div>
   </div>
 </div>

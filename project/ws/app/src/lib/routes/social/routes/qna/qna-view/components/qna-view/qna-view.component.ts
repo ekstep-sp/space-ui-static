@@ -54,7 +54,7 @@ export class QnaViewComponent implements OnInit, OnDestroy {
   getRootOrg: string | any = ''
   getOrg: string | any = ''
   userDataInJsonFormat: any = []
-
+  isGuestUser = false
   commentAddRequest: NsDiscussionForum.IPostCommentRequest = {
     postKind: NsDiscussionForum.EReplyKind.COMMENT,
     parentId: '',
@@ -130,6 +130,7 @@ export class QnaViewComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
+    this.isGuestUser = this.configSvc.guestUserEnabled
     this.voteService.callComponent.subscribe((data: any) => {
       if (data) {
         this.discussionSvc.fetchPost(this.qnaConversationRequest).subscribe(

@@ -42,7 +42,7 @@
       <mat-divider></mat-divider>
       <div class="flex mt-4">
         <div class="icon-section" *ngIf="qnaConversation.mainPost.status !== 'Draft'">
-          <ws-widget-btn-social-vote *ngIf="allowedToComment" class="block" [voteType]="'upVote'"
+          <ws-widget-btn-social-vote *ngIf="!isGuestUser" class="block" [voteType]="'upVote'"
             [postId]="qnaConversation.mainPost.id"
             [postCreatorId]="qnaConversation?.mainPost?.postCreator?.postCreatorId"
             [activity]="qnaConversation.mainPost.activity" [iconType]="'triangle'"></ws-widget-btn-social-vote>
@@ -50,16 +50,16 @@
             {{
               qnaConversation.mainPost.activity.activityData.upVote -
                 qnaConversation.mainPost.activity.activityData.downVote
-            }} <span *ngIf="!allowedToComment" class="votes-text"> votes </span>
+            }} <span *ngIf="!allowedToComment" class="votes-text"> </span>
           </div>
-          <ws-widget-btn-social-vote *ngIf="allowedToComment" class="block" [voteType]="'downVote'"
+          <ws-widget-btn-social-vote *ngIf="!isGuestUser" class="block" [voteType]="'downVote'"
             [postId]="qnaConversation.mainPost.id"
             [postCreatorId]="qnaConversation?.mainPost?.postCreator?.postCreatorId"
             [activity]="qnaConversation.mainPost.activity" [iconType]="'triangle'"></ws-widget-btn-social-vote>
-          <ws-widget-btn-social-like *ngIf="showSocialLike" class="block items-center margin-top-s"
+          <!-- <ws-widget-btn-social-like *ngIf="showSocialLike" class="block items-center margin-top-s"
             [postId]="qnaConversation.mainPost.id" [activity]="qnaConversation.mainPost.activity"
             [postCreatorId]="qnaConversation?.mainPost?.postCreator?.postCreatorId">
-          </ws-widget-btn-social-like>
+          </ws-widget-btn-social-like> -->
         </div>
         <div class="body-section width-expand">
           <div class="margin-bottom-s"
@@ -163,8 +163,8 @@
     </div>
   </mat-card>
 
-  <mat-card [hidden]="!qnaConversation || !allowedToAnswer" class="my-4">
-    <h2 i18n>Type your answer or comments here</h2>
+  <mat-card *ngIf="!isGuestUser" [hidden]="!qnaConversation || allowedToAnswer" class="my-4">
+    <h2 i18n>Your answer</h2>
     <ws-widget-editor-quill class="editor" [htmlText]="replyAddRequest?.postContent?.body" [showMention]="allowMention"
       [minLength]="'10'" (textData)="onTextChange($event)" (mentionsData)="mentions = $event" #editor>
     </ws-widget-editor-quill>

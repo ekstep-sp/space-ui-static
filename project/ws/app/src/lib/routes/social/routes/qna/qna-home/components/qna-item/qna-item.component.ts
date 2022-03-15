@@ -17,6 +17,7 @@ export class QnaItemComponent implements OnInit {
   showSocialLike = false
   ePostStatus = NsDiscussionForum.EPostStatus
   isSocialLike = false
+  isGuestUser = false
   constructor(
     public dialog: MatDialog,
     private snackBar: MatSnackBar,
@@ -28,6 +29,7 @@ export class QnaItemComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.isGuestUser = this.configSvc.guestUserEnabled
     this.showSocialLike = (this.configSvc.restrictedFeatures && !this.configSvc.restrictedFeatures.has('socialLike')) || false
   }
 

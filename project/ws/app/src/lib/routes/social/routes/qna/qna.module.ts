@@ -4,6 +4,7 @@ import { QnaViewModule } from './qna-view/qna-view.module'
 import { QnaHomeModule } from './qna-home/qna-home.module'
 import { QnaEditModule } from './qna-edit/qna-edit.module';
 import { QnaSpacePlatformTextModule } from './qna-space-platform-text/qna-space-platform-text.module';
+import { QnaSocietalThinkingModule } from './qna-societal-thinking/qna-societal-thinking.module';
 
 @NgModule({
   declarations: [],
@@ -12,7 +13,8 @@ import { QnaSpacePlatformTextModule } from './qna-space-platform-text/qna-space-
     QnaEditModule,
     QnaHomeModule,
     QnaViewModule,
-    QnaSpacePlatformTextModule
+    QnaSpacePlatformTextModule,
+    QnaSocietalThinkingModule
   ],
   exports: [],
 })

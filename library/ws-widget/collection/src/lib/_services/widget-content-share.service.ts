@@ -80,7 +80,7 @@ export class WidgetContentShareService {
         text: txtBody,
         isHTML: false,
       },
-      ccTo: [],
+      ccTo: [{email: user.email}],
       emailTo: reciepients,
       emailType: type,
       sharedBy: [

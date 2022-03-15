@@ -12,6 +12,7 @@ import { QnaHomeComponent } from './routes/qna/qna-home/components/qna-home/qna-
 import { QnaViewComponent } from './routes/qna/qna-view/components/qna-view/qna-view.component'
 import { PageResolve } from '../../../../../../../library/ws-widget/utils/src/public-api'
 import { QnaSpacePlatformTextComponent } from './routes/qna/qna-space-platform-text/components/qna-space-platform-text.component'
+import { QnaSocietalThinkingComponent } from './routes/qna/qna-societal-thinking/components/qna-societal-thinking.component'
 
 const routes: Routes = [
   {
@@ -138,6 +139,21 @@ const routes: Routes = [
   {
     path: 'qna/space-platform',
     component: QnaSpacePlatformTextComponent,
+    data: {
+      pageType: 'feature',
+      pageKey: 'qna',
+      requiredFeatures: ['QUESTION_AND_ANSWER'],
+      // requiredRoles: ['publisher', 'content-creator', 'editor'],
+    },
+    resolve: {
+      pageData: PageResolve,
+      resolveData: PostFetchResolverService,
+    },
+    canActivate: [GeneralGuard],
+  },
+  {
+    path: 'qna/societal-thinking',
+    component: QnaSocietalThinkingComponent,
     data: {
       pageType: 'feature',
       pageKey: 'qna',

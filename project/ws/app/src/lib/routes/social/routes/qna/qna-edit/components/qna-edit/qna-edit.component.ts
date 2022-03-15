@@ -120,13 +120,19 @@ export class QnaEditComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
+    if(this.qanQuestionParent){
+      this.isCreatingPost = false
+      this.actionButtonsEnabled = true
+    }
     this.activatedRoute.data.subscribe(_data => {
       // console.log(_data)
       // tslint:disable-next-line: max-line-length
-      if (this.qnaService.isVisibileAccToRoles(_data.pageData.data.rolesAllowed.qna, _data.pageData.data.rolesNotAllowed.qna)) {
-        this.allowedToDiscussionForum = true
-      } else {
-        this.router.navigateByUrl('/page/home')
+      if (_data.pageData && _data.pageData.data) {
+        if (this.qnaService.isVisibileAccToRoles(_data.pageData.data.rolesAllowed.qna, _data.pageData.data.rolesNotAllowed.qna)) {
+          this.allowedToDiscussionForum = true
+        } else {
+          this.router.navigateByUrl('/page/home')
+        }
       }
     })
     this.initData()
@@ -145,6 +151,7 @@ export class QnaEditComponent implements OnInit, OnDestroy {
         } else {
           this.qnaRequest = response.resolveData.data.request
           this.qnaConversation = response.resolveData.data.response
+          if(this.qnaConversation.mainPost){
           if (this.qnaConversation.mainPost.postCreator.postCreatorId !== this.userId) {
             this.router.navigate(['error-access-forbidden'])
             return
@@ -159,6 +166,7 @@ export class QnaEditComponent implements OnInit, OnDestroy {
           this.title = this.qnaConversation.mainPost.postContent.title
           this.selectedTags = [...this.qnaConversation.mainPost.tags]
           this.tagsFromConversation = [...this.qnaConversation.mainPost.tags]
+        }
         }
       }
     })
@@ -214,7 +222,7 @@ export class QnaEditComponent implements OnInit, OnDestroy {
         name: NsDiscussionForum.EDiscussionType.SOCIAL,
       },
     }
-    if (this.qnaConversation) {
+    if (this.qnaConversation.mainPost) {
       request.dateCreated = this.qnaConversation.mainPost.dtCreated
       request.id = this.qnaConversation.mainPost.id
     }
