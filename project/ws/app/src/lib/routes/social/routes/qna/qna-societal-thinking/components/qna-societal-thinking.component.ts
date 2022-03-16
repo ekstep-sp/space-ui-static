@@ -17,7 +17,7 @@ export class QnaSocietalThinkingComponent implements OnInit {
   allowedToDeleteForSpecificRoles = false
   currentTab = NsDiscussionForum.ETimelineType.ALL
   questions: NsDiscussionForum.ITimelineResult[] = []
-  qnaTimelineForSpacePlatform: NsDiscussionForum.ITimelineResult[] = []
+  qnaTimelineForSocietalThinking: NsDiscussionForum.ITimelineResult[] = []
   userId = ''
   FAQsAuthorId = ''
   constructor(
@@ -41,10 +41,9 @@ export class QnaSocietalThinkingComponent implements OnInit {
       this.questions.map(tagData => {
         tagData.tags.forEach(tag => {
           if (tag.name === 'Societal Thinking')
-            this.qnaTimelineForSpacePlatform.push(tagData)
+            this.qnaTimelineForSocietalThinking.push(tagData)
         })
       })
-      console.log(this.qnaTimelineForSpacePlatform)
     })
   }
 }

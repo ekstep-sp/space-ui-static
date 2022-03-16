@@ -149,5 +149,8 @@
         </mat-expansion-panel>
       </mat-accordion>
     </div>
+    <div class="no-result-timeline" *ngIf="!qnaTimelineForSpacePlatform.length">
+      <span class="noresult-text"> No Result</span>
+    </div>
   </div>
 </div>

@@ -7,7 +7,7 @@
   
   <div class="reference-question-section">
     <div class="reference-qna-section">
-      <div class="frequent-question-societal" *ngFor="let tagData of qnaTimelineForSpacePlatform">
+      <div class="frequent-question-societal" *ngFor="let tagData of qnaTimelineForSocietalThinking">
         <mat-accordion>
           <mat-expansion-panel>
             <mat-expansion-panel-header>
@@ -16,6 +16,9 @@
             <div [innerHTML] = "tagData.latestReply.postContent && tagData.latestReply.postContent.body ? tagData.latestReply.postContent.body : 'No Answers'"></div>
           </mat-expansion-panel>
         </mat-accordion>
+      </div>
+      <div class="no-result-timeline" *ngIf="!qnaTimelineForSocietalThinking.length">
+        <span class="noresult-text"> No Result</span>
       </div>
     </div>
   </div>
