@@ -172,6 +172,9 @@ export class QnaViewComponent implements OnInit, OnDestroy {
         this.allowedToComment = true
         this.allowedToAnswer = true
       }
+      if(!this.isGuestUser){
+        this.allowedToComment = true
+      }
       // this method will allow the access to only specific roles to delete qna thread
       this.allowedToDeleteForSpecificRoles = this.socialSvc.deleteAccessForSpecificRole(response.socialData.data.rolesAllowedForDelete ?
         response.socialData.data.rolesAllowedForDelete.QnA : [])
