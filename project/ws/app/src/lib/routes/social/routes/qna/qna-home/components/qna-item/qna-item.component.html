@@ -54,7 +54,7 @@
         </div>
       </div>
       <div class="answer-author-details">
-        <div _ngcontent-uhm-c21="" class="count mobile-view">{{ item.replyCount }} answers</div>
+        <div _ngcontent-uhm-c21="" class="count mobile-view">{{ item.replyCount ? item.replyCount : 0 }} answers</div>
         <div class="creation">
           <span class="mat-caption" i18n>asked</span>&nbsp;
           <span class="mat-caption">{{ item.dtCreated | date }}</span>&nbsp;
