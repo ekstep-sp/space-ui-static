@@ -154,3 +154,15 @@ mat-chip {
     margin-top: 12px;
   }
 }
+
+@media (max-width:700px){
+  .icon-section{
+    min-width: auto !important;
+    height: auto !important;
+  }
+  .vote-count {
+    display: block !important;
+    height: auto !important;
+    width: 48px !important;
+  }
+}
