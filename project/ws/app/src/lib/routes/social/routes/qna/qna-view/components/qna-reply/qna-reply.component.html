@@ -20,9 +20,9 @@
         <mat-icon *ngIf="isAcceptingAnswerInProgress">hourglass_empty</mat-icon>
       </button>
       <mat-icon *ngIf="isAcceptedAnswer" class="isAccepted">check</mat-icon>
-      <ws-widget-btn-social-like *ngIf="showSocialLike" class="block flex-middle margin-top-xs"
+      <!-- <ws-widget-btn-social-like *ngIf="showSocialLike" class="block flex-middle margin-top-xs"
         [postCreatorId]="item?.postCreator?.postCreatorId" [postId]="item.id" [activity]="item.activity">
-      </ws-widget-btn-social-like>
+      </ws-widget-btn-social-like> -->
     </div>
     <div class="body-section width-expand">
       <div *ngIf="!editMode" class="margin-bottom-s" [innerHtml]="item.postContent.body | pipeSafeSanitizer: 'html'">

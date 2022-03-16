@@ -19,7 +19,7 @@
         <div class="count">{{ item.activity.activityData.like }} likes</div>
       </span> -->
       <ws-widget-btn-social-vote *ngIf = "!isGuestUser" [postId]="item.id" [activity]="item.activity" [voteType]="'upVote'"
-      [postCreatorId]="item?.postCreator?.postCreatorId" [isDf]="true" [qnaPage]="true" class="upVote-aligment" [iconType]="'triangle'"></ws-widget-btn-social-vote>
+      [postCreatorId]="item?.postCreator?.postCreatorId" [qnaPage]="true" class="upVote-aligment" [iconType]="'triangle'"></ws-widget-btn-social-vote>
       <div class="count mobile-view" *ngIf = "!isGuestUser">
           {{ item.activity.activityData.upVote - item.activity.activityData.downVote }}
       </div>
