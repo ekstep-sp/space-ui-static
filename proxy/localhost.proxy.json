@@ -1,12 +1,12 @@
 {
   "/apis/*": {
-    "target": "https://space-stage.societalplatform.org",
+    "target": "https://space.societalplatform.org",
     "secure": false,
     "logLevel": "debug",
     "changeOrigin": true
   },
   "/content-api/*": {
-    "target": "https://space-stage.societalplatform.org",
+    "target": "https://space.societalplatform.org",
     "secure": false,
     "logLevel": "debug",
     "changeOrigin": true,
@@ -15,7 +15,7 @@
     }
   },
   "/content-store/*": {
-    "target": "https://space-stage.societalplatform.org",
+    "target": "https://space.societalplatform.org",
     "secure": false,
     "logLevel": "debug",
     "changeOrigin": true,
@@ -24,7 +24,7 @@
     }
   },
   "/chat-bot/*": {
-    "target": "https://space-stage.societalplatform.org",
+    "target": "https://space.societalplatform.org",
     "secure": false,
     "logLevel": "debug",
     "changeOrigin": true,
@@ -33,7 +33,7 @@
     }
   },
   "/mobile-apps/*": {
-    "target": "https://space-stage.societalplatform.org",
+    "target": "https://space.societalplatform.org",
     "secure": false,
     "logLevel": "debug",
     "changeOrigin": true,
@@ -42,7 +42,7 @@
     }
   },
   "/LA/*": {
-    "target": "https://space-stage.societalplatform.org",
+    "target": "https://space.societalplatform.org",
     "secure": false,
     "logLevel": "debug",
     "changeOrigin": true,
@@ -58,12 +58,5 @@
     "pathRewrite": {
       "/apis": ""
     }
-  },
- "/usersubmission/*": {
-   "target": "https://space-stage.societalplatform.org",
-   "secure": false,
-   "logLevel": "debug",
-   "changeOrigin": true
- }
-
+  }
 }
