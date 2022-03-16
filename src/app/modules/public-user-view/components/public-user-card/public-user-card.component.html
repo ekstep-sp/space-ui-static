@@ -42,35 +42,44 @@
       <!-- <div class="font-size-18 org-color mt-2">
         {{userData?.department_name}}
       </div> -->
-      <div class="hovercard mt-3">
-        <div class="font-size-14 txt-color break-all" [ngClass]="{
+      <div class="hovercard">
+        <div class="font-size-12 txt-color break-all" [ngClass]="{
           'mt-2': !showAcceptAndReject(connectionData),
           'adjustable-margin': showAcceptAndReject(connectionData)
         }" *ngIf="userData?.job_role">
           <div>{{userData?.job_role}}<span *ngIf="userData?.organization_location_country"></span>, {{userData?.organization_location_country}} </div>
         </div>
-        <div class="area-of-work-expertise">
-          <span class="area-of-work-text" *ngIf="areaOfWork?.length > 0">Domain / Area of Work</span>
-          <div class="font-size-18 org-color break-all area-of-work-display">
-            <div *ngFor="let work of areaOfWork" class="area-ofwork-batch" [ngClass] = "{'ellipsis-class' : work.length > 5}" [innerHTML] = "work | pipeLimitTo: 50">
+        <div class="text-justify mx-2">
+          <span class="font-size-12 area-of-work-text" *ngIf="areaOfWork?.length > 0">Domain / Area of Work</span>
+          <div class="font-size-12 mb-2 org-color break-all area-of-work-display">
+            <!-- <div *ngFor="let work of areaOfWork" class="chip" [ngClass] = "{'chip-width-small' : work.length <= 15 , 'chip-width-medium' : work.length > 15 && work.length <= 31, 
+              'chip-width-large' : work.length > 31}" [innerHTML] = "work"> -->
+              <!-- <div *ngFor="let work of areaOfWork" class="chip" [ngClass] = "{
+                'chip-width-large' : work.length > 50}" [innerHTML] = "work"> -->
+              <div *ngFor="let work of areaOfWork" class="chip"  [innerHTML] = "work">
             </div>
           </div>
-          <span class="area-of-expertise-text" *ngIf="areaOfExpertise?.length > 0">Area of Expertise</span>
-          <div class="font-size-18 org-color break-all area-of-work-display">
-            <div *ngFor="let expertise of areaOfExpertise" class="area-ofwork-batch" [ngClass] = "{'ellipsis-class' : expertise.length > 5}" [innerHTML]="expertise | pipeLimitTo: 45">
+          <span class="font-size-12 area-of-expertise-text" *ngIf="areaOfExpertise?.length > 0">Area of Expertise</span>
+          <div class="font-size-12 org-color break-all area-of-work-display">
+            <!-- <div *ngFor="let expertise of areaOfExpertise" class="chip" 
+            [ngClass] = "{'chip-width-small' : expertise.length <= 15 , 'chip-width-medium' : expertise.length > 15 && expertise.length <= 31, 
+              'chip-width-large' : expertise.length > 31}"  [innerHTML]="expertise"> -->
+              <!-- <div *ngFor="let expertise of areaOfExpertise" class="chip" 
+              [ngClass] = "{'chip-width-large' : expertise.length > 31}"  [innerHTML]="expertise"> -->
+              <div *ngFor="let expertise of areaOfExpertise" class="chip" [innerHTML]="expertise">
               <span></span>
             </div>
           </div>
         </div>
-        <div class="font-size-14 txt-color underline break-all" *ngIf="userData?.user_properties?.value?.profileLink">
-            <div class="profile mt-3" (click)="navigateToProfileLink(userData?.user_properties?.value?.profileLink)">{{userData?.user_properties?.value?.profileLink}}</div>
+        <div class="font-size-12 txt-color underline break-all" *ngIf="userData?.user_properties?.value?.profileLink">
+            <div class="profile mt-3 mb-2" (click)="navigateToProfileLink(userData?.user_properties?.value?.profileLink)">{{userData?.user_properties?.value?.profileLink}}</div>
         </div>        
         <div class="flex flex-col">
           <!-- <div class="bio-desc overflow-y-auto font-size-14 mx-5 txt-color">
             <p>{{userData?.user_properties?.value?.bio}}</p>
           </div> -->
           <ng-container *ngIf ="resultsOK && !hideButtonStatus(userData, connectionData) && !showAcceptAndReject(connectionData) ">
-          <div class="hovercard exactly-middle-button mt-1">
+          <div class="hovercard exactly-middle-button mt-2">
             <button class="m-auto" mat-raised-button  [class.spinner]="isLoadingConnection"  [attr.outage-count]="Withdraw" [ngClass] = "{'btn-status': buttonStatus === 'Pending'}" (click)="sendConnectionStatus(userData, connectionData)">
               <span class="btn-txt">{{buttonStatus === 'Pending' ? 'Withdraw' : buttonStatus}}</span>
             </button>

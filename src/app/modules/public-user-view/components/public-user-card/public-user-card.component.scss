@@ -125,6 +125,11 @@ $card-height: 240px;
       .btn-txt{
         color: #42428B;
       }
+      .btn-font{
+        font-size: 14px;
+        font-style: normal;
+        font-weight: 600;
+      }
       &.exactly-middle-button {
         // position: absolute;
         bottom: 15px;
@@ -199,6 +204,11 @@ $card-height: 240px;
       .btn-txt{
         color: #42428B;
       }
+      .btn-font{
+        font-size: 14px;
+        font-style: normal;
+        font-weight: 600;
+      }
     }
   }
 }
@@ -218,27 +228,54 @@ $card-height: 240px;
 //   font-size: 16px;
 // }
 
-.area-ofwork-batch {
-  margin-right: 10px;
+.chip {
+  // margin-right: 6px;
+  // border-radius: 5px;
+  // margin-top: 5px;
+  // padding-top: 3px;
+  // padding-right: 2px;
+  // padding-bottom: 2px;
+  // padding-left: 5px;
+  margin-right: 6px;
   border-radius: 5px;
   margin-top: 5px;
-  padding: 5px;
+  padding-top: 3px;
+  padding-right: 5px;
+  padding-bottom: 2px;
+  padding-left: 5px;
   background-color: #925EB0;
   color: white;
   font-weight: 600;
   font-size: 12px;
-  text-overflow: ellipsis;
   /* width: 70px; */
   /* overflow: hidden; */
   /* white-space: nowrap; */
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
 }
+
+// .chip-width-small{
+//   min-width: 95px;
+// }
+
+// .chip-width-medium{
+//   min-width: 200px;
+// }
+
+// .chip-width-large{
+//   min-width: 300px;
+//   text-overflow: ellipsis;
+//   white-space: nowrap;
+//   overflow: hidden;
+// }
 
 
 .area-of-work-display{
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
-  justify-content: center;
+  //justify-content: center;
   // overflow: scroll;
   // height: 36px;
   // overflow-x: hidden;
@@ -256,9 +293,8 @@ $card-height: 240px;
   }
 }
 
-.area-of-work-expertise{
-  text-align: justify;
-}
+
 .area-of-work-text,.area-of-expertise-text{
   color: #FFE22A;
+  font-weight: 600;
 }
