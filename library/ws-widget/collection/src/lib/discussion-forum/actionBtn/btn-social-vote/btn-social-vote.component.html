@@ -55,7 +55,7 @@
               matBadgeColor="accent" matBadgeSize="small">thumb_up</mat-icon>
             </ng-container>       
         </button>
-        <span class="tooltiptext">
+        <span class="tooltiptext" *ngIf="!qnaPage">
           <ws-widget-display-users-social-vote [userList]="userForUpvote" [iconType]="iconType" [voteType]="voteType" [isReply]= "isReply">
           </ws-widget-display-users-social-vote>
         </span>
@@ -63,11 +63,11 @@
     </ng-container>
     <ng-container *ngIf="iconType === 'triangle'">
       <div class="tooltip tooltip-qna" >
-        <mat-icon class="vote-triangle" matTooltip="up vote" matTooltipPosition="right" role="button" i18n-matTooltip
+        <mat-icon class="vote-triangle" matTooltip="Up Vote" matTooltipPosition="right" role="button" i18n-matTooltip
           (click)="upVote(invalidUser.value)" [ngClass]="{'line matdark material-icons-outlined': isDf}" [ngClass]="{ highlight: activity.userActivity.upVote }">arrow_drop_up
         </mat-icon>
 
-        <span class="tooltiptext" [ngClass]= "{ 'tooltip-social':isSocial }" >
+        <span class="tooltiptext" [ngClass]= "{ 'tooltip-social':isSocial }" *ngIf="!qnaPage">
           <ws-widget-display-users-social-vote [userList]="userForUpvote" [iconType]="iconType" [voteType]="voteType" [isReply]= "isReply">
           </ws-widget-display-users-social-vote>
         </span>

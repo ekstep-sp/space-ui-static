@@ -120,10 +120,6 @@ export class QnaEditComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
-    if(this.qanQuestionParent){
-      this.isCreatingPost = false
-      this.actionButtonsEnabled = true
-    }
     this.activatedRoute.data.subscribe(_data => {
       // console.log(_data)
       // tslint:disable-next-line: max-line-length
@@ -131,7 +127,12 @@ export class QnaEditComponent implements OnInit, OnDestroy {
         if (this.qnaService.isVisibileAccToRoles(_data.pageData.data.rolesAllowed.qna, _data.pageData.data.rolesNotAllowed.qna)) {
           this.allowedToDiscussionForum = true
         } else {
-          this.router.navigateByUrl('/page/home')
+          if(this.configSvc.isGuestUser){
+            this.router.navigateByUrl('/page/home')
+          }
+          else{
+            this.allowedToDiscussionForum=true
+          }
         }
       }
     })

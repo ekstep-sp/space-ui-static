@@ -16,7 +16,7 @@
             <mat-icon class="dehaze-icon">double_arrow</mat-icon>
           </button> -->
         </div>
-        <mat-sidenav-container autosize class="viewer-sidenav-container ">
+        <mat-sidenav-container autosize class="viewer-sidenav-container playerTypeVideo">
             <mat-sidenav #snav [ngClass]="isTypeOfCollection ? 'viewer-sidenav':'viewer-sidenav-standalone'"
             [opened]="sideNavBarOpened" [mode]="mode" class="sidenav-effect"
             >
@@ -28,16 +28,16 @@
             <ng-container [wsResolverWidget]="discussionForumWidgetWithComment"></ng-container>
           </div> -->
           <mat-sidenav-content class="sidenavContent" #scrollableContent  [ngClass]="{'sideNavOpend':snav?.opened}">
-            <div class="pt-2 share-button">
-              <ws-widget-btn-content-share [forPreview]="forPreview" [overview]="true" [widgetData]="content" [isDisabled]="isPreviewMode">
-              </ws-widget-btn-content-share>
-            </div>
             <button *ngIf="snav?.opened" mat-icon-button aria-label="Navbar Toggle button" color="primary" class="toggleBtn side-nav-button-opened" (click)="snav?.toggle()">
               <mat-icon class="dehaze-icon reverse" >double_arrow</mat-icon>
             </button>
             <button *ngIf="!snav?.opened" mat-icon-button aria-label="Navbar Toggle button" color="primary" class="toggleBtn side-nav-button-closed" (click)="snav?.toggle()">
               <mat-icon class="dehaze-icon">double_arrow</mat-icon>
             </button>
+            <div class="share-button">
+              <ws-widget-btn-content-share [forPreview]="forPreview" [overview]="true" [widgetData]="content" [isDisabled]="isPreviewMode">
+              </ws-widget-btn-content-share>
+            </div>
             <ng-container *ngTemplateOutlet="mainContentTemplate; context: {navStatus:snav?.opened}"></ng-container>
           </mat-sidenav-content>
         </mat-sidenav-container>

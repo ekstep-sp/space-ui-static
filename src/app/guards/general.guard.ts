@@ -34,6 +34,7 @@ export class GeneralGuard implements CanActivate {
     if (document.location.href.includes('public/sharecontent')) {
       return true
     }
+    this.configSvc.guestUser()
     this.configSvc.removeGuestUser()
     // alert('removed guest user from general guard')
     if (!this.configSvc.isAuthenticated) {

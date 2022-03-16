@@ -54,7 +54,7 @@ export class QnaHomeComponent implements OnInit, OnDestroy {
       // tslint:disable-next-line: max-line-length
       const isAllowed = this.forumSrvc.isVisibileAccToRoles(_combinedResult[0].socialData.data.rolesAllowed.QnA, _combinedResult[0].socialData.data.rolesNotAllowed.QnA)
         this.allowedToAsk = isAllowed
-        this.allowedToEdit = isAllowed
+        this.allowedToEdit = !this.isGuestUser
         // allow users with specific roles to delete the qna thread
       // tslint:disable-next-line: max-line-length
       this.allowedToDeleteForSpecificRoles = this.socialSvc.deleteAccessForSpecificRole(_combinedResult[0].socialData.data.rolesAllowedForDelete ?
@@ -80,7 +80,7 @@ export class QnaHomeComponent implements OnInit, OnDestroy {
        }
        else{
         this.qnaTimelineForUI = this.qnaTimeline.result
-        this.questionsCount = this.qnaTimeline.hits - this.qnaTimelineForCount.length
+        this.questionsCount = this.qnaTimelineForUI.length
        }
         this.verifyTimelineContentStatus()
       }
