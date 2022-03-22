@@ -2,14 +2,11 @@
   class="display-grid grid-cols-2 gap-3 pt-20 pb-20 h-full mat-drawer-container mat-drawer-container-has-open mat-drawer-transition">
   <div class="feedback-section">
     <section class="flex flex-wrap justify-between mb-8">
-      <div class="p-4">
-        <h2 class="font-montserrat mat-title w-full body-font-size-primary" i18n>We appreciate your feedback</h2>
-      </div>
       <div class="p-4 margin-right-l">
         <a mat-flat-button class="primaryclr feedback-btn" [routerLink]="'./my-feedback'"
           [matBadge]="newItemsCount <= 99 ? newItemsCount : '99+'" [matBadgeColor]="'accent'"
           [matBadgeHidden]="!newItemsCount" i18n>
-          My Feedback
+          My Queries
         </a>
       </div>
     </section>

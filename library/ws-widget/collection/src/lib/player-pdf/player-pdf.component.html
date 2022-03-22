@@ -86,7 +86,7 @@
     </button>
     
     <ng-container
-      *ngIf="!showDownloadPublicGuest && showDownloadMobile && widgetData.pdfUrl && isDownloadable && !showDownloadGuest">
+      *ngIf="!showDownloadPublicGuest && showDownloadMobile && widgetData.pdfUrl && isDownloadable">
 
       <button mat-menu-item class="menu-btn menu-btn-galaxy">
         <mat-icon class="material-icons-outlined mat-icon notranslate innerSpan material-icons mat-icon-no-color" (click)="download()">cloud_download</mat-icon>

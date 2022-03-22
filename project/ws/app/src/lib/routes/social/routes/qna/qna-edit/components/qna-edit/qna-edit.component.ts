@@ -120,6 +120,10 @@ export class QnaEditComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
+    if(this.qanQuestionParent){
+      this.isCreatingPost = false
+      this.actionButtonsEnabled = true
+    }
     this.activatedRoute.data.subscribe(_data => {
       // console.log(_data)
       // tslint:disable-next-line: max-line-length

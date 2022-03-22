@@ -43,7 +43,7 @@ $card-height: 240px;
       background-color: transparent;
     }
     &::-webkit-scrollbar-thumb {
-      background-color: yellow;
+      background-color: #FFE22A;
       border-radius: 15px;
     }
   }
@@ -63,7 +63,7 @@ $card-height: 240px;
       width: 235px !important;
     }
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-    border: 1 px yellow solid;
+    border: 1 px #FFE22A solid;
     position: relative !important;
     }
    .hovercard {
@@ -163,7 +163,7 @@ $card-height: 240px;
       flex:1;
     }
     .color-on-hover, .conn-done {
-      color:yellow;
+      color:#FFE22A;
     }
     .conn-done{
        font-size: 28px !important;
@@ -196,7 +196,7 @@ $card-height: 240px;
     height:  $card-height;
     overflow: auto;
     .color-on-hover{
-      color:yellow;
+      color:#FFE22A;
     }
     .hovercard {
       display: block;
@@ -284,11 +284,11 @@ $card-height: 240px;
 
 @media (max-width : 1400px){
   .content .substitute:hover .profile-card{
-    height: auto !important;
+    // height: auto !important;
     overflow: auto;
   }
   .content .substitute:hover{
-    height: auto !important;
+    // height: auto !important;
     overflow: auto;
   }
 }
@@ -297,4 +297,8 @@ $card-height: 240px;
 .area-of-work-text,.area-of-expertise-text{
   color: #FFE22A;
   font-weight: 600;
+}
+
+.hover-card-display {
+  margin-bottom: 20px;
 }
